@@ -1,0 +1,13 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 19011220,
+    "separation": 0,
+    "spacing": 1,
+    "spread_type": "triangular"
+  },
+  "structures": [{
+    "structure": "laicaps:village_cherry",
+    "weight": 1
+  }]
+}

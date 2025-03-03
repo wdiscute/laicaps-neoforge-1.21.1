@@ -1,0 +1,192 @@
+{
+  "variants": {
+    "facing=east,symbol=one": {
+      "model": "laicaps:block/symbol_puzzle_block_one_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=one": {
+      "model": "laicaps:block/symbol_puzzle_block_one_inactive"
+    },
+    "facing=south,symbol=one": {
+      "model": "laicaps:block/symbol_puzzle_block_one_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=one": {
+      "model": "laicaps:block/symbol_puzzle_block_one_inactive",
+      "y": 270
+    },
+
+    "facing=east,symbol=two": {
+      "model": "laicaps:block/symbol_puzzle_block_two_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=two": {
+      "model": "laicaps:block/symbol_puzzle_block_two_inactive"
+    },
+    "facing=south,symbol=two": {
+      "model": "laicaps:block/symbol_puzzle_block_two_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=two": {
+      "model": "laicaps:block/symbol_puzzle_block_two_inactive",
+      "y": 270
+    },
+
+
+    "facing=east,symbol=three": {
+      "model": "laicaps:block/symbol_puzzle_block_three_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=three": {
+      "model": "laicaps:block/symbol_puzzle_block_three_inactive"
+    },
+    "facing=south,symbol=three": {
+      "model": "laicaps:block/symbol_puzzle_block_three_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=three": {
+      "model": "laicaps:block/symbol_puzzle_block_three_inactive",
+      "y": 270
+    },
+
+
+    "facing=east,symbol=four": {
+      "model": "laicaps:block/symbol_puzzle_block_four_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=four": {
+      "model": "laicaps:block/symbol_puzzle_block_four_inactive"
+    },
+    "facing=south,symbol=four": {
+      "model": "laicaps:block/symbol_puzzle_block_four_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=four": {
+      "model": "laicaps:block/symbol_puzzle_block_four_inactive",
+      "y": 270
+    },
+
+
+
+    "facing=east,symbol=five": {
+      "model": "laicaps:block/symbol_puzzle_block_five_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=five": {
+      "model": "laicaps:block/symbol_puzzle_block_five_inactive"
+    },
+    "facing=south,symbol=five": {
+      "model": "laicaps:block/symbol_puzzle_block_five_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=five": {
+      "model": "laicaps:block/symbol_puzzle_block_five_inactive",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,symbol=six": {
+      "model": "laicaps:block/symbol_puzzle_block_six_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=six": {
+      "model": "laicaps:block/symbol_puzzle_block_six_inactive"
+    },
+    "facing=south,symbol=six": {
+      "model": "laicaps:block/symbol_puzzle_block_six_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=six": {
+      "model": "laicaps:block/symbol_puzzle_block_six_inactive",
+      "y": 270
+    },
+
+
+
+    "facing=east,symbol=seven": {
+      "model": "laicaps:block/symbol_puzzle_block_seven_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=seven": {
+      "model": "laicaps:block/symbol_puzzle_block_seven_inactive"
+    },
+    "facing=south,symbol=seven": {
+      "model": "laicaps:block/symbol_puzzle_block_seven_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=seven": {
+      "model": "laicaps:block/symbol_puzzle_block_seven_inactive",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,symbol=eight": {
+      "model": "laicaps:block/symbol_puzzle_block_eight_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=eight": {
+      "model": "laicaps:block/symbol_puzzle_block_eight_inactive"
+    },
+    "facing=south,symbol=eight": {
+      "model": "laicaps:block/symbol_puzzle_block_eight_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=eight": {
+      "model": "laicaps:block/symbol_puzzle_block_eight_inactive",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,symbol=nine": {
+      "model": "laicaps:block/symbol_puzzle_block_nine_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=nine": {
+      "model": "laicaps:block/symbol_puzzle_block_nine_inactive"
+    },
+    "facing=south,symbol=nine": {
+      "model": "laicaps:block/symbol_puzzle_block_nine_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=nine": {
+      "model": "laicaps:block/symbol_puzzle_block_nine_inactive",
+      "y": 270
+    },
+
+
+
+
+    "facing=east,symbol=ten": {
+      "model": "laicaps:block/symbol_puzzle_block_ten_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=ten": {
+      "model": "laicaps:block/symbol_puzzle_block_ten_inactive"
+    },
+    "facing=south,symbol=ten": {
+      "model": "laicaps:block/symbol_puzzle_block_ten_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=ten": {
+      "model": "laicaps:block/symbol_puzzle_block_ten_inactive",
+      "y": 270
+    }
+
+
+
+
+
+
+
+
+
+
+
+  }
+}

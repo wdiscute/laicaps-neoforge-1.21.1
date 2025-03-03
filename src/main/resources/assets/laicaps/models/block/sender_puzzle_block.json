@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "laicaps:block/sender_puzzle_front",
+    "side": "laicaps:block/sender_puzzle_side",
+    "top": "laicaps:block/sender_puzzle_top"
+  }
+}

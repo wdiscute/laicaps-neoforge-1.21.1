@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "laicaps:block/lunarveil_closed"
+  },
+  "render_type":"cutout"
+}

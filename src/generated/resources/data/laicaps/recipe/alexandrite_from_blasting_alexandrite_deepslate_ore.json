@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "ingredient": {
+    "item": "laicaps:alexandrite_deepslate_ore"
+  },
+  "result": {
+    "id": "laicaps:alexandrite"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "laicaps:block/symbol_controller_block_inactive"
+    },
+    "active=true": {
+      "model": "laicaps:block/symbol_controller_block_active"
+    }
+  }
+}

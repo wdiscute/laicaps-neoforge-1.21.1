@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "laicaps:block/oakroot_leaves"
+  }
+}

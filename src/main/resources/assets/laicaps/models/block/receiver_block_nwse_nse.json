@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "laicaps:block/receiver_block_side",
+    "down": "laicaps:block/receiver_block_side",
+    "up": "laicaps:block/receiver_block_nwse_nse",
+    "north": "laicaps:block/receiver_block_side_active",
+    "east": "laicaps:block/receiver_block_side_active",
+    "south": "laicaps:block/receiver_block_side_active",
+    "west": "laicaps:block/receiver_block_side_inactive"
+  }
+}

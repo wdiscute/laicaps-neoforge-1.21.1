@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "laicaps:block/flowering_oakheart_leaves_4"
+  }
+}

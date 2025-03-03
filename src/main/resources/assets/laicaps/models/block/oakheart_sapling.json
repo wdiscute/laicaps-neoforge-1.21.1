@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "laicaps:block/oakheart_sapling"
+  },
+  "render_type":"cutout"
+}

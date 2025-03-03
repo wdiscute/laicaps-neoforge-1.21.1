@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "laicaps:block/oakheart_sapling"
+  },
+  "render_type": "minecraft:cutout"
+}

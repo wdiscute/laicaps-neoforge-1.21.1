@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "laicaps:block/asha_grass_block"
+      },
+      {
+        "model": "laicaps:block/asha_grass_block",
+        "y": 90
+      },
+      {
+        "model": "laicaps:block/asha_grass_block",
+        "y": 180
+      },
+      {
+        "model": "laicaps:block/asha_grass_block",
+        "y": 270
+      }
+    ]
+  }
+}
