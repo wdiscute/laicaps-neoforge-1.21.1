@@ -1,11 +1,14 @@
 package com.wdiscute.laicaps.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.laicaps.ModTags;
+import com.wdiscute.laicaps.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -13,10 +16,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -31,25 +31,48 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.OptionalInt;
 
-public class Riverthorne extends Block implements SimpleWaterloggedBlock
+public class Riverthorne extends BushBlock implements SimpleWaterloggedBlock
 {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
+    {
 
+        if (level.getBlockState(pos.above()) == Blocks.WATER.defaultBlockState())
+        {
+            level.setBlockAndUpdate(pos.above(), ModBlocks.RIVERTHORNE.get().defaultBlockState().setValue(WATERLOGGED, true));
+        }
 
+        if (level.getBlockState(pos.above()).isAir())
+        {
+            level.setBlockAndUpdate(pos.above(), ModBlocks.RIVERTHORNE_THISTLE.get().defaultBlockState().setValue(RiverthorneThistle.GROWN, true));
+        }
 
+    }
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos)
     {
 
-        return level.getBlockState(pos) == Blocks.WATER.defaultBlockState();
+        if (!level.getBlockState(pos).getFluidState().is(FluidTags.WATER))
+        {
+            return false;
+        }
+
+        if (!level.getBlockState(pos.below()).is(ModTags.Blocks.RIVERTHORNE_CAN_SURVIVE))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
-    protected FluidState getFluidState(BlockState state) {
+    protected FluidState getFluidState(BlockState state)
+    {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
@@ -69,5 +92,11 @@ public class Riverthorne extends Block implements SimpleWaterloggedBlock
     public Riverthorne(Properties properties)
     {
         super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec()
+    {
+        return null;
     }
 }

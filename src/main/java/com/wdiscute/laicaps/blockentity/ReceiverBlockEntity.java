@@ -5,13 +5,19 @@ import com.wdiscute.laicaps.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.datafix.fixes.PlayerUUIDFix;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.UUID;
 
 public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private int counter = 0;
     private int tickOffset = 0;
+    private PlayerUUIDFix playeruuid;
+
+
 
 
     @Override
@@ -33,6 +39,19 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
 
     }
 
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    {
+        tag.putUUID("users", UUID);
+        super.saveAdditional(tag, registries);
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    {
+        super.loadAdditional(tag, registries);
+    }
 
     public ReceiverBlockEntity(BlockPos pPos, BlockState pBlockState)
     {

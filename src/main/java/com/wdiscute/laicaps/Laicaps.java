@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.block.ModBlocks;
-import com.wdiscute.laicaps.item.ModCreativeModeTabs;
 import com.wdiscute.laicaps.item.ModItems;
 import com.wdiscute.laicaps.sound.ModSounds;
 import net.minecraft.world.item.CreativeModeTabs;

@@ -11,6 +11,9 @@ public class ModTags
 {
     public static class Blocks {
 
+        public static final TagKey<Block> RIVERTHORNE_CAN_SURVIVE = createTag("riverthorne_can_survive");
+
+
         private static TagKey<Block> createTag(String name)
         {
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, name));

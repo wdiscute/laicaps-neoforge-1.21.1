@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "laicaps:block/riverthorne_thistle_grown"
+  },
+  "render_type":"cutout"
+}

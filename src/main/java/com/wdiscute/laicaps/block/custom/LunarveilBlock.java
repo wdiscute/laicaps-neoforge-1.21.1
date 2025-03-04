@@ -15,6 +15,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
@@ -37,6 +38,18 @@ public class LunarveilBlock extends BushBlock
     }
 
     @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+    {
+        if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+            return true;
+
+        if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+            return true;
+
+        return false;
+    }
+
+    @Override
     protected MapCodec<? extends BushBlock> codec()
     {
         return null;
@@ -50,7 +63,9 @@ public class LunarveilBlock extends BushBlock
         if (pState.getValue(OPEN))
         {
             pLevel.addParticle(
-                    new DustParticleOptions(new Vec3(0.557f, 0.369f, 0.961f).toVector3f(), 3.0F){},
+                    new DustParticleOptions(new Vec3(0.557f, 0.369f, 0.961f).toVector3f(), 3.0F)
+                    {
+                    },
                     (double) pPos.getX() + 0.5f,
                     (double) pPos.getY() + 1.2f,
                     (double) pPos.getZ() + 0.5f,
@@ -60,7 +75,6 @@ public class LunarveilBlock extends BushBlock
             );
         }
     }
-
 
 
     @Override
@@ -74,14 +88,16 @@ public class LunarveilBlock extends BushBlock
     {
         int numberOfDays = (int) (level.getDayTime() / 24000f);
 
-        if(level.getDayTime() - (numberOfDays * 24000L) > 12000 && level.getDayTime() - (numberOfDays * 24000L) < 22500)
+        if (level.getDayTime() - (numberOfDays * 24000L) > 12000 && level.getDayTime() - (numberOfDays * 24000L) < 22500)
         {
 
-            if(!state.getValue(LunarveilBlock.OPEN)) level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, true));
+            if (!state.getValue(LunarveilBlock.OPEN))
+                level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, true));
             return;
         }
 
-        if(state.getValue(LunarveilBlock.OPEN)) level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, false));
+        if (state.getValue(LunarveilBlock.OPEN))
+            level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, false));
 
     }
 

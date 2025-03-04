@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "laicaps:block/asha_short_grass"
+  },
+  "render_type":"cutout"
+}

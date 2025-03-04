@@ -18,7 +18,6 @@ public class ModBiomeModifiers
 
     public static final ResourceKey<BiomeModifier> ADD_ALEXANDRITE_ORE = registerKey("add_alexandrite_ore");
     public static final ResourceKey<BiomeModifier> ADD_WALNUT_TREE = registerKey("add_walnut_tree");
-    public static final ResourceKey<BiomeModifier> ADD_RANDOM_BLOCKS = registerKey("add_random_blocks");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context)
     {

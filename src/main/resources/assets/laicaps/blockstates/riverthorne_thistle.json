@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "grown=false": {
+      "model": "laicaps:block/riverthorne_thistle"
+    },
+    "grown=true": {
+      "model": "laicaps:block/riverthorne_thistle_grown"
+    }
+  }
+}

@@ -272,23 +272,7 @@ public class ModBlocks
                             .pushReaction(PushReaction.DESTROY)
                             .lightLevel(state -> state.getValue(LunarveilBlock.OPEN) ? 11 : 0)
                             .randomTicks()
-                    )
-                    {
-                        @Override
-                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
-                        {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
-                                return true;
-
-                            return state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState();
-                        }
-
-                        @Override
-                        protected MapCodec<? extends BushBlock> codec()
-                        {
-                            return null;
-                        }
-                    });
+                    ));
 
 
 
@@ -300,6 +284,7 @@ public class ModBlocks
                             .noCollission()
                             .noOcclusion()
                             .instabreak()
+                            .replaceable()
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .pushReaction(PushReaction.DESTROY)
                             .randomTicks()
@@ -317,15 +302,94 @@ public class ModBlocks
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .pushReaction(PushReaction.DESTROY)
                             .randomTicks()
+                            .replaceable()
+                            .lightLevel(state -> state.getValue(RiverthorneThistle.GROWN) ? 5 : 0)
+
                     ));
 
 
+    public static final DeferredBlock<Block> ASHA_SHORT_GRASS =
+            registerBlock("asha_short_grass", () ->
+                    new BushBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .pushReaction(PushReaction.DESTROY)
+                            .replaceable()
+                    )
+                    {
+                        @Override
+                        protected MapCodec<? extends BushBlock> codec()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    }
+                    );
+
+    public static final DeferredBlock<Block> ASHA_GRASS =
+            registerBlock("asha_grass", () ->
+                    new BushBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .pushReaction(PushReaction.DESTROY)
+                            .replaceable()
+                    )
+                    {
+                        @Override
+                        protected MapCodec<? extends BushBlock> codec()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    }
+                    );
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block)
     {

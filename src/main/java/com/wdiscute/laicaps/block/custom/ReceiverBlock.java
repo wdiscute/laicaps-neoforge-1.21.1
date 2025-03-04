@@ -38,6 +38,10 @@ public class ReceiverBlock extends Block implements EntityBlock
     public static BooleanProperty SOUTH_ACTIVE = BooleanProperty.create("south_active");
     public static BooleanProperty EAST_ACTIVE = BooleanProperty.create("east_active");
 
+
+
+
+
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom)
     {
