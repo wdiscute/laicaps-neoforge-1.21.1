@@ -15,7 +15,19 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
 {
     private int counter = 0;
     private int tickOffset = 0;
-    private PlayerUUIDFix playeruuid;
+    private UUID playeruuid;
+    private boolean currentlyDroppingItems;
+
+
+    public void SavePlayerUUID(UUID uuid)
+    {
+        this.playeruuid = uuid;
+    }
+
+    public boolean CheckPlayerUUID(UUID uuid)
+    {
+        return playeruuid == uuid;
+    }
 
 
 
@@ -43,13 +55,14 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
-        tag.putUUID("users", UUID);
+        tag.putUUID("users", playeruuid);
         super.saveAdditional(tag, registries);
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
+        playeruuid = tag.getUUID("users");
         super.loadAdditional(tag, registries);
     }
 
