@@ -1,16 +1,16 @@
 {
-  "biomes": "minecraft:forest",
+  "biomes": "laicaps:test_biome",
   "adapt_noise": false,
   "liquid_settings": "ignore_waterlogging",
   "spawn_overrides": {},
   "type": "minecraft:jigsaw",
-  "start_pool": "laicaps:village_cherry/town_centers",
+  "start_pool": "laicaps:asha_puzzle_container_5x5_pool",
   "size": 7,
   "step": "surface_structures",
   "start_height": {
     "absolute": 0
   },
-  "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "project_start_to_heightmap": "MOTION_BLOCKING_NO_LEAVES",
   "max_distance_from_center": 116,
   "terrain_adaptation": "beard_thin",
   "use_expansion_hack": false

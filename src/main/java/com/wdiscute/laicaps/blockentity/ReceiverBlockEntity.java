@@ -5,31 +5,70 @@ import com.wdiscute.laicaps.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.datafix.fixes.PlayerUUIDFix;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private int counter = 0;
     private int tickOffset = 0;
-    private UUID playeruuid;
-    private boolean currentlyDroppingItems;
+    private final UUID[] arrayuuid = new UUID[15];
 
 
-    public void SavePlayerUUID(UUID uuid)
+    public boolean CanPlayerObtainDrops(UUID uuid)
     {
-        this.playeruuid = uuid;
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            if (Objects.equals(this.arrayuuid[0], uuid))
+            {
+                return false;
+            }
+            if (Objects.equals(this.arrayuuid[0], null))
+            {
+                this.arrayuuid[i] = uuid;
+                return true;
+            }
+
+        }
+        return false;
     }
 
-    public boolean CheckPlayerUUID(UUID uuid)
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
-        return playeruuid == uuid;
+        super.saveAdditional(tag, registries);
+
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            if (this.arrayuuid[i] == null)
+                return;
+
+            tag.putUUID("user" + i, this.arrayuuid[i]);
+        }
+
+
     }
 
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    {
+        super.loadAdditional(tag, registries);
 
+        for (int i = 0; i < 16; i++)
+        {
+
+            if (tag.contains("user" + i))
+                this.arrayuuid[i] = tag.getUUID("user" + i);
+
+
+
+        }
+
+    }
 
 
     @Override
@@ -37,8 +76,9 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
     {
         if (this.level == null || this.level.isClientSide()) return;
 
-        if(this.tickOffset == 0){
-            this.tickOffset = (int)(Math.random() * 20 + 1);
+        if (this.tickOffset == 0)
+        {
+            this.tickOffset = (int) (Math.random() * 20 + 1);
         }
         counter++;
 
@@ -47,24 +87,10 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
             this.level.scheduleTick(this.getBlockPos(), ModBlocks.RECEIVER_BLOCK.get(), 1);
         }
 
-        if(counter > 10000000) counter = 0;
+        if (counter > 10000000) counter = 0;
 
     }
 
-
-    @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
-    {
-        tag.putUUID("users", playeruuid);
-        super.saveAdditional(tag, registries);
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
-    {
-        playeruuid = tag.getUUID("users");
-        super.loadAdditional(tag, registries);
-    }
 
     public ReceiverBlockEntity(BlockPos pPos, BlockState pBlockState)
     {

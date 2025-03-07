@@ -1,11 +1,20 @@
 {
-  "name": "laicaps:village_cherry/5x5_receiver",
+  "name": "laicaps:5x5_receiver",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "laicaps:puzzles/receiver_gravel_1",
+        "location": "laicaps:asha_puzzles/receiver_gravel_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha_puzzles/receiver_gravel_2",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

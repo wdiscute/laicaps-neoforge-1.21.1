@@ -9,31 +9,59 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class SymbolPuzzleBlockEntity extends BlockEntity
 {
-    private BlockPos blockLinked = getBlockPos();
+    private BlockPos blockLinkedOffset = new BlockPos(0,0,0);
 
-    public void setBlockLinked(BlockPos blockPos)
+    public void setX(int dawd)
     {
-        this.blockLinked = blockPos;
+        this.blockLinkedOffset = new BlockPos(dawd ,this.blockLinkedOffset.getY(), this.blockLinkedOffset.getZ());
     }
 
-    public BlockPos getBlockLinked()
+    public int getX()
     {
-        return this.blockLinked;
+       return this.blockLinkedOffset.getX();
     }
+
+
+    public void setZ(int dawd)
+    {
+        this.blockLinkedOffset = new BlockPos(this.blockLinkedOffset.getX(), this.blockLinkedOffset.getY(), dawd);
+    }
+
+    public int getZ()
+    {
+        return this.blockLinkedOffset.getZ();
+    }
+
+
+    public void setY(int dawd)
+    {
+        this.blockLinkedOffset = new BlockPos(this.blockLinkedOffset.getX(), dawd, this.blockLinkedOffset.getZ());
+    }
+
+    public int getY()
+    {
+        return this.blockLinkedOffset.getY();
+    }
+
+
+
+
+
+
 
 
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
-        this.blockLinked = new BlockPos(pTag.getInt("linkedx"), pTag.getInt("linkedy"), pTag.getInt("linkedz"));
+        this.blockLinkedOffset = new BlockPos(pTag.getInt("linkedx"), pTag.getInt("linkedy"), pTag.getInt("linkedz"));
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
-        pTag.putInt("linkedx", this.blockLinked.getX());
-        pTag.putInt("linkedy", this.blockLinked.getY());
-        pTag.putInt("linkedz", this.blockLinked.getZ());
+        pTag.putInt("linkedx", this.blockLinkedOffset.getX());
+        pTag.putInt("linkedy", this.blockLinkedOffset.getY());
+        pTag.putInt("linkedz", this.blockLinkedOffset.getZ());
     }
 
     public SymbolPuzzleBlockEntity(BlockPos pPos, BlockState pBlockState)

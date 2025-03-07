@@ -1,13 +1,13 @@
 {
   "placement": {
     "type": "minecraft:random_spread",
-    "salt": 19011220,
-    "separation": 0,
-    "spacing": 1,
+    "salt": 234234,
+    "separation": 1,
+    "spacing": 2,
     "spread_type": "triangular"
   },
   "structures": [{
-    "structure": "laicaps:village_cherry",
+    "structure": "laicaps:asha_puzzle_container_5x5_structure",
     "weight": 1
   }]
 }

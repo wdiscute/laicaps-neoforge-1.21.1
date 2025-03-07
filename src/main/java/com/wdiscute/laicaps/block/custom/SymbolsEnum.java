@@ -17,7 +17,7 @@ public enum SymbolsEnum implements StringRepresentable
 
     private final String name;
 
-    private SymbolsEnum(final String pName) {
+    SymbolsEnum(final String pName) {
         this.name = pName;
     }
 

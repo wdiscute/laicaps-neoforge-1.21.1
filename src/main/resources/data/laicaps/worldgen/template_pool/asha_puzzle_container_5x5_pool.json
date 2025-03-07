@@ -1,11 +1,11 @@
 {
-  "name": "laicaps:village_cherry/lamps",
+  "name": "laicaps:5x5_receiver",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "laicaps:test/lamp",
+        "location": "laicaps:asha_puzzles/test_container",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

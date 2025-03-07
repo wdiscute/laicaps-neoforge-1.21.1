@@ -3,20 +3,17 @@ package com.wdiscute.laicaps.block.custom;
 import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.block.ModBlocks;
 import com.wdiscute.laicaps.blockentity.ReceiverBlockEntity;
-import com.wdiscute.laicaps.blockentity.SymbolPuzzleBlockEntity;
 import com.wdiscute.laicaps.blockentity.TickableBlockEntity;
-import com.wdiscute.laicaps.component.ModDataComponentTypes;
-import com.wdiscute.laicaps.item.ModItems;
-import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -28,11 +25,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.UUID;
 
 
 public class ReceiverBlock extends Block implements EntityBlock
@@ -52,17 +46,19 @@ public class ReceiverBlock extends Block implements EntityBlock
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level pLevel, BlockPos pPos, Player player, BlockHitResult hitResult)
     {
-        if (state.getValue(ACTIVE) && !pLevel.isClientSide())
+        if (state.getValue(ACTIVE) && !pLevel.isClientSide() && pLevel.getBlockEntity(pPos) instanceof ReceiverBlockEntity blockEntity)
         {
+            pLevel.setBlockAndUpdate(pPos, state);
 
-            BlockEntity be = pLevel.getBlockEntity(pPos);
-            if (be instanceof ReceiverBlockEntity blockEntity)
+            if (blockEntity.CanPlayerObtainDrops(player.getUUID()))
             {
-                if (!blockEntity.CheckPlayerUUID(player.getUUID()))
-                    blockEntity.SavePlayerUUID(player.getUUID());
-                    //summon drops
-                return InteractionResult.SUCCESS;
+                //summon drops
+                ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX() + 0.5f, pPos.getY() + 1.2f, pPos.getZ() + 0.5f, new ItemStack(Items.DIAMOND));
+                pLevel.addFreshEntity(itemEntity);
             }
+
+            return InteractionResult.SUCCESS;
+
 
         }
         return InteractionResult.SUCCESS;
