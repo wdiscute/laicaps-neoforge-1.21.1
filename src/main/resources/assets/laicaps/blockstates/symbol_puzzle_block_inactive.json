@@ -1,5 +1,21 @@
 {
   "variants": {
+    "facing=east,symbol=random": {
+      "model": "laicaps:block/symbol_puzzle_block_random_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=random": {
+      "model": "laicaps:block/symbol_puzzle_block_random_inactive"
+    },
+    "facing=south,symbol=random": {
+      "model": "laicaps:block/symbol_puzzle_block_random_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=random": {
+      "model": "laicaps:block/symbol_puzzle_block_random_inactive",
+      "y": 270
+    },
+
     "facing=east,symbol=one": {
       "model": "laicaps:block/symbol_puzzle_block_one_inactive",
       "y": 90

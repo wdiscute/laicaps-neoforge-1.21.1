@@ -4,6 +4,7 @@ import net.minecraft.util.StringRepresentable;
 
 public enum SymbolsEnum implements StringRepresentable
 {
+    RANDOM("random"),
     ONE("one"),
     TWO("two"),
     THREE("three"),

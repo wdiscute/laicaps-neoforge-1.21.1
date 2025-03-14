@@ -3,6 +3,8 @@ package com.wdiscute.laicaps.block.custom;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -20,7 +22,6 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
     {
         super(properties);
     }
-
 
 
     public static final EnumProperty<SymbolsEnum> SYMBOLS = EnumProperty.create("symbol", SymbolsEnum.class);
@@ -44,6 +45,29 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
 
     }
 
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
+    {
+        if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
+        {
+            int rint = random.nextInt(10) + 1;
+
+            switch (rint)
+            {
+                case 1 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.ONE));
+                case 2 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TWO));
+                case 3 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.THREE));
+                case 4 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FOUR));
+                case 5 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FIVE));
+                case 6 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SIX));
+                case 7 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SEVEN));
+                case 8 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.EIGHT));
+                case 9 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.NINE));
+                case 10 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TEN));
+            }
+
+        }
+    }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult)
@@ -61,7 +85,7 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext)
     {
-        this.defaultBlockState().setValue(SYMBOLS, SymbolsEnum.ONE);
+        this.defaultBlockState().setValue(SYMBOLS, SymbolsEnum.RANDOM);
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SymbolPuzzleBlockEntity extends BlockEntity
 {
     private BlockPos blockLinkedOffset = new BlockPos(0,0,0);
-    private String symbolsAvailable = "011011011";
+    private String symbolsAvailable = "011011010";
 
     public BlockPos getBlockLinkedOffset()
     {

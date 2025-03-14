@@ -13,6 +13,19 @@ import java.util.Objects;
 public class SymbolControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private int counter = 0;
+    private boolean ticking = true;
+
+    private boolean randomizedLink0;
+    private boolean randomizedLink1;
+    private boolean randomizedLink2;
+    private boolean randomizedLink3;
+    private boolean randomizedLink4;
+    private boolean randomizedLink5;
+    private boolean randomizedLink6;
+    private boolean randomizedLink7;
+    private boolean randomizedLink8;
+    private boolean randomizedLink9;
+    private boolean randomizedLink10;
 
     private BlockPos link0 = new BlockPos(0, 0, 0);
     private BlockPos link1 = new BlockPos(0, 0, 0);
@@ -25,7 +38,6 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     private BlockPos link8 = new BlockPos(0, 0, 0);
     private BlockPos link9 = new BlockPos(0, 0, 0);
     private BlockPos link10 = new BlockPos(0, 0, 0);
-
 
     public BlockPos getLinkedBlock(int blockposlink)
     {
@@ -67,78 +79,70 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
         BlockPos blockPosZero = new BlockPos(0, 0, 0);
         if (Objects.equals(link0, blockPosZero))
         {
-            System.out.println("set link1 to " + blockPos);
             link0 = blockPos;
-            System.out.println("link1 is " + link1);
             return;
         }
         if (Objects.equals(link1, blockPosZero))
         {
-            System.out.println("set link1 to " + blockPos);
             link1 = blockPos;
-            System.out.println("link1 is " + link1);
             return;
         }
         if (Objects.equals(link2, blockPosZero))
         {
-            System.out.println("set link2 to " + blockPos);
             link2 = blockPos;
             return;
         }
         if (Objects.equals(link3, blockPosZero))
         {
-            System.out.println("set link3 to " + blockPos);
             link3 = blockPos;
             return;
         }
         if (Objects.equals(link4, blockPosZero))
         {
-            System.out.println("set link4 to " + blockPos);
             link4 = blockPos;
             return;
         }
         if (Objects.equals(link5, blockPosZero))
         {
-            System.out.println("set link5 to " + blockPos);
             link5 = blockPos;
             return;
         }
         if (Objects.equals(link6, blockPosZero))
         {
-            System.out.println("set link6 to " + blockPos);
             link6 = blockPos;
             return;
         }
         if (Objects.equals(link7, blockPosZero))
         {
-            System.out.println("set link7 to " + blockPos);
             link7 = blockPos;
             return;
         }
         if (Objects.equals(link8, blockPosZero))
         {
-            System.out.println("set link8 to " + blockPos);
             link8 = blockPos;
             return;
         }
         if (Objects.equals(link9, blockPosZero))
         {
-            System.out.println("set link9 to " + blockPos);
             link9 = blockPos;
             return;
         }
         if (Objects.equals(link10, blockPosZero))
         {
-            System.out.println("set link10 to " + blockPos);
             link10 = blockPos;
         }
     }
 
+    public Boolean setTicking()
+    {
+        this.ticking = !this.ticking;
+        return this.ticking;
+    }
 
     @Override
     public void tick()
     {
-        if (this.level == null || this.level.isClientSide()) return;
+        if (this.level == null || this.level.isClientSide() || !ticking) return;
         counter++;
         if (counter % 20 == 0)
         {
@@ -154,6 +158,18 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
+        randomizedLink0 = pTag.getBoolean("randomizedLink0");
+        randomizedLink1 = pTag.getBoolean("randomizedLink1");
+        randomizedLink2 = pTag.getBoolean("randomizedLink2");
+        randomizedLink3 = pTag.getBoolean("randomizedLink3");
+        randomizedLink4 = pTag.getBoolean("randomizedLink4");
+        randomizedLink5 = pTag.getBoolean("randomizedLink5");
+        randomizedLink6 = pTag.getBoolean("randomizedLink6");
+        randomizedLink7 = pTag.getBoolean("randomizedLink7");
+        randomizedLink8 = pTag.getBoolean("randomizedLink8");
+        randomizedLink9 = pTag.getBoolean("randomizedLink9");
+        randomizedLink10 = pTag.getBoolean("randomizedLink10");
+
         link0 = new BlockPos(pTag.getIntArray("link0")[0] , pTag.getIntArray("link0")[1], pTag.getIntArray("link0")[2]);
         link1 = new BlockPos(pTag.getIntArray("link1")[0] , pTag.getIntArray("link1")[1], pTag.getIntArray("link1")[2]);
         link2 = new BlockPos(pTag.getIntArray("link2")[0] , pTag.getIntArray("link2")[1], pTag.getIntArray("link2")[2]);
@@ -165,11 +181,24 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
         link8 = new BlockPos(pTag.getIntArray("link8")[0] , pTag.getIntArray("link8")[1], pTag.getIntArray("link8")[2]);
         link9 = new BlockPos(pTag.getIntArray("link9")[0] , pTag.getIntArray("link9")[1], pTag.getIntArray("link9")[2]);
         link10 = new BlockPos(pTag.getIntArray("link10")[0] , pTag.getIntArray("link10")[1], pTag.getIntArray("link10")[2]);
+
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
+        pTag.putBoolean("randomizedLink0", randomizedLink0);
+        pTag.putBoolean("randomizedLink1", randomizedLink1);
+        pTag.putBoolean("randomizedLink2", randomizedLink2);
+        pTag.putBoolean("randomizedLink3", randomizedLink3);
+        pTag.putBoolean("randomizedLink4", randomizedLink4);
+        pTag.putBoolean("randomizedLink5", randomizedLink5);
+        pTag.putBoolean("randomizedLink6", randomizedLink6);
+        pTag.putBoolean("randomizedLink7", randomizedLink7);
+        pTag.putBoolean("randomizedLink8", randomizedLink8);
+        pTag.putBoolean("randomizedLink9", randomizedLink9);
+        pTag.putBoolean("randomizedLink10", randomizedLink10);
+
         pTag.putIntArray("link0", new int[]{link0.getX(), link0.getY(), link0.getZ()});
         pTag.putIntArray("link1", new int[]{link1.getX(), link1.getY(), link1.getZ()});
         pTag.putIntArray("link2", new int[]{link2.getX(), link2.getY(), link2.getZ()});

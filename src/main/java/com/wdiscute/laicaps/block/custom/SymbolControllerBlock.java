@@ -12,12 +12,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -33,7 +37,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.openjdk.nashorn.internal.runtime.Symbol;
 
+import java.awt.*;
 import java.util.Objects;
 import java.util.Random;
 
@@ -92,16 +98,51 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
 
     }
 
+    private void ScheduleTicks(ServerLevel level, BlockPos controllerBlockPos)
+    {
+
+        if (level.getBlockEntity(controllerBlockPos) instanceof SymbolControllerBlockEntity scbe)
+        {
+            //schedule tick for SYMBOL_PUZZLE_BLOCK
+            for (int i = 0; i < 10; i++)
+            {
+                BlockPos ActiveLinkedBlockPos = DecodeBlockPosWithOffset(level, controllerBlockPos, scbe.getLinkedBlock(i));
+                level.scheduleTick(ActiveLinkedBlockPos, ModBlocks.SYMBOL_PUZZLE_BLOCK.get(), 1);
+            }
+
+            //schedule tick for SYMBOL_PUZZLE_BLOCK
+            for (int i = 0; i < 10; i++)
+            {
+                BlockPos ActiveLinkedBlockPos = DecodeBlockPosWithOffset(level, controllerBlockPos, scbe.getLinkedBlock(i));
+                if (level.getBlockEntity(ActiveLinkedBlockPos) instanceof SymbolPuzzleBlockEntity spbe)
+                {
+                    BlockPos offset = new BlockPos(spbe.getX(), spbe.getY(), spbe.getZ());
+                    BlockPos InactiveLinkedBlockPos = DecodeBlockPosWithOffset(level, ActiveLinkedBlockPos, offset);
+
+                    level.scheduleTick(InactiveLinkedBlockPos, ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE.get(), 1);
+
+                }
+            }
+
+
+        }
+
+        //schedule tick to randomize blocks if needed
+        //pLevel.scheduleTick(blockPosLinkedToController, ModBlocks.SENDER_PUZZLE_BLOCK.get(), 1);
+        //pLevel.scheduleTick(DecodeBlockPosWithOffset(pLevel, blockPosLinkedToController, spbe.getBlockLinkedOffset()), ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE.get(), 1);
+
+
+    }
 
     @Override
     protected void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom)
     {
+        ScheduleTicks(pLevel, pPos);
         boolean active = true;
         for (int i = 0; i <= 10; i++)
         {
             if (pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity scbe)
             {
-
 
                 BlockPos zeroBP = new BlockPos(0, 0, 0);
                 if (Objects.equals(scbe.getLinkedBlock(i), zeroBP))
@@ -169,15 +210,23 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
     {
         if (!pLevel.isClientSide)
         {
-            //reset
+            //reset when chisel is on off hand
             if (pPlayer.getOffhandItem().getItem() == ModItems.CHISEL.get())
             {
                 if (pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity) blockEntity.reset();
                 return ItemInteractionResult.SUCCESS;
             }
 
+            //debug: disable ticking when anvil is on main hand
+            if (pPlayer.getMainHandItem().getItem() == Items.ANVIL && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity)
+            {
+                pPlayer.sendSystemMessage(Component.literal("Set Ticking to " + blockEntity.setTicking()));
+                pLevel.playSound(null, pPos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1, 0.5f);
+                return ItemInteractionResult.SUCCESS;
+            }
+
             //debug: print all 10 linked blocks
-            if (pPlayer.getMainHandItem().getItem() != ModItems.CHISEL.get() && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity)
+            if (pPlayer.getMainHandItem().isEmpty() && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity)
             {
                 System.out.println("link0: " + blockEntity.getLinkedBlock(0));
                 System.out.println("link1: " + blockEntity.getLinkedBlock(1));
@@ -193,6 +242,7 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
 
                 return ItemInteractionResult.SUCCESS;
             }
+
 
 
             //add blockpos stored in chisel to linked

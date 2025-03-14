@@ -3,12 +3,13 @@ package com.wdiscute.laicaps.block.custom;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.block.ModBlockEntity;
-import com.wdiscute.laicaps.block.ModBlocks;
 import com.wdiscute.laicaps.blockentity.SymbolPuzzleBlockEntity;
 import com.wdiscute.laicaps.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -18,30 +19,50 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
 
 public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
+    public static final EnumProperty<SymbolsEnum> SYMBOLS = EnumProperty.create("symbol", SymbolsEnum.class);
+
     public SymbolPuzzleBlock(Properties properties)
     {
         super(properties);
     }
 
 
-    public static final EnumProperty<SymbolsEnum> SYMBOLS = EnumProperty.create("symbol", SymbolsEnum.class);
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
+    {
+        if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
+        {
+            int rint = random.nextInt(10) + 1;
+
+            switch (rint)
+            {
+                case 1 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.ONE));
+                case 2 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TWO));
+                case 3 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.THREE));
+                case 4 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FOUR));
+                case 5 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FIVE));
+                case 6 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SIX));
+                case 7 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SEVEN));
+                case 8 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.EIGHT));
+                case 9 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.NINE));
+                case 10 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TEN));
+            }
+
+        }
+
+    }
 
 
     private static SymbolsEnum GetNextSymbolInCycle(BlockState state)
@@ -127,11 +148,14 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
                     be.setZ(newz);
                 }
 
+                return ItemInteractionResult.SUCCESS;
             }
 
             if (!pLevel.isClientSide() && pStack.getItem() == Items.AIR)
             {
+                pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
                 pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, GetNextSymbolInCycle(pState)));
+                return ItemInteractionResult.SUCCESS;
             }
 
         }
@@ -140,48 +164,10 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
     }
 
 
-    private BlockPos getLinkedBlockPos(Level plevel, BlockPos pPos)
-    {
-        //returns the world coords of the linked block based on the offset stored
-        BlockState pState = plevel.getBlockState(pPos);
-        if (plevel.getBlockEntity(pPos) instanceof SymbolPuzzleBlockEntity be)
-        {
-
-            if (pState.getValue(FACING) == Direction.SOUTH)
-            {
-                //finalx = be.getZ() * -1;
-                //finalz = be.getX();
-                System.out.println("SOUTH");
-                return new BlockPos(pPos.getX() + (be.getZ() * -1), pPos.getY() + be.getY(), pPos.getZ() + be.getX());
-
-            }
-
-            if (pState.getValue(FACING) == Direction.WEST)
-            {
-                //finalx = be.getX() * -1;
-                //finalz = be.getZ() * -1;
-                System.out.println("WEST");
-                return new BlockPos(pPos.getX() + (be.getX() * -1), pPos.getY() + be.getY(), pPos.getZ() + (be.getZ() * -1));
-            }
-
-            if (pState.getValue(FACING) == Direction.NORTH)
-            {
-                //finalx = be.getZ();
-                //finalz = be.getX() * -1;
-                System.out.println("NORTH");
-                return new BlockPos(pPos.getX() + be.getZ(), pPos.getY() + be.getY(), pPos.getZ() + (be.getX() * -1));
-            }
-            System.out.println("EAST");
-            return new BlockPos(pPos.getX() + be.getX(), pPos.getY() + be.getY(), pPos.getZ() + be.getZ());
-        }
-        return new BlockPos(0, 0, 0);
-    }
-
-
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext)
     {
-        BlockState bs = defaultBlockState().setValue(SYMBOLS, SymbolsEnum.ONE);
+        BlockState bs = defaultBlockState().setValue(SYMBOLS, SymbolsEnum.RANDOM);
         bs = bs.setValue(FACING, pContext.getHorizontalDirection().getOpposite());
         return bs;
     }
