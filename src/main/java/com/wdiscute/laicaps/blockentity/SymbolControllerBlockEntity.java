@@ -14,6 +14,7 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
 {
     private int counter = 0;
 
+    private BlockPos link0 = new BlockPos(0, 0, 0);
     private BlockPos link1 = new BlockPos(0, 0, 0);
     private BlockPos link2 = new BlockPos(0, 0, 0);
     private BlockPos link3 = new BlockPos(0, 0, 0);
@@ -30,6 +31,7 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     {
         return switch (blockposlink)
         {
+            case 0 -> link0;
             case 1 -> link1;
             case 2 -> link2;
             case 3 -> link3;
@@ -46,6 +48,7 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     public void reset()
     {
         BlockPos zero = new BlockPos(0,0,0);
+        link0 = zero;
         link1 = zero;
         link2 = zero;
         link3 = zero;
@@ -62,6 +65,13 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     {
         System.out.println("entered setNextLinkedBlock");
         BlockPos blockPosZero = new BlockPos(0, 0, 0);
+        if (Objects.equals(link0, blockPosZero))
+        {
+            System.out.println("set link1 to " + blockPos);
+            link0 = blockPos;
+            System.out.println("link1 is " + link1);
+            return;
+        }
         if (Objects.equals(link1, blockPosZero))
         {
             System.out.println("set link1 to " + blockPos);
@@ -144,6 +154,7 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
+        link0 = new BlockPos(pTag.getIntArray("link0")[0] , pTag.getIntArray("link0")[1], pTag.getIntArray("link0")[2]);
         link1 = new BlockPos(pTag.getIntArray("link1")[0] , pTag.getIntArray("link1")[1], pTag.getIntArray("link1")[2]);
         link2 = new BlockPos(pTag.getIntArray("link2")[0] , pTag.getIntArray("link2")[1], pTag.getIntArray("link2")[2]);
         link3 = new BlockPos(pTag.getIntArray("link3")[0] , pTag.getIntArray("link3")[1], pTag.getIntArray("link3")[2]);
@@ -159,6 +170,7 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
+        pTag.putIntArray("link0", new int[]{link0.getX(), link0.getY(), link0.getZ()});
         pTag.putIntArray("link1", new int[]{link1.getX(), link1.getY(), link1.getZ()});
         pTag.putIntArray("link2", new int[]{link2.getX(), link2.getY(), link2.getZ()});
         pTag.putIntArray("link3", new int[]{link3.getX(), link3.getY(), link3.getZ()});

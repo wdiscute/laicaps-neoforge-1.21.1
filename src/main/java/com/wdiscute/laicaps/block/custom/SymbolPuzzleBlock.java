@@ -42,31 +42,12 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
 
     public static final EnumProperty<SymbolsEnum> SYMBOLS = EnumProperty.create("symbol", SymbolsEnum.class);
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
 
-    @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom)
+    private static SymbolsEnum GetNextSymbolInCycle(BlockState state)
     {
-        if (pState.getValue(ACTIVE))
-        {
-            pLevel.addParticle(
-                    new DustParticleOptions(new Vec3(0.557f, 0.369f, 0.961f).toVector3f(), 3.0F)
-                    {
-                    },
-                    (double) pPos.getX() + 0.5f,
-                    (double) pPos.getY() + 1.2f,
-                    (double) pPos.getZ() + 0.5f,
-                    3.0,
-                    3.0,
-                    3.0
-            );
-        }
-    }
 
-
-    private static SymbolsEnum CycleSymbol(SymbolsEnum sym)
-    {
+        SymbolsEnum sym = state.getValue(SYMBOLS);
 
         if (sym == SymbolsEnum.ONE) return SymbolsEnum.TWO;
         if (sym == SymbolsEnum.TWO) return SymbolsEnum.THREE;
@@ -150,10 +131,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
             if (!pLevel.isClientSide() && pStack.getItem() == Items.AIR)
             {
-
-                System.out.println("block changed to diamond: " + getLinkedBlockPos(pLevel, pPos));
-                pLevel.setBlockAndUpdate(getLinkedBlockPos(pLevel, pPos), Blocks.DIAMOND_BLOCK.defaultBlockState());
-
+                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, GetNextSymbolInCycle(pState)));
             }
 
         }
@@ -164,7 +142,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
     private BlockPos getLinkedBlockPos(Level plevel, BlockPos pPos)
     {
-
+        //returns the world coords of the linked block based on the offset stored
         BlockState pState = plevel.getBlockState(pPos);
         if (plevel.getBlockEntity(pPos) instanceof SymbolPuzzleBlockEntity be)
         {
@@ -203,13 +181,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext)
     {
-        BlockState bs = defaultBlockState().setValue(ACTIVE, false);
-
-        Random r = new Random();
-        int randInt = r.nextInt(10);
-        System.out.println(randInt);
-
-        bs = bs.setValue(SYMBOLS, SymbolsEnum.ONE);
+        BlockState bs = defaultBlockState().setValue(SYMBOLS, SymbolsEnum.ONE);
         bs = bs.setValue(FACING, pContext.getHorizontalDirection().getOpposite());
         return bs;
     }
@@ -227,7 +199,6 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(SYMBOLS);
         pBuilder.add(FACING);
-        pBuilder.add(ACTIVE);
     }
 
 

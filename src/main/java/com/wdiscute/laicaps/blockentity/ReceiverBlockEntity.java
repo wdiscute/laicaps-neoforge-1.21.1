@@ -57,8 +57,6 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
                 this.arrayuuid[i] = uuid;
                 this.droppingItems = true;
 
-                Random r = new Random();
-
                 LootParams.Builder builder = new LootParams.Builder((ServerLevel) this.level);
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 

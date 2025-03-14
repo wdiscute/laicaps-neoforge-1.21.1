@@ -4,12 +4,20 @@ import com.wdiscute.laicaps.block.ModBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SymbolPuzzleBlockEntity extends BlockEntity
 {
     private BlockPos blockLinkedOffset = new BlockPos(0,0,0);
+    private String symbolsAvailable = "011011011";
+
+    public BlockPos getBlockLinkedOffset()
+    {
+        return this.blockLinkedOffset;
+    }
+
 
     public void setX(int dawd)
     {
@@ -42,12 +50,6 @@ public class SymbolPuzzleBlockEntity extends BlockEntity
     {
         return this.blockLinkedOffset.getY();
     }
-
-
-
-
-
-
 
 
     @Override
