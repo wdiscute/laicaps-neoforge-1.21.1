@@ -1,12 +1,12 @@
 {
-  "name": "laicaps:5x5_receiver",
+  "name": "laicaps:asha_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "laicaps:asha_puzzles/test_container",
-        "processors": "minecraft:empty",
+        "location": "laicaps:asha/small_colosseum",
+        "processors": "laicaps:colosseum_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

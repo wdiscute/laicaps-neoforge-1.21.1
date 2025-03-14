@@ -372,7 +372,14 @@ public class ModBlocks
                     }
                     );
 
-
+    public static final DeferredBlock<Block> BRICKS =
+            registerBlock("bricks", () ->
+                    new Block(BlockBehaviour.Properties.of()
+                            .sound(SoundType.STONE)
+                            .strength(4f, 4f)
+                            .instabreak()
+                    )
+            );
 
 
 

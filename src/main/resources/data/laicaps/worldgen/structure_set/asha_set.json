@@ -2,12 +2,12 @@
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 234234,
-    "separation": 1,
-    "spacing": 2,
+    "separation": 10,
+    "spacing": 20,
     "spread_type": "triangular"
   },
   "structures": [{
-    "structure": "laicaps:asha_puzzle_container_5x5_structure",
+    "structure": "laicaps:asha_structure",
     "weight": 1
   }]
 }

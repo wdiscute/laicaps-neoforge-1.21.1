@@ -4,29 +4,37 @@ import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.block.ModBlocks;
 import com.wdiscute.laicaps.blockentity.ReceiverBlockEntity;
 import com.wdiscute.laicaps.blockentity.TickableBlockEntity;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 
 public class ReceiverBlock extends Block implements EntityBlock
@@ -48,19 +56,10 @@ public class ReceiverBlock extends Block implements EntityBlock
     {
         if (state.getValue(ACTIVE) && !pLevel.isClientSide() && pLevel.getBlockEntity(pPos) instanceof ReceiverBlockEntity blockEntity)
         {
-            pLevel.setBlockAndUpdate(pPos, state);
-
-            if (blockEntity.CanPlayerObtainDrops(player.getUUID()))
-            {
-                //summon drops
-                ItemEntity itemEntity = new ItemEntity(pLevel, pPos.getX() + 0.5f, pPos.getY() + 1.2f, pPos.getZ() + 0.5f, new ItemStack(Items.DIAMOND));
-                pLevel.addFreshEntity(itemEntity);
-            }
-
-            return InteractionResult.SUCCESS;
-
-
+            blockEntity.CanPlayerObtainDrops(player);
         }
+
+        pLevel.playSound(null, pPos, SoundEvents.VAULT_HIT, SoundSource.BLOCKS, 1f, 1f);
         return InteractionResult.SUCCESS;
     }
 
@@ -69,9 +68,15 @@ public class ReceiverBlock extends Block implements EntityBlock
     {
         if (pState.getValue(ACTIVE))
         {
+            Random r = new Random();
 
-            pLevel.addParticle(ParticleTypes.END_ROD, pPos.getX() + 0.5, pPos.getY() + 1.5, pPos.getZ() + 0.5,
-                    0.05, 0.05, 0.05);
+            pLevel.addParticle(ParticleTypes.END_ROD,
+                    pPos.getX() - 0.5 + r.nextFloat(2f),
+                    pPos.getY() + 0 + r.nextFloat(1.5f),
+                    pPos.getZ() - 0.5 + r.nextFloat(2f),
+                    0,
+                    0,
+                    0);
 
         }
     }
@@ -79,6 +84,7 @@ public class ReceiverBlock extends Block implements EntityBlock
     @Override
     protected void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom)
     {
+
         pState = pState.setValue(NORTH_ENABLED, false);
         pState = pState.setValue(EAST_ENABLED, false);
         pState = pState.setValue(SOUTH_ENABLED, false);

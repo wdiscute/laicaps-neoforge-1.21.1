@@ -2,13 +2,32 @@ package com.wdiscute.laicaps.blockentity;
 
 import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.block.ModBlocks;
+import com.wdiscute.laicaps.sound.ModSounds;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEntity
@@ -16,24 +35,39 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
     private int counter = 0;
     private int tickOffset = 0;
     private final UUID[] arrayuuid = new UUID[15];
+    private boolean droppingItems;
+    private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
+    private Player lastPlayerToClick;
 
-
-    public boolean CanPlayerObtainDrops(UUID uuid)
+    public void CanPlayerObtainDrops(Player player)
     {
+        if (this.droppingItems) return;  //skips if its currently dropping items for another player
+
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
+            UUID uuid = player.getUUID();
             if (Objects.equals(this.arrayuuid[0], uuid))
             {
-                return false;
+                level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 2f, 0.5f);
+                return;
             }
             if (Objects.equals(this.arrayuuid[0], null))
             {
+                this.lastPlayerToClick = player;
                 this.arrayuuid[i] = uuid;
-                return true;
+                this.droppingItems = true;
+
+                Random r = new Random();
+
+                LootParams.Builder builder = new LootParams.Builder((ServerLevel) this.level);
+                LootParams params = builder.create(LootContextParamSets.EMPTY);
+
+                arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.ABANDONED_MINESHAFT).getRandomItems(params);
+
+                return;
             }
 
         }
-        return false;
     }
 
 
@@ -65,7 +99,6 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
                 this.arrayuuid[i] = tag.getUUID("user" + i);
 
 
-
         }
 
     }
@@ -74,7 +107,52 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
     @Override
     public void tick()
     {
+
+        //return if there's no level for whatever reason or if its client side
         if (this.level == null || this.level.isClientSide()) return;
+
+        //runs if array has something
+        if (arrayOfItemStacks != null)
+        {
+            if (arrayOfItemStacks.isEmpty()) droppingItems = false;
+
+            if (droppingItems && this.counter % 4 == 0)
+            {
+                Random r = new Random();
+
+                BlockPos pos = this.getBlockPos();
+                int randomInt = r.nextInt(arrayOfItemStacks.size());
+                ItemStack randomItemStack = arrayOfItemStacks.get(randomInt);
+
+                if (randomItemStack.getCount() == 1)
+                {
+                    arrayOfItemStacks.remove(randomInt);
+                    Item randomItem = randomItemStack.getItem();
+                    this.level.addFreshEntity(new ItemEntity(this.level, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, new ItemStack(randomItem)));
+                }
+
+                if (randomItemStack.getCount() > 1)
+                {
+                    randomItemStack.shrink(1);
+
+                    arrayOfItemStacks.set(randomInt, randomItemStack);
+
+                    Item randomItem = randomItemStack.getItem();
+                    this.level.addFreshEntity(new ItemEntity(this.level, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, new ItemStack(randomItem)));
+                }
+
+                System.out.println(lastPlayerToClick);
+                System.out.println(this.level);
+                System.out.println(this.getBlockPos());
+
+                level.playSound(null, pos, SoundEvents.CRAFTER_CRAFT, SoundSource.BLOCKS, 1f, r.nextFloat(0.1f) + 0.95f);
+
+            }
+
+        }
+
+
+
 
         if (this.tickOffset == 0)
         {
