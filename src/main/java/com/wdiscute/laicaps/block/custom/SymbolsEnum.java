@@ -2,6 +2,10 @@ package com.wdiscute.laicaps.block.custom;
 
 import net.minecraft.util.StringRepresentable;
 
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Random;
+
 public enum SymbolsEnum implements StringRepresentable
 {
     RANDOM("random"),
@@ -18,17 +22,40 @@ public enum SymbolsEnum implements StringRepresentable
 
     private final String name;
 
-    SymbolsEnum(final String pName) {
+    public static SymbolsEnum getRandom()
+    {
+
+        Random r = new Random();
+
+        int i = r.nextInt(((int) Arrays.stream(SymbolsEnum.values()).count() - 1));
+
+        return SymbolsEnum.values()[i];
+    }
+
+    public static SymbolsEnum GetNextSymbolInCycle(String s)
+    {
+
+        System.out.println(SymbolsEnum.valueOf(SymbolsEnum.class, s));
+
+
+        return SymbolsEnum.valueOf("three");
+    }
+
+
+    SymbolsEnum(final String pName)
+    {
         this.name = pName;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return this.name;
     }
 
     @Override
-    public String getSerializedName() {
+    public String getSerializedName()
+    {
         return this.name;
     }
 }

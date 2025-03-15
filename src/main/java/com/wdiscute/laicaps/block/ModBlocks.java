@@ -160,7 +160,7 @@ public class ModBlocks
             registerBlock("sender_puzzle_block", () ->
                     new SenderPuzzleBLock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.AMETHYST)
                     )
             );
 
@@ -168,7 +168,7 @@ public class ModBlocks
             registerBlock("receiver_block", () ->
                     new ReceiverBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.AMETHYST)
                     )
             );
 
@@ -176,7 +176,7 @@ public class ModBlocks
             registerBlock("symbol_puzzle_block", () ->
                     new SymbolPuzzleBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.STONE)
                     )
             );
 
@@ -184,7 +184,7 @@ public class ModBlocks
             registerBlock("symbol_controller_block", () ->
                     new SymbolControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.STONE)
                     )
             );
 
@@ -193,7 +193,7 @@ public class ModBlocks
             registerBlock("symbol_puzzle_block_inactive", () ->
                     new SymbolPuzzleBlockInactive(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.STONE)
                     )
             );
 

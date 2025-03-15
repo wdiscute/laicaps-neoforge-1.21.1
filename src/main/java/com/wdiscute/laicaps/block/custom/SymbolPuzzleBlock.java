@@ -44,21 +44,11 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
     {
         if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
         {
-            int rint = random.nextInt(10) + 1;
+            String string = "325235252352352532523535235525235235235235235325235322553252352323";
 
-            switch (rint)
-            {
-                case 1 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.ONE));
-                case 2 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TWO));
-                case 3 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.THREE));
-                case 4 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FOUR));
-                case 5 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FIVE));
-                case 6 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SIX));
-                case 7 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SEVEN));
-                case 8 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.EIGHT));
-                case 9 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.NINE));
-                case 10 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TEN));
-            }
+            SymbolsEnum.getRandom();
+
+            level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
 
         }
 
@@ -154,8 +144,12 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
             if (!pLevel.isClientSide() && pStack.getItem() == Items.AIR)
             {
                 pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
-                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, GetNextSymbolInCycle(pState)));
+
+                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, SymbolsEnum.GetNextSymbolInCycle(pState.getValue(SYMBOLS).getSerializedName())));
+
+                //pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, GetNextSymbolInCycle(pState)));
                 return ItemInteractionResult.SUCCESS;
+
             }
 
         }

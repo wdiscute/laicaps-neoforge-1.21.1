@@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -48,25 +50,7 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
-        if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
-        {
-            int rint = random.nextInt(10) + 1;
-
-            switch (rint)
-            {
-                case 1 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.ONE));
-                case 2 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TWO));
-                case 3 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.THREE));
-                case 4 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FOUR));
-                case 5 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FIVE));
-                case 6 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SIX));
-                case 7 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SEVEN));
-                case 8 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.EIGHT));
-                case 9 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.NINE));
-                case 10 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TEN));
-            }
-
-        }
+        level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
     }
 
     @Override
@@ -76,10 +60,17 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
         {
             SymbolsEnum next = CycleSymbol(pState.getValue(SYMBOLS));
             pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, next));
-
+            pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1,0.5f);
+            return InteractionResult.SUCCESS;
         }
 
-        return InteractionResult.SUCCESS;
+        if (pLevel.isClientSide() && pPlayer.getMainHandItem().getItem() == ModItems.CHISEL.get())
+        {
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.FAIL;
+
     }
 
     @Override
