@@ -28,47 +28,32 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
 
     public static final EnumProperty<SymbolsEnum> SYMBOLS = EnumProperty.create("symbol", SymbolsEnum.class);
 
-
-    private static SymbolsEnum CycleSymbol(SymbolsEnum sym)
-    {
-
-        if (sym == SymbolsEnum.ONE) return SymbolsEnum.TWO;
-        if (sym == SymbolsEnum.TWO) return SymbolsEnum.THREE;
-        if (sym == SymbolsEnum.THREE) return SymbolsEnum.FOUR;
-        if (sym == SymbolsEnum.FOUR) return SymbolsEnum.FIVE;
-        if (sym == SymbolsEnum.FIVE) return SymbolsEnum.SIX;
-        if (sym == SymbolsEnum.SIX) return SymbolsEnum.SEVEN;
-        if (sym == SymbolsEnum.SEVEN) return SymbolsEnum.EIGHT;
-        if (sym == SymbolsEnum.EIGHT) return SymbolsEnum.NINE;
-        if (sym == SymbolsEnum.NINE) return SymbolsEnum.TEN;
-
-        return SymbolsEnum.ONE;
-
-
-    }
-
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
-        level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
+        if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
+            level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult)
     {
+
+        //if clicked with chisel then cycles to next symbol and plays sound
         if (!pLevel.isClientSide() && pPlayer.getMainHandItem().getItem() == ModItems.CHISEL.get())
         {
-            SymbolsEnum next = CycleSymbol(pState.getValue(SYMBOLS));
-            pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, next));
-            pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1,0.5f);
+            pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, SymbolsEnum.GetNextSymbol(pState.getValue(SYMBOLS))));
+            pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1, 0.5f);
             return InteractionResult.SUCCESS;
         }
 
+        //code so client side plays hand animation when using chisel
         if (pLevel.isClientSide() && pPlayer.getMainHandItem().getItem() == ModItems.CHISEL.get())
         {
             return InteractionResult.SUCCESS;
         }
 
+        //if not clicked with chisel doesnt play hand animation
         return InteractionResult.FAIL;
 
     }

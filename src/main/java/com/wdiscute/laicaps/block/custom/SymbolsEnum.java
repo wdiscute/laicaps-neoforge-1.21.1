@@ -2,7 +2,6 @@ package com.wdiscute.laicaps.block.custom;
 
 import net.minecraft.util.StringRepresentable;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -32,13 +31,22 @@ public enum SymbolsEnum implements StringRepresentable
         return SymbolsEnum.values()[i];
     }
 
-    public static SymbolsEnum GetNextSymbolInCycle(String s)
+    public static SymbolsEnum GetNextSymbol(SymbolsEnum sym)
     {
 
-        System.out.println(SymbolsEnum.valueOf(SymbolsEnum.class, s));
+        //cycles through the list of SymbolsEnum - 1
+        for (int i = 0; i < Arrays.stream(SymbolsEnum.values()).count() - 1; i++)
+        {
+            if(sym == SymbolsEnum.values()[i])
+            {
+                //if the symbol matches then returns the next in the list
+                return SymbolsEnum.values()[i + 1];
+            }
+        }
 
+        //if no matching symbol is found that means it's the last one so returns the first on the list
+        return SymbolsEnum.values()[1];
 
-        return SymbolsEnum.valueOf("three");
     }
 
 

@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import org.openjdk.nashorn.internal.ir.Symbol;
 
 
 public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements EntityBlock
@@ -51,27 +52,6 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
             level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
 
         }
-
-    }
-
-
-    private static SymbolsEnum GetNextSymbolInCycle(BlockState state)
-    {
-
-        SymbolsEnum sym = state.getValue(SYMBOLS);
-
-        if (sym == SymbolsEnum.ONE) return SymbolsEnum.TWO;
-        if (sym == SymbolsEnum.TWO) return SymbolsEnum.THREE;
-        if (sym == SymbolsEnum.THREE) return SymbolsEnum.FOUR;
-        if (sym == SymbolsEnum.FOUR) return SymbolsEnum.FIVE;
-        if (sym == SymbolsEnum.FIVE) return SymbolsEnum.SIX;
-        if (sym == SymbolsEnum.SIX) return SymbolsEnum.SEVEN;
-        if (sym == SymbolsEnum.SEVEN) return SymbolsEnum.EIGHT;
-        if (sym == SymbolsEnum.EIGHT) return SymbolsEnum.NINE;
-        if (sym == SymbolsEnum.NINE) return SymbolsEnum.TEN;
-
-        return SymbolsEnum.ONE;
-
 
     }
 
@@ -143,13 +123,11 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
             if (!pLevel.isClientSide() && pStack.getItem() == Items.AIR)
             {
+                //if clicked with air then cycles to next symbol and plays sound
                 pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
+                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, SymbolsEnum.GetNextSymbol(pState.getValue(SYMBOLS))));
 
-                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, SymbolsEnum.GetNextSymbolInCycle(pState.getValue(SYMBOLS).getSerializedName())));
-
-                //pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, GetNextSymbolInCycle(pState)));
                 return ItemInteractionResult.SUCCESS;
-
             }
 
         }
