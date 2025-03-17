@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import org.openjdk.nashorn.internal.ir.Symbol;
 
 
 public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements EntityBlock
@@ -44,44 +45,13 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
     {
         if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
         {
-            int rint = random.nextInt(10) + 1;
+            String string = "325235252352352532523535235525235235235235235325235322553252352323";
 
-            switch (rint)
-            {
-                case 1 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.ONE));
-                case 2 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TWO));
-                case 3 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.THREE));
-                case 4 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FOUR));
-                case 5 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.FIVE));
-                case 6 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SIX));
-                case 7 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.SEVEN));
-                case 8 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.EIGHT));
-                case 9 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.NINE));
-                case 10 -> level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.TEN));
-            }
+            SymbolsEnum.getRandom();
+
+            level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
 
         }
-
-    }
-
-
-    private static SymbolsEnum GetNextSymbolInCycle(BlockState state)
-    {
-
-        SymbolsEnum sym = state.getValue(SYMBOLS);
-
-        if (sym == SymbolsEnum.ONE) return SymbolsEnum.TWO;
-        if (sym == SymbolsEnum.TWO) return SymbolsEnum.THREE;
-        if (sym == SymbolsEnum.THREE) return SymbolsEnum.FOUR;
-        if (sym == SymbolsEnum.FOUR) return SymbolsEnum.FIVE;
-        if (sym == SymbolsEnum.FIVE) return SymbolsEnum.SIX;
-        if (sym == SymbolsEnum.SIX) return SymbolsEnum.SEVEN;
-        if (sym == SymbolsEnum.SEVEN) return SymbolsEnum.EIGHT;
-        if (sym == SymbolsEnum.EIGHT) return SymbolsEnum.NINE;
-        if (sym == SymbolsEnum.NINE) return SymbolsEnum.TEN;
-
-        return SymbolsEnum.ONE;
-
 
     }
 
@@ -153,8 +123,10 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
             if (!pLevel.isClientSide() && pStack.getItem() == Items.AIR)
             {
+                //if clicked with air then cycles to next symbol and plays sound
                 pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
-                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, GetNextSymbolInCycle(pState)));
+                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, SymbolsEnum.GetNextSymbol(pState.getValue(SYMBOLS))));
+
                 return ItemInteractionResult.SUCCESS;
             }
 

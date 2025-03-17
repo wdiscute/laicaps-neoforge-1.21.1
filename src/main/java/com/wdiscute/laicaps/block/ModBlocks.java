@@ -4,10 +4,8 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.block.custom.*;
 import com.wdiscute.laicaps.item.ModItems;
-import com.wdiscute.laicaps.sound.ModSounds;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -160,7 +158,7 @@ public class ModBlocks
             registerBlock("sender_puzzle_block", () ->
                     new SenderPuzzleBLock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.AMETHYST)
                     )
             );
 
@@ -168,7 +166,7 @@ public class ModBlocks
             registerBlock("receiver_block", () ->
                     new ReceiverBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.AMETHYST)
                     )
             );
 
@@ -176,7 +174,7 @@ public class ModBlocks
             registerBlock("symbol_puzzle_block", () ->
                     new SymbolPuzzleBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.STONE)
                     )
             );
 
@@ -184,7 +182,7 @@ public class ModBlocks
             registerBlock("symbol_controller_block", () ->
                     new SymbolControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.STONE)
                     )
             );
 
@@ -193,7 +191,7 @@ public class ModBlocks
             registerBlock("symbol_puzzle_block_inactive", () ->
                     new SymbolPuzzleBlockInactive(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                            .sound(SoundType.STONE)
                     )
             );
 
