@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.laicaps.block.ModBlocks;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.blockentity.SymbolPuzzleBlockEntity;
@@ -27,7 +28,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import org.openjdk.nashorn.internal.ir.Symbol;
+
+import java.util.Arrays;
 
 
 public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements EntityBlock
@@ -41,17 +43,76 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
 
     @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
+    protected void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource random)
     {
-        if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
+        if (pLevel.getBlockEntity(pPos) instanceof SymbolPuzzleBlockEntity be)
         {
-            String string = "325235252352352532523535235525235235235235235325235322553252352323";
+            //if ACTIVE symbol block is random
+            if (pState.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
+            {
+                String symbolsAvailable = be.getSymbols();
+                for (int i = 0; i < 150; i++)
+                {
+                    SymbolsEnum randomSymbolActive = SymbolsEnum.getRandom();
+                    if (symbolsAvailable.contains(randomSymbolActive.getSerializedName()))
+                    {
+                        //play sound and set block to the next symbol that is found inside the list
+                        pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, randomSymbolActive));
+                        break;
+                    }
+                }
+            }
 
-            SymbolsEnum.getRandom();
+            //if INACTIVE symbol block is random
 
-            level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
+            BlockState inactiveState = pLevel.getBlockState(DecodeBlockPosWithOffset(pLevel, pPos, be.getBlockLinkedOffset()));
+            BlockPos posInactive = DecodeBlockPosWithOffset(pLevel, pPos, be.getBlockLinkedOffset());
+
+            if(!inactiveState.is(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE))
+                return;
+
+            if (inactiveState.getValue(SymbolPuzzleBlockInactive.SYMBOLS) == SymbolsEnum.RANDOM)
+            {
+                String symbolsAvailable = be.getSymbols();
+                //System.out.println("symbolsAvailable " + symbolsAvailable);
+
+                for (int i = 0; i < 150; i++)
+                {
+                    SymbolsEnum randomSymbolInactive = SymbolsEnum.getRandom();
+                    //System.out.println("atempted " + randomSymbolInactive);
+                    if (symbolsAvailable.contains(randomSymbolInactive.getSerializedName()) && randomSymbolInactive != pState.getValue(SYMBOLS))
+                    {
+                        //System.out.println("sucess with " + randomSymbolInactive + " which is different than " + pState.getValue(SYMBOLS));
+                        //play sound and set block to the next symbol that is found inside the list
+                        pLevel.setBlockAndUpdate(posInactive, inactiveState.setValue(SymbolPuzzleBlockInactive.SYMBOLS, randomSymbolInactive));
+                        break;
+                    }
+                }
+            }
 
         }
+
+    }
+
+
+    private BlockPos DecodeBlockPosWithOffset(Level plevel, BlockPos pos, BlockPos posOffset)
+    {
+        //returns the world coords of the linked block based on the offset stored
+        BlockState pState = plevel.getBlockState(pos);
+
+        if (pState.getValue(FACING) == Direction.SOUTH)
+            return new BlockPos(pos.getX() + (posOffset.getZ() * -1), pos.getY() + posOffset.getY(), pos.getZ() + posOffset.getX());
+
+        if (pState.getValue(FACING) == Direction.WEST)
+            return new BlockPos(pos.getX() + (posOffset.getX() * -1), pos.getY() + posOffset.getY(), pos.getZ() + (posOffset.getZ() * -1));
+
+        if (pState.getValue(FACING) == Direction.NORTH)
+            return new BlockPos(pos.getX() + posOffset.getZ(), pos.getY() + posOffset.getY(), pos.getZ() + (posOffset.getX() * -1));
+
+        if (pState.getValue(FACING) == Direction.EAST)
+            return new BlockPos(pos.getX() + posOffset.getX(), pos.getY() + posOffset.getY(), pos.getZ() + posOffset.getZ());
+
+        return new BlockPos(0, 0, 0);
 
     }
 
@@ -124,14 +185,24 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
             if (!pLevel.isClientSide() && pStack.getItem() == Items.AIR)
             {
                 //if clicked with air then cycles to next symbol and plays sound
-                pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
-                pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, SymbolsEnum.GetNextSymbol(pState.getValue(SYMBOLS))));
 
-                return ItemInteractionResult.SUCCESS;
+                SymbolsEnum nextSymbol = SymbolsEnum.GetNextSymbol(pState.getValue(SYMBOLS));
+                String symbolsAvailable = be.getSymbols();
+
+                for (int i = 0; i < Arrays.stream(SymbolsEnum.values()).count(); i++)
+                {
+                    if (symbolsAvailable.contains(nextSymbol.getSerializedName()))
+                    {
+                        //play sound and set block to the next symbol that is found inside the list
+                        pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
+                        pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, nextSymbol));
+                        break;
+                    }
+                    nextSymbol = SymbolsEnum.GetNextSymbol(nextSymbol);
+                }
             }
-
+            return ItemInteractionResult.SUCCESS;
         }
-
         return ItemInteractionResult.SUCCESS;
     }
 

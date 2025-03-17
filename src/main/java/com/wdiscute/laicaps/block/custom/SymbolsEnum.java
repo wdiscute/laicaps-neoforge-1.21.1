@@ -8,16 +8,17 @@ import java.util.Random;
 public enum SymbolsEnum implements StringRepresentable
 {
     RANDOM("random"),
-    ONE("one"),
-    TWO("two"),
-    THREE("three"),
-    FOUR("four"),
-    FIVE("five"),
-    SIX("six"),
-    SEVEN("seven"),
-    EIGHT("eight"),
-    NINE("nine"),
-    TEN("ten");
+    MUSHROOM("mushroom"),
+    CREEPER("creeper"),
+    FLOWER("flower"),
+    CAT("cat"),
+    HEART("heart"),
+    WHALE("whale"),
+    MOON("moon"),
+    HOURGLASS("hourglass"),
+    PICKAXE("pickaxe"),
+    BOW("bow"),
+    FROG("frog");
 
     private final String name;
 
@@ -28,14 +29,13 @@ public enum SymbolsEnum implements StringRepresentable
 
         int i = r.nextInt(((int) Arrays.stream(SymbolsEnum.values()).count() - 1));
 
-        return SymbolsEnum.values()[i];
+        return SymbolsEnum.values()[i + 1];
     }
 
     public static SymbolsEnum GetNextSymbol(SymbolsEnum sym)
     {
-
         //cycles through the list of SymbolsEnum - 1
-        for (int i = 0; i < Arrays.stream(SymbolsEnum.values()).count() - 1; i++)
+        for (int i = 1; i < Arrays.stream(SymbolsEnum.values()).count() - 1; i++)
         {
             if(sym == SymbolsEnum.values()[i])
             {

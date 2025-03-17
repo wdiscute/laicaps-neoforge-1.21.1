@@ -25,15 +25,7 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
         super(properties);
     }
 
-
     public static final EnumProperty<SymbolsEnum> SYMBOLS = EnumProperty.create("symbol", SymbolsEnum.class);
-
-    @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
-    {
-        if (state.getValue(SYMBOLS) == SymbolsEnum.RANDOM)
-            level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.getRandom()));
-    }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult)

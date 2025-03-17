@@ -15,182 +15,169 @@
       "model": "laicaps:block/symbol_puzzle_block_random",
       "y": 270
     },
-
-    "facing=east,symbol=one": {
+    "facing=east,symbol=mushroom": {
       "model": "laicaps:block/symbol_puzzle_block_one",
       "y": 90
     },
-    "facing=north,symbol=one": {
+    "facing=north,symbol=mushroom": {
       "model": "laicaps:block/symbol_puzzle_block_one"
     },
-    "facing=south,symbol=one": {
+    "facing=south,symbol=mushroom": {
       "model": "laicaps:block/symbol_puzzle_block_one",
       "y": 180
     },
-    "facing=west,symbol=one": {
+    "facing=west,symbol=mushroom": {
       "model": "laicaps:block/symbol_puzzle_block_one",
       "y": 270
     },
-
-    "facing=east,symbol=two": {
+    "facing=east,symbol=creeper": {
       "model": "laicaps:block/symbol_puzzle_block_two",
       "y": 90
     },
-    "facing=north,symbol=two": {
+    "facing=north,symbol=creeper": {
       "model": "laicaps:block/symbol_puzzle_block_two"
     },
-    "facing=south,symbol=two": {
+    "facing=south,symbol=creeper": {
       "model": "laicaps:block/symbol_puzzle_block_two",
       "y": 180
     },
-    "facing=west,symbol=two": {
+    "facing=west,symbol=creeper": {
       "model": "laicaps:block/symbol_puzzle_block_two",
       "y": 270
     },
-
-
-    "facing=east,symbol=three": {
+    "facing=east,symbol=flower": {
       "model": "laicaps:block/symbol_puzzle_block_three",
       "y": 90
     },
-    "facing=north,symbol=three": {
+    "facing=north,symbol=flower": {
       "model": "laicaps:block/symbol_puzzle_block_three"
     },
-    "facing=south,symbol=three": {
+    "facing=south,symbol=flower": {
       "model": "laicaps:block/symbol_puzzle_block_three",
       "y": 180
     },
-    "facing=west,symbol=three": {
+    "facing=west,symbol=flower": {
       "model": "laicaps:block/symbol_puzzle_block_three",
       "y": 270
     },
-
-
-    "facing=east,symbol=four": {
+    "facing=east,symbol=cat": {
       "model": "laicaps:block/symbol_puzzle_block_four",
       "y": 90
     },
-    "facing=north,symbol=four": {
+    "facing=north,symbol=cat": {
       "model": "laicaps:block/symbol_puzzle_block_four"
     },
-    "facing=south,symbol=four": {
+    "facing=south,symbol=cat": {
       "model": "laicaps:block/symbol_puzzle_block_four",
       "y": 180
     },
-    "facing=west,symbol=four": {
+    "facing=west,symbol=cat": {
       "model": "laicaps:block/symbol_puzzle_block_four",
       "y": 270
     },
-
-
-
-    "facing=east,symbol=five": {
+    "facing=east,symbol=heart": {
       "model": "laicaps:block/symbol_puzzle_block_five",
       "y": 90
     },
-    "facing=north,symbol=five": {
+    "facing=north,symbol=heart": {
       "model": "laicaps:block/symbol_puzzle_block_five"
     },
-    "facing=south,symbol=five": {
+    "facing=south,symbol=heart": {
       "model": "laicaps:block/symbol_puzzle_block_five",
       "y": 180
     },
-    "facing=west,symbol=five": {
-      "model": "laicaps:block/symbol_puzzle_block_five",
+    "facing=west,symbol=heart": {
+      "model": "laicaps:block/symbol_puzzle_block_heart",
       "y": 270
     },
-
-
-
-
-    "facing=east,symbol=six": {
+    "facing=east,symbol=whale": {
       "model": "laicaps:block/symbol_puzzle_block_six",
       "y": 90
     },
-    "facing=north,symbol=six": {
+    "facing=north,symbol=whale": {
       "model": "laicaps:block/symbol_puzzle_block_six"
     },
-    "facing=south,symbol=six": {
+    "facing=south,symbol=whale": {
       "model": "laicaps:block/symbol_puzzle_block_six",
       "y": 180
     },
-    "facing=west,symbol=six": {
+    "facing=west,symbol=whale": {
       "model": "laicaps:block/symbol_puzzle_block_six",
       "y": 270
     },
-
-
-
-    "facing=east,symbol=seven": {
+    "facing=east,symbol=moon": {
       "model": "laicaps:block/symbol_puzzle_block_seven",
       "y": 90
     },
-    "facing=north,symbol=seven": {
+    "facing=north,symbol=moon": {
       "model": "laicaps:block/symbol_puzzle_block_seven"
     },
-    "facing=south,symbol=seven": {
+    "facing=south,symbol=moon": {
       "model": "laicaps:block/symbol_puzzle_block_seven",
       "y": 180
     },
-    "facing=west,symbol=seven": {
+    "facing=west,symbol=moon": {
       "model": "laicaps:block/symbol_puzzle_block_seven",
       "y": 270
     },
-
-
-
-
-    "facing=east,symbol=eight": {
+    "facing=east,symbol=hourglass": {
       "model": "laicaps:block/symbol_puzzle_block_eight",
       "y": 90
     },
-    "facing=north,symbol=eight": {
+    "facing=north,symbol=hourglass": {
       "model": "laicaps:block/symbol_puzzle_block_eight"
     },
-    "facing=south,symbol=eight": {
+    "facing=south,symbol=hourglass": {
       "model": "laicaps:block/symbol_puzzle_block_eight",
       "y": 180
     },
-    "facing=west,symbol=eight": {
+    "facing=west,symbol=hourglass": {
       "model": "laicaps:block/symbol_puzzle_block_eight",
       "y": 270
     },
-
-
-
-
-    "facing=east,symbol=nine": {
+    "facing=east,symbol=pickaxe": {
       "model": "laicaps:block/symbol_puzzle_block_nine",
       "y": 90
     },
-    "facing=north,symbol=nine": {
+    "facing=north,symbol=pickaxe": {
       "model": "laicaps:block/symbol_puzzle_block_nine"
     },
-    "facing=south,symbol=nine": {
+    "facing=south,symbol=pickaxe": {
       "model": "laicaps:block/symbol_puzzle_block_nine",
       "y": 180
     },
-    "facing=west,symbol=nine": {
+    "facing=west,symbol=pickaxe": {
       "model": "laicaps:block/symbol_puzzle_block_nine",
       "y": 270
     },
-
-
-
-
-    "facing=east,symbol=ten": {
+    "facing=east,symbol=bow": {
       "model": "laicaps:block/symbol_puzzle_block_ten",
       "y": 90
     },
-    "facing=north,symbol=ten": {
+    "facing=north,symbol=bow": {
       "model": "laicaps:block/symbol_puzzle_block_ten"
     },
-    "facing=south,symbol=ten": {
+    "facing=south,symbol=bow": {
       "model": "laicaps:block/symbol_puzzle_block_ten",
       "y": 180
     },
-    "facing=west,symbol=ten": {
+    "facing=west,symbol=bow": {
       "model": "laicaps:block/symbol_puzzle_block_ten",
+      "y": 270
+    },
+    "facing=east,symbol=frog": {
+      "model": "laicaps:block/symbol_puzzle_block_eleven",
+      "y": 90
+    },
+    "facing=north,symbol=frog": {
+      "model": "laicaps:block/symbol_puzzle_block_eleven"
+    },
+    "facing=south,symbol=frog": {
+      "model": "laicaps:block/symbol_puzzle_block_eleven",
+      "y": 180
+    },
+    "facing=west,symbol=frog": {
+      "model": "laicaps:block/symbol_puzzle_block_eleven",
       "y": 270
     }
 
