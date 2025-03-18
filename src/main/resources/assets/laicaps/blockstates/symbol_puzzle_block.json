@@ -179,6 +179,22 @@
     "facing=west,symbol=frog": {
       "model": "laicaps:block/symbol_puzzle_block_eleven",
       "y": 270
+    },
+
+    "facing=east,symbol=jellyfish": {
+      "model": "laicaps:block/symbol_puzzle_block_twelve",
+      "y": 90
+    },
+    "facing=north,symbol=jellyfish": {
+      "model": "laicaps:block/symbol_puzzle_block_twelve"
+    },
+    "facing=south,symbol=jellyfish": {
+      "model": "laicaps:block/symbol_puzzle_block_twelve",
+      "y": 180
+    },
+    "facing=west,symbol=jellyfish": {
+      "model": "laicaps:block/symbol_puzzle_block_twelve",
+      "y": 270
     }
 
 

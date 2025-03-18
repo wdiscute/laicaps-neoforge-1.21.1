@@ -18,7 +18,8 @@ public enum SymbolsEnum implements StringRepresentable
     HOURGLASS("hourglass"),
     PICKAXE("pickaxe"),
     BOW("bow"),
-    FROG("frog");
+    FROG("frog"),
+    JELLYFISH("jellyfish");
 
     private final String name;
 

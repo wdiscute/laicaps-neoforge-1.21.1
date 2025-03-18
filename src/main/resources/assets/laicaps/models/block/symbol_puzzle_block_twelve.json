@@ -1,0 +1,35 @@
+{
+  "parent": "block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "laicaps:block/symbol_puzzle_block_side",
+    "side": "laicaps:block/symbol_puzzle_block_side",
+    "symbol": "laicaps:block/symbol_puzzle_block_twelve",
+    "front": "laicaps:block/symbol_puzzle_block_front"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [  0, 0, 16, 16 ], "texture": "#side"},
+        "up":    { "uv": [  0, 0, 16, 16 ], "texture": "#side"},
+        "north": { "uv": [  0, 0, 16, 16 ], "texture": "#front"},
+        "south": { "uv": [  0, 0, 16, 16 ], "texture": "#side"},
+        "west":  { "uv": [  0, 0, 16, 16 ], "texture": "#side"},
+        "east":  { "uv": [  0, 0, 16, 16 ], "texture": "#side"}
+      }
+    },
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "north": { "uv": [  0, 0, 16, 16 ], "texture": "#symbol", "neoforge_data": {
+          "block_light": 13,
+          "sky_light": 13
+        }
+        }
+      }
+    }
+  ]
+}
