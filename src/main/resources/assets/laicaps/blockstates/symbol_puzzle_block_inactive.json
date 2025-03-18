@@ -227,11 +227,27 @@
     "facing=west,symbol=jellyfish": {
       "model": "laicaps:block/symbol_puzzle_block_twelve_inactive",
       "y": 270
+    },
+
+
+
+
+
+    "facing=east,symbol=raincloud": {
+      "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive",
+      "y": 90
+    },
+    "facing=north,symbol=raincloud": {
+      "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive"
+    },
+    "facing=south,symbol=raincloud": {
+      "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive",
+      "y": 180
+    },
+    "facing=west,symbol=raincloud": {
+      "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive",
+      "y": 270
     }
-
-
-
-
 
 
 

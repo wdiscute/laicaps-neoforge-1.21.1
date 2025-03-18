@@ -19,7 +19,8 @@ public enum SymbolsEnum implements StringRepresentable
     PICKAXE("pickaxe"),
     BOW("bow"),
     FROG("frog"),
-    JELLYFISH("jellyfish");
+    JELLYFISH("jellyfish"),
+    RAINCLOUD("raincloud");
 
     private final String name;
 
