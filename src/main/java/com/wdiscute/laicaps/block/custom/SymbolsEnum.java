@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.block.custom;
 import net.minecraft.util.StringRepresentable;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 public enum SymbolsEnum implements StringRepresentable
@@ -20,7 +21,7 @@ public enum SymbolsEnum implements StringRepresentable
     BOW("bow"),
     FROG("frog"),
     JELLYFISH("jellyfish"),
-    RAINCLOUD("raincloud"),
+    CLOUD("cloud"),
     DUCK("duck");
 
     private final String name;

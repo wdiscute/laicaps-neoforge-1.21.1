@@ -233,18 +233,18 @@
 
 
 
-    "facing=east,symbol=raincloud": {
+    "facing=east,symbol=cloud": {
       "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive",
       "y": 90
     },
-    "facing=north,symbol=raincloud": {
+    "facing=north,symbol=cloud": {
       "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive"
     },
-    "facing=south,symbol=raincloud": {
+    "facing=south,symbol=cloud": {
       "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive",
       "y": 180
     },
-    "facing=west,symbol=raincloud": {
+    "facing=west,symbol=cloud": {
       "model": "laicaps:block/symbol_puzzle_block_thirteen_inactive",
       "y": 270
     },
