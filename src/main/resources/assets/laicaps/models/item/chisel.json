@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/stick",
+    "layer1": "minecraft:item/glowstone_dust"
+  },
+  "neoforge_data": {
+    "layers": {
+      "1": {
+        "color": "0xFFFF0000",
+        "block_light": 15,
+        "sky_light": 15,
+        "ambient_occlusion": false
+      }
+    }
+  }
+}

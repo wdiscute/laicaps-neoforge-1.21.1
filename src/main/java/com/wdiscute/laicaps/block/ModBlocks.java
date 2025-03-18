@@ -302,7 +302,6 @@ public class ModBlocks
                             .randomTicks()
                             .replaceable()
                             .lightLevel(state -> state.getValue(RiverthorneThistle.GROWN) ? 5 : 0)
-
                     ));
 
 
