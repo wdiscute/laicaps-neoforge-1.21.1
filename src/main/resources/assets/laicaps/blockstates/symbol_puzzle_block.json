@@ -254,6 +254,25 @@
     "facing=west,symbol=raincloud": {
       "model": "laicaps:block/symbol_puzzle_block_thirteen",
       "y": 270
+    },
+
+
+
+
+    "facing=east,symbol=duck": {
+      "model": "laicaps:block/symbol_puzzle_block_fourteen",
+      "y": 90
+    },
+    "facing=north,symbol=duck": {
+      "model": "laicaps:block/symbol_puzzle_block_fourteen"
+    },
+    "facing=south,symbol=duck": {
+      "model": "laicaps:block/symbol_puzzle_block_fourteen",
+      "y": 180
+    },
+    "facing=west,symbol=duck": {
+      "model": "laicaps:block/symbol_puzzle_block_fourteen",
+      "y": 270
     }
 
 

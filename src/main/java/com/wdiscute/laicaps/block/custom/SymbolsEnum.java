@@ -20,7 +20,8 @@ public enum SymbolsEnum implements StringRepresentable
     BOW("bow"),
     FROG("frog"),
     JELLYFISH("jellyfish"),
-    RAINCLOUD("raincloud");
+    RAINCLOUD("raincloud"),
+    DUCK("duck");
 
     private final String name;
 
