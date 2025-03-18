@@ -10,7 +10,8 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SymbolPuzzleBlockEntity extends BlockEntity
 {
     private BlockPos blockLinkedOffset = new BlockPos(0, 0, 0);
-    private String symbols = "mushroom, creeper, flower, cat, heart, whale, moon, hourglass, pickaxe, bow, frog";
+    private String symbols = "all";
+    //private String symbols = "mushroom, creeper, flower, cat, heart, whale, moon, hourglass, pickaxe, bow, frog";
 
     public BlockPos getBlockLinkedOffset()
     {

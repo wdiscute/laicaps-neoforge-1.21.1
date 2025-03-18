@@ -54,7 +54,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
                 for (int i = 0; i < 150; i++)
                 {
                     SymbolsEnum randomSymbolActive = SymbolsEnum.getRandom();
-                    if (symbolsAvailable.contains(randomSymbolActive.getSerializedName()))
+                    if (symbolsAvailable.contains(randomSymbolActive.getSerializedName()) || symbolsAvailable.equals("all"))
                     {
                         //play sound and set block to the next symbol that is found inside the list
                         pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, randomSymbolActive));
@@ -80,7 +80,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
                 {
                     SymbolsEnum randomSymbolInactive = SymbolsEnum.getRandom();
                     //System.out.println("atempted " + randomSymbolInactive);
-                    if (symbolsAvailable.contains(randomSymbolInactive.getSerializedName()) && randomSymbolInactive != pState.getValue(SYMBOLS))
+                    if (symbolsAvailable.contains(randomSymbolInactive.getSerializedName()) && randomSymbolInactive != pState.getValue(SYMBOLS) || symbolsAvailable.equals("all"))
                     {
                         //System.out.println("sucess with " + randomSymbolInactive + " which is different than " + pState.getValue(SYMBOLS));
                         //play sound and set block to the next symbol that is found inside the list
@@ -191,7 +191,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
                 for (int i = 0; i < Arrays.stream(SymbolsEnum.values()).count(); i++)
                 {
-                    if (symbolsAvailable.contains(nextSymbol.getSerializedName()))
+                    if (symbolsAvailable.contains(nextSymbol.getSerializedName()) || symbolsAvailable.equals("all"))
                     {
                         //play sound and set block to the next symbol that is found inside the list
                         pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
