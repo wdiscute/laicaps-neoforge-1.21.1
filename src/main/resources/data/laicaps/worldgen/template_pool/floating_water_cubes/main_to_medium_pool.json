@@ -1,11 +1,11 @@
 {
-  "name": "laicaps:5x5_receiver",
+  "name": "laicaps:floating_water_cubes_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "laicaps:asha_puzzles/receiver_gravel_1",
+        "location": "laicaps:floating_water_cubes/bridges/main_to_medium_empty",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -14,7 +14,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "laicaps:asha_puzzles/receiver_gravel_2",
+        "location": "laicaps:floating_water_cubes/bridges/main_to_medium_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -23,8 +23,8 @@
     {
       "weight": 1,
       "element": {
-        "location": "laicaps:asha_puzzles/receiver_gravel_3",
-        "processors": "minecraft:empty",
+        "location": "laicaps:floating_water_cubes/bridges/main_to_medium_2",
+        "processors": "laicaps:colosseum_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

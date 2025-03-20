@@ -369,12 +369,15 @@ public class ModBlocks
                     }
                     );
 
-    public static final DeferredBlock<Block> BRICKS =
-            registerBlock("bricks", () ->
+    public static final DeferredBlock<Block> WATER_CONTAINER =
+            registerBlock("water_container", () ->
                     new Block(BlockBehaviour.Properties.of()
-                            .sound(SoundType.STONE)
-                            .strength(4f, 4f)
-                            .instabreak()
+                            .sound(SoundType.SCULK)
+                            .strength(4f, 40f)
+                            .noCollission()
+                            .noOcclusion()
+                            .replaceable()
+                            .forceSolidOn()
                     )
             );
 
