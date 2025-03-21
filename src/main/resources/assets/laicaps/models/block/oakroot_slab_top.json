@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "laicaps:block/oakroot_planks",
+    "side": "laicaps:block/oakroot_planks",
+    "top": "laicaps:block/oakroot_planks"
+  }
+}

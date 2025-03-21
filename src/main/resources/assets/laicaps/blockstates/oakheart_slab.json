@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "laicaps:block/oakheart_slab"
+    },
+    "type=double": {
+      "model": "laicaps:block/oakheart_planks"
+    },
+    "type=top": {
+      "model": "laicaps:block/oakheart_slab_top"
+    }
+  }
+}

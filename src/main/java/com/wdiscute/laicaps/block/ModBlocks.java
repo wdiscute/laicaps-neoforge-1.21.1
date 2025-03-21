@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -212,6 +213,32 @@ public class ModBlocks
                             .ignitedByLava()
                     ));
 
+
+    public static final DeferredBlock<Block> OAKROOT_PLANKS =
+            registerBlock("oakroot_planks", () ->
+                    new Block(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.WOOD)
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F, 3.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    ));
+
+    public static final DeferredBlock<Block> OAKROOT_SLAB =
+            registerBlock("oakroot_slab", () ->
+                    new SlabBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.WOOD)
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F, 3.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    ));
+
+
+
+
+
+
     public static final DeferredBlock<Block> OAKROOT_LEAVES =
             registerBlock("oakroot_leaves", () ->
                     new LeavesBlock(BlockBehaviour.Properties.of()
@@ -242,6 +269,35 @@ public class ModBlocks
                             .strength(2.0F)
                             .ignitedByLava()
                     ));
+
+    public static final DeferredBlock<Block> OAKHEART_PLANKS =
+            registerBlock("oakheart_planks", () ->
+                    new Block(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.WOOD)
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F, 3.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_SLAB =
+            registerBlock("oakheart_slab", () ->
+                    new SlabBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.WOOD)
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F, 3.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    ));
+
+
+
+
+
+
+
+
+
 
     public static final DeferredBlock<Block> OAKHEART_LEAVES =
             registerBlock("oakheart_leaves", () ->
@@ -283,6 +339,9 @@ public class ModBlocks
                     new RotatedPillarBlock(BlockBehaviour.Properties.of()
                             .sound(SoundType.ROOTED_DIRT)
                             .strength(0.6F)
+                            .mapColor(MapColor.GRASS)
+                            .randomTicks()
+
                     ));
 
     public static final DeferredBlock<Block> ASHA_DIRT =
