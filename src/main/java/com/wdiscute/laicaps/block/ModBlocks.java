@@ -371,17 +371,29 @@ public class ModBlocks
 
     public static final DeferredBlock<Block> WATER_CONTAINER =
             registerBlock("water_container", () ->
-                    new Block(BlockBehaviour.Properties.of()
+                    new WaterContainerBlock(BlockBehaviour.Properties.of()
                             .sound(SoundType.SCULK)
-                            .strength(4f, 40f)
+                            .strength(1f, 40f)
                             .noCollission()
                             .noOcclusion()
                             .replaceable()
                             .forceSolidOn()
+                            .noTerrainParticles()
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
                     )
             );
 
-
+    public static final DeferredBlock<Block> WATER_CONTAINER_HELPER =
+            registerBlock("water_container_helper", () ->
+                    new WaterContainerHelperBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.SCULK)
+                            .strength(1f, 40f)
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .randomTicks()
+                    )
+            );
 
 
 
