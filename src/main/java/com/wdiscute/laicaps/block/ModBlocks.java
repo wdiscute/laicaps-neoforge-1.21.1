@@ -15,7 +15,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -196,20 +200,9 @@ public class ModBlocks
             );
 
 
-    //sapling requires tree grower which is being provided on ModTreeGrowers
-    //we use ModSaplingBlock so we can change what block it can be placed/grown on etc
-    public static final DeferredBlock<Block> WALNUT_SAPLING =
-            registerBlock("walnut_sapling", () ->
-                    new ModSaplingBlock(ModTreeGrowers.WALNUT, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> Blocks.GRASS_BLOCK));
-
-
     public static final DeferredBlock<Block> OAKROOT_SAPLING =
             registerBlock("oakroot_sapling", () ->
                     new ModSaplingBlock(ModTreeGrowers.OAKROOT, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get()));
-
-    public static final DeferredBlock<Block> OAKROOT_LEAVES =
-            registerBlock("oakroot_leaves", () ->
-                    new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES)));
 
     public static final DeferredBlock<Block> OAKROOT_LOG =
             registerBlock("oakroot_log", () ->
@@ -218,6 +211,24 @@ public class ModBlocks
                             .strength(2.0F)
                             .ignitedByLava()
                     ));
+
+    public static final DeferredBlock<Block> OAKROOT_LEAVES =
+            registerBlock("oakroot_leaves", () ->
+                    new LeavesBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.PLANT)
+                            .strength(0.2F)
+                            .randomTicks()
+                            .sound(SoundType.GRASS)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::ocelotOrParrot)
+                            .isSuffocating(ModBlocks::never)
+                            .isViewBlocking(ModBlocks::never)
+                            .ignitedByLava()
+                            .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor(ModBlocks::never)
+                    ));
+
+
 
 
     public static final DeferredBlock<Block> OAKHEART_SAPLING =
@@ -234,13 +245,37 @@ public class ModBlocks
 
     public static final DeferredBlock<Block> OAKHEART_LEAVES =
             registerBlock("oakheart_leaves", () ->
-                    new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES)));
+                    new LeavesBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.PLANT)
+                            .strength(0.2F)
+                            .randomTicks()
+                            .sound(SoundType.GRASS)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::ocelotOrParrot)
+                            .isSuffocating(ModBlocks::never)
+                            .isViewBlocking(ModBlocks::never)
+                            .ignitedByLava()
+                            .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor(ModBlocks::never)
+                    ));
 
     public static final DeferredBlock<Block> FLOWERING_OAKHEART_LEAVES =
             registerBlock("flowering_oakheart_leaves", () ->
-                    new FloweringOakheartLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES).
-                            randomTicks()
+                    new FloweringOakheartLeavesBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.PLANT)
+                            .strength(0.2F)
+                            .randomTicks()
+                            .sound(SoundType.GRASS)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .isSuffocating(ModBlocks::never)
+                            .isViewBlocking(ModBlocks::never)
+                            .ignitedByLava()
+                            .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor(ModBlocks::never)
                     ));
+
+
 
 
     public static final DeferredBlock<Block> ASHA_GRASS_BLOCK =
@@ -318,6 +353,13 @@ public class ModBlocks
                     )
                     {
                         @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box((double)3.0F, (double)0.0F, (double)3.0F, (double)13.0F, (double)8.0F, (double)13.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+
+                        @Override
                         protected MapCodec<? extends BushBlock> codec()
                         {
                             return null;
@@ -349,6 +391,13 @@ public class ModBlocks
                             .replaceable()
                     )
                     {
+                        @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box(2.0F, 0.0F, 2.0F, 14.0F, 13.0F, 14.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+
                         @Override
                         protected MapCodec<? extends BushBlock> codec()
                         {
@@ -392,6 +441,8 @@ public class ModBlocks
                             .isValidSpawn(Blocks::never)
                             .pushReaction(PushReaction.DESTROY)
                             .randomTicks()
+                            .replaceable()
+                            .instabreak()
                     )
             );
 
@@ -408,7 +459,13 @@ public class ModBlocks
 
 
 
-    
+    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return true;
+    }
+
+    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return false;
+    }
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block)
     {

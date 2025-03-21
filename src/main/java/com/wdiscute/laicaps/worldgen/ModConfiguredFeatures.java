@@ -13,7 +13,6 @@ public class ModConfiguredFeatures
 {
 
     //public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_ALEXANDRITE_ORE_KEY = registerKey("alexandrite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> WALNUT_KEY = registerKey("walnut");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAKHEART_KEY = registerKey("oakheart");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAKROOT_KEY = registerKey("oakroot");
     //public static final ResourceKey<ConfiguredFeature<?, ?>> RANDOM_BLOCKS_KEY = registerKey("random_blocks_patch_key");

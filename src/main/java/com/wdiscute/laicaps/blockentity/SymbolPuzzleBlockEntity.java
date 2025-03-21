@@ -15,63 +15,71 @@ public class SymbolPuzzleBlockEntity extends BlockEntity
 
     public BlockPos getBlockLinkedOffset()
     {
-        return this.blockLinkedOffset;
+        setChanged();
+        return blockLinkedOffset;
     }
 
     public String getSymbols()
     {
+        setChanged();
         return symbols;
     }
 
 
     public void setX(int dawd)
     {
-        this.blockLinkedOffset = new BlockPos(dawd, this.blockLinkedOffset.getY(), this.blockLinkedOffset.getZ());
+        setChanged();
+        blockLinkedOffset = new BlockPos(dawd, blockLinkedOffset.getY(), blockLinkedOffset.getZ());
     }
 
     public int getX()
     {
-        return this.blockLinkedOffset.getX();
+        setChanged();
+        return blockLinkedOffset.getX();
     }
 
 
     public void setZ(int dawd)
     {
-        this.blockLinkedOffset = new BlockPos(this.blockLinkedOffset.getX(), this.blockLinkedOffset.getY(), dawd);
+        setChanged();
+        blockLinkedOffset = new BlockPos(blockLinkedOffset.getX(), blockLinkedOffset.getY(), dawd);
     }
 
     public int getZ()
     {
-        return this.blockLinkedOffset.getZ();
+        setChanged();
+        return blockLinkedOffset.getZ();
     }
 
 
     public void setY(int dawd)
     {
-        this.blockLinkedOffset = new BlockPos(this.blockLinkedOffset.getX(), dawd, this.blockLinkedOffset.getZ());
+        setChanged();
+        blockLinkedOffset = new BlockPos(blockLinkedOffset.getX(), dawd, blockLinkedOffset.getZ());
     }
 
     public int getY()
     {
-        return this.blockLinkedOffset.getY();
-    }
-
-
-    @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
-    {
-        this.blockLinkedOffset = new BlockPos(pTag.getInt("linkedx"), pTag.getInt("linkedy"), pTag.getInt("linkedz"));
-        this.symbols = pTag.getString("symbols");
-
+        setChanged();
+        return blockLinkedOffset.getY();
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
-        pTag.putInt("linkedx", this.blockLinkedOffset.getX());
-        pTag.putInt("linkedy", this.blockLinkedOffset.getY());
-        pTag.putInt("linkedz", this.blockLinkedOffset.getZ());
-        pTag.putString("symbols", symbols);
+        super.loadAdditional(tag, registries);
+        blockLinkedOffset = new BlockPos(tag.getIntArray("linkedBlock")[0], tag.getIntArray("linkedBlock")[1], tag.getIntArray("linkedBlock")[2]);
+        symbols = tag.getString("symbols");
+
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    {
+        super.saveAdditional(tag, registries);
+        tag.putIntArray("linkedBlock", new int[]{blockLinkedOffset.getX(), blockLinkedOffset.getY(), blockLinkedOffset.getZ()});
+        tag.putString("symbols", symbols);
+
     }
 
     public SymbolPuzzleBlockEntity(BlockPos pPos, BlockState pBlockState)

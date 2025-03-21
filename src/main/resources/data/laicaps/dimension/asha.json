@@ -7,7 +7,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "laicaps:test_biome",
+          "biome": "laicaps:asha_forest",
           "parameters": {
             "continentalness": 0.0,
             "depth": 0.0,

@@ -28,6 +28,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class LunarveilBlock extends BushBlock
@@ -35,6 +37,14 @@ public class LunarveilBlock extends BushBlock
     public LunarveilBlock(Properties properties)
     {
         super(properties);
+    }
+
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Vec3 vec3 = state.getOffset(level, pos);
+        VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)15.0F, (double)11.0F);
+        return shape.move(vec3.x, vec3.y, vec3.z);
     }
 
     @Override

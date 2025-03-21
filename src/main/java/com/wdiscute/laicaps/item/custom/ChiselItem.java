@@ -19,21 +19,10 @@ import java.util.Map;
 public class ChiselItem extends Item
 {
 
-    private static final Map<Block, Block> CHISEL_MAP =
-            Map.of(
-                    Blocks.STONE, Blocks.STONE_BRICKS,
-                    Blocks.END_STONE, Blocks.END_STONE_BRICKS,
-                    Blocks.DEEPSLATE, Blocks.DEEPSLATE_BRICKS,
-                    Blocks.IRON_BLOCK, Blocks.DIAMOND_BLOCK,
-                    Blocks.DIRT, ModBlocks.ALEXENDRITE_BLOCK.get()
-
-            );
-
     public ChiselItem(Properties pProperties)
     {
         super(pProperties);
     }
-
 
     @Override
     public InteractionResult useOn(UseOnContext pContext)

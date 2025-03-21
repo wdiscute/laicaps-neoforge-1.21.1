@@ -10,14 +10,7 @@ public class ModPlacedFeatures
 {
     public static final ResourceKey<PlacedFeature> ALEXANDRTITE_ORE_PLACED_KEY = registerKey("alexandrite_ore_placed");
 
-    public static final ResourceKey<PlacedFeature> WALNUT_PLACED_KEY = registerKey("walnut_placed");
-
     public static final ResourceKey<PlacedFeature> RANDOM_BLOCKS_PLACED_KEY = registerKey("random_blocks_placed_key");
-
-
-
-
-
 
 
     public static ResourceKey<PlacedFeature> registerKey(String name)

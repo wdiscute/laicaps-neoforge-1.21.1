@@ -17,7 +17,6 @@ public class ModBiomeModifiers
 {
 
     public static final ResourceKey<BiomeModifier> ADD_ALEXANDRITE_ORE = registerKey("add_alexandrite_ore");
-    public static final ResourceKey<BiomeModifier> ADD_WALNUT_TREE = registerKey("add_walnut_tree");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context)
     {
@@ -31,12 +30,6 @@ public class ModBiomeModifiers
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
 
-
-        context.register(ADD_WALNUT_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.END_HIGHLANDS), biomes.getOrThrow(Biomes.END_MIDLANDS), biomes.getOrThrow(Biomes.END_BARRENS)),
-                HolderSet.direct(placedFeature.getOrThrow(ModPlacedFeatures.WALNUT_PLACED_KEY)),
-                GenerationStep.Decoration.VEGETAL_DECORATION
-        ));
 
     }
 
