@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "laicaps:block/oakheart_pressure_plate"
+    },
+    "powered=true": {
+      "model": "laicaps:block/oakheart_pressure_plate_down"
+    }
+  }
+}

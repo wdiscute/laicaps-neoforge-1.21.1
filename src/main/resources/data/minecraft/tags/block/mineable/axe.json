@@ -5,10 +5,14 @@
     "laicaps:oakheart_slab",
     "laicaps:oakheart_stairs",
     "laicaps:oakheart_fence",
+    "laicaps:oakheart_button",
+
     "laicaps:oakroot_log",
     "laicaps:oakroot_planks",
     "laicaps:oakroot_slab",
     "laicaps:oakroot_stairs",
-    "laicaps:oakroot_fence"
+    "laicaps:oakroot_fence",
+    "laicaps:oakroot_button"
+
   ]
 }

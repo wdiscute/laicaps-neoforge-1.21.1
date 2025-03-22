@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "laicaps:block/oakroot_pressure_plate"
+    },
+    "powered=true": {
+      "model": "laicaps:block/oakroot_pressure_plate_down"
+    }
+  }
+}

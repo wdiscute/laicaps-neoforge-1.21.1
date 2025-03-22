@@ -6,6 +6,7 @@ import com.wdiscute.laicaps.block.custom.*;
 import com.wdiscute.laicaps.item.ModItems;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -250,6 +251,28 @@ public class ModBlocks
                                     .sound(SoundType.WOOD)
                     ));
 
+    public static final DeferredBlock<Block> OAKROOT_BUTTON =
+            registerBlock("oakroot_button", () ->
+                    new ButtonBlock(BlockSetType.OAK, 30,
+                            BlockBehaviour.Properties.of()
+                                    .noCollission()
+                                    .strength(0.5F)
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+    public static final DeferredBlock<Block> OAKROOT_PRESSURE_PLATE =
+            registerBlock("oakroot_pressure_plate", () ->
+                    new PressurePlateBlock(BlockSetType.OAK,
+                            BlockBehaviour.Properties.of()
+                                    .forceSolidOn()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .noCollission()
+                                    .strength(0.5F)
+                                    .ignitedByLava()
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+
 
 
     public static final DeferredBlock<Block> OAKROOT_LEAVES =
@@ -271,6 +294,13 @@ public class ModBlocks
 
 
 
+
+
+
+
+
+
+
     public static final DeferredBlock<Block> OAKHEART_SAPLING =
             registerBlock("oakheart_sapling", () ->
                     new ModSaplingBlock(ModTreeGrowers.OAKHEART, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get()));
@@ -281,7 +311,21 @@ public class ModBlocks
                             .sound(SoundType.WOOD)
                             .strength(2.0F)
                             .ignitedByLava()
-                    ));
+                    ){
+                        @Override
+                        public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+                        {
+                            return true;
+                        }
+
+                        @Override
+                        public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+                        {
+                            return 20;
+                        }
+
+                    }
+    );
 
     public static final DeferredBlock<Block> OAKHEART_PLANKS =
             registerBlock("oakheart_planks", () ->
@@ -318,6 +362,32 @@ public class ModBlocks
                                     .ignitedByLava()
                                     .sound(SoundType.WOOD)
                     ));
+
+    public static final DeferredBlock<Block> OAKHEART_BUTTON =
+            registerBlock("oakheart_button", () ->
+                    new ButtonBlock(BlockSetType.OAK, 30,
+                            BlockBehaviour.Properties.of()
+                                    .noCollission()
+                                    .strength(0.5F)
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_PRESSURE_PLATE =
+            registerBlock("oakheart_pressure_plate", () ->
+                    new PressurePlateBlock(BlockSetType.OAK,
+                            BlockBehaviour.Properties.of()
+                                    .forceSolidOn()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .noCollission()
+                                    .strength(0.5F)
+                                    .ignitedByLava()
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+
+
+
+
 
 
 
