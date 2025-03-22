@@ -234,8 +234,21 @@ public class ModBlocks
                             .ignitedByLava()
                     ));
 
+    public static final DeferredBlock<Block> OAKROOT_STAIRS =
+            registerBlock("oakroot_stairs", () ->
+                    new StairBlock(OAKROOT_PLANKS.get().defaultBlockState(),
+                            BlockBehaviour.Properties.ofFullCopy(OAKROOT_PLANKS.get())
+                    ));
 
-
+    public static final DeferredBlock<Block> OAKROOT_FENCE =
+            registerBlock("oakroot_fence", () ->
+                    new FenceBlock(
+                            BlockBehaviour.Properties.of()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(2.0F, 3.0F)
+                                    .ignitedByLava()
+                                    .sound(SoundType.WOOD)
+                    ));
 
 
 
@@ -290,9 +303,21 @@ public class ModBlocks
                             .ignitedByLava()
                     ));
 
+    public static final DeferredBlock<Block> OAKHEART_STAIRS =
+            registerBlock("oakheart_stairs", () ->
+                    new StairBlock(OAKROOT_PLANKS.get().defaultBlockState(),
+                            BlockBehaviour.Properties.ofFullCopy(OAKHEART_PLANKS.get())
+                    ));
 
-
-
+    public static final DeferredBlock<Block> OAKHEART_FENCE =
+            registerBlock("oakheart_fence", () ->
+                    new FenceBlock(
+                            BlockBehaviour.Properties.of()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(2.0F, 3.0F)
+                                    .ignitedByLava()
+                                    .sound(SoundType.WOOD)
+                    ));
 
 
 

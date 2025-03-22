@@ -3,8 +3,12 @@
     "laicaps:oakheart_log",
     "laicaps:oakheart_planks",
     "laicaps:oakheart_slab",
+    "laicaps:oakheart_stairs",
+    "laicaps:oakheart_fence",
     "laicaps:oakroot_log",
     "laicaps:oakroot_planks",
-    "laicaps:oakroot_slab"
+    "laicaps:oakroot_slab",
+    "laicaps:oakroot_stairs",
+    "laicaps:oakroot_fence"
   ]
 }
