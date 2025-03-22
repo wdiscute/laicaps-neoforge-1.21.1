@@ -3,6 +3,7 @@
 
   "block.laicaps.sender_puzzle_block": "block that sends",
   "block.laicaps.receiver_block": "block that receives",
+
   "block.laicaps.symbol_puzzle_block": "block that has a symbol",
   "block.laicaps.symbol_puzzle_block_inactive": "block that has a symbol but that symbol is inactive so it cant be changed",
   "block.laicaps.symbol_controller_block": "block that controls the symbols",
@@ -10,21 +11,62 @@
   "block.laicaps.magic_block": "Cool Block Of Magicalness",
 
   "block.laicaps.oakheart_sapling": "Oakheart Sapling",
+  "block.laicaps.stripped_oakheart_log": "Stripped Oakheart Log",
   "block.laicaps.oakheart_log": "Oakheart Log",
+  "block.laicaps.stripped_oakheart_wood": "Stripped Oakheart Wood",
+  "block.laicaps.oakheart_wood": "Oakheart Wood",
   "block.laicaps.oakheart_leaves": "Oakheart Leaves",
+  "block.laicaps.flowering_oakheart_leaves": "Flowering Oakheart Leaves",
+  "block.laicaps.oakheart_planks": "Oakheart Planks",
+  "block.laicaps.oakheart_slab": "Oakheart Slab",
+  "block.laicaps.oakheart_stairs": "Oakheart Stairs",
+  "block.laicaps.oakheart_button": "Oakheart Button",
+  "block.laicaps.oakheart_trapdoor": "Oakheart Trapdoor",
+  "block.laicaps.oakheart_door": "Oakheart Door",
+  "block.laicaps.oakheart_fence": "Oakheart Fence",
+  "block.laicaps.oakheart_fence_gate": "Oakheart Fence Gate",
+  "block.laicaps.oakheart_pressure_plate": "Oakheart Pressure Plate",
+  "block.laicaps.oakheart_sign": "Oakheart Sign",
+  "block.laicaps.oakheart_hanging_sign": "Oakheart Hanging Sign",
+  "block.laicaps.oakheart_boat": "Oakheart Boat",
+  "block.laicaps.oakheart_chest_boat": "Oakheart Boat With Chest",
+
 
   "block.laicaps.oakroot_sapling": "Oakroot Sapling",
+  "block.laicaps.stripped_oakroot_log": "Stripped Oakroot Log",
   "block.laicaps.oakroot_log": "Oakroot Log",
+  "block.laicaps.stripped_oakroot_wood": "Stripped Oakroot Wood",
+  "block.laicaps.oakroot_wood": "Oakroot Wood",
   "block.laicaps.oakroot_leaves": "Oakroot Leaves",
+  "block.laicaps.flowering_oakroot_leaves": "Flowering Oakroot Leaves",
+  "block.laicaps.oakroot_planks": "Oakroot Planks",
+  "block.laicaps.oakroot_slab": "Oakroot Slab",
+  "block.laicaps.oakroot_stairs": "Oakroot Stairs",
+  "block.laicaps.oakroot_button": "Oakroot Button",
+  "block.laicaps.oakroot_trapdoor": "Oakroot Trapdoor",
+  "block.laicaps.oakroot_door": "Oakroot Door",
+  "block.laicaps.oakroot_fence": "Oakroot Fence",
+  "block.laicaps.oakroot_fence_gate": "Oakroot Fence Gate",
+  "block.laicaps.oakroot_pressure_plate": "Oakroot Pressure Plate",
+  "block.laicaps.oakroot_sign": "Oakroot Sign",
+  "block.laicaps.oakroot_hanging_sign": "Oakroot Hanging Sign",
+  "block.laicaps.oakroot_boat": "Oakroot Boat",
+  "block.laicaps.oakroot_chest_boat": "Oakroot Boat With Chest",
+
+
+
 
   "tooltip.laicaps.magic_block.tooltip": "This §k~~~ §rmagic §k~~~§r block makes you all §ljumpy and stuff§r",
 
-  "toolip.laicaps.chisel": "Hold shift for more information",
-  "toolip.laicaps.chisel.shift_down": "this chisel does very cool things",
+  "tooltip.laicaps.generic.shift_up": "⏬ §l§3[Shift]§r ⏬",
+  "tooltip.laicaps.generic.shift_down": "⏫ §l§6[Shift]§r ⏫",
+  "tooltip.laicaps.generic.empty" : "",
 
 
+  "tooltip.laicaps.chisel.shift_down": "the chisel is very cool!",
 
-
+  "tooltip.laicaps.oakheart_log.shift_down" : "this oakheart log is very tasty!",
+  "tooltip.laicaps.oakheart_log.shift_down_2" : "But you can not eat it lol",
 
 
   "item.laicaps.alexandrite": "Alexandrite",

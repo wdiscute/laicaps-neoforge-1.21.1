@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "laicaps:alexandrite_ore"
+          "Name": "laicaps:oakheart_log"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "laicaps:alexandrite_deepslate_ore"
+          "Name": "laicaps:oakroot_log"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

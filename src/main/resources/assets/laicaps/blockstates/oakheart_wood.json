@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "laicaps:block/oakheart_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "laicaps:block/oakheart_wood"
+    },
+    "axis=z": {
+      "model": "laicaps:block/oakheart_wood",
+      "x": 90
+    }
+  }
+}

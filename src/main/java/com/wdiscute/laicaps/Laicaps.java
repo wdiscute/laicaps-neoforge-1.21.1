@@ -6,6 +6,7 @@ import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.block.ModBlocks;
 import com.wdiscute.laicaps.item.ModItems;
 import com.wdiscute.laicaps.sound.ModSounds;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -27,6 +28,11 @@ public class Laicaps
 {
     public static final String MOD_ID = "laicaps";
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    public static Boolean HasExtraInfoKeyDown()
+    {
+        return Screen.hasShiftDown();
+    }
 
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
@@ -59,15 +65,15 @@ public class Laicaps
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
-            event.accept(ModItems.ALEXANDRITE);
-            event.accept(ModItems.RAW_ALEXANDRITE);
+            //event.accept(ModItems.ALEXANDRITE);
+            //event.accept(ModItems.RAW_ALEXANDRITE);
         }
 
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
-            event.accept(ModBlocks.ALEXENDRITE_BLOCK);
-            event.accept(ModBlocks.RAW_ALEXENDRITE_BLOCK);
-            event.accept(ModBlocks.ALEXENDRITE_ORE);
-            event.accept(ModBlocks.ALEXENDRITE_DEEPSLATE_ORE);
+            //event.accept(ModBlocks.ALEXENDRITE_BLOCK);
+            //event.accept(ModBlocks.RAW_ALEXENDRITE_BLOCK);
+            //event.accept(ModBlocks.ALEXENDRITE_ORE);
+            //event.accept(ModBlocks.ALEXENDRITE_DEEPSLATE_ORE);
         }
 
     }

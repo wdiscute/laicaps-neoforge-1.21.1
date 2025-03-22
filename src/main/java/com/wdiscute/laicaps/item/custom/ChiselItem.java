@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps.item.custom;
 
+import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.block.ModBlocks;
 import com.wdiscute.laicaps.sound.ModSounds;
@@ -41,20 +42,23 @@ public class ChiselItem extends Item
 
 
     @Override
-    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag)
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> tooltipComponents, TooltipFlag pTooltipFlag)
     {
-        if (Screen.hasShiftDown())
+        if (Laicaps.HasExtraInfoKeyDown())
         {
-            pTooltipComponents.add(Component.translatable("toolip.laicaps.chisel.shift_down"));
-        } else
+            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
+            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
+            tooltipComponents.add(Component.translatable("tooltip.laicaps.chisel.shift_down"));
+        }
+        else
         {
-            pTooltipComponents.add(Component.translatable("toolip.laicaps.chisel"));
+            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
         }
 
         if (pStack.get(ModDataComponentTypes.COORDINATES.get()) != null)
         {
-            pTooltipComponents.add(Component.literal("Last Block Clicked at " + pStack.get(ModDataComponentTypes.COORDINATES.get())));
+            tooltipComponents.add(Component.literal("Last Block Clicked at " + pStack.get(ModDataComponentTypes.COORDINATES.get())));
         }
-        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+        super.appendHoverText(pStack, pContext, tooltipComponents, pTooltipFlag);
     }
 }

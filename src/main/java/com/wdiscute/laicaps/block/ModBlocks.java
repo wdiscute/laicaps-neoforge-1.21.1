@@ -3,14 +3,29 @@ package com.wdiscute.laicaps.block;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.block.custom.*;
+import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.item.ModItems;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.TagTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,146 +34,29 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlocks
 {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Laicaps.MOD_ID);
 
-    public static final DeferredBlock<Block> ALEXENDRITE_BLOCK =
-            registerBlock("alexandrite_block", () ->
-                    new Block(BlockBehaviour.Properties.of()
-                            .requiresCorrectToolForDrops()
-                            .strength(4f, 4f)
-                            .noCollission()
-                            .replaceable()
-                            .sound(SoundType.TUFF)
-                    )
-            );
-
-    public static final DeferredBlock<Block> RAW_ALEXENDRITE_BLOCK =
-            registerBlock("raw_alexandrite_block", () ->
-                    new Block(BlockBehaviour.Properties.of()
-                            .requiresCorrectToolForDrops()
-                            .strength(4f, 4f)
-                            .sound(SoundType.BONE_BLOCK)
-                    )
-            );
-
-    public static final DeferredBlock<Block> ALEXENDRITE_ORE =
-            registerBlock("alexandrite_ore", () ->
-                    new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.of()
-                            .requiresCorrectToolForDrops()
-                            .strength(4f, 6f)
-                    )
-            );
-
-    public static final DeferredBlock<Block> ALEXENDRITE_DEEPSLATE_ORE =
-            registerBlock("alexandrite_deepslate_ore", () ->
-                    new DropExperienceBlock(UniformInt.of(2, 4), BlockBehaviour.Properties.of()
-                            .requiresCorrectToolForDrops()
-                            .strength(5f, 7f)
-                    )
-            );
-
-    public static final DeferredBlock<Block> MAGIC_BLOCK =
-            registerBlock("magic_block", () ->
-                    new MagicBlock(BlockBehaviour.Properties.of()
-                            .strength(5f, 7f)
-                            .sound(SoundType.AMETHYST)
-                    )
-            );
-
-    public static final DeferredBlock<StairBlock> ALEXANDRITE_STAIRS =
-            registerBlock("alexandrite_stairs", () ->
-                    new StairBlock(ModBlocks.ALEXENDRITE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                    )
-            );
-
-    public static final DeferredBlock<SlabBlock> ALEXANDRITE_SLAB =
-            registerBlock("alexandrite_slab", () ->
-                    new SlabBlock(BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                    )
-            );
-
-    public static final DeferredBlock<PressurePlateBlock> ALEXANDRITE_PRESSURE_PLATE =
-            registerBlock("alexandrite_pressure_plate", () ->
-                    new PressurePlateBlock(BlockSetType.IRON, BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                    )
-            );
-
-    public static final DeferredBlock<ButtonBlock> ALEXANDRITE_BUTTON =
-            registerBlock("alexandrite_button", () ->
-                    new ButtonBlock(BlockSetType.IRON, 20, BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                            .noCollission()
-                    )
-            );
-
-    public static final DeferredBlock<FenceBlock> ALEXANDRITE_FENCE =
-            registerBlock("alexandrite_fence", () ->
-                    new FenceBlock(BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                    )
-            );
-
-    public static final DeferredBlock<FenceGateBlock> ALEXANDRITE_FENCE_GATE =
-            registerBlock("alexandrite_fence_gate", () ->
-                    new FenceGateBlock(WoodType.ACACIA, BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                    )
-            );
-
-    public static final DeferredBlock<WallBlock> ALEXANDRITE_WALL =
-            registerBlock("alexandrite_wall", () ->
-                    new WallBlock(BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                    )
-            );
-
-    public static final DeferredBlock<DoorBlock> ALEXANDRITE_DOOR =
-            registerBlock("alexandrite_door", () ->
-                    new DoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                            .noOcclusion() //noOcclusion needs to be set otherwise transparent pixels will make the world see through like xray
-                    )
-            );
-
-    public static final DeferredBlock<TrapDoorBlock> ALEXANDRITE_TRAPDOOR =
-            registerBlock("alexandrite_trapdoor", () ->
-                    new TrapDoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                            .noOcclusion() //noOcclusion needs to be set otherwise transparent pixels will make the world see through like xray
-                    )
-            );
-
-    public static final DeferredBlock<Block> ALEXANDRITE_LAMP =
-            registerBlock("alexandrite_lamp", () ->
-                    new AlexandriteLampBlock(BlockBehaviour.Properties.of()
-                            .strength(3)
-                            .requiresCorrectToolForDrops()
-                            .lightLevel(state -> state.getValue(AlexandriteLampBlock.CLICKED) ? 15 : 0)
-                    )
-            );
+    //
+    //,------.  ,--. ,--. ,-------. ,-------. ,--.    ,------.
+    //|  .--. ' |  | |  | `--.   /  `--.   /  |  |    |  .---'
+    //|  '--' | |  | |  |   /   /     /   /   |  |    |  `--,
+    //|  | --'  '  '-'  '  /   `--.  /   `--. |  '--. |  `---.
+    //`--'       `-----'  `-------' `-------' `-----' `------'
+    //
 
     public static final DeferredBlock<Block> SENDER_PUZZLE_BLOCK =
             registerBlock("sender_puzzle_block", () ->
@@ -192,7 +90,6 @@ public class ModBlocks
                     )
             );
 
-
     public static final DeferredBlock<Block> SYMBOL_PUZZLE_BLOCK_INACTIVE =
             registerBlock("symbol_puzzle_block_inactive", () ->
                     new SymbolPuzzleBlockInactive(BlockBehaviour.Properties.of()
@@ -200,6 +97,216 @@ public class ModBlocks
                             .sound(SoundType.STONE)
                     )
             );
+
+
+
+    //
+    // ,-----.    ,---.   ,--. ,--. ,--.  ,--. ,------.   ,---.   ,------.  ,--------.
+    //'  .-.  '  /  O  \  |  .'   / |  '--'  | |  .---'  /  O  \  |  .--. ' '--.  .--'
+    //|  | |  | |  .-.  | |  .   '  |  .--.  | |  `--,  |  .-.  | |  '--'.'    |  |
+    //'  '-'  ' |  | |  | |  |\   \ |  |  |  | |  `---. |  | |  | |  |\  \     |  |
+    // `-----'  `--' `--' `--' '--' `--'  `--' `------' `--' `--' `--' '--'    `--'
+    //
+
+
+    public static final DeferredBlock<Block> OAKHEART_SAPLING =
+            registerBlock("oakheart_sapling", () ->
+                    new ModSaplingBlock(ModTreeGrowers.OAKHEART, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get()));
+
+    public static final DeferredBlock<Block> OAKHEART_LOG =
+            registerBlock("oakheart_log", () ->
+                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.WOOD)
+                            .strength(2.0F)
+                            .ignitedByLava()
+                    )
+                    {
+                        @Override
+                        protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+                        {
+                            if(stack.is(ItemTags.AXES)){
+                                level.setBlockAndUpdate(pos, STRIPPED_OAKHEART_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+                                stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                                level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                return ItemInteractionResult.SUCCESS;
+                            }
+                            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+                        }
+
+                        @Override
+                        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+                        {
+                            if (Laicaps.HasExtraInfoKeyDown())
+                            {
+                                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
+                                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
+                                tooltipComponents.add(Component.translatable("tooltip.laicaps.oakheart_log.shift_down"));
+                                tooltipComponents.add(Component.translatable("tooltip.laicaps.oakheart_log.shift_down_2"));
+                            } else
+                            {
+                                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
+                            }
+
+                            super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                        }
+                    }
+            );
+
+    public static final DeferredBlock<Block> STRIPPED_OAKHEART_LOG =
+            registerBlock("stripped_oakheart_log", () ->
+                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    ){
+                        @Override
+                        protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+                        {
+                            if(stack.is(ItemTags.AXES)){
+                                level.setBlockAndUpdate(pos, STRIPPED_OAKHEART_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+                                stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                                level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                return ItemInteractionResult.SUCCESS;
+                            }
+                            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+                        }
+                    }
+            );
+
+    public static final DeferredBlock<Block> OAKHEART_WOOD =
+            registerBlock("oakheart_wood", () ->
+                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    )
+                    {
+                        @Override
+                        protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+                        {
+                            if(stack.is(ItemTags.AXES)){
+                                level.setBlockAndUpdate(pos, STRIPPED_OAKHEART_WOOD.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+                                stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                                level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                return ItemInteractionResult.SUCCESS;
+                            }
+                            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+                        }
+                    }
+            );
+
+    public static final DeferredBlock<Block> STRIPPED_OAKHEART_WOOD =
+            registerBlock("stripped_oakheart_wood", () ->
+                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    )
+            );
+
+    public static final DeferredBlock<Block> OAKHEART_PLANKS =
+            registerBlock("oakheart_planks", () ->
+                    new Block(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.WOOD)
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F, 3.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_SLAB =
+            registerBlock("oakheart_slab", () ->
+                    new SlabBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.WOOD)
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F, 3.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_STAIRS =
+            registerBlock("oakheart_stairs", () ->
+                    new StairBlock(OAKHEART_PLANKS.get().defaultBlockState(),
+                            BlockBehaviour.Properties.ofFullCopy(OAKHEART_PLANKS.get())
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_FENCE =
+            registerBlock("oakheart_fence", () ->
+                    new FenceBlock(
+                            BlockBehaviour.Properties.of()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(2.0F, 3.0F)
+                                    .ignitedByLava()
+                                    .sound(SoundType.WOOD)
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_BUTTON =
+            registerBlock("oakheart_button", () ->
+                    new ButtonBlock(BlockSetType.OAK, 30,
+                            BlockBehaviour.Properties.of()
+                                    .noCollission()
+                                    .strength(0.5F)
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_PRESSURE_PLATE =
+            registerBlock("oakheart_pressure_plate", () ->
+                    new PressurePlateBlock(BlockSetType.OAK,
+                            BlockBehaviour.Properties.of()
+                                    .forceSolidOn()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .noCollission()
+                                    .strength(0.5F)
+                                    .ignitedByLava()
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_LEAVES =
+            registerBlock("oakheart_leaves", () ->
+                    new LeavesBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.PLANT)
+                            .strength(0.2F)
+                            .randomTicks()
+                            .sound(SoundType.GRASS)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::ocelotOrParrot)
+                            .isSuffocating(ModBlocks::never)
+                            .isViewBlocking(ModBlocks::never)
+                            .ignitedByLava()
+                            .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor(ModBlocks::never)
+                    ));
+
+    public static final DeferredBlock<Block> FLOWERING_OAKHEART_LEAVES =
+            registerBlock("flowering_oakheart_leaves", () ->
+                    new FloweringOakheartLeavesBlock(BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.PLANT)
+                            .strength(0.2F)
+                            .randomTicks()
+                            .sound(SoundType.GRASS)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::never)
+                            .isSuffocating(ModBlocks::never)
+                            .isViewBlocking(ModBlocks::never)
+                            .ignitedByLava()
+                            .pushReaction(PushReaction.DESTROY)
+                            .isRedstoneConductor(ModBlocks::never)
+                    ));
+
+
+
+
+
+    //
+    // ,-----.    ,---.   ,--. ,--. ,------.   ,-----.   ,-----.  ,--------.
+    //'  .-.  '  /  O  \  |  .'   / |  .--. ' '  .-.  ' '  .-.  ' '--.  .--'
+    //|  | |  | |  .-.  | |  .   '  |  '--'.' |  | |  | |  | |  |    |  |
+    //'  '-'  ' |  | |  | |  |\   \ |  |\  \  '  '-'  ' '  '-'  '    |  |
+    // `-----'  `--' `--' `--' '--' `--' '--'  `-----'   `-----'     `--'
+    //
 
 
     public static final DeferredBlock<Block> OAKROOT_SAPLING =
@@ -212,8 +319,63 @@ public class ModBlocks
                             .sound(SoundType.WOOD)
                             .strength(2.0F)
                             .ignitedByLava()
-                    ));
+                    ){
+                        @Override
+                        protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+                        {
+                            if(stack.is(ItemTags.AXES)){
+                                level.setBlockAndUpdate(pos, STRIPPED_OAKROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+                                stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                                level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                return ItemInteractionResult.SUCCESS;
+                            }
+                            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+                        }
+                    }
+            );
 
+    public static final DeferredBlock<Block> STRIPPED_OAKROOT_LOG =
+            registerBlock("stripped_oakroot_log", () ->
+                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    )
+            );
+
+    public static final DeferredBlock<Block> OAKROOT_WOOD =
+            registerBlock("oakroot_wood", () ->
+                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    )
+                    {
+                        @Override
+                        protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+                        {
+                            if(stack.is(ItemTags.AXES)){
+                                level.setBlockAndUpdate(pos, STRIPPED_OAKROOT_WOOD.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
+                                stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                                level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                return ItemInteractionResult.SUCCESS;
+                            }
+                            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+                        }
+                    }
+            );
+
+    public static final DeferredBlock<Block> STRIPPED_OAKROOT_WOOD =
+            registerBlock("stripped_oakroot_wood", () ->
+                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                            .instrument(NoteBlockInstrument.BASS)
+                            .strength(2.0F)
+                            .sound(SoundType.WOOD)
+                            .ignitedByLava()
+                    )
+            );
 
     public static final DeferredBlock<Block> OAKROOT_PLANKS =
             registerBlock("oakroot_planks", () ->
@@ -273,8 +435,6 @@ public class ModBlocks
                     ));
 
 
-
-
     public static final DeferredBlock<Block> OAKROOT_LEAVES =
             registerBlock("oakroot_leaves", () ->
                     new LeavesBlock(BlockBehaviour.Properties.of()
@@ -293,140 +453,20 @@ public class ModBlocks
 
 
 
-
-
-
-
-
-
-
-
-    public static final DeferredBlock<Block> OAKHEART_SAPLING =
-            registerBlock("oakheart_sapling", () ->
-                    new ModSaplingBlock(ModTreeGrowers.OAKHEART, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get()));
-
-    public static final DeferredBlock<Block> OAKHEART_LOG =
-            registerBlock("oakheart_log", () ->
-                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
-                            .sound(SoundType.WOOD)
-                            .strength(2.0F)
-                            .ignitedByLava()
-                    ){
-                        @Override
-                        public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction)
-                        {
-                            return true;
-                        }
-
-                        @Override
-                        public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction)
-                        {
-                            return 20;
-                        }
-
-                    }
-    );
-
-    public static final DeferredBlock<Block> OAKHEART_PLANKS =
-            registerBlock("oakheart_planks", () ->
-                    new Block(BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.WOOD)
-                            .instrument(NoteBlockInstrument.BASS)
-                            .strength(2.0F, 3.0F)
-                            .sound(SoundType.WOOD)
-                            .ignitedByLava()
-                    ));
-
-    public static final DeferredBlock<Block> OAKHEART_SLAB =
-            registerBlock("oakheart_slab", () ->
-                    new SlabBlock(BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.WOOD)
-                            .instrument(NoteBlockInstrument.BASS)
-                            .strength(2.0F, 3.0F)
-                            .sound(SoundType.WOOD)
-                            .ignitedByLava()
-                    ));
-
-    public static final DeferredBlock<Block> OAKHEART_STAIRS =
-            registerBlock("oakheart_stairs", () ->
-                    new StairBlock(OAKROOT_PLANKS.get().defaultBlockState(),
-                            BlockBehaviour.Properties.ofFullCopy(OAKHEART_PLANKS.get())
-                    ));
-
-    public static final DeferredBlock<Block> OAKHEART_FENCE =
-            registerBlock("oakheart_fence", () ->
-                    new FenceBlock(
-                            BlockBehaviour.Properties.of()
-                                    .instrument(NoteBlockInstrument.BASS)
-                                    .strength(2.0F, 3.0F)
-                                    .ignitedByLava()
-                                    .sound(SoundType.WOOD)
-                    ));
-
-    public static final DeferredBlock<Block> OAKHEART_BUTTON =
-            registerBlock("oakheart_button", () ->
-                    new ButtonBlock(BlockSetType.OAK, 30,
-                            BlockBehaviour.Properties.of()
-                                    .noCollission()
-                                    .strength(0.5F)
-                                    .pushReaction(PushReaction.DESTROY)
-                    ));
-
-    public static final DeferredBlock<Block> OAKHEART_PRESSURE_PLATE =
-            registerBlock("oakheart_pressure_plate", () ->
-                    new PressurePlateBlock(BlockSetType.OAK,
-                            BlockBehaviour.Properties.of()
-                                    .forceSolidOn()
-                                    .instrument(NoteBlockInstrument.BASS)
-                                    .noCollission()
-                                    .strength(0.5F)
-                                    .ignitedByLava()
-                                    .pushReaction(PushReaction.DESTROY)
-                    ));
-
-
-
-
-
-
-
-
-
-
-
-    public static final DeferredBlock<Block> OAKHEART_LEAVES =
-            registerBlock("oakheart_leaves", () ->
-                    new LeavesBlock(BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.PLANT)
-                            .strength(0.2F)
-                            .randomTicks()
-                            .sound(SoundType.GRASS)
-                            .noOcclusion()
-                            .isValidSpawn(Blocks::ocelotOrParrot)
-                            .isSuffocating(ModBlocks::never)
-                            .isViewBlocking(ModBlocks::never)
-                            .ignitedByLava()
-                            .pushReaction(PushReaction.DESTROY)
-                            .isRedstoneConductor(ModBlocks::never)
-                    ));
-
-    public static final DeferredBlock<Block> FLOWERING_OAKHEART_LEAVES =
-            registerBlock("flowering_oakheart_leaves", () ->
-                    new FloweringOakheartLeavesBlock(BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.PLANT)
-                            .strength(0.2F)
-                            .randomTicks()
-                            .sound(SoundType.GRASS)
-                            .noOcclusion()
-                            .isValidSpawn(Blocks::never)
-                            .isSuffocating(ModBlocks::never)
-                            .isViewBlocking(ModBlocks::never)
-                            .ignitedByLava()
-                            .pushReaction(PushReaction.DESTROY)
-                            .isRedstoneConductor(ModBlocks::never)
-                    ));
-
-
+    //
+    //  ,---.    ,---.   ,--.  ,--.   ,---.
+    // /  O  \  '   .-'  |  '--'  |  /  O  \
+    //|  .-.  | `.  `-.  |  .--.  | |  .-.  |
+    //|  | |  | .-'    | |  |  |  | |  | |  |
+    //`--' `--' `-----'  `--'  `--' `--' `--'
+    //
+    //
+    //,------. ,--.  ,--. ,--.   ,--. ,--. ,------.   ,-----.  ,--.  ,--. ,--.   ,--. ,------. ,--.  ,--. ,--------.
+    //|  .---' |  ,'.|  |  \  `.'  /  |  | |  .--. ' '  .-.  ' |  ,'.|  | |   `.'   | |  .---' |  ,'.|  | '--.  .--'
+    //|  `--,  |  |' '  |   \     /   |  | |  '--'.' |  | |  | |  |' '  | |  |'.'|  | |  `--,  |  |' '  |    |  |
+    //|  `---. |  | `   |    \   /    |  | |  |\  \  '  '-'  ' |  | `   | |  |   |  | |  `---. |  | `   |    |  |
+    //`------' `--'  `--'     `-'     `--' `--' '--'  `-----'  `--'  `--' `--'   `--' `------' `--'  `--'    `--'
+    //
 
 
     public static final DeferredBlock<Block> ASHA_GRASS_BLOCK =
@@ -460,7 +500,6 @@ public class ModBlocks
                             .lightLevel(state -> state.getValue(LunarveilBlock.OPEN) ? 11 : 0)
                             .randomTicks()
                     ));
-
 
 
     public static final DeferredBlock<Block> RIVERTHORNE =
@@ -507,9 +546,10 @@ public class ModBlocks
                     )
                     {
                         @Override
-                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+                        {
                             Vec3 vec3 = state.getOffset(level, pos);
-                            VoxelShape shape = Block.box((double)3.0F, (double)0.0F, (double)3.0F, (double)13.0F, (double)8.0F, (double)13.0F);
+                            VoxelShape shape = Block.box((double) 3.0F, (double) 0.0F, (double) 3.0F, (double) 13.0F, (double) 8.0F, (double) 13.0F);
                             return shape.move(vec3.x, vec3.y, vec3.z);
                         }
 
@@ -531,7 +571,7 @@ public class ModBlocks
                             return false;
                         }
                     }
-                    );
+            );
 
     public static final DeferredBlock<Block> ASHA_GRASS =
             registerBlock("asha_grass", () ->
@@ -546,7 +586,8 @@ public class ModBlocks
                     )
                     {
                         @Override
-                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+                        {
                             Vec3 vec3 = state.getOffset(level, pos);
                             VoxelShape shape = Block.box(2.0F, 0.0F, 2.0F, 14.0F, 13.0F, 14.0F);
                             return shape.move(vec3.x, vec3.y, vec3.z);
@@ -570,7 +611,17 @@ public class ModBlocks
                             return false;
                         }
                     }
-                    );
+            );
+
+
+
+    //
+    //,--.   ,--.   ,---.   ,--------. ,------. ,------.
+    //|  |   |  |  /  O  \  '--.  .--' |  .---' |  .--. '
+    //|  |.'.|  | |  .-.  |    |  |    |  `--,  |  '--'.'
+    //|   ,'.   | |  | |  |    |  |    |  `---. |  |\  \
+    //'--'   '--' `--' `--'    `--'    `------' `--' '--'
+    //
 
     public static final DeferredBlock<Block> WATER_CONTAINER =
             registerBlock("water_container", () ->
@@ -613,11 +664,38 @@ public class ModBlocks
 
 
 
-    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //
+    // ,-----.  ,--------. ,--.  ,--. ,------. ,------.   ,---.
+    //'  .-.  ' '--.  .--' |  '--'  | |  .---' |  .--. ' '   .-'
+    //|  | |  |    |  |    |  .--.  | |  `--,  |  '--'.' `.  `-.
+    //'  '-'  '    |  |    |  |  |  | |  `---. |  |\  \  .-'    |
+    // `-----'     `--'    `--'  `--' `------' `--' '--' `-----'
+    //
+
+
+
+    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos)
+    {
         return true;
     }
 
-    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos)
+    {
         return false;
     }
 

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "laicaps:block/oakheart_log",
+    "side": "laicaps:block/oakheart_log"
+  }
+}
