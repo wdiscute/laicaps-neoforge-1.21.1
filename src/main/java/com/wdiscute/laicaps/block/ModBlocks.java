@@ -422,6 +422,44 @@ public class ModBlocks
                                     .pushReaction(PushReaction.DESTROY)
                     ));
 
+
+
+
+
+
+
+    public static final DeferredBlock<Block> OAKROOT_SIGN =
+            registerBlock("oakroot_sign", () ->
+                    new ModStandingSignBlock(ModWoodTypes.OAKROOT,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)
+                    ));
+
+    public static final DeferredBlock<Block> OAKROOT_WALL_SIGN =
+            registerBlock("oakroot_wall_sign", () ->
+                    new ModWallSignBlock(ModWoodTypes.OAKROOT,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)
+                    ));
+
+
+    public static final DeferredBlock<Block> OAKROOT_HANGING_SIGN =
+            registerBlock("oakroot_hanging_sign", () ->
+                    new ModHangingSignBlock(ModWoodTypes.OAKROOT,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)
+                    ));
+
+    public static final DeferredBlock<Block> OAKROOT_WALL_HANGING_SIGN =
+            registerBlock("oakroot_wall_hanging_sign", () ->
+                    new ModWallHangingSignBlock(ModWoodTypes.OAKROOT,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)
+                    ));
+
+
+
+
+
+
+
+
     public static final DeferredBlock<Block> OAKROOT_PRESSURE_PLATE =
             registerBlock("oakroot_pressure_plate", () ->
                     new PressurePlateBlock(BlockSetType.OAK,

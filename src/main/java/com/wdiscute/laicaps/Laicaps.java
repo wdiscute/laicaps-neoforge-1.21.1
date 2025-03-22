@@ -1,12 +1,14 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
+import com.wdiscute.laicaps.block.ModWoodTypes;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.block.ModBlocks;
 import com.wdiscute.laicaps.item.ModItems;
 import com.wdiscute.laicaps.sound.ModSounds;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -92,6 +94,8 @@ public class Laicaps
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            Sheets.addWoodType(ModWoodTypes.OAKROOT);
+            Sheets.addWoodType(ModWoodTypes.OAKHEART);
 
         }
     }
