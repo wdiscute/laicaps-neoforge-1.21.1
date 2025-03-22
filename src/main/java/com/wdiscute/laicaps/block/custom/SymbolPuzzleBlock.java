@@ -1,11 +1,11 @@
 package com.wdiscute.laicaps.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.laicaps.block.ModBlocks;
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.block.ModBlockEntity;
 import com.wdiscute.laicaps.blockentity.SymbolPuzzleBlockEntity;
-import com.wdiscute.laicaps.item.ModItems;
+import com.wdiscute.laicaps.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

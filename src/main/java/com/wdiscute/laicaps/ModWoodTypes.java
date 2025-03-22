@@ -1,7 +1,6 @@
-package com.wdiscute.laicaps.block;
+package com.wdiscute.laicaps;
 
 
-import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 

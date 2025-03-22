@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps.block;
 
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.blockentity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -39,7 +40,9 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(
                             ModSignBlockEntity::new,
                             ModBlocks.OAKROOT_SIGN.get(),
-                            ModBlocks.OAKROOT_WALL_SIGN.get()
+                            ModBlocks.OAKROOT_WALL_SIGN.get(),
+                            ModBlocks.OAKHEART_SIGN.get(),
+                            ModBlocks.OAKHEART_WALL_SIGN.get()
                     )
                     .build(null)
     );
@@ -49,8 +52,10 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(
                             ModHangingSignBlockEntity::new,
                             ModBlocks.OAKROOT_HANGING_SIGN.get(),
-                            ModBlocks.OAKROOT_WALL_HANGING_SIGN.get()
-                    )
+                            ModBlocks.OAKROOT_WALL_HANGING_SIGN.get(),                            ModBlocks.OAKROOT_HANGING_SIGN.get(),
+                            ModBlocks.OAKHEART_HANGING_SIGN.get(),
+                            ModBlocks.OAKHEART_WALL_HANGING_SIGN.get()
+                            )
                     .build(null)
     );
 

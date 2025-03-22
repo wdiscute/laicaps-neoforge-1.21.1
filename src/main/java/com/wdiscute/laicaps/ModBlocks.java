@@ -1,29 +1,20 @@
-package com.wdiscute.laicaps.block;
+package com.wdiscute.laicaps;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.block.custom.*;
-import com.wdiscute.laicaps.component.ModDataComponentTypes;
-import com.wdiscute.laicaps.item.ModItems;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.TagTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -31,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
@@ -39,7 +29,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -252,6 +241,31 @@ public class ModBlocks
                                     .pushReaction(PushReaction.DESTROY)
                     ));
 
+    public static final DeferredBlock<Block> OAKHEART_SIGN =
+            registerBlockNoItem("oakheart_sign", () ->
+                    new ModStandingSignBlock(ModWoodTypes.OAKHEART,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_WALL_SIGN =
+            registerBlockNoItem("oakheart_wall_sign", () ->
+                    new ModWallSignBlock(ModWoodTypes.OAKHEART,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)
+                    ));
+
+
+    public static final DeferredBlock<Block> OAKHEART_HANGING_SIGN =
+            registerBlockNoItem("oakheart_hanging_sign", () ->
+                    new ModHangingSignBlock(ModWoodTypes.OAKHEART,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_WALL_HANGING_SIGN =
+            registerBlockNoItem("oakheart_wall_hanging_sign", () ->
+                    new ModWallHangingSignBlock(ModWoodTypes.OAKHEART,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)
+                    ));
+
     public static final DeferredBlock<Block> OAKHEART_PRESSURE_PLATE =
             registerBlock("oakheart_pressure_plate", () ->
                     new PressurePlateBlock(BlockSetType.OAK,
@@ -422,43 +436,29 @@ public class ModBlocks
                                     .pushReaction(PushReaction.DESTROY)
                     ));
 
-
-
-
-
-
-
     public static final DeferredBlock<Block> OAKROOT_SIGN =
-            registerBlock("oakroot_sign", () ->
+            registerBlockNoItem("oakroot_sign", () ->
                     new ModStandingSignBlock(ModWoodTypes.OAKROOT,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)
                     ));
 
     public static final DeferredBlock<Block> OAKROOT_WALL_SIGN =
-            registerBlock("oakroot_wall_sign", () ->
+            registerBlockNoItem("oakroot_wall_sign", () ->
                     new ModWallSignBlock(ModWoodTypes.OAKROOT,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)
                     ));
 
-
     public static final DeferredBlock<Block> OAKROOT_HANGING_SIGN =
-            registerBlock("oakroot_hanging_sign", () ->
+            registerBlockNoItem("oakroot_hanging_sign", () ->
                     new ModHangingSignBlock(ModWoodTypes.OAKROOT,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)
                     ));
 
     public static final DeferredBlock<Block> OAKROOT_WALL_HANGING_SIGN =
-            registerBlock("oakroot_wall_hanging_sign", () ->
+            registerBlockNoItem("oakroot_wall_hanging_sign", () ->
                     new ModWallHangingSignBlock(ModWoodTypes.OAKROOT,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)
                     ));
-
-
-
-
-
-
-
 
     public static final DeferredBlock<Block> OAKROOT_PRESSURE_PLATE =
             registerBlock("oakroot_pressure_plate", () ->
@@ -471,7 +471,6 @@ public class ModBlocks
                                     .ignitedByLava()
                                     .pushReaction(PushReaction.DESTROY)
                     ));
-
 
     public static final DeferredBlock<Block> OAKROOT_LEAVES =
             registerBlock("oakroot_leaves", () ->
@@ -747,6 +746,11 @@ public class ModBlocks
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block)
     {
         ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerBlockNoItem(String name, Supplier<T> block)
+    {
+        return BLOCKS.register(name, block);
     }
 
     public static void register(IEventBus eventBus)

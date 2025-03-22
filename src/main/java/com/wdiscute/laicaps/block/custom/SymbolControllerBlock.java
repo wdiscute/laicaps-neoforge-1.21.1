@@ -4,13 +4,12 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.blockentity.SymbolPuzzleBlockEntity;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.block.ModBlockEntity;
-import com.wdiscute.laicaps.block.ModBlocks;
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.blockentity.SymbolControllerBlockEntity;
 import com.wdiscute.laicaps.blockentity.TickableBlockEntity;
-import com.wdiscute.laicaps.item.ModItems;
+import com.wdiscute.laicaps.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -34,12 +33,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.openjdk.nashorn.internal.runtime.Symbol;
 
-import java.awt.*;
 import java.util.Objects;
 import java.util.Random;
 
