@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.block.custom;
 
-import com.wdiscute.laicaps.block.ModBlockEntity;
+import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.blockentity.ReceiverBlockEntity;
 import com.wdiscute.laicaps.blockentity.TickableBlockEntity;

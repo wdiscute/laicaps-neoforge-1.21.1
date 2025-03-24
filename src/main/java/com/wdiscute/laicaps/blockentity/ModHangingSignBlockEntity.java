@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.blockentity;
 
-import com.wdiscute.laicaps.block.ModBlockEntity;
+import com.wdiscute.laicaps.ModBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;

@@ -1,7 +1,5 @@
-package com.wdiscute.laicaps.block;
+package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.blockentity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.blockentity;
 
-import com.wdiscute.laicaps.block.ModBlockEntity;
+import com.wdiscute.laicaps.ModBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

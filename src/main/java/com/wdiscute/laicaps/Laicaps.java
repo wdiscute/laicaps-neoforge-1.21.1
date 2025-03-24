@@ -2,11 +2,12 @@ package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
-import com.wdiscute.laicaps.block.ModBlockEntity;
-import com.wdiscute.laicaps.event.ModEventBusClientEvents;
+import com.wdiscute.laicaps.entity.ModEntities;
+import com.wdiscute.laicaps.entity.client.ModBoatRenderer;
 import com.wdiscute.laicaps.sound.ModSounds;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -47,6 +48,7 @@ public class Laicaps
         ModDataComponentTypes.register(modEventBus);
         ModSounds.register(modEventBus);
         ModBlockEntity.register(modEventBus);
+        ModEntities.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -94,6 +96,9 @@ public class Laicaps
         {
             Sheets.addWoodType(ModWoodTypes.OAKROOT);
             Sheets.addWoodType(ModWoodTypes.OAKHEART);
+
+            EntityRenderers.register(ModEntities.MOD_BOAT.get(), context -> new ModBoatRenderer(context, false));
+            EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
 
         }
     }

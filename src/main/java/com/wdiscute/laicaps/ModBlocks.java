@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
@@ -232,6 +233,38 @@ public class ModBlocks
                                     .sound(SoundType.WOOD)
                     ));
 
+    public static final DeferredBlock<Block> OAKHEART_FENCE_GATE =
+            registerBlock("oakheart_fence_gate", () ->
+                    new FenceGateBlock(ModWoodTypes.OAKHEART,
+                            BlockBehaviour.Properties.of()
+                                    .forceSolidOn()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(2.0F, 3.0F)
+                                    .ignitedByLava()
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_DOOR =
+            registerBlockNoItem("oakheart_door", () ->
+                    new DoorBlock(BlockSetType.OAK,
+                            BlockBehaviour.Properties.of()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(3.0F)
+                                    .noOcclusion()
+                                    .ignitedByLava()
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+    public static final DeferredBlock<Block> OAKHEART_TRAPDOOR =
+            registerBlock("oakheart_trapdoor", () ->
+                    new TrapDoorBlock(BlockSetType.OAK,
+                            BlockBehaviour.Properties.of()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(3.0F)
+                                    .noOcclusion()
+                                    .isValidSpawn(Blocks::never)
+                                    .ignitedByLava()
+                    ));
+
     public static final DeferredBlock<Block> OAKHEART_BUTTON =
             registerBlock("oakheart_button", () ->
                     new ButtonBlock(BlockSetType.OAK, 30,
@@ -427,6 +460,38 @@ public class ModBlocks
                                     .sound(SoundType.WOOD)
                     ));
 
+    public static final DeferredBlock<Block> OAKROOT_FENCE_GATE =
+            registerBlock("oakroot_fence_gate", () ->
+                    new FenceGateBlock(ModWoodTypes.OAKROOT,
+                            BlockBehaviour.Properties.of()
+                                    .forceSolidOn()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(2.0F, 3.0F)
+                                    .ignitedByLava()
+                    ));
+
+    public static final DeferredBlock<Block> OAKROOT_DOOR =
+            registerBlockNoItem("oakroot_door", () ->
+                    new DoorBlock(BlockSetType.OAK,
+                            BlockBehaviour.Properties.of()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(3.0F)
+                                    .noOcclusion()
+                                    .ignitedByLava()
+                                    .pushReaction(PushReaction.DESTROY)
+                    ));
+
+    public static final DeferredBlock<Block> OAKROOT_TRAPDOOR =
+            registerBlock("oakroot_trapdoor", () ->
+                    new TrapDoorBlock(BlockSetType.OAK,
+                            BlockBehaviour.Properties.of()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .strength(3.0F)
+                                    .noOcclusion()
+                                    .isValidSpawn(Blocks::never)
+                                    .ignitedByLava()
+                    ));
+
     public static final DeferredBlock<Block> OAKROOT_BUTTON =
             registerBlock("oakroot_button", () ->
                     new ButtonBlock(BlockSetType.OAK, 30,
@@ -471,6 +536,9 @@ public class ModBlocks
                                     .ignitedByLava()
                                     .pushReaction(PushReaction.DESTROY)
                     ));
+
+
+
 
     public static final DeferredBlock<Block> OAKROOT_LEAVES =
             registerBlock("oakroot_leaves", () ->

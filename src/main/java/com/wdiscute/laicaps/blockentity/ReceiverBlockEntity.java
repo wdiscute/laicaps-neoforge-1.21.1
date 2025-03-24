@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.blockentity;
 
-import com.wdiscute.laicaps.block.ModBlockEntity;
+import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;

@@ -38,12 +38,11 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.OAKHEART_STAIRS.get());
                         output.accept(ModBlocks.OAKHEART_SLAB.get());
                         output.accept(ModBlocks.OAKHEART_FENCE.get());
-                        //output.accept(ModBlocks.OAKHEART_FENCE_GATE.get());
-                        //output.accept(ModBlocks.OAKHEART_DOOR.get());
-                        //output.accept(ModBlocks.OAKHEART_TRAPDOOR.get());
+                        output.accept(ModBlocks.OAKHEART_FENCE_GATE.get());
+                        output.accept(ModBlocks.OAKHEART_DOOR.get());
+                        output.accept(ModBlocks.OAKHEART_TRAPDOOR.get());
                         output.accept(ModBlocks.OAKHEART_SIGN.get());
                         output.accept(ModBlocks.OAKHEART_HANGING_SIGN.get());
-
                         output.accept(ModBlocks.OAKHEART_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.OAKHEART_BUTTON.get());
                         //output.accept(ModBlocks.OAKHEART_BOAT.get());
@@ -62,12 +61,11 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.OAKROOT_STAIRS.get());
                         output.accept(ModBlocks.OAKROOT_SLAB.get());
                         output.accept(ModBlocks.OAKROOT_FENCE.get());
-                        //output.accept(ModBlocks.OAKROOT_FENCE_GATE.get());
-                        //output.accept(ModBlocks.OAKROOT_DOOR.get());
-                        //output.accept(ModBlocks.OAKROOT_TRAPDOOR.get());
+                        output.accept(ModBlocks.OAKROOT_FENCE_GATE.get());
+                        output.accept(ModBlocks.OAKROOT_DOOR.get());
+                        output.accept(ModBlocks.OAKROOT_TRAPDOOR.get());
                         output.accept(ModBlocks.OAKROOT_SIGN.get());
                         output.accept(ModBlocks.OAKROOT_HANGING_SIGN.get());
-
                         output.accept(ModBlocks.OAKROOT_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.OAKROOT_BUTTON.get());
                         //output.accept(ModBlocks.OAKROOT_BOAT.get());
