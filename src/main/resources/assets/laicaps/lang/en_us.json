@@ -28,8 +28,8 @@
   "block.laicaps.oakheart_pressure_plate": "Oakheart Pressure Plate",
   "block.laicaps.oakheart_sign": "Oakheart Sign",
   "block.laicaps.oakheart_hanging_sign": "Oakheart Hanging Sign",
-  "block.laicaps.oakheart_boat": "Oakheart Boat",
-  "block.laicaps.oakheart_chest_boat": "Oakheart Boat With Chest",
+  "item.laicaps.oakheart_boat" : "Oakheart Boat",
+  "item.laicaps.oakheart_chest_boat" : "Oakheart Boat with Chest",
 
 
   "block.laicaps.oakroot_sapling": "Oakroot Sapling",
@@ -50,9 +50,8 @@
   "block.laicaps.oakroot_pressure_plate": "Oakroot Pressure Plate",
   "block.laicaps.oakroot_sign": "Oakroot Sign",
   "block.laicaps.oakroot_hanging_sign": "Oakroot Hanging Sign",
-  "block.laicaps.oakroot_boat": "Oakroot Boat",
-  "block.laicaps.oakroot_chest_boat": "Oakroot Boat With Chest",
-
+  "item.laicaps.oakroot_boat" : "Oakroot Boat",
+  "item.laicaps.oakroot_chest_boat" : "Oakroot Boat with Chest",
 
 
 

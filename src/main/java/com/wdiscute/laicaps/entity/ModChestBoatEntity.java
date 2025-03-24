@@ -38,12 +38,10 @@ public class ModChestBoatEntity extends ChestBoat
     @Override
     public Item getDropItem()
     {
-        switch (getModVariant())
-        {
+        return switch (getModVariant()) {
             case OAKHEART -> ModItems.OAKHEART_CHEST_BOAT.get();
             case OAKROOT -> ModItems.OAKROOT_CHEST_BOAT.get();
-        }
-        return super.getDropItem();
+        };
     }
 
     public void setVariant(ModBoatEntity.Type pVariant)
