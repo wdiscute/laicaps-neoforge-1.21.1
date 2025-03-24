@@ -75,37 +75,38 @@ public class ModItems
 
     public static final DeferredItem<Item> OAKHEART_BOAT =
             ITEMS.register("oakheart_boat",
-                    () -> new ModBoatItem(
-                            false,
+                    () -> new ModBoatItem(false,
                             ModBoatEntity.Type.OAKHEART,
                             new Item.Properties().stacksTo(16)
                     ));
 
     public static final DeferredItem<Item> OAKROOT_BOAT =
             ITEMS.register("oakroot_boat",
-                    () -> new ModBoatItem(
-                            false,
+                    () -> new ModBoatItem(false,
                             ModBoatEntity.Type.OAKROOT,
                             new Item.Properties().stacksTo(16)
                     ));
 
-
     public static final DeferredItem<Item> OAKHEART_CHEST_BOAT =
             ITEMS.register("oakheart_chest_boat",
-                    () -> new ModBoatItem(
-                            true,
+                    () -> new ModBoatItem(true,
                             ModBoatEntity.Type.OAKHEART,
                             new Item.Properties().stacksTo(16)
                     ));
 
     public static final DeferredItem<Item> OAKROOT_CHEST_BOAT =
             ITEMS.register("oakroot_chest_boat",
-                    () -> new ModBoatItem(
-                            true,
+                    () -> new ModBoatItem(true,
                             ModBoatEntity.Type.OAKROOT,
                             new Item.Properties().stacksTo(16)
                     ));
 
+    public static final DeferredItem<Item> DIAMONG_CHEST_BOAT =
+            ITEMS.register("diamond_chest_boat",
+                    () -> new ModBoatItem(true,
+                            ModBoatEntity.Type.OAKROOT,
+                            new Item.Properties().stacksTo(16)
+                    ));
 
 
 

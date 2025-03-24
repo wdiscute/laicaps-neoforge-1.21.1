@@ -68,7 +68,7 @@ public class ModBoatEntity extends Boat {
         }
     }
 
-    public static enum Type implements StringRepresentable {
+    public enum Type implements StringRepresentable {
         OAKHEART(ModBlocks.OAKHEART_PLANKS.get(), "oakheart"),
         OAKROOT(ModBlocks.OAKROOT_PLANKS.get(), "oakroot");
 
@@ -77,7 +77,7 @@ public class ModBoatEntity extends Boat {
         public static final StringRepresentable.EnumCodec<ModBoatEntity.Type> CODEC = StringRepresentable.fromEnum(ModBoatEntity.Type::values);
         private static final IntFunction<ModBoatEntity.Type> BY_ID = ByIdMap.continuous(Enum::ordinal, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
 
-        private Type(Block pPlanks, String pName) {
+        Type(Block pPlanks, String pName) {
             this.name = pName;
             this.planks = pPlanks;
         }
@@ -98,9 +98,6 @@ public class ModBoatEntity extends Boat {
             return this.name;
         }
 
-        /**
-         * Get a boat type by its enum ordinal
-         */
         public static ModBoatEntity.Type byId(int pId) {
             return BY_ID.apply(pId);
         }
