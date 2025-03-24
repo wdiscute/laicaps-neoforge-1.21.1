@@ -16,13 +16,6 @@ public class ModChestBoatEntity extends ChestBoat
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE = SynchedEntityData.defineId(Boat.class, EntityDataSerializers.INT);
 
 
-    @Override
-    public void tick()
-    {
-        //System.out.println(DATA_ID_TYPE);
-        super.tick();
-    }
-
     public ModChestBoatEntity(EntityType<? extends ChestBoat> pEntityType, Level pLevel)
     {
         super(pEntityType, pLevel);
