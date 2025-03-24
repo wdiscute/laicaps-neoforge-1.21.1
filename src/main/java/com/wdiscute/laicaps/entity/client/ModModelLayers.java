@@ -13,10 +13,13 @@ public class ModModelLayers
             ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "boat/oakroot"), "main");
 
 
+
+
     public static final ModelLayerLocation OAKHEART_CHEST_BOAT_LAYER = new ModelLayerLocation(
             ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "chest_boat/oakheart"), "main");
 
     public static final ModelLayerLocation OAKROOT_CHEST_BOAT_LAYER = new ModelLayerLocation(
             ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "chest_boat/oakroot"), "main");
+
 
 }

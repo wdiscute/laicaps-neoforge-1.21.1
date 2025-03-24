@@ -20,8 +20,9 @@ public class ModEventBusClientEvents
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
         event.registerLayerDefinition(ModModelLayers.OAKHEART_BOAT_LAYER, BoatModel::createBodyModel);
+        event.registerLayerDefinition(ModModelLayers.OAKROOT_BOAT_LAYER, BoatModel::createBodyModel);
+
         event.registerLayerDefinition(ModModelLayers.OAKHEART_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
-        event.registerLayerDefinition(ModModelLayers.OAKROOT_BOAT_LAYER, ChestBoatModel::createBodyModel);
         event.registerLayerDefinition(ModModelLayers.OAKROOT_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
     }
 
