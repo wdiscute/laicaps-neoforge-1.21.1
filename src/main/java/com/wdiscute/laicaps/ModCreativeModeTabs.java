@@ -45,8 +45,8 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.OAKHEART_HANGING_SIGN.get());
                         output.accept(ModBlocks.OAKHEART_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.OAKHEART_BUTTON.get());
-                        //output.accept(ModBlocks.OAKHEART_BOAT.get());
-                        //output.accept(ModBlocks.OAKHEART_CHEST_BOAT.get());
+                        output.accept(ModItems.OAKHEART_BOAT.get());
+                        output.accept(ModItems.OAKHEART_CHEST_BOAT.get());
 
 
 
@@ -68,8 +68,8 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.OAKROOT_HANGING_SIGN.get());
                         output.accept(ModBlocks.OAKROOT_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.OAKROOT_BUTTON.get());
-                        //output.accept(ModBlocks.OAKROOT_BOAT.get());
-                        //output.accept(ModBlocks.OAKROOT_CHEST_BOAT.get());
+                        output.accept(ModItems.OAKROOT_BOAT.get());
+                        output.accept(ModItems.OAKROOT_CHEST_BOAT.get());
 
 
 

@@ -106,6 +106,13 @@ public class ModItems
                             new Item.Properties().stacksTo(16)
                     ));
 
+    public static final DeferredItem<Item> DIAMONG_CHEST_BOAT =
+            ITEMS.register("diamond_chest_boat",
+                    () -> new ModBoatItem(
+                            true,
+                            ModBoatEntity.Type.OAKROOT,
+                            new Item.Properties().stacksTo(16)
+                    ));
 
 
 
