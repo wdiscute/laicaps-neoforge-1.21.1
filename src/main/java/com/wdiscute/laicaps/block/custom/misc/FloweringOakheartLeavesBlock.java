@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.custom;
+package com.wdiscute.laicaps.block.custom.misc;
 
 import com.wdiscute.laicaps.ModItems;
 import net.minecraft.core.BlockPos;

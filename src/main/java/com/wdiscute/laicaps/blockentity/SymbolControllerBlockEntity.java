@@ -15,6 +15,9 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     private int counter = 0;
     private boolean ticking = true;
 
+
+
+
     private BlockPos link0 = new BlockPos(0, 0, 0);
     private BlockPos link1 = new BlockPos(0, 0, 0);
     private BlockPos link2 = new BlockPos(0, 0, 0);

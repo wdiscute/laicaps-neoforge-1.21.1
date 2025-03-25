@@ -1,8 +1,9 @@
-package com.wdiscute.laicaps.block.custom;
+package com.wdiscute.laicaps.block.custom.misc;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModTags;
 import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.block.custom.RiverthorneThistle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;

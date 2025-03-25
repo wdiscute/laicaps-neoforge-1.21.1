@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.custom;
+package com.wdiscute.laicaps.block.custom.generics;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;

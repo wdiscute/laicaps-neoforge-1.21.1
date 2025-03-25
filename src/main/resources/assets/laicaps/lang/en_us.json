@@ -1,4 +1,7 @@
 {
+  "tag.item.laicaps.oakheart_logs" : "Oakheart Logs",
+  "tag.item.laicaps.oakroot_logs" : "Oakheart Logs",
+
   "creativetab.laicaps.laicaps": "Laicaps",
 
   "block.laicaps.sender_puzzle_block": "block that sends",
@@ -65,35 +68,11 @@
   "tooltip.laicaps.chisel.shift_down": "the chisel is very cool!",
 
   "tooltip.laicaps.oakheart_log.shift_down" : "this oakheart log is very tasty!",
-  "tooltip.laicaps.oakheart_log.shift_down_2" : "But you can not eat it lol",
-
-
-  "item.laicaps.alexandrite": "Alexandrite",
-  "item.laicaps.raw_alexandrite": "Raw Alexandrite",
-  "item.laicaps.chisel": "Chisel",
-  "item.laicaps.kohlrabi": "Kohlrabi",
-  "item.laicaps.aurora_ashes": "Aurora Ashes",
-
-  "block.laicaps.alexandrite_block": "Block of Alexandrite",
-  "block.laicaps.alexandrite_stairs": "Alexandrite Stairs",
-  "block.laicaps.alexandrite_slab": "Alexandrite Slab",
-  "block.laicaps.alexandrite_door": "Alexandrite Door",
-  "block.laicaps.alexandrite_trapdoor": "Alexandrite Trapdoor",
-  "block.laicaps.alexandrite_pressure_plate": "Alexandrite Pressure Plate",
-  "block.laicaps.alexandrite_button": "Alexandrite Button",
-  "block.laicaps.alexandrite_fence": "Alexandrite Fence",
-  "block.laicaps.alexandrite_fence_gate": "Alexandrite Fence Gate",
-  "block.laicaps.alexandrite_wall": "Alexandrite Wall",
-
-  "block.laicaps.alexandrite_lamp": "Alexandrite Lamp",
+  "tooltip.laicaps.oakheart_log.shift_down_2" : "But you can not eat it lol"
 
 
 
-  "block.laicaps.alexandrite_ore": "Alexandrite Ore",
-  "block.laicaps.alexandrite_deepslate_ore": "Alexandrite Deepslate Ore",
-  "block.laicaps.raw_alexandrite_block": "Block of Raw Alexandrite",
 
-  "creativetab.laicaps.alexandrite_items": "Alexandrite",
 
-  "tooltip.laicaps.aurora_ashes.tooltip" : "A peculiar taste..."
+
 }

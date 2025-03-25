@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.custom;
+package com.wdiscute.laicaps.block.custom.symbol;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModItems;

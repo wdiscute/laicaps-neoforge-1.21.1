@@ -1,9 +1,8 @@
-package com.wdiscute.laicaps.block.custom;
+package com.wdiscute.laicaps.block.custom.symbol;
 
 import net.minecraft.util.StringRepresentable;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Random;
 
 public enum SymbolsEnum implements StringRepresentable

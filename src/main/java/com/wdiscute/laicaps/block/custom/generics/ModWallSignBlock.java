@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.custom;
+package com.wdiscute.laicaps.block.custom.generics;
 
 import com.wdiscute.laicaps.blockentity.ModSignBlockEntity;
 import net.minecraft.core.BlockPos;
