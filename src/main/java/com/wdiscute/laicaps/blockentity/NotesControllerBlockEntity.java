@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -175,29 +176,25 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             return;
         }
 
-
+        System.out.println("counter" + counter);
         if (counter > -1) counter++;
         if (state == 1)
         {
             if (Objects.equals(wavehelper, "")) wavehelper = waves[currentWave];
             if (counter == 20)
             {
-                System.out.println("wavehelper " + wavehelper);
                 int currentLinkedPos = Integer.parseInt(wavehelper.substring(0, 1));
-                System.out.println("currentLinkedPos " + currentLinkedPos);
                 BlockPos bpDecoded = DecodeBlockPosWithOffset(level, getBlockPos(), links[currentLinkedPos]);
-                System.out.println("set " + bpDecoded + " to diamond");
-                level.setBlockAndUpdate(bpDecoded, Blocks.DIAMOND_BLOCK.defaultBlockState());
-            }
 
-            if (counter == 40)
-            {
-                int currentLinkedPos = Integer.parseInt(wavehelper.substring(0, 1));
-
-                BlockPos bpDecoded = DecodeBlockPosWithOffset(level, getBlockPos(), links[currentLinkedPos]);
-                level.setBlockAndUpdate(bpDecoded, Blocks.GOLD_BLOCK.defaultBlockState());
-                wavehelper = wavehelper.substring(1);
+                if (level.getBlockEntity(bpDecoded) instanceof NotesPuzzleBlockEntity npbe)
+                {
+                    npbe.playNote(10);
+                } else
+                {
+                    Component.literal("uh oh! The block " + bpDecoded + " is not a NotesPuzzleBlockEntity, you better warn @wdiscute on discord.");
+                }
                 counter = 0;
+                wavehelper = wavehelper.substring(1);
             }
 
             if (Objects.equals(wavehelper, ""))

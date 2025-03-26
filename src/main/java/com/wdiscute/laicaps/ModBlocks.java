@@ -115,13 +115,6 @@ public class ModBlocks
                     )
             );
 
-    public static final DeferredBlock<Block> KETTLE =
-            registerBlock("kettle", () ->
-                    new KettleBlock(BlockBehaviour.Properties.of()
-                            .strength(30)
-                            .sound(SoundType.STONE)
-                    )
-            );
 
     //
     // ,-----.    ,---.   ,--. ,--. ,--.  ,--. ,------.   ,---.   ,------.  ,--------.
