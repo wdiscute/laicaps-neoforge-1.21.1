@@ -9,6 +9,8 @@ import com.wdiscute.laicaps.block.custom.generics.ModWallSignBlock;
 import com.wdiscute.laicaps.block.custom.misc.FloweringOakheartLeavesBlock;
 import com.wdiscute.laicaps.block.custom.misc.LunarveilBlock;
 import com.wdiscute.laicaps.block.custom.misc.Riverthorne;
+import com.wdiscute.laicaps.block.custom.notes.NotesControllerBlock;
+import com.wdiscute.laicaps.block.custom.notes.NotesPuzzleBlock;
 import com.wdiscute.laicaps.block.custom.symbol.SymbolControllerBlock;
 import com.wdiscute.laicaps.block.custom.symbol.SymbolPuzzleBlock;
 import com.wdiscute.laicaps.block.custom.symbol.SymbolPuzzleBlockInactive;
@@ -97,7 +99,29 @@ public class ModBlocks
                     )
             );
 
+    public static final DeferredBlock<Block> NOTES_PUZZLE_BLOCK =
+            registerBlock("notes_puzzle_block", () ->
+                    new NotesPuzzleBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
 
+    public static final DeferredBlock<Block> NOTES_CONTROLLER_BLOCK =
+            registerBlock("notes_controller_block", () ->
+                    new NotesControllerBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
+
+    public static final DeferredBlock<Block> KETTLE =
+            registerBlock("kettle", () ->
+                    new KettleBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
 
     //
     // ,-----.    ,---.   ,--. ,--. ,--.  ,--. ,------.   ,---.   ,------.  ,--------.

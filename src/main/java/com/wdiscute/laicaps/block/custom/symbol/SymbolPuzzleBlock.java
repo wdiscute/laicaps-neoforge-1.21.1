@@ -182,7 +182,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
                 return ItemInteractionResult.SUCCESS;
             }
 
-            if (!pLevel.isClientSide() && pStack.getItem() == Items.AIR)
+            if (!pLevel.isClientSide())
             {
                 //if clicked with air then cycles to next symbol and plays sound
 

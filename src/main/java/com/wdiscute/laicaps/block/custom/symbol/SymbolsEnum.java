@@ -47,7 +47,7 @@ public enum SymbolsEnum implements StringRepresentable
             }
         }
 
-        //if no matching symbol is found that means it's the last one so returns the first on the list
+        //if no matching symbol is found that means it's the last one so returns the second on the list to skip random
         return SymbolsEnum.values()[1];
 
     }
