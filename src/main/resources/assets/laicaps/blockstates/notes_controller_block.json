@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "laicaps:block/notes_controller_block"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "values": [
     "laicaps:receiver_block",
-    "laicaps:sender_block"
+    "laicaps:sender_puzzle_block"
   ]
 }

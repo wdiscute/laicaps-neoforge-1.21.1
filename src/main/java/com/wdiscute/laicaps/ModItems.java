@@ -7,10 +7,12 @@ import com.wdiscute.laicaps.item.custom.ChiselItem;
 
 import com.wdiscute.laicaps.item.custom.ModBoatItem;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.Nullable;
 
 public class ModItems
 {
@@ -21,6 +23,14 @@ public class ModItems
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
             () -> new ChiselItem(new Item.Properties()
                     .durability(32)));
+
+    //
+    // ,-----.    ,---.   ,--. ,--. ,--.  ,--. ,------.   ,---.   ,------.  ,--------.
+    //'  .-.  '  /  O  \  |  .'   / |  '--'  | |  .---'  /  O  \  |  .--. ' '--.  .--'
+    //|  | |  | |  .-.  | |  .   '  |  .--.  | |  `--,  |  .-.  | |  '--'.'    |  |
+    //'  '-'  ' |  | |  | |  |\   \ |  |  |  | |  `---. |  | |  | |  |\  \     |  |
+    // `-----'  `--' `--' `--' '--' `--'  `--' `------' `--' `--' `--' '--'    `--'
+    //
 
 
     public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register("oakheart_berries",
@@ -96,13 +106,6 @@ public class ModItems
 
     public static final DeferredItem<Item> OAKROOT_CHEST_BOAT =
             ITEMS.register("oakroot_chest_boat",
-                    () -> new ModBoatItem(true,
-                            ModBoatEntity.Type.OAKROOT,
-                            new Item.Properties().stacksTo(16)
-                    ));
-
-    public static final DeferredItem<Item> DIAMONG_CHEST_BOAT =
-            ITEMS.register("diamond_chest_boat",
                     () -> new ModBoatItem(true,
                             ModBoatEntity.Type.OAKROOT,
                             new Item.Properties().stacksTo(16)

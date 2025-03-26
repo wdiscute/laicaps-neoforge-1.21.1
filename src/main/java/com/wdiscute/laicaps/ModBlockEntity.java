@@ -26,8 +26,13 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(SymbolControllerBlockEntity::new, ModBlocks.SYMBOL_CONTROLLER_BLOCK.get())
                     .build(null));
 
+    public static final Supplier<BlockEntityType<NotesControllerBlockEntity>> NOTES_CONTROLLER_BLOCK = BLOCK_ENTITIES.register("notes_controller_block",
+            () -> BlockEntityType.Builder.of(NotesControllerBlockEntity::new, ModBlocks.NOTES_CONTROLLER_BLOCK.get())
+                    .build(null));
 
-
+    public static final Supplier<BlockEntityType<NotesPuzzleBlockEntity>> NOTES_PUZZLE_BLOCK = BLOCK_ENTITIES.register("notes_puzzle_block",
+            () -> BlockEntityType.Builder.of(NotesPuzzleBlockEntity::new, ModBlocks.NOTES_PUZZLE_BLOCK.get())
+                    .build(null));
 
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =

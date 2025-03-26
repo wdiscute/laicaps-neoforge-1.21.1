@@ -2,6 +2,18 @@ package com.wdiscute.laicaps;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.block.custom.*;
+import com.wdiscute.laicaps.block.custom.generics.ModHangingSignBlock;
+import com.wdiscute.laicaps.block.custom.generics.ModSaplingBlock;
+import com.wdiscute.laicaps.block.custom.generics.ModStandingSignBlock;
+import com.wdiscute.laicaps.block.custom.generics.ModWallSignBlock;
+import com.wdiscute.laicaps.block.custom.misc.FloweringOakheartLeavesBlock;
+import com.wdiscute.laicaps.block.custom.misc.LunarveilBlock;
+import com.wdiscute.laicaps.block.custom.misc.Riverthorne;
+import com.wdiscute.laicaps.block.custom.notes.NotesControllerBlock;
+import com.wdiscute.laicaps.block.custom.notes.NotesPuzzleBlock;
+import com.wdiscute.laicaps.block.custom.symbol.SymbolControllerBlock;
+import com.wdiscute.laicaps.block.custom.symbol.SymbolPuzzleBlock;
+import com.wdiscute.laicaps.block.custom.symbol.SymbolPuzzleBlockInactive;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -22,7 +34,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
@@ -88,6 +99,21 @@ public class ModBlocks
                     )
             );
 
+    public static final DeferredBlock<Block> NOTES_PUZZLE_BLOCK =
+            registerBlock("notes_puzzle_block", () ->
+                    new NotesPuzzleBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
+
+    public static final DeferredBlock<Block> NOTES_CONTROLLER_BLOCK =
+            registerBlock("notes_controller_block", () ->
+                    new NotesControllerBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
 
 
     //

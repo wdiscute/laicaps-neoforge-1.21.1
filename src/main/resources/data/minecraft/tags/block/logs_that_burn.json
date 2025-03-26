@@ -1,6 +1,6 @@
 {
   "values": [
-    "laicaps:oakheart_log",
-    "laicaps:oakroot_log"
+    "#laicaps:oakheart_logs",
+    "#laicaps:oakroot_logs"
   ]
 }

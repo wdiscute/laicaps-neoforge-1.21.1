@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "laicaps:oakheart_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "laicaps:oakheart_planks"
+  }
+}

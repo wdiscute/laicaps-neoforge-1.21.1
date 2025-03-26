@@ -87,6 +87,8 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.ASHA_SHORT_GRASS.get());
                         output.accept(ModBlocks.ASHA_GRASS_BLOCK.get());
                         output.accept(ModBlocks.ASHA_DIRT.get());
+                        output.accept(ModBlocks.WATER_CONTAINER.get());
+                        output.accept(ModBlocks.WATER_CONTAINER_HELPER.get());
                         //riverthorne
                         output.accept(ModBlocks.RIVERTHORNE_THISTLE.get());
                         output.accept(ModBlocks.RIVERTHORNE.get());

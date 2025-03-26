@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=true": {
+      "model": "laicaps:block/notes_puzzle_block_active"
+    },
+    "active=false": {
+      "model": "laicaps:block/notes_puzzle_block"
+    }
+  }
+}
