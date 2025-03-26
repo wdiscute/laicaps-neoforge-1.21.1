@@ -63,7 +63,7 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
                 int newz = z;
 
                 BlockPos bp = new BlockPos(newx, y, newz);
-                be.setLinkedBlock(bp);
+                be.setLinkedBlock(bp, player);
 
             }
             if (state.getValue(FACING) == Direction.SOUTH && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity be)
@@ -76,7 +76,7 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
                 int newz = x * -1;
 
                 BlockPos bp = new BlockPos(newx, y, newz);
-                be.setLinkedBlock(bp);
+                be.setLinkedBlock(bp, player);
             }
             if (state.getValue(FACING) == Direction.WEST && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity be)
             {
@@ -88,7 +88,7 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
                 int newz = z * -1;
 
                 BlockPos bp = new BlockPos(newx, y, newz);
-                be.setLinkedBlock(bp);
+                be.setLinkedBlock(bp, player);
             }
             if (state.getValue(FACING) == Direction.NORTH && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity be)
             {
@@ -100,7 +100,7 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
                 int newz = x;
 
                 BlockPos bp = new BlockPos(newx, y, newz);
-                be.setLinkedBlock(bp);
+                be.setLinkedBlock(bp, player);
             }
         }
 

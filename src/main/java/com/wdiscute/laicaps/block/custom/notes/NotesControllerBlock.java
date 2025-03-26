@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.block.custom.notes;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.blockentity.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.blockentity.TickableBlockEntity;
@@ -9,6 +10,7 @@ import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -103,54 +105,69 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
             //add blockpos stored in chisel to linked
             if(pStack.is(ModItems.CHISEL))
             {
-                if (pState.getValue(FACING) == Direction.EAST && pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity be)
+                //check if blocked stored in chisel is a notes block
+                if(!pLevel.getBlockState(pStack.get(ModDataComponentTypes.COORDINATES.get())).is(ModBlocks.NOTES_PUZZLE_BLOCK.get()))
                 {
-                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                    pPlayer.displayClientMessage(
+                            Component.literal("Uh Oh! The " + pStack.get(ModDataComponentTypes.COORDINATES.get()) +
+                                    " is not a notes_puzzle_block and you're trying to link it to a controller!"), false);
 
-                    int newx = x;
-                    int newz = z;
 
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    be.setNextLinkedBlock(bp);
-
+                      return ItemInteractionResult.SUCCESS;
                 }
-                if (pState.getValue(FACING) == Direction.SOUTH && pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity be)
+
+                //if so, then store the block linked's relative coords
+                if(pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity be)
                 {
-                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                    if (pState.getValue(FACING) == Direction.EAST)
+                    {
+                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
 
-                    int newx = z;
-                    int newz = x * -1;
+                        int newx = x;
+                        int newz = z;
 
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    be.setNextLinkedBlock(bp);
-                }
-                if (pState.getValue(FACING) == Direction.WEST && pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity be)
-                {
-                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                        BlockPos bp = new BlockPos(newx, y, newz);
+                        be.setNextLinkedBlock(bp, pPlayer);
 
-                    int newx = x * -1;
-                    int newz = z * -1;
+                    }
+                    if (pState.getValue(FACING) == Direction.SOUTH)
+                    {
+                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
 
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    be.setNextLinkedBlock(bp);
-                }
-                if (pState.getValue(FACING) == Direction.NORTH && pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity be)
-                {
-                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                        int newx = z;
+                        int newz = x * -1;
 
-                    int newx = z * -1;
-                    int newz = x;
+                        BlockPos bp = new BlockPos(newx, y, newz);
+                        be.setNextLinkedBlock(bp, pPlayer);
+                    }
+                    if (pState.getValue(FACING) == Direction.WEST)
+                    {
+                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
 
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    be.setNextLinkedBlock(bp);
+                        int newx = x * -1;
+                        int newz = z * -1;
+
+                        BlockPos bp = new BlockPos(newx, y, newz);
+                        be.setNextLinkedBlock(bp, pPlayer);
+                    }
+                    if (pState.getValue(FACING) == Direction.NORTH)
+                    {
+                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+
+                        int newx = z * -1;
+                        int newz = x;
+
+                        BlockPos bp = new BlockPos(newx, y, newz);
+                        be.setNextLinkedBlock(bp, pPlayer);
+                    }
                 }
             }
 

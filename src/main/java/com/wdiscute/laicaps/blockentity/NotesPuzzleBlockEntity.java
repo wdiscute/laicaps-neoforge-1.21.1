@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
@@ -23,9 +25,10 @@ public class NotesPuzzleBlockEntity extends BlockEntity implements TickableBlock
         return linkedBlock;
     }
 
-    public void setLinkedBlock(BlockPos blockPos)
+    public void setLinkedBlock(BlockPos blockPos, Player player)
     {
         linkedBlock = blockPos;
+        player.displayClientMessage(Component.literal("Linked  " + blockPos + ". Hopefully its a controller because im not checking"), true);
     }
 
     public void playNote(Integer activeTime)

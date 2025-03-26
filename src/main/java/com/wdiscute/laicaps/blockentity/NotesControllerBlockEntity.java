@@ -3,11 +3,13 @@ package com.wdiscute.laicaps.blockentity;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.block.custom.notes.NotesControllerBlock;
+import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -60,7 +62,7 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
         links[10] = zero;
     }
 
-    public void setNextLinkedBlock(BlockPos blockPos)
+    public void setNextLinkedBlock(BlockPos blockPos, Player player)
     {
         BlockPos blockPosZero = new BlockPos(0, 0, 0);
         for (int i = 0; i < 11; i++)
@@ -69,7 +71,7 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             {
                 links[i] = blockPos;
                 setChanged();
-                System.out.println("Set next block on slot " + i);
+                player.displayClientMessage(Component.literal("Set " + blockPos + " to slot " + i), true);
                 return;
             }
         }
@@ -176,7 +178,7 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             return;
         }
 
-        System.out.println("counter" + counter);
+        //System.out.println("counter" + counter);
         if (counter > -1) counter++;
         if (state == 1)
         {
@@ -189,9 +191,6 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 if (level.getBlockEntity(bpDecoded) instanceof NotesPuzzleBlockEntity npbe)
                 {
                     npbe.playNote(10);
-                } else
-                {
-                    Component.literal("uh oh! The block " + bpDecoded + " is not a NotesPuzzleBlockEntity, you better warn @wdiscute on discord.");
                 }
                 counter = 0;
                 wavehelper = wavehelper.substring(1);
