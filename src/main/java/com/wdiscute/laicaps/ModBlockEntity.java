@@ -1,6 +1,12 @@
 package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.blockentity.*;
+import com.wdiscute.laicaps.block.generics.ModHangingSignBlockEntity;
+import com.wdiscute.laicaps.block.generics.ModSignBlockEntity;
+import com.wdiscute.laicaps.block.generics.ReceiverBlockEntity;
+import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
+import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
+import com.wdiscute.laicaps.block.symbol.SymbolControllerBlockEntity;
+import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
