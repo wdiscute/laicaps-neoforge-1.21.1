@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,10 +36,21 @@ import java.util.Random;
 
 public class NotesControllerBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
+
+    public static final IntegerProperty WAVES = IntegerProperty.create("waves", 1, 5);
+    public static final IntegerProperty WAVES_COMPLETE = IntegerProperty.create("waves_complete", 0, 5);
+    public static final IntegerProperty WAVE_IN_PROGRESS = IntegerProperty.create("wave_in_progress", 0, 5);
+
     public NotesControllerBlock(Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(ACTIVE, false));
+
+        BlockState state = defaultBlockState();
+
+        state = state.setValue(WAVES, 5);
+        state = state.setValue(WAVES_COMPLETE, 0);
+        state = state.setValue(WAVE_IN_PROGRESS, 0);
+        this.registerDefaultState(state);
     }
 
     @Override
@@ -47,133 +59,136 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
         return null;
     }
 
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom)
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult HitResult)
     {
-        if (pState.getValue(ACTIVE))
+
+        if (!level.isClientSide && hand == InteractionHand.MAIN_HAND)
         {
-            Random r = new Random();
-
-            pLevel.addParticle(ParticleTypes.END_ROD,
-                    pPos.getX() - 0.5 + r.nextFloat(2f),
-                    pPos.getY() + 0 + r.nextFloat(1.5f),
-                    pPos.getZ() - 0.5 + r.nextFloat(2f),
-                    0,
-                    0,
-                    0);
-
-        }
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult)
-    {
-        if (!pLevel.isClientSide)
-        {
-            //debug: print all 10 linked blocks
-            if (pPlayer.getMainHandItem().isEmpty() && pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity blockEntity)
-            {
-                System.out.println("link0: " + blockEntity.getLinkedBlock(0));
-                System.out.println("link1: " + blockEntity.getLinkedBlock(1));
-                System.out.println("link2: " + blockEntity.getLinkedBlock(2));
-                System.out.println("link3: " + blockEntity.getLinkedBlock(3));
-                System.out.println("link4: " + blockEntity.getLinkedBlock(4));
-                System.out.println("link5: " + blockEntity.getLinkedBlock(5));
-                System.out.println("link6: " + blockEntity.getLinkedBlock(6));
-                System.out.println("link7: " + blockEntity.getLinkedBlock(7));
-                System.out.println("link8: " + blockEntity.getLinkedBlock(8));
-                System.out.println("link9: " + blockEntity.getLinkedBlock(9));
-
-                return ItemInteractionResult.SUCCESS;
-            }
-
-            if (!pPlayer.getMainHandItem().is(ModItems.CHISEL) && pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity blockEntity)
-            {
-                //sends signal to start
-                blockEntity.start();
-            }
-
             //add blockpos stored in chisel to linked
-            if(pStack.is(ModItems.CHISEL))
+            if (stack.is(ModItems.CHISEL))
             {
                 //check if blocked stored in chisel is a notes block
-                if(!pLevel.getBlockState(pStack.get(ModDataComponentTypes.COORDINATES.get())).is(ModBlocks.NOTES_PUZZLE_BLOCK.get()))
+
+                //if not, returns with no hand animation and displays error message
+                if (!level.getBlockState(stack.get(ModDataComponentTypes.COORDINATES.get())).is(ModBlocks.NOTES_PUZZLE_BLOCK.get()))
                 {
-                    pPlayer.displayClientMessage(
-                            Component.literal("Uh Oh! The " + pStack.get(ModDataComponentTypes.COORDINATES.get()) +
-                                    " is not a notes_puzzle_block and you're trying to link it to a controller!"), false);
-
-
-                      return ItemInteractionResult.SUCCESS;
+                    return ItemInteractionResult.FAIL;
                 }
 
-                //if so, then store the block linked's relative coords
-                if(pLevel.getBlockEntity(pPos) instanceof NotesControllerBlockEntity be)
+                //if yes, then store the block linked's relative coords
+                if (level.getBlockEntity(pos) instanceof NotesControllerBlockEntity be)
                 {
-                    if (pState.getValue(FACING) == Direction.EAST)
+                    if (state.getValue(FACING) == Direction.EAST)
                     {
-                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                        int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
+                        int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
+                        int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
 
                         int newx = x;
                         int newz = z;
 
                         BlockPos bp = new BlockPos(newx, y, newz);
-                        be.setNextLinkedBlock(bp, pPlayer);
+                        be.setNextLinkedBlock(bp, player);
 
                     }
-                    if (pState.getValue(FACING) == Direction.SOUTH)
+                    if (state.getValue(FACING) == Direction.SOUTH)
                     {
-                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                        int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
+                        int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
+                        int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
 
                         int newx = z;
                         int newz = x * -1;
 
                         BlockPos bp = new BlockPos(newx, y, newz);
-                        be.setNextLinkedBlock(bp, pPlayer);
+                        be.setNextLinkedBlock(bp, player);
                     }
-                    if (pState.getValue(FACING) == Direction.WEST)
+                    if (state.getValue(FACING) == Direction.WEST)
                     {
-                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                        int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
+                        int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
+                        int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
 
                         int newx = x * -1;
                         int newz = z * -1;
 
                         BlockPos bp = new BlockPos(newx, y, newz);
-                        be.setNextLinkedBlock(bp, pPlayer);
+                        be.setNextLinkedBlock(bp, player);
                     }
-                    if (pState.getValue(FACING) == Direction.NORTH)
+                    if (state.getValue(FACING) == Direction.NORTH)
                     {
-                        int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                        int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                        int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                        int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
+                        int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
+                        int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
 
                         int newx = z * -1;
                         int newz = x;
 
                         BlockPos bp = new BlockPos(newx, y, newz);
-                        be.setNextLinkedBlock(bp, pPlayer);
+                        be.setNextLinkedBlock(bp, player);
                     }
+                    return ItemInteractionResult.SUCCESS;
+                }
+            }
+
+            //if item is not chisel sends start command and be will check if puzzle can start
+            if (level.getBlockEntity(pos) instanceof NotesControllerBlockEntity ncbe)
+            {
+                //sends signal to start
+                if (ncbe.getState() == 0)
+                {
+                    ncbe.start();
+                    return ItemInteractionResult.SUCCESS;
+                } else
+                {
+                    return ItemInteractionResult.FAIL;
+                }
+            }
+        }
+
+        if (level.isClientSide && hand == InteractionHand.MAIN_HAND)
+        {
+            if (stack.is(ModItems.CHISEL))
+            {
+                if (!level.getBlockState(stack.get(ModDataComponentTypes.COORDINATES.get())).is(ModBlocks.NOTES_PUZZLE_BLOCK.get()))
+                {
+                    player.displayClientMessage(
+                            Component.literal("Uh Oh! The " + stack.get(ModDataComponentTypes.COORDINATES.get()) +
+                                    " is not a notes_puzzle_block and you're trying to link it to a controller!"), false);
+                    return ItemInteractionResult.FAIL;
+                }
+                return ItemInteractionResult.SUCCESS;
+            }
+
+            //if controller state is 0 then hand animation otherwise no hand animation
+            if (level.getBlockEntity(pos) instanceof NotesControllerBlockEntity ncbe)
+            {
+                //sends signal to start
+                if (ncbe.getState() == 0)
+                {
+                    ncbe.start();
+                    return ItemInteractionResult.SUCCESS;
+                } else
+                {
+                    return ItemInteractionResult.FAIL;
                 }
             }
 
         }
-        return ItemInteractionResult.SUCCESS;
+
+        // returns fail for offhands
+        return ItemInteractionResult.FAIL;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder)
     {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(ACTIVE);
         pBuilder.add(FACING);
+        pBuilder.add(WAVES);
+        pBuilder.add(WAVES_COMPLETE);
+        pBuilder.add(WAVE_IN_PROGRESS);
     }
 
     @Override

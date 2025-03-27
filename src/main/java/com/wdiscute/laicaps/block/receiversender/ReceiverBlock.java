@@ -2,7 +2,6 @@ package com.wdiscute.laicaps.block.receiversender;
 
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
-import com.wdiscute.laicaps.block.generics.ReceiverBlockEntity;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

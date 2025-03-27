@@ -1,7 +1,8 @@
-package com.wdiscute.laicaps.block.generics;
+package com.wdiscute.laicaps.block.receiversender;
 
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;

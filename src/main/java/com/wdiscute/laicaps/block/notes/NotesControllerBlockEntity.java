@@ -7,6 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,14 +20,14 @@ import java.util.Random;
 public class NotesControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private int counter = -1;
-    private boolean start = false;
     private int currentWave = -1;
 
     //0 - nothing
     //1 - displaying notes
     //2 - listening
     //3 - you did it! sounds and stuff
-    //4 - complete, waiting before resetting
+    //4 - WRONG! resetting
+    //5 - complete, waiting before resetting
     private int state = 0;
 
     String[] wavesPerm = {"random5", "1221", "random3", "random8", "random4"};
@@ -37,29 +39,15 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     private String waveListener = "";
 
 
-
-
     public BlockPos getLinkedBlock(int blockposlink)
     {
         setChanged();
         return links[blockposlink];
     }
 
-    public void resetLinks()
+    public Integer getState()
     {
-        setChanged();
-        BlockPos zero = new BlockPos(0, 0, 0);
-        links[0] = zero;
-        links[1] = zero;
-        links[2] = zero;
-        links[3] = zero;
-        links[4] = zero;
-        links[5] = zero;
-        links[6] = zero;
-        links[7] = zero;
-        links[8] = zero;
-        links[9] = zero;
-        links[10] = zero;
+        return state;
     }
 
     public void setNextLinkedBlock(BlockPos blockPos, Player player)
@@ -79,11 +67,25 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
 
     public void start()
     {
+        if(state != 0)
+        {
+            System.out.println("returned");
+            return;
+        }
+
         waveHelper = "";
         waveListener = "";
-        counter = -1;
-        currentWave = -1;
-        start = true;
+        counter = 0;
+        currentWave = 0;
+        state = 1;
+
+        setWaveValues();
+
+        System.out.println("waves[0]: " + waves[0]);
+        System.out.println("waves[1]: " + waves[1]);
+        System.out.println("waves[2]: " + waves[2]);
+        System.out.println("waves[3]: " + waves[3]);
+        System.out.println("waves[4]: " + waves[4]);
     }
 
     private BlockPos DecodeBlockPosWithOffset(Level plevel, BlockPos pos, BlockPos posOffset)
@@ -127,11 +129,6 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
 
     }
 
-    private void setRandomLinksValues()
-    {
-
-    }
-
     private void setWaveValues()
     {
         setChanged();
@@ -165,7 +162,7 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     {
         for (int i = 0; i < 10; i++)
         {
-            if(links[i].equals(bp))
+            if (links[i].equals(bp))
             {
                 return i;
             }
@@ -175,10 +172,10 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
 
     public void receiveClicked(BlockPos bp)
     {
-        if(state == 2)
+        if (state == 2)
         {
             System.out.println("slot clicked was " + getSlotFromBlockOffset(bp));
-
+            waveListener += "" + getSlotFromBlockOffset(bp);
         }
 
     }
@@ -186,29 +183,16 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     @Override
     public void tick()
     {
+        //counter goes up only while state is not 0
+        if (state != 0) counter++;
 
-        //start displaying the notes
-        if (counter == -1 && start)
-        {
-            setRandomLinksValues();
-            setWaveValues();
-            currentWave = 0;
-            state = 1;
-
-            System.out.println("waves 0: " + waves[0]);
-            System.out.println("waves 1: " + waves[1]);
-            System.out.println("waves 2: " + waves[2]);
-            System.out.println("waves 3: " + waves[3]);
-            System.out.println("waves 4: " + waves[4]);
-            counter++;
-            return;
-        }
-
-        //System.out.println("counter" + counter);
-        if (counter > -1) counter++;
+        //state 1 == displaying sequence
         if (state == 1)
         {
+            //set waveHelper to currentwave if empty
             if (Objects.equals(waveHelper, "")) waveHelper = waves[currentWave];
+
+            //every 20 ticks activates the noteblock in pos waveHelper.substring(0, 1) and removed it from wavehelper
             if (counter == 20)
             {
                 int currentLinkedPos = Integer.parseInt(waveHelper.substring(0, 1));
@@ -222,15 +206,86 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 waveHelper = waveHelper.substring(1);
             }
 
+            //if there are no more numbers in waveHelper
             if (Objects.equals(waveHelper, ""))
             {
                 System.out.println("finished wave " + currentWave);
-                currentWave += 1;
                 state = 2;
                 waveListener = "";
             }
-
         }
+
+        //state 2 == listening to sequence input
+        if (state == 2)
+        {
+            counter = 0;
+            if (waveListener.length() == waves[currentWave].length())
+            {
+                if (Objects.equals(waveListener, waves[currentWave]))
+                {
+                    state = 3;
+                } else
+                {
+                    state = 4;
+                }
+            }
+        }
+
+        if (state == 3)
+        {
+            if(counter == 10) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1f);
+            if(counter == 20) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 0.9f);
+            if(counter == 25) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.1f);
+            if(counter == 30) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.3f);
+            if(counter == 35) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.5f);
+            if(counter == 50)
+            {
+                //if its wave 4 sets state to complete since theres no more after
+                if(currentWave == 4)
+                {
+                    state = 5;
+                    return;
+                }
+
+                //if next wave is empty sets state to complete
+                if(!Objects.equals(waves[currentWave + 1], ""))
+                {
+                    currentWave += 1;
+                    state = 1;
+                    counter = 0;
+                }
+                else
+                {
+                    state = 5;
+                }
+
+            }
+        }
+
+
+        if (state == 4)
+        {
+            if(counter == 10) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 1f);
+            if(counter == 20) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.9f);
+            if(counter == 30) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.8f);
+            if(counter == 40) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.7f);
+            if(counter == 60)
+            {
+                state = 0;
+                counter = -1;
+            }
+        }
+
+        if (state == 5)
+        {
+            //after 10 seconds resets puzzle to idle
+            if(counter == 200)
+            {
+                state = 0;
+            }
+            System.out.println("puzzle complete");
+        }
+
 
     }
 

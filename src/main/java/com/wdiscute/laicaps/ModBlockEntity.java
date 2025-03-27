@@ -2,7 +2,7 @@ package com.wdiscute.laicaps;
 
 import com.wdiscute.laicaps.block.generics.ModHangingSignBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModSignBlockEntity;
-import com.wdiscute.laicaps.block.generics.ReceiverBlockEntity;
+import com.wdiscute.laicaps.block.receiversender.ReceiverBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlockEntity;
