@@ -5,13 +5,17 @@ import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.apache.logging.log4j.core.jmx.Server;
 
 public class NotesPuzzleBlockEntity extends BlockEntity implements TickableBlockEntity
 {
@@ -37,6 +41,16 @@ public class NotesPuzzleBlockEntity extends BlockEntity implements TickableBlock
         BlockState state = level.getBlockState(getBlockPos());
         level.playSound(null, getBlockPos(), state.getValue(NotesPuzzleBlock.NOTE).getSound(), SoundSource.BLOCKS, 1f, state.getValue(NotesPuzzleBlock.NOTE).getPitch());
         level.setBlockAndUpdate(getBlockPos(), level.getBlockState(getBlockPos()).setValue(NotesPuzzleBlock.ACTIVE, true));
+        ((ServerLevel) level).sendParticles(ParticleTypes.NOTE,
+                getBlockPos().getX() + 0.5f,
+                getBlockPos().getY() + 1.3f,
+                getBlockPos().getZ() + 0.5f,
+                1,
+                0,
+                0,
+                0,
+                0
+        );
     }
 
     @Override

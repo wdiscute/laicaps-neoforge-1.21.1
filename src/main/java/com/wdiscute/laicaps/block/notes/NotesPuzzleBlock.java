@@ -7,6 +7,8 @@ import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -25,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,11 +41,12 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
 
     public static final EnumProperty<NotesEnum> NOTE = EnumProperty.create("note", NotesEnum.class);
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-
-
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
+        //we only care about main hand to prevent double stuff
+        if (hand == InteractionHand.OFF_HAND) return ItemInteractionResult.FAIL;
+
         //add blockpos stored in chisel to linked
         if (stack.is(ModItems.CHISEL))
         {
@@ -98,34 +102,55 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
             return ItemInteractionResult.SUCCESS;
         }
 
+        //cycle note, should prob change the block used or something
         if (stack.is(Items.ANVIL) && !level.isClientSide())
         {
             level.setBlockAndUpdate(pos, state.setValue(NOTE, NotesEnum.GetNextNote(state.getValue(NOTE))));
+            level.playSound(null, pos, state.getValue(NOTE).getSound(), SoundSource.BLOCKS, 1f, state.getValue(NOTE).getPitch());
+            player.displayClientMessage(Component.literal("Changed note to  " + state.getValue(NOTE)), true);
             return ItemInteractionResult.SUCCESS;
         }
 
-        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity npbe)
+        //checks if can play notes and sends signals to controller and sounds if so
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity npbe && !state.getValue(ACTIVE))
         {
-            if (!state.getValue(ACTIVE))
+            //gets decoded block pos of controller
+            BlockPos decodedLinkedPos = DecodeBlockPosWithOffset(level, pos, npbe.getLinkedBlock());
+            if (level.getBlockEntity(decodedLinkedPos) instanceof NotesControllerBlockEntity ncbe)
             {
-                npbe.playNote(10);
-                level.playSound(null, pos, state.getValue(NOTE).getSound(), SoundSource.BLOCKS, 1f, state.getValue(NOTE).getPitch());
-
-                BlockPos decodedLinkedPos = DecodeBlockPosWithOffset(level, pos, npbe.getLinkedBlock());
-
-                if(level.getBlockEntity(decodedLinkedPos) instanceof NotesControllerBlockEntity ncbe)
+                //if controller state is idle or listening then plays note
+                if (ncbe.getState() == 0 || ncbe.getState() == 2)
                 {
+                    npbe.playNote(10);
+                    level.playSound(null, pos, state.getValue(NOTE).getSound(), SoundSource.BLOCKS, 1f, state.getValue(NOTE).getPitch());
                     BlockPos dwa = new BlockPos(npbe.getLinkedBlock().getX() * -1, npbe.getLinkedBlock().getY() * -1, npbe.getLinkedBlock().getZ() * -1);
                     ncbe.receiveClicked(dwa);
+                    return ItemInteractionResult.SUCCESS;
                 }
-
-            }else
-            {
-                return ItemInteractionResult.FAIL;
             }
 
         }
-        return ItemInteractionResult.SUCCESS;
+
+        //if controller state is idle or listening then plays hand animation on client side
+        if (level.isClientSide && !state.getValue(ACTIVE) && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity npbe)
+        {
+            if (level.getBlockEntity(DecodeBlockPosWithOffset(level, pos, npbe.getLinkedBlock())) instanceof NotesControllerBlockEntity ncbe)
+            {
+                if (ncbe.getState() == 0 || ncbe.getState() == 2)
+                {
+                    return ItemInteractionResult.SUCCESS;
+                }
+            }
+        }
+
+        //error message if it got here and block is not active
+        if (!state.getValue(ACTIVE) && level.isClientSide)
+        {
+            player.displayClientMessage(Component.literal("Not linked to a controller. Please report to @wdiscute if found naturally"), true);
+        }
+
+        //skip hand animation if player couldn't play note
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     private BlockPos DecodeBlockPosWithOffset(Level plevel, BlockPos pos, BlockPos posOffset)
