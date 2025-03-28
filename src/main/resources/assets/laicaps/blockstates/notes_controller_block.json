@@ -125,7 +125,7 @@
       "y": 90
     },
     "facing=east,waves=4,waves_complete=4": {
-      "model": "laicaps:block/notes_controller_block_44_false",
+      "model": "laicaps:block/notes_controller_block_44",
       "y": 90
     },
 
