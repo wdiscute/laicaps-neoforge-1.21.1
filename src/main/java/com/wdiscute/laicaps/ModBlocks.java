@@ -108,7 +108,17 @@ public class ModBlocks
                     new NotesControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
                             .sound(SoundType.STONE)
+                            .noOcclusion()
                     )
+                    {
+                        @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+                        {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box((double) 1.0F, (double) 0.0F, (double) 1.0F, (double) 15.0F, (double) 14.0F, (double) 15.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+                    }
             );
 
 
@@ -603,7 +613,6 @@ public class ModBlocks
                             .strength(0.6F)
                             .mapColor(MapColor.GRASS)
                             .randomTicks()
-
                     ));
 
     public static final DeferredBlock<Block> ASHA_DIRT =

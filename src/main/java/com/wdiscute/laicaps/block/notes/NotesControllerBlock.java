@@ -39,7 +39,7 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
 
     public static final IntegerProperty WAVES = IntegerProperty.create("waves", 1, 5);
     public static final IntegerProperty WAVES_COMPLETE = IntegerProperty.create("waves_complete", 0, 5);
-    public static final IntegerProperty WAVE_IN_PROGRESS = IntegerProperty.create("wave_in_progress", 0, 5);
+    public static final BooleanProperty WAVE_IN_PROGRESS = BooleanProperty.create("wave_in_progress");
 
     public NotesControllerBlock(Properties properties)
     {
@@ -49,7 +49,7 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
 
         state = state.setValue(WAVES, 5);
         state = state.setValue(WAVES_COMPLETE, 0);
-        state = state.setValue(WAVE_IN_PROGRESS, 0);
+        state = state.setValue(WAVE_IN_PROGRESS, false);
         this.registerDefaultState(state);
     }
 

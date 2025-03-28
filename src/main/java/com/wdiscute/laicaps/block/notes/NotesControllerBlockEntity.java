@@ -65,11 +65,20 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
         }
     }
 
+    //aux method to get how many waves have values to set state WAVES
+    private int getTotalWaves()
+    {
+        if(wavesPerm[0].isEmpty()) return 1; //should never happen!
+        if(wavesPerm[1].isEmpty()) return 1;
+        if(wavesPerm[2].isEmpty()) return 2;
+        if(wavesPerm[3].isEmpty()) return 3;
+        if(wavesPerm[4].isEmpty()) return 4;
+        return 5;
+    }
+
     public void start()
     {
-        if(state != 0)
-        {
-            System.out.println("returned");
+        if(state != 0) {
             return;
         }
 
@@ -80,12 +89,20 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
         state = 1;
 
         setWaveValues();
-
         System.out.println("waves[0]: " + waves[0]);
         System.out.println("waves[1]: " + waves[1]);
         System.out.println("waves[2]: " + waves[2]);
         System.out.println("waves[3]: " + waves[3]);
         System.out.println("waves[4]: " + waves[4]);
+
+
+        BlockState bs = level.getBlockState(getBlockPos());
+        bs = bs.setValue(NotesControllerBlock.WAVES, getTotalWaves());
+        bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, 0);
+        bs = bs.setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
+        level.setBlockAndUpdate(getBlockPos(), bs);
+
+
     }
 
     private BlockPos DecodeBlockPosWithOffset(Level plevel, BlockPos pos, BlockPos posOffset)
@@ -174,7 +191,6 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     {
         if (state == 2)
         {
-            System.out.println("slot clicked was " + getSlotFromBlockOffset(bp));
             waveListener += "" + getSlotFromBlockOffset(bp);
         }
 
@@ -212,6 +228,8 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 System.out.println("finished wave " + currentWave);
                 state = 2;
                 waveListener = "";
+                BlockState bs = level.getBlockState(getBlockPos()).setValue(NotesControllerBlock.WAVE_IN_PROGRESS, true);
+                level.setBlockAndUpdate(getBlockPos(), bs);
             }
         }
 
@@ -224,9 +242,15 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 if (Objects.equals(waveListener, waves[currentWave]))
                 {
                     state = 3;
+                    BlockState bs = level.getBlockState(getBlockPos()).setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
+                    bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, currentWave + 1);
+                    level.setBlockAndUpdate(getBlockPos(), bs);
                 } else
                 {
                     state = 4;
+                    BlockState bs = level.getBlockState(getBlockPos()).setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
+                    bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, 0);
+                    level.setBlockAndUpdate(getBlockPos(), bs);
                 }
             }
         }
@@ -281,6 +305,9 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             //after 10 seconds resets puzzle to idle
             if(counter == 200)
             {
+                BlockState bs = level.getBlockState(getBlockPos()).setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
+                bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, 0);
+                level.setBlockAndUpdate(getBlockPos(), bs);
                 state = 0;
             }
             System.out.println("puzzle complete");
