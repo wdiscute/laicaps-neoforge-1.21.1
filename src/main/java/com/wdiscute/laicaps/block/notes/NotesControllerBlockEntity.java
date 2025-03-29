@@ -30,7 +30,7 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     //5 - complete, waiting before resetting
     private int state = 0;
 
-    String[] wavesPerm = {"random5", "1221", "random3", "random8", "random4"};
+    String[] wavesPerm = {"123", "123", "123", "", ""};
     String[] waves = {"", "", "", "", ""};
     BlockPos zero = new BlockPos(0, 0, 0);
     BlockPos[] links = {zero, zero, zero, zero, zero, zero, zero, zero, zero, zero};
@@ -237,8 +237,9 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
         if (state == 2)
         {
             counter = 0;
-            if (waveListener.length() == waves[currentWave].length())
+            if (waveListener.length() >= waves[currentWave].length())
             {
+                System.out.println("waveListener " + waveListener);
                 if (Objects.equals(waveListener, waves[currentWave]))
                 {
                     state = 3;
