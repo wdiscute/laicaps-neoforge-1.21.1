@@ -1,30 +1,17 @@
 {
   "variants": {
-
-
     "facing=east,waves=1,waves_complete=0,wave_in_progress=false": {
       "model": "laicaps:block/notes_controller_block_01_false",
       "y": 90
     },
-
     "facing=east,waves=1,waves_complete=0,wave_in_progress=true": {
       "model": "laicaps:block/notes_controller_block_01_true",
       "y": 90
     },
-
     "facing=east,waves=1,waves_complete=1": {
       "model": "laicaps:block/notes_controller_block_11",
       "y": 90
     },
-
-
-
-
-
-
-
-
-
     "facing=east,waves=2,waves_complete=0,wave_in_progress=false": {
       "model": "laicaps:block/notes_controller_block_02_false",
       "y": 90
@@ -45,15 +32,6 @@
       "model": "laicaps:block/notes_controller_block_22",
       "y": 90
     },
-
-
-
-
-
-
-
-
-
     "facing=east,waves=3,waves_complete=0,wave_in_progress=false": {
       "model": "laicaps:block/notes_controller_block_03_false",
       "y": 90
@@ -82,16 +60,6 @@
       "model": "laicaps:block/notes_controller_block_33",
       "y": 90
     },
-
-
-
-
-
-
-
-
-
-
     "facing=east,waves=4,waves_complete=0,wave_in_progress=false": {
       "model": "laicaps:block/notes_controller_block_04_false",
       "y": 90
@@ -128,18 +96,6 @@
       "model": "laicaps:block/notes_controller_block_44",
       "y": 90
     },
-
-
-
-
-
-
-
-
-
-
-
-
     "facing=east,waves=5,waves_complete=0,wave_in_progress=false": {
       "model": "laicaps:block/notes_controller_block_05_false",
       "y": 90
@@ -183,6 +139,424 @@
     "facing=east,waves=5,waves_complete=5,wave_in_progress=false": {
       "model": "laicaps:block/notes_controller_block_55",
       "y": 90
+    },
+
+
+
+
+
+
+
+
+
+    "facing=north,waves=1,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_01_false"
+    },
+    "facing=north,waves=1,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_01_true"
+    },
+    "facing=north,waves=1,waves_complete=1": {
+      "model": "laicaps:block/notes_controller_block_11"
+    },
+    "facing=north,waves=2,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_02_false"
+    },
+    "facing=north,waves=2,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_02_true"
+    },
+    "facing=north,waves=2,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_12_false"
+    },
+    "facing=north,waves=2,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_12_true"
+    },
+    "facing=north,waves=2,waves_complete=2,": {
+      "model": "laicaps:block/notes_controller_block_22"
+    },
+    "facing=north,waves=3,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_03_false"
+    },
+    "facing=north,waves=3,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_03_true"
+    },
+    "facing=north,waves=3,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_13_false"
+    },
+    "facing=north,waves=3,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_13_true"
+    },
+    "facing=north,waves=3,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_23_false"
+    },
+    "facing=north,waves=3,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_23_true"
+    },
+    "facing=north,waves=3,waves_complete=3": {
+      "model": "laicaps:block/notes_controller_block_33"
+    },
+    "facing=north,waves=4,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_04_false"
+    },
+    "facing=north,waves=4,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_04_true"
+    },
+    "facing=north,waves=4,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_14_false"
+    },
+    "facing=north,waves=4,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_14_true"
+    },
+    "facing=north,waves=4,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_24_false"
+    },
+    "facing=north,waves=4,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_24_true"
+    },
+    "facing=north,waves=4,waves_complete=3,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_34_false"
+    },
+    "facing=north,waves=4,waves_complete=3,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_34_true"
+    },
+    "facing=north,waves=4,waves_complete=4": {
+      "model": "laicaps:block/notes_controller_block_44"
+    },
+    "facing=north,waves=5,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_05_false"
+    },
+    "facing=north,waves=5,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_05_true"
+    },
+    "facing=north,waves=5,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_15_false"
+    },
+    "facing=north,waves=5,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_15_true"
+    },
+    "facing=north,waves=5,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_25_false"
+    },
+    "facing=north,waves=5,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_25_true"
+    },
+    "facing=north,waves=5,waves_complete=3,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_35_false"
+    },
+    "facing=north,waves=5,waves_complete=3,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_35_true"
+    },
+    "facing=north,waves=5,waves_complete=4,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_45_false"
+    },
+    "facing=north,waves=5,waves_complete=4,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_45_true"
+    },
+    "facing=north,waves=5,waves_complete=5,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_55"
+    },
+
+
+
+
+
+
+
+
+
+
+
+    "facing=south,waves=1,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_01_false",
+      "y": 180
+    },
+    "facing=south,waves=1,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_01_true",
+      "y": 180
+    },
+    "facing=south,waves=1,waves_complete=1": {
+      "model": "laicaps:block/notes_controller_block_11",
+      "y": 180
+    },
+    "facing=south,waves=2,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_02_false",
+      "y": 180
+    },
+    "facing=south,waves=2,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_02_true",
+      "y": 180
+    },
+    "facing=south,waves=2,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_12_false",
+      "y": 180
+    },
+    "facing=south,waves=2,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_12_true",
+      "y": 180
+    },
+    "facing=south,waves=2,waves_complete=2,": {
+      "model": "laicaps:block/notes_controller_block_22",
+      "y": 180
+    },
+    "facing=south,waves=3,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_03_false",
+      "y": 180
+    },
+    "facing=south,waves=3,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_03_true",
+      "y": 180
+    },
+    "facing=south,waves=3,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_13_false",
+      "y": 180
+    },
+    "facing=south,waves=3,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_13_true",
+      "y": 180
+    },
+    "facing=south,waves=3,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_23_false",
+      "y": 180
+    },
+    "facing=south,waves=3,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_23_true",
+      "y": 180
+    },
+    "facing=south,waves=3,waves_complete=3": {
+      "model": "laicaps:block/notes_controller_block_33",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_04_false",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_04_true",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_14_false",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_14_true",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_24_false",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_24_true",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=3,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_34_false",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=3,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_34_true",
+      "y": 180
+    },
+    "facing=south,waves=4,waves_complete=4": {
+      "model": "laicaps:block/notes_controller_block_44",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_05_false",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_05_true",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_15_false",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_15_true",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_25_false",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_25_true",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=3,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_35_false",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=3,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_35_true",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=4,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_45_false",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=4,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_45_true",
+      "y": 180
+    },
+    "facing=south,waves=5,waves_complete=5,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_55",
+      "y": 180
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "facing=west,waves=1,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_01_false",
+      "y": 270
+    },
+    "facing=west,waves=1,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_01_true",
+      "y": 270
+    },
+    "facing=west,waves=1,waves_complete=1": {
+      "model": "laicaps:block/notes_controller_block_11",
+      "y": 270
+    },
+    "facing=west,waves=2,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_02_false",
+      "y": 270
+    },
+    "facing=west,waves=2,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_02_true",
+      "y": 270
+    },
+    "facing=west,waves=2,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_12_false",
+      "y": 270
+    },
+    "facing=west,waves=2,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_12_true",
+      "y": 270
+    },
+    "facing=west,waves=2,waves_complete=2,": {
+      "model": "laicaps:block/notes_controller_block_22",
+      "y": 270
+    },
+    "facing=west,waves=3,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_03_false",
+      "y": 270
+    },
+    "facing=west,waves=3,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_03_true",
+      "y": 270
+    },
+    "facing=west,waves=3,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_13_false",
+      "y": 270
+    },
+    "facing=west,waves=3,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_13_true",
+      "y": 270
+    },
+    "facing=west,waves=3,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_23_false",
+      "y": 270
+    },
+    "facing=west,waves=3,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_23_true",
+      "y": 270
+    },
+    "facing=west,waves=3,waves_complete=3": {
+      "model": "laicaps:block/notes_controller_block_33",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_04_false",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_04_true",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_14_false",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_14_true",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_24_false",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_24_true",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=3,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_34_false",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=3,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_34_true",
+      "y": 270
+    },
+    "facing=west,waves=4,waves_complete=4": {
+      "model": "laicaps:block/notes_controller_block_44",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_05_false",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=0,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_05_true",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=1,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_15_false",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=1,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_15_true",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=2,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_25_false",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=2,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_25_true",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=3,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_35_false",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=3,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_35_true",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=4,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_45_false",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=4,wave_in_progress=true": {
+      "model": "laicaps:block/notes_controller_block_45_true",
+      "y": 270
+    },
+    "facing=west,waves=5,waves_complete=5,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_55",
+      "y": 270
     }
   }
 }

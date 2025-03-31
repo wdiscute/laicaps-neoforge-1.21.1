@@ -12,6 +12,7 @@ import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockInactive;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -35,6 +36,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -112,11 +114,15 @@ public class ModBlocks
                     )
                     {
                         @Override
-                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
-                        {
-                            Vec3 vec3 = state.getOffset(level, pos);
-                            VoxelShape shape = Block.box((double) 1.0F, (double) 0.0F, (double) 1.0F, (double) 15.0F, (double) 14.0F, (double) 15.0F);
-                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            switch (state.getValue(FACING)) {
+                                case EAST, WEST:
+                                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                                            Block.box(4, 13, 1, 12, 14, 15));
+                                default:
+                                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                                            Block.box(1, 13, 4, 15, 14, 12));
+                            }
                         }
                     }
             );
