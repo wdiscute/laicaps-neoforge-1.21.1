@@ -70,7 +70,6 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     public void setNextLinkedBlock(BlockPos blockPos)
     {
         setChanged();
-        System.out.println("entered setNextLinkedBlock");
         BlockPos blockPosZero = new BlockPos(0, 0, 0);
         if (Objects.equals(link0, blockPosZero))
         {

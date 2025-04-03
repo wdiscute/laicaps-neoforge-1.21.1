@@ -6,9 +6,11 @@ import com.wdiscute.laicaps.item.ModFoodProperties;
 import com.wdiscute.laicaps.item.custom.ChiselItem;
 
 import com.wdiscute.laicaps.item.custom.ModBoatItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;

@@ -32,17 +32,10 @@ public class ModBoatRenderer extends BoatRenderer
 
     private ListModel<Boat> createBoatModel(EntityRendererProvider.Context context, ModBoatEntity.Type type, boolean chestBoat) {
 
-        System.out.println("0000000000000000000000000000000");
-        System.out.println("context " + context);
-        System.out.println("type " + type);
-        System.out.println("chestBoat " + chestBoat);
         ResourceLocation location = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, type.getName());
 
         ModelLayerLocation modellayerlocation = chestBoat ? new ModelLayerLocation(location.withPrefix("chest_boat/"), "main") : new ModelLayerLocation(location.withPrefix("boat/"), "main");
         ModelPart modelpart = context.bakeLayer(modellayerlocation);
-        System.out.println("modellayerlocation " + modellayerlocation);
-        System.out.println("modelpart " + modelpart);
-        System.out.println("0000000000000000000000000000000");
 
         return chestBoat ? new ChestBoatModel(modelpart) : new BoatModel(modelpart);
 

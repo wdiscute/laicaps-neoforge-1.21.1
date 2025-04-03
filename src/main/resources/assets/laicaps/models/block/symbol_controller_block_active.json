@@ -1,6 +1,10 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "laicaps:block/template_chest_1",
   "textures": {
-    "all": "laicaps:block/symbol_controller_block_active"
+    "particle": "block/stripped_oak_log",
+    "edge": "block/stripped_oak_log",
+    "center": "block/stripped_spruce_log",
+    "keyhole": "block/diamond_block",
+    "marker1": "laicaps:block/green"
   }
 }

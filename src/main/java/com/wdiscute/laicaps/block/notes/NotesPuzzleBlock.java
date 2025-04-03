@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
-    public NotesPuzzleBlock(Properties properties)
+    public  NotesPuzzleBlock(Properties properties)
     {
         super(properties);
     }
@@ -111,6 +111,11 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
             return ItemInteractionResult.SUCCESS;
         }
 
+        if (stack.is(Items.ANVIL) && level.isClientSide())
+        {
+            return ItemInteractionResult.SUCCESS;
+        }
+
         //checks if can play notes and sends signals to controller and sounds if so
         if (!level.isClientSide() && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity npbe && !state.getValue(ACTIVE))
         {
@@ -119,10 +124,9 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
             if (level.getBlockEntity(decodedLinkedPos) instanceof NotesControllerBlockEntity ncbe)
             {
                 //if controller state is idle or listening then plays note
-                if (ncbe.getState() == 0 || ncbe.getState() == 2)
+                if (ncbe.getState() == 0 || ncbe.getState() == 2 && hand == InteractionHand.MAIN_HAND)
                 {
                     npbe.playNote(10);
-                    level.playSound(null, pos, state.getValue(NOTE).getSound(), SoundSource.BLOCKS, 1f, state.getValue(NOTE).getPitch());
                     BlockPos dwa = new BlockPos(npbe.getLinkedBlock().getX() * -1, npbe.getLinkedBlock().getY() * -1, npbe.getLinkedBlock().getZ() * -1);
                     ncbe.receiveClicked(dwa);
                     return ItemInteractionResult.SUCCESS;
@@ -141,12 +145,6 @@ public class NotesPuzzleBlock extends HorizontalDirectionalBlock implements Enti
                     return ItemInteractionResult.SUCCESS;
                 }
             }
-        }
-
-        //error message if it got here and block is not active
-        if (!state.getValue(ACTIVE) && level.isClientSide)
-        {
-            player.displayClientMessage(Component.literal("Not linked to a controller. Please report to @wdiscute if found naturally"), true);
         }
 
         //skip hand animation if player couldn't play note

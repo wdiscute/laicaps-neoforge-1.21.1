@@ -6,17 +6,21 @@ import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -29,6 +33,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,6 +47,7 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
     public static final IntegerProperty WAVES = IntegerProperty.create("waves", 1, 5);
     public static final IntegerProperty WAVES_COMPLETE = IntegerProperty.create("waves_complete", 0, 5);
     public static final BooleanProperty WAVE_IN_PROGRESS = BooleanProperty.create("wave_in_progress");
+    private int statebe = 0;
 
     public NotesControllerBlock(Properties properties)
     {
@@ -62,8 +70,7 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult HitResult)
     {
-
-        if (!level.isClientSide && hand == InteractionHand.MAIN_HAND)
+        if (hand == InteractionHand.MAIN_HAND)
         {
             //add blockpos stored in chisel to linked
             if (stack.is(ModItems.CHISEL))
@@ -135,50 +142,67 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
             //if item is not chisel sends start command and be will check if puzzle can start
             if (level.getBlockEntity(pos) instanceof NotesControllerBlockEntity ncbe)
             {
+                //store statebe in a local variable so client side can access too i think
+                statebe = ncbe.getState();
+
                 //sends signal to start
-                if (ncbe.getState() == 0)
+                if (statebe == 0)
                 {
                     ncbe.start();
                     return ItemInteractionResult.SUCCESS;
-                } else
+                }
+
+                if (statebe == 5)
                 {
-                    return ItemInteractionResult.FAIL;
+                    if (ncbe.CanPlayerObtainDrops(player))
+                    {
+                        return ItemInteractionResult.SUCCESS;
+                    } else
+                    {
+                        if(!level.isClientSide)
+                        {
+                            Random r = new Random();
+                            for (int t = 0; t < 50; t++)
+                            {
+                                ((ServerLevel) level).sendParticles(
+                                        ParticleTypes.ASH,
+                                        pos.getX() - 0.5f + r.nextFloat(2f),
+                                        pos.getY() + r.nextFloat(1.2f),
+                                        pos.getZ() - 0.5f + r.nextFloat(2f),
+                                        1,
+                                        0f, 0f, 0f, 0f
+                                );
+                            }
+
+                            player.displayClientMessage(Component.literal("§cYou have already claimed loot."), true);
+                            level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 12f, r.nextFloat(0.1f) + 0.95f);
+                            level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 12f, r.nextFloat(0.1f) + 0.95f);
+                            level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 12f, r.nextFloat(0.1f) + 0.95f);
+                        }
+
+
+                        return ItemInteractionResult.FAIL;
+                    }
                 }
             }
-        }
-
-        if (level.isClientSide && hand == InteractionHand.MAIN_HAND)
-        {
-            if (stack.is(ModItems.CHISEL))
-            {
-                if (!level.getBlockState(stack.get(ModDataComponentTypes.COORDINATES.get())).is(ModBlocks.NOTES_PUZZLE_BLOCK.get()))
-                {
-                    player.displayClientMessage(
-                            Component.literal("Uh Oh! The " + stack.get(ModDataComponentTypes.COORDINATES.get()) +
-                                    " is not a notes_puzzle_block and you're trying to link it to a controller!"), false);
-                    return ItemInteractionResult.FAIL;
-                }
-                return ItemInteractionResult.SUCCESS;
-            }
-
-            //if controller state is 0 then hand animation otherwise no hand animation
-            if (level.getBlockEntity(pos) instanceof NotesControllerBlockEntity ncbe)
-            {
-                //sends signal to start
-                if (ncbe.getState() == 0)
-                {
-                    ncbe.start();
-                    return ItemInteractionResult.SUCCESS;
-                } else
-                {
-                    return ItemInteractionResult.FAIL;
-                }
-            }
-
         }
 
         // returns fail for offhands
         return ItemInteractionResult.FAIL;
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    {
+        switch (state.getValue(FACING))
+        {
+            case EAST, WEST:
+                return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                        Block.box(4, 13, 1, 12, 14, 15));
+            default:
+                return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                        Block.box(1, 13, 4, 15, 14, 12));
+        }
     }
 
     @Override
@@ -194,7 +218,13 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        BlockState bs = defaultBlockState();
+        bs = bs.setValue(FACING, context.getHorizontalDirection().getOpposite());
+        bs = bs.setValue(WAVES, 1);
+        bs = bs.setValue(WAVES_COMPLETE, 0);
+        bs = bs.setValue(WAVE_IN_PROGRESS, false);
+
+        return bs;
     }
 
     @Override

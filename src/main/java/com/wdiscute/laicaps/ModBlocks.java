@@ -1,9 +1,11 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.receiversender.ReceiverBlock;
 import com.wdiscute.laicaps.block.receiversender.SenderPuzzleBLock;
+import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
 import com.wdiscute.laicaps.block.singleblocks.*;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlock;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlock;
@@ -12,7 +14,6 @@ import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockInactive;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -36,7 +37,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -65,7 +65,7 @@ public class ModBlocks
                     )
             );
 
-    public static final DeferredBlock<ReceiverBlock> RECEIVER_BLOCK =
+    public static final DeferredBlock<Block> RECEIVER_BLOCK =
             registerBlock("receiver_block", () ->
                     new ReceiverBlock(BlockBehaviour.Properties.of()
                             .strength(30)
@@ -86,6 +86,7 @@ public class ModBlocks
                     new SymbolControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
                             .sound(SoundType.STONE)
+                            .noOcclusion()
                     )
             );
 
@@ -112,20 +113,27 @@ public class ModBlocks
                             .sound(SoundType.STONE)
                             .noOcclusion()
                     )
-                    {
-                        @Override
-                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-                            switch (state.getValue(FACING)) {
-                                case EAST, WEST:
-                                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
-                                            Block.box(4, 13, 1, 12, 14, 15));
-                                default:
-                                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
-                                            Block.box(1, 13, 4, 15, 14, 12));
-                            }
-                        }
-                    }
             );
+
+    public static final DeferredBlock<Block> ROTATING_PUZZLE_BLOCK =
+            registerBlock("rotating_puzzle_block", () ->
+                    new RotatingPuzzleBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
+
+
+    public static final DeferredBlock<Block> CHASE_CONTROLLER_BLOCK =
+            registerBlock("chase_controller_block", () ->
+                    new ChaseControllerBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                            .noOcclusion()
+                    )
+            );
+
+
 
 
     //
@@ -152,7 +160,8 @@ public class ModBlocks
                         @Override
                         protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
                         {
-                            if(stack.is(ItemTags.AXES)){
+                            if (stack.is(ItemTags.AXES))
+                            {
                                 level.setBlockAndUpdate(pos, STRIPPED_OAKHEART_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
                                 stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
                                 level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -187,11 +196,13 @@ public class ModBlocks
                             .strength(2.0F)
                             .sound(SoundType.WOOD)
                             .ignitedByLava()
-                    ){
+                    )
+                    {
                         @Override
                         protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
                         {
-                            if(stack.is(ItemTags.AXES)){
+                            if (stack.is(ItemTags.AXES))
+                            {
                                 level.setBlockAndUpdate(pos, STRIPPED_OAKHEART_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
                                 stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
                                 level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -214,7 +225,8 @@ public class ModBlocks
                         @Override
                         protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
                         {
-                            if(stack.is(ItemTags.AXES)){
+                            if (stack.is(ItemTags.AXES))
+                            {
                                 level.setBlockAndUpdate(pos, STRIPPED_OAKHEART_WOOD.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
                                 stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
                                 level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -382,9 +394,6 @@ public class ModBlocks
                     ));
 
 
-
-
-
     //
     // ,-----.    ,---.   ,--. ,--. ,------.   ,-----.   ,-----.  ,--------.
     //'  .-.  '  /  O  \  |  .'   / |  .--. ' '  .-.  ' '  .-.  ' '--.  .--'
@@ -404,11 +413,13 @@ public class ModBlocks
                             .sound(SoundType.WOOD)
                             .strength(2.0F)
                             .ignitedByLava()
-                    ){
+                    )
+                    {
                         @Override
                         protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
                         {
-                            if(stack.is(ItemTags.AXES)){
+                            if (stack.is(ItemTags.AXES))
+                            {
                                 level.setBlockAndUpdate(pos, STRIPPED_OAKROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
                                 stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
                                 level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -441,7 +452,8 @@ public class ModBlocks
                         @Override
                         protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
                         {
-                            if(stack.is(ItemTags.AXES)){
+                            if (stack.is(ItemTags.AXES))
+                            {
                                 level.setBlockAndUpdate(pos, STRIPPED_OAKROOT_WOOD.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS)));
                                 stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
                                 level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -576,8 +588,6 @@ public class ModBlocks
                     ));
 
 
-
-
     public static final DeferredBlock<Block> OAKROOT_LEAVES =
             registerBlock("oakroot_leaves", () ->
                     new LeavesBlock(BlockBehaviour.Properties.of()
@@ -593,7 +603,6 @@ public class ModBlocks
                             .pushReaction(PushReaction.DESTROY)
                             .isRedstoneConductor(ModBlocks::never)
                     ));
-
 
 
     //
@@ -756,7 +765,6 @@ public class ModBlocks
             );
 
 
-
     //
     //,--.   ,--.   ,---.   ,--------. ,------. ,------.
     //|  |   |  |  /  O  \  '--.  .--' |  .---' |  .--. '
@@ -794,33 +802,6 @@ public class ModBlocks
             );
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //
     // ,-----.  ,--------. ,--.  ,--. ,------. ,------.   ,---.
     //'  .-.  ' '--.  .--' |  '--'  | |  .---' |  .--. ' '   .-'
@@ -828,7 +809,6 @@ public class ModBlocks
     //'  '-'  '    |  |    |  |  |  | |  `---. |  |\  \  .-'    |
     // `-----'     `--'    `--'  `--' `------' `--' '--' `-----'
     //
-
 
 
     private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos)

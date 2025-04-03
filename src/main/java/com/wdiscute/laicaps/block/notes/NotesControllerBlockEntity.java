@@ -2,20 +2,30 @@ package com.wdiscute.laicaps.block.notes;
 
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.Objects;
 import java.util.Random;
+import java.util.UUID;
 
 public class NotesControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
@@ -30,7 +40,7 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     //5 - complete, waiting before resetting
     private int state = 0;
 
-    String[] wavesPerm = {"123", "123", "123", "", ""};
+    String[] wavesPerm = {"012", "012", "012", "", ""};
     String[] waves = {"", "", "", "", ""};
     BlockPos zero = new BlockPos(0, 0, 0);
     BlockPos[] links = {zero, zero, zero, zero, zero, zero, zero, zero, zero, zero};
@@ -38,12 +48,39 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     private String waveHelper = "";
     private String waveListener = "";
 
+    private final UUID[] arrayuuid = new UUID[15];
+    private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
 
-    public BlockPos getLinkedBlock(int blockposlink)
+    public boolean CanPlayerObtainDrops(Player player)
     {
-        setChanged();
-        return links[blockposlink];
+        if(this.level.isClientSide) return false;
+
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            UUID uuid = player.getUUID();
+            if (Objects.equals(this.arrayuuid[i], uuid))
+            {
+                level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 2f, 0.5f);
+                return false;
+            }
+            if (Objects.equals(this.arrayuuid[i], null))
+            {
+                this.arrayuuid[i] = uuid;
+                state = 6;
+
+                LootParams.Builder builder = new LootParams.Builder((ServerLevel) this.level);
+                LootParams params = builder.create(LootContextParamSets.EMPTY);
+
+                arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.ABANDONED_MINESHAFT).getRandomItems(params);
+                return true;
+            }
+
+        }
+
+        return false;
+
     }
+
 
     public Integer getState()
     {
@@ -68,17 +105,18 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     //aux method to get how many waves have values to set state WAVES
     private int getTotalWaves()
     {
-        if(wavesPerm[0].isEmpty()) return 1; //should never happen!
-        if(wavesPerm[1].isEmpty()) return 1;
-        if(wavesPerm[2].isEmpty()) return 2;
-        if(wavesPerm[3].isEmpty()) return 3;
-        if(wavesPerm[4].isEmpty()) return 4;
+        if (wavesPerm[0].isEmpty()) return 1; //should never happen!
+        if (wavesPerm[1].isEmpty()) return 1;
+        if (wavesPerm[2].isEmpty()) return 2;
+        if (wavesPerm[3].isEmpty()) return 3;
+        if (wavesPerm[4].isEmpty()) return 4;
         return 5;
     }
 
     public void start()
     {
-        if(state != 0) {
+        if (state != 0)
+        {
             return;
         }
 
@@ -89,12 +127,25 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
         state = 1;
 
         setWaveValues();
-        System.out.println("waves[0]: " + waves[0]);
-        System.out.println("waves[1]: " + waves[1]);
-        System.out.println("waves[2]: " + waves[2]);
-        System.out.println("waves[3]: " + waves[3]);
-        System.out.println("waves[4]: " + waves[4]);
 
+        BlockState bs = level.getBlockState(getBlockPos());
+        bs = bs.setValue(NotesControllerBlock.WAVES, getTotalWaves());
+        bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, 0);
+        bs = bs.setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
+        level.setBlockAndUpdate(getBlockPos(), bs);
+
+
+    }
+
+    public void reset()
+    {
+        waveHelper = "";
+        waveListener = "";
+        counter = -1;
+        currentWave = 0;
+        state = 0;
+
+        setWaveValues();
 
         BlockState bs = level.getBlockState(getBlockPos());
         bs = bs.setValue(NotesControllerBlock.WAVES, getTotalWaves());
@@ -199,10 +250,14 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     @Override
     public void tick()
     {
+
         //counter goes up only while state is not 0
         if (state != 0) counter++;
 
-        //state 1 == displaying sequence
+        if(state == 0 && getBlockState().getValue(NotesControllerBlock.WAVES_COMPLETE) != 0) reset();
+        if(state == 0 && getBlockState().getValue(NotesControllerBlock.WAVE_IN_PROGRESS)) reset();
+
+        //displaying sequence
         if (state == 1)
         {
             //set waveHelper to currentwave if empty
@@ -225,7 +280,6 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             //if there are no more numbers in waveHelper
             if (Objects.equals(waveHelper, ""))
             {
-                System.out.println("finished wave " + currentWave);
                 state = 2;
                 waveListener = "";
                 BlockState bs = level.getBlockState(getBlockPos()).setValue(NotesControllerBlock.WAVE_IN_PROGRESS, true);
@@ -233,13 +287,12 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             }
         }
 
-        //state 2 == listening to sequence input
+        //listening to sequence input
         if (state == 2)
         {
             counter = 0;
             if (waveListener.length() >= waves[currentWave].length())
             {
-                System.out.println("waveListener " + waveListener);
                 if (Objects.equals(waveListener, waves[currentWave]))
                 {
                     state = 3;
@@ -256,30 +309,35 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             }
         }
 
+        //correct sequence
         if (state == 3)
         {
-            if(counter == 10) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1f);
-            if(counter == 20) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 0.9f);
-            if(counter == 25) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.1f);
-            if(counter == 30) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.3f);
-            if(counter == 35) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.5f);
-            if(counter == 50)
+            if (counter == 10)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1f);
+            if (counter == 20)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 0.9f);
+            if (counter == 25)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.1f);
+            if (counter == 30)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.3f);
+            if (counter == 35)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1.5f, 1.5f);
+            if (counter == 50)
             {
                 //if its wave 4 sets state to complete since theres no more after
-                if(currentWave == 4)
+                if (currentWave == 4)
                 {
                     state = 5;
                     return;
                 }
 
                 //if next wave is empty sets state to complete
-                if(!Objects.equals(waves[currentWave + 1], ""))
+                if (!Objects.equals(waves[currentWave + 1], ""))
                 {
                     currentWave += 1;
                     state = 1;
                     counter = 0;
-                }
-                else
+                } else
                 {
                     state = 5;
                 }
@@ -287,31 +345,87 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             }
         }
 
-
+        //wong requence
         if (state == 4)
         {
-            if(counter == 10) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 1f);
-            if(counter == 20) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.9f);
-            if(counter == 30) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.8f);
-            if(counter == 40) level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.7f);
-            if(counter == 60)
+            if (counter == 10)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 1f);
+            if (counter == 20)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.9f);
+            if (counter == 30)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.8f);
+            if (counter == 40)
+                level.playSound(null, getBlockPos(), SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f, 0.7f);
+            if (counter == 60)
             {
                 state = 0;
                 counter = -1;
             }
         }
 
+        //puzzle complete - waiting for a valid player to claim loot
         if (state == 5)
         {
-            //after 10 seconds resets puzzle to idle
-            if(counter == 200)
+            //resets if 1 minute goes by without players claiming loot
+            if (counter == 1200)
             {
-                BlockState bs = level.getBlockState(getBlockPos()).setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
-                bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, 0);
-                level.setBlockAndUpdate(getBlockPos(), bs);
                 state = 0;
+                BlockState bs = level.getBlockState(getBlockPos());
+                bs = bs.setValue(NotesControllerBlock.WAVES, getTotalWaves());
+                bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, 0);
+                bs = bs.setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
+                level.setBlockAndUpdate(getBlockPos(), bs);
             }
-            System.out.println("puzzle complete");
+        }
+
+        if (state == 6)
+        {
+            //grabs loot table and stores in arrayOfItemStacks
+            if (counter % 4 == 0)
+            {
+                //runs if array has something
+                if (arrayOfItemStacks != null)
+                {
+                    if (arrayOfItemStacks.isEmpty())
+                    {
+                        state = 5;
+                        return;
+                    }
+
+                    Random r = new Random();
+
+                    BlockPos pos = this.getBlockPos();
+                    int randomInt = r.nextInt(arrayOfItemStacks.size());
+                    ItemStack randomItemStack = arrayOfItemStacks.get(randomInt);
+
+                    if (randomItemStack.getCount() == 1)
+                    {
+                        arrayOfItemStacks.remove(randomInt);
+                        Item randomItem = randomItemStack.getItem();
+                        this.level.addFreshEntity(new ItemEntity(this.level, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, new ItemStack(randomItem)));
+                    }
+
+                    if (randomItemStack.getCount() > 1)
+                    {
+                        randomItemStack.shrink(1);
+
+                        arrayOfItemStacks.set(randomInt, randomItemStack);
+
+                        Item randomItem = randomItemStack.getItem();
+                        this.level.addFreshEntity(new ItemEntity(this.level, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, new ItemStack(randomItem)));
+                    }
+
+                    ((ServerLevel) level).sendParticles(
+                            ParticleTypes.HAPPY_VILLAGER,
+                            pos.getX() - 0.5f + r.nextFloat(2f),
+                            pos.getY() + r.nextFloat(1.2f),
+                            pos.getZ() - 0.5f + r.nextFloat(2f),
+                            1,
+                            0f, 0f, 0f, 0f
+                    );
+                    level.playSound(null, pos, SoundEvents.CRAFTER_CRAFT, SoundSource.BLOCKS, 1f, r.nextFloat(0.1f) + 0.95f);
+                }
+            }
         }
 
 
@@ -326,6 +440,13 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
         super.loadAdditional(pTag, pRegistries);
+
+        for (int i = 0; i < arrayuuid.length; i++)
+        {
+            if (pTag.contains("user" + i))
+                this.arrayuuid[i] = pTag.getUUID("user" + i);
+        }
+
         wavesPerm[0] = pTag.getString("wave0");
         wavesPerm[1] = pTag.getString("wave1");
         wavesPerm[2] = pTag.getString("wave2");
@@ -348,6 +469,14 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
     {
         super.saveAdditional(pTag, pRegistries);
+
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            if (this.arrayuuid[i] == null)
+                break;
+            pTag.putUUID("user" + i, this.arrayuuid[i]);
+        }
+
         pTag.putString("wave0", wavesPerm[0]);
         pTag.putString("wave1", wavesPerm[1]);
         pTag.putString("wave2", wavesPerm[2]);

@@ -1,0 +1,16 @@
+{
+	"parent": "laicaps:block/template_chest_7",
+	"textures": {
+		"particle": "block/stripped_oak_log",
+		"edge": "block/stripped_oak_log",
+		"center": "block/stripped_spruce_log",
+		"keyhole": "block/diamond_block",
+		"marker1": "laicaps:block/green",
+		"marker2": "laicaps:block/red",
+		"marker3": "laicaps:block/red",
+		"marker4": "laicaps:block/red",
+		"marker5": "laicaps:block/red",
+		"marker6": "laicaps:block/red",
+		"marker7": "laicaps:block/red"
+	}
+}

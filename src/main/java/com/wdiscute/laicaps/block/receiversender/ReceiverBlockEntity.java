@@ -40,12 +40,12 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
             UUID uuid = player.getUUID();
-            if (Objects.equals(this.arrayuuid[0], uuid))
+            if (Objects.equals(this.arrayuuid[i], uuid))
             {
                 level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 2f, 0.5f);
                 return;
             }
-            if (Objects.equals(this.arrayuuid[0], null))
+            if (Objects.equals(this.arrayuuid[i], null))
             {
                 this.lastPlayerToClick = player;
                 this.arrayuuid[i] = uuid;
@@ -84,7 +84,7 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
     {
         super.loadAdditional(tag, registries);
 
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < arrayuuid.length; i++)
         {
 
             if (tag.contains("user" + i))

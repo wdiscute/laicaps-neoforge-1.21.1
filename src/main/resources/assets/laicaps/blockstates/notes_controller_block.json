@@ -1,5 +1,10 @@
 {
   "variants": {
+
+    "waves=0,waves_complete=0,wave_in_progress=false": {
+      "model": "laicaps:block/notes_controller_block_55"
+    },
+
     "facing=east,waves=1,waves_complete=0,wave_in_progress=false": {
       "model": "laicaps:block/notes_controller_block_01_false",
       "y": 90

@@ -20,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -31,6 +32,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,6 +56,20 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
     }
 
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    {
+        switch (state.getValue(FACING))
+        {
+            case EAST, WEST:
+                return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                        Block.box(4, 13, 1, 12, 14, 15));
+            default:
+                return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                        Block.box(1, 13, 4, 15, 14, 12));
+        }
+    }
 
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom)
@@ -218,26 +236,6 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
                 pLevel.playSound(null, pPos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1, 0.5f);
                 return ItemInteractionResult.SUCCESS;
             }
-
-            //debug: print all 10 linked blocks
-            if (pPlayer.getMainHandItem().isEmpty() && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity)
-            {
-                System.out.println("link0: " + blockEntity.getLinkedBlock(0));
-                System.out.println("link1: " + blockEntity.getLinkedBlock(1));
-                System.out.println("link2: " + blockEntity.getLinkedBlock(2));
-                System.out.println("link3: " + blockEntity.getLinkedBlock(3));
-                System.out.println("link4: " + blockEntity.getLinkedBlock(4));
-                System.out.println("link5: " + blockEntity.getLinkedBlock(5));
-                System.out.println("link6: " + blockEntity.getLinkedBlock(6));
-                System.out.println("link7: " + blockEntity.getLinkedBlock(7));
-                System.out.println("link8: " + blockEntity.getLinkedBlock(8));
-                System.out.println("link9: " + blockEntity.getLinkedBlock(9));
-                System.out.println("link10: " + blockEntity.getLinkedBlock(10));
-
-                return ItemInteractionResult.SUCCESS;
-            }
-
-
 
             //add blockpos stored in chisel to linked
             if (pState.getValue(FACING) == Direction.EAST && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity be)
