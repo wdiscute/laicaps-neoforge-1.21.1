@@ -41,6 +41,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -129,7 +130,6 @@ public class ModBlocks
                     new ChaseControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
                             .sound(SoundType.STONE)
-                            .noOcclusion()
                     )
             );
 
@@ -772,6 +772,8 @@ public class ModBlocks
     //|   ,'.   | |  | |  |    |  |    |  `---. |  |\  \
     //'--'   '--' `--' `--'    `--'    `------' `--' '--'
     //
+
+
 
     public static final DeferredBlock<Block> WATER_CONTAINER =
             registerBlock("water_container", () ->

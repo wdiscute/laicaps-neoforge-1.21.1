@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.wdiscute.laicaps.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "WaterFacesMixin"
+  ],
+  "client": [
+    "WaterFacesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

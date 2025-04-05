@@ -4,6 +4,8 @@ import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.client.ModBoatRenderer;
+import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
+import com.wdiscute.laicaps.particle.ModParticles;
 import com.wdiscute.laicaps.sound.ModSounds;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.Sheets;
@@ -18,12 +20,13 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Laicaps.MOD_ID)
 public class Laicaps
 {
@@ -49,6 +52,7 @@ public class Laicaps
         ModSounds.register(modEventBus);
         ModBlockEntity.register(modEventBus);
         ModEntities.register(modEventBus);
+        ModParticles.register(modEventBus);
 
 
         // Register the item to a creative tab
@@ -101,5 +105,14 @@ public class Laicaps
             EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
 
         }
+
+        @SubscribeEvent
+        public static void registerParticleFactories(RegisterParticleProvidersEvent event)
+        {
+            event.registerSpriteSet(ModParticles.CHASE_PUZZLE_PARTICLES.get(), ChasePuzzleParticles.Provider::new);
+        }
+
+
+
     }
 }
