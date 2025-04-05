@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class WaterFacesMixin
 {
     @Inject(method = "tesselate", at = @At("HEAD"), cancellable = true)
-    public void shouldRenderFace(BlockAndTintGetter level, BlockPos pos, VertexConsumer buffer, BlockState blockState, FluidState fluidState, CallbackInfo ci)
+    public void tesselate(BlockAndTintGetter level, BlockPos pos, VertexConsumer buffer, BlockState blockState, FluidState fluidState, CallbackInfo ci)
     {
         System.out.println("ran tesselate");
         throw new IllegalStateException("test exception");
