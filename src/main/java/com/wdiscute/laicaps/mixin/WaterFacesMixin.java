@@ -34,8 +34,6 @@ public class WaterFacesMixin
     public void tesselate(BlockAndTintGetter level, BlockPos pos, VertexConsumer buffer, BlockState blockState, FluidState fluidState, CallbackInfo ci)
     {
         System.out.println("ran tesselate");
-        throw new IllegalStateException("test exception");
-
     }
 
 }
