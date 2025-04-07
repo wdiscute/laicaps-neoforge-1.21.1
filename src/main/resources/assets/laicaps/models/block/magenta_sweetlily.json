@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "laicaps:block/magenta_sweetlily"
+  },
+  "render_type":"cutout"
+}
