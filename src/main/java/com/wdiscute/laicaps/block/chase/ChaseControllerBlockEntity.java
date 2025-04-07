@@ -12,6 +12,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -39,6 +40,7 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
     private Vec3 particlePositionTemp;
     private Vec3 particlePositionOffset;
     private double timeToReachNextCheckpoint;
+    private final Random r = new Random();
 
     BlockPos bsZero = new BlockPos(0, 0, 0);
     private BlockPos[] waypoints = {bsZero, bsZero, bsZero, bsZero, bsZero, bsZero, bsZero};
@@ -47,16 +49,19 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
 
     public void CanPlayerObtainDrops(Player player)
     {
-        if(this.level.isClientSide) return;
-        if(state != 5) return;
+        setChanged();
+        if (this.level.isClientSide) return;
+        if (state != 5) return;
 
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
             UUID uuid = player.getUUID();
             if (Objects.equals(this.arrayuuid[i], uuid))
             {
-                level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 2f, 0.5f);
-                player.displayClientMessage(Component.literal("You have already claimed loot"), true);
+                level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.5f);
+                player.displayClientMessage(Component.literal("§cYou have already claimed loot."), true);
+
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
 
                 return;
             }
@@ -161,21 +166,20 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
             Random r = new Random();
             if (r.nextInt(10) > 6)
             {
-                ((ServerLevel) level).sendParticles(
-                        ModParticles.CHASE_PUZZLE_PARTICLES.get(),
-                        getBlockPos().getX() + 0.5f,
-                        getBlockPos().getY() + 1.2f,
-                        getBlockPos().getZ() + 0.5f, 1, 0, 0, 0, 0);
+                ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(), getBlockPos().getX() + 0.5f, getBlockPos().getY() + 1.2f, getBlockPos().getZ() + 0.5f, 1, 0, 0, 0, 0);
             }
+        }
+
+        //return if player is null, hopefully this also means it's null if player logs off
+        if (player == null)
+        {
+            state = 0;
+            return;
         }
 
         //spawning particles and checking if player is close
         if (state == 1)
         {
-            if (player == null) {
-                state = 0;
-                return;
-            }
             Random r = new Random();
             if (r.nextInt(10) > 6)
             {
@@ -187,7 +191,7 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
                 counter = 0;
                 state = 2;
                 current_waypoint += 1;
-                if(current_waypoint == 7)
+                if (current_waypoint == 7)
                 {
                     state = 2;
                     particlePositionOffset = new Vec3(getBlockPos().getX() - particlePosition.getX(), getBlockPos().getY() - particlePosition.getY(), getBlockPos().getZ() - particlePosition.getZ());
@@ -211,7 +215,12 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
                 //particlePositionTemp is used to spawn particles in an animation from one waypoint to the next
                 particlePositionTemp = new Vec3(particlePositionOld.getX(), particlePositionOld.getY(), particlePositionOld.getZ());
 
-
+                ((ServerLevel) level).sendParticles(ParticleTypes.HAPPY_VILLAGER,
+                        getBlockPos().getX() + 0.5f,
+                        getBlockPos().getY() + 0.5f,
+                        getBlockPos().getZ() + 0.5f,
+                        20,
+                        0.5f, 0.3f, 0.5f, 0);
             }
         }
 
@@ -224,15 +233,23 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
             //spawn particles at temp
             ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(), particlePositionTemp.x() + 0.5f, particlePositionTemp.y() + 1.2f, particlePositionTemp.z() + 0.5f, 1, 0, 0, 0, 0);
 
+            //play sound upon leaving checkpoint
+            if(counter == 1)
+                level.playSound(null, particlePositionTemp.x, particlePositionTemp.y, particlePositionTemp.z, SoundEvents.BOAT_PADDLE_WATER, SoundSource.BLOCKS, 3f, 1f);
+
+            //play sound 0.25s before reaching next checkpoint
+            if(counter == timeToReachNextCheckpoint - 5)
+                level.playSound(null, particlePositionTemp.x, particlePositionTemp.y, particlePositionTemp.z, SoundEvents.BOAT_PADDLE_WATER, SoundSource.BLOCKS, 3f, r.nextFloat(0.49F));
+
+
             //if particles at next way point then goes back to state 1 or finishes
             if (counter == timeToReachNextCheckpoint)
             {
-                if(current_waypoint >= getTotalWaypoints())
+                if (current_waypoint >= getTotalWaypoints())
                 {
                     counter = 0;
                     state = 5;
-                }
-                else
+                } else
                 {
                     state = 1;
                 }
@@ -242,7 +259,8 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
         //puzzle complete - waiting for a valid player to claim loot
         if (state == 5)
         {
-            if(counter == 1)
+            //spawn big burst of bubbles at start
+            if (counter == 1)
             {
                 ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(),
                         getBlockPos().getX() + 0.5f,
@@ -252,6 +270,69 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
                         0.5f, 0.7f, 0.5f, 0);
             }
 
+            //particles + sound 5 seconds before closing
+            if (counter == 1100)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1.2f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 4 seconds before closing
+            if (counter == 1120)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1.1f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 3 seconds before closing
+            if (counter == 1140)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 2 seconds before closing
+            if (counter == 1160)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 1 second before closing
+            if (counter == 1180)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //resets if 1 minute goes by without players claiming loot
+            if (counter == 1200)
+            {
+                //reset stuff
+                player = null;
+                state = 0;
+                BlockState bs = level.getBlockState(getBlockPos());
+                bs = bs.setValue(ChaseControllerBlock.WAYPOINTS, getTotalWaypoints());
+                bs = bs.setValue(ChaseControllerBlock.WAYPOINTS_COMPLETED, 0);
+                level.setBlockAndUpdate(getBlockPos(), bs);
+
+                //play closing sound
+                level.playSound(null, getBlockPos(), SoundEvents.TRIAL_SPAWNER_DETECT_PLAYER, SoundSource.BLOCKS);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() - 0.5f, getBlockPos().getY(), getBlockPos().getZ() - 0.5f, 50, 1f, 1f, 1f, 0f);
+
+            }
+
+            //play ambient bubble particles around block
             ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(),
                     getBlockPos().getX() + 0.5f,
                     getBlockPos().getY() + 0.5f,
@@ -259,15 +340,7 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
                     1,
                     0.5f, 0.3f, 0.5f, 0);
 
-            //resets if 1 minute goes by without players claiming loot
-            if (counter == 1200)
-            {
-                state = 0;
-                BlockState bs = level.getBlockState(getBlockPos());
-                bs = bs.setValue(ChaseControllerBlock.WAYPOINTS, getTotalWaypoints());
-                bs = bs.setValue(ChaseControllerBlock.WAYPOINTS_COMPLETED, 0);
-                level.setBlockAndUpdate(getBlockPos(), bs);
-            }
+
         }
 
         //drop items stored in arrayOfItemStacks
@@ -275,6 +348,8 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
         {
             if (counter % 4 == 0)
             {
+                ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(), getBlockPos().getX() + 0.5f, getBlockPos().getY() + 1.2f, getBlockPos().getZ() + 0.5f, 1, 0, 0, 0, 0);
+
                 //runs if array has something
                 if (arrayOfItemStacks != null)
                 {

@@ -162,17 +162,7 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
                         if(!level.isClientSide)
                         {
                             Random r = new Random();
-                            for (int t = 0; t < 50; t++)
-                            {
-                                ((ServerLevel) level).sendParticles(
-                                        ParticleTypes.ASH,
-                                        pos.getX() - 0.5f + r.nextFloat(2f),
-                                        pos.getY() + r.nextFloat(1.2f),
-                                        pos.getZ() - 0.5f + r.nextFloat(2f),
-                                        1,
-                                        0f, 0f, 0f, 0f
-                                );
-                            }
+                            ((ServerLevel) level).sendParticles(ParticleTypes.ASH, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 50, 1f, 1f, 1f, 0f);
 
                             player.displayClientMessage(Component.literal("§cYou have already claimed loot."), true);
                             level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 12f, r.nextFloat(0.1f) + 0.95f);

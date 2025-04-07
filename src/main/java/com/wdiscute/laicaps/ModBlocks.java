@@ -765,6 +765,205 @@ public class ModBlocks
             );
 
 
+    public static final DeferredBlock<Block> VIOLET_SWEETLILY =
+            registerBlock("violet_sweetlily", () ->
+                    new BushBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .pushReaction(PushReaction.DESTROY)
+                            .replaceable()
+                    )
+                    {
+                        @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)13.0F, (double)11.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+
+                        @Override
+                        protected MapCodec<? extends BushBlock> codec()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    }
+            );
+
+
+    public static final DeferredBlock<Block> PEACH_SWEETLILY =
+            registerBlock("peach_sweetlily", () ->
+                    new BushBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .pushReaction(PushReaction.DESTROY)
+                            .replaceable()
+                    )
+                    {
+                        @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)13.0F, (double)11.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+
+                        @Override
+                        protected MapCodec<? extends BushBlock> codec()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    }
+            );
+
+
+    public static final DeferredBlock<Block> MAGENTA_SWEETLILY =
+            registerBlock("magenta_sweetlily", () ->
+                    new BushBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .pushReaction(PushReaction.DESTROY)
+                            .replaceable()
+                    )
+                    {
+                        @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)13.0F, (double)11.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+
+                        @Override
+                        protected MapCodec<? extends BushBlock> codec()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    }
+            );
+
+
+    public static final DeferredBlock<Block> NAVY_SWEETLILY =
+            registerBlock("navy_sweetlily", () ->
+                    new BushBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .pushReaction(PushReaction.DESTROY)
+                            .replaceable()
+                    )
+                    {
+                        @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)13.0F, (double)11.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+
+                        @Override
+                        protected MapCodec<? extends BushBlock> codec()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    }
+            );
+
+
+    public static final DeferredBlock<Block> CHERRY_SWEETLILY =
+            registerBlock("cherry_sweetlily", () ->
+                    new BushBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .noCollission()
+                            .noOcclusion()
+                            .instabreak()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                            .pushReaction(PushReaction.DESTROY)
+                            .replaceable()
+                    )
+                    {
+                        @Override
+                        protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                            Vec3 vec3 = state.getOffset(level, pos);
+                            VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)13.0F, (double)11.0F);
+                            return shape.move(vec3.x, vec3.y, vec3.z);
+                        }
+
+                        @Override
+                        protected MapCodec<? extends BushBlock> codec()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    }
+            );
+
     //
     //,--.   ,--.   ,---.   ,--------. ,------. ,------.
     //|  |   |  |  /  O  \  '--.  .--' |  .---' |  .--. '
