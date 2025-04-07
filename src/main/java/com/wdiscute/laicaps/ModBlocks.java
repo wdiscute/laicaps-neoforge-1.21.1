@@ -774,7 +774,6 @@ public class ModBlocks
                             .instabreak()
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .pushReaction(PushReaction.DESTROY)
-                            .replaceable()
                     )
                     {
                         @Override
@@ -814,7 +813,6 @@ public class ModBlocks
                             .instabreak()
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .pushReaction(PushReaction.DESTROY)
-                            .replaceable()
                     )
                     {
                         @Override
@@ -854,7 +852,6 @@ public class ModBlocks
                             .instabreak()
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .pushReaction(PushReaction.DESTROY)
-                            .replaceable()
                     )
                     {
                         @Override
@@ -894,7 +891,6 @@ public class ModBlocks
                             .instabreak()
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .pushReaction(PushReaction.DESTROY)
-                            .replaceable()
                     )
                     {
                         @Override
@@ -934,7 +930,6 @@ public class ModBlocks
                             .instabreak()
                             .offsetType(BlockBehaviour.OffsetType.XZ)
                             .pushReaction(PushReaction.DESTROY)
-                            .replaceable()
                     )
                     {
                         @Override

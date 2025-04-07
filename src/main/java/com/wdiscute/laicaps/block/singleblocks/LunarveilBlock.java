@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.block.singleblocks;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.particle.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
@@ -59,9 +60,7 @@ public class LunarveilBlock extends BushBlock
         if (pState.getValue(OPEN))
         {
             pLevel.addParticle(
-                    new DustParticleOptions(new Vec3(0.557f, 0.369f, 0.961f).toVector3f(), 3.0F)
-                    {
-                    },
+                    ModParticles.CHASE_PUZZLE_PARTICLES.get(),
                     (double) pPos.getX() + 0.5f,
                     (double) pPos.getY() + 1.2f,
                     (double) pPos.getZ() + 0.5f,
