@@ -58,6 +58,19 @@
 
 
 
+  "block.laicaps.violet_sweetlily": "Violet Sweetlily",
+  "block.laicaps.peach_sweetlily": "Peach Sweetlily",
+  "block.laicaps.navy_sweetlily": "Navy Sweetlily",
+  "block.laicaps.magenta_sweetlily": "Magenta Sweetlily",
+  "block.laicaps.cherry_sweetlily": "Cherry Sweetlily",
+
+
+
+  "block.laicaps.lunarveil": "Lunarveil",
+
+
+
+
   "tooltip.laicaps.magic_block.tooltip": "This §k~~~ §rmagic §k~~~§r block makes you all §ljumpy and stuff§r",
 
   "tooltip.laicaps.generic.shift_up": "⏬ §l§3[Shift]§r ⏬",
@@ -69,9 +82,6 @@
 
   "tooltip.laicaps.oakheart_log.shift_down" : "this oakheart log is very tasty!",
   "tooltip.laicaps.oakheart_log.shift_down_2" : "But you can not eat it lol"
-
-
-
 
 
 
