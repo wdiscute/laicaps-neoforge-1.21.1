@@ -92,6 +92,13 @@ public class ModCreativeModeTabs
                         //riverthorne
                         output.accept(ModBlocks.RIVERTHORNE_THISTLE.get());
                         output.accept(ModBlocks.RIVERTHORNE.get());
+                        //sweetlily
+                        output.accept(ModBlocks.VIOLET_SWEETLILY.get());
+                        output.accept(ModBlocks.PEACH_SWEETLILY.get());
+                        output.accept(ModBlocks.NAVY_SWEETLILY.get());
+                        output.accept(ModBlocks.MAGENTA_SWEETLILY.get());
+                        output.accept(ModBlocks.CHERRY_SWEETLILY.get());
+
 
                     })
                     .build()
