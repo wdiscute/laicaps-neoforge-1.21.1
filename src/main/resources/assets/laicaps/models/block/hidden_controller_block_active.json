@@ -1,0 +1,9 @@
+{
+	"parent": "laicaps:block/template_chest_0",
+	"textures": {
+		"particle": "block/stripped_oak_log",
+		"edge": "block/stripped_oak_log",
+		"center": "block/stripped_spruce_log",
+		"keyhole": "block/diamond_block"
+	}
+}

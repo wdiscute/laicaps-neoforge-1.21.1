@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "facing=east,active=false": {
+      "model": "laicaps:block/hidden_controller_block_inactive",
+      "y": 90
+    },
+    "facing=east,active=true": {
+      "model": "laicaps:block/hidden_controller_block_active",
+      "y": 90
+    },
+
+
+
+    "facing=north,active=false": {
+      "model": "laicaps:block/hidden_controller_block_inactive"
+    },
+    "facing=north,active=true": {
+      "model": "laicaps:block/hidden_controller_block_active"
+    },
+
+
+    "facing=south,active=false": {
+      "model": "laicaps:block/hidden_controller_block_inactive",
+      "y": 180
+    },
+    "facing=south,active=true": {
+      "model": "laicaps:block/hidden_controller_block_active",
+      "y": 180
+    },
+
+
+
+    "facing=west,active=false": {
+      "model": "laicaps:block/hidden_controller_block_inactive",
+      "y": 270
+    },
+    "facing=west,active=true": {
+      "model": "laicaps:block/hidden_controller_block_active",
+      "y": 270
+    }
+
+  }
+}

@@ -3,6 +3,7 @@ package com.wdiscute.laicaps;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModHangingSignBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModSignBlockEntity;
+import com.wdiscute.laicaps.block.hidden.HiddenControllerBlockEntity;
 import com.wdiscute.laicaps.block.receiversender.ReceiverBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
@@ -44,6 +45,19 @@ public class ModBlockEntity
     public static final Supplier<BlockEntityType<ChaseControllerBlockEntity>> CHASE_CONTROLLER_BLOCK = BLOCK_ENTITIES.register("chase_controller_block",
             () -> BlockEntityType.Builder.of(ChaseControllerBlockEntity::new, ModBlocks.CHASE_CONTROLLER_BLOCK.get())
                     .build(null));
+
+    public static final Supplier<BlockEntityType<HiddenControllerBlockEntity>> HIDDEN_CONTROLLER_BLOCK = BLOCK_ENTITIES.register("hidden_controller_block",
+            () -> BlockEntityType.Builder.of(HiddenControllerBlockEntity::new, ModBlocks.HIDDEN_CONTROLLER_BLOCK.get())
+                    .build(null));
+
+
+
+
+
+
+
+
+
 
 
 

@@ -249,6 +249,8 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
                 {
                     counter = 0;
                     state = 5;
+                    level.playSound(null, getBlockPos(), SoundEvents.CONDUIT_ACTIVATE, SoundSource.BLOCKS, 1f, 0.4f);
+
                 } else
                 {
                     state = 1;

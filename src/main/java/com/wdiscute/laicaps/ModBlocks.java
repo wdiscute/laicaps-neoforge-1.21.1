@@ -3,6 +3,7 @@ package com.wdiscute.laicaps;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.generics.*;
+import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
 import com.wdiscute.laicaps.block.receiversender.ReceiverBlock;
 import com.wdiscute.laicaps.block.receiversender.SenderPuzzleBLock;
 import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
@@ -133,7 +134,14 @@ public class ModBlocks
                     )
             );
 
-
+    public static final DeferredBlock<Block> HIDDEN_CONTROLLER_BLOCK =
+            registerBlock("hidden_controller_block", () ->
+                    new HiddenControllerBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                            .noCollission()
+                    )
+            );
 
 
     //
