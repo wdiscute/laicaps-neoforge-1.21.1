@@ -155,7 +155,21 @@ public class ModBlocks
 
     public static final DeferredBlock<Block> OAKHEART_SAPLING =
             registerBlock("oakheart_sapling", () ->
-                    new ModSaplingBlock(ModTreeGrowers.OAKHEART, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get()));
+                    new ModSaplingBlock(ModTreeGrowers.OAKHEART,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get())
+                    {
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter pLevel, BlockPos pPos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    });
 
     public static final DeferredBlock<Block> OAKHEART_LOG =
             registerBlock("oakheart_log", () ->
@@ -413,7 +427,20 @@ public class ModBlocks
 
     public static final DeferredBlock<Block> OAKROOT_SAPLING =
             registerBlock("oakroot_sapling", () ->
-                    new ModSaplingBlock(ModTreeGrowers.OAKROOT, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get()));
+                    new ModSaplingBlock(ModTreeGrowers.OAKROOT, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING), () -> ModBlocks.ASHA_GRASS_BLOCK.get())
+                    {
+                        @Override
+                        protected boolean mayPlaceOn(BlockState state, BlockGetter pLevel, BlockPos pPos)
+                        {
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                                return true;
+
+                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                                return true;
+
+                            return false;
+                        }
+                    });
 
     public static final DeferredBlock<Block> OAKROOT_LOG =
             registerBlock("oakroot_log", () ->
@@ -631,7 +658,7 @@ public class ModBlocks
 
     public static final DeferredBlock<Block> ASHA_GRASS_BLOCK =
             registerBlock("asha_grass_block", () ->
-                    new RotatedPillarBlock(BlockBehaviour.Properties.of()
+                    new AshaGrassBlock(BlockBehaviour.Properties.of()
                             .sound(SoundType.ROOTED_DIRT)
                             .strength(0.6F)
                             .mapColor(MapColor.GRASS)

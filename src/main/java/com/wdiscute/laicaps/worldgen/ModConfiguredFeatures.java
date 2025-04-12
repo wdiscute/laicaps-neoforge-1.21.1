@@ -12,10 +12,10 @@ import net.minecraft.world.level.levelgen.feature.configurations.*;
 public class ModConfiguredFeatures
 {
 
-    //public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_ALEXANDRITE_ORE_KEY = registerKey("alexandrite_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAKHEART_KEY = registerKey("oakheart");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OAKROOT_KEY = registerKey("oakroot");
-    //public static final ResourceKey<ConfiguredFeature<?, ?>> RANDOM_BLOCKS_KEY = registerKey("random_blocks_patch_key");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASHA_SWEETLILY_PATCH = registerKey("asha_sweetlily_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ASHA_GRASS_BLOCK_BONEMEAL = registerKey("asha_grass_block_bonemeal");
 
 
 

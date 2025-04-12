@@ -10,8 +10,8 @@
   "block.laicaps.symbol_puzzle_block": "block that has a symbol",
   "block.laicaps.symbol_puzzle_block_inactive": "block that has a symbol but that symbol is inactive so it cant be changed",
   "block.laicaps.symbol_controller_block": "block that controls the symbols",
-
-  "block.laicaps.magic_block": "Cool Block Of Magicalness",
+  "block.laicaps.water_container": "Water Container",
+  "block.laicaps.water_container_helper": "Water Container Helper",
 
   "block.laicaps.oakheart_sapling": "Oakheart Sapling",
   "block.laicaps.stripped_oakheart_log": "Stripped Oakheart Log",
@@ -33,6 +33,7 @@
   "block.laicaps.oakheart_hanging_sign": "Oakheart Hanging Sign",
   "item.laicaps.oakheart_boat" : "Oakheart Boat",
   "item.laicaps.oakheart_chest_boat" : "Oakheart Boat with Chest",
+  "item.laicaps.oakheart_berries" : "Oakheart Boat with Chest",
 
 
   "block.laicaps.oakroot_sapling": "Oakroot Sapling",
