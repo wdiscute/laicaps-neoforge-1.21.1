@@ -7,6 +7,7 @@ import com.wdiscute.laicaps.item.custom.ChiselItem;
 
 import com.wdiscute.laicaps.item.custom.ModBoatItem;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
@@ -15,6 +16,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ModItems
 {
@@ -36,7 +39,16 @@ public class ModItems
 
 
     public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register("oakheart_berries",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES)));
+            () -> new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES))
+            {
+                @Override
+                public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+                {
+                    Laicaps.appendHoverText(stack, context, tooltipComponents);
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            }
+    );
 
 
     public static final DeferredItem<Item> OAKHEART_DOOR =

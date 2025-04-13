@@ -2,20 +2,58 @@
   "tag.item.laicaps.oakheart_logs" : "Oakheart Logs",
   "tag.item.laicaps.oakroot_logs" : "Oakheart Logs",
 
+
+
+
   "creativetab.laicaps.laicaps": "Laicaps",
+  "creativetab.laicaps.laicaps_puzzles": "Laicaps Puzzle Blocks",
+
+  "tooltip.laicaps.generic.shift_up": "⏬ §l§3[Shift]§r ⏬",
+  "tooltip.laicaps.generic.shift_down": "⏫ §l§6[Shift]§r ⏫",
+  "tooltip.laicaps.generic.empty" : "",
+
+
+
+
+  "item.laicaps.chisel": "Chisel",
+  "tooltip.laicaps.chisel.tooltip_0": "Doesn't actually chisel anything",
 
   "block.laicaps.sender_puzzle_block": "block that sends",
   "block.laicaps.receiver_block": "block that receives",
+  "block.laicaps.receiver_block.tooltip_0": "this block receives!",
 
   "block.laicaps.symbol_puzzle_block": "block that has a symbol",
   "block.laicaps.symbol_puzzle_block_inactive": "block that has a symbol but that symbol is inactive so it cant be changed",
   "block.laicaps.symbol_controller_block": "block that controls the symbols",
+
+  "block.laicaps.notes_puzzle_block": "block that has a symbol",
+  "block.laicaps.notes_controller_block": "block that has a symbol",
+
+  "block.laicaps.chase_controller_block": "block that has a symbol",
+
+  "block.laicaps.hidden_controller_block": "block that has a symbol",
+
+  "block.laicaps.rotating_controller_block": "block that has a symbol",
+  "block.laicaps.rotating_puzzle_block": "block that has a symbol",
+
+
+
+
   "block.laicaps.water_container": "Water Container",
   "block.laicaps.water_container_helper": "Water Container Helper",
+
+
 
   "block.laicaps.oakheart_sapling": "Oakheart Sapling",
   "block.laicaps.stripped_oakheart_log": "Stripped Oakheart Log",
   "block.laicaps.oakheart_log": "Oakheart Log",
+  "tooltip.laicaps.oakheart_log.tooltip_0" : "this oakheart log is very tasty!",
+  "tooltip.laicaps.oakheart_log.tooltip_1" : "But ",
+  "tooltip.laicaps.oakheart_log.tooltip_2" : "you",
+  "tooltip.laicaps.oakheart_log.tooltip_3" : "should",
+  "tooltip.laicaps.oakheart_log.tooltip_4" : "§cNOT",
+  "tooltip.laicaps.oakheart_log.tooltip_5" : "eat",
+  "tooltip.laicaps.oakheart_log.tooltip_6" : "it",
   "block.laicaps.stripped_oakheart_wood": "Stripped Oakheart Wood",
   "block.laicaps.oakheart_wood": "Oakheart Wood",
   "block.laicaps.oakheart_leaves": "Oakheart Leaves",
@@ -33,7 +71,8 @@
   "block.laicaps.oakheart_hanging_sign": "Oakheart Hanging Sign",
   "item.laicaps.oakheart_boat" : "Oakheart Boat",
   "item.laicaps.oakheart_chest_boat" : "Oakheart Boat with Chest",
-  "item.laicaps.oakheart_berries" : "Oakheart Boat with Chest",
+  "item.laicaps.oakheart_berries" : "Oakheart Berries",
+  "tooltip.laicaps.oakheart_berries.tooltip_0" : "Sweet and refreshing!",
 
 
   "block.laicaps.oakroot_sapling": "Oakroot Sapling",
@@ -75,24 +114,11 @@
 
 
   "block.laicaps.asha_grass": "Asha Grass",
-  "block.laicaps.asha_short_grass": "Asha Short Grass",
+  "block.laicaps.asha_short_grass": "Asha Short Grass"
 
 
 
 
-
-
-  "tooltip.laicaps.magic_block.tooltip": "This §k~~~ §rmagic §k~~~§r block makes you all §ljumpy and stuff§r",
-
-  "tooltip.laicaps.generic.shift_up": "⏬ §l§3[Shift]§r ⏬",
-  "tooltip.laicaps.generic.shift_down": "⏫ §l§6[Shift]§r ⏫",
-  "tooltip.laicaps.generic.empty" : "",
-
-
-  "tooltip.laicaps.chisel.shift_down": "the chisel is very cool!",
-
-  "tooltip.laicaps.oakheart_log.shift_down" : "this oakheart log is very tasty!",
-  "tooltip.laicaps.oakheart_log.shift_down_2" : "But you can not eat it lol"
 
 
 

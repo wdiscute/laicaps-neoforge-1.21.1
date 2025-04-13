@@ -19,8 +19,8 @@ public class ModCreativeModeTabs
         CREATIVE_MODE_TABS.register(eventBus);
     }
 
-    public static final Supplier<CreativeModeTab> LAICAPS_TAP =
-            CREATIVE_MODE_TABS.register("laicaps_tab", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.LUNARVEIL.get()))
+    public static final Supplier<CreativeModeTab> LAICAPS =
+            CREATIVE_MODE_TABS.register("laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.LUNARVEIL.get()))
                     .title(Component.translatable("creativetab.laicaps.laicaps"))
                     .displayItems( (itemDisplayParameters, output) -> {
                         output.accept(ModItems.CHISEL.get());
@@ -71,16 +71,6 @@ public class ModCreativeModeTabs
                         output.accept(ModItems.OAKROOT_BOAT.get());
                         output.accept(ModItems.OAKROOT_CHEST_BOAT.get());
 
-
-
-
-                        //puzzle blocks sender receiver
-                        output.accept(ModBlocks.SENDER_PUZZLE_BLOCK.get());
-                        output.accept(ModBlocks.RECEIVER_BLOCK.get());
-                        //puzzle blocks symbols
-                        output.accept(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE.get());
-                        output.accept(ModBlocks.SYMBOL_PUZZLE_BLOCK.get());
-                        output.accept(ModBlocks.SYMBOL_CONTROLLER_BLOCK.get());
                         //asha environment
                         output.accept(ModBlocks.LUNARVEIL.get());
                         output.accept(ModBlocks.ASHA_GRASS.get());
@@ -103,4 +93,47 @@ public class ModCreativeModeTabs
                     })
                     .build()
             );
+
+    public static final Supplier<CreativeModeTab> LAICAPS_PUZZLES =
+            CREATIVE_MODE_TABS.register("laicaps_puzzles", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.SYMBOL_CONTROLLER_BLOCK.get()))
+                    .title(Component.translatable("creativetab.laicaps.laicaps_puzzles"))
+                    .displayItems( (itemDisplayParameters, output) -> {
+                        output.accept(ModItems.CHISEL.get());
+
+                        //Chisel
+                        output.accept(ModItems.CHISEL.get());
+
+                        //sender receiver
+                        output.accept(ModBlocks.SENDER_PUZZLE_BLOCK.get());
+                        output.accept(ModBlocks.RECEIVER_BLOCK.get());
+
+                        //symbols
+                        output.accept(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE.get());
+                        output.accept(ModBlocks.SYMBOL_PUZZLE_BLOCK.get());
+                        output.accept(ModBlocks.SYMBOL_CONTROLLER_BLOCK.get());
+
+                        //chase
+                        output.accept(ModBlocks.CHASE_CONTROLLER_BLOCK.get());
+
+                        //hidden
+                        output.accept(ModBlocks.HIDDEN_CONTROLLER_BLOCK.get());
+
+                        //rotating
+                        output.accept(ModBlocks.ROTATING_CONTROLLER_BLOCK.get());
+                        output.accept(ModBlocks.ROTATING_PUZZLE_BLOCK.get());
+
+                        //notes
+                        output.accept(ModBlocks.NOTES_PUZZLE_BLOCK.get());
+                        output.accept(ModBlocks.NOTES_CONTROLLER_BLOCK.get());
+
+
+
+
+
+
+                    })
+                    .build()
+            );
+
+
 }

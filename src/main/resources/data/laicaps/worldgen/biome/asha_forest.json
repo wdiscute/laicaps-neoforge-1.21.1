@@ -16,13 +16,7 @@
     },
     "sky_color": 12296678,
     "water_color": 9465551,
-    "water_fog_color": 10508941,
-    "particle": {
-      "options": {
-        "type": "minecraft:crit"
-      },
-      "probability": 0.004
-    }
+    "water_fog_color": 10508941
   },
   "features": [
     [

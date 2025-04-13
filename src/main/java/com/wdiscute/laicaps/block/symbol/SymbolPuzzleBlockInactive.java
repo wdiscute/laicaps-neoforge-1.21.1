@@ -5,8 +5,12 @@ import com.wdiscute.laicaps.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -26,27 +30,33 @@ public class SymbolPuzzleBlockInactive extends HorizontalDirectionalBlock
     public static final EnumProperty<SymbolsEnum> SYMBOLS = EnumProperty.create("symbol", SymbolsEnum.class);
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult)
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
-
         //if clicked with chisel then cycles to next symbol and plays sound
-        if (!pLevel.isClientSide() && pPlayer.getMainHandItem().getItem() == ModItems.CHISEL.get())
+        if (!level.isClientSide() && stack.is(ModItems.CHISEL.get()))
         {
-            pLevel.setBlockAndUpdate(pPos, pState.setValue(SYMBOLS, SymbolsEnum.GetNextSymbol(pState.getValue(SYMBOLS))));
-            pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1, 0.5f);
-            return InteractionResult.SUCCESS;
+            level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.GetNextSymbol(state.getValue(SYMBOLS))));
+            level.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1, 0.5f);
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        if (!level.isClientSide() && stack.is(Items.ANVIL))
+        {
+            level.setBlockAndUpdate(pos, state.setValue(SYMBOLS, SymbolsEnum.RANDOM));
+
+            return ItemInteractionResult.SUCCESS;
         }
 
         //code so client side plays hand animation when using chisel
-        if (pLevel.isClientSide() && pPlayer.getMainHandItem().getItem() == ModItems.CHISEL.get())
+        if (level.isClientSide() && ( stack.is(ModItems.CHISEL.get()) || stack.is(Items.ANVIL) ))
         {
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
 
-        //if not clicked with chisel doesnt play hand animation
-        return InteractionResult.FAIL;
-
+        //if not clicked with chisel doesn't play hand animation
+        return ItemInteractionResult.FAIL;
     }
+
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext)

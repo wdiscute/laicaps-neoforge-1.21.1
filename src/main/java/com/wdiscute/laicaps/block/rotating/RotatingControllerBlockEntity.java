@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
-public class RotatingBlockEntity extends BlockEntity implements TickableBlockEntity
+public class RotatingControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private int counter = 0;
     private int tickOffset = 0;
@@ -162,7 +162,7 @@ public class RotatingBlockEntity extends BlockEntity implements TickableBlockEnt
     }
 
 
-    public RotatingBlockEntity(BlockPos pPos, BlockState pBlockState)
+    public RotatingControllerBlockEntity(BlockPos pPos, BlockState pBlockState)
     {
         super(ModBlockEntity.RECEIVER_BLOCK.get(), pPos, pBlockState);
     }

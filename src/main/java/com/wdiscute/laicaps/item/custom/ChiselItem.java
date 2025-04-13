@@ -39,16 +39,7 @@ public class ChiselItem extends Item
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> tooltipComponents, TooltipFlag pTooltipFlag)
     {
-        if (Laicaps.HasExtraInfoKeyDown())
-        {
-            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
-            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
-            tooltipComponents.add(Component.translatable("tooltip.laicaps.chisel.shift_down"));
-        }
-        else
-        {
-            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
-        }
+        Laicaps.appendHoverText(pStack, pContext, tooltipComponents);
 
         if (pStack.get(ModDataComponentTypes.COORDINATES.get()) != null)
         {

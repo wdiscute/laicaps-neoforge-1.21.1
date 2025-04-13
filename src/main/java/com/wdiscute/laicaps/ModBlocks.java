@@ -6,6 +6,7 @@ import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
 import com.wdiscute.laicaps.block.receiversender.ReceiverBlock;
 import com.wdiscute.laicaps.block.receiversender.SenderPuzzleBLock;
+import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
 import com.wdiscute.laicaps.block.singleblocks.*;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlock;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
@@ -73,6 +75,14 @@ public class ModBlocks
                             .strength(30)
                             .sound(SoundType.AMETHYST)
                     )
+                    {
+                        @Override
+                        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+                        {
+                            Laicaps.appendHoverText(stack, context, tooltipComponents);
+                            super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                        }
+                    }
             );
 
     public static final DeferredBlock<Block> SYMBOL_PUZZLE_BLOCK =
@@ -89,6 +99,8 @@ public class ModBlocks
                             .strength(30)
                             .sound(SoundType.STONE)
                             .noOcclusion()
+                            .lightLevel(state -> state.getValue(SymbolControllerBlock.ACTIVE) ? 11 : 0)
+
                     )
             );
 
@@ -120,6 +132,14 @@ public class ModBlocks
     public static final DeferredBlock<Block> ROTATING_PUZZLE_BLOCK =
             registerBlock("rotating_puzzle_block", () ->
                     new RotatingPuzzleBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
+
+    public static final DeferredBlock<Block> ROTATING_CONTROLLER_BLOCK =
+            registerBlock("rotating_controller_block", () ->
+                    new RotatingControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
                             .sound(SoundType.STONE)
                     )
@@ -195,17 +215,7 @@ public class ModBlocks
                         @Override
                         public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
                         {
-                            if (Laicaps.HasExtraInfoKeyDown())
-                            {
-                                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
-                                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
-                                tooltipComponents.add(Component.translatable("tooltip.laicaps.oakheart_log.shift_down"));
-                                tooltipComponents.add(Component.translatable("tooltip.laicaps.oakheart_log.shift_down_2"));
-                            } else
-                            {
-                                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
-                            }
-
+                            Laicaps.appendHoverText(stack, context, tooltipComponents);
                             super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                         }
                     }

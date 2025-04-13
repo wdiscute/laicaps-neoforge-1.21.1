@@ -3,128 +3,69 @@ package com.wdiscute.laicaps.block.symbol;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.particle.ModParticles;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Objects;
+import java.util.Random;
+import java.util.UUID;
 
 public class SymbolControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private int counter = 0;
     private boolean ticking = true;
+    private int counterOffset = new Random().nextInt(20);
+
+    private BlockPos zero = new BlockPos(0, 0, 0);
+    private BlockPos[] links = {zero, zero, zero, zero, zero, zero, zero, zero, zero, zero};
+    private int state = 0;
+
+    private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
+    private final UUID[] arrayuuid = new UUID[15];
 
 
-
-
-    private BlockPos link0 = new BlockPos(0, 0, 0);
-    private BlockPos link1 = new BlockPos(0, 0, 0);
-    private BlockPos link2 = new BlockPos(0, 0, 0);
-    private BlockPos link3 = new BlockPos(0, 0, 0);
-    private BlockPos link4 = new BlockPos(0, 0, 0);
-    private BlockPos link5 = new BlockPos(0, 0, 0);
-    private BlockPos link6 = new BlockPos(0, 0, 0);
-    private BlockPos link7 = new BlockPos(0, 0, 0);
-    private BlockPos link8 = new BlockPos(0, 0, 0);
-    private BlockPos link9 = new BlockPos(0, 0, 0);
-    private BlockPos link10 = new BlockPos(0, 0, 0);
-
-    public BlockPos getLinkedBlock(int blockposlink)
+    public BlockPos DecodeBlockPosWithOffset(Direction facing, BlockPos pos, BlockPos posOffset)
     {
-        setChanged();
-        return switch (blockposlink)
-        {
-            case 0 -> link0;
-            case 1 -> link1;
-            case 2 -> link2;
-            case 3 -> link3;
-            case 4 -> link4;
-            case 5 -> link5;
-            case 6 -> link6;
-            case 7 -> link7;
-            case 8 -> link8;
-            case 9 -> link9;
-            default -> link10;
-        };
-    }
+        if (facing == Direction.SOUTH)
+            return new BlockPos(pos.getX() + (posOffset.getZ() * -1), pos.getY() + posOffset.getY(), pos.getZ() + posOffset.getX());
 
-    public void reset()
-    {
-        setChanged();
-        BlockPos zero = new BlockPos(0,0,0);
-        link0 = zero;
-        link1 = zero;
-        link2 = zero;
-        link3 = zero;
-        link4 = zero;
-        link5 = zero;
-        link6 = zero;
-        link7 = zero;
-        link8 = zero;
-        link9 = zero;
-        link10 = zero;
+        if (facing == Direction.WEST)
+            return new BlockPos(pos.getX() + (posOffset.getX() * -1), pos.getY() + posOffset.getY(), pos.getZ() + (posOffset.getZ() * -1));
+
+        if (facing == Direction.NORTH)
+            return new BlockPos(pos.getX() + posOffset.getZ(), pos.getY() + posOffset.getY(), pos.getZ() + (posOffset.getX() * -1));
+
+        if (facing == Direction.EAST)
+            return new BlockPos(pos.getX() + posOffset.getX(), pos.getY() + posOffset.getY(), pos.getZ() + posOffset.getZ());
+
+        return new BlockPos(0, 0, 0);
     }
 
     public void setNextLinkedBlock(BlockPos blockPos)
     {
         setChanged();
-        BlockPos blockPosZero = new BlockPos(0, 0, 0);
-        if (Objects.equals(link0, blockPosZero))
+        for (int i = 0; i < 10; i++)
         {
-            link0 = blockPos;
-            return;
+            if (Objects.equals(links[i], zero))
+            {
+                links[i] = blockPos;
+                break;
+            }
         }
-        if (Objects.equals(link1, blockPosZero))
-        {
-            link1 = blockPos;
-            return;
-        }
-        if (Objects.equals(link2, blockPosZero))
-        {
-            link2 = blockPos;
-            return;
-        }
-        if (Objects.equals(link3, blockPosZero))
-        {
-            link3 = blockPos;
-            return;
-        }
-        if (Objects.equals(link4, blockPosZero))
-        {
-            link4 = blockPos;
-            return;
-        }
-        if (Objects.equals(link5, blockPosZero))
-        {
-            link5 = blockPos;
-            return;
-        }
-        if (Objects.equals(link6, blockPosZero))
-        {
-            link6 = blockPos;
-            return;
-        }
-        if (Objects.equals(link7, blockPosZero))
-        {
-            link7 = blockPos;
-            return;
-        }
-        if (Objects.equals(link8, blockPosZero))
-        {
-            link8 = blockPos;
-            return;
-        }
-        if (Objects.equals(link9, blockPosZero))
-        {
-            link9 = blockPos;
-            return;
-        }
-        if (Objects.equals(link10, blockPosZero))
-        {
-            link10 = blockPos;
-        }
+
     }
 
     public Boolean setTicking()
@@ -137,13 +78,162 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     @Override
     public void tick()
     {
-        setChanged();
-        if (this.level == null || this.level.isClientSide() || !ticking) return;
         counter++;
-        if (counter % 20 == 0)
+        if ((counterOffset + counter) % 20 != 0) return;
+        if (!ticking) return;
+
+        //setup of random symbols for blocks, only runs on load
+        if (state == 0)
         {
-            this.level.scheduleTick(this.getBlockPos(), ModBlocks.SYMBOL_CONTROLLER_BLOCK.get(), 1);
+            state = 1;
+            for (int i = 0; i < 10; i++)
+            {
+                //get blockPos and blockState of linked block
+                BlockPos linkedBP = DecodeBlockPosWithOffset(getBlockState().getValue(SymbolControllerBlock.FACING), getBlockPos(), links[i]);
+                BlockState linkedBS = level.getBlockState(linkedBP);
+
+                if (level.getBlockEntity(linkedBP) instanceof SymbolPuzzleBlockEntity spbe)
+                {
+                    String symbols = spbe.getSymbols();
+
+                    //randomize SymbolPuzzleBlock.SYMBOLS based on symbols allowed
+                    if (linkedBS.getValue(SymbolPuzzleBlock.SYMBOLS) == SymbolsEnum.RANDOM)
+                    {
+                        if (symbols.equals("all"))
+                        {
+                            level.setBlockAndUpdate(linkedBP, linkedBS.setValue(SymbolPuzzleBlock.SYMBOLS, SymbolsEnum.getRandom()));
+                        } else
+                        {
+                            for (int j = 0; j < 100; j++)
+                            {
+                                SymbolsEnum symbolRandom = SymbolsEnum.getRandom();
+                                if (symbols.contains(symbolRandom.getSerializedName()))
+                                {
+                                    level.setBlockAndUpdate(linkedBP, linkedBS.setValue(SymbolPuzzleBlock.SYMBOLS, symbolRandom));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    //get blockPos and blockState of block linked in SymbolPuzzleBlock
+                    BlockPos linkedInactiveBP = DecodeBlockPosWithOffset(linkedBS.getValue(SymbolPuzzleBlock.FACING), linkedBP, spbe.getLinkedBLock());
+                    BlockState linkedInactiveBS = level.getBlockState(linkedInactiveBP);
+
+                    //if block linked in SymbolPuzzleBlock is SYMBOL_PUZZLE_BLOCK_INACTIVE and its symbol is random, randomize
+                    if (linkedInactiveBS.is(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE) && linkedInactiveBS.getValue(SymbolPuzzleBlockInactive.SYMBOLS) == SymbolsEnum.RANDOM)
+                    {
+                        for (int j = 0; j < 100; j++)
+                        {
+                            SymbolsEnum symbolRandom = SymbolsEnum.getRandom();
+                            if ((symbols.equals("all") || (symbols.contains(symbolRandom.getSerializedName()))) && symbolRandom != level.getBlockState(linkedBP).getValue(SymbolPuzzleBlock.SYMBOLS))
+                            {
+                                level.setBlockAndUpdate(linkedInactiveBP, linkedInactiveBS.setValue(SymbolPuzzleBlockInactive.SYMBOLS, symbolRandom));
+                                break;
+                            }
+                        }
+                    }
+
+
+                }
+
+
+            }
         }
+
+        if(state == 1)
+        {
+            boolean flag = true;
+
+            for (int i = 0; i < 10; i++)
+            {
+                if(links[i].equals(zero))
+                {
+                    flag = false;
+                    break;
+                }
+
+                //get blockPos and blockState of linked block
+                BlockPos linkedBP = DecodeBlockPosWithOffset(getBlockState().getValue(SymbolControllerBlock.FACING), getBlockPos(), links[i]);
+                BlockState linkedBS = level.getBlockState(linkedBP);
+
+                if(level.getBlockEntity(links[i]) instanceof SymbolPuzzleBlockEntity spbe)
+                {
+                    BlockPos linkedInactiveBP = DecodeBlockPosWithOffset(linkedBS.getValue(SymbolPuzzleBlock.FACING), linkedBP, spbe.getLinkedBLock());
+                    BlockState linkedInactiveBS = level.getBlockState(linkedInactiveBP);
+
+                    if(linkedInactiveBS.getValue(SymbolPuzzleBlockInactive.SYMBOLS) != linkedBS.getValue(SymbolPuzzleBlock.SYMBOLS))
+                    {
+                        flag = false;
+                    }
+                }
+            }
+
+
+            if(flag != getBlockState().getValue(SymbolControllerBlock.ACTIVE))
+            {
+                level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(SymbolControllerBlock.ACTIVE, flag));
+            }
+
+
+
+
+        }
+
+
+        //drop items
+        if (state == 5)
+        {
+            if (counter % 4 == 0)
+            {
+                ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(), getBlockPos().getX() + 0.5f, getBlockPos().getY() + 1.2f, getBlockPos().getZ() + 0.5f, 1, 0, 0, 0, 0);
+
+                //runs if array has something
+                if (arrayOfItemStacks != null)
+                {
+                    if (arrayOfItemStacks.isEmpty())
+                    {
+                        state = 5;
+                        return;
+                    }
+
+                    Random r = new Random();
+
+                    BlockPos pos = this.getBlockPos();
+                    int randomInt = r.nextInt(arrayOfItemStacks.size());
+                    ItemStack randomItemStack = arrayOfItemStacks.get(randomInt);
+
+                    if (randomItemStack.getCount() == 1)
+                    {
+                        arrayOfItemStacks.remove(randomInt);
+                        Item randomItem = randomItemStack.getItem();
+                        this.level.addFreshEntity(new ItemEntity(this.level, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, new ItemStack(randomItem)));
+                    }
+
+                    if (randomItemStack.getCount() > 1)
+                    {
+                        randomItemStack.shrink(1);
+
+                        arrayOfItemStacks.set(randomInt, randomItemStack);
+
+                        Item randomItem = randomItemStack.getItem();
+                        this.level.addFreshEntity(new ItemEntity(this.level, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, new ItemStack(randomItem)));
+                    }
+
+                    ((ServerLevel) level).sendParticles(
+                            ParticleTypes.HAPPY_VILLAGER,
+                            pos.getX() - 0.5f + r.nextFloat(2f),
+                            pos.getY() + r.nextFloat(1.2f),
+                            pos.getZ() - 0.5f + r.nextFloat(2f),
+                            1,
+                            0f, 0f, 0f, 0f
+                    );
+                    level.playSound(null, pos, SoundEvents.CRAFTER_CRAFT, SoundSource.BLOCKS, 1f, r.nextFloat(0.1f) + 0.95f);
+                }
+            }
+        }
+
+
     }
 
     public SymbolControllerBlockEntity(BlockPos pPos, BlockState pBlockState)
@@ -152,37 +242,48 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     }
 
     @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
-        super.loadAdditional(pTag, pRegistries);
-        link0 = new BlockPos(pTag.getIntArray("link0")[0] , pTag.getIntArray("link0")[1], pTag.getIntArray("link0")[2]);
-        link1 = new BlockPos(pTag.getIntArray("link1")[0] , pTag.getIntArray("link1")[1], pTag.getIntArray("link1")[2]);
-        link2 = new BlockPos(pTag.getIntArray("link2")[0] , pTag.getIntArray("link2")[1], pTag.getIntArray("link2")[2]);
-        link3 = new BlockPos(pTag.getIntArray("link3")[0] , pTag.getIntArray("link3")[1], pTag.getIntArray("link3")[2]);
-        link4 = new BlockPos(pTag.getIntArray("link4")[0] , pTag.getIntArray("link4")[1], pTag.getIntArray("link4")[2]);
-        link5 = new BlockPos(pTag.getIntArray("link5")[0] , pTag.getIntArray("link5")[1], pTag.getIntArray("link5")[2]);
-        link6 = new BlockPos(pTag.getIntArray("link6")[0] , pTag.getIntArray("link6")[1], pTag.getIntArray("link6")[2]);
-        link7 = new BlockPos(pTag.getIntArray("link7")[0] , pTag.getIntArray("link7")[1], pTag.getIntArray("link7")[2]);
-        link8 = new BlockPos(pTag.getIntArray("link8")[0] , pTag.getIntArray("link8")[1], pTag.getIntArray("link8")[2]);
-        link9 = new BlockPos(pTag.getIntArray("link9")[0] , pTag.getIntArray("link9")[1], pTag.getIntArray("link9")[2]);
-        link10 = new BlockPos(pTag.getIntArray("link10")[0] , pTag.getIntArray("link10")[1], pTag.getIntArray("link10")[2]);
+        super.loadAdditional(tag, registries);
 
+        for (int i = 0; i < arrayuuid.length; i++)
+        {
+            if (tag.contains("user" + i))
+                this.arrayuuid[i] = tag.getUUID("user" + i);
+        }
+
+        for (int i = 0; i < 7; i++)
+        {
+            if (tag.contains("link" + i))
+            {
+                links[i] = new BlockPos(tag.getIntArray("link" + i)[0], tag.getIntArray("link" + i)[1], tag.getIntArray("link" + i)[2]);
+            } else
+            {
+                break;
+            }
+        }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries)
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
-        super.saveAdditional(pTag, pRegistries);
-        pTag.putIntArray("link0", new int[]{link0.getX(), link0.getY(), link0.getZ()});
-        pTag.putIntArray("link1", new int[]{link1.getX(), link1.getY(), link1.getZ()});
-        pTag.putIntArray("link2", new int[]{link2.getX(), link2.getY(), link2.getZ()});
-        pTag.putIntArray("link3", new int[]{link3.getX(), link3.getY(), link3.getZ()});
-        pTag.putIntArray("link4", new int[]{link4.getX(), link4.getY(), link4.getZ()});
-        pTag.putIntArray("link5", new int[]{link5.getX(), link5.getY(), link5.getZ()});
-        pTag.putIntArray("link6", new int[]{link6.getX(), link6.getY(), link6.getZ()});
-        pTag.putIntArray("link7", new int[]{link7.getX(), link7.getY(), link7.getZ()});
-        pTag.putIntArray("link8", new int[]{link8.getX(), link8.getY(), link8.getZ()});
-        pTag.putIntArray("link9", new int[]{link9.getX(), link9.getY(), link9.getZ()});
-        pTag.putIntArray("link10", new int[]{link10.getX(), link10.getY(), link10.getZ()});
+
+        super.saveAdditional(tag, registries);
+
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            if (this.arrayuuid[i] == null)
+                break;
+            tag.putUUID("user" + i, this.arrayuuid[i]);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (Objects.equals(links[i], zero))
+            {
+                break;
+            }
+            tag.putIntArray("link" + i, new int[]{links[i].getX(), links[i].getY(), links[i].getZ()});
+        }
     }
 }

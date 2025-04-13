@@ -10,10 +10,17 @@ import com.wdiscute.laicaps.sound.ModSounds;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ISystemReportExtender;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
@@ -22,9 +29,12 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.TranslatableEnum;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
+
+import java.util.List;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Laicaps.MOD_ID)
@@ -33,10 +43,31 @@ public class Laicaps
     public static final String MOD_ID = "laicaps";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static Boolean HasExtraInfoKeyDown()
+    public static void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents)
     {
-        return Screen.hasShiftDown();
+
+        if(I18n.exists("tooltip.laicaps." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + ".tooltip_0"))
+        {
+            if (Screen.hasShiftDown())
+            {
+                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
+                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
+
+                for (int i = 0; i < 100; i++)
+                {
+                    if(!I18n.exists("tooltip.laicaps." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + ".tooltip_" + i)) break;
+                    tooltipComponents.add(Component.translatable("tooltip.laicaps." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() +
+                            ".tooltip_" + i));
+                }
+
+            } else
+            {
+                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
+            }
+
+        }
     }
+
 
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
