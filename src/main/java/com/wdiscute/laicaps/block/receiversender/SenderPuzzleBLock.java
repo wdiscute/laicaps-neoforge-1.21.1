@@ -8,18 +8,27 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SenderPuzzleBLock extends HorizontalDirectionalBlock
 {
     public SenderPuzzleBLock(Properties properties)
     {
         super(properties);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    {
+        return super.getShape(state, level, pos, context);
     }
 
     @Override
@@ -34,7 +43,7 @@ public class SenderPuzzleBLock extends HorizontalDirectionalBlock
         float sy = 0;
         float sz = 0;
 
-                if (pState.getValue(FACING) == Direction.EAST)
+        if (pState.getValue(FACING) == Direction.EAST)
         {
             x = 1.2f;
             y = 0.5f;

@@ -51,9 +51,16 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     private final UUID[] arrayuuid = new UUID[15];
     private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
 
-    public boolean CanPlayerObtainDrops(Player player)
+    public void CanPlayerObtainDrops(Player player)
     {
-        if(this.level.isClientSide) return false;
+        if(this.level.isClientSide) return;
+        if (state == 6)
+        {
+            player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.treasure_chest_busy"), true);
+            return ;
+        }
+
+        if(state != 5) return;
 
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
@@ -61,7 +68,9 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
             if (Objects.equals(this.arrayuuid[i], uuid))
             {
                 level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 2f, 0.5f);
-                return false;
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.treasure_chest_looted"), true);
+                return;
             }
             if (Objects.equals(this.arrayuuid[i], null))
             {
@@ -72,13 +81,10 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
                 arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.ABANDONED_MINESHAFT).getRandomItems(params);
-                return true;
+                return;
             }
 
         }
-
-        return false;
-
     }
 
 
@@ -327,6 +333,14 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 //if its wave 4 sets state to complete since theres no more after
                 if (currentWave == 4)
                 {
+                    ((ServerLevel) level).sendParticles(
+                            ParticleTypes.HAPPY_VILLAGER,
+                            getBlockPos().getX() + 0.5f,
+                            getBlockPos().getY() + 0.5f,
+                            getBlockPos().getZ() + 0.5f,
+                            30,
+                            0.5f, 0.5f, 0.5f, 0f
+                    );
                     state = 5;
                     return;
                 }
@@ -339,13 +353,21 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                     counter = 0;
                 } else
                 {
+                    ((ServerLevel) level).sendParticles(
+                            ParticleTypes.HAPPY_VILLAGER,
+                            getBlockPos().getX() + 0.5f,
+                            getBlockPos().getY() + 0.5f,
+                            getBlockPos().getZ() + 0.5f,
+                            30,
+                            0.5f, 0.5f, 0.5f, 0f
+                    );
                     state = 5;
                 }
 
             }
         }
 
-        //wong requence
+        //wong sequence
         if (state == 4)
         {
             if (counter == 10)
@@ -366,6 +388,51 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
         //puzzle complete - waiting for a valid player to claim loot
         if (state == 5)
         {
+            //particles + sound 5 seconds before closing
+            if (counter == 1100)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1.2f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 4 seconds before closing
+            if (counter == 1120)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1.1f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 3 seconds before closing
+            if (counter == 1140)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 2 seconds before closing
+            if (counter == 1160)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
+            //particles + sound 1 second before closing
+            if (counter == 1180)
+            {
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
+                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            }
+
             //resets if 1 minute goes by without players claiming loot
             if (counter == 1200)
             {
@@ -375,6 +442,11 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 bs = bs.setValue(NotesControllerBlock.WAVES_COMPLETE, 0);
                 bs = bs.setValue(NotesControllerBlock.WAVE_IN_PROGRESS, false);
                 level.setBlockAndUpdate(getBlockPos(), bs);
+
+                //play closing sound
+                level.playSound(null, getBlockPos(), SoundEvents.TRIAL_SPAWNER_DETECT_PLAYER, SoundSource.BLOCKS);
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() - 0.5f, getBlockPos().getY(), getBlockPos().getZ() - 0.5f, 50, 1f, 1f, 1f, 0f);
+
             }
         }
 

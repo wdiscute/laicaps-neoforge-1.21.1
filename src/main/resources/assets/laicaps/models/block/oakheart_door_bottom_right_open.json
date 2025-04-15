@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:translucent",
   "parent": "minecraft:block/door_bottom_right_open",
   "textures": {
     "bottom": "laicaps:block/oakheart_door_bottom",

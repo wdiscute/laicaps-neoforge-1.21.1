@@ -47,7 +47,6 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
     public static final IntegerProperty WAVES = IntegerProperty.create("waves", 1, 5);
     public static final IntegerProperty WAVES_COMPLETE = IntegerProperty.create("waves_complete", 0, 5);
     public static final BooleanProperty WAVE_IN_PROGRESS = BooleanProperty.create("wave_in_progress");
-    private int statebe = 0;
 
     public NotesControllerBlock(Properties properties)
     {
@@ -62,6 +61,23 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
     }
 
     @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
+    {
+        if(state.getValue(WAVES_COMPLETE).equals(state.getValue(WAVES)))
+        {
+            Random r = new Random();
+            
+            level.addParticle(ParticleTypes.HAPPY_VILLAGER,
+                    pos.getX() - 0.5 + r.nextFloat(2f),
+                    pos.getY() + 0 + r.nextFloat(1.5f),
+                    pos.getZ() - 0.5 + r.nextFloat(2f),
+                    0,
+                    0,
+                    0);
+        }
+    }
+
+    @Override
     protected MapCodec<? extends HorizontalDirectionalBlock> codec()
     {
         return null;
@@ -70,7 +86,9 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult HitResult)
     {
-        if (hand == InteractionHand.MAIN_HAND)
+        if (hand == InteractionHand.OFF_HAND) return ItemInteractionResult.FAIL;
+
+        if (hand == InteractionHand.MAIN_HAND && !level.isClientSide)
         {
             //add blockpos stored in chisel to linked
             if (stack.is(ModItems.CHISEL))
@@ -139,46 +157,16 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
                 }
             }
 
-            //if item is not chisel sends start command and be will check if puzzle can start
+            //if item is not chisel sends start command
             if (level.getBlockEntity(pos) instanceof NotesControllerBlockEntity ncbe)
             {
-                //store statebe in a local variable so client side can access too i think
-                statebe = ncbe.getState();
-
-                //sends signal to start
-                if (statebe == 0)
-                {
-                    ncbe.start();
-                    return ItemInteractionResult.SUCCESS;
-                }
-
-                if (statebe == 5)
-                {
-                    if (ncbe.CanPlayerObtainDrops(player))
-                    {
-                        return ItemInteractionResult.SUCCESS;
-                    } else
-                    {
-                        if(!level.isClientSide)
-                        {
-                            Random r = new Random();
-                            ((ServerLevel) level).sendParticles(ParticleTypes.ASH, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 50, 1f, 1f, 1f, 0f);
-
-                            player.displayClientMessage(Component.literal("§cYou have already claimed loot."), true);
-                            level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 12f, r.nextFloat(0.1f) + 0.95f);
-                            level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 12f, r.nextFloat(0.1f) + 0.95f);
-                            level.playSound(null, pos, SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 12f, r.nextFloat(0.1f) + 0.95f);
-                        }
-
-
-                        return ItemInteractionResult.FAIL;
-                    }
-                }
+                ncbe.start();
+                ncbe.CanPlayerObtainDrops(player);
             }
         }
 
-        // returns fail for offhands
-        return ItemInteractionResult.FAIL;
+
+        return ItemInteractionResult.SUCCESS;
     }
 
     @Override

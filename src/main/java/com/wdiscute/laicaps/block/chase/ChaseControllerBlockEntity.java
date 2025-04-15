@@ -59,7 +59,7 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
             if (Objects.equals(this.arrayuuid[i], uuid))
             {
                 level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.5f);
-                player.displayClientMessage(Component.literal("§cYou have already claimed loot."), true);
+                player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.treasure_chest_looted"), true);
 
                 ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
 

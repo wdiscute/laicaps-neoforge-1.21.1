@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps.block.symbol;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
@@ -88,63 +89,73 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult)
+    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level level, BlockPos pPos, Player player, InteractionHand pHand, BlockHitResult pHitResult)
     {
-        if (!pLevel.isClientSide)
+        if (!level.isClientSide)
         {
             //disable ticking when anvil is on main hand
-            if (pPlayer.getMainHandItem().getItem() == Items.ANVIL && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity)
+            if (pStack.is(Items.ANVIL) && level.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity)
             {
-                pPlayer.sendSystemMessage(Component.literal("Set Ticking to " + blockEntity.setTicking()));
-                pLevel.playSound(null, pPos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1, 0.5f);
+                player.sendSystemMessage(Component.literal("Set Ticking to " + blockEntity.setTicking()));
+                level.playSound(null, pPos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1, 0.5f);
                 return ItemInteractionResult.SUCCESS;
             }
 
             //add blockpos stored in chisel to linked
-            if (pState.getValue(FACING) == Direction.EAST && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity be)
+            if(pStack.is(ModItems.CHISEL) && level.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity be)
             {
-                int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                if (pState.getValue(FACING) == Direction.EAST)
+                {
+                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
 
-                int newx = x;
-                int newz = z;
+                    int newx = x;
+                    int newz = z;
 
-                be.setNextLinkedBlock(new BlockPos(newx, y, newz));
+                    be.setNextLinkedBlock(new BlockPos(newx, y, newz));
+                }
+                if (pState.getValue(FACING) == Direction.SOUTH)
+                {
+                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+
+                    int newx = z;
+                    int newz = x * -1;
+
+                    be.setNextLinkedBlock(new BlockPos(newx, y, newz));
+                }
+                if (pState.getValue(FACING) == Direction.WEST)
+                {
+                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+
+                    int newx = x * -1;
+                    int newz = z * -1;
+
+                    be.setNextLinkedBlock(new BlockPos(newx, y, newz));
+                }
+                if (pState.getValue(FACING) == Direction.NORTH)
+                {
+                    int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
+                    int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+
+                    int newx = z * -1;
+                    int newz = x;
+
+                    be.setNextLinkedBlock(new BlockPos(newx, y, newz));
+                }
+                return ItemInteractionResult.SUCCESS;
             }
-            if (pState.getValue(FACING) == Direction.SOUTH && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity be)
+
+            if(pState.getValue(ACTIVE) && level.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity be)
             {
-                int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
-
-                int newx = z;
-                int newz = x * -1;
-
-                be.setNextLinkedBlock(new BlockPos(newx, y, newz));
+                be.CanPlayerObtainDrops(player);
             }
-            if (pState.getValue(FACING) == Direction.WEST && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity be)
-            {
-                int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
 
-                int newx = x * -1;
-                int newz = z * -1;
-
-                be.setNextLinkedBlock(new BlockPos(newx, y, newz));
-            }
-            if (pState.getValue(FACING) == Direction.NORTH && pLevel.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity be)
-            {
-                int x = pStack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                int z = pStack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                int y = pStack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
-
-                int newx = z * -1;
-                int newz = x;
-
-                be.setNextLinkedBlock(new BlockPos(newx, y, newz));
-            }
 
         }
         return ItemInteractionResult.SUCCESS;

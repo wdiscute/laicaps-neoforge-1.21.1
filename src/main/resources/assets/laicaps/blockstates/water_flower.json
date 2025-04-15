@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "laicaps:block/water_flower"
+    },
+    "open=true": {
+      "model": "laicaps:block/water_flower_open"
+    }
+  }
+}

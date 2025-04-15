@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.block.symbol;
 
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import com.wdiscute.laicaps.particle.ModParticles;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -10,14 +11,20 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 import java.util.Random;
@@ -28,10 +35,10 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     private int counter = 0;
     private boolean ticking = true;
     private int counterOffset = new Random().nextInt(20);
+    private int state = 0;
 
     private BlockPos zero = new BlockPos(0, 0, 0);
     private BlockPos[] links = {zero, zero, zero, zero, zero, zero, zero, zero, zero, zero};
-    private int state = 0;
 
     private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
     private final UUID[] arrayuuid = new UUID[15];
@@ -75,12 +82,45 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
         return this.ticking;
     }
 
+    public void CanPlayerObtainDrops(Player player)
+    {
+        setChanged();
+        if (this.level.isClientSide) return;
+        if (state == 6)
+        {
+            player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.treasure_chest_busy"), true);
+            return;
+        }
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            UUID uuid = player.getUUID();
+            if (Objects.equals(this.arrayuuid[i], uuid))
+            {
+                level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.5f);
+                player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.treasure_chest_looted"), true);
+
+                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+
+                return;
+            }
+            if (Objects.equals(this.arrayuuid[i], null))
+            {
+                this.arrayuuid[i] = uuid;
+                state = 6;
+
+                LootParams.Builder builder = new LootParams.Builder((ServerLevel) this.level);
+                LootParams params = builder.create(LootContextParamSets.EMPTY);
+
+                arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.ABANDONED_MINESHAFT).getRandomItems(params);
+                return;
+            }
+        }
+    }
+
     @Override
     public void tick()
     {
         counter++;
-        if ((counterOffset + counter) % 20 != 0) return;
-        if (!ticking) return;
 
         //setup of random symbols for blocks, only runs on load
         if (state == 0)
@@ -141,15 +181,16 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
             }
         }
 
-        if(state == 1)
+        if (state == 1)
         {
+            if (!ticking) return;
+            if ((counterOffset + counter) % 20 != 0) return;
             boolean flag = true;
 
             for (int i = 0; i < 10; i++)
             {
-                if(links[i].equals(zero))
+                if (links[i].equals(zero))
                 {
-                    flag = false;
                     break;
                 }
 
@@ -157,43 +198,51 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
                 BlockPos linkedBP = DecodeBlockPosWithOffset(getBlockState().getValue(SymbolControllerBlock.FACING), getBlockPos(), links[i]);
                 BlockState linkedBS = level.getBlockState(linkedBP);
 
-                if(level.getBlockEntity(links[i]) instanceof SymbolPuzzleBlockEntity spbe)
+                if (level.getBlockEntity(linkedBP) instanceof SymbolPuzzleBlockEntity spbe)
                 {
                     BlockPos linkedInactiveBP = DecodeBlockPosWithOffset(linkedBS.getValue(SymbolPuzzleBlock.FACING), linkedBP, spbe.getLinkedBLock());
                     BlockState linkedInactiveBS = level.getBlockState(linkedInactiveBP);
 
-                    if(linkedInactiveBS.getValue(SymbolPuzzleBlockInactive.SYMBOLS) != linkedBS.getValue(SymbolPuzzleBlock.SYMBOLS))
+                    if (linkedInactiveBS.is(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE))
                     {
-                        flag = false;
+                        if (linkedInactiveBS.getValue(SymbolPuzzleBlockInactive.SYMBOLS) != linkedBS.getValue(SymbolPuzzleBlock.SYMBOLS))
+                        {
+                            flag = false;
+                        }
                     }
                 }
             }
 
 
-            if(flag != getBlockState().getValue(SymbolControllerBlock.ACTIVE))
+            if (flag != getBlockState().getValue(SymbolControllerBlock.ACTIVE))
             {
+                if (flag)
+                {
+                    ((ServerLevel) level).sendParticles(
+                            ParticleTypes.HAPPY_VILLAGER,
+                            getBlockPos().getX() + 0.5f,
+                            getBlockPos().getY() + 0.5f,
+                            getBlockPos().getZ() + 0.5f,
+                            30,
+                            0.5f, 0.5f, 0.5f, 0f
+                    );
+                }
                 level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(SymbolControllerBlock.ACTIVE, flag));
             }
-
-
-
-
         }
 
-
         //drop items
-        if (state == 5)
+        if (state == 6)
         {
+            //grabs loot table and stores in arrayOfItemStacks
             if (counter % 4 == 0)
             {
-                ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(), getBlockPos().getX() + 0.5f, getBlockPos().getY() + 1.2f, getBlockPos().getZ() + 0.5f, 1, 0, 0, 0, 0);
-
                 //runs if array has something
                 if (arrayOfItemStacks != null)
                 {
                     if (arrayOfItemStacks.isEmpty())
                     {
-                        state = 5;
+                        state = 1;
                         return;
                     }
 

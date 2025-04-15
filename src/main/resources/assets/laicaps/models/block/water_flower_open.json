@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "laicaps:block/water_flower_open"
+  },
+  "render_type":"cutout"
+}

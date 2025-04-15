@@ -1,0 +1,250 @@
+{
+  "variants": {
+
+
+    "facing=east,marker=0": {
+      "model": "laicaps:block/treasure_chest",
+      "y": 90
+    },
+    "facing=east,marker=1,active=false": {
+      "model": "laicaps:block/treasure_chest_1_false",
+      "y": 90
+    },
+    "facing=east,marker=1,active=true": {
+      "model": "laicaps:block/treasure_chest_1_true",
+      "y": 90
+    },
+    "facing=east,marker=2,active=false": {
+      "model": "laicaps:block/treasure_chest_2_false",
+      "y": 90
+    },
+    "facing=east,marker=2,active=true": {
+      "model": "laicaps:block/treasure_chest_2_true",
+      "y": 90
+    },
+    "facing=east,marker=3,active=false": {
+      "model": "laicaps:block/treasure_chest_3_false",
+      "y": 90
+    },
+    "facing=east,marker=3,active=true": {
+      "model": "laicaps:block/treasure_chest_3_true",
+      "y": 90
+    },
+    "facing=east,marker=4,active=false": {
+      "model": "laicaps:block/treasure_chest_4_false",
+      "y": 90
+    },
+    "facing=east,marker=4,active=true": {
+      "model": "laicaps:block/treasure_chest_4_true",
+      "y": 90
+    },
+    "facing=east,marker=5,active=false": {
+      "model": "laicaps:block/treasure_chest_5_false",
+      "y": 90
+    },
+    "facing=east,marker=5,active=true": {
+      "model": "laicaps:block/treasure_chest_5_true",
+      "y": 90
+    },
+    "facing=east,marker=6,active=false": {
+      "model": "laicaps:block/treasure_chest_6_false",
+      "y": 90
+    },
+    "facing=east,marker=6,active=true": {
+      "model": "laicaps:block/treasure_chest_6_true",
+      "y": 90
+    },
+    "facing=east,marker=7,active=false": {
+      "model": "laicaps:block/treasure_chest_7_false",
+      "y": 90
+    },
+    "facing=east,marker=7,active=true": {
+      "model": "laicaps:block/treasure_chest_7_true",
+      "y": 90
+    },
+
+
+
+
+
+    "facing=north,marker=0": {
+      "model": "laicaps:block/treasure_chest"
+    },
+    "facing=north,marker=1,active=false": {
+      "model": "laicaps:block/treasure_chest_1_false"
+    },
+    "facing=north,marker=1,active=true": {
+      "model": "laicaps:block/treasure_chest_1_true"
+    },
+    "facing=north,marker=2,active=false": {
+      "model": "laicaps:block/treasure_chest_2_false"
+    },
+    "facing=north,marker=2,active=true": {
+      "model": "laicaps:block/treasure_chest_2_true"
+    },
+    "facing=north,marker=3,active=false": {
+      "model": "laicaps:block/treasure_chest_3_false"
+    },
+    "facing=north,marker=3,active=true": {
+      "model": "laicaps:block/treasure_chest_3_true"
+    },
+    "facing=north,marker=4,active=false": {
+      "model": "laicaps:block/treasure_chest_4_false"
+    },
+    "facing=north,marker=4,active=true": {
+      "model": "laicaps:block/treasure_chest_4_true"
+    },
+    "facing=north,marker=5,active=false": {
+      "model": "laicaps:block/treasure_chest_5_false"
+    },
+    "facing=north,marker=5,active=true,waterlogged=false": {
+      "model": "laicaps:block/treasure_chest_5_true"
+    },
+    "facing=north,marker=6,active=false": {
+      "model": "laicaps:block/treasure_chest_6_false"
+    },
+    "facing=north,marker=6,active=true": {
+      "model": "laicaps:block/treasure_chest_6_true"
+    },
+    "facing=north,marker=7,active=false": {
+      "model": "laicaps:block/treasure_chest_7_false"
+    },
+    "facing=north,marker=7,active=true": {
+      "model": "laicaps:block/treasure_chest_7_true"
+    },
+
+
+
+
+
+
+    "facing=south,marker=0": {
+      "model": "laicaps:block/treasure_chest",
+      "y": 180
+    },
+    "facing=south,marker=1,active=false": {
+      "model": "laicaps:block/treasure_chest_1_false",
+      "y": 180
+    },
+    "facing=south,marker=1,active=true": {
+      "model": "laicaps:block/treasure_chest_1_true",
+      "y": 180
+    },
+    "facing=south,marker=2,active=false": {
+      "model": "laicaps:block/treasure_chest_2_false",
+      "y": 180
+    },
+    "facing=south,marker=2,active=true": {
+      "model": "laicaps:block/treasure_chest_2_true",
+      "y": 180
+    },
+    "facing=south,marker=3,active=false": {
+      "model": "laicaps:block/treasure_chest_3_false",
+      "y": 180
+    },
+    "facing=south,marker=3,active=true": {
+      "model": "laicaps:block/treasure_chest_3_true",
+      "y": 180
+    },
+    "facing=south,marker=4,active=false": {
+      "model": "laicaps:block/treasure_chest_4_false",
+      "y": 180
+    },
+    "facing=south,marker=4,active=true": {
+      "model": "laicaps:block/treasure_chest_4_true",
+      "y": 180
+    },
+    "facing=south,marker=5,active=false": {
+      "model": "laicaps:block/treasure_chest_5_false",
+      "y": 180
+    },
+    "facing=south,marker=5,active=true": {
+      "model": "laicaps:block/treasure_chest_5_true",
+      "y": 180
+    },
+    "facing=south,marker=6,active=false": {
+      "model": "laicaps:block/treasure_chest_6_false",
+      "y": 180
+    },
+    "facing=south,marker=6,active=true": {
+      "model": "laicaps:block/treasure_chest_6_true",
+      "y": 180
+    },
+    "facing=south,marker=7,active=false": {
+      "model": "laicaps:block/treasure_chest_7_false",
+      "y": 180
+    },
+    "facing=south,marker=7,active=true": {
+      "model": "laicaps:block/treasure_chest_7_true",
+      "y": 180
+    },
+
+
+
+
+
+
+
+
+    "facing=west,marker=0": {
+      "model": "laicaps:block/treasure_chest",
+      "y": 270
+    },
+    "facing=west,marker=1,active=false": {
+      "model": "laicaps:block/treasure_chest_1_false",
+      "y": 270
+    },
+    "facing=west,marker=1,active=true": {
+      "model": "laicaps:block/treasure_chest_1_true",
+      "y": 270
+    },
+    "facing=west,marker=2,active=false": {
+      "model": "laicaps:block/treasure_chest_2_false",
+      "y": 270
+    },
+    "facing=west,marker=2,active=true": {
+      "model": "laicaps:block/treasure_chest_2_true",
+      "y": 270
+    },
+    "facing=west,marker=3,active=false": {
+      "model": "laicaps:block/treasure_chest_3_false",
+      "y": 270
+    },
+    "facing=west,marker=3,active=true": {
+      "model": "laicaps:block/treasure_chest_3_true",
+      "y": 270
+    },
+    "facing=west,marker=4,active=false": {
+      "model": "laicaps:block/treasure_chest_4_false",
+      "y": 270
+    },
+    "facing=west,marker=4,active=true": {
+      "model": "laicaps:block/treasure_chest_4_true",
+      "y": 270
+    },
+    "facing=west,marker=5,active=false": {
+      "model": "laicaps:block/treasure_chest_5_false",
+      "y": 270
+    },
+    "facing=west,marker=5,active=true": {
+      "model": "laicaps:block/treasure_chest_5_true",
+      "y": 270
+    },
+    "facing=west,marker=6,active=false": {
+      "model": "laicaps:block/treasure_chest_6_false",
+      "y": 270
+    },
+    "facing=west,marker=6,active=true": {
+      "model": "laicaps:block/treasure_chest_6_true",
+      "y": 270
+    },
+    "facing=west,marker=7,active=false": {
+      "model": "laicaps:block/treasure_chest_7_false",
+      "y": 270
+    },
+    "facing=west,marker=7,active=true": {
+      "model": "laicaps:block/treasure_chest_7_true",
+      "y": 270
+    }
+  }
+}

@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +50,7 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
     }
 
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
@@ -111,28 +113,30 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
             return ItemInteractionResult.SUCCESS;
         }
 
-        //if controller state is idle or listening then plays hand animation on client side
-        if (level.isClientSide && !state.getValue(ACTIVE) && level.getBlockEntity(pos) instanceof NotesPuzzleBlockEntity npbe)
+        if (state.getValue(ACTIVE) && !level.isClientSide && level.getBlockEntity(pos) instanceof HiddenControllerBlockEntity hcbe)
         {
-            return ItemInteractionResult.SUCCESS;
+            hcbe.CanPlayerObtainDrops(player);
         }
 
-        //skip hand animation if player couldn't play note
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
+        if(!state.getValue(ACTIVE))
+        {
+            return ItemInteractionResult.FAIL;
+        }
 
+        return ItemInteractionResult.SUCCESS;
+    }
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
-        if(Minecraft.getInstance().player.getMainHandItem().is(ModItems.CHISEL.get()) || Minecraft.getInstance().player.isCreative())
+        if (Minecraft.getInstance().player.getMainHandItem().is(ModItems.CHISEL.get()) || Minecraft.getInstance().player.isCreative())
         {
 
             level.addParticle(ParticleTypes.CLOUD,
                     pos.getX() + 0.5f,
                     pos.getY() + 0.5f,
                     pos.getZ() + 0.5f,
-                    0,0,0);
+                    0, 0, 0);
         }
     }
 
@@ -148,14 +152,22 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         boolean creative = false;
-        if(Minecraft.getInstance().player != null)
+        if (Minecraft.getInstance().player != null)
         {
             creative = Minecraft.getInstance().player.isCreative();
         }
 
-        if(state.getValue(ACTIVE) || creative)
+        if (state.getValue(ACTIVE) || creative)
         {
-            return Block.box(0.0F, 0.0F,  0.0F, 16.0F, 16.0F, 16.0F);
+            switch (state.getValue(FACING))
+            {
+                case EAST, WEST:
+                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                            Block.box(4, 13, 1, 12, 14, 15));
+                default:
+                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                            Block.box(1, 13, 4, 15, 14, 12));
+            }
         }
 
         return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
@@ -164,9 +176,9 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        if(state.getValue(ACTIVE))
+        if (state.getValue(ACTIVE))
         {
-            return Block.box(0.0F, 0.0F,  0.0F, 16.0F, 16.0F, 16.0F);
+            return Block.box(1.0F, 0.0F, 1.0F, 15.0F, 14.0F, 15.0F);
         }
 
         return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);

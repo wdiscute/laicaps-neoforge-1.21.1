@@ -39,8 +39,6 @@ public class ChiselItem extends Item
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> tooltipComponents, TooltipFlag pTooltipFlag)
     {
-        Laicaps.appendHoverText(pStack, pContext, tooltipComponents);
-
         if (pStack.get(ModDataComponentTypes.COORDINATES.get()) != null)
         {
             tooltipComponents.add(Component.literal("Last Block Clicked at " + pStack.get(ModDataComponentTypes.COORDINATES.get())));

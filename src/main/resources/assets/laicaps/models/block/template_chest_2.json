@@ -47,12 +47,12 @@
 			"to": [11.25, 15, 10],
 			"rotation": {"angle": -45, "axis": "y", "origin": [11.9, 14, 9]},
 			"faces": {
-				"north": {"uv": [6, 9, 8, 10], "texture": "#marker1"},
-				"east": {"uv": [4, 9, 6, 10], "texture": "#marker1"},
-				"south": {"uv": [10, 9, 12, 10], "texture": "#marker1"},
-				"west": {"uv": [8, 9, 10, 10], "texture": "#marker1"},
-				"up": {"uv": [7, 7, 9, 9], "texture": "#marker1"},
-				"down": {"uv": [10, 7, 8, 9], "texture": "#marker1"}
+				"north": {"uv": [6, 9, 8, 10], "texture": "#marker1", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"east": {"uv": [4, 9, 6, 10], "texture": "#marker1", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"south": {"uv": [10, 9, 12, 10], "texture": "#marker1", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"west": {"uv": [8, 9, 10, 10], "texture": "#marker1", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"up": {"uv": [7, 7, 9, 9], "texture": "#marker1", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"down": {"uv": [10, 7, 8, 9], "texture": "#marker1", "neoforge_data": {"block_light": 13, "sky_light": 13}}
 			}
 		},
 		{
@@ -61,12 +61,12 @@
 			"to": [5.75, 15, 10],
 			"rotation": {"angle": -45, "axis": "y", "origin": [6.4, 14, 9]},
 			"faces": {
-				"north": {"uv": [6, 9, 8, 10], "texture": "#marker2"},
-				"east": {"uv": [4, 9, 6, 10], "texture": "#marker2"},
-				"south": {"uv": [10, 9, 12, 10], "texture": "#marker2"},
-				"west": {"uv": [8, 9, 10, 10], "texture": "#marker2"},
-				"up": {"uv": [7, 7, 9, 9], "texture": "#marker2"},
-				"down": {"uv": [10, 7, 8, 9], "texture": "#marker2"}
+				"north": {"uv": [6, 9, 8, 10], "texture": "#marker2", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"east": {"uv": [4, 9, 6, 10], "texture": "#marker2", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"south": {"uv": [10, 9, 12, 10], "texture": "#marker2", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"west": {"uv": [8, 9, 10, 10], "texture": "#marker2", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"up": {"uv": [7, 7, 9, 9], "texture": "#marker2", "neoforge_data": {"block_light": 13, "sky_light": 13}},
+				"down": {"uv": [10, 7, 8, 9], "texture": "#marker2", "neoforge_data": {"block_light": 13, "sky_light": 13}}
 			}
 		},
 		{

@@ -23,7 +23,6 @@ public class ModCreativeModeTabs
             CREATIVE_MODE_TABS.register("laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.LUNARVEIL.get()))
                     .title(Component.translatable("creativetab.laicaps.laicaps"))
                     .displayItems( (itemDisplayParameters, output) -> {
-                        output.accept(ModItems.CHISEL.get());
 
                         //oakheart
                         output.accept(ModBlocks.OAKHEART_SAPLING.get());
@@ -47,7 +46,6 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.OAKHEART_BUTTON.get());
                         output.accept(ModItems.OAKHEART_BOAT.get());
                         output.accept(ModItems.OAKHEART_CHEST_BOAT.get());
-
 
 
                         //oakroot
@@ -77,8 +75,7 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.ASHA_SHORT_GRASS.get());
                         output.accept(ModBlocks.ASHA_GRASS_BLOCK.get());
                         output.accept(ModBlocks.ASHA_DIRT.get());
-                        output.accept(ModBlocks.WATER_CONTAINER.get());
-                        output.accept(ModBlocks.WATER_CONTAINER_HELPER.get());
+
                         //riverthorne
                         output.accept(ModBlocks.RIVERTHORNE_THISTLE.get());
                         output.accept(ModBlocks.RIVERTHORNE.get());
@@ -88,6 +85,13 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.NAVY_SWEETLILY.get());
                         output.accept(ModBlocks.MAGENTA_SWEETLILY.get());
                         output.accept(ModBlocks.CHERRY_SWEETLILY.get());
+
+
+
+
+
+                        //water flower
+                        output.accept(ModBlocks.WATER_FLOWER.get());
 
 
                     })
@@ -102,6 +106,9 @@ public class ModCreativeModeTabs
 
                         //Chisel
                         output.accept(ModItems.CHISEL.get());
+
+                        //treasure chest
+                        output.accept(ModBlocks.TREASURE_CHEST.get());
 
                         //sender receiver
                         output.accept(ModBlocks.SENDER_PUZZLE_BLOCK.get());
@@ -126,8 +133,9 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.NOTES_PUZZLE_BLOCK.get());
                         output.accept(ModBlocks.NOTES_CONTROLLER_BLOCK.get());
 
-
-
+                        //floating water structure
+                        output.accept(ModBlocks.WATER_CONTAINER.get());
+                        output.accept(ModBlocks.WATER_CONTAINER_HELPER.get());
 
 
 

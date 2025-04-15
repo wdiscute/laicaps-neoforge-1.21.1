@@ -3,5 +3,5 @@
   "textures": {
     "cross": "laicaps:block/lunarveil_open"
   },
-  "render_type":"cutout"
+  "render_type": "minecraft:translucent"
 }

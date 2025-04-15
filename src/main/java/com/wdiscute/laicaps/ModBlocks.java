@@ -16,7 +16,6 @@ import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockInactive;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -26,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -34,7 +32,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
@@ -44,9 +41,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.spongepowered.asm.mixin.Mixin;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlocks
@@ -60,6 +55,15 @@ public class ModBlocks
     //|  | --'  '  '-'  '  /   `--.  /   `--. |  '--. |  `---.
     //`--'       `-----'  `-------' `-------' `-----' `------'
     //
+
+    public static final DeferredBlock<Block> TREASURE_CHEST =
+            registerBlock("treasure_chest", () ->
+                    new TreasureChestBlock(BlockBehaviour.Properties.of()
+                            .strength(5)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()
+                    )
+            );
 
     public static final DeferredBlock<Block> SENDER_PUZZLE_BLOCK =
             registerBlock("sender_puzzle_block", () ->
@@ -75,14 +79,6 @@ public class ModBlocks
                             .strength(30)
                             .sound(SoundType.AMETHYST)
                     )
-                    {
-                        @Override
-                        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-                        {
-                            Laicaps.appendHoverText(stack, context, tooltipComponents);
-                            super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-                        }
-                    }
             );
 
     public static final DeferredBlock<Block> SYMBOL_PUZZLE_BLOCK =
@@ -97,10 +93,8 @@ public class ModBlocks
             registerBlock("symbol_controller_block", () ->
                     new SymbolControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(SoundType.STONE)
+                            .sound(SoundType.WOOD)
                             .noOcclusion()
-                            .lightLevel(state -> state.getValue(SymbolControllerBlock.ACTIVE) ? 11 : 0)
-
                     )
             );
 
@@ -124,7 +118,7 @@ public class ModBlocks
             registerBlock("notes_controller_block", () ->
                     new NotesControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(SoundType.STONE)
+                            .sound(SoundType.WOOD)
                             .noOcclusion()
                     )
             );
@@ -141,7 +135,7 @@ public class ModBlocks
             registerBlock("rotating_controller_block", () ->
                     new RotatingControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(SoundType.STONE)
+                            .sound(SoundType.WOOD)
                     )
             );
 
@@ -150,7 +144,7 @@ public class ModBlocks
             registerBlock("chase_controller_block", () ->
                     new ChaseControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(SoundType.STONE)
+                            .sound(SoundType.WOOD)
                     )
             );
 
@@ -158,10 +152,11 @@ public class ModBlocks
             registerBlock("hidden_controller_block", () ->
                     new HiddenControllerBlock(BlockBehaviour.Properties.of()
                             .strength(30)
-                            .sound(SoundType.STONE)
+                            .sound(SoundType.WOOD)
                             .noCollission()
                     )
             );
+
 
 
     //
@@ -210,13 +205,6 @@ public class ModBlocks
                                 return ItemInteractionResult.SUCCESS;
                             }
                             return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-                        }
-
-                        @Override
-                        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-                        {
-                            Laicaps.appendHoverText(stack, context, tooltipComponents);
-                            super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                         }
                     }
             );
@@ -758,10 +746,10 @@ public class ModBlocks
                         @Override
                         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                         {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
                                 return true;
 
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_DIRT.get()))
                                 return true;
 
                             return false;
@@ -798,10 +786,10 @@ public class ModBlocks
                         @Override
                         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                         {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
                                 return true;
 
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_DIRT.get()))
                                 return true;
 
                             return false;
@@ -824,7 +812,7 @@ public class ModBlocks
                         @Override
                         protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
                             Vec3 vec3 = state.getOffset(level, pos);
-                            VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)13.0F, (double)11.0F);
+                            VoxelShape shape = Block.box(5.0F, 0.0F, 5.0F, 11.0F, 13.0F, 11.0F);
                             return shape.move(vec3.x, vec3.y, vec3.z);
                         }
 
@@ -837,10 +825,10 @@ public class ModBlocks
                         @Override
                         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                         {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
                                 return true;
 
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_DIRT.get()))
                                 return true;
 
                             return false;
@@ -876,10 +864,10 @@ public class ModBlocks
                         @Override
                         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                         {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
                                 return true;
 
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_DIRT.get()))
                                 return true;
 
                             return false;
@@ -915,10 +903,10 @@ public class ModBlocks
                         @Override
                         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                         {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
                                 return true;
 
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_DIRT.get()))
                                 return true;
 
                             return false;
@@ -954,10 +942,10 @@ public class ModBlocks
                         @Override
                         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                         {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
                                 return true;
 
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_DIRT.get()))
                                 return true;
 
                             return false;
@@ -993,10 +981,10 @@ public class ModBlocks
                         @Override
                         protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                         {
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
                                 return true;
 
-                            if (state.getBlock().defaultBlockState() == ModBlocks.ASHA_DIRT.get().defaultBlockState())
+                            if (state.is(ModBlocks.ASHA_DIRT.get()))
                                 return true;
 
                             return false;
@@ -1041,6 +1029,38 @@ public class ModBlocks
                             .instabreak()
                     )
             );
+
+
+    public static final DeferredBlock<Block> WATER_FLOWER =
+            registerBlock("water_flower", () ->
+                    new WaterFlower(BlockBehaviour.Properties.of()
+                            .sound(SoundType.GRASS)
+                            .isValidSpawn(Blocks::never)
+                            .pushReaction(PushReaction.DESTROY)
+                            .randomTicks()
+                            .instabreak()
+                            .noOcclusion()
+                            .noCollission()
+                            .offsetType(BlockBehaviour.OffsetType.XZ)
+                    )
+            );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //

@@ -12,29 +12,39 @@
   "tooltip.laicaps.generic.shift_down": "⏫ §l§6[Shift]§r ⏫",
   "tooltip.laicaps.generic.empty" : "",
 
+  "tooltip.laicaps.generic.treasure_chest_looted" : "§cYou have already claimed loot.",
+  "tooltip.laicaps.generic.treasure_chest_busy" : "§cA player is already obtaining loot.",
+
 
 
 
   "item.laicaps.chisel": "Chisel",
-  "tooltip.laicaps.chisel.tooltip_0": "Doesn't actually chisel anything",
+  "tooltip.laicaps.chisel.0": "Doesn't actually chisel anything",
 
-  "block.laicaps.sender_puzzle_block": "block that sends",
-  "block.laicaps.receiver_block": "block that receives",
-  "block.laicaps.receiver_block.tooltip_0": "this block receives!",
 
-  "block.laicaps.symbol_puzzle_block": "block that has a symbol",
-  "block.laicaps.symbol_puzzle_block_inactive": "block that has a symbol but that symbol is inactive so it cant be changed",
-  "block.laicaps.symbol_controller_block": "block that controls the symbols",
+  "block.laicaps.treasure_chest": "Treasure Chest",
+  "tooltip.laicaps.treasure_chest.0": "This treasure chest seems to",
+  "tooltip.laicaps.treasure_chest.1": "have been displaced from it's origin.",
+  "tooltip.laicaps.treasure_chest.2": "It serves as nothing but decoration now.",
 
-  "block.laicaps.notes_puzzle_block": "block that has a symbol",
-  "block.laicaps.notes_controller_block": "block that has a symbol",
 
-  "block.laicaps.chase_controller_block": "block that has a symbol",
+  "block.laicaps.sender_puzzle_block": "Sender Puzzle Block",
+  "block.laicaps.receiver_block": "Receiver Puzzle Block",
+  "tooltip.laicaps.receiver_block.0": "this block receives!",
 
-  "block.laicaps.hidden_controller_block": "block that has a symbol",
+  "block.laicaps.symbol_puzzle_block": "Symbols Puzzle Block",
+  "block.laicaps.symbol_puzzle_block_inactive": "Inactive Symbols Puzzle Block",
+  "block.laicaps.symbol_controller_block": "Symbols Puzzle Controller",
 
-  "block.laicaps.rotating_controller_block": "block that has a symbol",
-  "block.laicaps.rotating_puzzle_block": "block that has a symbol",
+  "block.laicaps.notes_puzzle_block": "Notes Puzzle Block",
+  "block.laicaps.notes_controller_block": "Notes Puzzle Controller",
+
+  "block.laicaps.chase_controller_block": "Chase Puzzle Controller",
+
+  "block.laicaps.hidden_controller_block": "Hidden Puzzle Controller",
+
+  "block.laicaps.rotating_controller_block": "Rotating Puzzle Controller",
+  "block.laicaps.rotating_puzzle_block": "Rotating Puzzle Block",
 
 
 
@@ -42,18 +52,18 @@
   "block.laicaps.water_container": "Water Container",
   "block.laicaps.water_container_helper": "Water Container Helper",
 
-
+  "tooltip.minecraft.oak_log.0" : "not as cool as oakheart log tho",
 
   "block.laicaps.oakheart_sapling": "Oakheart Sapling",
   "block.laicaps.stripped_oakheart_log": "Stripped Oakheart Log",
   "block.laicaps.oakheart_log": "Oakheart Log",
-  "tooltip.laicaps.oakheart_log.tooltip_0" : "this oakheart log is very tasty!",
-  "tooltip.laicaps.oakheart_log.tooltip_1" : "But ",
-  "tooltip.laicaps.oakheart_log.tooltip_2" : "you",
-  "tooltip.laicaps.oakheart_log.tooltip_3" : "should",
-  "tooltip.laicaps.oakheart_log.tooltip_4" : "§cNOT",
-  "tooltip.laicaps.oakheart_log.tooltip_5" : "eat",
-  "tooltip.laicaps.oakheart_log.tooltip_6" : "it",
+  "tooltip.laicaps.oakheart_log.0" : "this oakheart log is very tasty!",
+  "tooltip.laicaps.oakheart_log.1" : "But",
+  "tooltip.laicaps.oakheart_log.2" : "you",
+  "tooltip.laicaps.oakheart_log.3" : "should",
+  "tooltip.laicaps.oakheart_log.4" : "§cNOT",
+  "tooltip.laicaps.oakheart_log.5" : "eat",
+  "tooltip.laicaps.oakheart_log.6" : "it",
   "block.laicaps.stripped_oakheart_wood": "Stripped Oakheart Wood",
   "block.laicaps.oakheart_wood": "Oakheart Wood",
   "block.laicaps.oakheart_leaves": "Oakheart Leaves",
@@ -72,7 +82,7 @@
   "item.laicaps.oakheart_boat" : "Oakheart Boat",
   "item.laicaps.oakheart_chest_boat" : "Oakheart Boat with Chest",
   "item.laicaps.oakheart_berries" : "Oakheart Berries",
-  "tooltip.laicaps.oakheart_berries.tooltip_0" : "Sweet and refreshing!",
+  "tooltip.laicaps.oakheart_berries.0" : "Sweet and refreshing!",
 
 
   "block.laicaps.oakroot_sapling": "Oakroot Sapling",

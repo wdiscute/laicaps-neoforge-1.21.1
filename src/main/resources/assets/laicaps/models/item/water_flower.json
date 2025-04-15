@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "laicaps:block/water_flower_open"
+  },
+  "render_type": "minecraft:cutout"
+}

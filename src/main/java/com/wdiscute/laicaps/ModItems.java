@@ -44,7 +44,7 @@ public class ModItems
                 @Override
                 public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
                 {
-                    Laicaps.appendHoverText(stack, context, tooltipComponents);
+                    Laicaps.appendHoverText(stack, tooltipComponents);
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             }
