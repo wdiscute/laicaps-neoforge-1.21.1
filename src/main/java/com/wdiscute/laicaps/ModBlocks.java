@@ -18,6 +18,9 @@ import com.wdiscute.laicaps.block.watercontainer.WaterContainerBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -49,6 +52,68 @@ import java.util.function.Supplier;
 public class ModBlocks
 {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Laicaps.MOD_ID);
+
+
+    //
+    //,--.   ,--. ,--.  ,---.    ,-----.
+    //|   `.'   | |  | '   .-'  '  .--./
+    //|  |'.'|  | |  | `.  `-.  |  |
+    //|  |   |  | |  | .-'    | '  '--'\
+    //`--'   `--' `--' `-----'   `-----'
+    //
+
+
+    public static final DeferredBlock<Block> ASHA_TELEPORTER =
+            registerBlock("asha_teleporter", () ->
+                    new SimpleTeleporterBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.SCULK)
+                    )
+                    {
+                        @Override
+                        public ResourceKey<Level> getDimensionKey()
+                        {
+                            return ResourceKey.create(Registries.DIMENSION,
+                                    ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha"));
+                        }
+                    }
+            );
+
+
+    public static final DeferredBlock<Block> LUNAMAR_TELEPORTER =
+            registerBlock("lunamar_teleporter", () ->
+                    new SimpleTeleporterBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.SCULK)
+                    )
+                    {
+                        @Override
+                        public ResourceKey<Level> getDimensionKey()
+                        {
+                            return ResourceKey.create(Registries.DIMENSION,
+                                    ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "lunamar"));
+                        }
+                    }
+            );
+
+    public static final DeferredBlock<Block> EMBER_TELEPORTER =
+            registerBlock("ember_teleporter", () ->
+                    new SimpleTeleporterBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.SCULK)
+                    )
+                    {
+                        @Override
+                        public ResourceKey<Level> getDimensionKey()
+                        {
+                            return ResourceKey.create(Registries.DIMENSION,
+                                    ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "ember"));
+                        }
+                    }
+            );
+
+
+
 
     //
     //,------.  ,--. ,--. ,-------. ,-------. ,--.    ,------.
@@ -414,6 +479,7 @@ public class ModBlocks
                             .pushReaction(PushReaction.DESTROY)
                             .isRedstoneConductor(ModBlocks::never)
                     ));
+
 
 
     //
