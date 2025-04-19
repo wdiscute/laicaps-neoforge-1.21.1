@@ -24,6 +24,12 @@ public class ModCreativeModeTabs
                     .title(Component.translatable("creativetab.laicaps.laicaps"))
                     .displayItems( (itemDisplayParameters, output) -> {
 
+                        //teleporters
+                        output.accept(ModBlocks.ASHA_TELEPORTER.get());
+                        output.accept(ModBlocks.LUNAMAR_TELEPORTER.get());
+                        output.accept(ModBlocks.EMBER_TELEPORTER.get());
+
+
                         //oakheart
                         output.accept(ModBlocks.OAKHEART_SAPLING.get());
                         output.accept(ModBlocks.OAKHEART_LEAVES.get());
