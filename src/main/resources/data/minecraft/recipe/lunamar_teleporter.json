@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "teleporters",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    }
+  },
+  "pattern": [
+    "IDI",
+    "DND",
+    "IDI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "laicaps:lunamar_teleporter"
+  }
+}

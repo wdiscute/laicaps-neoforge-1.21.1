@@ -27,7 +27,7 @@ public class SimpleTeleporterBlock extends Block
     {
         if(level.isClientSide) return ItemInteractionResult.SUCCESS;
 
-        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 60, 7, true, false));
+        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 600, 0, true, false));
 
         ServerLevel dimensionLevel = ((ServerLevel) level).getServer().getLevel(getDimensionKey());
         player.teleportTo(dimensionLevel, 0, 150, 0, null, 0,0 );
