@@ -1,6 +1,12 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "block/cube",
   "textures": {
-    "all": "laicaps:block/lunamar_teleporter"
+    "particle": "laicaps:block/lunamar_teleporter",
+    "down": "minecraft:block/bedrock",
+    "up": "minecraft:block/bedrock",
+    "north": "laicaps:block/lunamar_teleporter",
+    "east": "laicaps:block/lunamar_teleporter",
+    "south": "laicaps:block/lunamar_teleporter",
+    "west": "laicaps:block/lunamar_teleporter"
   }
 }

@@ -1,6 +1,12 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "block/cube",
   "textures": {
-    "all": "laicaps:block/asha_teleporter"
+    "particle": "laicaps:block/asha_teleporter",
+    "down": "minecraft:block/bedrock",
+    "up": "minecraft:block/bedrock",
+    "north": "laicaps:block/asha_teleporter",
+    "east": "laicaps:block/asha_teleporter",
+    "south": "laicaps:block/asha_teleporter",
+    "west": "laicaps:block/asha_teleporter"
   }
 }
