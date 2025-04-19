@@ -1,6 +1,9 @@
 {
-  "biomes": "laicaps:asha_forest",
-  "adapt_noise": false,
+  "biomes": [
+    "laicaps:lunamar_mar",
+    "laicaps:lunamar_deep",
+    "laicaps:lunamar_subtidal"
+  ],
   "liquid_settings": "apply_waterlogging",
   "spawn_overrides": {},
   "type": "minecraft:jigsaw",

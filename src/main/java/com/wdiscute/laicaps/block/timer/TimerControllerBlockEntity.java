@@ -1,13 +1,14 @@
 package com.wdiscute.laicaps.block.timer;
 
 import com.wdiscute.laicaps.ModBlockEntity;
+import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class TimerControllerBlockEntity extends BlockEntity
+public class TimerControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private BlockPos blockLinkedOffset = new BlockPos(0, 0, 0);
     private String symbols = "all";
@@ -85,5 +86,11 @@ public class TimerControllerBlockEntity extends BlockEntity
     public TimerControllerBlockEntity(BlockPos pPos, BlockState pBlockState)
     {
         super(ModBlockEntity.SYMBOL_PUZZLE_BLOCK.get(), pPos, pBlockState);
+    }
+
+    @Override
+    public void tick()
+    {
+
     }
 }

@@ -2,12 +2,14 @@
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 234,
-    "separation": 27,
-    "spacing": 50,
+    "separation": 15,
+    "spacing": 36,
     "spread_type": "triangular"
   },
-  "structures": [{
-    "structure": "laicaps:floating_water_cubes_structure",
-    "weight": 1
-  }]
+  "structures": [
+    {
+      "structure": "laicaps:floating_water_cubes_structure",
+      "weight": 1
+    }
+  ]
 }

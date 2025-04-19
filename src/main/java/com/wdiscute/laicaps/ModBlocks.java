@@ -14,6 +14,8 @@ import com.wdiscute.laicaps.block.notes.NotesPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockInactive;
+import com.wdiscute.laicaps.block.watercontainer.WaterContainerBlock;
+import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

@@ -14,8 +14,25 @@ public class ModParticles
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
             DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, Laicaps.MOD_ID);
 
+
+
+
+
+
     public static final Supplier<SimpleParticleType> CHASE_PUZZLE_PARTICLES =
             PARTICLE_TYPES.register("chase_puzzle_particles", () -> new SimpleParticleType(true));
+
+    public static final Supplier<SimpleParticleType> WATER_FLOWER_PARTICLES =
+            PARTICLE_TYPES.register("water_flower_particles", () -> new SimpleParticleType(true));
+
+
+
+
+
+
+
+
+
 
 
 

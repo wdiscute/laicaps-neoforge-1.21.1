@@ -1,0 +1,97 @@
+{
+  "type": "laicaps:lunamar_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "laicaps:lunamar_noise",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "laicaps:lunamar_shallow",
+          "parameters": {
+            "continentalness": 0.6,
+            "depth": 0,
+            "erosion": 0.0,
+            "humidity": 0,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 0
+          }
+        },
+        {
+          "biome": "laicaps:lunamar_subtidal",
+          "parameters": {
+            "continentalness": 0.1,
+            "depth": 0,
+            "erosion": 0.0,
+            "humidity": 0,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 0
+          }
+        },
+        {
+          "biome": "laicaps:lunamar_mar",
+          "parameters": {
+            "continentalness": -0.3,
+            "depth": 0,
+            "erosion": 0.0,
+            "humidity": 0,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 0
+          }
+        },
+        {
+          "biome": "laicaps:lunamar_verdure",
+          "parameters": {
+            "continentalness": 0.7,
+            "depth": 0,
+            "erosion": 0.0,
+            "humidity": 0.8,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 0
+          }
+        },
+        {
+          "biome": "laicaps:lunamar_ashen_shores",
+          "parameters": {
+            "continentalness": 0.7,
+            "depth": 0,
+            "erosion": 0.0,
+            "humidity": -0.3,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 1
+          }
+        },
+        {
+          "biome": "laicaps:lunamar_subtidal",
+          "parameters": {
+            "continentalness": 0,
+            "depth": 0,
+            "erosion": 0.0,
+            "humidity": -0.3,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 1
+          }
+        },
+        {
+          "biome": "laicaps:lunamar_deep",
+          "parameters": {
+            "continentalness": -0.7,
+            "depth": 0,
+            "erosion": 0.0,
+            "humidity": 0,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 0
+          }
+        }
+      ]
+    }
+
+  }
+}

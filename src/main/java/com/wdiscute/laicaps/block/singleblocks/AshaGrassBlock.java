@@ -4,6 +4,7 @@ import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.worldgen.ModConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.NetherFeatures;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Random;
 
@@ -37,7 +39,6 @@ public class AshaGrassBlock extends RotatedPillarBlock
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
-
         if (level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()))
         {
             level.setBlockAndUpdate(pos, ModBlocks.ASHA_DIRT.get().defaultBlockState());

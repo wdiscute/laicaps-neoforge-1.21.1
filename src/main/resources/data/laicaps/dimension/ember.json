@@ -1,0 +1,24 @@
+{
+  "type": "laicaps:asha_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "laicaps:asha_noise",
+    "biome_source": {
+      "type": "multi_noise",
+      "biomes": [
+        {
+          "biome": "laicaps:asha_forest",
+          "parameters": {
+            "continentalness": -0.19,
+            "depth": 0.0,
+            "erosion": 0.0,
+            "humidity": 0.0,
+            "offset": 0.0,
+            "temperature": 0.0,
+            "weirdness": 0.0
+          }
+        }
+      ]
+    }
+  }
+}

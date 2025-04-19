@@ -9,6 +9,7 @@ import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockEntity;
+import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -50,6 +51,9 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(HiddenControllerBlockEntity::new, ModBlocks.HIDDEN_CONTROLLER_BLOCK.get())
                     .build(null));
 
+    public static final Supplier<BlockEntityType<WaterContainerHelperBlockEntity>> WATER_CONTAINER_HELPER_BLOCK = BLOCK_ENTITIES.register("water_container_helper_block",
+            () -> BlockEntityType.Builder.of(WaterContainerHelperBlockEntity::new, ModBlocks.WATER_CONTAINER_HELPER.get())
+                    .build(null));
 
 
 

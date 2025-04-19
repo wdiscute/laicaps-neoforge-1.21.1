@@ -1,0 +1,17 @@
+{
+  "biomes": "laicaps:lunamar_deep",
+  "adapt_noise": false,
+  "liquid_settings": "apply_waterlogging",
+  "spawn_overrides": {},
+  "type": "minecraft:jigsaw",
+  "start_pool": "laicaps:example_structure/white_pool",
+  "size": 7,
+  "step": "raw_generation",
+  "start_height": {
+    "absolute": 20
+  },
+  "project_start_to_heightmap": "OCEAN_FLOOR_WG",
+  "max_distance_from_center": 116,
+  "terrain_adaptation": "none",
+  "use_expansion_hack": false
+}

@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.block.singleblocks;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModTags;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -65,7 +66,7 @@ public class TreasureChestBlock extends HorizontalDirectionalBlock implements Si
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         //if there are 0 markers go straight to 1 instead of changing active since theres no active for 0
-        if(state.getValue(MARKER) == 0)
+        if (state.getValue(MARKER) == 0)
         {
             level.setBlockAndUpdate(pos, state.setValue(MARKER, 1));
             return ItemInteractionResult.SUCCESS;
@@ -122,6 +123,8 @@ public class TreasureChestBlock extends HorizontalDirectionalBlock implements Si
     {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
+
+
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)

@@ -7,6 +7,7 @@ import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.client.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
 import com.wdiscute.laicaps.particle.ModParticles;
+import com.wdiscute.laicaps.particle.WaterFlowerParticles;
 import com.wdiscute.laicaps.sound.ModSounds;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -112,6 +113,7 @@ public class Laicaps
         public static void registerParticleFactories(RegisterParticleProvidersEvent event)
         {
             event.registerSpriteSet(ModParticles.CHASE_PUZZLE_PARTICLES.get(), ChasePuzzleParticles.Provider::new);
+            event.registerSpriteSet(ModParticles.WATER_FLOWER_PARTICLES.get(), WaterFlowerParticles.Provider::new);
         }
 
 
