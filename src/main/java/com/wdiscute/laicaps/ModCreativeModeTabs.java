@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -19,8 +20,9 @@ public class ModCreativeModeTabs
         CREATIVE_MODE_TABS.register(eventBus);
     }
 
+
     public static final Supplier<CreativeModeTab> LAICAPS =
-            CREATIVE_MODE_TABS.register("laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.LUNARVEIL.get()))
+            CREATIVE_MODE_TABS.register("laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ELITE_NAVIGATION_CHIP.get()))
                     .title(Component.translatable("creativetab.laicaps.laicaps"))
                     .displayItems( (itemDisplayParameters, output) -> {
 
@@ -29,6 +31,27 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.LUNAMAR_TELEPORTER.get());
                         output.accept(ModBlocks.EMBER_TELEPORTER.get());
 
+                        //chips
+                        output.accept(ModItems.BASIC_MICROCHIP.get());
+                        output.accept(ModItems.BASIC_NAVIGATION_CHIP.get());
+                        output.accept(ModItems.REFINED_MICROCHIP.get());
+                        output.accept(ModItems.REFINED_NAVIGATION_CHIP.get());
+                        output.accept(ModItems.ADVANCED_MICROCHIP.get());
+                        output.accept(ModItems.ADVANCED_NAVIGATION_CHIP.get());
+                        output.accept(ModItems.ELITE_MICROCHIP.get());
+                        output.accept(ModItems.ELITE_NAVIGATION_CHIP.get());
+
+
+
+
+                    })
+                    .build()
+            );
+
+    public static final Supplier<CreativeModeTab> LAICAPS_ASHA =
+            CREATIVE_MODE_TABS.register("laicaps_asha", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.LUNARVEIL.get()))
+                    .title(Component.translatable("creativetab.laicaps.laicaps_asha"))
+                    .displayItems( (itemDisplayParameters, output) -> {
 
                         //oakheart
                         output.accept(ModBlocks.OAKHEART_SAPLING.get());
@@ -44,10 +67,10 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.OAKHEART_SLAB.get());
                         output.accept(ModBlocks.OAKHEART_FENCE.get());
                         output.accept(ModBlocks.OAKHEART_FENCE_GATE.get());
-                        output.accept(ModBlocks.OAKHEART_DOOR.get());
+                        output.accept(ModItems.OAKHEART_DOOR.get());
                         output.accept(ModBlocks.OAKHEART_TRAPDOOR.get());
-                        output.accept(ModBlocks.OAKHEART_SIGN.get());
-                        output.accept(ModBlocks.OAKHEART_HANGING_SIGN.get());
+                        output.accept(ModItems.OAKHEART_SIGN.get());
+                        output.accept(ModItems.OAKHEART_HANGING_SIGN.get());
                         output.accept(ModBlocks.OAKHEART_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.OAKHEART_BUTTON.get());
                         output.accept(ModItems.OAKHEART_BOAT.get());
@@ -66,10 +89,10 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.OAKROOT_SLAB.get());
                         output.accept(ModBlocks.OAKROOT_FENCE.get());
                         output.accept(ModBlocks.OAKROOT_FENCE_GATE.get());
-                        output.accept(ModBlocks.OAKROOT_DOOR.get());
+                        output.accept(ModItems.OAKROOT_DOOR.get());
                         output.accept(ModBlocks.OAKROOT_TRAPDOOR.get());
-                        output.accept(ModBlocks.OAKROOT_SIGN.get());
-                        output.accept(ModBlocks.OAKROOT_HANGING_SIGN.get());
+                        output.accept(ModItems.OAKROOT_SIGN.get());
+                        output.accept(ModItems.OAKROOT_HANGING_SIGN.get());
                         output.accept(ModBlocks.OAKROOT_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.OAKROOT_BUTTON.get());
                         output.accept(ModItems.OAKROOT_BOAT.get());
@@ -85,6 +108,7 @@ public class ModCreativeModeTabs
                         //riverthorne
                         output.accept(ModBlocks.RIVERTHORNE_THISTLE.get());
                         output.accept(ModBlocks.RIVERTHORNE.get());
+
                         //sweetlily
                         output.accept(ModBlocks.VIOLET_SWEETLILY.get());
                         output.accept(ModBlocks.PEACH_SWEETLILY.get());
@@ -103,6 +127,30 @@ public class ModCreativeModeTabs
                     })
                     .build()
             );
+
+    public static final Supplier<CreativeModeTab> LAICAPS_LUNAMAR =
+            CREATIVE_MODE_TABS.register("laicaps_lunamar", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.WATER_FLOWER.get()))
+                    .title(Component.translatable("creativetab.laicaps.laicaps_lunamar"))
+                    .displayItems( (itemDisplayParameters, output) -> {
+
+                        //water flower
+                        output.accept(ModBlocks.WATER_FLOWER.get());
+
+
+                    })
+                    .build());
+
+    public static final Supplier<CreativeModeTab> LAICAPS_EMBER =
+            CREATIVE_MODE_TABS.register("laicaps_ember", () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.BARRIER))
+                    .title(Component.translatable("creativetab.laicaps.laicaps_ember"))
+                    .displayItems( (itemDisplayParameters, output) -> {
+
+                        //add ember stuff here
+                        output.accept(Items.BARRIER);
+
+
+                    }).build());
+
 
     public static final Supplier<CreativeModeTab> LAICAPS_PUZZLES =
             CREATIVE_MODE_TABS.register("laicaps_puzzles", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.SYMBOL_CONTROLLER_BLOCK.get()))
@@ -145,9 +193,7 @@ public class ModCreativeModeTabs
 
 
 
-                    })
-                    .build()
-            );
+                    }).build());
 
 
 }

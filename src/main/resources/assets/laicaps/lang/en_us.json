@@ -6,7 +6,10 @@
 
 
   "creativetab.laicaps.laicaps": "Laicaps",
-  "creativetab.laicaps.laicaps_puzzles": "Laicaps Puzzle Blocks",
+  "creativetab.laicaps.laicaps_asha": "Laicaps - Asha",
+  "creativetab.laicaps.laicaps_lunamar": "Laicaps - Lunamar",
+  "creativetab.laicaps.laicaps_ember": "Laicaps - Ember",
+  "creativetab.laicaps.laicaps_puzzles": "Laicaps - Puzzle Blocks",
 
   "tooltip.laicaps.generic.shift_up": "⏬ §l§3[Shift]§r ⏬",
   "tooltip.laicaps.generic.shift_down": "⏫ §l§6[Shift]§r ⏫",
@@ -47,12 +50,25 @@
   "block.laicaps.rotating_puzzle_block": "Rotating Puzzle Block",
 
 
+  "item.laicaps.asha_teleporter": "Asha Teleporter",
+  "item.laicaps.lunamar_teleporter": "Lunamar Teleporter",
+  "item.laicaps.ember_teleporter": "Ember Teleporter",
+
+  "item.laicaps.basic_microchip": "Basic Microchip",
+  "item.laicaps.basic_navigation_chip": "Basic Navigation Chip",
+  "item.laicaps.refined_microchip": "Refined Chip",
+  "item.laicaps.refined_navigation_chip": "Refined Navigation Chip",
+  "item.laicaps.advanced_microchip": "Advanced Microchip",
+  "item.laicaps.advanced_navigation_chip": "Advanced Navigation Chip",
+  "item.laicaps.elite_microchip": "Elite Microchip",
+  "item.laicaps.elite_navigation_chip": "Elite Navigation Chip",
+
+
+
 
 
   "block.laicaps.water_container": "Water Container",
   "block.laicaps.water_container_helper": "Water Container Helper",
-
-  "tooltip.minecraft.oak_log.0" : "not as cool as oakheart log tho",
 
   "block.laicaps.oakheart_sapling": "Oakheart Sapling",
   "block.laicaps.stripped_oakheart_log": "Stripped Oakheart Log",

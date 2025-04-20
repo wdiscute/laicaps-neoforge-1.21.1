@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps.block.hidden;
 
+import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlock;
@@ -9,8 +10,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 import java.util.Objects;
@@ -131,7 +136,10 @@ public class HiddenControllerBlockEntity extends BlockEntity implements Tickable
                 LootParams.Builder builder = new LootParams.Builder((ServerLevel) this.level);
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
-                arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.ABANDONED_MINESHAFT).getRandomItems(params);
+                ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
+                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha_puzzle"));
+
+                arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
                 return;
             }
         }

@@ -3,9 +3,9 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 1,
+      "weight": 4,
       "element": {
-        "location": "laicaps:floating_water_cubes/bridges/main_to_medium_empty",
+        "location": "laicaps:floating_water_cubes/bridges/empty",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
