@@ -2,7 +2,6 @@ package com.wdiscute.laicaps.entity;
 
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;

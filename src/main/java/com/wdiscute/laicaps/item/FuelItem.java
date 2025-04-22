@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.item.custom;
+package com.wdiscute.laicaps.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

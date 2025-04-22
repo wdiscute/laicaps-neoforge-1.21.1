@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.item.custom;
+package com.wdiscute.laicaps.item;
 
 import com.wdiscute.laicaps.entity.ModBoatEntity;
 import com.wdiscute.laicaps.entity.ModChestBoatEntity;
