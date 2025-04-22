@@ -47,6 +47,15 @@ public class HiddenControllerBlockEntity extends BlockEntity implements Tickable
     private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
     private final UUID[] arrayuuid = new UUID[15];
 
+    public void resetPlayersSaved()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            arrayuuid[i] = null;
+        }
+    }
+
+
     public void setNextLinkedBlock(BlockPos blockPos, Player player)
     {
         setChanged();
@@ -137,7 +146,7 @@ public class HiddenControllerBlockEntity extends BlockEntity implements Tickable
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
                 ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
-                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha_puzzle"));
+                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "chests/asha_puzzle"));
 
                 arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
                 return;
@@ -249,6 +258,12 @@ public class HiddenControllerBlockEntity extends BlockEntity implements Tickable
     {
         super.loadAdditional(tag, pRegistries);
 
+        for (int i = 0; i < arrayuuid.length; i++)
+        {
+            if (tag.contains("user" + i))
+                this.arrayuuid[i] = tag.getUUID("user" + i);
+        }
+
         for (int i = 0; i < linksBS.length; i++)
         {
             if (tag.contains("linkbs" + i))
@@ -278,6 +293,18 @@ public class HiddenControllerBlockEntity extends BlockEntity implements Tickable
             //breaks if linkBS[i] hasn't been changed
             if (Objects.equals(linksString[i], "")) break;
             tag.putString("linkstring" + i, linksString[i]);
+        }
+
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            if (this.arrayuuid[i] == null)
+            {
+                if (tag.contains("user" + i)) tag.remove("user" + i);
+
+            } else
+            {
+                tag.putUUID("user" + i, this.arrayuuid[i]);
+            }
         }
 
     }

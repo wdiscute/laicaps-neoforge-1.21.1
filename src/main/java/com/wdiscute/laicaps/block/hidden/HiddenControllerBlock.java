@@ -58,6 +58,13 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
         //we only care about main hand to prevent double stuff
         if (hand == InteractionHand.OFF_HAND) return ItemInteractionResult.FAIL;
 
+        if (stack.is(Items.BARRIER) && state.getValue(ACTIVE) && !level.isClientSide && level.getBlockEntity(pos) instanceof HiddenControllerBlockEntity hcbe)
+        {
+            hcbe.resetPlayersSaved();
+            player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.players_reset"), true);
+            return ItemInteractionResult.SUCCESS;
+        }
+
         //add blockpos stored in chisel to linked
         if (stack.is(ModItems.CHISEL) && !level.isClientSide)
         {

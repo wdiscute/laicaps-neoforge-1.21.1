@@ -19,6 +19,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -58,8 +59,16 @@ public class ChaseControllerBlock extends HorizontalDirectionalBlock implements 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
+
         if(!level.isClientSide && level.getBlockEntity(pos) instanceof ChaseControllerBlockEntity ccbe && hand == InteractionHand.MAIN_HAND)
         {
+            if(stack.is(Items.BARRIER))
+            {
+                ccbe.resetPlayersSaved();
+                player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.players_reset"), true);
+                return ItemInteractionResult.SUCCESS;
+            }
+
             if(stack.is(ModItems.CHISEL))
             {
                 if (state.getValue(FACING) == Direction.EAST)
@@ -117,8 +126,6 @@ public class ChaseControllerBlock extends HorizontalDirectionalBlock implements 
             ccbe.CanPlayerObtainDrops(player);
 
             ccbe.assignPlayer(player);
-
-
         }
 
         return ItemInteractionResult.SUCCESS;

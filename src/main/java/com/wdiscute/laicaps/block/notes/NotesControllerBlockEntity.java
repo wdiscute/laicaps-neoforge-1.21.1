@@ -56,6 +56,14 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
     private final UUID[] arrayuuid = new UUID[15];
     private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
 
+    public void resetPlayersSaved()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            arrayuuid[i] = UUID.randomUUID();
+        }
+    }
+
     public void CanPlayerObtainDrops(Player player)
     {
         if(this.level.isClientSide) return;

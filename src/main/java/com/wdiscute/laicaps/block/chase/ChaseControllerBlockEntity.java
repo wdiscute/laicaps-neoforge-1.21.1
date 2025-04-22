@@ -52,6 +52,16 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
     private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
     private final UUID[] arrayuuid = new UUID[15];
 
+
+    public void resetPlayersSaved()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            arrayuuid[i] = null;
+        }
+    }
+
+
     public void CanPlayerObtainDrops(Player player)
     {
         setChanged();
@@ -79,9 +89,10 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
                 ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
-                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha_puzzle"));
-                
-                arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
+                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "chests/asha_puzzle"));
+
+                arrayOfItemStacks = level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
+
                 return;
             }
         }
@@ -107,7 +118,7 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
             {
                 setChanged();
                 waypoints[i] = posOffset;
-                System.out.println("set waypoint " + i);
+                player.displayClientMessage(Component.translatable("Set Waypoint " + i + "/6"), true);
                 return true;
             }
         }
@@ -242,11 +253,11 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
             ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(), particlePositionTemp.x() + 0.5f, particlePositionTemp.y() + 1.2f, particlePositionTemp.z() + 0.5f, 1, 0, 0, 0, 0);
 
             //play sound upon leaving checkpoint
-            if(counter == 1)
+            if (counter == 1)
                 level.playSound(null, particlePositionTemp.x, particlePositionTemp.y, particlePositionTemp.z, SoundEvents.BOAT_PADDLE_WATER, SoundSource.BLOCKS, 3f, 1f);
 
             //play sound 0.25s before reaching next checkpoint
-            if(counter == timeToReachNextCheckpoint - 5)
+            if (counter == timeToReachNextCheckpoint - 5)
                 level.playSound(null, particlePositionTemp.x, particlePositionTemp.y, particlePositionTemp.z, SoundEvents.BOAT_PADDLE_WATER, SoundSource.BLOCKS, 3f, r.nextFloat(0.49F));
 
 
@@ -416,8 +427,13 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
             if (this.arrayuuid[i] == null)
-                break;
-            tag.putUUID("user" + i, this.arrayuuid[i]);
+            {
+                if (tag.contains("user" + i)) tag.remove("user" + i);
+
+            } else
+            {
+                tag.putUUID("user" + i, this.arrayuuid[i]);
+            }
         }
 
         for (int i = 0; i < 7; i++)

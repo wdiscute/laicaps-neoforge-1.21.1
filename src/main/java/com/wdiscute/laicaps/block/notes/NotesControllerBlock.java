@@ -19,6 +19,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -90,6 +91,14 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
 
         if (hand == InteractionHand.MAIN_HAND && !level.isClientSide)
         {
+
+            if(stack.is(Items.BARRIER) && level.getBlockEntity(pos) instanceof NotesControllerBlockEntity ncbe)
+            {
+                ncbe.resetPlayersSaved();
+                player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.players_reset"), true);
+                return ItemInteractionResult.SUCCESS;
+            }
+
             //add blockpos stored in chisel to linked
             if (stack.is(ModItems.CHISEL))
             {

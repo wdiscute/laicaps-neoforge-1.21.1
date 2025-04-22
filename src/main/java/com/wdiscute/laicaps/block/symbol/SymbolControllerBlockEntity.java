@@ -49,6 +49,14 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     private final UUID[] arrayuuid = new UUID[15];
 
 
+    public void resetPlayersSaved()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            arrayuuid[i] = UUID.randomUUID();
+        }
+    }
+
     public BlockPos DecodeBlockPosWithOffset(Direction facing, BlockPos pos, BlockPos posOffset)
     {
         if (facing == Direction.SOUTH)
