@@ -3,19 +3,14 @@ package com.wdiscute.laicaps;
 
 import com.wdiscute.laicaps.entity.ModBoatEntity;
 import com.wdiscute.laicaps.item.ModFoodProperties;
-import com.wdiscute.laicaps.item.custom.ChiselItem;
+import com.wdiscute.laicaps.item.ChiselItem;
 
-import com.wdiscute.laicaps.item.custom.ModBoatItem;
-import net.minecraft.core.component.DataComponents;
+import com.wdiscute.laicaps.item.ModBoatItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 

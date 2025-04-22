@@ -9,6 +9,7 @@ import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockEntity;
+import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -55,7 +56,9 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(WaterContainerHelperBlockEntity::new, ModBlocks.WATER_CONTAINER_HELPER.get())
                     .build(null));
 
-
+    public static final Supplier<BlockEntityType<TelescopeBlockEntity>> TELESCOPE = BLOCK_ENTITIES.register("telescope",
+            () -> BlockEntityType.Builder.of(TelescopeBlockEntity::new, ModBlocks.TELESCOPE.get())
+                    .build(null));
 
 
 

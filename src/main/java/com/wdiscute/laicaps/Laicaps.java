@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
-import com.sun.jna.platform.win32.WinNT;
+import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
 import com.wdiscute.laicaps.component.ModDataComponentTypes;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.client.ModBoatRenderer;
@@ -9,14 +9,13 @@ import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
 import com.wdiscute.laicaps.particle.ModParticles;
 import com.wdiscute.laicaps.particle.WaterFlowerParticles;
 import com.wdiscute.laicaps.sound.ModSounds;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
+import com.wdiscute.laicaps.types.ModMenuTypes;
+import com.wdiscute.laicaps.types.ModWoodTypes;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -26,13 +25,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -63,6 +59,7 @@ public class Laicaps
         ModBlockEntity.register(modEventBus);
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -116,7 +113,11 @@ public class Laicaps
             event.registerSpriteSet(ModParticles.WATER_FLOWER_PARTICLES.get(), WaterFlowerParticles.Provider::new);
         }
 
-
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event)
+        {
+            event.register(ModMenuTypes.TELESCOPE_MENU.get(), TelescopeScreen::new);
+        }
 
     }
 }

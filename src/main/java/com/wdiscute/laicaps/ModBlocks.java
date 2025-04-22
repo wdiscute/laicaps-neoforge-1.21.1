@@ -14,8 +14,11 @@ import com.wdiscute.laicaps.block.notes.NotesPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockInactive;
+import com.wdiscute.laicaps.block.telescope.TelescopeBaseBlock;
+import com.wdiscute.laicaps.block.telescope.TelescopeBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
+import com.wdiscute.laicaps.types.ModWoodTypes;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -112,7 +115,23 @@ public class ModBlocks
                     }
             );
 
+    public static final DeferredBlock<Block> TELESCOPE =
+            registerBlock("telescope", () ->
+                    new TelescopeBlock(BlockBehaviour.Properties.of()
+                            .strength(6)
+                            .sound(SoundType.GLASS)
+                            .noOcclusion()
+                    )
+            );
 
+    public static final DeferredBlock<Block> TELESCOPE_BASE =
+            registerBlock("telescope_base", () ->
+                    new TelescopeBaseBlock(BlockBehaviour.Properties.of()
+                            .strength(6)
+                            .sound(SoundType.WOOD)
+                            .noOcclusion()
+                    )
+            );
 
 
     //
