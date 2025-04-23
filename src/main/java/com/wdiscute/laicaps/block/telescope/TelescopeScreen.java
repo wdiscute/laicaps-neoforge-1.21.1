@@ -9,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,9 +24,9 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 {
 
     private static final ResourceLocation INV_AND_BORDER_BACKGROUND = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/inv_and_border_background.png");
-    private static final ResourceLocation BLACK_BACKGROUND = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/telescope_black_background.png");
-
+    private static final ResourceLocation SKY_BACKGROUND = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/sky_background.png");
     private static final ResourceLocation BLACK_OVERLAY = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/black.png");
+    private static final ResourceLocation LENSES = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/lenses.png");
 
     private static final ResourceLocation STAR_1 = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/star_1.png");
     private static final ResourceLocation STAR_2 = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/star_2.png");
@@ -43,7 +42,6 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     private static final ResourceLocation FROG = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/frog.png");
     private static final ResourceLocation FROG_2 = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/frog_2.png");
 
-    private static final ResourceLocation LENSES = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/lenses.png");
 
     private static final Logger log = LoggerFactory.getLogger(TelescopeScreen.class);
 
@@ -166,7 +164,6 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             for (int i = 0; i < 1000; i++)
             {
                 i += r.nextInt(40, 220);
-                System.out.println(i);
                 starsFGList.add(new AbstractMap.SimpleEntry<>(starsRLFGList.get(r.nextInt(starsRLFGList.size())), new Vector2i(i, r.nextInt(236))));
             }
 
@@ -195,7 +192,11 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         blackScreenX = uiStartX + 178;
         blackScreenY = uiStartY + 3;
 
-        guiGraphics.blit(BLACK_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 512, 256);
+        if(mouseX - uiStartX > 175 && mouseX - uiStartX < 200 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset < 0) scrollBuffer = 25;
+        if(mouseX - uiStartX > 487 && mouseX - uiStartX < 517 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset > -700) scrollBuffer = -25;
+
+        //renders
+        guiGraphics.blit(SKY_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 512, 256);
 
 
         //renders stars background from list
@@ -236,12 +237,6 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                     0, 0, 45, 45, 45, 45);
         }
 
-
-        //TODO MAKE IT SO YOU CAN SCROLL THE SCREEN MY PUTTING THE CURSOR CLOSE TO THE EDGES
-
-        System.out.println("x " + (mouseX - uiStartX));
-        System.out.println("y " + (mouseY - uiStartY));
-
         //if mouse (with offset for UI scale and whatever other bullshit) is inside, then render lenses
         if(mouseX - uiStartX > 140 && mouseX - uiStartX < 540 && mouseY - uiStartY > -30 && mouseY - uiStartY < 280)
         {
@@ -251,31 +246,26 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
             RenderSystem.setShaderTexture(0, LENSES);
 
-            List<Vector2f> positions = Lists.newArrayList();
+            List<Vector2f> borderOfOcclusion = Lists.newArrayList();
             //north
-            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY - 43));
-
+            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY - 43));
             //south
-            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY + 299));
-
+            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY + 299));
             //west
-            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 132, uiStartY - 40 + (i * 20)));
-
+            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 132, uiStartY - 40 + (i * 20)));
             //east
-            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 555, uiStartY - 40 + (i * 20)));
+            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 555, uiStartY - 40 + (i * 20)));
 
             List<Float> scales = Lists.newArrayList();
-            for (int i = 0; i < positions.size(); i++) scales.add(0.5f);
+            for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
 
 
-            RevealRenderUtil.renderRevealingPanel(poseStack, mouseX - 45, mouseY - 45, 90, 90, positions, scales);
+            RevealRenderUtil.renderRevealingPanel(poseStack, mouseX - 45, mouseY - 45, 90, 90, borderOfOcclusion, scales);
 
             poseStack.popPose();
         }
 
 
-
-        //guiGraphics.blitSprite(LENSES, 90, 90, 0, 0, mouseX - 45, mouseY - 45, 90, 90);
         //render inventory png
         guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 0, 0, 512, 256, 514, 257);
 
