@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -42,7 +43,10 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     private static final ResourceLocation FROG = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/frog.png");
     private static final ResourceLocation FROG_2 = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/frog_2.png");
 
+    private static final ResourceLocation LENSES = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/lenses.png");
+
     private static final Logger log = LoggerFactory.getLogger(TelescopeScreen.class);
+
 
     private int counter = 0;
     private int scrollOffset = 0;
@@ -57,27 +61,23 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     int scrollBuffer = 0;
     int scrollBufferStrength = 0;
 
-    List<Map.Entry<ResourceLocation, Vector2i>> starsBGList = new ArrayList<>();
+    int state = 0;
 
+    List<Map.Entry<ResourceLocation, Vector2i>> elementsBGList = new ArrayList<>();
     List<Map.Entry<ResourceLocation, Vector2i>> starsFGList = new ArrayList<>();
+
     List<ResourceLocation> starsRLBGList = new ArrayList<>();
     List<ResourceLocation> starsRLFGList = new ArrayList<>();
 
     TelescopeStarButton starButtonLeft;
     TelescopeStarButton starButtonRight;
 
-
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
-    {
-        if (Math.abs(scrollBuffer) < 100)
-            scrollBuffer += ((int) scrollY) * 5;
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-    }
-
     @Override
     protected void containerTick()
     {
+
+        //close if screen resized with a 1 tick delay to fix that one bug that was weird and not cool :(
+        if(counter == -1) onClose();
 
         //scrolling logic
         {
@@ -158,14 +158,14 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 {
                     lastYOffset = attemptedOffset;
 
-                    starsBGList.add(new AbstractMap.SimpleEntry<>(starsRLBGList.get(r.nextInt(starsRLBGList.size())), new Vector2i(i, lastYOffset)));
+                    elementsBGList.add(new AbstractMap.SimpleEntry<>(starsRLBGList.get(r.nextInt(starsRLBGList.size())), new Vector2i(i, lastYOffset)));
                 }
             }
 
             //create list of foreground stars
             for (int i = 0; i < 1000; i++)
             {
-                i += r.nextInt(5, 100);
+                i += r.nextInt(40, 220);
                 System.out.println(i);
                 starsFGList.add(new AbstractMap.SimpleEntry<>(starsRLFGList.get(r.nextInt(starsRLFGList.size())), new Vector2i(i, r.nextInt(236))));
             }
@@ -199,12 +199,12 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
 
         //renders stars background from list
-        for (Map.Entry<ResourceLocation, Vector2i> entry : starsBGList)
+        for (Map.Entry<ResourceLocation, Vector2i> entry : elementsBGList)
         {
             //if entry is inside the borders of the black screen
             if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10) guiGraphics.blit(
                     entry.getKey(),
-                    blackScreenX + entry.getValue().x + ((int) scrollOffset),
+                    blackScreenX + entry.getValue().x + scrollOffset,
                     blackScreenY + entry.getValue().y,
                     0, 0, 45, 45, 45, 45);
         }
@@ -218,12 +218,9 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
             List<Vector2f> positions = Lists.newArrayList(new Vector2f(mouseX, mouseY));
-            List<Float> scales = Lists.newArrayList(0.09F);
-            List<Float> noises = Lists.newArrayList(1F);
+            List<Float> scales = Lists.newArrayList(0.08f);
 
-            poseStack.translate(0, 0, 0);
-
-            RevealRenderUtil.renderRevealingPanel(poseStack, uiStartX + 178, uiStartY + 3, 331, 250, positions, scales, noises, 0);
+            RevealRenderUtil.renderRevealingPanel(poseStack, uiStartX + 178, uiStartY + 3, 331, 250, positions, scales);
 
             poseStack.popPose();
         }
@@ -240,7 +237,47 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         }
 
 
-        guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 514, 257);
+        //TODO MAKE IT SO YOU CAN SCROLL THE SCREEN MY PUTTING THE CURSOR CLOSE TO THE EDGES
+
+        System.out.println("x " + (mouseX - uiStartX));
+        System.out.println("y " + (mouseY - uiStartY));
+
+        //if mouse (with offset for UI scale and whatever other bullshit) is inside, then render lenses
+        if(mouseX - uiStartX > 140 && mouseX - uiStartX < 540 && mouseY - uiStartY > -30 && mouseY - uiStartY < 280)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+            RenderSystem.setShaderTexture(0, LENSES);
+
+            List<Vector2f> positions = Lists.newArrayList();
+            //north
+            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY - 43));
+
+            //south
+            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY + 299));
+
+            //west
+            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 132, uiStartY - 40 + (i * 20)));
+
+            //east
+            for (int i = 0; i < 18; i++) positions.add(new Vector2f(uiStartX + 555, uiStartY - 40 + (i * 20)));
+
+            List<Float> scales = Lists.newArrayList();
+            for (int i = 0; i < positions.size(); i++) scales.add(0.5f);
+
+
+            RevealRenderUtil.renderRevealingPanel(poseStack, mouseX - 45, mouseY - 45, 90, 90, positions, scales);
+
+            poseStack.popPose();
+        }
+
+
+
+        //guiGraphics.blitSprite(LENSES, 90, 90, 0, 0, mouseX - 45, mouseY - 45, 90, 90);
+        //render inventory png
+        guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 0, 0, 512, 256, 514, 257);
 
 
     }
@@ -263,16 +300,24 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     }
 
 
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
+    {
+        if (Math.abs(scrollBuffer) < 100)
+            scrollBuffer += ((int) scrollY) * 9;
+        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+    }
+
     public TelescopeScreen(TelescopeMenu menu, Inventory playerInventory, Component title)
     {
         super(menu, playerInventory, title);
     }
 
-
     @Override
     public void resize(Minecraft minecraft, int width, int height)
     {
-        counter = 0;
+        //TODO FIX BAND-AID FIX SO SCREEN DOESN'T GO OUT OF BOUNDS FOR SOME REASON
+        counter = -2;
         super.resize(minecraft, width, height);
     }
 

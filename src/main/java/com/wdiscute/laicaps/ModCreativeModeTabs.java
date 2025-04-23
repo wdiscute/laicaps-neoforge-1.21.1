@@ -26,6 +26,11 @@ public class ModCreativeModeTabs
                     .title(Component.translatable("creativetab.laicaps.laicaps"))
                     .displayItems( (itemDisplayParameters, output) -> {
 
+                        //telescope
+                        output.accept(ModBlocks.TELESCOPE_BASE.get());
+                        output.accept(ModBlocks.TELESCOPE.get());
+                        //output.accept(ModItems.ASTROLOGY_NOTEBOOK.get());
+
                         //teleporters
                         output.accept(ModBlocks.ASHA_TELEPORTER.get());
                         output.accept(ModBlocks.LUNAMAR_TELEPORTER.get());

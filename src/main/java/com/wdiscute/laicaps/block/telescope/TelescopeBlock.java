@@ -38,7 +38,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
-        if(!level.isClientSide && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
         {
             player.openMenu(new SimpleMenuProvider(tbe, Component.literal("Telescope")), pos);
             return ItemInteractionResult.SUCCESS;
@@ -60,7 +60,6 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     }
 
 
-
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
@@ -71,6 +70,20 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState)
     {
         return ModBlockEntity.TELESCOPE.get().create(pPos, pState);
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
+    {
+        if (state.getBlock() != newState.getBlock())
+        {
+            if (level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
+            {
+               tbe.drops();
+               level.updateNeighbourForOutputSignal(pos, this);
+            }
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override

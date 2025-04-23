@@ -6,7 +6,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -18,6 +20,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class TelescopeBlockEntity extends BlockEntity implements TickableBlockEntity, MenuProvider
 {
+
+
     public final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
@@ -33,6 +37,23 @@ public class TelescopeBlockEntity extends BlockEntity implements TickableBlockEn
         }
     };
 
+    public void clearContents()
+    {
+        inventory.setStackInSlot(0, ItemStack.EMPTY);
+    }
+
+    public void drops()
+    {
+        SimpleContainer inv = new SimpleContainer(inventory.getSlots());
+        for (int i = 0; i < inventory.getSlots(); i++)
+        {
+            inv.setItem(i, inventory.getStackInSlot(i));
+        }
+
+        Containers.dropContents(level, this.worldPosition, inv);
+    }
+
+
     @Override
     public void tick()
     {
@@ -44,7 +65,7 @@ public class TelescopeBlockEntity extends BlockEntity implements TickableBlockEn
     @Override
     public Component getDisplayName()
     {
-        return Component.literal("awdawd");
+        return Component.literal("Telescope");
     }
 
     @Override
@@ -57,12 +78,18 @@ public class TelescopeBlockEntity extends BlockEntity implements TickableBlockEn
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
+
+        tag.put("inventory", inventory.serializeNBT(registries));
+
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
+
+        inventory.deserializeNBT(registries, tag.getCompound("inventory"));
+
     }
 
     public TelescopeBlockEntity(BlockPos pPos, BlockState pBlockState)

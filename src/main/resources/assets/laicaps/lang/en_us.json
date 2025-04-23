@@ -17,6 +17,7 @@
 
   "tooltip.laicaps.generic.treasure_chest_looted" : "§cYou have already claimed loot.",
   "tooltip.laicaps.generic.treasure_chest_busy" : "§cA player is already obtaining loot.",
+  "tooltip.laicaps.generic.players_reset" : "§cThe players available to loot have been reset.",
 
 
 
@@ -48,6 +49,10 @@
 
   "block.laicaps.rotating_controller_block": "Rotating Puzzle Controller",
   "block.laicaps.rotating_puzzle_block": "Rotating Puzzle Block",
+
+
+  "block.laicaps.telescope": "Telescope",
+  "block.laicaps.telescope_base": "Telescope Base",
 
 
   "item.laicaps.asha_teleporter": "Asha Teleporter",
