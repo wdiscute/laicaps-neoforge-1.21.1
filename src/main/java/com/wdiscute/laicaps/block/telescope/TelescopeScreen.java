@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -27,6 +26,13 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     private static final ResourceLocation SKY_BACKGROUND = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/sky_background.png");
     private static final ResourceLocation BLACK_OVERLAY = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/black.png");
     private static final ResourceLocation LENSES = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/lenses.png");
+
+    private static final ResourceLocation SUN = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/sun.png");
+    private static final ResourceLocation EMBER = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/ember.png");
+    private static final ResourceLocation OVERWORLD = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/overworld.png");
+    private static final ResourceLocation ASHA = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/asha.png");
+    private static final ResourceLocation LUNAMAR = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/lunamar.png");
+
 
     private static final ResourceLocation STAR_1 = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/star_1.png");
     private static final ResourceLocation STAR_2 = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/telescope/star_2.png");
@@ -61,7 +67,11 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
     int state = 0;
 
-    List<Map.Entry<ResourceLocation, Vector2i>> elementsBGList = new ArrayList<>();
+    List<Vector2f> borderOfOcclusion = Lists.newArrayList();
+
+    List<Map.Entry<ResourceLocation, Vector2i>> planetsList = new ArrayList<>();
+
+    List<Map.Entry<ResourceLocation, Vector2i>> starsBGList = new ArrayList<>();
     List<Map.Entry<ResourceLocation, Vector2i>> starsFGList = new ArrayList<>();
 
     List<ResourceLocation> starsRLBGList = new ArrayList<>();
@@ -71,11 +81,101 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     TelescopeStarButton starButtonRight;
 
     @Override
+    protected void init()
+    {
+        super.init();
+
+        //size of "canvas"
+        this.imageWidth = 512;
+        this.imageHeight = 256;
+
+        uiStartX = (width - imageWidth) / 2;
+        uiStartY = (height - imageHeight) / 2;
+        blackScreenX = uiStartX + 178;
+        blackScreenY = uiStartY + 3;
+
+        //set borderOfOcclusion
+        {
+            //north
+            for (int i = 0; i < 18; i++)
+                borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY - 43));
+            //south
+            for (int i = 0; i < 18; i++)
+                borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY + 299));
+            //west
+            for (int i = 0; i < 18; i++)
+                borderOfOcclusion.add(new Vector2f(uiStartX + 132, uiStartY - 40 + (i * 20)));
+            //east
+            for (int i = 0; i < 18; i++)
+                borderOfOcclusion.add(new Vector2f(uiStartX + 555, uiStartY - 40 + (i * 20)));
+        }
+
+        //add zoom in and zoom out button
+        {
+            starButtonLeft = this.addRenderableWidget(TelescopeStarButton.builder(button ->
+                            scrollBuffer += (scrollOffset < -900 || scrollOffset > 200) ? 20 : 39)
+                    .bounds(uiStartX + 14, uiStartY + 13, 20, 20).build());
+
+            starButtonRight = this.addRenderableWidget(TelescopeStarButton.builder(button ->
+                            scrollBuffer -= (scrollOffset < -900 || scrollOffset > 200) ? 20 : 39)
+                    .bounds(uiStartX + 136, uiStartY + 13, 20, 20).build());
+        }
+
+        //add stars ResourceLocations to respective lists
+        {
+            starsRLBGList.add(STAR_1);
+            starsRLBGList.add(STAR_2);
+            starsRLBGList.add(STAR_3);
+            starsRLBGList.add(STAR_4);
+            starsRLBGList.add(STAR_5);
+            starsRLBGList.add(STAR_6);
+            starsRLFGList.add(STAR_DARK_1);
+            starsRLFGList.add(STAR_DARK_2);
+            starsRLFGList.add(STAR_DARK_3);
+        }
+
+        //create list of background and foreground stars
+        {
+            int lastYOffset = r.nextInt(203);
+            for (int i = 0; i < 1000; i++)
+            {
+                i += r.nextInt(10, 25);
+                int attemptedOffset = r.nextInt(203);
+                if (Math.abs(lastYOffset - attemptedOffset) > 40)
+                {
+                    lastYOffset = attemptedOffset;
+                    starsBGList.add(new AbstractMap.SimpleEntry<>(starsRLBGList.get(r.nextInt(starsRLBGList.size())), new Vector2i(i, lastYOffset)));
+                }
+            }
+
+            for (int i = 0; i < 1000; i++)
+            {
+                i += r.nextInt(40, 220);
+                starsFGList.add(new AbstractMap.SimpleEntry<>(starsRLFGList.get(r.nextInt(starsRLFGList.size())), new Vector2i(i, r.nextInt(236))));
+            }
+
+            starsFGList.add(new AbstractMap.SimpleEntry<>(FROG, new Vector2i(-300, 105)));
+            starsFGList.add(new AbstractMap.SimpleEntry<>(FROG_2, new Vector2i(-260, 75)));
+        }
+
+        //create list of planets
+        {
+            planetsList.add(new AbstractMap.SimpleEntry<>(EMBER, new Vector2i(120, 95)));
+            planetsList.add(new AbstractMap.SimpleEntry<>(ASHA, new Vector2i(240, 95)));
+            planetsList.add(new AbstractMap.SimpleEntry<>(OVERWORLD, new Vector2i(360, 95)));
+            planetsList.add(new AbstractMap.SimpleEntry<>(LUNAMAR, new Vector2i(480, 95)));
+        }
+
+
+    }
+
+    @Override
     protected void containerTick()
     {
 
         //close if screen resized with a 1 tick delay to fix that one bug that was weird and not cool :(
-        if(counter == -1) onClose();
+        if (counter == -1) onClose();
+        counter++;
 
         //scrolling logic
         {
@@ -106,74 +206,6 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
         }
 
-        //initial setup and on screen size change
-        if (counter == 0)
-        {
-            this.imageWidth = 512;
-            this.imageHeight = 256;
-
-            uiStartX = (width - imageWidth) / 2;
-            uiStartY = (height - imageHeight) / 2;
-
-            //add stars ResourceLocations to respective lists
-            {
-                starsRLBGList.add(STAR_1);
-                starsRLBGList.add(STAR_2);
-                starsRLBGList.add(STAR_3);
-                starsRLBGList.add(STAR_4);
-                starsRLBGList.add(STAR_5);
-                starsRLBGList.add(STAR_6);
-                starsRLFGList.add(STAR_DARK_1);
-                starsRLFGList.add(STAR_DARK_2);
-                starsRLFGList.add(STAR_DARK_3);
-            }
-
-            //add zoom in and zoom out button
-            {
-                starButtonLeft = this.addRenderableWidget(TelescopeStarButton.builder(button ->
-                                scrollBuffer += (scrollOffset < -900 || scrollOffset > 200) ? 20 : 39)
-                        .bounds(uiStartX + 14, uiStartY + 13, 20, 20).build());
-
-                starButtonRight = this.addRenderableWidget(TelescopeStarButton.builder(button -> {})
-                        .bounds(uiStartX + 136, uiStartY + 13, 20, 20).build());
-            }
-
-
-            if(renderables.get(0) instanceof TelescopeStarButton tsb)
-            {
-                tsb.setPosition(100, 100);
-            }
-
-
-            //create list of background stars
-            int lastYOffset = r.nextInt(203);
-            for (int i = 0; i < 1000; i++)
-            {
-                i += r.nextInt(10, 25);
-                int attemptedOffset = r.nextInt(203);
-
-                if (Math.abs(lastYOffset - attemptedOffset) > 40)
-                {
-                    lastYOffset = attemptedOffset;
-
-                    elementsBGList.add(new AbstractMap.SimpleEntry<>(starsRLBGList.get(r.nextInt(starsRLBGList.size())), new Vector2i(i, lastYOffset)));
-                }
-            }
-
-            //create list of foreground stars
-            for (int i = 0; i < 1000; i++)
-            {
-                i += r.nextInt(40, 220);
-                starsFGList.add(new AbstractMap.SimpleEntry<>(starsRLFGList.get(r.nextInt(starsRLFGList.size())), new Vector2i(i, r.nextInt(236))));
-            }
-
-            starsFGList.add(new AbstractMap.SimpleEntry<>(FROG, new Vector2i(-300, 105)));
-            starsFGList.add(new AbstractMap.SimpleEntry<>(FROG_2, new Vector2i(-260, 75)));
-
-
-        }
-
-        counter++;
     }
 
     @Override
@@ -184,90 +216,139 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-        this.imageWidth = 514;
-        this.imageHeight = 256;
 
-        uiStartX = (width - imageWidth) / 2;
-        uiStartY = (height - imageHeight) / 2;
-        blackScreenX = uiStartX + 178;
-        blackScreenY = uiStartY + 3;
+        //scroll by hovering the sides
+        if (mouseX - uiStartX > 175 && mouseX - uiStartX < 200 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset < 0)
+            scrollBuffer = 25;
+        if (mouseX - uiStartX > 487 && mouseX - uiStartX < 517 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset > -700)
+            scrollBuffer = -25;
 
-        if(mouseX - uiStartX > 175 && mouseX - uiStartX < 200 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset < 0) scrollBuffer = 25;
-        if(mouseX - uiStartX > 487 && mouseX - uiStartX < 517 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset > -700) scrollBuffer = -25;
-
-        //renders
-        guiGraphics.blit(SKY_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 512, 256);
-
-
-        //renders stars background from list
-        for (Map.Entry<ResourceLocation, Vector2i> entry : elementsBGList)
+        if (state == 0)
         {
-            //if entry is inside the borders of the black screen
-            if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10) guiGraphics.blit(
-                    entry.getKey(),
-                    blackScreenX + entry.getValue().x + scrollOffset,
-                    blackScreenY + entry.getValue().y,
-                    0, 0, 45, 45, 45, 45);
-        }
+            //renders purple flat sky background
+            guiGraphics.blit(SKY_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 512, 256);
 
-        //render reveal around cursor
-        {
-            PoseStack poseStack = guiGraphics.pose();
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-            poseStack.pushPose();
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-            RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
-
-            List<Vector2f> positions = Lists.newArrayList(new Vector2f(mouseX, mouseY));
-            List<Float> scales = Lists.newArrayList(0.08f);
-
-            RevealRenderUtil.renderRevealingPanel(poseStack, uiStartX + 178, uiStartY + 3, 331, 250, positions, scales);
-
-            poseStack.popPose();
-        }
-
-        //renders stars foreground from list
-        for (Map.Entry<ResourceLocation, Vector2i> entry : starsFGList)
-        {
-            //if entry is inside the borders of the black screen
-            if (entry.getValue().x + scrollOffset < 326 && entry.getValue().x + scrollOffset > -60) guiGraphics.blit(
-                    entry.getKey(),
-                    blackScreenX + entry.getValue().x + ((int) scrollOffset),
-                    blackScreenY + entry.getValue().y,
-                    0, 0, 45, 45, 45, 45);
-        }
-
-        //if mouse (with offset for UI scale and whatever other bullshit) is inside, then render lenses
-        if(mouseX - uiStartX > 140 && mouseX - uiStartX < 540 && mouseY - uiStartY > -30 && mouseY - uiStartY < 280)
-        {
-            PoseStack poseStack = guiGraphics.pose();
-            poseStack.pushPose();
-
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
-            RenderSystem.setShaderTexture(0, LENSES);
-
-            List<Vector2f> borderOfOcclusion = Lists.newArrayList();
-            //north
-            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY - 43));
-            //south
-            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY + 299));
-            //west
-            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 132, uiStartY - 40 + (i * 20)));
-            //east
-            for (int i = 0; i < 18; i++) borderOfOcclusion.add(new Vector2f(uiStartX + 555, uiStartY - 40 + (i * 20)));
-
-            List<Float> scales = Lists.newArrayList();
-            for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
+            //renders stars background from list
+            for (Map.Entry<ResourceLocation, Vector2i> entry : starsBGList)
+            {
+                //if entry is inside the borders of the black screen
+                if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10)
+                    guiGraphics.blit(
+                            entry.getKey(),
+                            blackScreenX + entry.getValue().x + scrollOffset,
+                            blackScreenY + entry.getValue().y,
+                            0, 0, 45, 45, 45, 45);
+            }
 
 
-            RevealRenderUtil.renderRevealingPanel(poseStack, mouseX - 45, mouseY - 45, 90, 90, borderOfOcclusion, scales);
+            //render sun with occlusion
+            if (100 + scrollOffset < 326 && 100 + scrollOffset > -10)
+            {
+                PoseStack poseStack = guiGraphics.pose();
+                poseStack.pushPose();
 
-            poseStack.popPose();
+                RenderSystem.setShaderTexture(0, SUN);
+
+                List<Float> scales = Lists.newArrayList();
+                for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
+
+                RevealRenderUtil.renderWithOcclusion(poseStack, blackScreenX - 50 + (scrollOffset), blackScreenY + 69, 90, 90, borderOfOcclusion, scales);
+
+                poseStack.popPose();
+            }
+
+
+            //renders planets list with occlusion
+            for (Map.Entry<ResourceLocation, Vector2i> entry : planetsList)
+            {
+                if (entry.getValue().x + scrollOffset < 326 && entry.getValue().x + scrollOffset > -120)
+                {
+                    PoseStack poseStack = guiGraphics.pose();
+                    poseStack.pushPose();
+
+                    RenderSystem.setShaderTexture(0, entry.getKey());
+
+                    List<Float> scales = Lists.newArrayList();
+                    for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
+
+                    RevealRenderUtil.renderWithOcclusion(poseStack, blackScreenX + entry.getValue().x + (scrollOffset), blackScreenY + entry.getValue().y, 90, 90, borderOfOcclusion, scales);
+
+                    poseStack.popPose();
+                }
+
+            }
+
+            //render inventory overlay
+            guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 0, 0, 512, 256, 514, 257);
+
+
         }
 
 
-        //render inventory png
-        guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 0, 0, 512, 256, 514, 257);
+        //2 = planet searching
+        if (state == 2)
+        {
+            //renders purple flat sky background
+            guiGraphics.blit(SKY_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 512, 256);
+
+            //renders stars background from list
+            for (Map.Entry<ResourceLocation, Vector2i> entry : starsBGList)
+            {
+                //if entry is inside the borders of the black screen
+                if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10)
+                    guiGraphics.blit(
+                            entry.getKey(),
+                            blackScreenX + entry.getValue().x + scrollOffset,
+                            blackScreenY + entry.getValue().y,
+                            0, 0, 45, 45, 45, 45);
+            }
+
+            //render BLACK_OVERLAY with occlusion around cursor
+            {
+                PoseStack poseStack = guiGraphics.pose();
+                poseStack.pushPose();
+
+                RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
+
+                RevealRenderUtil.renderWithOcclusion(poseStack, uiStartX + 178, uiStartY + 3, 331, 250,
+                        Lists.newArrayList(new Vector2f(mouseX, mouseY)),
+                        Lists.newArrayList(0.08f));
+
+                poseStack.popPose();
+            }
+
+            //renders stars foreground from list
+            for (Map.Entry<ResourceLocation, Vector2i> entry : starsFGList)
+            {
+                //if entry is inside the borders of the black screen
+                if (entry.getValue().x + scrollOffset < 326 && entry.getValue().x + scrollOffset > -60)
+                    guiGraphics.blit(
+                            entry.getKey(),
+                            blackScreenX + entry.getValue().x + ((int) scrollOffset),
+                            blackScreenY + entry.getValue().y,
+                            0, 0, 45, 45, 45, 45);
+            }
+
+            //render lenses with occlusion outside the correct area
+            if (mouseX - uiStartX > 140 && mouseX - uiStartX < 540 && mouseY - uiStartY > -30 && mouseY - uiStartY < 280)
+            {
+                PoseStack poseStack = guiGraphics.pose();
+                poseStack.pushPose();
+
+                RenderSystem.setShaderTexture(0, LENSES);
+
+                List<Float> scales = Lists.newArrayList();
+                for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
+
+                RevealRenderUtil.renderWithOcclusion(poseStack, mouseX - 45, mouseY - 45, 90, 90, borderOfOcclusion, scales);
+
+                poseStack.popPose();
+            }
+
+            //render inventory overlay
+            guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 0, 0, 512, 256, 514, 257);
+
+        }
 
 
     }
@@ -278,17 +359,12 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-        RenderSystem.setShaderTexture(0, INV_AND_BORDER_BACKGROUND);
-
-        guiGraphics.drawString(this.font, Component.literal("test string that's very cool"), uiStartX, uiStartY, 16250871);
-        guiGraphics.renderItem(ModBlocks.LUNARVEIL.toStack(), 100, 100);
+        //guiGraphics.drawString(this.font, Component.literal("test string that's very cool"), uiStartX, uiStartY, 16250871);
+        //guiGraphics.renderItem(ModBlocks.LUNARVEIL.toStack(), 100, 100);
 
         this.renderTooltip(guiGraphics, mouseX, mouseY);
 
     }
-
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)

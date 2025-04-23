@@ -10,7 +10,12 @@ import java.util.List;
 public class RevealRenderUtil
 {
 
-    public static void renderRevealingPanel(PoseStack matrices, float x, float y, float sizeX, float sizeY, List<Vector2f> points, List<Float> revealRadiuses) {
+    public static void renderWithOcclusion(PoseStack matrices, float startPosX, float startPosY, float sizeX, float sizeY, List<Vector2f> pointsToOcclude, List<Float> radiusesOfEachOcclusion) {
+
+        //most of the code shamelessly stolen from RELICS
+        //https://github.com/Octo-Studios/relics
+        //I wish I were smart enough to understand it
+
         RenderSystem.enableBlend();
         float time = 0;
         float[] arr = new float[256];
@@ -22,12 +27,12 @@ public class RevealRenderUtil
             float lmx;
             float lmy;
 
-            if (i / 2 < points.size()) {
-                Vector2f v = points.get(i / 2);
-                lmx = (v.x - x) / sizeX;
-                lmy = (v.y - y) / sizeY;
+            if (i / 2 < pointsToOcclude.size()) {
+                Vector2f v = pointsToOcclude.get(i / 2);
+                lmx = (v.x - startPosX) / sizeX;
+                lmy = (v.y - startPosY) / sizeY;
 
-                radiuses[i / 2] = revealRadiuses.get(i / 2);
+                radiuses[i / 2] = radiusesOfEachOcclusion.get(i / 2);
             } else {
                 radiuses[i / 2] = 0.0001f;
                 lmx = -100;
@@ -58,14 +63,14 @@ public class RevealRenderUtil
 
         BufferBuilder builder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
 
-        builder.addVertex(mat, x, y, 0).setUv(0, 0);
-        builder.addVertex(mat, x + sizeX, y, 0).setUv(1, 0);
-        builder.addVertex(mat, x + sizeX, y + sizeY, 0).setUv(1, 1);
-        builder.addVertex(mat, x, y + sizeY, 0).setUv(0, 1);
-        builder.addVertex(mat, x, y + sizeY, 0).setUv(0, 1);
-        builder.addVertex(mat, x + sizeX, y + sizeY, 0).setUv(1, 1);
-        builder.addVertex(mat, x + sizeX, y, 0).setUv(1, 0);
-        builder.addVertex(mat, x, y, 0).setUv(0, 0);
+        builder.addVertex(mat, startPosX, startPosY, 0).setUv(0, 0);
+        builder.addVertex(mat, startPosX + sizeX, startPosY, 0).setUv(1, 0);
+        builder.addVertex(mat, startPosX + sizeX, startPosY + sizeY, 0).setUv(1, 1);
+        builder.addVertex(mat, startPosX, startPosY + sizeY, 0).setUv(0, 1);
+        builder.addVertex(mat, startPosX, startPosY + sizeY, 0).setUv(0, 1);
+        builder.addVertex(mat, startPosX + sizeX, startPosY + sizeY, 0).setUv(1, 1);
+        builder.addVertex(mat, startPosX + sizeX, startPosY, 0).setUv(1, 0);
+        builder.addVertex(mat, startPosX, startPosY, 0).setUv(0, 0);
 
 
         BufferUploader.drawWithShader(builder.buildOrThrow());
