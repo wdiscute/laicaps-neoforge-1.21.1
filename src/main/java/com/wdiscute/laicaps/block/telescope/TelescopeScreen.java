@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -52,15 +53,17 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     private static final Logger log = LoggerFactory.getLogger(TelescopeScreen.class);
 
 
+    private static TelescopeMenu menu;
+
     private int counter = 0;
     private int scrollOffset = 0;
 
     Random r = new Random();
 
-    int uiStartX = (width - imageWidth) / 2;
-    int uiStartY = (height - imageHeight) / 2;
-    int blackScreenX = uiStartX + 178;
-    int blackScreenY = uiStartX + 3;
+    int uiX = (width - imageWidth) / 2;
+    int uiY = (height - imageHeight) / 2;
+    int canvasX = uiX + 178;
+    int canvasY = uiX + 3;
 
     int scrollBuffer = 0;
     int scrollBufferStrength = 0;
@@ -68,6 +71,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     int state = 0;
 
     List<Vector2f> borderOfOcclusion = Lists.newArrayList();
+
+    private int planetSelected = 0;
 
     List<Map.Entry<ResourceLocation, Vector2i>> planetsList = new ArrayList<>();
 
@@ -89,36 +94,36 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         this.imageWidth = 512;
         this.imageHeight = 256;
 
-        uiStartX = (width - imageWidth) / 2;
-        uiStartY = (height - imageHeight) / 2;
-        blackScreenX = uiStartX + 178;
-        blackScreenY = uiStartY + 3;
+        uiX = (width - imageWidth) / 2;
+        uiY = (height - imageHeight) / 2;
+        canvasX = uiX + 178;
+        canvasY = uiY + 3;
 
         //set borderOfOcclusion
         {
             //north
             for (int i = 0; i < 18; i++)
-                borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY - 43));
+                borderOfOcclusion.add(new Vector2f(uiX + 180 + (i * 20), uiY - 43));
             //south
             for (int i = 0; i < 18; i++)
-                borderOfOcclusion.add(new Vector2f(uiStartX + 180 + (i * 20), uiStartY + 299));
+                borderOfOcclusion.add(new Vector2f(uiX + 180 + (i * 20), uiY + 299));
             //west
             for (int i = 0; i < 18; i++)
-                borderOfOcclusion.add(new Vector2f(uiStartX + 132, uiStartY - 40 + (i * 20)));
+                borderOfOcclusion.add(new Vector2f(uiX + 132, uiY - 40 + (i * 20)));
             //east
             for (int i = 0; i < 18; i++)
-                borderOfOcclusion.add(new Vector2f(uiStartX + 555, uiStartY - 40 + (i * 20)));
+                borderOfOcclusion.add(new Vector2f(uiX + 555, uiY - 40 + (i * 20)));
         }
 
         //add zoom in and zoom out button
         {
             starButtonLeft = this.addRenderableWidget(TelescopeStarButton.builder(button ->
                             scrollBuffer += (scrollOffset < -900 || scrollOffset > 200) ? 20 : 39)
-                    .bounds(uiStartX + 14, uiStartY + 13, 20, 20).build());
+                    .bounds(uiX + 14, uiY + 13, 20, 20).build());
 
             starButtonRight = this.addRenderableWidget(TelescopeStarButton.builder(button ->
                             scrollBuffer -= (scrollOffset < -900 || scrollOffset > 200) ? 20 : 39)
-                    .bounds(uiStartX + 136, uiStartY + 13, 20, 20).build());
+                    .bounds(uiX + 136, uiY + 13, 20, 20).build());
         }
 
         //add stars ResourceLocations to respective lists
@@ -173,6 +178,10 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     protected void containerTick()
     {
 
+        if(state == 0 && menu.blockEntity.inventory.getStackInSlot(0).is(ModItems.ASTROLOGY_NOTEBOOK.get()))
+        {
+            state = 1;
+        }
         //close if screen resized with a 1 tick delay to fix that one bug that was weird and not cool :(
         if (counter == -1) onClose();
         counter++;
@@ -209,6 +218,15 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     }
 
     @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    {
+
+        state = 2;
+        return super.mouseClicked(mouseX, mouseY, button);
+
+    }
+
+    @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY)
     {
 
@@ -217,16 +235,47 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
 
-        //scroll by hovering the sides
-        if (mouseX - uiStartX > 175 && mouseX - uiStartX < 200 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset < 0)
-            scrollBuffer = 25;
-        if (mouseX - uiStartX > 487 && mouseX - uiStartX < 517 && mouseY - uiStartY > 3 && mouseY - uiStartY < 252 && scrollOffset > -700)
-            scrollBuffer = -25;
+        //scroll by hovering the sides - commented out because its annoying af, maybe make it an option?
+//        if (mouseX - uiX > 175 && mouseX - uiX < 200 && mouseY - uiY > 3 && mouseY - uiY < 252 && scrollOffset < 0)
+//            scrollBuffer = 25;
+//        if (mouseX - uiX > 487 && mouseX - uiX < 517 && mouseY - uiY > 3 && mouseY - uiY < 252 && scrollOffset > -700)
+//            scrollBuffer = -25;
 
+
+
+        //planet selection screen
         if (state == 0)
         {
+            //renders BLACK OVERLAY sky background
+            guiGraphics.blit(BLACK_OVERLAY, canvasX, canvasY, 0, 0, 331, 250, 331, 250);
+
+            //renders dark stars foreground from list
+            for (Map.Entry<ResourceLocation, Vector2i> entry : starsFGList)
+            {
+                //if entry is inside the borders of the black screen
+                if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10)
+                    guiGraphics.blit(
+                            entry.getKey(),
+                            canvasX + entry.getValue().x + scrollOffset,
+                            canvasY + entry.getValue().y,
+                            0, 0, 45, 45, 45, 45);
+            }
+
+            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.telescope.missing"), uiX + 10, uiY + 60, 13186614, true);
+
+            //render inventory overlay
+            guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiX, uiY, 0, 0, 512, 256, 512, 256);
+
+
+        }
+
+
+
+        //planet selection screen
+        if (state == 1)
+        {
             //renders purple flat sky background
-            guiGraphics.blit(SKY_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 512, 256);
+            guiGraphics.blit(SKY_BACKGROUND, uiX, uiY, 1, 1, 512, 256, 512, 256);
 
             //renders stars background from list
             for (Map.Entry<ResourceLocation, Vector2i> entry : starsBGList)
@@ -235,8 +284,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10)
                     guiGraphics.blit(
                             entry.getKey(),
-                            blackScreenX + entry.getValue().x + scrollOffset,
-                            blackScreenY + entry.getValue().y,
+                            canvasX + entry.getValue().x + scrollOffset,
+                            canvasY + entry.getValue().y,
                             0, 0, 45, 45, 45, 45);
             }
 
@@ -252,7 +301,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 List<Float> scales = Lists.newArrayList();
                 for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, blackScreenX - 50 + (scrollOffset), blackScreenY + 69, 90, 90, borderOfOcclusion, scales);
+                RevealRenderUtil.renderWithOcclusion(poseStack, canvasX - 50 + (scrollOffset), canvasY + 69, 90, 90, borderOfOcclusion, scales);
 
                 poseStack.popPose();
             }
@@ -271,7 +320,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                     List<Float> scales = Lists.newArrayList();
                     for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
 
-                    RevealRenderUtil.renderWithOcclusion(poseStack, blackScreenX + entry.getValue().x + (scrollOffset), blackScreenY + entry.getValue().y, 90, 90, borderOfOcclusion, scales);
+                    RevealRenderUtil.renderWithOcclusion(poseStack, canvasX + entry.getValue().x + (scrollOffset), canvasY + entry.getValue().y, 90, 90, borderOfOcclusion, scales);
 
                     poseStack.popPose();
                 }
@@ -279,17 +328,16 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //render inventory overlay
-            guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 0, 0, 512, 256, 514, 257);
+            guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiX, uiY, 0, 0, 512, 256, 512, 256);
 
 
         }
-
 
         //2 = planet searching
         if (state == 2)
         {
             //renders purple flat sky background
-            guiGraphics.blit(SKY_BACKGROUND, uiStartX, uiStartY, 1, 1, 512, 256, 512, 256);
+            guiGraphics.blit(SKY_BACKGROUND, uiX, uiY, 1, 1, 512, 256, 512, 256);
 
             //renders stars background from list
             for (Map.Entry<ResourceLocation, Vector2i> entry : starsBGList)
@@ -298,8 +346,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10)
                     guiGraphics.blit(
                             entry.getKey(),
-                            blackScreenX + entry.getValue().x + scrollOffset,
-                            blackScreenY + entry.getValue().y,
+                            canvasX + entry.getValue().x + scrollOffset,
+                            canvasY + entry.getValue().y,
                             0, 0, 45, 45, 45, 45);
             }
 
@@ -310,7 +358,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, uiStartX + 178, uiStartY + 3, 331, 250,
+                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
                         Lists.newArrayList(new Vector2f(mouseX, mouseY)),
                         Lists.newArrayList(0.08f));
 
@@ -324,13 +372,13 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 if (entry.getValue().x + scrollOffset < 326 && entry.getValue().x + scrollOffset > -60)
                     guiGraphics.blit(
                             entry.getKey(),
-                            blackScreenX + entry.getValue().x + ((int) scrollOffset),
-                            blackScreenY + entry.getValue().y,
+                            canvasX + entry.getValue().x + ((int) scrollOffset),
+                            canvasY + entry.getValue().y,
                             0, 0, 45, 45, 45, 45);
             }
 
             //render lenses with occlusion outside the correct area
-            if (mouseX - uiStartX > 140 && mouseX - uiStartX < 540 && mouseY - uiStartY > -30 && mouseY - uiStartY < 280)
+            if (mouseX - uiX > 140 && mouseX - uiX < 540 && mouseY - uiY > -30 && mouseY - uiY < 280)
             {
                 PoseStack poseStack = guiGraphics.pose();
                 poseStack.pushPose();
@@ -346,7 +394,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //render inventory overlay
-            guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiStartX, uiStartY, 0, 0, 512, 256, 514, 257);
+            guiGraphics.blit(INV_AND_BORDER_BACKGROUND, uiX, uiY, 0, 0, 512, 256, 512, 256);
 
         }
 
@@ -374,9 +422,10 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
     }
 
-    public TelescopeScreen(TelescopeMenu menu, Inventory playerInventory, Component title)
+    public TelescopeScreen(TelescopeMenu telescopeMenu, Inventory playerInventory, Component title)
     {
-        super(menu, playerInventory, title);
+        super(telescopeMenu, playerInventory, title);
+        menu = telescopeMenu;
     }
 
     @Override
