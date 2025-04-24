@@ -38,6 +38,8 @@ public class AstrologyTableBlockEntity extends BlockEntity implements MenuProvid
         }
     };
 
+
+
     public void clearContents()
     {
         inventory.setStackInSlot(0, ItemStack.EMPTY);

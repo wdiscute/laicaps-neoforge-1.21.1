@@ -33,7 +33,7 @@ public class AstrologyTableBlock extends HorizontalDirectionalBlock implements E
     {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof AstrologyTableBlockEntity atbe)
         {
-            player.openMenu(new SimpleMenuProvider(atbe, Component.literal("Telescope")), pos);
+            player.openMenu(new SimpleMenuProvider(atbe, Component.literal("Astrology Table")), pos);
             return ItemInteractionResult.SUCCESS;
         }
 

@@ -1,6 +1,8 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
+import com.wdiscute.laicaps.block.astrologytable.AstrologyTableMenu;
+import com.wdiscute.laicaps.block.astrologytable.AstrologyTableScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.entity.ModEntities;
@@ -117,6 +119,7 @@ public class Laicaps
         public static void registerScreens(RegisterMenuScreensEvent event)
         {
             event.register(ModMenuTypes.TELESCOPE_MENU.get(), TelescopeScreen::new);
+            event.register(ModMenuTypes.ASTROLOGY_TABLE_MENU.get(), AstrologyTableScreen::new);
         }
 
     }
