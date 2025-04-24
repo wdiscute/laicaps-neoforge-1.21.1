@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "teleporters",
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "W": {
+      "item": "#minecraft:wooden_slabs"
+    },
+    "L": {
+      "item": "#minecraft:logs"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SBS",
+    "LWL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "laicaps:telescope_stand"
+  }
+}

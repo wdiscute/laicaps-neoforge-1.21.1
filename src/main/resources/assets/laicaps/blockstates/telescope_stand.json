@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "laicaps:block/telescope_stand",
+      "y": 90
+    },
+
+    "facing=north": {
+      "model": "laicaps:block/telescope_stand"
+    },
+
+    "facing=south": {
+      "model": "laicaps:block/telescope_stand",
+      "y": 180
+    },
+
+    "facing=west": {
+      "model": "laicaps:block/telescope_stand",
+      "y": 270
+    }
+  }
+}

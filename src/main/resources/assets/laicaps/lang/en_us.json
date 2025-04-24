@@ -52,7 +52,11 @@
 
 
   "block.laicaps.telescope": "Telescope",
-  "block.laicaps.telescope_base": "Telescope Base",
+  "block.laicaps.telescope_stand": "Telescope Stand",
+  "gui.laicaps.telescope.missing": "Insert your Astrology Notebook",
+
+  "item.laicaps.astrology_notebook": "Astrology Notebook",
+
 
 
   "item.laicaps.asha_teleporter": "Asha Teleporter",
