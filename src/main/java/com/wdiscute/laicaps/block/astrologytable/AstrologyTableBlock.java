@@ -1,14 +1,11 @@
-package com.wdiscute.laicaps.block.telescope;
+package com.wdiscute.laicaps.block.astrologytable;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.ModBlocks;
-import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -19,19 +16,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class TelescopeBlock extends HorizontalDirectionalBlock implements EntityBlock
+public class AstrologyTableBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
-    public TelescopeBlock(Properties properties)
+    public AstrologyTableBlock(Properties properties)
     {
         super(properties);
     }
@@ -39,9 +31,9 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof AstrologyTableBlockEntity atbe)
         {
-            player.openMenu(new SimpleMenuProvider(tbe, Component.literal("Telescope")), pos);
+            player.openMenu(new SimpleMenuProvider(atbe, Component.literal("Telescope")), pos);
             return ItemInteractionResult.SUCCESS;
         }
 
@@ -64,19 +56,13 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        BlockState bellow = context.getLevel().getBlockState(context.getClickedPos().below());
-        if(bellow.is(ModBlocks.TELESCOPE_STAND))
-        {
-            return defaultBlockState().setValue(FACING, bellow.getValue(FACING));
-        }
-        context.getPlayer().displayClientMessage(Component.translatable("block.laicaps.telescope.place"),true);
-        return null;
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState)
     {
-        return ModBlockEntity.TELESCOPE.get().create(pPos, pState);
+        return ModBlockEntity.ASTROLOGY_TABLE.get().create(pPos, pState);
     }
 
     @Override
@@ -92,6 +78,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
+
 }
 
 

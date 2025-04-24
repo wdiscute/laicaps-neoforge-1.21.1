@@ -57,6 +57,9 @@
   "gui.laicaps.telescope.missing": "Insert your Astrology Notebook",
 
   "item.laicaps.astrology_notebook": "Astrology Notebook",
+  "item.laicaps.astrology_notebook.use": "§cPlace at an Astrology Table to open",
+
+  "item.laicaps.astrology_table": "Astrology Notebook",
 
 
 

@@ -1,8 +1,6 @@
 package com.wdiscute.laicaps.item;
 
-import com.wdiscute.laicaps.sound.ModSounds;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -27,6 +25,8 @@ public class AstrologyNotebookItem extends Item
     {
         Level level = pContext.getLevel();
 
+
+        pContext.getPlayer().displayClientMessage(Component.translatable("item.laicaps.astrology_notebook.use"), true);
 
         pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, 1);
         level.playSound(null, pContext.getClickedPos(), SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS);

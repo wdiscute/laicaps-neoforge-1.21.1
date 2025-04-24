@@ -1,6 +1,8 @@
-package com.wdiscute.laicaps.block.telescope;
+package com.wdiscute.laicaps.block.astrologytable;
 
 import com.wdiscute.laicaps.ModBlockEntity;
+import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-public class TelescopeBlockEntity extends BlockEntity implements MenuProvider
+public class AstrologyTableBlockEntity extends BlockEntity implements MenuProvider
 {
 
 
@@ -55,13 +57,13 @@ public class TelescopeBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public Component getDisplayName()
     {
-        return Component.literal("Telescope");
+        return Component.literal("Astrology Table");
     }
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        return new TelescopeMenu(i, inventory, this);
+        return new AstrologyTableMenu(i, inventory, this);
     }
 
     @Override
@@ -82,9 +84,9 @@ public class TelescopeBlockEntity extends BlockEntity implements MenuProvider
 
     }
 
-    public TelescopeBlockEntity(BlockPos pPos, BlockState pBlockState)
+    public AstrologyTableBlockEntity(BlockPos pPos, BlockState pBlockState)
     {
-        super(ModBlockEntity.TELESCOPE.get(), pPos, pBlockState);
+        super(ModBlockEntity.ASTROLOGY_TABLE.get(), pPos, pBlockState);
     }
 
 

@@ -221,7 +221,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
 
-        state = 2;
+        //state = 2;
         return super.mouseClicked(mouseX, mouseY, button);
 
     }
