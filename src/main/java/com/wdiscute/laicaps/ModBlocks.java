@@ -124,8 +124,8 @@ public class ModBlocks
                     )
             );
 
-    public static final DeferredBlock<Block> TELESCOPE_BASE =
-            registerBlock("telescope_base", () ->
+    public static final DeferredBlock<Block> TELESCOPE_STAND =
+            registerBlock("telescope_stand", () ->
                     new TelescopeBaseBlock(BlockBehaviour.Properties.of()
                             .strength(6)
                             .sound(SoundType.WOOD)

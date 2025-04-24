@@ -27,9 +27,9 @@ public class ModCreativeModeTabs
                     .displayItems( (itemDisplayParameters, output) -> {
 
                         //telescope
-                        output.accept(ModBlocks.TELESCOPE_BASE.get());
+                        output.accept(ModBlocks.TELESCOPE_STAND.get());
                         output.accept(ModBlocks.TELESCOPE.get());
-                        //output.accept(ModItems.ASTROLOGY_NOTEBOOK.get());
+                        output.accept(ModItems.ASTROLOGY_NOTEBOOK.get());
 
                         //teleporters
                         output.accept(ModBlocks.ASHA_TELEPORTER.get());
