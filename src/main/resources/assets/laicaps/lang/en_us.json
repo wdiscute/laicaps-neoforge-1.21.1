@@ -53,6 +53,7 @@
 
   "block.laicaps.telescope": "Telescope",
   "block.laicaps.telescope_stand": "Telescope Stand",
+  "block.laicaps.telescope.place": "§cThe telescope must be placed on a stand",
   "gui.laicaps.telescope.missing": "Insert your Astrology Notebook",
 
   "item.laicaps.astrology_notebook": "Astrology Notebook",

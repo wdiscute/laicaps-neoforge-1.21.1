@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.block.telescope;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -63,7 +64,13 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        return defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+        BlockState bellow = context.getLevel().getBlockState(context.getClickedPos().below());
+        if(bellow.is(ModBlocks.TELESCOPE_STAND))
+        {
+            return defaultBlockState().setValue(FACING, bellow.getValue(FACING));
+        }
+        context.getPlayer().displayClientMessage(Component.translatable("block.laicaps.telescope.place"),true);
+        return null;
     }
 
     @Override
