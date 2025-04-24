@@ -2,7 +2,7 @@ package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
-import com.wdiscute.laicaps.component.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.client.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
