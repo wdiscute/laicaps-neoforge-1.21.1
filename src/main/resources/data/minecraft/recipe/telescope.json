@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "teleporters",
+  "key": {
+    "S": {
+      "item": "minecraft:spyglass"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "L": {
+      "item": "minecraft:glass"
+    }
+  },
+  "pattern": [
+    " GL",
+    "GSG",
+    "DG "
+  ],
+  "result": {
+    "count": 1,
+    "id": "laicaps:telescope"
+  }
+}
