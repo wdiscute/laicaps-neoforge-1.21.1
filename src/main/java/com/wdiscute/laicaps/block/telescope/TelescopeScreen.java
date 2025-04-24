@@ -60,10 +60,10 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
     Random r = new Random();
 
-    int uiX = (width - imageWidth) / 2;
-    int uiY = (height - imageHeight) / 2;
-    int canvasX = uiX + 178;
-    int canvasY = uiX + 3;
+    int uiX;
+    int uiY;
+    int canvasX;
+    int canvasY;
 
     int scrollBuffer = 0;
     int scrollBufferStrength = 0;

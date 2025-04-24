@@ -34,18 +34,18 @@ public class AstrologyTableMenu extends AbstractContainerMenu
         {
             for (int l = 0; l < 9; ++l)
             {
-                this.addSlot(new Slot(inv, l + i * 9 + 9, (8 + l * 18) - 168, 84 + i * 18));
+                this.addSlot(new Slot(inv, l + i * 9 + 9, (8 + l * 18) - 168, 77 + i * 18));
             }
         }
 
         //player hotbar
         for (int i = 0; i < 9; ++i)
         {
-            this.addSlot(new Slot(inv, i, (8 + i * 18)  - 168, 142));
+            this.addSlot(new Slot(inv, i, (8 + i * 18)  - 168, 135));
         }
 
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, -88, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, -88, 28));
     }
 
 
