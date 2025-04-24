@@ -2,6 +2,7 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.ModBoatEntity;
+import com.wdiscute.laicaps.item.AstrologyNotebookItem;
 import com.wdiscute.laicaps.item.ModFoodProperties;
 import com.wdiscute.laicaps.item.ChiselItem;
 
@@ -31,6 +32,12 @@ public class ModItems
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
             () -> new ChiselItem(new Item.Properties()
                     .rarity(Rarity.EPIC)));
+
+    public static final DeferredItem<Item> ASTROLOGY_NOTEBOOK = ITEMS.register("astrology_notebook",
+            () -> new AstrologyNotebookItem(new Item.Properties()
+                    .rarity(Rarity.EPIC)
+                    .stacksTo(1)
+            ));
 
 
     //
