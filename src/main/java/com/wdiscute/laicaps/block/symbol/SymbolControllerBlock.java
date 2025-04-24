@@ -2,15 +2,13 @@ package com.wdiscute.laicaps.block.symbol;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.component.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -38,7 +36,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class SymbolControllerBlock extends HorizontalDirectionalBlock implements EntityBlock
