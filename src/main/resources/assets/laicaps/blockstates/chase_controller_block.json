@@ -144,13 +144,13 @@
       "model": "laicaps:block/chase_controller_block_77",
       "y": 90
     },
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     "facing=north,waypoints_completed=0,waypoints=0,": {
       "model": "laicaps:block/chase_controller_block_00"
     },

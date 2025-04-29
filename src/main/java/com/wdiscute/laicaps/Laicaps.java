@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -45,6 +46,11 @@ public class Laicaps
     {
 
 
+    }
+
+    public static ResourceLocation rl(String s)
+    {
+        return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, s);
     }
 
 

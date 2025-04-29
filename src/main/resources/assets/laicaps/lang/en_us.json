@@ -56,6 +56,27 @@
   "block.laicaps.telescope.place": "§cThe telescope must be placed on a stand",
   "gui.laicaps.telescope.missing": "Insert your Astrology Notebook",
 
+
+  "gui.laicaps.telescope.tooltip.ember.0": "§6        EMBER    ",
+  "gui.laicaps.telescope.tooltip.ember.1": "ember is very cool wowie :3",
+  "gui.laicaps.telescope.tooltip.ember.2": "(so cool...)",
+  "gui.laicaps.telescope.tooltip.ember_blur.0": "§6§k    EMBER",
+  "gui.laicaps.telescope.tooltip.ember_blur.1": "§c??????",
+  "gui.laicaps.telescope.tooltip.ember_blur.2": "§c??????",
+  "gui.laicaps.telescope.tooltip.ember_blur.3": "§c??????",
+  "gui.laicaps.telescope.tooltip.ember_blur.4": "§c??????",
+  "gui.laicaps.telescope.tooltip.ember_blur.5": "§c??????",
+  "gui.laicaps.telescope.tooltip.ember_blur.6": "§c??????",
+  "gui.laicaps.telescope.tooltip.ember_blur.7": "§c> Click to Stargaze <",
+  "gui.laicaps.telescope.tooltip.asha.0": "§d    ASHA    ",
+  "gui.laicaps.telescope.tooltip.asha_blur.0": "§d§k       ASHA    ",
+  "gui.laicaps.telescope.tooltip.asha_blur.1": "§c> Click to Stargaze <",
+  "gui.laicaps.telescope.tooltip.overworld.0": "§2    OVERWORLD    ",
+  "gui.laicaps.telescope.tooltip.lunamar.0": "§9    LUNAMAR    ",
+  "gui.laicaps.telescope.tooltip.lunamar_blur.0": "§9§k    LUNAMAR    ",
+  "gui.laicaps.telescope.tooltip.lunamar_blur.1": "§c> Click to Stargaze <",
+
+
   "item.laicaps.astrology_notebook": "Astrology Notebook",
   "item.laicaps.astrology_notebook.use": "§cPlace at an Astrology Table to open",
 

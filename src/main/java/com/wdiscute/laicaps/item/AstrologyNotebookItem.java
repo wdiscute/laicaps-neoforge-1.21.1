@@ -23,16 +23,12 @@ public class AstrologyNotebookItem extends Item
     @Override
     public InteractionResult useOn(UseOnContext pContext)
     {
-        Level level = pContext.getLevel();
 
-
-        pContext.getPlayer().displayClientMessage(Component.translatable("item.laicaps.astrology_notebook.use"), true);
-
+        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR, 1);
+        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, 1);
         pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, 1);
-        level.playSound(null, pContext.getClickedPos(), SoundEvents.BOOK_PAGE_TURN, SoundSource.BLOCKS);
+        pContext.getPlayer().displayClientMessage(Component.translatable("item.laicaps.astrology_notebook.use"), true);
         return InteractionResult.SUCCESS;
-
-
     }
 
 

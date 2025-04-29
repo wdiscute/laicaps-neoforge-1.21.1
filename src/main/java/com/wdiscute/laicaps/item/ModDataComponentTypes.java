@@ -19,7 +19,13 @@ public class ModDataComponentTypes
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> COORDINATES = register("coordinates",
             builder -> builder.persistent(BlockPos.CODEC));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ASTROLOGY_KNOWLEDGE_EMBER = register("astrology_knowledge_ember",
+            builder -> builder.persistent(ExtraCodecs.intRange(0, 5)));
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ASTROLOGY_KNOWLEDGE_ASHA = register("astrology_knowledge_asha",
+            builder -> builder.persistent(ExtraCodecs.intRange(0, 5)));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ASTROLOGY_KNOWLEDGE_LUNAMAR = register("astrology_knowledge_lunamar",
             builder -> builder.persistent(ExtraCodecs.intRange(0, 5)));
 
 

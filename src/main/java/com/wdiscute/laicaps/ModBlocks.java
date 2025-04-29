@@ -66,6 +66,19 @@ public class ModBlocks
     //`--'   `--' `--' `-----'   `-----'
     //
 
+    public static final DeferredBlock<Block> SALT =
+            registerBlock("salt", () ->
+                    new SaltBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.SCULK)
+                            .noOcclusion()
+                            .noCollission()
+                    )
+            );
+
+
+
+
 
     public static final DeferredBlock<Block> ASHA_TELEPORTER =
             registerBlock("asha_teleporter", () ->

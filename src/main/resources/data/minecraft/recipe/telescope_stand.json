@@ -7,10 +7,10 @@
       "item": "minecraft:book"
     },
     "W": {
-      "item": "#minecraft:wooden_slabs"
+      "tag": "minecraft:wooden_slabs"
     },
     "L": {
-      "item": "#minecraft:logs"
+      "tag": "minecraft:logs"
     },
     "S": {
       "item": "minecraft:stick"
