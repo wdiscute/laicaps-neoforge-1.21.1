@@ -1,0 +1,6 @@
+{
+    "parent": "laicaps:block/redstone_dust_side",
+    "textures": {
+        "line": "laicaps:block/redstone_dust_line0"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "laicaps:block/redstone_dust_dot",
+        "line": "laicaps:block/redstone_dust_line0"
+    },
+    "render_type":"cutout",
+    "elements": [
+        {   "from": [ 0, 0, 0.25 ],
+            "to": [ 16, 16, 0.25 ],
+            "shade": false,
+            "faces": {
+                "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#line"},
+                "north": { "uv": [ 16, 0, 0, 16 ], "texture": "#line"}
+            }
+        }
+    ]
+}
