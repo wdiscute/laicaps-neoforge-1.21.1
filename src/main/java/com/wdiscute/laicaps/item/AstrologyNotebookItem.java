@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -18,6 +19,20 @@ public class AstrologyNotebookItem extends Item
     public AstrologyNotebookItem(Properties pProperties)
     {
         super(pProperties);
+    }
+
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
+    {
+        if(stack.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) == null)
+        {
+            stack.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, 0);
+            stack.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, 0);
+            stack.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR, 0);
+        }
+
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
 
     @Override

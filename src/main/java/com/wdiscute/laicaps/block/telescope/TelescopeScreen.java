@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 import org.slf4j.Logger;
@@ -50,7 +51,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     private static final ResourceLocation LUNAMAR_BLUR = Laicaps.rl("textures/gui/telescope/lunamar_blur.png");
     private static final ResourceLocation LUNAMAR_BLUR_HIGHLIGHTED = Laicaps.rl("textures/gui/telescope/lunamar_blur_highlighted.png");
 
-    private static final ResourceLocation EMBER_SEARCH = Laicaps.rl("textures/gui/telescope/ember_search.png");
+    private static final ResourceLocation EMBER_SEARCH = Laicaps.rl("textures/gui/telescope/ember_searchwad.png");
     private static final ResourceLocation ASHA_SEARCH = Laicaps.rl("textures/gui/telescope/asha_search.png");
     private static final ResourceLocation LUNAMAR_SEARCH = Laicaps.rl("textures/gui/telescope/lunamar_search.png");
     private static ResourceLocation planet_being_searched;
@@ -196,26 +197,10 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         {
             state = 1;
             book = menu.blockEntity.inventory.getStackInSlot(0);
-
-            if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) == null)
-            {
-                book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, 0);
-            }
-
-            if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) == null)
-            {
-                book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, 0);
-            }
-
-            if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) == null)
-            {
-                book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR, 0);
-            }
-
             return;
         }
 
-        if (!menu.blockEntity.inventory.getStackInSlot(0).is(ModItems.ASTROLOGY_NOTEBOOK.get()))
+        if (!menu.blockEntity.inventory.getStackInSlot(0).equals(book))
         {
             state = 0;
             return;
@@ -269,6 +254,16 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
+        ItemStack test = menu.blockEntity.inventory.getStackInSlot(0);
+        test.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, 43);
+
+        menu.blockEntity.inventory.setStackInSlot(0, test);
+
+        menu.blockEntity.inventory.setStackInSlot(0, new ItemStack(Items.DIAMOND));
+
+        System.out.println(menu.blockEntity.getLevel());
+
+
         if (transition) return true;
         double x = mouseX - uiX;
         double y = mouseY - uiY;
@@ -309,6 +304,33 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 scrollOffset = -max_scrollOffset/2;
                 transition = true;
             }
+        }
+
+        if(state == 2)
+        {
+
+            if(Math.abs((canvasX + planet_being_searched_x + scrollOffset + 22) - mouseX) < 15 && Math.abs((canvasY + planet_being_searched_y + 22) - mouseY) < 15 )
+            {
+                if(planetSelected == 1)
+                {
+                    System.out.println("ran");
+                    book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) + 1);
+                    menu.blockEntity.inventory.setStackInSlot(0, book);
+                }
+
+                if(planetSelected == 2)
+                {
+
+                }
+
+                if(planetSelected == 4)
+                {
+
+                }
+
+            }
+
+
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
@@ -413,7 +435,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
                         Lists.newArrayList(new Vector2f(mouseX, mouseY)),
-                        Lists.newArrayList(((40 - counter - partialTick) / 2 * 0.08f)));
+                        Lists.newArrayList(((40 - counter - partialTick) / 4 * 0.08f)));
 
                 poseStack.popPose();
             }
@@ -491,9 +513,9 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
-                        Lists.newArrayList(new Vector2f(mouseX, mouseY)),
-                        Lists.newArrayList(0.08f));
+//                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
+//                        Lists.newArrayList(new Vector2f(mouseX, mouseY)),
+//                        Lists.newArrayList(0.08f));
 
                 poseStack.popPose();
             }
@@ -596,7 +618,9 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 list.add(Component.translatable("gui.laicaps.telescope.tooltip." + s + "." + i));
             } else
             {
-                if (i == 0) list.add(Component.literal("translation key missing! Report to @wdiscute on discord :3"));
+                if (i == 0) list.add(Component.literal("translation key missing! "));
+                if (i == 0) list.add(Component.literal("Report to @wdiscute on discord"));
+                if (i == 0) list.add(Component.literal("or whoever is translating the mod! :3"));
                 break;
             }
         }
