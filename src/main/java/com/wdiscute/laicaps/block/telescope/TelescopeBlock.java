@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.block.singleblocks.LunarveilBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,6 +30,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class TelescopeBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
     public TelescopeBlock(Properties properties)
@@ -41,11 +44,27 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
         {
-            player.openMenu(new SimpleMenuProvider(tbe, Component.literal("Telescope")), pos);
+            int numberOfDays = (int) (level.getDayTime() / 24000f);
+
+            if (level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 22000)
+            {
+                player.openMenu(new SimpleMenuProvider(tbe, Component.literal("Telescope")), pos);
+            }else
+            {
+                player.displayClientMessage(Component.translatable("block.laicaps.telescope.daytime"), true);
+            }
+
             return ItemInteractionResult.SUCCESS;
         }
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    {
+        if (!level.getBlockState(pos.below()).is(ModBlocks.TELESCOPE_STAND)) level.destroyBlock(pos, true, null);
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
     }
 
     @Override
@@ -65,11 +84,11 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
         BlockState bellow = context.getLevel().getBlockState(context.getClickedPos().below());
-        if(bellow.is(ModBlocks.TELESCOPE_STAND))
+        if (bellow.is(ModBlocks.TELESCOPE_STAND))
         {
             return defaultBlockState().setValue(FACING, bellow.getValue(FACING));
         }
-        context.getPlayer().displayClientMessage(Component.translatable("block.laicaps.telescope.place"),true);
+        context.getPlayer().displayClientMessage(Component.translatable("block.laicaps.telescope.place"), true);
         return null;
     }
 
@@ -86,8 +105,8 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
         {
             if (level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
             {
-               tbe.drops();
-               level.updateNeighbourForOutputSignal(pos, this);
+                tbe.drops();
+                level.updateNeighbourForOutputSignal(pos, this);
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);

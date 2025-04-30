@@ -54,6 +54,7 @@
   "block.laicaps.telescope": "Telescope",
   "block.laicaps.telescope_stand": "Telescope Stand",
   "block.laicaps.telescope.place": "§cThe telescope must be placed on a stand",
+  "block.laicaps.telescope.daytime": "§cIt's too bright to see anything through the telescope",
   "gui.laicaps.telescope.missing": "Insert your Astrology Notebook",
 
 
@@ -115,7 +116,6 @@
   "tooltip.laicaps.astrology_notebook.1" : "you note down all of your findings.",
   "tooltip.laicaps.astrology_notebook.2" : "Place at an Astrology Table",
   "tooltip.laicaps.astrology_notebook.3" : "to read your notes.",
-
 
   "item.laicaps.astrology_table": "Astrology Notebook",
 
