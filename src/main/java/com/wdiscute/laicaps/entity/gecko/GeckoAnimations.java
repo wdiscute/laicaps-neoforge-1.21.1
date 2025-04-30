@@ -99,6 +99,7 @@ public class GeckoAnimations
                                     AnimationChannel.Interpolations.LINEAR),
                             new Keyframe(4f, KeyframeAnimations.posVec(0f, 0f, 0f),
                                     AnimationChannel.Interpolations.LINEAR))).build();
+
     public static final AnimationDefinition MAGNAGECKO_WALK = AnimationDefinition.Builder.withLength(1f).looping()
             .addAnimation("Head",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,

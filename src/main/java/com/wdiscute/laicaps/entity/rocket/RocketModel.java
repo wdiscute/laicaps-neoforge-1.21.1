@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.entity.rocket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.entity.gecko.GeckoAnimations;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -43,7 +44,7 @@ public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
     {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.animate(entity.shakeAnimationState, RocketAnimation.ANIM_ROCKET_SHAKE, ageInTicks, 1f);
+        this.animate(entity.shakeAnimationState, GeckoAnimations.MAGNAGECKO_WALK, ageInTicks, 1f);
 
     }
 
