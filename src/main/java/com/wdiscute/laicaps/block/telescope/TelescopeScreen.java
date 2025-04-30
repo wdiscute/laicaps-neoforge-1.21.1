@@ -187,6 +187,12 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     @Override
     protected void containerTick()
     {
+        if(!menu.blockEntity.inventory.getStackInSlot(0).equals(book))
+        {
+            state = 1;
+            book = menu.blockEntity.inventory.getStackInSlot(0);
+        }
+
         if (state == 0 && menu.blockEntity.inventory.getStackInSlot(0).is(ModItems.ASTROLOGY_NOTEBOOK.get()))
         {
             state = 1;
@@ -194,12 +200,11 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             return;
         }
 
-
-//        if (!menu.blockEntity.inventory.getStackInSlot(0).equals(book))
-//        {
-//            state = 0;
-//            return;
-//        }
+        if (!menu.blockEntity.inventory.getStackInSlot(0).is(ModItems.ASTROLOGY_NOTEBOOK))
+        {
+            state = 0;
+            return;
+        }
 
         //close if screen resized with a 1 tick delay to fix that one bug that was weird and not cool :(
         if (counter == -1) onClose();
@@ -453,6 +458,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
             //render tooltip
             {
+                if(transitionMenu || transitionSearch) return;
                 List<Component> tooltips;
 
                 //ember
@@ -508,7 +514,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //render planet
-            if (planet_being_searched_x + scrollOffset < 285 && planet_being_searched_x + scrollOffset > -10)
+            if (planet_being_searched_x + scrollOffset < 285 && planet_being_searched_x + scrollOffset > -50)
                 guiGraphics.blit(
                         planet_being_searched,
                         canvasX + planet_being_searched_x + scrollOffset,
@@ -533,7 +539,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             for (Map.Entry<ResourceLocation, Vector2i> entry : starsFGList)
             {
                 //if entry is inside the borders of the black screen
-                if (entry.getValue().x + scrollOffset < 326 && entry.getValue().x + scrollOffset > -60)
+                if (entry.getValue().x + scrollOffset < 326 && entry.getValue().x + scrollOffset > -10)
                     guiGraphics.blit(
                             entry.getKey(),
                             canvasX + entry.getValue().x + ((int) scrollOffset),
@@ -656,8 +662,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
         }
 
-        String progressBefore = I18n.get("gui.laicaps.telescope.tooltip." + s + ".progress_before");
-        String progressAfter = I18n.get("gui.laicaps.telescope.tooltip." + s + ".progress_after");
+
 
         if (Objects.equals(s, "ember_blur") || Objects.equals(s, "asha_blur") || Objects.equals(s, "lunamar_blur"))
         {
@@ -667,7 +672,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             if (Objects.equals(s, "lunamar_blur"))
                 progress = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR);
 
-
+            String progressBefore = I18n.get("gui.laicaps.telescope.tooltip." + s + ".progress_before");
+            String progressAfter = I18n.get("gui.laicaps.telescope.tooltip." + s + ".progress_after");
             list.add(Component.literal(progressBefore + "[" + progress + "/4]" + progressAfter));
 
             list.add(Component.translatable("gui.laicaps.telescope.tooltip." + s + ".stargaze"));

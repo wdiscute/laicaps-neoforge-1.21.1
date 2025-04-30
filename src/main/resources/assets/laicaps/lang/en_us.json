@@ -111,6 +111,11 @@
 
   "item.laicaps.astrology_notebook": "Astrology Notebook",
   "item.laicaps.astrology_notebook.use": "§cPlace at an Astrology Table to open",
+  "tooltip.laicaps.astrology_notebook.0" : "A trusty Astrology Notebook where",
+  "tooltip.laicaps.astrology_notebook.1" : "you note down all of your findings.",
+  "tooltip.laicaps.astrology_notebook.2" : "Place at an Astrology Table",
+  "tooltip.laicaps.astrology_notebook.3" : "to read your notes.",
+
 
   "item.laicaps.astrology_table": "Astrology Notebook",
 
