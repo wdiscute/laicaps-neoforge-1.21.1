@@ -44,12 +44,37 @@ public class RocketEntity extends LivingEntity
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
         this.shakeAnimationState.start(this.tickCount);
-        System.out.println(this.shakeAnimationState.isStarted());
 
-//        if(hand == InteractionHand.OFF_HAND) return  InteractionResult.FAIL;
-//        player.startRiding(this);
+        if(hand == InteractionHand.OFF_HAND) return  InteractionResult.FAIL;
 
+        player.startRiding(this);
         return super.interactAt(player, vec, hand);
+    }
+
+    @Override
+    public boolean shouldRiderSit()
+    {
+        return true;
+    }
+
+    @Override
+    protected void positionRider(Entity passenger, MoveFunction callback)
+    {
+        Vec3 vec3 = this.getPassengerRidingPosition(passenger);
+        Vec3 vec31 = passenger.getVehicleAttachmentPoint(this);
+        callback.accept(passenger, vec3.x - vec31.x, vec3.y - vec31.y + 0.2f, vec3.z - vec31.z);
+    }
+
+    @Override
+    public boolean isNoGravity()
+    {
+        return true;
+    }
+
+    @Override
+    public void kill() {
+        this.remove(Entity.RemovalReason.KILLED);
+        this.gameEvent(GameEvent.ENTITY_DIE);
     }
 
     @Override
@@ -92,12 +117,6 @@ public class RocketEntity extends LivingEntity
     public Iterable<ItemStack> getArmorSlots()
     {
         return this.armorItems;
-    }
-
-    @Override
-    public boolean isNoGravity()
-    {
-        return true;
     }
 
     @Override

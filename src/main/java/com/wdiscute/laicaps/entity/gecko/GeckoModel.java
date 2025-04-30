@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.entity.gecko;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.entity.rocket.RocketAnimation;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,7 +15,7 @@ import net.minecraft.util.Mth;
 public class GeckoModel<T extends GeckoEntity> extends HierarchicalModel<T>
 {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "gecko"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "kaupengecko"), "main");
     private final ModelPart Body;
     private final ModelPart head;
 
