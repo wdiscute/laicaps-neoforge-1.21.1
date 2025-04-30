@@ -2,7 +2,7 @@ package com.wdiscute.laicaps.event;
 
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.entity.client.ModModelLayers;
+import com.wdiscute.laicaps.entity.boat.ModModelLayers;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;

@@ -1,10 +1,8 @@
-package com.wdiscute.laicaps.entity.client;
+package com.wdiscute.laicaps.entity.boat;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.entity.ModBoatEntity;
-import com.wdiscute.laicaps.entity.ModChestBoatEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

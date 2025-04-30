@@ -1,12 +1,13 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
-import com.wdiscute.laicaps.block.astrologytable.AstrologyTableMenu;
 import com.wdiscute.laicaps.block.astrologytable.AstrologyTableScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
+import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
+import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.entity.ModEntities;
-import com.wdiscute.laicaps.entity.client.ModBoatRenderer;
+import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
 import com.wdiscute.laicaps.particle.ModParticles;
 import com.wdiscute.laicaps.particle.WaterFlowerParticles;
@@ -111,6 +112,9 @@ public class Laicaps
 
             EntityRenderers.register(ModEntities.MOD_BOAT.get(), context -> new ModBoatRenderer(context, false));
             EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
+
+            EntityRenderers.register(ModEntities.GECKO.get(), GeckoRenderer::new);
+            EntityRenderers.register(ModEntities.ROCKET.get(), RocketRenderer::new);
 
         }
 

@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps;
 
 
-import com.wdiscute.laicaps.entity.ModBoatEntity;
+import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.item.AstrologyNotebookItem;
 import com.wdiscute.laicaps.item.ModFoodProperties;
 import com.wdiscute.laicaps.item.ChiselItem;

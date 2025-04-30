@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.item;
 
-import com.wdiscute.laicaps.entity.ModBoatEntity;
-import com.wdiscute.laicaps.entity.ModChestBoatEntity;
+import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
+import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;

@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.entity.client;
+package com.wdiscute.laicaps.entity.boat;
 
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.model.geom.ModelLayerLocation;
