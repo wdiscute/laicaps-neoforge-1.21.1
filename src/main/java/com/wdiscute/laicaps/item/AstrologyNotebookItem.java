@@ -39,9 +39,9 @@ public class AstrologyNotebookItem extends Item
     public InteractionResult useOn(UseOnContext pContext)
     {
 
-        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR, 1);
-        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, 1);
-        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, 1);
+        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR, 69);
+        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, 69);
+        pContext.getItemInHand().set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, 69);
         pContext.getPlayer().displayClientMessage(Component.translatable("item.laicaps.astrology_notebook.use"), true);
         return InteractionResult.SUCCESS;
     }

@@ -1,6 +1,8 @@
 package com.wdiscute.laicaps.block.telescope;
 
 import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.ModItems;
+import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.types.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -46,6 +48,34 @@ public class TelescopeMenu extends AbstractContainerMenu
 
 
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, -88, 35));
+    }
+
+    @Override
+    public boolean clickMenuButton(Player player, int id)
+    {
+        ItemStack book = this.blockEntity.inventory.getStackInSlot(0);
+
+        if(!book.is(ModItems.ASTROLOGY_NOTEBOOK)) return false;
+
+        if(id == 1)
+        {
+            book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) + 1);
+            this.blockEntity.inventory.setStackInSlot(0, book);
+        }
+
+        if(id == 2)
+        {
+            book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) + 1);
+            this.blockEntity.inventory.setStackInSlot(0, book);
+        }
+
+        if(id == 4)
+        {
+            book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR, book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) + 1);
+            this.blockEntity.inventory.setStackInSlot(0, book);
+        }
+
+        return super.clickMenuButton(player, id);
     }
 
 
