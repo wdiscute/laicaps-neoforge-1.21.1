@@ -9,11 +9,14 @@ import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
@@ -21,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.logging.Level;
 
 
 public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
@@ -187,6 +191,18 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     @Override
     protected void containerTick()
     {
+        ClientLevel level = Minecraft.getInstance().level;
+        Player player = Minecraft.getInstance().player;
+        int numberOfDays = (int) (level.getDayTime() / 24000f);
+
+        if (level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 23000)
+        {
+
+        }else
+        {
+            this.onClose();
+        }
+
         if(!menu.blockEntity.inventory.getStackInSlot(0).equals(book))
         {
             state = 1;

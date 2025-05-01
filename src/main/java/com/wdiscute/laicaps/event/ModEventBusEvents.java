@@ -5,6 +5,7 @@ import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.gecko.GeckoModel;
+import com.wdiscute.laicaps.entity.rocket.RocketEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketModel;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -25,7 +26,7 @@ public class ModEventBusEvents
     public static void registerAttributed(EntityAttributeCreationEvent event)
     {
         event.put(ModEntities.GECKO.get(), GeckoEntity.createAttributes().build());
-        event.put(ModEntities.ROCKET.get(), GeckoEntity.createAttributes().build());
+        event.put(ModEntities.ROCKET.get(), RocketEntity.createAttributes().build());
     }
 
 }

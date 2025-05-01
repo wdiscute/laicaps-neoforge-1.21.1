@@ -46,7 +46,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
         {
             int numberOfDays = (int) (level.getDayTime() / 24000f);
 
-            if (level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 22000)
+            if (level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 23000)
             {
                 player.openMenu(new SimpleMenuProvider(tbe, Component.literal("Telescope")), pos);
             }else

@@ -4,10 +4,12 @@
   "package": "com.wdiscute.laicaps.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "WaterFacesMixin"
+    "WaterFacesMixin",
+    "JumpingAcessor"
   ],
   "client": [
-    "WaterFacesMixin"
+    "WaterFacesMixin",
+    "JumpingAcessor"
   ],
   "injectors": {
     "defaultRequire": 1
