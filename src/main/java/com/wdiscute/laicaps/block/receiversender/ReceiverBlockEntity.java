@@ -141,10 +141,6 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
                     this.level.addFreshEntity(new ItemEntity(this.level, pos.getX() + 0.5f, pos.getY() + 1.2f, pos.getZ() + 0.5f, new ItemStack(randomItem)));
                 }
 
-                System.out.println(lastPlayerToClick);
-                System.out.println(this.level);
-                System.out.println(this.getBlockPos());
-
                 level.playSound(null, pos, SoundEvents.CRAFTER_CRAFT, SoundSource.BLOCKS, 1f, r.nextFloat(0.1f) + 0.95f);
 
             }

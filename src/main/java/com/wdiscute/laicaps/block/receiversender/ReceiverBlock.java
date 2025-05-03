@@ -200,7 +200,6 @@ public class ReceiverBlock extends Block implements EntityBlock
             shouldBeActive = false;
         }
 
-        //System.out.println("ran check with " + shouldBeActive);
         level.setBlockAndUpdate(pos, level.getBlockState(pos).setValue(ACTIVE, shouldBeActive));
 
     }
@@ -208,7 +207,6 @@ public class ReceiverBlock extends Block implements EntityBlock
     private void ChangeDirActive(Level level, BlockPos pos, Direction dir, boolean bActive)
     {
         BlockState bs = level.getBlockState(pos);
-        //System.out.println("Changed active with dir " + dir + " and bactive " + bActive);
 
         if (dir == Direction.NORTH)
             level.setBlockAndUpdate(pos, bs.setValue(NORTH_ACTIVE, bActive));
