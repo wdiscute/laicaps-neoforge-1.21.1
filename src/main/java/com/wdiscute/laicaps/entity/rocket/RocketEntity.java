@@ -1,43 +1,34 @@
 package com.wdiscute.laicaps.entity.rocket;
 
-import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RocketEntity extends LivingEntity implements PlayerRideable
+public class RocketEntity extends LivingEntity implements PlayerRideable, MenuProvider
 {
     private static final Logger log = LoggerFactory.getLogger(RocketEntity.class);
     private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY);
@@ -50,29 +41,48 @@ public class RocketEntity extends LivingEntity implements PlayerRideable
         super(entityType, level);
     }
 
+    public final ItemStackHandler inventory = new ItemStackHandler(1)
+    {
+        @Override
+        protected int getStackLimit(int slot, ItemStack stack)
+        {
+            return 1;
+        }
+
+    };
 
     @Override
     public void tick()
     {
         super.tick();
 
+
+        if (position().y > 200 && !level().isClientSide && getFirstPassenger() instanceof Player player)
+        {
+            if (!player.hasContainerOpen())
+                player.openMenu(new SimpleMenuProvider(this, Component.literal("Space")));
+        }
+
         if (getFirstPassenger() instanceof JumpingAcessor player)
         {
             setDeltaMovement(new Vec3(0, 0, 0));
-            if(player.isJumping()){
-                setDeltaMovement(new Vec3(0, 0.6f, 0));
-            }else
+            if (player.isJumping())
             {
-                if(!this.onGround())
+                setDeltaMovement(new Vec3(0, 0.6f, 0));
+            } else
+            {
+                if (!this.onGround())
                 {
                     setDeltaMovement(new Vec3(0, -0.1f, 0));
-
                 }
             }
         }
+    }
 
-
-
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
+    {
+        return new RocketSpaceMenu(i, inventory, this);
     }
 
     @Override
@@ -126,7 +136,7 @@ public class RocketEntity extends LivingEntity implements PlayerRideable
     @Override
     public void kill()
     {
-        this.remove(Entity.RemovalReason.KILLED);
+        this.remove(RemovalReason.KILLED);
         this.gameEvent(GameEvent.ENTITY_DIE);
     }
 

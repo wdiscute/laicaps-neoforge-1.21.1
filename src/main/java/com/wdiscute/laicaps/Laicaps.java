@@ -5,6 +5,8 @@ import com.wdiscute.laicaps.block.astrologytable.AstrologyTableScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
 import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
+import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
+import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
@@ -42,6 +44,11 @@ public class Laicaps
 {
     public static final String MOD_ID = "laicaps";
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final int MAX_EMBER_KNOWLEDGE = 4;
+    public static final int MAX_ASHA_KNOWLEDGE = 4;
+    public static final int MAX_OVERWORLD_KNOWLEDGE = 4;
+    public static final int MAX_LUNAMAR_KNOWLEDGE = 4;
 
     public static void appendHoverText(ItemStack stack, List<Component> tooltipComponents)
     {
@@ -130,6 +137,7 @@ public class Laicaps
         {
             event.register(ModMenuTypes.TELESCOPE_MENU.get(), TelescopeScreen::new);
             event.register(ModMenuTypes.ASTROLOGY_TABLE_MENU.get(), AstrologyTableScreen::new);
+            event.register(ModMenuTypes.ROCKET_SPACE_MENU.get(), RocketSpaceScreen::new);
         }
 
     }

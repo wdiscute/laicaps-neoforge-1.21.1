@@ -3,6 +3,8 @@ package com.wdiscute.laicaps.types;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.block.astrologytable.AstrologyTableMenu;
 import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
+import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
+import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -11,6 +13,8 @@ import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.network.IContainerFactory;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class ModMenuTypes
 {
@@ -25,7 +29,8 @@ public class ModMenuTypes
     public static final DeferredHolder<MenuType<?>, MenuType<AstrologyTableMenu>> ASTROLOGY_TABLE_MENU =
             registerMenuType("astrology_table_menu", AstrologyTableMenu::new);
 
-
+    public static final Supplier<MenuType<RocketSpaceMenu>> ROCKET_SPACE_MENU =
+            registerMenuType("rocket_space_menu", RocketSpaceMenu::new);
 
 
 

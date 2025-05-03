@@ -38,6 +38,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     private static final ResourceLocation ZOOM_BACKGROUND = Laicaps.rl("textures/gui/telescope/zoom_background.png");
     private static final ResourceLocation ZOOM_NOTCH = Laicaps.rl("textures/gui/telescope/zoom_notch.png");
     private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/telescope/planet_screen_background.png");
+    private static final ResourceLocation NO_BOOK_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/telescope/no_book_screen_background.png");
 
     private static final ResourceLocation EMBER = Laicaps.rl("textures/gui/telescope/ember.png");
     private static final ResourceLocation EMBER_HIGHLIGHTED = Laicaps.rl("textures/gui/telescope/ember_highlighted.png");
@@ -105,25 +106,12 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     private List<Map.Entry<ResourceLocation, Vector2i>> starsBGList = new ArrayList<>();
     private List<Map.Entry<ResourceLocation, Vector2i>> starsFGList = new ArrayList<>();
 
-    private static List<Component> ember_tooltip = new ArrayList<>();
-    private static List<Component> asha_tooltip = new ArrayList<>();
-    private static List<Component> overworld_tooltip = new ArrayList<>();
-    private static List<Component> lunamar_tooltip = new ArrayList<>();
-
     ItemStack book;
 
     @Override
     protected void init()
     {
         super.init();
-
-        //set tooltips components
-        {
-            ember_tooltip = tooltipHelper("ember");
-            asha_tooltip = tooltipHelper("asha");
-            overworld_tooltip = tooltipHelper("overworld");
-            lunamar_tooltip = tooltipHelper("lunamar");
-        }
 
         //set size and x/y's
         {
@@ -198,12 +186,12 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         if (level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 23000)
         {
 
-        }else
+        } else
         {
             this.onClose();
         }
 
-        if(!menu.blockEntity.inventory.getStackInSlot(0).equals(book))
+        if (!menu.blockEntity.inventory.getStackInSlot(0).equals(book))
         {
             state = 1;
             book = menu.blockEntity.inventory.getStackInSlot(0);
@@ -277,7 +265,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         if (state == 1)
         {
             //ember
-            if (x > 250 && x < 283 && y > 170 && y < 200 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) < 4)
+            if (x > 250 && x < 283 && y > 170 && y < 200 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) == 0)
             {
                 counter = 0;
                 planetSelected = 1;
@@ -289,7 +277,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //asha
-            if (x > 310 && x < 335 && y > 86 && y < 111 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) < 4)
+            if (x > 310 && x < 335 && y > 86 && y < 111 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) == 0)
             {
                 counter = 0;
                 planetSelected = 2;
@@ -301,7 +289,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //lunamar
-            if (x > 444 && x < 589 && y > 16 && y < 65 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) < 4)
+            if (x > 444 && x < 589 && y > 16 && y < 65 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) == 0)
             {
                 counter = 0;
                 planetSelected = 4;
@@ -363,25 +351,12 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         if (state == 0)
         {
             //renders BLACK OVERLAY sky background
-            guiGraphics.blit(BLACK_OVERLAY, canvasX, canvasY, 0, 0, 331, 250, 331, 250);
-
-            //renders dark stars foreground from list
-            for (Map.Entry<ResourceLocation, Vector2i> entry : starsFGList)
-            {
-                //if entry is inside the borders of the black screen
-                if (entry.getValue().x + scrollOffset < 285 && entry.getValue().x + scrollOffset > -10)
-                    guiGraphics.blit(
-                            entry.getKey(),
-                            canvasX + entry.getValue().x + scrollOffset,
-                            canvasY + entry.getValue().y,
-                            0, 0, 45, 45, 45, 45);
-            }
+            renderImage(guiGraphics, NO_BOOK_SCREEN_BACKGROUND);
 
             guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.telescope.missing"), uiX + 10, uiY + 60, 13186614, true);
 
             //render inventory overlay
             renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
-
 
         }
 
@@ -400,7 +375,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 RenderSystem.enableBlend();
 
                 //ember
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) < 4)
+                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) == 0)
                     rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_BLUR_HIGHLIGHTED : EMBER_BLUR;
                 else
                     rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_HIGHLIGHTED : EMBER;
@@ -408,7 +383,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
 
                 //asha
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) < 4)
+                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) == 0)
                     rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_BLUR_HIGHLIGHTED : ASHA_BLUR;
                 else
                     rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_HIGHLIGHTED : ASHA;
@@ -420,7 +395,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
 
                 //lunamar
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) < 4)
+                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) == 0)
                     rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_BLUR_HIGHLIGHTED : LUNAMAR_BLUR;
                 else
                     rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_HIGHLIGHTED : LUNAMAR;
@@ -474,34 +449,34 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
             //render tooltip
             {
-                if(transitionMenu || transitionSearch) return;
+                if (transitionMenu || transitionSearch) return;
                 List<Component> tooltips;
 
                 //ember
                 if (x > 250 && x < 283 && y > 170 && y < 200)
                 {
-                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER).intValue() < 4 ? tooltipHelper("ember_blur") : ember_tooltip;
+                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur") : tooltipHelper("ember");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
                 //asha
                 if (x > 310 && x < 335 && y > 86 && y < 111)
                 {
-                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA).intValue() < 4 ? tooltipHelper("asha_blur") : asha_tooltip;
+                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA).intValue() == 0 ? tooltipHelper("asha_blur") : tooltipHelper("asha");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
                 //overworld
                 if (x > 392 && x < 429 && y > 121 && y < 160)
                 {
-                    tooltips = overworld_tooltip;
+                    tooltips = tooltipHelper("overworld");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
                 //lunamar
                 if (x > 444 && x < 589 && y > 16 && y < 65)
                 {
-                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR).intValue() < 4 ? tooltipHelper("lunamar_blur") : lunamar_tooltip;
+                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR).intValue() == 0 ? tooltipHelper("lunamar_blur") : tooltipHelper("lunamar");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
@@ -661,17 +636,18 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
 
-    private List<Component> tooltipHelper(String s)
+    private List<Component> tooltipHelper(String input)
     {
         List<Component> list = new ArrayList<>();
         for (int i = 0; i < 100; i++)
         {
-            if (I18n.exists("gui.laicaps.telescope.tooltip." + s + "." + i))
+            if (I18n.exists("gui.laicaps.telescope.tooltip." + input + "." + i))
             {
-                list.add(Component.translatable("gui.laicaps.telescope.tooltip." + s + "." + i));
+                list.add(Component.translatable("gui.laicaps.telescope.tooltip." + input + "." + i));
             } else
             {
-                if (i == 0) list.add(Component.literal("translation key missing! "));
+                if (i == 0)
+                    list.add(Component.literal("translation key missing! gui.laicaps.telescope.tooltip." + input + "." + i));
                 if (i == 0) list.add(Component.literal("Report to @wdiscute on discord"));
                 if (i == 0) list.add(Component.literal("or whoever is translating the mod! :3"));
                 break;
@@ -679,21 +655,40 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         }
 
 
-
-        if (Objects.equals(s, "ember_blur") || Objects.equals(s, "asha_blur") || Objects.equals(s, "lunamar_blur"))
+        //add "there's more to research" and "travel possible"
         {
-            int progress = 0;
-            if (Objects.equals(s, "ember_blur")) progress = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER);
-            if (Objects.equals(s, "asha_blur")) progress = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA);
-            if (Objects.equals(s, "lunamar_blur"))
-                progress = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR);
+            if (Objects.equals(input, "ember"))
+            {
+                list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
+                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) < Laicaps.MAX_EMBER_KNOWLEDGE)
+                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
+            }
 
-            String progressBefore = I18n.get("gui.laicaps.telescope.tooltip." + s + ".progress_before");
-            String progressAfter = I18n.get("gui.laicaps.telescope.tooltip." + s + ".progress_after");
-            list.add(Component.literal(progressBefore + "[" + progress + "/4]" + progressAfter));
+            if (Objects.equals(input, "asha"))
+            {
+                list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
+                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) < Laicaps.MAX_ASHA_KNOWLEDGE)
+                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
+            }
 
-            list.add(Component.translatable("gui.laicaps.telescope.tooltip." + s + ".stargaze"));
+            if (Objects.equals(input, "overworld"))
+            {
+                list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
+            }
+
+            if (Objects.equals(input, "lunamar"))
+            {
+                list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
+                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
+                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
+            }
         }
+
+
+        //add .stargaze translation key at the end for blurred planets
+        if (Objects.equals(input, "ember_blur") || Objects.equals(input, "asha_blur") || Objects.equals(input, "lunamar_blur"))
+            list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.stargaze"));
+
 
         return list;
     }

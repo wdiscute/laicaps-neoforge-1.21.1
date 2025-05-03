@@ -58,56 +58,123 @@
   "gui.laicaps.telescope.missing": "Insert your Astrology Notebook",
 
 
-  "gui.laicaps.telescope.tooltip.ember.0": "§6         EMBER      ",
-  "gui.laicaps.telescope.tooltip.ember.1": "A flaming hot world :3",
-  "gui.laicaps.telescope.tooltip.ember.2": "     (so hot...)",
-  "gui.laicaps.telescope.tooltip.ember.3": "   (but also cold!?)",
+
+  "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
+  "gui.laicaps.telescope.tooltip.generic.research": "§c§l>§r §cThere is more to research here",
+  "gui.laicaps.telescope.tooltip.generic.stargaze": "§c§l>>>§r §cClick to Stargaze §c§l<<<§r",
+  "gui.laicaps.rocket.tooltip.generic.travel": "§c§l>>>§r §cClick to Travel §c§l<<<§r",
+
+
+
+  "gui.laicaps.telescope.tooltip.ember.0": "§6            EMBER      ",
+  "gui.laicaps.telescope.tooltip.ember.1": "    A flaming hot world :3",
+  "gui.laicaps.telescope.tooltip.ember.2": "          (so hot...)",
+  "gui.laicaps.telescope.tooltip.ember.3": "       (but also cold!?)",
   "gui.laicaps.telescope.tooltip.ember.4": "",
-  "gui.laicaps.telescope.tooltip.ember.5": "§a   Progress: [4/4]   ",
 
   "gui.laicaps.telescope.tooltip.ember_blur.0": "§6§k         EMBER",
   "gui.laicaps.telescope.tooltip.ember_blur.1": "",
   "gui.laicaps.telescope.tooltip.ember_blur.2": "    ????????????",
   "gui.laicaps.telescope.tooltip.ember_blur.3": "",
-  "gui.laicaps.telescope.tooltip.ember_blur.progress_before": "§c   Progress: ",
-  "gui.laicaps.telescope.tooltip.ember_blur.progress_after": "",
-  "gui.laicaps.telescope.tooltip.ember_blur.stargaze": "§c§l>§r §cClick to Stargaze §c§l<§r",
+
+
 
   "gui.laicaps.telescope.tooltip.asha.0": "§d         ASHA    ",
   "gui.laicaps.telescope.tooltip.asha.1": "",
   "gui.laicaps.telescope.tooltip.asha.2": "    asha is a very",
   "gui.laicaps.telescope.tooltip.asha.3": "      nice planet",
   "gui.laicaps.telescope.tooltip.asha.4": "",
-  "gui.laicaps.telescope.tooltip.asha.5": "§a   Progress: [4/4]   ",
 
   "gui.laicaps.telescope.tooltip.asha_blur.0": "§d§k          ASHA",
   "gui.laicaps.telescope.tooltip.asha_blur.1": "",
   "gui.laicaps.telescope.tooltip.asha_blur.2": "    ????????????",
-  "gui.laicaps.telescope.tooltip.asha_blur.3": "",
-  "gui.laicaps.telescope.tooltip.asha_blur.progress_before": "§c   Progress: ",
-  "gui.laicaps.telescope.tooltip.asha_blur.progress_after": "",
-  "gui.laicaps.telescope.tooltip.asha_blur.stargaze": "§c§l>§r §cClick to Stargaze §c§l<§r",
+ "gui.laicaps.telescope.tooltip.asha_blur.3": "",
+
+
 
   "gui.laicaps.telescope.tooltip.overworld.0": "§2      OVERWORLD    ",
   "gui.laicaps.telescope.tooltip.overworld.1": "",
   "gui.laicaps.telescope.tooltip.overworld.2": "  Home sweet home.",
   "gui.laicaps.telescope.tooltip.overworld.3": "",
-  "gui.laicaps.telescope.tooltip.overworld.4": "§a   Progress: [4/4]   ",
+
+
 
   "gui.laicaps.telescope.tooltip.lunamar.0": "§9            LUNAMAR    ",
   "gui.laicaps.telescope.tooltip.lunamar.1": "",
   "gui.laicaps.telescope.tooltip.lunamar.2": "An ocean world full of life,",
   "gui.laicaps.telescope.tooltip.lunamar.3": "under and above water...",
   "gui.laicaps.telescope.tooltip.lunamar.4": "",
-  "gui.laicaps.telescope.tooltip.lunamar.5": "§a       Progress: [4/4]   ",
 
   "gui.laicaps.telescope.tooltip.lunamar_blur.0": "§9§k        LUNAMAR",
   "gui.laicaps.telescope.tooltip.lunamar_blur.1": "",
   "gui.laicaps.telescope.tooltip.lunamar_blur.2": "    ????????????",
   "gui.laicaps.telescope.tooltip.lunamar_blur.3": "",
-  "gui.laicaps.telescope.tooltip.lunamar_blur.progress_before": "§c   Progress: ",
-  "gui.laicaps.telescope.tooltip.lunamar_blur.progress_after": "",
-  "gui.laicaps.telescope.tooltip.lunamar_blur.stargaze": "§c§l>§r §cClick to Stargaze §c§l<§r",
+
+
+
+
+
+
+
+  "gui.laicaps.rocket.tooltip.ember.0": "§6            EMBER      ",
+  "gui.laicaps.rocket.tooltip.ember.1": "    A flaming hot world :3",
+  "gui.laicaps.rocket.tooltip.ember.2": "          (so hot...)",
+  "gui.laicaps.rocket.tooltip.ember.3": "       (but also cold!?)",
+  "gui.laicaps.rocket.tooltip.ember.4": "",
+  "gui.laicaps.rocket.tooltip.ember.5": "      §a§l>§r§a Rocket Travel Available §a§l<§r",
+
+  "gui.laicaps.rocket.tooltip.ember_blur.0": "§6§k         EMBER",
+  "gui.laicaps.rocket.tooltip.ember_blur.1": "",
+  "gui.laicaps.rocket.tooltip.ember_blur.2": "    ????????????",
+  "gui.laicaps.rocket.tooltip.ember_blur.3": "",
+
+
+
+  "gui.laicaps.rocket.tooltip.asha.0": "§d         ASHA    ",
+  "gui.laicaps.rocket.tooltip.asha.1": "",
+  "gui.laicaps.rocket.tooltip.asha.2": "    asha is a very",
+  "gui.laicaps.rocket.tooltip.asha.3": "      nice planet",
+  "gui.laicaps.rocket.tooltip.asha.4": "",
+  "gui.laicaps.rocket.tooltip.asha.5": "      §a§l>§r§a Rocket Travel Available §a§l<§r",
+
+  "gui.laicaps.rocket.tooltip.asha_blur.0": "§d§k          ASHA",
+  "gui.laicaps.rocket.tooltip.asha_blur.1": "",
+  "gui.laicaps.rocket.tooltip.asha_blur.2": "    ????????????",
+  "gui.laicaps.rocket.tooltip.asha_blur.3": "",
+
+
+
+  "gui.laicaps.rocket.tooltip.overworld.0": "§2      OVERWORLD    ",
+  "gui.laicaps.rocket.tooltip.overworld.1": "",
+  "gui.laicaps.rocket.tooltip.overworld.2": "  Home sweet home.",
+  "gui.laicaps.rocket.tooltip.overworld.3": "",
+  "gui.laicaps.rocket.tooltip.overworld.4": "§a§l>§r§a Rocket Travel Available §a§l<§r",
+
+
+
+  "gui.laicaps.rocket.tooltip.lunamar.0": "§9            LUNAMAR    ",
+  "gui.laicaps.rocket.tooltip.lunamar.1": "",
+  "gui.laicaps.rocket.tooltip.lunamar.2": "An ocean world full of life,",
+  "gui.laicaps.rocket.tooltip.lunamar.3": "under and above water...",
+  "gui.laicaps.rocket.tooltip.lunamar.4": "",
+  "gui.laicaps.rocket.tooltip.lunamar.5": "      §a§l>§r§a Rocket Travel Available §a§l<§r",
+
+  "gui.laicaps.rocket.tooltip.lunamar_blur.0": "§9§k        LUNAMAR",
+  "gui.laicaps.rocket.tooltip.lunamar_blur.1": "",
+  "gui.laicaps.rocket.tooltip.lunamar_blur.2": "    ????????????",
+  "gui.laicaps.rocket.tooltip.lunamar_blur.3": "",
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   "item.laicaps.astrology_notebook": "Astrology Notebook",
