@@ -36,7 +36,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
     private static final Logger log = LoggerFactory.getLogger(RocketSpaceScreen.class);
 
-    private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/telescope/inv_and_border_background.png");
+    private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/rocket/inventory_overlay.png");
     private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/telescope/planet_screen_background.png");
     private static final ResourceLocation BLACK_OVERLAY = Laicaps.rl("textures/gui/telescope/black.png");
     private static final ResourceLocation NO_BOOK_SCREEN_BACKGROUND_ROCKET = Laicaps.rl("textures/gui/telescope/no_book_screen_background_rocket.png");
@@ -93,6 +93,8 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private static RocketSpaceMenu menu;
 
     ItemStack book;
+
+    int planetSelected = -1;
 
     @Override
     protected void init()
@@ -192,7 +194,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             //renders BLACK OVERLAY sky background
             renderImage(guiGraphics, NO_BOOK_SCREEN_BACKGROUND_ROCKET);
 
-            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.telescope.missing"), uiX + 10, uiY + 60, 13186614, true);
+            guiGraphics.drawString(this.font, Component.translatable("gui.rocket.telescope.notebook"), uiX + 50, uiY + 70, 13186614, true);
 
             //render inventory overlay
             renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);

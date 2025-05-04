@@ -1,7 +1,9 @@
 package com.wdiscute.laicaps.entity.rocket;
 
+import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -34,19 +36,43 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY);
     private final NonNullList<ItemStack> handItems = NonNullList.withSize(2, ItemStack.EMPTY);
     public final AnimationState shakeAnimationState = new AnimationState();
-    private static final EntityDataAccessor<Boolean> JUMP = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
 
     public RocketEntity(EntityType<? extends LivingEntity> entityType, Level level)
     {
         super(entityType, level);
     }
 
-    public final ItemStackHandler inventory = new ItemStackHandler(1)
+    public final ItemStackHandler inventory = new ItemStackHandler(3)
     {
         @Override
         protected int getStackLimit(int slot, ItemStack stack)
         {
-            return 1;
+            System.out.println(slot);
+            System.out.println(stack);
+
+            if (slot == 0)
+                if (stack.is(ModItems.ASTROLOGY_NOTEBOOK))
+                    return 1;
+                else
+                    return 0;
+
+            if (slot == 1)
+                if (stack.is(ModItems.ENDERBLAZE_FUEL))
+                    return 64;
+                else
+                    return 0;
+
+            if (slot == 2)
+                if (stack.is(ModItems.TANK))
+                    return 1;
+                else
+                    return 0;
+
+
+
+
+            return 64;
         }
 
     };
@@ -55,7 +81,6 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     public void tick()
     {
         super.tick();
-
 
         if (position().y > 200 && !level().isClientSide && getFirstPassenger() instanceof Player player)
         {
@@ -89,7 +114,7 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         super.defineSynchedData(builder);
-        builder.define(JUMP, false);
+        builder.define(STATE, 0);
     }
 
 
@@ -97,6 +122,7 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
         this.shakeAnimationState.start(this.tickCount);
+        //player.openMenu(new SimpleMenuProvider(this, Component.literal("Space")));
 
         if (hand == InteractionHand.OFF_HAND) return InteractionResult.FAIL;
 
@@ -113,6 +139,8 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
 
         if (source.isCreativePlayer()) this.kill();
 
+        //TODO MAKE BETTER SYSTEM TO REMOVE ROCKET FROM WORLD
+        this.kill();
         return true;
     }
 
@@ -132,6 +160,23 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     //|  ||  | ' '-' '       |  |   ' '-' ' '  ''  ' \ `--. |  | |  |   \   '
     //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
     //                                                                `---'
+
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound)
+    {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("state", this.entityData.get(STATE));
+        compound.put("inventory", inventory.serializeNBT(registryAccess()));
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound)
+    {
+        super.readAdditionalSaveData(compound);
+        this.entityData.set(STATE, compound.getInt("state"));
+        inventory.deserializeNBT(registryAccess(), compound.getCompound("inventory"));
+    }
 
     @Override
     public void kill()

@@ -2,11 +2,8 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
-import com.wdiscute.laicaps.item.AstrologyNotebookItem;
-import com.wdiscute.laicaps.item.ModFoodProperties;
-import com.wdiscute.laicaps.item.ChiselItem;
+import com.wdiscute.laicaps.item.*;
 
-import com.wdiscute.laicaps.item.ModBoatItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
@@ -87,6 +84,60 @@ public class ModItems
             ITEMS.register("elite_navigation_chip", () -> new Item(new Item.Properties()
                     .rarity(Rarity.EPIC)
             ));
+
+
+    //
+    //,------.   ,-----.   ,-----. ,--. ,--. ,------. ,--------.
+    //|  .--. ' '  .-.  ' '  .--./ |  .'   / |  .---' '--.  .--'
+    //|  '--'.' |  | |  | |  |     |  .   '  |  `--,     |  |
+    //|  |\  \  '  '-'  ' '  '--'\ |  |\   \ |  `---.    |  |
+    //`--' '--'  `-----'   `-----' `--' '--' `------'    `--'
+    //
+
+
+    public static final DeferredItem<Item> ROCKET =
+            ITEMS.register("rocket", () -> new RocketItem(new Item.Properties()
+                    .rarity(Rarity.EPIC)
+                    .stacksTo(1)
+            ));
+
+    public static final DeferredItem<Item> TANK =
+            ITEMS.register("tank", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+                    .stacksTo(1)
+            ));
+
+    public static final DeferredItem<Item> MEDIUM_TANK =
+            ITEMS.register("medium_tank", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+                    .stacksTo(1)
+            ));
+
+    public static final DeferredItem<Item> LARGE_TANK =
+            ITEMS.register("large_tank", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+                    .stacksTo(1)
+            ));
+
+
+    public static final DeferredItem<Item> CANISTER =
+            ITEMS.register("canister", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+                    .stacksTo(1)
+            ));
+
+
+    public static final DeferredItem<Item> ENDERBLAZE_FUEL =
+            ITEMS.register("enderblaze_fuel", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+            ));
+
+
+
+
+
+
+
 
 
 

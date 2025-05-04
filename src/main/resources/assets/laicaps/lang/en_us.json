@@ -63,6 +63,8 @@
   "gui.laicaps.telescope.tooltip.generic.research": "§c§l>§r §cThere is more to research here",
   "gui.laicaps.telescope.tooltip.generic.stargaze": "§c§l>>>§r §cClick to Stargaze §c§l<<<§r",
   "gui.laicaps.rocket.tooltip.generic.travel": "§c§l>>>§r §cClick to Travel §c§l<<<§r",
+  "gui.rocket.telescope.notebook": "§cInsert Notebook",
+  "gui.rocket.telescope.tank": "§cInsert Tank",
 
 
 
@@ -201,7 +203,13 @@
   "item.laicaps.elite_microchip": "Elite Microchip",
   "item.laicaps.elite_navigation_chip": "Elite Navigation Chip",
 
+  "item.laicaps.tank": "Tank",
+  "item.laicaps.medium_tank": "Medium Tank",
+  "item.laicaps.large_tank": "Large Tank",
 
+  "item.laicaps.canister": "Canister",
+
+  "item.laicaps.rocket": "WIP Rocket",
 
 
 
