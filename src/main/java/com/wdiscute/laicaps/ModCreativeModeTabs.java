@@ -22,15 +22,22 @@ public class ModCreativeModeTabs
 
 
     public static final Supplier<CreativeModeTab> LAICAPS =
-            CREATIVE_MODE_TABS.register("laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ELITE_NAVIGATION_CHIP.get()))
+            CREATIVE_MODE_TABS.register("laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ASTRONOMY_NOTEBOOK.get()))
                     .title(Component.translatable("creativetab.laicaps.laicaps"))
                     .displayItems( (itemDisplayParameters, output) -> {
 
                         //telescope
+                        output.accept(ModItems.ASTRONOMY_NOTEBOOK.get());
                         output.accept(ModBlocks.TELESCOPE_STAND.get());
                         output.accept(ModBlocks.TELESCOPE.get());
-                        output.accept(ModItems.ASTRONOMY_NOTEBOOK.get());
                         output.accept(ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
+
+                        //rocket stuff
+                        output.accept(ModItems.ROCKET.get());
+                        output.accept(ModItems.TANK.get());
+                        output.accept(ModItems.MEDIUM_TANK.get());
+                        output.accept(ModItems.LARGE_TANK.get());
+                        output.accept(ModItems.ENDERBLAZE_FUEL.get());
 
                         //teleporters
                         output.accept(ModBlocks.ASHA_TELEPORTER.get());

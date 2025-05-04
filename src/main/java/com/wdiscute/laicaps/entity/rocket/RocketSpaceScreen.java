@@ -112,6 +112,8 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     @Override
     protected void containerTick()
     {
+        System.out.println(menu.rocketEntity);
+
         if (menu.rocketEntity == null) return;
         if (menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
         {

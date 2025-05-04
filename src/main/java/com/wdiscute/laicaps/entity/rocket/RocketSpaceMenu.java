@@ -7,7 +7,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-import javax.annotation.Nullable;
 
 public class RocketSpaceMenu extends AbstractContainerMenu
 {
@@ -34,6 +32,8 @@ public class RocketSpaceMenu extends AbstractContainerMenu
     {
         super(ModMenuTypes.ROCKET_SPACE_MENU.get(), containerId);
         this.rocketEntity = entity;
+
+        System.out.println(entity);
 
         //player inventory
         for (int i = 0; i < 3; ++i)
@@ -60,8 +60,11 @@ public class RocketSpaceMenu extends AbstractContainerMenu
             return;
         }
 
+        //book
         this.addSlot(new SlotItemHandler(this.rocketEntity.inventory, 0, -24, 20));
+        //fuel
         this.addSlot(new SlotItemHandler(this.rocketEntity.inventory, 1, -158, 20));
+        //tank
         this.addSlot(new SlotItemHandler(this.rocketEntity.inventory, 2, -158, 52));
     }
 

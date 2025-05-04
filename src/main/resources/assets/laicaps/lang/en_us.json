@@ -68,6 +68,19 @@
   "gui.rocket.telescope.notebook": "§cInsert Notebook",
   "gui.rocket.telescope.tank": "§cInsert Tank",
 
+  "gui.laicaps.rocket.takeoff.0": "",
+  "gui.laicaps.rocket.takeoff.1": "§l10",
+  "gui.laicaps.rocket.takeoff.2": "§l9",
+  "gui.laicaps.rocket.takeoff.3": "§l8",
+  "gui.laicaps.rocket.takeoff.4": "§l7",
+  "gui.laicaps.rocket.takeoff.5": "§l6",
+  "gui.laicaps.rocket.takeoff.6": "§l5",
+  "gui.laicaps.rocket.takeoff.7": "§l4",
+  "gui.laicaps.rocket.takeoff.8": "§l3",
+  "gui.laicaps.rocket.takeoff.9": "§l2",
+  "gui.laicaps.rocket.takeoff.10": "§l1",
+  "gui.laicaps.rocket.takeoff.11": "§l§cTAKEOFF",
+
 
 
   "gui.laicaps.telescope.tooltip.ember.0": "§6            EMBER      ",
