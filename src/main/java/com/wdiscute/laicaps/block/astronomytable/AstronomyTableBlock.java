@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.astrologytable;
+package com.wdiscute.laicaps.block.astronomytable;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
@@ -21,9 +21,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
-public class AstrologyTableBlock extends HorizontalDirectionalBlock implements EntityBlock
+public class AstronomyTableBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
-    public AstrologyTableBlock(Properties properties)
+    public AstronomyTableBlock(Properties properties)
     {
         super(properties);
     }
@@ -31,9 +31,9 @@ public class AstrologyTableBlock extends HorizontalDirectionalBlock implements E
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof AstrologyTableBlockEntity atbe)
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof AstronomyTableBlockEntity atbe)
         {
-            player.openMenu(new SimpleMenuProvider(atbe, Component.literal("Astrology Table")), pos);
+            player.openMenu(new SimpleMenuProvider(atbe, Component.literal("Astronomy Table")), pos);
             return ItemInteractionResult.SUCCESS;
         }
 
@@ -62,7 +62,7 @@ public class AstrologyTableBlock extends HorizontalDirectionalBlock implements E
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState)
     {
-        return ModBlockEntity.ASTROLOGY_TABLE.get().create(pPos, pState);
+        return ModBlockEntity.ASTRONOMY_TABLE.get().create(pPos, pState);
     }
 
     @Override

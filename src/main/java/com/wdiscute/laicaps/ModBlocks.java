@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.laicaps.block.astrologytable.AstrologyTableBlock;
+import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlock;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
@@ -147,9 +147,9 @@ public class ModBlocks
                     )
             );
 
-    public static final DeferredBlock<Block> ASTROLOGY_RESEARCH_TABLE =
-            registerBlock("astrology_research_table", () ->
-                    new AstrologyTableBlock(BlockBehaviour.Properties.of()
+    public static final DeferredBlock<Block> ASTRONOMY_RESEARCH_TABLE =
+            registerBlock("astronomy_research_table", () ->
+                    new AstronomyTableBlock(BlockBehaviour.Properties.of()
                             .strength(6)
                             .sound(SoundType.WOOD)
                             .noOcclusion()

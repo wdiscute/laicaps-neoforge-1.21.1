@@ -30,8 +30,8 @@ public class ModItems
             () -> new ChiselItem(new Item.Properties()
                     .rarity(Rarity.EPIC)));
 
-    public static final DeferredItem<Item> ASTROLOGY_NOTEBOOK = ITEMS.register("astrology_notebook",
-            () -> new AstrologyNotebookItem(new Item.Properties()
+    public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook",
+            () -> new AstronomyNotebookItem(new Item.Properties()
                     .rarity(Rarity.EPIC)
                     .stacksTo(1)
             ));

@@ -1,11 +1,10 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
-import com.wdiscute.laicaps.block.astrologytable.AstrologyTableScreen;
+import com.wdiscute.laicaps.block.astronomytable.AstronomyTableScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
 import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
-import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.entity.ModEntities;
@@ -136,7 +135,7 @@ public class Laicaps
         public static void registerScreens(RegisterMenuScreensEvent event)
         {
             event.register(ModMenuTypes.TELESCOPE_MENU.get(), TelescopeScreen::new);
-            event.register(ModMenuTypes.ASTROLOGY_TABLE_MENU.get(), AstrologyTableScreen::new);
+            event.register(ModMenuTypes.ASTRONOMY_TABLE_MENU.get(), AstronomyTableScreen::new);
             event.register(ModMenuTypes.ROCKET_SPACE_MENU.get(), RocketSpaceScreen::new);
         }
 

@@ -1,35 +1,30 @@
-package com.wdiscute.laicaps.block.astrologytable;
+package com.wdiscute.laicaps.block.astronomytable;
 
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.block.telescope.TelescopeStarButton;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import org.joml.Vector2f;
-import org.joml.Vector2i;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 
-public class AstrologyTableScreen extends AbstractContainerScreen<AstrologyTableMenu>
+public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTableMenu>
 {
 
 
-    private static final Logger log = LoggerFactory.getLogger(AstrologyTableScreen.class);
-    private static final ResourceLocation INV_BOOK_BACKGROUND = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astrology_table/book_background.png");
-    private static final ResourceLocation ARROW_PREVIOUS = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astrology_table/arrow_previous.png");
-    private static final ResourceLocation ARROW_NEXT = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astrology_table/arrow_next.png");
+    private static final Logger log = LoggerFactory.getLogger(AstronomyTableScreen.class);
+    private static final ResourceLocation INV_BOOK_BACKGROUND = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/book_background.png");
+    private static final ResourceLocation ARROW_PREVIOUS = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/arrow_previous.png");
+    private static final ResourceLocation ARROW_NEXT = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/arrow_next.png");
 
 
-    private static AstrologyTableMenu menu;
+    private static AstronomyTableMenu menu;
 
     Random r = new Random();
 
@@ -94,10 +89,10 @@ public class AstrologyTableScreen extends AbstractContainerScreen<AstrologyTable
 
     }
 
-    public AstrologyTableScreen(AstrologyTableMenu astrologyTableMenu, Inventory playerInventory, Component title)
+    public AstronomyTableScreen(AstronomyTableMenu astronomyTableMenu, Inventory playerInventory, Component title)
     {
-        super(astrologyTableMenu, playerInventory, title);
-        menu = astrologyTableMenu;
+        super(astronomyTableMenu, playerInventory, title);
+        menu = astronomyTableMenu;
     }
 
 

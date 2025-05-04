@@ -1,10 +1,9 @@
 package com.wdiscute.laicaps.types;
 
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.block.astrologytable.AstrologyTableMenu;
+import com.wdiscute.laicaps.block.astronomytable.AstronomyTableMenu;
 import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
-import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -26,8 +25,8 @@ public class ModMenuTypes
     public static final DeferredHolder<MenuType<?>, MenuType<TelescopeMenu>> TELESCOPE_MENU =
             registerMenuType("telescope_menu", TelescopeMenu::new);
 
-    public static final DeferredHolder<MenuType<?>, MenuType<AstrologyTableMenu>> ASTROLOGY_TABLE_MENU =
-            registerMenuType("astrology_table_menu", AstrologyTableMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<AstronomyTableMenu>> ASTRONOMY_TABLE_MENU =
+            registerMenuType("astronomy_table_menu", AstronomyTableMenu::new);
 
     public static final Supplier<MenuType<RocketSpaceMenu>> ROCKET_SPACE_MENU =
             registerMenuType("rocket_space_menu", RocketSpaceMenu::new);

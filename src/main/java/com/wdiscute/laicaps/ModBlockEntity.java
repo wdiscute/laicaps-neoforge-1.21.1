@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.block.astrologytable.AstrologyTableBlockEntity;
+import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlockEntity;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModHangingSignBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModSignBlockEntity;
@@ -61,8 +61,8 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(TelescopeBlockEntity::new, ModBlocks.TELESCOPE.get())
                     .build(null));
 
-    public static final Supplier<BlockEntityType<AstrologyTableBlockEntity>> ASTROLOGY_TABLE = BLOCK_ENTITIES.register("astrology_table",
-            () -> BlockEntityType.Builder.of(AstrologyTableBlockEntity::new, ModBlocks.ASTROLOGY_RESEARCH_TABLE.get())
+    public static final Supplier<BlockEntityType<AstronomyTableBlockEntity>> ASTRONOMY_TABLE = BLOCK_ENTITIES.register("astronomy_table",
+            () -> BlockEntityType.Builder.of(AstronomyTableBlockEntity::new, ModBlocks.ASTRONOMY_RESEARCH_TABLE.get())
                     .build(null));
 
 

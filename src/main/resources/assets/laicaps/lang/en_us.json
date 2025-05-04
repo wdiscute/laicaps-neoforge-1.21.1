@@ -55,14 +55,16 @@
   "block.laicaps.telescope_stand": "Telescope Stand",
   "block.laicaps.telescope.place": "§cThe telescope must be placed on a stand",
   "block.laicaps.telescope.daytime": "§cIt's too bright to see anything through the telescope",
-  "gui.laicaps.telescope.missing": "Insert your Astrology Notebook",
+  "gui.laicaps.telescope.missing": "Insert your Astronomy Notebook",
 
 
 
   "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
   "gui.laicaps.telescope.tooltip.generic.research": "§c§l>§r §cThere is more to research here",
   "gui.laicaps.telescope.tooltip.generic.stargaze": "§c§l>>>§r §cClick to Stargaze §c§l<<<§r",
-  "gui.laicaps.rocket.tooltip.generic.travel": "§c§l>>>§r §cClick to Travel §c§l<<<§r",
+  "gui.laicaps.rocket.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
+  "gui.laicaps.rocket.tooltip.generic.knowledge": "§c§k    !!!§r §cMore Knowledge is §c§k!!!§r",
+  "gui.laicaps.rocket.tooltip.generic.knowledge.2": "§c§k!!!§r §cRequired Before Travel §c§k!!!§r",
   "gui.rocket.telescope.notebook": "§cInsert Notebook",
   "gui.rocket.telescope.tank": "§cInsert Tank",
 
@@ -179,14 +181,14 @@
 
 
 
-  "item.laicaps.astrology_notebook": "Astrology Notebook",
-  "item.laicaps.astrology_notebook.use": "§cPlace at an Astrology Table to open",
-  "tooltip.laicaps.astrology_notebook.0" : "A trusty Astrology Notebook where",
-  "tooltip.laicaps.astrology_notebook.1" : "you note down all of your findings.",
-  "tooltip.laicaps.astrology_notebook.2" : "Place at an Astrology Table",
-  "tooltip.laicaps.astrology_notebook.3" : "to read your notes.",
+  "item.laicaps.astronomy_notebook": "Astronomy Notebook",
+  "item.laicaps.astronomy_notebook.use": "§cPlace at an Astronomy Table to open",
+  "tooltip.laicaps.astronomy_notebook.0" : "A trusty Astronomy Notebook where",
+  "tooltip.laicaps.astronomy_notebook.1" : "you note down all of your findings.",
+  "tooltip.laicaps.astronomy_notebook.2" : "Place at an Astronomy Table",
+  "tooltip.laicaps.astronomy_notebook.3" : "to read your notes.",
 
-  "item.laicaps.astrology_table": "Astrology Notebook",
+  "item.laicaps.astronomy_table": "Astronomy Notebook",
 
 
 

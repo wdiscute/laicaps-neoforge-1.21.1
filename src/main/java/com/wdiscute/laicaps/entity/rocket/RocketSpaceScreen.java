@@ -1,17 +1,11 @@
 package com.wdiscute.laicaps.entity.rocket;
 
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.block.telescope.RevealRenderUtil;
-import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.Registries;
@@ -19,11 +13,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.joml.Vector2f;
-import org.joml.Vector2i;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,26 +52,30 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private static final ResourceLocation LUNAMAR_BLUR = Laicaps.rl("textures/gui/telescope/lunamar_blur.png");
     private static final ResourceLocation LUNAMAR_BLUR_HIGHLIGHTED = Laicaps.rl("textures/gui/telescope/lunamar_blur_highlighted.png");
 
-    private static final ResourceLocation EMBER_TO_EMBER = Laicaps.rl("textures/gui/telescope/ember_to_ember.png");
-    private static final ResourceLocation EMBER_TO_ASHA = Laicaps.rl("textures/gui/telescope/ember_to_asha.png");
-    private static final ResourceLocation EMBER_TO_OVERWORLD = Laicaps.rl("textures/gui/telescope/ember_overworld.png");
-    private static final ResourceLocation EMBER_TO_LUNAMAR = Laicaps.rl("textures/gui/telescope/ember_to_lunamar.png");
+    private static final ResourceLocation EMBER_TO_EMBER = Laicaps.rl("textures/gui/rocket/ember_to_ember.png");
+    private static final ResourceLocation EMBER_TO_ASHA = Laicaps.rl("textures/gui/rocket/ember_to_asha.png");
+    private static final ResourceLocation EMBER_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/ember_to_overworld.png");
+    private static final ResourceLocation EMBER_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/ember_to_lunamar.png");
 
-    private static final ResourceLocation ASHA_TO_EMBER = Laicaps.rl("textures/gui/telescope/asha_to_ember.png");
-    private static final ResourceLocation ASHA_TO_ASHA = Laicaps.rl("textures/gui/telescope/asha_to_asha.png");
-    private static final ResourceLocation ASHA_TO_OVERWORLD = Laicaps.rl("textures/gui/telescope/asha_to_overworld.png");
-    private static final ResourceLocation ASHA_TO_LUNAMAR = Laicaps.rl("textures/gui/telescope/asha_to_lunamar.png");
+    private static final ResourceLocation ASHA_TO_EMBER = Laicaps.rl("textures/gui/rocket/asha_to_ember.png");
+    private static final ResourceLocation ASHA_TO_ASHA = Laicaps.rl("textures/gui/rocket/asha_to_asha.png");
+    private static final ResourceLocation ASHA_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/asha_to_overworld.png");
+    private static final ResourceLocation ASHA_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/asha_to_lunamar.png");
 
-    private static final ResourceLocation OVERWORLD_TO_EMBER = Laicaps.rl("textures/gui/telescope/overworld_to_ember.png");
-    private static final ResourceLocation OVERWORLD_TO_ASHA = Laicaps.rl("textures/gui/telescope/overworld_to_asha.png");
-    private static final ResourceLocation OVERWORLD_TO_OVERWORLD = Laicaps.rl("textures/gui/telescope/overworld_to_overworld.png");
-    private static final ResourceLocation OVERWORLD_TO_LUNAMAR = Laicaps.rl("textures/gui/telescope/overworld_to_lunamar.png");
+    private static final ResourceLocation OVERWORLD_TO_EMBER = Laicaps.rl("textures/gui/rocket/overworld_to_ember.png");
+    private static final ResourceLocation OVERWORLD_TO_ASHA = Laicaps.rl("textures/gui/rocket/overworld_to_asha.png");
+    private static final ResourceLocation OVERWORLD_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/overworld_to_overworld.png");
+    private static final ResourceLocation OVERWORLD_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/overworld_to_lunamar.png");
 
-    private static final ResourceLocation LUNAMAR_TO_EMBER = Laicaps.rl("textures/gui/telescope/lunamar_to_ember.png");
-    private static final ResourceLocation LUNAMAR_TO_ASHA = Laicaps.rl("textures/gui/telescope/lunamar_to_asha.png");
-    private static final ResourceLocation LUNAMAR_TO_OVERWORLD = Laicaps.rl("textures/gui/telescope/lunamar_to_overworld.png");
-    private static final ResourceLocation LUNAMAR_TO_LUNAMAR = Laicaps.rl("textures/gui/telescope/lunamar_to_lunamar.png");
+    private static final ResourceLocation LUNAMAR_TO_EMBER = Laicaps.rl("textures/gui/rocket/lunamar_to_ember.png");
+    private static final ResourceLocation LUNAMAR_TO_ASHA = Laicaps.rl("textures/gui/rocket/lunamar_to_asha.png");
+    private static final ResourceLocation LUNAMAR_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/lunamar_to_overworld.png");
+    private static final ResourceLocation LUNAMAR_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
 
+    private static final ResourceLocation NOTHING_TO_EMBER = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
+    private static final ResourceLocation NOTHING_TO_ASHA = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
+    private static final ResourceLocation NOTHING_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
+    private static final ResourceLocation NOTHING_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
 
     int state = 0;
 
@@ -96,6 +91,11 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
     int planetSelected = -1;
 
+    int emberKnowledge = 0;
+    int ashaKnowledge = 0;
+    int overworldKnowledge = 0;
+    int lunamarKnowledge = 0;
+
     @Override
     protected void init()
     {
@@ -107,14 +107,13 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         uiY = (height - imageHeight) / 2;
         canvasX = uiX + 178;
         canvasY = uiY + 3;
-
     }
 
     @Override
     protected void containerTick()
     {
         if (menu.rocketEntity == null) return;
-        if (menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTROLOGY_NOTEBOOK.get()))
+        if (menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
         {
             book = menu.rocketEntity.inventory.getStackInSlot(0);
         }
@@ -125,18 +124,24 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             book = menu.rocketEntity.inventory.getStackInSlot(0);
         }
 
-        if (state == 0 && menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTROLOGY_NOTEBOOK.get()))
+        if (state == 0 && menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
         {
             state = 1;
             book = menu.rocketEntity.inventory.getStackInSlot(0);
             return;
         }
 
-        if (!menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTROLOGY_NOTEBOOK))
+        if (!menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTRONOMY_NOTEBOOK))
         {
             state = 0;
             return;
         }
+
+
+        emberKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+        ashaKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+        overworldKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+        lunamarKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
 
     }
 
@@ -148,27 +153,27 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         double y = mouseY - uiY;
 
         //ember
-        if (x > 250 && x < 283 && y > 170 && y < 200 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) > 0)
+        if (x > 250 && x < 283 && y > 170 && y < 200)
         {
-            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 1);
+            planetSelected = 1;
         }
 
         //asha
-        if (x > 310 && x < 335 && y > 86 && y < 111 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) > 0)
+        if (x > 310 && x < 335 && y > 86 && y < 111)
         {
-            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 2);
+            planetSelected = 2;
         }
 
         //overworld
         if (x > 392 && x < 429 && y > 121 && y < 160)
         {
-            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 3);
+            planetSelected = 3;
         }
 
         //lunamar
-        if (x > 444 && x < 589 && y > 16 && y < 65 && book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) > 0)
+        if (x > 444 && x < 589 && y > 16 && y < 65)
         {
-            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 4);
+            planetSelected = 4;
         }
 
 
@@ -203,7 +208,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
 
         //planet selection screen
-        if (state == 1 && book.is(ModItems.ASTROLOGY_NOTEBOOK))
+        if (state == 1 && book.is(ModItems.ASTRONOMY_NOTEBOOK))
         {
             //renders background
             renderImage(guiGraphics, PLANET_SCREEN_BACKGROUND);
@@ -211,25 +216,30 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             double x = mouseX - uiX;
             double y = mouseY - uiY;
 
+            //render inventory overlay
+            renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
+
+            //render planet selected arrow
+            renderPlanetArrows(guiGraphics);
+
             //render planets with blurs & highlights
             {
                 ResourceLocation rl;
                 RenderSystem.enableBlend();
 
                 //ember
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) < 4)
+                if (emberKnowledge < 4)
                     rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_BLUR_HIGHLIGHTED : EMBER_BLUR;
                 else
                 {
                     rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_HIGHLIGHTED : EMBER;
-                    renderPlanetArrows(guiGraphics, x, y);
                 }
 
                 renderImage(guiGraphics, rl);
 
 
                 //asha
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) < 4)
+                if (ashaKnowledge < 4)
                     rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_BLUR_HIGHLIGHTED : ASHA_BLUR;
                 else
                     rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_HIGHLIGHTED : ASHA;
@@ -241,7 +251,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
 
                 //lunamar
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) < 4)
+                if (lunamarKnowledge < 4)
                     rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_BLUR_HIGHLIGHTED : LUNAMAR_BLUR;
                 else
                     rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_HIGHLIGHTED : LUNAMAR;
@@ -250,100 +260,13 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
                 RenderSystem.disableBlend();
             }
 
-            //render inventory overlay
-            renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
-
             //render tooltip
-            {
-                List<Component> tooltips;
-                //ember
-                if (x > 250 && x < 283 && y > 170 && y < 200)
-                {
-                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER).intValue() < 4 ? tooltipHelper("ember_blur") : tooltipHelper("ember");
-                    guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
-                }
-
-                //asha
-                if (x > 310 && x < 335 && y > 86 && y < 111)
-                {
-                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA).intValue() < 4 ? tooltipHelper("asha_blur") : tooltipHelper("asha");
-                    guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
-                }
-
-                //overworld
-                if (x > 392 && x < 429 && y > 121 && y < 160)
-                {
-                    tooltips = tooltipHelper("overworld");
-                    guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
-                }
-
-                //lunamar
-                if (x > 444 && x < 589 && y > 16 && y < 65)
-                {
-                    tooltips = book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR).intValue() < 4 ? tooltipHelper("lunamar_blur") : tooltipHelper("lunamar");
-                    guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
-                }
+            renderPlanetTooltip(guiGraphics, mouseX, mouseY);
 
 
-            }
+
         }
     }
-
-    private void renderPlanetArrows(GuiGraphics guiGraphics, double x, double y)
-    {
-        String planet = "";
-
-        //ember
-        if (x > 250 && x < 283 && y > 170 && y < 200)
-            planet = "ember";
-        //asha
-        if (x > 310 && x < 335 && y > 86 && y < 111)
-            planet = "asha";
-
-        //overworld
-        if (x > 392 && x < 429 && y > 121 && y < 160)
-            planet = "overworld";
-
-        //lunamar
-        if (x > 444 && x < 589 && y > 16 && y < 65)
-            planet = "lunamar";
-
-
-        if (menu.rocketEntity.level().dimension() == EMBER_KEY)
-        {
-            if (planet.equals("ember")) renderImage(guiGraphics, EMBER_TO_EMBER);
-            if (planet.equals("asha")) renderImage(guiGraphics, EMBER_TO_ASHA);
-            if (planet.equals("overworld")) renderImage(guiGraphics, EMBER_TO_OVERWORLD);
-            if (planet.equals("lunamar")) renderImage(guiGraphics, EMBER_TO_LUNAMAR);
-        }
-
-        if (menu.rocketEntity.level().dimension() == ASHA_KEY)
-        {
-            if (planet.equals("ember")) renderImage(guiGraphics, ASHA_TO_EMBER);
-            if (planet.equals("asha")) renderImage(guiGraphics, ASHA_TO_ASHA);
-            if (planet.equals("overworld")) renderImage(guiGraphics, ASHA_TO_OVERWORLD);
-            if (planet.equals("lunamar")) renderImage(guiGraphics, ASHA_TO_LUNAMAR);
-        }
-
-        if (menu.rocketEntity.level().dimension() == OVERWORLD_KEY)
-        {
-            if (planet.equals("ember")) renderImage(guiGraphics, OVERWORLD_TO_EMBER);
-            if (planet.equals("asha")) renderImage(guiGraphics, OVERWORLD_TO_ASHA);
-            if (planet.equals("overworld")) renderImage(guiGraphics, OVERWORLD_TO_OVERWORLD);
-            if (planet.equals("lunamar")) renderImage(guiGraphics, OVERWORLD_TO_LUNAMAR);
-        }
-
-        if (menu.rocketEntity.level().dimension() == LUNAMAR_KEY)
-        {
-            if (planet.equals("ember")) renderImage(guiGraphics, LUNAMAR_TO_EMBER);
-            if (planet.equals("asha")) renderImage(guiGraphics, LUNAMAR_TO_ASHA);
-            if (planet.equals("overworld")) renderImage(guiGraphics, LUNAMAR_TO_OVERWORLD);
-            if (planet.equals("lunamar")) renderImage(guiGraphics, LUNAMAR_TO_LUNAMAR);
-        }
-
-
-    }
-
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
@@ -353,6 +276,153 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         this.renderTooltip(guiGraphics, mouseX, mouseY);
 
+    }
+
+
+    private void renderPlanetArrows(GuiGraphics guiGraphics)
+    {
+        if (menu.rocketEntity.level().dimension() == EMBER_KEY)
+        {
+            if (planetSelected == 1) renderImage(guiGraphics, EMBER_TO_EMBER);
+            if (planetSelected == 2) renderImage(guiGraphics, EMBER_TO_ASHA);
+            if (planetSelected == 3) renderImage(guiGraphics, EMBER_TO_OVERWORLD);
+            if (planetSelected == 4) renderImage(guiGraphics, EMBER_TO_LUNAMAR);
+            return;
+        }
+
+        if (menu.rocketEntity.level().dimension() == ASHA_KEY)
+        {
+            if (planetSelected == 1) renderImage(guiGraphics, ASHA_TO_EMBER);
+            if (planetSelected == 2) renderImage(guiGraphics, ASHA_TO_ASHA);
+            if (planetSelected == 3) renderImage(guiGraphics, ASHA_TO_OVERWORLD);
+            if (planetSelected == 4) renderImage(guiGraphics, ASHA_TO_LUNAMAR);
+            return;
+        }
+
+        if (menu.rocketEntity.level().dimension() == OVERWORLD_KEY)
+        {
+            if (planetSelected == 1) renderImage(guiGraphics, OVERWORLD_TO_EMBER);
+            if (planetSelected == 2) renderImage(guiGraphics, OVERWORLD_TO_ASHA);
+            if (planetSelected == 3) renderImage(guiGraphics, OVERWORLD_TO_OVERWORLD);
+            if (planetSelected == 4) renderImage(guiGraphics, OVERWORLD_TO_LUNAMAR);
+            return;
+        }
+
+        if (menu.rocketEntity.level().dimension() == LUNAMAR_KEY)
+        {
+            if (planetSelected == 1) renderImage(guiGraphics, LUNAMAR_TO_EMBER);
+            if (planetSelected == 2) renderImage(guiGraphics, LUNAMAR_TO_ASHA);
+            if (planetSelected == 3) renderImage(guiGraphics, LUNAMAR_TO_OVERWORLD);
+            if (planetSelected == 4) renderImage(guiGraphics, LUNAMAR_TO_LUNAMAR);
+            return;
+        }
+
+        if (planetSelected == 1) renderImage(guiGraphics, NOTHING_TO_EMBER);
+        if (planetSelected == 2) renderImage(guiGraphics, NOTHING_TO_ASHA);
+        if (planetSelected == 3) renderImage(guiGraphics, NOTHING_TO_OVERWORLD);
+        if (planetSelected == 4) renderImage(guiGraphics, NOTHING_TO_LUNAMAR);
+
+    }
+
+
+    private void renderPlanetTooltip(GuiGraphics guiGraphics, double mouseX, double mouseY)
+    {
+        String planet = "";
+
+        double x = mouseX - uiX;
+        double y = mouseY - uiY;
+
+        //ember
+        if (x > 250 && x < 283 && y > 170 && y < 200)
+            planet = emberKnowledge > 0 ? "ember" : "ember_blur";
+
+        //asha
+        if (x > 310 && x < 335 && y > 86 && y < 111)
+            planet = ashaKnowledge > 0 ? "asha" : "asha_blur";
+
+        //overworld
+        if (x > 392 && x < 429 && y > 121 && y < 160)
+            planet = "overworld";
+
+        //lunamar
+        if (x > 444 && x < 589 && y > 16 && y < 65)
+            planet = lunamarKnowledge > 0 ? "lunamar" : "lunamar_blur";
+
+        //return if mouse is not hovering a planet
+        if (planet.equals("")) return;
+
+        //add base tooltips for each planet
+        List<Component> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++)
+        {
+            if (I18n.exists("gui.laicaps.telescope.tooltip." + planet + "." + i))
+            {
+                list.add(Component.translatable("gui.laicaps.telescope.tooltip." + planet + "." + i));
+            } else
+            {
+                if (i == 0)
+                    list.add(Component.literal("translation key missing! gui.laicaps.telescope.tooltip." + planet + "." + i));
+                if (i == 0) list.add(Component.literal("Report to @wdiscute on discord"));
+                if (i == 0) list.add(Component.literal("or whoever is translating the mod! :3"));
+                break;
+            }
+        }
+
+
+        //add "there's more to research" and "Click to Select" for non-blurred
+        {
+            if (Objects.equals(planet, "ember"))
+            {
+                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+                if (emberKnowledge < Laicaps.MAX_EMBER_KNOWLEDGE)
+                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
+            }
+
+            if (Objects.equals(planet, "asha"))
+            {
+                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+                if (ashaKnowledge < Laicaps.MAX_ASHA_KNOWLEDGE)
+                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
+            }
+
+            if (Objects.equals(planet, "overworld"))
+            {
+                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+            }
+
+            if (Objects.equals(planet, "lunamar"))
+            {
+                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+                if (lunamarKnowledge < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
+                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
+            }
+        }
+
+
+        //add "more knowledge required" for blurred planets
+        if (Objects.equals(planet, "ember_blur") || Objects.equals(planet, "asha_blur") || Objects.equals(planet, "lunamar_blur"))
+        {
+            list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.knowledge"));
+            list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.knowledge.2"));
+        }
+
+        guiGraphics.renderComponentTooltip(this.font, list, ((int) mouseX), ((int) mouseY));
+    }
+
+
+    //
+    //                       ,--.                           ,--.
+    //,--,--,   ,---.      ,-'  '-.  ,---.  ,--.,--.  ,---. |  ,---.  ,--. ,--.
+    //|      \ | .-. |     '-.  .-' | .-. | |  ||  | | .--' |  .-.  |  \  '  /
+    //|  ||  | ' '-' '       |  |   ' '-' ' '  ''  ' \ `--. |  | |  |   \   '
+    //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
+    //                                                                `---'
+
+
+    //empty so it doesn't render "inventory"  and "telescope" text
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    {
     }
 
     private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
@@ -367,67 +437,5 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         menu = rocketSpaceMenu;
     }
 
-    //empty so it doesn't render "inventory"  and "telescope" text
-    @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY)
-    {
-    }
-
-    private List<Component> tooltipHelper(String input)
-    {
-        List<Component> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++)
-        {
-            if (I18n.exists("gui.laicaps.telescope.tooltip." + input + "." + i))
-            {
-                list.add(Component.translatable("gui.laicaps.telescope.tooltip." + input + "." + i));
-            } else
-            {
-                if (i == 0)
-                    list.add(Component.literal("translation key missing! gui.laicaps.telescope.tooltip." + input + "." + i));
-                if (i == 0) list.add(Component.literal("Report to @wdiscute on discord"));
-                if (i == 0) list.add(Component.literal("or whoever is translating the mod! :3"));
-                break;
-            }
-        }
-
-
-        //add "there's more to research" and "travel possible"
-        {
-            if (Objects.equals(input, "ember"))
-            {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.travel"));
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) < Laicaps.MAX_EMBER_KNOWLEDGE)
-                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
-            }
-
-            if (Objects.equals(input, "asha"))
-            {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.travel"));
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) < Laicaps.MAX_ASHA_KNOWLEDGE)
-                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
-            }
-
-            if (Objects.equals(input, "overworld"))
-            {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.travel"));
-            }
-
-            if (Objects.equals(input, "lunamar"))
-            {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.travel"));
-                if (book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
-                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
-            }
-        }
-
-
-        //add .stargaze translation key at the end for blurred planets
-        if (Objects.equals(input, "ember_blur") || Objects.equals(input, "asha_blur") || Objects.equals(input, "lunamar_blur"))
-            list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.stargaze"));
-
-
-        return list;
-    }
 
 }

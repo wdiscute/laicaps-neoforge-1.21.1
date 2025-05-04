@@ -48,11 +48,8 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
         @Override
         protected int getStackLimit(int slot, ItemStack stack)
         {
-            System.out.println(slot);
-            System.out.println(stack);
-
             if (slot == 0)
-                if (stack.is(ModItems.ASTROLOGY_NOTEBOOK))
+                if (stack.is(ModItems.ASTRONOMY_NOTEBOOK))
                     return 1;
                 else
                     return 0;
@@ -64,7 +61,7 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
                     return 0;
 
             if (slot == 2)
-                if (stack.is(ModItems.TANK))
+                if (stack.is(ModItems.TANK) || stack.is(ModItems.MEDIUM_TANK) || stack.is(ModItems.LARGE_TANK))
                     return 1;
                 else
                     return 0;

@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.astrologytable;
+package com.wdiscute.laicaps.block.astronomytable;
 
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.types.ModMenuTypes;
@@ -13,20 +13,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class AstrologyTableMenu extends AbstractContainerMenu
+public class AstronomyTableMenu extends AbstractContainerMenu
 {
-    public final AstrologyTableBlockEntity blockEntity;
+    public final AstronomyTableBlockEntity blockEntity;
     public final Level level;
 
-    public AstrologyTableMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
+    public AstronomyTableMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
         this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public AstrologyTableMenu(int containerId, Inventory inv, BlockEntity blockEntity)
+    public AstronomyTableMenu(int containerId, Inventory inv, BlockEntity blockEntity)
     {
-        super(ModMenuTypes.ASTROLOGY_TABLE_MENU.get(), containerId);
-        this.blockEntity = ((AstrologyTableBlockEntity) blockEntity);
+        super(ModMenuTypes.ASTRONOMY_TABLE_MENU.get(), containerId);
+        this.blockEntity = ((AstronomyTableBlockEntity) blockEntity);
         this.level = inv.player.level();
 
         //player inventory
@@ -95,6 +95,6 @@ public class AstrologyTableMenu extends AbstractContainerMenu
     public boolean stillValid(Player player)
     {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.ASTROLOGY_RESEARCH_TABLE.get());
+                player, ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
     }
 }

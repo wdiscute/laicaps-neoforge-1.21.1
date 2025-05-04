@@ -29,8 +29,8 @@ public class ModCreativeModeTabs
                         //telescope
                         output.accept(ModBlocks.TELESCOPE_STAND.get());
                         output.accept(ModBlocks.TELESCOPE.get());
-                        output.accept(ModItems.ASTROLOGY_NOTEBOOK.get());
-                        output.accept(ModBlocks.ASTROLOGY_RESEARCH_TABLE.get());
+                        output.accept(ModItems.ASTRONOMY_NOTEBOOK.get());
+                        output.accept(ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
 
                         //teleporters
                         output.accept(ModBlocks.ASHA_TELEPORTER.get());

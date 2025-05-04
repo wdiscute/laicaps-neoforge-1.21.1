@@ -55,23 +55,23 @@ public class TelescopeMenu extends AbstractContainerMenu
     {
         ItemStack book = this.blockEntity.inventory.getStackInSlot(0);
 
-        if(!book.is(ModItems.ASTROLOGY_NOTEBOOK)) return false;
+        if(!book.is(ModItems.ASTRONOMY_NOTEBOOK)) return false;
 
         if(id == 1)
         {
-            book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER, book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_EMBER) + 1);
+            book.set(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER, book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER) + 1);
             this.blockEntity.inventory.setStackInSlot(0, book);
         }
 
         if(id == 2)
         {
-            book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA, book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_ASHA) + 1);
+            book.set(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA, book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA) + 1);
             this.blockEntity.inventory.setStackInSlot(0, book);
         }
 
         if(id == 4)
         {
-            book.set(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR, book.get(ModDataComponentTypes.ASTROLOGY_KNOWLEDGE_LUNAMAR) + 1);
+            book.set(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR, book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR) + 1);
             this.blockEntity.inventory.setStackInSlot(0, book);
         }
 
