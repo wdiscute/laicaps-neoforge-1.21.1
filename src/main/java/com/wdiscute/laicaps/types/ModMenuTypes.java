@@ -2,6 +2,8 @@ package com.wdiscute.laicaps.types;
 
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableMenu;
+import com.wdiscute.laicaps.block.refuelstation.RefuelStationMenu;
+import com.wdiscute.laicaps.block.refuelstation.RefuelStationScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
 import net.minecraft.core.registries.Registries;
@@ -31,7 +33,8 @@ public class ModMenuTypes
     public static final Supplier<MenuType<RocketSpaceMenu>> ROCKET_SPACE_MENU =
             registerMenuType("rocket_space_menu", RocketSpaceMenu::new);
 
-
+    public static final Supplier<MenuType<RefuelStationMenu>> REFUEL_STATION_MENU =
+            registerMenuType("refuel_station_menu", RefuelStationMenu::new);
 
 
 
