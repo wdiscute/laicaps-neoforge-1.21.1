@@ -4,8 +4,12 @@ package com.wdiscute.laicaps;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.item.*;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -105,18 +109,37 @@ public class ModItems
             ITEMS.register("tank", () -> new Item(new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
-            ));
+                    .component(ModDataComponentTypes.TANK_FUEL, 0)
+                    .durability(400)
+            )
+            {
+                @Override
+                public int getDamage(ItemStack stack)
+                {
+                    return (400 - stack.get(ModDataComponentTypes.TANK_FUEL) == 0) ? 1 : 400 - stack.get(ModDataComponentTypes.TANK_FUEL);
+                }
+
+
+                @Override
+                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+                {
+                    tooltipComponents.clear();
+                    tooltipComponents.add(Component.literal("test"));
+                }
+            });
 
     public static final DeferredItem<Item> MEDIUM_TANK =
             ITEMS.register("medium_tank", () -> new Item(new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
+                    .component(ModDataComponentTypes.MEDIUM_TANK_FUEL, 0)
             ));
 
     public static final DeferredItem<Item> LARGE_TANK =
             ITEMS.register("large_tank", () -> new Item(new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
+                    .component(ModDataComponentTypes.LARGE_TANK_FUEL, 0)
             ));
 
 
@@ -133,7 +156,26 @@ public class ModItems
             ));
 
 
-
+    public static final DeferredItem<Item> EMBER =
+            ITEMS.register("ember", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+            ));
+    public static final DeferredItem<Item> ASHA =
+            ITEMS.register("asha", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+            ));
+    public static final DeferredItem<Item> OVERWORLD =
+            ITEMS.register("overworld", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+            ));
+    public static final DeferredItem<Item> LUNAMAR =
+            ITEMS.register("lunamar", () -> new Item(new Item.Properties()
+                    .rarity(Rarity.RARE)
+            ));
+    public static final DeferredItem<Item> UNKNOWN =
+        ITEMS.register("unknown", () -> new Item(new Item.Properties()
+                .rarity(Rarity.RARE)
+        ));
 
 
 
