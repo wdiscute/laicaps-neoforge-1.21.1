@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -14,10 +15,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 
@@ -30,7 +33,6 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/rocket/inventory_overlay.png");
     private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/telescope/planet_screen_background.png");
     private static final ResourceLocation BLACK_OVERLAY = Laicaps.rl("textures/gui/telescope/black.png");
-    private static final ResourceLocation NO_BOOK_SCREEN_BACKGROUND_ROCKET = Laicaps.rl("textures/gui/telescope/no_book_screen_background_rocket.png");
 
     private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "ember"));
     private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha"));
@@ -72,12 +74,11 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private static final ResourceLocation LUNAMAR_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/lunamar_to_overworld.png");
     private static final ResourceLocation LUNAMAR_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
 
-    private static final ResourceLocation NOTHING_TO_EMBER = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
-    private static final ResourceLocation NOTHING_TO_ASHA = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
-    private static final ResourceLocation NOTHING_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
-    private static final ResourceLocation NOTHING_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
+    private static final ResourceLocation UNKNOWN_TO_EMBER = Laicaps.rl("textures/gui/rocket/unknown_to_ember.png");
+    private static final ResourceLocation UNKNOWN_TO_ASHA = Laicaps.rl("textures/gui/rocket/unknown_to_asha.png");
+    private static final ResourceLocation UNKNOWN_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/unknown_to_overworld.png");
+    private static final ResourceLocation UNKNOWN_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/unknown_to_lunamar.png");
 
-    int state = 0;
 
     int uiX;
     int uiY;
@@ -88,13 +89,15 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private static RocketSpaceMenu menu;
 
     ItemStack book;
-
-    int planetSelected = -1;
+    ItemStack tank;
 
     int emberKnowledge = 0;
     int ashaKnowledge = 0;
     int overworldKnowledge = 0;
     int lunamarKnowledge = 0;
+
+    int rocketState = 0;
+    int counter = 0;
 
     @Override
     protected void init()
@@ -112,38 +115,44 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     @Override
     protected void containerTick()
     {
-        System.out.println(menu.rocketEntity);
+        counter++;
 
-        if (menu.rocketEntity == null) return;
-        if (menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
+        if (menu.container == null) return;
+
+        if (menu.container.getItem(3).is(Items.DIRT)) rocketState = 0;
+        if (menu.container.getItem(3).is(Items.STONE)) rocketState = 1;
+        if (menu.container.getItem(3).is(Items.ANDESITE)) rocketState = 2;
+        if (menu.container.getItem(3).is(Items.GRANITE)) rocketState = 3;
+        if (menu.container.getItem(3).is(Items.DIORITE)) rocketState = 4;
+
+        if (menu.container.getItem(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
         {
-            book = menu.rocketEntity.inventory.getStackInSlot(0);
+            book = menu.container.getItem(0);
+            emberKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+            ashaKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+            overworldKnowledge = 100;
+            lunamarKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+        } else
+        {
+            emberKnowledge = 0;
+            ashaKnowledge = 0;
+            overworldKnowledge = 100;
+            lunamarKnowledge = 0;
         }
 
-        if (!menu.rocketEntity.inventory.getStackInSlot(0).equals(book))
+
+        if (menu.container.getItem(2).is(ModItems.TANK.get()))
         {
-            state = 1;
-            book = menu.rocketEntity.inventory.getStackInSlot(0);
+            tank = menu.container.getItem(2);
+
+            if(counter % 8 == 0)
+            {
+                System.out.println("sent 69");
+                getMinecraft().gameMode.handleInventoryButtonClick(menu.containerId, 69);
+            }
+
         }
 
-        if (state == 0 && menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
-        {
-            state = 1;
-            book = menu.rocketEntity.inventory.getStackInSlot(0);
-            return;
-        }
-
-        if (!menu.rocketEntity.inventory.getStackInSlot(0).is(ModItems.ASTRONOMY_NOTEBOOK))
-        {
-            state = 0;
-            return;
-        }
-
-
-        emberKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
-        ashaKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
-        overworldKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
-        lunamarKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
 
     }
 
@@ -156,28 +165,19 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         //ember
         if (x > 250 && x < 283 && y > 170 && y < 200)
-        {
-            planetSelected = 1;
-        }
+            getMinecraft().gameMode.handleInventoryButtonClick(menu.containerId, 1);
 
         //asha
         if (x > 310 && x < 335 && y > 86 && y < 111)
-        {
-            planetSelected = 2;
-        }
+            getMinecraft().gameMode.handleInventoryButtonClick(menu.containerId, 2);
 
         //overworld
         if (x > 392 && x < 429 && y > 121 && y < 160)
-        {
-            planetSelected = 3;
-        }
+            getMinecraft().gameMode.handleInventoryButtonClick(menu.containerId, 3);
 
         //lunamar
         if (x > 444 && x < 589 && y > 16 && y < 65)
-        {
-            planetSelected = 4;
-        }
-
+            getMinecraft().gameMode.handleInventoryButtonClick(menu.containerId, 4);
 
         return super.mouseClicked(mouseX, mouseY, button);
 
@@ -186,143 +186,210 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY)
     {
+        checkNulls();
+        double x = mouseX - uiX;
+        double y = mouseY - uiY;
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-        if (book == null) return;
+        //renders background
+        renderImage(guiGraphics, PLANET_SCREEN_BACKGROUND);
 
-        guiGraphics.blit(BLACK_OVERLAY, 0, 0, 0, 0, 10000, 10000, 331, 250);
 
-        //no book in slot
-        if (state == 0)
+        checkMissingItemsMessage(guiGraphics);
+
+
+        //render inventory overlay
+        renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
+
+        //render planet selected arrow
+        renderPlanetArrows(guiGraphics);
+
+        //render planets with blurs & highlights
         {
-            //renders BLACK OVERLAY sky background
-            renderImage(guiGraphics, NO_BOOK_SCREEN_BACKGROUND_ROCKET);
+            ResourceLocation rl;
+            RenderSystem.enableBlend();
 
-            guiGraphics.drawString(this.font, Component.translatable("gui.rocket.telescope.notebook"), uiX + 50, uiY + 70, 13186614, true);
-
-            //render inventory overlay
-            renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
-
-        }
-
-
-        //planet selection screen
-        if (state == 1 && book.is(ModItems.ASTRONOMY_NOTEBOOK))
-        {
-            //renders background
-            renderImage(guiGraphics, PLANET_SCREEN_BACKGROUND);
-
-            double x = mouseX - uiX;
-            double y = mouseY - uiY;
-
-            //render inventory overlay
-            renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
-
-            //render planet selected arrow
-            renderPlanetArrows(guiGraphics);
-
-            //render planets with blurs & highlights
+            //ember
+            if (emberKnowledge < 4)
+                rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_BLUR_HIGHLIGHTED : EMBER_BLUR;
+            else
             {
-                ResourceLocation rl;
-                RenderSystem.enableBlend();
-
-                //ember
-                if (emberKnowledge < 4)
-                    rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_BLUR_HIGHLIGHTED : EMBER_BLUR;
-                else
-                {
-                    rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_HIGHLIGHTED : EMBER;
-                }
-
-                renderImage(guiGraphics, rl);
-
-
-                //asha
-                if (ashaKnowledge < 4)
-                    rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_BLUR_HIGHLIGHTED : ASHA_BLUR;
-                else
-                    rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_HIGHLIGHTED : ASHA;
-                renderImage(guiGraphics, rl);
-
-                //overworld
-                rl = (x > 392 && x < 429 && y > 121 && y < 160) ? OVERWORLD_HIGHLIGHTED : OVERWORLD;
-                renderImage(guiGraphics, rl);
-
-
-                //lunamar
-                if (lunamarKnowledge < 4)
-                    rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_BLUR_HIGHLIGHTED : LUNAMAR_BLUR;
-                else
-                    rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_HIGHLIGHTED : LUNAMAR;
-                renderImage(guiGraphics, rl);
-
-                RenderSystem.disableBlend();
+                rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_HIGHLIGHTED : EMBER;
             }
 
-            //render tooltip
-            renderPlanetTooltip(guiGraphics, mouseX, mouseY);
+            renderImage(guiGraphics, rl);
 
 
+            //asha
+            if (ashaKnowledge < 4)
+                rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_BLUR_HIGHLIGHTED : ASHA_BLUR;
+            else
+                rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_HIGHLIGHTED : ASHA;
+            renderImage(guiGraphics, rl);
 
+            //overworld
+            rl = (x > 392 && x < 429 && y > 121 && y < 160) ? OVERWORLD_HIGHLIGHTED : OVERWORLD;
+            renderImage(guiGraphics, rl);
+
+
+            //lunamar
+            if (lunamarKnowledge < 4)
+                rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_BLUR_HIGHLIGHTED : LUNAMAR_BLUR;
+            else
+                rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_HIGHLIGHTED : LUNAMAR;
+            renderImage(guiGraphics, rl);
+
+            RenderSystem.disableBlend();
         }
+
+        //render tooltip
+        renderPlanetTooltip(guiGraphics, mouseX, mouseY);
+
+
+    }
+
+    private boolean checkMissingItemsMessage(@Nullable GuiGraphics guiGraphics)
+    {
+
+        if (book.isEmpty())
+        {
+            if (!(guiGraphics == null))
+                guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_notebook"), uiX + 30, uiY + 70, 13186614, true);
+            return false;
+        }
+
+        if (tank.isEmpty())
+        {
+            if (!(guiGraphics == null))
+                guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_tank"), uiX + 30, uiY + 70, 13186614, true);
+            return false;
+        }
+
+        //check fuel
+        if (!checkEnoughFuel())
+        {
+            guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_fuel"), uiX + 30, uiY + 70, 13186614, true);
+            return false;
+        }
+
+        if (rocketState == 0)
+        {
+            if (!(guiGraphics == null))
+                guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
+            return false;
+        }
+
+
+        return true;
+    }
+
+    private boolean checkEnoughFuel()
+    {
+        float fuelRequired = 0;
+        float fuelAvailable = 0;
+
+        if (tank.is(ModItems.TANK)) fuelAvailable = tank.get(ModDataComponentTypes.TANK_FUEL);
+        if (tank.is(ModItems.MEDIUM_TANK)) fuelAvailable = tank.get(ModDataComponentTypes.MEDIUM_TANK_FUEL);
+        if (tank.is(ModItems.LARGE_TANK)) fuelAvailable = tank.get(ModDataComponentTypes.LARGE_TANK_FUEL);
+
+        //fuelavailable = fuel.getcomponent(fuel)
+
+        if (Minecraft.getInstance().player.level().dimension() == EMBER_KEY)
+        {
+            if (menu.container.getItem(4).is(ModItems.EMBER)) fuelRequired = 120;
+            if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 490;
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 700;
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 1240;
+        }
+
+        if (Minecraft.getInstance().player.level().dimension() == ASHA_KEY)
+        {
+            if (menu.container.getItem(4).is(ModItems.EMBER)) fuelRequired = 490;
+            if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 120;
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 330;
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 870;
+        }
+
+        if (Minecraft.getInstance().player.level().dimension() == OVERWORLD_KEY)
+        {
+            if (menu.container.getItem(4).is(ModItems.EMBER)) fuelRequired = 790;
+            if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 330;
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 660;
+        }
+
+        if (Minecraft.getInstance().player.level().dimension() == LUNAMAR_KEY)
+        {
+            if (menu.container.getItem(4).is(ModItems.EMBER)) fuelRequired = 1240;
+            if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 870;
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 660;
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+        }
+
+        if (menu.container.getItem(4).is(ModItems.EMBER)) fuelRequired = 120;
+        if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 120;
+        if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
+        if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+
+
+        return fuelAvailable > fuelRequired;
+
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
     {
-
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-
         this.renderTooltip(guiGraphics, mouseX, mouseY);
-
     }
 
 
     private void renderPlanetArrows(GuiGraphics guiGraphics)
     {
-        if (menu.rocketEntity.level().dimension() == EMBER_KEY)
+
+        if (Minecraft.getInstance().player.level().dimension() == EMBER_KEY)
         {
-            if (planetSelected == 1) renderImage(guiGraphics, EMBER_TO_EMBER);
-            if (planetSelected == 2) renderImage(guiGraphics, EMBER_TO_ASHA);
-            if (planetSelected == 3) renderImage(guiGraphics, EMBER_TO_OVERWORLD);
-            if (planetSelected == 4) renderImage(guiGraphics, EMBER_TO_LUNAMAR);
+            if (menu.container.getItem(4).is(ModItems.EMBER)) renderImage(guiGraphics, EMBER_TO_EMBER);
+            if (menu.container.getItem(4).is(ModItems.ASHA)) renderImage(guiGraphics, EMBER_TO_ASHA);
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) renderImage(guiGraphics, EMBER_TO_OVERWORLD);
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) renderImage(guiGraphics, EMBER_TO_LUNAMAR);
             return;
         }
 
-        if (menu.rocketEntity.level().dimension() == ASHA_KEY)
+        if (Minecraft.getInstance().player.level().dimension() == ASHA_KEY)
         {
-            if (planetSelected == 1) renderImage(guiGraphics, ASHA_TO_EMBER);
-            if (planetSelected == 2) renderImage(guiGraphics, ASHA_TO_ASHA);
-            if (planetSelected == 3) renderImage(guiGraphics, ASHA_TO_OVERWORLD);
-            if (planetSelected == 4) renderImage(guiGraphics, ASHA_TO_LUNAMAR);
+            if (menu.container.getItem(4).is(ModItems.EMBER)) renderImage(guiGraphics, ASHA_TO_EMBER);
+            if (menu.container.getItem(4).is(ModItems.ASHA)) renderImage(guiGraphics, ASHA_TO_ASHA);
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) renderImage(guiGraphics, ASHA_TO_OVERWORLD);
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) renderImage(guiGraphics, ASHA_TO_LUNAMAR);
             return;
         }
 
-        if (menu.rocketEntity.level().dimension() == OVERWORLD_KEY)
+        if (Minecraft.getInstance().player.level().dimension() == OVERWORLD_KEY)
         {
-            if (planetSelected == 1) renderImage(guiGraphics, OVERWORLD_TO_EMBER);
-            if (planetSelected == 2) renderImage(guiGraphics, OVERWORLD_TO_ASHA);
-            if (planetSelected == 3) renderImage(guiGraphics, OVERWORLD_TO_OVERWORLD);
-            if (planetSelected == 4) renderImage(guiGraphics, OVERWORLD_TO_LUNAMAR);
+            if (menu.container.getItem(4).is(ModItems.EMBER)) renderImage(guiGraphics, OVERWORLD_TO_EMBER);
+            if (menu.container.getItem(4).is(ModItems.ASHA)) renderImage(guiGraphics, OVERWORLD_TO_ASHA);
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) renderImage(guiGraphics, OVERWORLD_TO_OVERWORLD);
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) renderImage(guiGraphics, OVERWORLD_TO_LUNAMAR);
             return;
         }
 
-        if (menu.rocketEntity.level().dimension() == LUNAMAR_KEY)
+        if (Minecraft.getInstance().player.level().dimension() == LUNAMAR_KEY)
         {
-            if (planetSelected == 1) renderImage(guiGraphics, LUNAMAR_TO_EMBER);
-            if (planetSelected == 2) renderImage(guiGraphics, LUNAMAR_TO_ASHA);
-            if (planetSelected == 3) renderImage(guiGraphics, LUNAMAR_TO_OVERWORLD);
-            if (planetSelected == 4) renderImage(guiGraphics, LUNAMAR_TO_LUNAMAR);
+            if (menu.container.getItem(4).is(ModItems.EMBER)) renderImage(guiGraphics, LUNAMAR_TO_EMBER);
+            if (menu.container.getItem(4).is(ModItems.ASHA)) renderImage(guiGraphics, LUNAMAR_TO_ASHA);
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) renderImage(guiGraphics, LUNAMAR_TO_OVERWORLD);
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) renderImage(guiGraphics, LUNAMAR_TO_LUNAMAR);
             return;
         }
 
-        if (planetSelected == 1) renderImage(guiGraphics, NOTHING_TO_EMBER);
-        if (planetSelected == 2) renderImage(guiGraphics, NOTHING_TO_ASHA);
-        if (planetSelected == 3) renderImage(guiGraphics, NOTHING_TO_OVERWORLD);
-        if (planetSelected == 4) renderImage(guiGraphics, NOTHING_TO_LUNAMAR);
+        if (menu.container.getItem(4).is(ModItems.EMBER)) renderImage(guiGraphics, UNKNOWN_TO_EMBER);
+        if (menu.container.getItem(4).is(ModItems.UNKNOWN)) renderImage(guiGraphics, UNKNOWN_TO_ASHA);
+        if (menu.container.getItem(4).is(ModItems.UNKNOWN)) renderImage(guiGraphics, UNKNOWN_TO_OVERWORLD);
+        if (menu.container.getItem(4).is(ModItems.UNKNOWN)) renderImage(guiGraphics, UNKNOWN_TO_LUNAMAR);
 
     }
 
@@ -420,6 +487,12 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
     //                                                                `---'
 
+
+    private void checkNulls()
+    {
+        if (book == null) book = ItemStack.EMPTY;
+        if (tank == null) tank = ItemStack.EMPTY;
+    }
 
     //empty so it doesn't render "inventory"  and "telescope" text
     @Override

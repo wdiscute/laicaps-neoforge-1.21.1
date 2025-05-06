@@ -28,8 +28,14 @@ public class ModDataComponentTypes
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ASTRONOMY_KNOWLEDGE_LUNAMAR = register("astronomy_knowledge_lunamar",
             builder -> builder.persistent(ExtraCodecs.intRange(0, 100)));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TANK_FUEL = register("tank_fuel",
+            builder -> builder.persistent(ExtraCodecs.intRange(0, 400)));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MEDIUM_TANK_FUEL = register("medium_tank_fuel",
+            builder -> builder.persistent(ExtraCodecs.intRange(0, 700)));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> LARGE_TANK_FUEL = register("large_tank_fuel",
+            builder -> builder.persistent(ExtraCodecs.intRange(0, 1300)));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator) {

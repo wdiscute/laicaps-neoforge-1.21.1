@@ -81,6 +81,12 @@
   "gui.laicaps.rocket.takeoff.10": "§l1",
   "gui.laicaps.rocket.takeoff.11": "§l§cTAKEOFF",
 
+  "gui.rocket.rocket.missing_notebook": "§cInsert Notebook",
+  "gui.rocket.rocket.missing_tank": "§cInsert Tank",
+  "gui.rocket.rocket.missing_fuel": "§cNot Enough Fuel",
+  "gui.rocket.rocket.missing_nothing": "§aReady for Takeoff",
+
+
 
 
   "gui.laicaps.telescope.tooltip.ember.0": "§6            EMBER      ",

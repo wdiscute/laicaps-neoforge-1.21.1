@@ -1,6 +1,8 @@
 package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.ModItems;
+import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.types.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -8,6 +10,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -21,81 +25,161 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class RocketSpaceMenu extends AbstractContainerMenu
 {
-    public final RocketEntity rocketEntity;
+    public final Container container;
 
     public RocketSpaceMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
-        this(containerId, inv, ((RocketEntity) inv.player.getVehicle()));
+        this(containerId, inv, new SimpleContainer(5));
     }
 
-    public RocketSpaceMenu(int containerId, Inventory inv, RocketEntity entity)
+    public RocketSpaceMenu(int containerId, Inventory playerInventory, Container container)
     {
         super(ModMenuTypes.ROCKET_SPACE_MENU.get(), containerId);
-        this.rocketEntity = entity;
+        this.container = container;
 
-        System.out.println(entity);
+        container.startOpen(playerInventory.player);
+
 
         //player inventory
         for (int i = 0; i < 3; ++i)
         {
             for (int l = 0; l < 9; ++l)
             {
-                this.addSlot(new Slot(inv, l + i * 9 + 9, (8 + l * 18) - 168, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, (8 + l * 18) - 168, 84 + i * 18));
             }
         }
 
         //player hotbar
         for (int i = 0; i < 9; ++i)
         {
-            this.addSlot(new Slot(inv, i, (8 + i * 18) - 168, 142));
-        }
-
-
-        //bandaid fix if player logs out while in the rocket menu so it doesn't crash because entity doesn't exist yet on menu load
-        if (rocketEntity == null)
-        {
-            this.addSlot(new Slot(inv, 0, (8 + 10 * 18) - 168, 142));
-            this.addSlot(new Slot(inv, 0, (8 + 10 * 18) - 168, 142));
-            this.addSlot(new Slot(inv, 0, (8 + 10 * 18) - 168, 142));
-            return;
+            this.addSlot(new Slot(playerInventory, i, (8 + i * 18) - 168, 142));
         }
 
         //book
-        this.addSlot(new SlotItemHandler(this.rocketEntity.inventory, 0, -24, 20));
+        this.addSlot(new Slot(this.container, 0, -24, 20)
+                     {
+                         @Override
+                         public boolean mayPlace(ItemStack stack)
+                         {
+                             return stack.is(ModItems.ASTRONOMY_NOTEBOOK);
+                         }
+                     }
+        );
+
         //fuel
-        this.addSlot(new SlotItemHandler(this.rocketEntity.inventory, 1, -158, 20));
+        this.addSlot(new Slot(this.container, 1, -158, 20)
+        {
+            @Override
+            public boolean mayPlace(ItemStack stack)
+            {
+                return stack.is(ModItems.ENDERBLAZE_FUEL);
+            }
+        });
+
         //tank
-        this.addSlot(new SlotItemHandler(this.rocketEntity.inventory, 2, -158, 52));
+        this.addSlot(new Slot(this.container, 2, -158, 52)
+        {
+            @Override
+            public boolean mayPlace(ItemStack stack)
+            {
+                return stack.is(ModItems.TANK) || stack.is(ModItems.MEDIUM_TANK) || stack.is(ModItems.LARGE_TANK);
+            }
+        });
+
+        //rocket state
+        this.addSlot(new Slot(this.container, 3, -158, 0)
+        {
+            @Override
+            public boolean mayPlace(ItemStack stack)
+            {
+                return false;
+            }
+
+            @Override
+            public boolean mayPickup(Player player)
+            {
+                return false;
+            }
+        });
+
+        //planet selected
+        this.addSlot(new Slot(this.container, 4, -158, -20)
+        {
+            @Override
+            public boolean mayPlace(ItemStack stack)
+            {
+                return false;
+            }
+
+            @Override
+            public boolean mayPickup(Player player)
+            {
+                return false;
+            }
+        });
     }
 
     @Override
     public boolean clickMenuButton(Player player, int id)
     {
+
         ResourceKey<Level> key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha"));
 
         Vec3 spawnPos = new Vec3(0, 150, 0);
 
-        if (id == 1)
+
+        if (id == 1) container.setItem(4, new ItemStack(ModItems.EMBER.get()));
+
+        if (id == 2) container.setItem(4, new ItemStack(ModItems.ASHA.get()));
+
+        if (id == 3) container.setItem(4, new ItemStack(ModItems.OVERWORLD.get()));
+
+        if (id == 4) container.setItem(4, new ItemStack(ModItems.LUNAMAR.get()));
+
+        if (id == 69)
         {
-            key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "ember"));
+            System.out.println("received 69");
+
+            ItemStack book = container.getItem(0);
+            ItemStack fuel = container.getItem(1);
+            ItemStack tank = container.getItem(2);
+
+            System.out.println("fuel " + fuel);
+            System.out.println("tank " + tank);
+            System.out.println("book " + book);
+
+            if(tank.is(ModItems.TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
+            {
+                int fuelAvailable = tank.get(ModDataComponentTypes.TANK_FUEL);
+                System.out.println(fuelAvailable);
+                if(fuelAvailable <= 390)
+                {
+                    tank.set(ModDataComponentTypes.TANK_FUEL, fuelAvailable + 10);
+                    fuel.shrink(1);
+                    container.setItem(1, fuel);
+                    container.setItem(2, tank);
+                }
+            }
         }
 
-        if (id == 2)
-        {
-            key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha"));
-        }
 
-        if (id == 3)
-        {
-            key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
-            BlockPos b = ((ServerPlayer) player).getRespawnPosition();
-            spawnPos = new Vec3(b.getX(), 150, b.getZ());
-        }
+        if (id == 11)
+            key = ResourceKey.create(Registries.DIMENSION,Laicaps.rl("ember"));
 
-        if (id == 4)
-        {
-            key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "lunamar"));
-        }
+
+        if (id == 12)
+            key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
+
+
+        if (id == 13)
+            key = ResourceKey.create(Registries.DIMENSION,
+                    ResourceLocation.withDefaultNamespace("overworld"));
+
+
+        if (id == 14)
+            key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
+
+
 
         DimensionTransition dt = new DimensionTransition(
                 player.level().getServer().getLevel(key),
@@ -108,9 +192,7 @@ public class RocketSpaceMenu extends AbstractContainerMenu
                 }
         );
 
-
-
-        this.rocketEntity.changeDimension(dt);
+        //this.rocketEntity.changeDimension(dt);
 
         return super.clickMenuButton(player, id);
     }
@@ -132,35 +214,44 @@ public class RocketSpaceMenu extends AbstractContainerMenu
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 5;  // must be the number of slots you have!
 
 
-    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
+    public ItemStack quickMoveStack(Player playerIn, int pIndex)
+    {
         Slot sourceSlot = slots.get(pIndex);
         if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
         // Check if the slot clicked is one of the vanilla container slots
-        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT)
+        {
             // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
+            if (!moveItemStackTo(
+                    sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
+                            + TE_INVENTORY_SLOT_COUNT, false))
+            {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
-        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
+        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT)
+        {
             // This is a TE slot so merge the stack into the players inventory
-            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
+            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false))
+            {
                 return ItemStack.EMPTY;
             }
-        } else {
+        } else
+        {
             System.out.println("Invalid slotIndex:" + pIndex);
             return ItemStack.EMPTY;
         }
         // If stack size == 0 (the entire stack was moved) set slot contents to null
-        if (sourceStack.getCount() == 0) {
+        if (sourceStack.getCount() == 0)
+        {
             sourceSlot.set(ItemStack.EMPTY);
-        } else {
+        } else
+        {
             sourceSlot.setChanged();
         }
         sourceSlot.onTake(playerIn, sourceStack);

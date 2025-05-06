@@ -8,11 +8,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -20,10 +18,13 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.ContainerEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -31,102 +32,37 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RocketEntity extends LivingEntity implements PlayerRideable, MenuProvider
+public class RocketEntity extends LivingEntity implements PlayerRideable, MenuProvider, ContainerEntity
 {
     private static final Logger log = LoggerFactory.getLogger(RocketEntity.class);
+
     private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY);
     private final NonNullList<ItemStack> handItems = NonNullList.withSize(2, ItemStack.EMPTY);
     public final AnimationState shakeAnimationState = new AnimationState();
     private static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> JUMPING = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
 
-    private int startTick = 0;
-
     public RocketEntity(EntityType<? extends LivingEntity> entityType, Level level)
     {
         super(entityType, level);
     }
 
-    public final ItemStackHandler inventory = new ItemStackHandler(3)
-    {
-        @Override
-        public ItemStack extractItem(int slot, int amount, boolean simulate)
-        {
-            if (amount == 0) return ItemStack.EMPTY;
+    private NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 
-            if (entityData.get(STATE) != 0 && slot == 0) return ItemStack.EMPTY;
-            if (entityData.get(STATE) != 0 && slot == 2) return ItemStack.EMPTY;
-
-
-            this.validateSlotIndex(slot);
-            ItemStack existing = (ItemStack) this.stacks.get(slot);
-            if (existing.isEmpty())
-            {
-                return ItemStack.EMPTY;
-            } else
-            {
-                int toExtract = Math.min(amount, existing.getMaxStackSize());
-                if (existing.getCount() <= toExtract)
-                {
-                    if (!simulate)
-                    {
-                        this.stacks.set(slot, ItemStack.EMPTY);
-                        this.onContentsChanged(slot);
-                        return existing;
-                    } else
-                    {
-                        return existing.copy();
-                    }
-                } else
-                {
-                    if (!simulate)
-                    {
-                        this.stacks.set(slot, existing.copyWithCount(existing.getCount() - toExtract));
-                        this.onContentsChanged(slot);
-                    }
-
-                    return existing.copyWithCount(toExtract);
-                }
-            }
-
-        }
-
-        @Override
-        protected int getStackLimit(int slot, ItemStack stack)
-        {
-            if (slot == 0)
-                if (stack.is(ModItems.ASTRONOMY_NOTEBOOK))
-                    return 1;
-                else
-                    return 0;
-
-            if (slot == 1)
-                if (stack.is(ModItems.ENDERBLAZE_FUEL))
-                    return 64;
-                else
-                    return 0;
-
-            if (slot == 2)
-                if (stack.is(ModItems.TANK) || stack.is(ModItems.MEDIUM_TANK) || stack.is(ModItems.LARGE_TANK))
-                    return 1;
-                else
-                    return 0;
-
-
-            return 64;
-        }
-
-    };
-
-    @Override
     public void tick()
     {
         super.tick();
+
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
         Vec3 delta = getDeltaMovement();
 
+        if(state == 0) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
+        if(state == 1) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
+        if(state == 2) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
+        if(state == 3) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
+        if(state == 4) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
 
         //landed aka on-ground
         if (state == 0)
@@ -153,7 +89,6 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
             {
                 entityData.set(STATE, 2);
                 entityData.set(JUMPING, -1);
-                startTick = tickCount;
             }
 
         }
@@ -229,8 +164,14 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
 
         this.shakeAnimationState.start(this.tickCount);
 
+
+
+
         if (player.isShiftKeyDown())
-            player.openMenu(new SimpleMenuProvider(this, Component.literal("Space Menu")));
+        {
+            if(!player.level().isClientSide)
+                player.openMenu(this);
+        }
         else
             player.startRiding(this);
 
@@ -267,25 +208,6 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     //|  ||  | ' '-' '       |  |   ' '-' ' '  ''  ' \ `--. |  | |  |   \   '
     //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
     //                                                                `---'
-
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag compound)
-    {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("state", this.entityData.get(STATE));
-        compound.putInt("jumping", this.entityData.get(JUMPING));
-        compound.put("inventory", inventory.serializeNBT(registryAccess()));
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag compound)
-    {
-        super.readAdditionalSaveData(compound);
-        this.entityData.set(STATE, compound.getInt("state"));
-        this.entityData.set(JUMPING, compound.getInt("jumping"));
-        inventory.deserializeNBT(registryAccess(), compound.getCompound("inventory"));
-    }
 
     @Override
     public void kill()
@@ -366,6 +288,118 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
         Vec3 vec3 = this.getPassengerRidingPosition(passenger);
         Vec3 vec31 = passenger.getVehicleAttachmentPoint(this);
         callback.accept(passenger, vec3.x - vec31.x, vec3.y - vec31.y + 0.2f, vec3.z - vec31.z);
+    }
+
+    @Override
+    public void setLootTable(@Nullable ResourceKey<LootTable> resourceKey)
+    {
+
+    }
+
+    @Override
+    public void setLootTableSeed(long l)
+    {
+
+    }
+
+    @Override
+    public NonNullList<ItemStack> getItemStacks()
+    {
+        return this.itemStacks;
+    }
+
+    @Override
+    public void clearItemStacks()
+    {
+        this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+    }
+
+    @Override
+    public int getContainerSize()
+    {
+        return 5;
+    }
+
+    @Override
+    public ItemStack getItem(int index)
+    {
+        return this.itemStacks.get(index);
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount)
+    {
+        return ContainerHelper.removeItem(this.getItemStacks(), slot, amount);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot)
+    {
+        ItemStack itemstack = (ItemStack)this.getItemStacks().get(slot);
+        if (itemstack.isEmpty()) {
+            return ItemStack.EMPTY;
+        } else {
+            this.getItemStacks().set(slot, ItemStack.EMPTY);
+            return itemstack;
+        }
+    }
+
+    @Override
+    public void setItem(int index, ItemStack stack)
+    {
+        this.itemStacks.set(index, stack);
+    }
+
+    @Override
+    public void setChanged()
+    {
+
+    }
+
+    @Override
+    public boolean stillValid(Player player)
+    {
+        return false;
+    }
+
+    @Override
+    public void clearContent()
+    {
+
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound)
+    {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("state", this.entityData.get(STATE));
+        compound.putInt("jumping", this.entityData.get(JUMPING));
+
+        ItemStackHandler inventory = new ItemStackHandler(5);
+        inventory.setStackInSlot(0, itemStacks.get(0));
+        inventory.setStackInSlot(1, itemStacks.get(1));
+        inventory.setStackInSlot(2, itemStacks.get(2));
+        inventory.setStackInSlot(3, itemStacks.get(3));
+        inventory.setStackInSlot(4, itemStacks.get(4));
+        compound.put("inventory", inventory.serializeNBT(registryAccess()));
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound)
+    {
+        super.readAdditionalSaveData(compound);
+        this.entityData.set(STATE, compound.getInt("state"));
+        this.entityData.set(JUMPING, compound.getInt("jumping"));
+
+        ItemStackHandler inventory = new ItemStackHandler(5);
+        inventory.deserializeNBT(registryAccess(), compound.getCompound("inventory"));
+        itemStacks.set(0, inventory.getStackInSlot(0));
+        itemStacks.set(1, inventory.getStackInSlot(1));
+        itemStacks.set(2, inventory.getStackInSlot(2));
+        itemStacks.set(3, inventory.getStackInSlot(3));
+        itemStacks.set(4, inventory.getStackInSlot(4));
+        compound.put("inventory", inventory.serializeNBT(registryAccess()));
+
     }
 
 }
