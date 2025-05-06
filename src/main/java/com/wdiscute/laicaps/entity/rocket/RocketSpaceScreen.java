@@ -1,8 +1,11 @@
 package com.wdiscute.laicaps.entity.rocket;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
+import com.wdiscute.laicaps.block.telescope.RevealRenderUtil;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,6 +20,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import org.joml.Vector2f;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +35,9 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private static final Logger log = LoggerFactory.getLogger(RocketSpaceScreen.class);
 
     private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/rocket/inventory_overlay.png");
-    private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/telescope/planet_screen_background.png");
+    private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/rocket/planet_screen_background.png");
     private static final ResourceLocation BLACK_OVERLAY = Laicaps.rl("textures/gui/telescope/black.png");
+    private static final ResourceLocation FUEL = Laicaps.rl("textures/gui/rocket/fuel.png");
 
     private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "ember"));
     private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha"));
@@ -79,6 +84,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private static final ResourceLocation UNKNOWN_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/unknown_to_overworld.png");
     private static final ResourceLocation UNKNOWN_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/unknown_to_lunamar.png");
 
+    private static RocketSpaceMenu menu;
 
     int uiX;
     int uiY;
@@ -86,10 +92,9 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     int canvasX;
     int canvasY;
 
-    private static RocketSpaceMenu menu;
-
     ItemStack book;
     ItemStack tank;
+    float fuelAvailable = 0;
 
     int emberKnowledge = 0;
     int ashaKnowledge = 0;
@@ -140,18 +145,28 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             lunamarKnowledge = 0;
         }
 
+        if(menu.container.getItem(4).isEmpty())
+        {
+            ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
+            if(dimension == EMBER_KEY) menu.container.setItem(4, new ItemStack(ModItems.EMBER.get()));
+            if(dimension == ASHA_KEY) menu.container.setItem(4, new ItemStack(ModItems.ASHA.get()));
+            if(dimension == OVERWORLD_KEY) menu.container.setItem(4, new ItemStack(ModItems.OVERWORLD.get()));
+            if(dimension == LUNAMAR_KEY) menu.container.setItem(4, new ItemStack(ModItems.LUNAMAR.get()));
+        }
 
-        if (menu.container.getItem(2).is(ModItems.TANK.get()))
+
+        if (menu.container.getItem(2).is(ModItems.TANK.get()) || menu.container.getItem(2).is(ModItems.MEDIUM_TANK.get()) || menu.container.getItem(2).is(ModItems.LARGE_TANK.get()))
         {
             tank = menu.container.getItem(2);
+            fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
 
-            if(counter % 8 == 0)
-            {
-                System.out.println("sent 69");
-                getMinecraft().gameMode.handleInventoryButtonClick(menu.containerId, 69);
-            }
+        }else
+        {
+            fuelAvailable = 0;
 
         }
+
+
 
 
     }
@@ -200,9 +215,40 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         checkMissingItemsMessage(guiGraphics);
 
+        //render fuel
+        PoseStack poseStack = guiGraphics.pose();
+        poseStack.pushPose();
+
+        RenderSystem.setShaderTexture(0, FUEL);
+
+
+        float fuelPercentage = ((fuelAvailable * 100 / 1300));
+        float fuelPercentageOfBar = fuelPercentage * 128 / 100;
+        fuelPercentageOfBar -=3;
+
+        RevealRenderUtil.renderWithOcclusion(
+                poseStack, uiX + 34, uiY + 105, 129, 8,
+                Lists.newArrayList(
+                        new Vector2f(uiX + 44 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 60 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 75 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 90 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 105 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 120 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 135 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 150 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 165 + fuelPercentageOfBar, uiY + 109),
+                        new Vector2f(uiX + 180 + fuelPercentageOfBar, uiY + 109)
+                ),
+                Lists.newArrayList(
+                        0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f
+                ));
+
+        poseStack.popPose();
 
         //render inventory overlay
         renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
+
 
         //render planet selected arrow
         renderPlanetArrows(guiGraphics);
@@ -251,51 +297,43 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
     }
 
-    private boolean checkMissingItemsMessage(@Nullable GuiGraphics guiGraphics)
+    private void checkMissingItemsMessage(@Nullable GuiGraphics guiGraphics)
     {
 
         if (book.isEmpty())
         {
             if (!(guiGraphics == null))
                 guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_notebook"), uiX + 30, uiY + 70, 13186614, true);
-            return false;
+            return;
         }
 
         if (tank.isEmpty())
         {
             if (!(guiGraphics == null))
                 guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_tank"), uiX + 30, uiY + 70, 13186614, true);
-            return false;
+            return;
         }
 
         //check fuel
-        if (!checkEnoughFuel())
+        if (!setFuelRequired())
         {
             guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_fuel"), uiX + 30, uiY + 70, 13186614, true);
-            return false;
+            return;
         }
+
 
         if (rocketState == 0)
         {
             if (!(guiGraphics == null))
                 guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
-            return false;
         }
 
-
-        return true;
     }
 
-    private boolean checkEnoughFuel()
+    private boolean setFuelRequired()
     {
         float fuelRequired = 0;
-        float fuelAvailable = 0;
-
-        if (tank.is(ModItems.TANK)) fuelAvailable = tank.get(ModDataComponentTypes.TANK_FUEL);
-        if (tank.is(ModItems.MEDIUM_TANK)) fuelAvailable = tank.get(ModDataComponentTypes.MEDIUM_TANK_FUEL);
-        if (tank.is(ModItems.LARGE_TANK)) fuelAvailable = tank.get(ModDataComponentTypes.LARGE_TANK_FUEL);
-
-        //fuelavailable = fuel.getcomponent(fuel)
+        boolean flag = false;
 
         if (Minecraft.getInstance().player.level().dimension() == EMBER_KEY)
         {
@@ -303,6 +341,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 490;
             if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 700;
             if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 1240;
+            flag = true;
         }
 
         if (Minecraft.getInstance().player.level().dimension() == ASHA_KEY)
@@ -311,6 +350,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 120;
             if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 330;
             if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 870;
+            flag = true;
         }
 
         if (Minecraft.getInstance().player.level().dimension() == OVERWORLD_KEY)
@@ -319,6 +359,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 330;
             if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
             if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 660;
+            flag = true;
         }
 
         if (Minecraft.getInstance().player.level().dimension() == LUNAMAR_KEY)
@@ -327,13 +368,16 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 870;
             if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 660;
             if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+            flag = true;
         }
 
-        if (menu.container.getItem(4).is(ModItems.EMBER)) fuelRequired = 120;
-        if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 120;
-        if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
-        if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
-
+        if (!flag)
+        {
+            if (menu.container.getItem(4).is(ModItems.EMBER)) fuelRequired = 120;
+            if (menu.container.getItem(4).is(ModItems.ASHA)) fuelRequired = 120;
+            if (menu.container.getItem(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (menu.container.getItem(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+        }
 
         return fuelAvailable > fuelRequired;
 

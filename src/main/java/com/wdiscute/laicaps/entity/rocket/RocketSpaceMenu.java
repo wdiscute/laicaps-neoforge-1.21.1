@@ -4,12 +4,10 @@ import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.types.ModMenuTypes;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,10 +15,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.SlotItemHandler;
 
 
 public class RocketSpaceMenu extends AbstractContainerMenu
@@ -61,20 +59,15 @@ public class RocketSpaceMenu extends AbstractContainerMenu
                          @Override
                          public boolean mayPlace(ItemStack stack)
                          {
+                             if (!container.getItem(3).is(Items.DIRT)) return false;
+
                              return stack.is(ModItems.ASTRONOMY_NOTEBOOK);
                          }
                      }
         );
 
-        //fuel
-        this.addSlot(new Slot(this.container, 1, -158, 20)
-        {
-            @Override
-            public boolean mayPlace(ItemStack stack)
-            {
-                return stack.is(ModItems.ENDERBLAZE_FUEL);
-            }
-        });
+        //TODO expansion item and system
+        this.addSlot(new Slot(this.container, 1, -158, 20));
 
         //tank
         this.addSlot(new Slot(this.container, 2, -158, 52)
@@ -82,7 +75,10 @@ public class RocketSpaceMenu extends AbstractContainerMenu
             @Override
             public boolean mayPlace(ItemStack stack)
             {
+                if (!container.getItem(3).is(Items.DIRT)) return false;
+
                 return stack.is(ModItems.TANK) || stack.is(ModItems.MEDIUM_TANK) || stack.is(ModItems.LARGE_TANK);
+
             }
         });
 
@@ -136,25 +132,45 @@ public class RocketSpaceMenu extends AbstractContainerMenu
 
         if (id == 4) container.setItem(4, new ItemStack(ModItems.LUNAMAR.get()));
 
+
+        //different implementation for refueling will be done with a seperate block
         if (id == 69)
         {
-            System.out.println("received 69");
-
+            if (true) return super.clickMenuButton(player, id);
             ItemStack book = container.getItem(0);
             ItemStack fuel = container.getItem(1);
             ItemStack tank = container.getItem(2);
 
-            System.out.println("fuel " + fuel);
-            System.out.println("tank " + tank);
-            System.out.println("book " + book);
-
-            if(tank.is(ModItems.TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
+            if (tank.is(ModItems.TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
             {
-                int fuelAvailable = tank.get(ModDataComponentTypes.TANK_FUEL);
-                System.out.println(fuelAvailable);
-                if(fuelAvailable <= 390)
+                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
+                if (fuelAvailable <= 390)
                 {
-                    tank.set(ModDataComponentTypes.TANK_FUEL, fuelAvailable + 10);
+                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
+                    fuel.shrink(1);
+                    container.setItem(1, fuel);
+                    container.setItem(2, tank);
+                }
+            }
+
+            if (tank.is(ModItems.MEDIUM_TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
+            {
+                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
+                if (fuelAvailable <= 790)
+                {
+                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
+                    fuel.shrink(1);
+                    container.setItem(1, fuel);
+                    container.setItem(2, tank);
+                }
+            }
+
+            if (tank.is(ModItems.LARGE_TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
+            {
+                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
+                if (fuelAvailable <= 1490)
+                {
+                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
                     fuel.shrink(1);
                     container.setItem(1, fuel);
                     container.setItem(2, tank);
@@ -164,7 +180,7 @@ public class RocketSpaceMenu extends AbstractContainerMenu
 
 
         if (id == 11)
-            key = ResourceKey.create(Registries.DIMENSION,Laicaps.rl("ember"));
+            key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
 
 
         if (id == 12)
@@ -172,13 +188,13 @@ public class RocketSpaceMenu extends AbstractContainerMenu
 
 
         if (id == 13)
-            key = ResourceKey.create(Registries.DIMENSION,
+            key = ResourceKey.create(
+                    Registries.DIMENSION,
                     ResourceLocation.withDefaultNamespace("overworld"));
 
 
         if (id == 14)
             key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
-
 
 
         DimensionTransition dt = new DimensionTransition(
