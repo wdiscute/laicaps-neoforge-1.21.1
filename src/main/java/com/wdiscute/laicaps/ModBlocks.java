@@ -7,6 +7,7 @@ import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
 import com.wdiscute.laicaps.block.receiversender.ReceiverBlock;
 import com.wdiscute.laicaps.block.receiversender.SenderPuzzleBLock;
+import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
 import com.wdiscute.laicaps.block.singleblocks.*;
@@ -77,7 +78,13 @@ public class ModBlocks
             );
 
 
-
+    public static final DeferredBlock<Block> REFUEL_STATION =
+            registerBlock("refuel_station", () ->
+                    new RefuelStationBlock(BlockBehaviour.Properties.of()
+                            .strength(30)
+                            .sound(SoundType.STONE)
+                    )
+            );
 
 
     public static final DeferredBlock<Block> ASHA_TELEPORTER =
