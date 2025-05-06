@@ -9,15 +9,12 @@
       "y": 90
     },
 
-
-
     "facing=north,active=false": {
       "model": "laicaps:block/symbol_controller_block_inactive"
     },
     "facing=north,active=true": {
       "model": "laicaps:block/symbol_controller_block_active"
     },
-
 
     "facing=south,active=false": {
       "model": "laicaps:block/symbol_controller_block_inactive",
@@ -27,8 +24,6 @@
       "model": "laicaps:block/symbol_controller_block_active",
       "y": 180
     },
-
-
 
     "facing=west,active=false": {
       "model": "laicaps:block/symbol_controller_block_inactive",
