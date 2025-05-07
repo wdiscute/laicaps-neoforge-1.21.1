@@ -4,12 +4,13 @@
   "package": "com.wdiscute.laicaps.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "TankDurabilityTooltipFix",
-    "JumpingAcessor"
+    "BrushCraftingRemainingFix",
+    "JumpingAcessor",
+    "TankDurabilityTooltipFix"
   ],
   "client": [
-    "TankDurabilityTooltipFix",
-    "JumpingAcessor"
+    "JumpingAcessor",
+    "TankDurabilityTooltipFix"
   ],
   "injectors": {
     "defaultRequire": 1
