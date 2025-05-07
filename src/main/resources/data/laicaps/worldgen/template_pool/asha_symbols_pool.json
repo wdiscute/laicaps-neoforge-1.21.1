@@ -1,0 +1,60 @@
+{
+  "name": "laicaps:asha_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_1",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_2",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_3",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_4",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_5",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_6",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

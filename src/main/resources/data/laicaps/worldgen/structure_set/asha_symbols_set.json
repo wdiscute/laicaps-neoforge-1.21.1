@@ -1,0 +1,13 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 234234,
+    "separation": 7,
+    "spacing": 12,
+    "spread_type": "triangular"
+  },
+  "structures": [{
+    "structure": "laicaps:asha_symbols_structure",
+    "weight": 1
+  }]
+}
