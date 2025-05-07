@@ -202,44 +202,63 @@
 
 
   "item.laicaps.asha_teleporter": "Asha Teleporter",
+  "tooltip.laicaps.asha_teleporter.0": "quick and dirty creative mode teleporter",
   "item.laicaps.lunamar_teleporter": "Lunamar Teleporter",
+  "tooltip.laicaps.lunamar_teleporter.0": "quick and dirty creative mode teleporter",
   "item.laicaps.ember_teleporter": "Ember Teleporter",
+  "tooltip.laicaps.ember_teleporter.0": "quick and dirty creative mode teleporter",
+
 
   "item.laicaps.basic_microchip": "Basic Microchip",
-  "item.laicaps.basic_navigation_chip": "Basic Navigation Chip",
+  "tooltip.laicaps.basic_microchip.0": "A small basic microchip found in Asha",
+  "tooltip.laicaps.basic_microchip.1": "left behind by whatever once inhabited it.",
   "item.laicaps.refined_microchip": "Refined Chip",
-  "item.laicaps.refined_navigation_chip": "Refined Navigation Chip",
+  "tooltip.laicaps.refined_microchip.0": "A refined microchip found in Lunamar.",
+  "tooltip.laicaps.refined_microchip.1": "You are unsure why or how it got there.",
   "item.laicaps.advanced_microchip": "Advanced Microchip",
-  "item.laicaps.advanced_navigation_chip": "Advanced Navigation Chip",
+  "tooltip.laicaps.advanced_microchip.0": "An advanced microchip found in Ember.",
+  "tooltip.laicaps.advanced_microchip.1": "It's hot to the touch... is it processing something",
+  "tooltip.laicaps.advanced_microchip.2": "or just leftover heat from Ember?",
   "item.laicaps.elite_microchip": "Elite Microchip",
-  "item.laicaps.elite_navigation_chip": "Elite Navigation Chip",
+  "tooltip.laicaps.elite_microchip.0": "WIP",
 
   "item.laicaps.tank": "Tank",
-  "item.laicaps.medium_tank": "Medium Tank",
-  "item.laicaps.large_tank": "Large Tank",
-
-  "tooltip.laicaps.tank.fuel": "Fuel",
-
   "tooltip.laicaps.tank.small.0": "A small tank capable of storing",
   "tooltip.laicaps.tank.small.1": "enough enderblaze fuel for a",
   "tooltip.laicaps.tank.small.2": "single one-way journey.",
   "tooltip.laicaps.tank.small.3": "",
 
+  "item.laicaps.medium_tank": "Medium Tank",
   "tooltip.laicaps.tank.medium.0": "A medium sized tank capable of storing",
-  "tooltip.laicaps.tank.medium.1": "a decent amount of enderblaze fuel,",
-  "tooltip.laicaps.tank.medium.2": "enough for a short journey and back",
+  "tooltip.laicaps.tank.medium.1": "a decent amount of enderblaze fuel.",
+  "tooltip.laicaps.tank.medium.2": "Possibly enough for a short journey and back",
   "tooltip.laicaps.tank.medium.3": "",
 
+  "item.laicaps.large_tank": "Large Tank",
   "tooltip.laicaps.tank.large.0": "A large tank capable of storing",
   "tooltip.laicaps.tank.large.1": "a huge amount of enderblaze fuel.",
   "tooltip.laicaps.tank.large.2": "It makes space travel a breeze.",
   "tooltip.laicaps.tank.large.3": "",
 
+  "tooltip.laicaps.tank.fuel": "Fuel",
 
   "item.laicaps.canister": "Canister",
+  "item.laicaps.canister.0": "WIP No use.",
 
   "item.laicaps.rocket": "WIP Rocket",
+  "item.laicaps.rocket.0": "WIP!! eventually there will be a whole progress for",
+  "item.laicaps.rocket.1": "slowly building towards the rocket ship with several in-world building stages",
+  "item.laicaps.rocket.2": "This is a quick dirty workaround for playtesting",
 
+  "item.laicaps.enderblaze_fuel": "Enderblaze Fuel",
+  "tooltip.laicaps.enderblaze_fuel.0": "A strong fuel made by combining",
+  "tooltip.laicaps.enderblaze_fuel.1": "blaze powder with pristine ender pearl dust.",
+  "tooltip.laicaps.enderblaze_fuel.2": "Can be used as rocket fuel when fed into a tank.",
+
+
+  "item.laicaps.pristine_enderpearl_dust": "Pristine Ender Pearl Dust",
+  "tooltip.laicaps.pristine_enderpearl_dust.0": "Dust carefully brushed off an ender pearl.",
+  "tooltip.laicaps.pristine_enderpearl_dust.1": "It's incredibly shiny and radiating with energy.",
 
 
   "block.laicaps.water_container": "Water Container",
