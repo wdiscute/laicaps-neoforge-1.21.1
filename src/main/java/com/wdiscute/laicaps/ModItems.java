@@ -55,22 +55,10 @@ public class ModItems
                             .rarity(Rarity.RARE)
                     ));
 
-    public static final DeferredItem<Item> BASIC_NAVIGATION_CHIP =
-            ITEMS.register(
-                    "basic_navigation_chip", () -> new Item(new Item.Properties()
-                            .rarity(Rarity.EPIC)
-                    ));
-
     public static final DeferredItem<Item> REFINED_MICROCHIP =
             ITEMS.register(
                     "refined_microchip", () -> new Item(new Item.Properties()
                             .rarity(Rarity.RARE)
-                    ));
-
-    public static final DeferredItem<Item> REFINED_NAVIGATION_CHIP =
-            ITEMS.register(
-                    "refined_navigation_chip", () -> new Item(new Item.Properties()
-                            .rarity(Rarity.EPIC)
                     ));
 
     public static final DeferredItem<Item> ADVANCED_MICROCHIP =
@@ -79,23 +67,40 @@ public class ModItems
                             .rarity(Rarity.RARE)
                     ));
 
-    public static final DeferredItem<Item> ADVANCED_NAVIGATION_CHIP =
-            ITEMS.register(
-                    "advanced_navigation_chip", () -> new Item(new Item.Properties()
-                            .rarity(Rarity.EPIC)
-                    ));
-
     public static final DeferredItem<Item> ELITE_MICROCHIP =
             ITEMS.register(
                     "elite_microchip", () -> new Item(new Item.Properties()
                             .rarity(Rarity.RARE)
                     ));
 
-    public static final DeferredItem<Item> ELITE_NAVIGATION_CHIP =
+    //
+    //,--------. ,------. ,--.    ,------.  ,---.    ,-----.  ,-----.  ,------.  ,------.
+    //'--.  .--' |  .---' |  |    |  .---' '   .-'  '  .--./ '  .-.  ' |  .--. ' |  .---'
+    //   |  |    |  `--,  |  |    |  `--,  `.  `-.  |  |     |  | |  | |  '--' | |  `--,
+    //   |  |    |  `---. |  '--. |  `---. .-'    | '  '--'\ '  '-'  ' |  | --'  |  `---.
+    //   `--'    `------' `-----' `------' `-----'   `-----'  `-----'  `--'      `------'
+    //
+
+
+    public static final DeferredItem<Item> BASIC_TELESCOPE_UPGRADE_KIT =
             ITEMS.register(
-                    "elite_navigation_chip", () -> new Item(new Item.Properties()
-                            .rarity(Rarity.EPIC)
+                    "basic_telescope_upgrade_kit", () -> new Item(new Item.Properties()
+                            .rarity(Rarity.RARE)
                     ));
+
+    public static final DeferredItem<Item> ADVANCED_TELESCOPE_UPGRADE_KIT =
+            ITEMS.register(
+                    "advanced_telescope_upgrade_kit", () -> new Item(new Item.Properties()
+                            .rarity(Rarity.RARE)
+                    ));
+
+    public static final DeferredItem<Item> ELITE_TELESCOPE_UPGRADE_KIT =
+            ITEMS.register(
+                    "elite_telescope_upgrade_kit", () -> new Item(new Item.Properties()
+                            .rarity(Rarity.RARE)
+                    ));
+
+
 
 
     //
@@ -167,6 +172,7 @@ public class ModItems
                             .component(ModDataComponentTypes.FUEL, 0)
                     )
                     {
+
                         @Override
                         public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
                         {
@@ -194,6 +200,12 @@ public class ModItems
                     "enderblaze_fuel", () -> new Item(new Item.Properties()
                             .rarity(Rarity.RARE)
                     ));
+
+    public static final DeferredItem<Item> PRISTINE_ENDERPEARL_DUST = ITEMS.register(
+            "pristine_enderpearl_dust",
+            () -> new Item(new Item.Properties()
+                    .rarity(Rarity.EPIC)
+            ));
 
 
     public static final DeferredItem<Item> EMBER =

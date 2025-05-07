@@ -26,18 +26,27 @@ public class ModCreativeModeTabs
                     .title(Component.translatable("creativetab.laicaps.laicaps"))
                     .displayItems( (itemDisplayParameters, output) -> {
 
-                        //telescope
+                        //telescope and astronomy stuff
                         output.accept(ModItems.ASTRONOMY_NOTEBOOK.get());
                         output.accept(ModBlocks.TELESCOPE_STAND.get());
                         output.accept(ModBlocks.TELESCOPE.get());
+
+                        output.accept(ModItems.BASIC_TELESCOPE_UPGRADE_KIT.get());
+                        output.accept(ModItems.ADVANCED_TELESCOPE_UPGRADE_KIT.get());
+                        output.accept(ModItems.ELITE_TELESCOPE_UPGRADE_KIT.get());
+
                         output.accept(ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
+
 
                         //rocket stuff
                         output.accept(ModItems.ROCKET.get());
+                        output.accept(ModBlocks.REFUEL_STATION.get());
                         output.accept(ModItems.TANK.get());
                         output.accept(ModItems.MEDIUM_TANK.get());
                         output.accept(ModItems.LARGE_TANK.get());
                         output.accept(ModItems.ENDERBLAZE_FUEL.get());
+                        output.accept(ModItems.PRISTINE_ENDERPEARL_DUST.get());
+
 
                         //teleporters
                         output.accept(ModBlocks.ASHA_TELEPORTER.get());
@@ -46,13 +55,11 @@ public class ModCreativeModeTabs
 
                         //chips
                         output.accept(ModItems.BASIC_MICROCHIP.get());
-                        output.accept(ModItems.BASIC_NAVIGATION_CHIP.get());
                         output.accept(ModItems.REFINED_MICROCHIP.get());
-                        output.accept(ModItems.REFINED_NAVIGATION_CHIP.get());
                         output.accept(ModItems.ADVANCED_MICROCHIP.get());
-                        output.accept(ModItems.ADVANCED_NAVIGATION_CHIP.get());
                         output.accept(ModItems.ELITE_MICROCHIP.get());
-                        output.accept(ModItems.ELITE_NAVIGATION_CHIP.get());
+
+
 
 
 
