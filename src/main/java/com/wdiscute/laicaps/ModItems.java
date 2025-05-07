@@ -4,7 +4,8 @@ package com.wdiscute.laicaps;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.item.*;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
@@ -123,6 +124,12 @@ public class ModItems
                     )
                     {
                         @Override
+                        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+                        {
+                            setHoverTextForTanks(stack, tooltipComponents, "small");
+                        }
+
+                        @Override
                         public int getDamage(ItemStack stack)
                         {
                             return (400 - stack.get(ModDataComponentTypes.FUEL) == 0) ? 1 : 400 - stack.get(ModDataComponentTypes.FUEL);
@@ -138,6 +145,12 @@ public class ModItems
                             .durability(800)
                     )
                     {
+                        @Override
+                        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+                        {
+                            setHoverTextForTanks(stack, tooltipComponents, "medium");
+                        }
+
                         @Override
                         public int getDamage(ItemStack stack)
                         {
@@ -155,12 +168,18 @@ public class ModItems
                     )
                     {
                         @Override
+                        public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+                        {
+
+                            setHoverTextForTanks(stack, tooltipComponents, "large");
+                        }
+
+                        @Override
                         public int getDamage(ItemStack stack)
                         {
                             return (1500 - stack.get(ModDataComponentTypes.FUEL) == 0) ? 1 : 1500 - stack.get(ModDataComponentTypes.FUEL);
                         }
                     });
-
 
     public static final DeferredItem<Item> CANISTER =
             ITEMS.register(
@@ -328,6 +347,32 @@ public class ModItems
     {
         ITEMS.register(eventBus);
     }
+
+    private static void setHoverTextForTanks(ItemStack stack, List<Component> tooltipComponents, String size)
+    {
+        int maxFuel = stack.getMaxDamage();
+        if (Screen.hasShiftDown())
+        {
+            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
+            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
+            for (int i = 0; i < 100; i++)
+            {
+                if (!I18n.exists("tooltip.laicaps.tank." + size + "." + i)) break;
+                tooltipComponents.add(Component.translatable("tooltip.laicaps.tank." + size + "." + i));
+            }
+
+
+            String color = "§4";
+
+            if(stack.get(ModDataComponentTypes.FUEL) > maxFuel / 2) color = "§6";
+            if(stack.get(ModDataComponentTypes.FUEL) > maxFuel / 1.5) color = "§a";
+
+            tooltipComponents.add(Component.literal(color + I18n.get("tooltip.laicaps.tank.fuel") + ": §l[" +
+                    stack.get(ModDataComponentTypes.FUEL) + " / " + maxFuel + "]"));
+        } else
+            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
+    }
+
 
 
 }

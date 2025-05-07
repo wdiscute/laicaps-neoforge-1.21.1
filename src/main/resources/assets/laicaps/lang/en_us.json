@@ -189,17 +189,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   "item.laicaps.astronomy_notebook": "Astronomy Notebook",
   "item.laicaps.astronomy_notebook.use": "§cPlace at an Astronomy Table to open",
   "tooltip.laicaps.astronomy_notebook.0" : "A trusty Astronomy Notebook where",
@@ -208,6 +197,7 @@
   "tooltip.laicaps.astronomy_notebook.3" : "to read your notes.",
 
   "item.laicaps.astronomy_table": "Astronomy Notebook",
+
 
 
 
@@ -227,6 +217,24 @@
   "item.laicaps.tank": "Tank",
   "item.laicaps.medium_tank": "Medium Tank",
   "item.laicaps.large_tank": "Large Tank",
+
+  "tooltip.laicaps.tank.fuel": "Fuel",
+
+  "tooltip.laicaps.tank.small.0": "A small tank capable of storing",
+  "tooltip.laicaps.tank.small.1": "enough enderblaze fuel for a",
+  "tooltip.laicaps.tank.small.2": "single one-way journey.",
+  "tooltip.laicaps.tank.small.3": "",
+
+  "tooltip.laicaps.tank.medium.0": "A medium sized tank capable of storing",
+  "tooltip.laicaps.tank.medium.1": "a decent amount of enderblaze fuel,",
+  "tooltip.laicaps.tank.medium.2": "enough for a short journey and back",
+  "tooltip.laicaps.tank.medium.3": "",
+
+  "tooltip.laicaps.tank.large.0": "A large tank capable of storing",
+  "tooltip.laicaps.tank.large.1": "a huge amount of enderblaze fuel.",
+  "tooltip.laicaps.tank.large.2": "It makes space travel a breeze.",
+  "tooltip.laicaps.tank.large.3": "",
+
 
   "item.laicaps.canister": "Canister",
 
