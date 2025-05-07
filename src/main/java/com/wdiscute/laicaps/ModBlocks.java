@@ -58,6 +58,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
+import java.util.concurrent.Flow;
 import java.util.function.Supplier;
 
 public class ModBlocks
@@ -1200,16 +1201,58 @@ public class ModBlocks
                                 @Override
                                 protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
                                 {
-                                    if (state.is(ModBlocks.ASHA_GRASS_BLOCK.get()))
-                                        return true;
-
-                                    if (state.is(ModBlocks.ASHA_DIRT.get()))
-                                        return true;
-
-                                    return false;
+                                    return state.is(ModBlocks.ASHA_DIRT.get()) || state.is(ModBlocks.ASHA_GRASS_BLOCK.get());
                                 }
                             }
             );
+
+
+    public static final DeferredBlock<Block> POTTED_VIOLET_SWEETLILY =
+            registerBlockNoItem("potted_violet_sweetlily",
+                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.VIOLET_SWEETLILY,
+                                    BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                            )
+            );
+
+    public static final DeferredBlock<Block> POTTED_PEACH_SWEETLILY =
+            registerBlockNoItem("potted_peach_sweetlily",
+                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.PEACH_SWEETLILY,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
+            );
+
+    public static final DeferredBlock<Block> POTTED_MAGENTA_SWEETLILY =
+            registerBlockNoItem("potted_magenta_sweetlily",
+                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.MAGENTA_SWEETLILY,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
+            );
+
+    public static final DeferredBlock<Block> POTTED_CHERRY_SWEETLILY =
+            registerBlockNoItem("potted_cherry_sweetlily",
+                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.CHERRY_SWEETLILY,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
+            );
+
+    public static final DeferredBlock<Block> POTTED_NAVY_SWEETLILY =
+            registerBlockNoItem("potted_navy_sweetlily",
+                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.NAVY_SWEETLILY,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
+            );
+
+
+
+    public static final DeferredBlock<Block> POTTED_LUNARVEIL =
+            registerBlockNoItem("potted_lunarveil",
+                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.LUNARVEIL,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
+            );
+
+
+
 
     //
     //,--.   ,--.   ,---.   ,--------. ,------. ,------.
