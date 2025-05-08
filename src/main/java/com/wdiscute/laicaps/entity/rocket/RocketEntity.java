@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -11,48 +12,49 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
+import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RocketEntity extends LivingEntity implements PlayerRideable, MenuProvider, ContainerEntity
+public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuProvider, ContainerEntity
 {
     private static final Logger log = LoggerFactory.getLogger(RocketEntity.class);
 
-    private final NonNullList<ItemStack> armorItems = NonNullList.withSize(4, ItemStack.EMPTY);
-    private final NonNullList<ItemStack> handItems = NonNullList.withSize(2, ItemStack.EMPTY);
     public final AnimationState shakeAnimationState = new AnimationState();
     private static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> JUMPING = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
+    private NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
+    private boolean started = false;
 
-    public RocketEntity(EntityType<? extends LivingEntity> entityType, Level level)
+    public RocketEntity(EntityType<? extends VehicleEntity> entityType, Level level)
     {
         super(entityType, level);
     }
-
-    private NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 
     public void tick()
     {
         super.tick();
 
+        if(true) return;
+
+        if(!started)
+        {
+            this.shakeAnimationState.start(this.tickCount);
+            started = true;
+        }
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
@@ -142,30 +144,27 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
+    public InteractionResult interactWithContainerVehicle(Player player)
     {
-        return new RocketSpaceMenu(i, inventory, this);
+        System.out.println("test");
+        return ContainerEntity.super.interactWithContainerVehicle(player);
     }
+
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder)
+    public InteractionResult interact(Player player, InteractionHand hand)
     {
-        super.defineSynchedData(builder);
-        builder.define(STATE, 0);
-        builder.define(JUMPING, 0);
+        System.out.println("test1");
+        return super.interact(player, hand);
     }
-
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
-
+        System.out.println("test2");
         if (hand == InteractionHand.OFF_HAND) return InteractionResult.FAIL;
 
         this.shakeAnimationState.start(this.tickCount);
-
-
-
 
         if (player.isShiftKeyDown())
         {
@@ -179,26 +178,6 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     }
 
 
-    @Override
-    public boolean hurt(DamageSource source, float amount)
-    {
-        if (this.isRemoved()) return false;
-        if (this.level().isClientSide) return false;
-
-        if (source.isCreativePlayer()) this.kill();
-
-        //TODO MAKE BETTER SYSTEM TO REMOVE ROCKET FROM WORLD
-        this.kill();
-        return true;
-    }
-
-
-    public static AttributeSupplier.Builder createAttributes()
-    {
-        return Animal.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 50d)
-                .add(Attributes.GRAVITY, 0);
-    }
 
 
     //
@@ -207,80 +186,35 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     //|      \ | .-. |     '-.  .-' | .-. | |  ||  | | .--' |  .-.  |  \  '  /
     //|  ||  | ' '-' '       |  |   ' '-' ' '  ''  ' \ `--. |  | |  |   \   '
     //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
+    //
     //                                                                `---'
 
     @Override
-    public void kill()
+    protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
-        this.remove(RemovalReason.KILLED);
-        this.gameEvent(GameEvent.ENTITY_DIE);
+        super.defineSynchedData(builder);
+        builder.define(STATE, 0);
+        builder.define(JUMPING, 0);
     }
 
     @Override
-    public boolean isPushedByFluid(FluidType type)
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        return false;
+        return new RocketSpaceMenu(i, inventory, this);
     }
 
     @Override
-    public boolean isPushable()
-    {
-        return false;
-    }
-
-    @Override
-    public void animateHurt(float yaw)
-    {
-    }
-
-    @Override
-    public Iterable<ItemStack> getArmorSlots()
-    {
-        return this.armorItems;
-    }
-
-    @Override
-    public ItemStack getItemBySlot(EquipmentSlot slot)
-    {
-        switch (slot.getType())
-        {
-            case HAND:
-                return this.handItems.get(slot.getIndex());
-            case HUMANOID_ARMOR:
-                return this.armorItems.get(slot.getIndex());
-            default:
-                return ItemStack.EMPTY;
-        }
-    }
-
-    @Override
-    public void setItemSlot(EquipmentSlot equipmentSlot, ItemStack itemStack)
-    {
-    }
-
-    //empty so it doesnt take knockback
-    @Override
-    public void knockback(double strength, double x, double z)
-    {
-    }
-
-    @Override
-    public HumanoidArm getMainArm()
-    {
-        return HumanoidArm.RIGHT;
-    }
-
-    @Override
-    public boolean isNoGravity()
+    public boolean canRiderInteract()
     {
         return true;
     }
 
     @Override
-    public boolean shouldRiderSit()
+    protected Item getDropItem()
     {
-        return true;
+        return ModItems.ROCKET.get();
     }
+
 
     @Override
     protected void positionRider(Entity passenger, MoveFunction callback)
@@ -291,9 +225,21 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     }
 
     @Override
+    public @Nullable ResourceKey<LootTable> getLootTable()
+    {
+        return null;
+    }
+
+    @Override
     public void setLootTable(@Nullable ResourceKey<LootTable> resourceKey)
     {
 
+    }
+
+    @Override
+    public long getLootTableSeed()
+    {
+        return 0;
     }
 
     @Override
@@ -368,10 +314,11 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
 
     }
 
+
+
     @Override
     public void addAdditionalSaveData(CompoundTag compound)
     {
-        super.addAdditionalSaveData(compound);
         compound.putInt("state", this.entityData.get(STATE));
         compound.putInt("jumping", this.entityData.get(JUMPING));
 
@@ -387,7 +334,6 @@ public class RocketEntity extends LivingEntity implements PlayerRideable, MenuPr
     @Override
     public void readAdditionalSaveData(CompoundTag compound)
     {
-        super.readAdditionalSaveData(compound);
         this.entityData.set(STATE, compound.getInt("state"));
         this.entityData.set(JUMPING, compound.getInt("jumping"));
 

@@ -25,11 +25,9 @@ public class BrushCraftingRemainingFix extends Item
     {
         if(itemStack.getDamageValue() == itemStack.getMaxDamage())
         {
-            System.out.println("1");
             return ItemStack.EMPTY;
         }else
         {
-            System.out.println("2");
             ItemStack brush = new ItemStack(Items.BRUSH);
             brush.setDamageValue(itemStack.getDamageValue() + 1);
             return brush;
