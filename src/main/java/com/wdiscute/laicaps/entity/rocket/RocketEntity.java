@@ -48,13 +48,14 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
     {
         super.tick();
 
-        if(true) return;
 
         if(!started)
         {
             this.shakeAnimationState.start(this.tickCount);
             started = true;
         }
+
+        if(true) return;
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
@@ -143,6 +144,11 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
 
     }
 
+
+
+
+
+
     @Override
     public InteractionResult interactWithContainerVehicle(Player player)
     {
@@ -188,6 +194,13 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
     //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
     //
     //                                                                `---'
+
+
+    @Override
+    public boolean canBeCollidedWith()
+    {
+        return true;
+    }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder)
