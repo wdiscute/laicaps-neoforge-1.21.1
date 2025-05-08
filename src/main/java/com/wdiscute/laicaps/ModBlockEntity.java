@@ -59,7 +59,7 @@ public class ModBlockEntity
                     .build(null));
 
     public static final Supplier<BlockEntityType<TelescopeBlockEntity>> TELESCOPE = BLOCK_ENTITIES.register("telescope",
-            () -> BlockEntityType.Builder.of(TelescopeBlockEntity::new, ModBlocks.TELESCOPE.get())
+            () -> BlockEntityType.Builder.of(TelescopeBlockEntity::new, ModBlocks.TELESCOPE.get(), ModBlocks.ADVANCED_TELESCOPE.get())
                     .build(null));
 
     public static final Supplier<BlockEntityType<AstronomyTableBlockEntity>> ASTRONOMY_TABLE = BLOCK_ENTITIES.register("astronomy_table",

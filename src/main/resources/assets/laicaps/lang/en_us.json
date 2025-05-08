@@ -52,6 +52,7 @@
 
 
   "block.laicaps.telescope": "Telescope",
+  "block.laicaps.advanced_telescope": "Advanced Telescope",
   "block.laicaps.telescope_stand": "Telescope Stand",
   "block.laicaps.telescope.place": "§cThe telescope must be placed on a stand",
   "block.laicaps.telescope.daytime": "§cIt's too bright to see anything through the telescope",
@@ -62,9 +63,13 @@
   "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
   "gui.laicaps.telescope.tooltip.generic.research": "§c§l>§r §cThere is more to research here",
   "gui.laicaps.telescope.tooltip.generic.stargaze": "§c§l>>>§r §cClick to Stargaze §c§l<<<§r",
+  "gui.laicaps.telescope.tooltip.generic.advanced.0": "§c§l>§r §cYour telescope is not powerful enough",
+  "gui.laicaps.telescope.tooltip.generic.advanced.1": "§c§l>§r §cto look this far into space",
+
   "gui.laicaps.rocket.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
   "gui.laicaps.rocket.tooltip.generic.knowledge": "§c§k    !!!§r §cMore Knowledge is §c§k!!!§r",
   "gui.laicaps.rocket.tooltip.generic.knowledge.2": "§c§k!!!§r §cRequired Before Travel §c§k!!!§r",
+
   "gui.rocket.telescope.notebook": "§cInsert Notebook",
   "gui.rocket.telescope.tank": "§cInsert Tank",
 
@@ -115,18 +120,21 @@
 
 
 
-  "gui.laicaps.telescope.tooltip.overworld.0": "§2      OVERWORLD    ",
+  "gui.laicaps.telescope.tooltip.overworld.0": "§2        OVERWORLD    ",
   "gui.laicaps.telescope.tooltip.overworld.1": "",
-  "gui.laicaps.telescope.tooltip.overworld.2": "  Home sweet home.",
+  "gui.laicaps.telescope.tooltip.overworld.2": "     Home sweet home.",
   "gui.laicaps.telescope.tooltip.overworld.3": "",
 
 
 
   "gui.laicaps.telescope.tooltip.lunamar.0": "§9            LUNAMAR    ",
   "gui.laicaps.telescope.tooltip.lunamar.1": "",
-  "gui.laicaps.telescope.tooltip.lunamar.2": "An ocean world full of life,",
-  "gui.laicaps.telescope.tooltip.lunamar.3": "under and above water...",
-  "gui.laicaps.telescope.tooltip.lunamar.4": "",
+  "gui.laicaps.telescope.tooltip.lunamar.2": "An ocean world full of life...",
+  "gui.laicaps.telescope.tooltip.lunamar.3": "So wet...",
+  "gui.laicaps.telescope.tooltip.lunamar.4": "So watery...",
+  "gui.laicaps.telescope.tooltip.lunamar.5": "So liquidy...",
+  "gui.laicaps.telescope.tooltip.lunamar.6": "So glub glub glub...",
+  "gui.laicaps.telescope.tooltip.lunamar.7": "",
 
   "gui.laicaps.telescope.tooltip.lunamar_blur.0": "§9§k        LUNAMAR",
   "gui.laicaps.telescope.tooltip.lunamar_blur.1": "",

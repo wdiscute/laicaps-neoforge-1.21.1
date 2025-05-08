@@ -82,24 +82,11 @@ public class ModItems
     //
 
 
-    public static final DeferredItem<Item> BASIC_TELESCOPE_UPGRADE_KIT =
+    public static final DeferredItem<Item> TELESCOPE_UPGRADE_KIT =
             ITEMS.register(
-                    "basic_telescope_upgrade_kit", () -> new Item(new Item.Properties()
+                    "telescope_upgrade_kit", () -> new Item(new Item.Properties()
                             .rarity(Rarity.RARE)
                     ));
-
-    public static final DeferredItem<Item> ADVANCED_TELESCOPE_UPGRADE_KIT =
-            ITEMS.register(
-                    "advanced_telescope_upgrade_kit", () -> new Item(new Item.Properties()
-                            .rarity(Rarity.RARE)
-                    ));
-
-    public static final DeferredItem<Item> ELITE_TELESCOPE_UPGRADE_KIT =
-            ITEMS.register(
-                    "elite_telescope_upgrade_kit", () -> new Item(new Item.Properties()
-                            .rarity(Rarity.RARE)
-                    ));
-
 
 
 
@@ -204,7 +191,7 @@ public class ModItems
     public static final DeferredItem<Item> PRISTINE_ENDERPEARL_DUST = ITEMS.register(
             "pristine_enderpearl_dust",
             () -> new Item(new Item.Properties()
-                    .rarity(Rarity.EPIC)
+                    .rarity(Rarity.RARE)
             ));
 
 

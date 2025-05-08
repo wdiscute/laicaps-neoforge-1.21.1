@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import net.minecraft.client.Minecraft;
@@ -22,6 +23,7 @@ import org.joml.Vector2i;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 
@@ -178,16 +180,11 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     protected void containerTick()
     {
         ClientLevel level = Minecraft.getInstance().level;
-        Player player = Minecraft.getInstance().player;
         int numberOfDays = (int) (level.getDayTime() / 24000f);
 
-        if (level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 23000)
-        {
-
-        } else
-        {
+        if (!(level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 23000))
             this.onClose();
-        }
+
 
         if (!menu.blockEntity.inventory.getStackInSlot(0).equals(book))
         {
@@ -415,7 +412,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
+                RevealRenderUtil.renderWithOcclusion(
+                        poseStack, uiX + 178, uiY + 3, 331, 250,
                         Lists.newArrayList(new Vector2f(mouseX, mouseY)),
                         Lists.newArrayList(((20 - counter - partialTick) / 1f * 0.08f)));
 
@@ -435,7 +433,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
+                RevealRenderUtil.renderWithOcclusion(
+                        poseStack, uiX + 178, uiY + 3, 331, 250,
                         Lists.newArrayList(new Vector2f(mouseX, mouseY)),
                         Lists.newArrayList(((counter + partialTick) / 1f * 0.08f)));
 
@@ -450,8 +449,15 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 if (transitionMenu || transitionSearch) return;
                 List<Component> tooltips;
 
-                //ember
-                if (x > 250 && x < 283 && y > 170 && y < 200)
+                //ember with basic telescope
+                if (x > 250 && x < 283 && y > 170 && y < 200 && menu.blockstate.is(ModBlocks.TELESCOPE))
+                {
+                    tooltips = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur", true) : tooltipHelper("ember");
+                    guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
+                }
+
+                //ember with advanced telescope
+                if (x > 250 && x < 283 && y > 170 && y < 200 && menu.blockstate.is(ModBlocks.ADVANCED_TELESCOPE))
                 {
                     tooltips = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur") : tooltipHelper("ember");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
@@ -517,7 +523,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
+                RevealRenderUtil.renderWithOcclusion(
+                        poseStack, uiX + 178, uiY + 3, 331, 250,
                         Lists.newArrayList(new Vector2f(mouseX, mouseY)),
                         Lists.newArrayList(0.08f));
 
@@ -547,7 +554,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 List<Float> scales = Lists.newArrayList();
                 for (int i = 0; i < borderOfOcclusion.size(); i++) scales.add(0.5f);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, mouseX - 45, mouseY - 45, 90, 90,
+                RevealRenderUtil.renderWithOcclusion(
+                        poseStack, mouseX - 45, mouseY - 45, 90, 90,
                         borderOfOcclusion, scales);
 
                 poseStack.popPose();
@@ -580,7 +588,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
+                RevealRenderUtil.renderWithOcclusion(
+                        poseStack, uiX + 178, uiY + 3, 331, 250,
                         Lists.newArrayList(new Vector2f(mouseX, mouseY)),
                         Lists.newArrayList(((counter + partialTick) / 2 * 0.08f)));
 
@@ -596,7 +605,8 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
                 RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
-                RevealRenderUtil.renderWithOcclusion(poseStack, uiX + 178, uiY + 3, 331, 250,
+                RevealRenderUtil.renderWithOcclusion(
+                        poseStack, uiX + 178, uiY + 3, 331, 250,
                         Lists.newArrayList(new Vector2f(mouseX, mouseY)),
                         Lists.newArrayList(((20 - counter - partialTick) / 2 * 0.08f)));
 
@@ -635,6 +645,11 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     }
 
     private List<Component> tooltipHelper(String input)
+    {
+        return tooltipHelper(input, false);
+    }
+
+    private List<Component> tooltipHelper(String input, boolean showNeedsAdvanced)
     {
         List<Component> list = new ArrayList<>();
         for (int i = 0; i < 100; i++)
@@ -682,11 +697,15 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
         }
 
-
-        //add .stargaze translation key at the end for blurred planets
-        if (Objects.equals(input, "ember_blur") || Objects.equals(input, "asha_blur") || Objects.equals(input, "lunamar_blur"))
-            list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.stargaze"));
-
+        //add .stargaze and .advanced translation key at the end for blurred planets
+        if (showNeedsAdvanced)
+            for (int i = 0; i < 100; i++)
+                if (I18n.exists("gui.laicaps.telescope.tooltip.generic.advanced." + i))
+                    list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.advanced." + i));
+                else break;
+        else
+            if (Objects.equals(input, "ember_blur") || Objects.equals(input, "asha_blur") || Objects.equals(input, "lunamar_blur"))
+                list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.stargaze"));
 
         return list;
     }

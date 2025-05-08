@@ -3,10 +3,14 @@ package com.wdiscute.laicaps.block.telescope;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.block.notes.NotesEnum;
 import com.wdiscute.laicaps.block.singleblocks.LunarveilBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -26,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +47,24 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
+
+        if(stack.is(ModItems.TELESCOPE_UPGRADE_KIT) && state.is(ModBlocks.TELESCOPE) && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
+        {
+            level.setBlockAndUpdate(pos, ModBlocks.ADVANCED_TELESCOPE.get()
+                    .defaultBlockState().setValue(FACING, level.getBlockState(pos).getValue(FACING)));
+            if(!level.isClientSide) {
+                ((ServerLevel) level).sendParticles(ParticleTypes.HAPPY_VILLAGER,
+                        pos.getX() + 0.5f,
+                        pos.getY() + 0.5f,
+                        pos.getZ() + 0.5f, 20, 0.5f, 0.5f, 0.5f, 0f);
+                tbe.drops();
+            }
+
+            return ItemInteractionResult.CONSUME;
+        }
+
+
+        if (hand == InteractionHand.MAIN_HAND && !level.isClientSide && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
         {
             int numberOfDays = (int) (level.getDayTime() / 24000f);
 

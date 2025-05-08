@@ -159,6 +159,16 @@ public class ModBlocks
                             )
             );
 
+    public static final DeferredBlock<Block> ADVANCED_TELESCOPE =
+            registerBlock(
+                    "advanced_telescope", () ->
+                            new TelescopeBlock(BlockBehaviour.Properties.of()
+                                    .strength(6)
+                                    .sound(SoundType.GLASS)
+                                    .noOcclusion()
+                            )
+            );
+
     public static final DeferredBlock<Block> TELESCOPE_STAND =
             registerBlock(
                     "telescope_stand", () ->

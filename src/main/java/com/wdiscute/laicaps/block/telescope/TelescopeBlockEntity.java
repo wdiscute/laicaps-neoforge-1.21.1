@@ -36,11 +36,6 @@ public class TelescopeBlockEntity extends BlockEntity implements MenuProvider
         }
     };
 
-    public void clearContents()
-    {
-        inventory.setStackInSlot(0, ItemStack.EMPTY);
-    }
-
     public void drops()
     {
         SimpleContainer inv = new SimpleContainer(inventory.getSlots());

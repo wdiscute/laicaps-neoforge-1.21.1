@@ -13,12 +13,14 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class TelescopeMenu extends AbstractContainerMenu
 {
     public final TelescopeBlockEntity blockEntity;
     public final Level level;
+    public final BlockState blockstate;
 
     public TelescopeMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
@@ -30,6 +32,7 @@ public class TelescopeMenu extends AbstractContainerMenu
         super(ModMenuTypes.TELESCOPE_MENU.get(), containerId);
         this.blockEntity = ((TelescopeBlockEntity) blockEntity);
         this.level = inv.player.level();
+        this.blockstate = level.getBlockState(blockEntity.getBlockPos());
 
         //player inventory
         for (int i = 0; i < 3; ++i)
@@ -125,6 +128,9 @@ public class TelescopeMenu extends AbstractContainerMenu
     public boolean stillValid(Player player)
     {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.TELESCOPE.get());
+                player, ModBlocks.TELESCOPE.get()) ||
+                stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
+                        player, ModBlocks.ADVANCED_TELESCOPE.get())
+                ;
     }
 }
