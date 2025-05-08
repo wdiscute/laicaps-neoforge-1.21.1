@@ -231,7 +231,7 @@
   "item.laicaps.medium_tank": "Medium Tank",
   "tooltip.laicaps.tank.medium.0": "A medium sized tank capable of storing",
   "tooltip.laicaps.tank.medium.1": "a decent amount of enderblaze fuel.",
-  "tooltip.laicaps.tank.medium.2": "Possibly enough for a short journey and back",
+  "tooltip.laicaps.tank.medium.2": "Possibly enough for a short journey and back.",
   "tooltip.laicaps.tank.medium.3": "",
 
   "item.laicaps.large_tank": "Large Tank",
@@ -249,6 +249,7 @@
   "item.laicaps.rocket.0": "WIP!! eventually there will be a whole progress for",
   "item.laicaps.rocket.1": "slowly building towards the rocket ship with several in-world building stages",
   "item.laicaps.rocket.2": "This is a quick dirty workaround for playtesting",
+
 
   "item.laicaps.enderblaze_fuel": "Enderblaze Fuel",
   "tooltip.laicaps.enderblaze_fuel.0": "A strong fuel made by combining",
