@@ -2,5 +2,7 @@
   "parent": "minecraft:block/flower_pot_cross",
   "textures": {
     "plant": "laicaps:block/navy_sweetlily"
-  }
+  },
+  "render_type": "minecraft:cutout"
+
 }
