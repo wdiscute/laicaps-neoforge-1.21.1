@@ -12,9 +12,11 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -29,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuProvider, ContainerEntity
+public class RocketEntity extends Entity implements PlayerRideable, MenuProvider, ContainerEntity
 {
     private static final Logger log = LoggerFactory.getLogger(RocketEntity.class);
 
@@ -39,9 +41,16 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
     private NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
     private boolean started = false;
 
-    public RocketEntity(EntityType<? extends VehicleEntity> entityType, Level level)
+    public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
         super(entityType, level);
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount)
+    {
+        this.kill();
+        return super.hurt(source, amount);
     }
 
     public void tick()
@@ -49,23 +58,21 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
         super.tick();
 
 
-        if(!started)
+        if (!started)
         {
             this.shakeAnimationState.start(this.tickCount);
             started = true;
         }
 
-        if(true) return;
-
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
         Vec3 delta = getDeltaMovement();
 
-        if(state == 0) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
-        if(state == 1) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
-        if(state == 2) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
-        if(state == 3) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
-        if(state == 4) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
+        if (state == 0) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
+        if (state == 1) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
+        if (state == 2) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
+        if (state == 3) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
+        if (state == 4) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
 
         //landed aka on-ground
         if (state == 0)
@@ -87,8 +94,7 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
 
 
             //takeoff at 220 jumping ticks
-            if (jumping == 20)
-            //TODO if (jumping == 220)
+            if (jumping == 220)
             {
                 entityData.set(STATE, 2);
                 entityData.set(JUMPING, -1);
@@ -145,45 +151,22 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
     }
 
 
-
-
-
-
-    @Override
-    public InteractionResult interactWithContainerVehicle(Player player)
-    {
-        System.out.println("test");
-        return ContainerEntity.super.interactWithContainerVehicle(player);
-    }
-
-
-    @Override
-    public InteractionResult interact(Player player, InteractionHand hand)
-    {
-        System.out.println("test1");
-        return super.interact(player, hand);
-    }
-
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
-        System.out.println("test2");
         if (hand == InteractionHand.OFF_HAND) return InteractionResult.FAIL;
 
         this.shakeAnimationState.start(this.tickCount);
 
         if (player.isShiftKeyDown())
         {
-            if(!player.level().isClientSide)
+            if (!player.level().isClientSide)
                 player.openMenu(this);
-        }
-        else
+        } else
             player.startRiding(this);
 
         return super.interactAt(player, vec, hand);
     }
-
-
 
 
     //
@@ -197,15 +180,20 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
 
 
     @Override
+    public boolean isPickable()
+    {
+        return !this.isRemoved();
+    }
+
+    @Override
     public boolean canBeCollidedWith()
     {
-        return true;
+        return false;
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
-        super.defineSynchedData(builder);
         builder.define(STATE, 0);
         builder.define(JUMPING, 0);
     }
@@ -215,19 +203,6 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
     {
         return new RocketSpaceMenu(i, inventory, this);
     }
-
-    @Override
-    public boolean canRiderInteract()
-    {
-        return true;
-    }
-
-    @Override
-    protected Item getDropItem()
-    {
-        return ModItems.ROCKET.get();
-    }
-
 
     @Override
     protected void positionRider(Entity passenger, MoveFunction callback)
@@ -294,10 +269,12 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
     @Override
     public ItemStack removeItemNoUpdate(int slot)
     {
-        ItemStack itemstack = (ItemStack)this.getItemStacks().get(slot);
-        if (itemstack.isEmpty()) {
+        ItemStack itemstack = (ItemStack) this.getItemStacks().get(slot);
+        if (itemstack.isEmpty())
+        {
             return ItemStack.EMPTY;
-        } else {
+        } else
+        {
             this.getItemStacks().set(slot, ItemStack.EMPTY);
             return itemstack;
         }
@@ -326,8 +303,6 @@ public class RocketEntity extends VehicleEntity implements PlayerRideable, MenuP
     {
 
     }
-
-
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound)
