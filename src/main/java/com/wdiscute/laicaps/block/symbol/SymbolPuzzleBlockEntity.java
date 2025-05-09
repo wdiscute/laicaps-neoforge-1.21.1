@@ -1,9 +1,11 @@
 package com.wdiscute.laicaps.block.symbol;
 
 import com.wdiscute.laicaps.ModBlockEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -24,7 +26,9 @@ public class SymbolPuzzleBlockEntity extends BlockEntity
 
     public void setLinkedBLock(BlockPos bs)
     {
+        setChanged();
         linkedBlock = bs;
+        Minecraft.getInstance().player.displayClientMessage(Component.literal("linked to block at " + bs), false);
     }
 
     @Override

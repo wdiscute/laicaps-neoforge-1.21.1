@@ -30,7 +30,6 @@ import java.util.*;
 
 public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 {
-    private static final Random r = new Random();
 
     private static final Logger log = LoggerFactory.getLogger(RocketSpaceScreen.class);
 
@@ -132,6 +131,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         if (menu.container.getItem(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
         {
+
             book = menu.container.getItem(0);
             emberKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
             ashaKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
@@ -143,15 +143,6 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             ashaKnowledge = 0;
             overworldKnowledge = 100;
             lunamarKnowledge = 0;
-        }
-
-        if(menu.container.getItem(4).isEmpty())
-        {
-            ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
-            if(dimension == EMBER_KEY) menu.container.setItem(4, new ItemStack(ModItems.EMBER.get()));
-            if(dimension == ASHA_KEY) menu.container.setItem(4, new ItemStack(ModItems.ASHA.get()));
-            if(dimension == OVERWORLD_KEY) menu.container.setItem(4, new ItemStack(ModItems.OVERWORLD.get()));
-            if(dimension == LUNAMAR_KEY) menu.container.setItem(4, new ItemStack(ModItems.LUNAMAR.get()));
         }
 
 

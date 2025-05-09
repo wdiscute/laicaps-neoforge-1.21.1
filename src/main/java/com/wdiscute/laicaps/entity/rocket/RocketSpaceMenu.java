@@ -1,13 +1,8 @@
 package com.wdiscute.laicaps.entity.rocket;
 
-import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.types.ModMenuTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,10 +11,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.portal.DimensionTransition;
-import net.minecraft.world.phys.Vec3;
-
 
 public class RocketSpaceMenu extends AbstractContainerMenu
 {
@@ -118,97 +109,11 @@ public class RocketSpaceMenu extends AbstractContainerMenu
     @Override
     public boolean clickMenuButton(Player player, int id)
     {
+        if (id == 1) container.setItem(0, new ItemStack(ModItems.EMBER.get()));
+        if (id == 2) container.setItem(0, new ItemStack(ModItems.ASHA.get()));
+        if (id == 3) container.setItem(0, new ItemStack(ModItems.OVERWORLD.get()));
+        if (id == 4) container.setItem(0, new ItemStack(ModItems.LUNAMAR.get()));
 
-        ResourceKey<Level> key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha"));
-
-        Vec3 spawnPos = new Vec3(0, 150, 0);
-
-
-        if (id == 1) container.setItem(4, new ItemStack(ModItems.EMBER.get()));
-
-        if (id == 2) container.setItem(4, new ItemStack(ModItems.ASHA.get()));
-
-        if (id == 3) container.setItem(4, new ItemStack(ModItems.OVERWORLD.get()));
-
-        if (id == 4) container.setItem(4, new ItemStack(ModItems.LUNAMAR.get()));
-
-
-        //different implementation for refueling will be done with a seperate block
-        if (id == 69)
-        {
-            if (true) return super.clickMenuButton(player, id);
-            ItemStack book = container.getItem(0);
-            ItemStack fuel = container.getItem(1);
-            ItemStack tank = container.getItem(2);
-
-            if (tank.is(ModItems.TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
-            {
-                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
-                if (fuelAvailable <= 390)
-                {
-                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
-                    fuel.shrink(1);
-                    container.setItem(1, fuel);
-                    container.setItem(2, tank);
-                }
-            }
-
-            if (tank.is(ModItems.MEDIUM_TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
-            {
-                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
-                if (fuelAvailable <= 790)
-                {
-                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
-                    fuel.shrink(1);
-                    container.setItem(1, fuel);
-                    container.setItem(2, tank);
-                }
-            }
-
-            if (tank.is(ModItems.LARGE_TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
-            {
-                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
-                if (fuelAvailable <= 1490)
-                {
-                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
-                    fuel.shrink(1);
-                    container.setItem(1, fuel);
-                    container.setItem(2, tank);
-                }
-            }
-        }
-
-
-        if (id == 11)
-            key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
-
-
-        if (id == 12)
-            key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
-
-
-        if (id == 13)
-            key = ResourceKey.create(
-                    Registries.DIMENSION,
-                    ResourceLocation.withDefaultNamespace("overworld"));
-
-
-        if (id == 14)
-            key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
-
-
-        DimensionTransition dt = new DimensionTransition(
-                player.level().getServer().getLevel(key),
-                spawnPos,
-                new Vec3(0, 0, 0),
-                0.0f,
-                0.0f,
-                entity ->
-                {
-                }
-        );
-
-        //this.rocketEntity.changeDimension(dt);
 
         return super.clickMenuButton(player, id);
     }
@@ -236,7 +141,7 @@ public class RocketSpaceMenu extends AbstractContainerMenu
     public ItemStack quickMoveStack(Player playerIn, int pIndex)
     {
         Slot sourceSlot = slots.get(pIndex);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        if (!sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 

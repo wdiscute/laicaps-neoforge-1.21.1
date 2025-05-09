@@ -1,29 +1,31 @@
 package com.wdiscute.laicaps.entity.rocket;
 
+import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
+import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
-import net.minecraft.core.BlockPos;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
-import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -39,30 +41,86 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     private static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> JUMPING = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
     private NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
-    private boolean started = false;
+
+    private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+    private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+    private static final ResourceKey<Level> OVERWORLD_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
+    private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+
 
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
         super(entityType, level);
     }
 
-    @Override
-    public boolean hurt(DamageSource source, float amount)
+
+    public static boolean canTakeoff(NonNullList<ItemStack> itemStacks)
     {
-        this.kill();
-        return super.hurt(source, amount);
+
+        if(itemStacks.get(4).isEmpty()) return false;
+        if(itemStacks.get(2).isEmpty()) return false;
+        if(itemStacks.get(1).isEmpty()) return false;
+
+
+
+        float fuelRequired = 0;
+        int fuelAvailable = itemStacks.get(2).get(ModDataComponentTypes.FUEL);
+        boolean flag = false;
+
+        if (Minecraft.getInstance().player.level().dimension() == EMBER_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 490;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 700;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 1240;
+            flag = true;
+        }
+
+        if (Minecraft.getInstance().player.level().dimension() == ASHA_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 490;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 330;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 870;
+            flag = true;
+        }
+
+        if (Minecraft.getInstance().player.level().dimension() == OVERWORLD_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 790;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 330;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 660;
+            flag = true;
+        }
+
+        if (Minecraft.getInstance().player.level().dimension() == LUNAMAR_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 1240;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 870;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 660;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+            flag = true;
+        }
+
+        if (!flag)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+        }
+
+        return fuelAvailable > fuelRequired;
     }
 
     public void tick()
     {
         super.tick();
 
+        canTakeoff(itemStacks);
+        this.shakeAnimationState.start(this.tickCount);
 
-        if (!started)
-        {
-            this.shakeAnimationState.start(this.tickCount);
-            started = true;
-        }
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
@@ -96,7 +154,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             //takeoff at 220 jumping ticks
             if (jumping == 220)
             {
-                entityData.set(STATE, 2);
+                entityData.set(STATE, 1);
                 entityData.set(JUMPING, -1);
             }
 
@@ -104,37 +162,60 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
 
         //takeoff
-        if (state == 2)
+        if (state == 1)
         {
             //TODO SMOOTH MOVEMENT
             setDeltaMovement(0, 1, 0);
 
             if (position().y > 200)
-                entityData.set(STATE, 3);
+                entityData.set(STATE, 2);
 
             //TODO SPAWN PARTICLES
         }
 
 
-        //ORBIT
-        if (state == 3)
+        //ORBIT / TELEPORT TO DIMENTION / TODO MINIGAME
+        if (state == 2)
         {
             //go up to y == 400
             if (delta.y < 0.3 && position().y < 400) setDeltaMovement(0, 0.35, 0);
             if (position().y > 400) setDeltaMovement(0, 0, 0);
 
-            //open space menu
-            if (getFirstPassenger() instanceof ServerPlayer player)
-            {
-                if (!player.hasContainerOpen())
-                    player.openMenu(new SimpleMenuProvider(this, Component.literal("Space Menu")));
-            }
+            ResourceKey<Level> key = null;
+
+            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+
+            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
+
+            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+                key = ResourceKey.create(
+                        Registries.DIMENSION,
+                        ResourceLocation.withDefaultNamespace("overworld"));
+
+            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
+
+
+            DimensionTransition dt = new DimensionTransition(
+                    level().getServer().getLevel(key),
+                    new Vec3(0, 500,0),
+                    new Vec3(0, 0, 0),
+                    0.0f,
+                    0.0f,
+                    entity ->
+                    {
+                    }
+            );
+
+            this.changeDimension(dt);
 
         }
 
 
         //landing
-        if (state == 4)
+        if (state == 3)
         {
             if (onGround())
             {
@@ -160,12 +241,26 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
         if (player.isShiftKeyDown())
         {
+            ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
+            itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
+            if(dimension == EMBER_KEY) itemStacks.set(4, new ItemStack(ModItems.EMBER.get()));
+            if(dimension == ASHA_KEY) itemStacks.set(4, new ItemStack(ModItems.ASHA.get()));
+            if(dimension == LUNAMAR_KEY) itemStacks.set(4, new ItemStack(ModItems.LUNAMAR.get()));
+
             if (!player.level().isClientSide)
                 player.openMenu(this);
         } else
             player.startRiding(this);
 
         return super.interactAt(player, vec, hand);
+    }
+
+
+    @Override
+    public boolean hurt(DamageSource source, float amount)
+    {
+        this.kill();
+        return super.hurt(source, amount);
     }
 
 
@@ -183,12 +278,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public boolean isPickable()
     {
         return !this.isRemoved();
-    }
-
-    @Override
-    public boolean canBeCollidedWith()
-    {
-        return false;
     }
 
     @Override

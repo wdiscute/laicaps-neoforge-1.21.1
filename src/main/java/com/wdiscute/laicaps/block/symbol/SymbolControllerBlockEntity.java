@@ -3,10 +3,9 @@ package com.wdiscute.laicaps.block.symbol;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
-import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
-import com.wdiscute.laicaps.particle.ModParticles;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -25,11 +24,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 import java.util.Random;
@@ -38,16 +35,23 @@ import java.util.UUID;
 public class SymbolControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
     private int counter = 0;
-    private boolean ticking = true;
-    private int counterOffset = new Random().nextInt(20);
+    private final int counterOffset = new Random().nextInt(20);
     private int state = 0;
 
-    private BlockPos zero = new BlockPos(0, 0, 0);
-    private BlockPos[] links = {zero, zero, zero, zero, zero, zero, zero, zero, zero, zero};
+    private final BlockPos zero = new BlockPos(0, 0, 0);
+    private final BlockPos[] links = {zero, zero, zero, zero, zero, zero, zero, zero, zero, zero};
 
-    private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
+    private BlockPos placedBlockPos = new BlockPos(0,0,0);
+
+    private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<>(new ItemStack[]{});
     private final UUID[] arrayuuid = new UUID[15];
 
+
+    public void setPlaced(BlockPos bp)
+    {
+        placedBlockPos = bp;
+        setChanged();
+    }
 
     public void resetPlayersSaved()
     {
@@ -56,6 +60,38 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
             arrayuuid[i] = UUID.randomUUID();
         }
     }
+
+    public void showLinkedBlocks(Player player)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if(links[i].equals(zero))
+            {
+                player.displayClientMessage(Component.literal("there are " + i + " linked blocks"), true);
+                return;
+            }
+
+            BlockPos decodedSymbolsBP = DecodeBlockPosWithOffset(level.getBlockState(getBlockPos()).getValue(SymbolControllerBlock.FACING), getBlockPos(), links[i]);
+
+            if(level.getBlockState(decodedSymbolsBP).is(ModBlocks.SYMBOL_PUZZLE_BLOCK))
+                ((ServerLevel) level).sendParticles(ParticleTypes.HAPPY_VILLAGER, decodedSymbolsBP.getX() + 0.5f, decodedSymbolsBP.getY() + 0.5f, decodedSymbolsBP.getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            else
+                ((ServerLevel) level).sendParticles(ParticleTypes.POOF, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 1f, 1f, 1f, 0f);
+
+            if(level.getBlockEntity(decodedSymbolsBP) instanceof SymbolPuzzleBlockEntity spbe && !spbe.getLinkedBLock().equals(zero))
+            {
+                BlockPos decodedInactiveSymbolsBP = DecodeBlockPosWithOffset(level.getBlockState(decodedSymbolsBP).getValue(SymbolPuzzleBlock.FACING), decodedSymbolsBP, spbe.getLinkedBLock());
+                System.out.println("decodedInactiveSymbolsBP " + decodedInactiveSymbolsBP);
+                System.out.println("linkd " + spbe.getLinkedBLock());
+                if(level.getBlockState(decodedInactiveSymbolsBP).is(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE))
+                    ((ServerLevel) level).sendParticles(ParticleTypes.ANGRY_VILLAGER, decodedInactiveSymbolsBP.getX() + 0.5f, decodedInactiveSymbolsBP.getY() + 0.5f, decodedInactiveSymbolsBP.getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+                else
+                    ((ServerLevel) level).sendParticles(ParticleTypes.POOF, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 1f, 1f, 1f, 0f);
+            }
+
+        }
+    }
+
 
     public BlockPos DecodeBlockPosWithOffset(Direction facing, BlockPos pos, BlockPos posOffset)
     {
@@ -81,18 +117,12 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
         {
             if (Objects.equals(links[i], zero))
             {
+                Minecraft.getInstance().player.displayClientMessage(Component.literal("Set block " + blockPos + " at link " + i), false);
                 links[i] = blockPos;
                 break;
             }
         }
 
-    }
-
-    public Boolean setTicking()
-    {
-        setChanged();
-        this.ticking = !this.ticking;
-        return this.ticking;
     }
 
     public void CanPlayerObtainDrops(Player player)
@@ -125,7 +155,7 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
                 ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
-                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha_puzzle"));
+                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "chests/asha_puzzle"));
 
                 arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
                 return;
@@ -141,6 +171,8 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
         //setup of random symbols for blocks, only runs on load
         if (state == 0)
         {
+            if(placedBlockPos.equals(getBlockPos())) return;
+
             state = 1;
             for (int i = 0; i < 10; i++)
             {
@@ -199,7 +231,6 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
 
         if (state == 1)
         {
-            if (!ticking) return;
             if ((counterOffset + counter) % 20 != 0) return;
             boolean flag = true;
 
@@ -311,6 +342,9 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
     {
         super.loadAdditional(tag, registries);
 
+        if (tag.contains("placed"))
+            placedBlockPos = new BlockPos(tag.getIntArray("placed")[0], tag.getIntArray("placed")[1], tag.getIntArray("placed")[2]);
+
         for (int i = 0; i < arrayuuid.length; i++)
         {
             if (tag.contains("user" + i))
@@ -335,6 +369,8 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
 
         super.saveAdditional(tag, registries);
 
+        tag.putIntArray("placed", new int[]{placedBlockPos.getX(), placedBlockPos.getY(), placedBlockPos.getZ()});
+
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
             if (this.arrayuuid[i] == null)
@@ -351,4 +387,5 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
             tag.putIntArray("link" + i, new int[]{links[i].getX(), links[i].getY(), links[i].getZ()});
         }
     }
+
 }

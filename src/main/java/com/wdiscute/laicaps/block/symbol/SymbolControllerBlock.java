@@ -9,8 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -69,6 +67,15 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
     }
 
     @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston)
+    {
+        if(!level.isClientSide && level.getBlockEntity(pos) instanceof SymbolControllerBlockEntity scbe)
+            scbe.setPlaced(pos);
+
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+    }
+
+    @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom)
     {
         if (pState.getValue(ACTIVE))
@@ -91,18 +98,17 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
         if (!level.isClientSide)
         {
 
+            if(stack.is(ModItems.ASHA) && level.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity scbe)
+            {
+                scbe.showLinkedBlocks(player);
+                return ItemInteractionResult.SUCCESS;
+            }
+
+
             if(stack.is(Items.BARRIER) && level.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity scbe)
             {
                 scbe.resetPlayersSaved();
                 player.displayClientMessage(Component.translatable("tooltip.laicaps.generic.players_reset"), true);
-                return ItemInteractionResult.SUCCESS;
-            }
-
-            //disable ticking when anvil is on main hand
-            if (stack.is(Items.ANVIL) && level.getBlockEntity(pPos) instanceof SymbolControllerBlockEntity blockEntity)
-            {
-                player.sendSystemMessage(Component.literal("Set Ticking to " + blockEntity.setTicking()));
-                level.playSound(null, pPos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1, 0.5f);
                 return ItemInteractionResult.SUCCESS;
             }
 
