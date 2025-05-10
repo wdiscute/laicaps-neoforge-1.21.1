@@ -4,6 +4,8 @@ import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableScreen;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
+import com.wdiscute.laicaps.entity.bluetale.BluetaleRenderer;
+import com.wdiscute.laicaps.entity.bluetale.RedtaleRenderer;
 import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
@@ -133,8 +135,15 @@ public class Laicaps
             EntityRenderers.register(ModEntities.MOD_BOAT.get(), context -> new ModBoatRenderer(context, false));
             EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
 
-            EntityRenderers.register(ModEntities.GECKO.get(), GeckoRenderer::new);
             EntityRenderers.register(ModEntities.ROCKET.get(), RocketRenderer::new);
+
+
+            //animals
+            EntityRenderers.register(ModEntities.GECKO.get(), GeckoRenderer::new);
+
+            EntityRenderers.register(ModEntities.BLUETALE.get(), BluetaleRenderer::new);
+            EntityRenderers.register(ModEntities.REDTALE.get(), RedtaleRenderer::new);
+
 
         }
 

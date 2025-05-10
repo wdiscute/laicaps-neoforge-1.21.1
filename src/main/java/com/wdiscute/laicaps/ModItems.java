@@ -1,14 +1,21 @@
 package com.wdiscute.laicaps;
 
 
+import com.wdiscute.laicaps.entity.ModEntities;
+import com.wdiscute.laicaps.entity.bluetale.BluetaleEntity;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.item.*;
 
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -142,13 +149,39 @@ public class ModItems
     public static final DeferredItem<Item> UNKNOWN = ITEMS.register("unknown", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
 
+
+
+
+
+
+
     //
-    // ,-----.    ,---.   ,--. ,--. ,--.  ,--. ,------.   ,---.   ,------.  ,--------.
-    //'  .-.  '  /  O  \  |  .'   / |  '--'  | |  .---'  /  O  \  |  .--. ' '--.  .--'
-    //|  | |  | |  .-.  | |  .   '  |  .--.  | |  `--,  |  .-.  | |  '--'.'    |  |
-    //'  '-'  ' |  | |  | |  |\   \ |  |  |  | |  `---. |  | |  | |  |\  \     |  |
-    // `-----'  `--' `--' `--' '--' `--'  `--' `------' `--' `--' `--' '--'    `--'
+    //  ,---.    ,---.   ,--.  ,--.   ,---.
+    // /  O  \  '   .-'  |  '--'  |  /  O  \
+    //|  .-.  | `.  `-.  |  .--.  | |  .-.  |
+    //|  | |  | .-'    | |  |  |  | |  | |  |
+    //`--' `--' `-----'  `--'  `--' `--' `--'
     //
+
+    public static final DeferredItem<Item> BLUETALE_BUCKET = ITEMS.register("bluetale_bucket",
+            () -> new MobBucketItem(
+                    ModEntities.BLUETALE.get(),
+                    Fluids.WATER,
+                    SoundEvents.BUCKET_EMPTY_FISH,
+                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)
+            )
+
+    );
+
+    public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register("redtale_bucket",
+            () -> new MobBucketItem(
+                    ModEntities.REDTALE.get(),
+                    Fluids.WATER,
+                    SoundEvents.BUCKET_EMPTY_FISH,
+                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)
+            )
+
+    );
 
 
     public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register(
@@ -172,14 +205,6 @@ public class ModItems
 
     public static final DeferredItem<Item> OAKHEART_CHEST_BOAT = ITEMS.register("oakheart_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.OAKHEART, new Item.Properties().stacksTo(16)));
 
-
-//
-// ,-----.    ,---.   ,--. ,--. ,------.   ,-----.   ,-----.  ,--------.
-//'  .-.  '  /  O  \  |  .'   / |  .--. ' '  .-.  ' '  .-.  ' '--.  .--'
-//|  | |  | |  .-.  | |  .   '  |  '--'.' |  | |  | |  | |  |    |  |
-//'  '-'  ' |  | |  | |  |\   \ |  |\  \  '  '-'  ' '  '-'  '    |  |
-// `-----'  `--' `--' `--' '--' `--' '--'  `-----'   `-----'     `--'
-//
 
     public static final DeferredItem<Item> OAKROOT_DOOR = ITEMS.register("oakroot_door", () -> new DoubleHighBlockItem(ModBlocks.OAKROOT_DOOR.get(), new Item.Properties()));
 

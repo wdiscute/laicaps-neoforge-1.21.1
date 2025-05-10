@@ -1,6 +1,8 @@
 package com.wdiscute.laicaps.entity;
 
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.entity.bluetale.BluetaleEntity;
+import com.wdiscute.laicaps.entity.bluetale.RedtaleEntity;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
@@ -31,6 +33,20 @@ public class ModEntities
     public static final Supplier<EntityType<GeckoEntity>> GECKO =
             ENTITY_TYPES.register("gecko", () -> EntityType.Builder.of(GeckoEntity::new, MobCategory.CREATURE)
                     .sized(0.75f, 0.35f).build("gecko"));
+
+
+
+    public static final Supplier<EntityType<BluetaleEntity>> BLUETALE =
+            ENTITY_TYPES.register("bluetale", () -> EntityType.Builder.of(BluetaleEntity::new, MobCategory.CREATURE)
+                    .sized(0.5f, 0.35f).build("bluetale"));
+
+    public static final Supplier<EntityType<RedtaleEntity>> REDTALE =
+            ENTITY_TYPES.register("redtale", () -> EntityType.Builder.of(RedtaleEntity::new, MobCategory.CREATURE)
+                    .sized(0.5f, 0.35f).build("redtale"));
+
+
+
+
 
     public static final Supplier<EntityType<RocketEntity>> ROCKET =
             ENTITY_TYPES.register("rocket", () -> EntityType.Builder.of(RocketEntity::new, MobCategory.MISC)
