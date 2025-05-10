@@ -54,12 +54,6 @@ public class Laicaps
     public static final int MAX_OVERWORLD_KNOWLEDGE = 4;
     public static final int MAX_LUNAMAR_KNOWLEDGE = 4;
 
-    public static void appendHoverText(ItemStack stack, List<Component> tooltipComponents)
-    {
-
-
-    }
-
     public static ResourceLocation rl(String s)
     {
         return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, s);
