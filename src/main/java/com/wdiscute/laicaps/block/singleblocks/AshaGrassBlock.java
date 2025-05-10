@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
@@ -59,7 +60,13 @@ public class AshaGrassBlock extends RotatedPillarBlock
         };
 
         //if posTested (adjacent/diagonal) is dirt then becomes grass (1/8th chance on randomTick)
-        if (level.getBlockState(posTested).is(ModBlocks.ASHA_DIRT) && !level.getBlockState(posTested.above()).isCollisionShapeFullBlock(level, posTested.above()))
+        if (level.getBlockState(posTested).is(ModBlocks.ASHA_DIRT)
+                && !level.getBlockState(posTested.above()).isCollisionShapeFullBlock(level, posTested.above())
+                && !level.getFluidState(posTested.above()).is(Fluids.WATER)
+                && !level.getFluidState(posTested.above()).is(Fluids.LAVA)
+                && !level.getFluidState(posTested.above()).is(Fluids.FLOWING_LAVA)
+                && !level.getFluidState(posTested.above()).is(Fluids.FLOWING_WATER)
+        )
         {
             level.setBlockAndUpdate(posTested, ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState());
             return;
@@ -67,14 +74,24 @@ public class AshaGrassBlock extends RotatedPillarBlock
 
 
         //block bellow
-        if (level.getBlockState(posTested.below()).is(ModBlocks.ASHA_DIRT) && !level.getBlockState(posTested).isCollisionShapeFullBlock(level, posTested))
+        if (level.getBlockState(posTested.below()).is(ModBlocks.ASHA_DIRT)
+                && !level.getBlockState(posTested).isCollisionShapeFullBlock(level, posTested)
+                && !level.getFluidState(posTested).is(Fluids.WATER)
+                && !level.getFluidState(posTested).is(Fluids.LAVA)
+                && !level.getFluidState(posTested).is(Fluids.FLOWING_LAVA)
+                && !level.getFluidState(posTested).is(Fluids.FLOWING_WATER))
         {
             level.setBlockAndUpdate(posTested.below(), ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState());
             return;
         }
 
         //block above
-        if (level.getBlockState(posTested.above()).is(ModBlocks.ASHA_DIRT) && !level.getBlockState(posTested.above().above()).isCollisionShapeFullBlock(level, posTested.above().above()))
+        if (level.getBlockState(posTested.above()).is(ModBlocks.ASHA_DIRT)
+                && !level.getBlockState(posTested.above().above()).isCollisionShapeFullBlock(level, posTested.above().above())
+                && !level.getFluidState(posTested.above().above()).is(Fluids.WATER)
+                && !level.getFluidState(posTested.above().above()).is(Fluids.LAVA)
+                && !level.getFluidState(posTested.above().above()).is(Fluids.FLOWING_LAVA)
+                && !level.getFluidState(posTested.above().above()).is(Fluids.FLOWING_WATER))
         {
             level.setBlockAndUpdate(posTested.above(), ModBlocks.ASHA_GRASS_BLOCK.get().defaultBlockState());
             return;
