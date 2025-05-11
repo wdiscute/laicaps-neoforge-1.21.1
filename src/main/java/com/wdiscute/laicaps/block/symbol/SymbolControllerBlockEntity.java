@@ -81,8 +81,6 @@ public class SymbolControllerBlockEntity extends BlockEntity implements Tickable
             if(level.getBlockEntity(decodedSymbolsBP) instanceof SymbolPuzzleBlockEntity spbe && !spbe.getLinkedBLock().equals(zero))
             {
                 BlockPos decodedInactiveSymbolsBP = DecodeBlockPosWithOffset(level.getBlockState(decodedSymbolsBP).getValue(SymbolPuzzleBlock.FACING), decodedSymbolsBP, spbe.getLinkedBLock());
-                System.out.println("decodedInactiveSymbolsBP " + decodedInactiveSymbolsBP);
-                System.out.println("linkd " + spbe.getLinkedBLock());
                 if(level.getBlockState(decodedInactiveSymbolsBP).is(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE))
                     ((ServerLevel) level).sendParticles(ParticleTypes.ANGRY_VILLAGER, decodedInactiveSymbolsBP.getX() + 0.5f, decodedInactiveSymbolsBP.getY() + 0.5f, decodedInactiveSymbolsBP.getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
                 else
