@@ -46,8 +46,6 @@ public class CombatControllerBlock extends HorizontalDirectionalBlock implements
         super(properties);
     }
 
-    public static final IntegerProperty WAYPOINTS = IntegerProperty.create("waypoints",0 , 7);
-    public static final IntegerProperty WAYPOINTS_COMPLETED = IntegerProperty.create("waypoints_completed",0 , 7);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 
@@ -64,63 +62,8 @@ public class CombatControllerBlock extends HorizontalDirectionalBlock implements
                 return ItemInteractionResult.SUCCESS;
             }
 
-            if(stack.is(ModItems.CHISEL))
-            {
-                if (state.getValue(FACING) == Direction.EAST)
-                {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
-
-                    int newx = x;
-                    int newz = z;
-
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    ccbe.SetNextLinkedBlock(bp, player);
-
-                }
-                if (state.getValue(FACING) == Direction.SOUTH)
-                {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
-
-                    int newx = z;
-                    int newz = x * -1;
-
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    ccbe.SetNextLinkedBlock(bp, player);
-                }
-                if (state.getValue(FACING) == Direction.WEST)
-                {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
-
-                    int newx = x * -1;
-                    int newz = z * -1;
-
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    ccbe.SetNextLinkedBlock(bp, player);
-                }
-                if (state.getValue(FACING) == Direction.NORTH)
-                {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
-
-                    int newx = z * -1;
-                    int newz = x;
-
-                    BlockPos bp = new BlockPos(newx, y, newz);
-                    ccbe.SetNextLinkedBlock(bp, player);
-                }
-                return ItemInteractionResult.SUCCESS;
-            }
-
             ccbe.CanPlayerObtainDrops(player);
 
-            ccbe.assignPlayer(player);
         }
 
         return ItemInteractionResult.SUCCESS;
@@ -136,8 +79,6 @@ public class CombatControllerBlock extends HorizontalDirectionalBlock implements
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder)
     {
         pBuilder.add(FACING);
-        pBuilder.add(WAYPOINTS);
-        pBuilder.add(WAYPOINTS_COMPLETED);
         pBuilder.add(WATERLOGGED);
     }
 
@@ -157,15 +98,13 @@ public class CombatControllerBlock extends HorizontalDirectionalBlock implements
             bs = bs.setValue(WATERLOGGED, false);
 
         bs = bs.setValue(FACING, context.getHorizontalDirection().getOpposite());
-        bs = bs.setValue(WAYPOINTS, 0);
-        bs = bs.setValue(WAYPOINTS_COMPLETED, 0);
         return bs;
     }
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState)
     {
-        return ModBlockEntity.CHASE_CONTROLLER_BLOCK.get().create(pPos, pState);
+        return ModBlockEntity.COMBAT_CONTROLLER_BLOCK.get().create(pPos, pState);
     }
 
     @Override

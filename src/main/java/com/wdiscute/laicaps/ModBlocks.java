@@ -304,6 +304,16 @@ public class ModBlocks
                             )
             );
 
+    public static final DeferredBlock<Block> COMBAT_CONTROLLER_BLOCK =
+            registerBlock(
+                    "combat_controller_block", () ->
+                            new HiddenControllerBlock(BlockBehaviour.Properties.of()
+                                    .strength(30)
+                                    .sound(SoundType.WOOD)
+                                    .noCollission()
+                            )
+            );
+
 
     //
     // ,-----.    ,---.   ,--. ,--. ,--.  ,--. ,------.   ,---.   ,------.  ,--------.

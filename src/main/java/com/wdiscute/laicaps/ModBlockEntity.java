@@ -2,6 +2,7 @@ package com.wdiscute.laicaps;
 
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlockEntity;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlockEntity;
+import com.wdiscute.laicaps.block.combat.CombatControllerBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModHangingSignBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModSignBlockEntity;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlockEntity;
@@ -52,6 +53,10 @@ public class ModBlockEntity
 
     public static final Supplier<BlockEntityType<HiddenControllerBlockEntity>> HIDDEN_CONTROLLER_BLOCK = BLOCK_ENTITIES.register("hidden_controller_block",
             () -> BlockEntityType.Builder.of(HiddenControllerBlockEntity::new, ModBlocks.HIDDEN_CONTROLLER_BLOCK.get())
+                    .build(null));
+
+    public static final Supplier<BlockEntityType<CombatControllerBlockEntity>> COMBAT_CONTROLLER_BLOCK = BLOCK_ENTITIES.register("combat_controller_block",
+            () -> BlockEntityType.Builder.of(CombatControllerBlockEntity::new, ModBlocks.COMBAT_CONTROLLER_BLOCK.get())
                     .build(null));
 
     public static final Supplier<BlockEntityType<WaterContainerHelperBlockEntity>> WATER_CONTAINER_HELPER_BLOCK = BLOCK_ENTITIES.register("water_container_helper_block",
