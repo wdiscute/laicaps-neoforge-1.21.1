@@ -135,12 +135,15 @@ public class ModCreativeModeTabs
                         output.accept(ModBlocks.MAGENTA_SWEETLILY.get());
                         output.accept(ModBlocks.CHERRY_SWEETLILY.get());
 
+                        //bluetale & redtale
+                        output.accept(ModItems.BLUETALE.get());
+                        output.accept(ModItems.COOKED_BLUETALE.get());
+                        output.accept(ModItems.BLUETALE_BUCKET.get());
+                        output.accept(ModItems.REDTALE.get());
+                        output.accept(ModItems.COOKED_REDTALE.get());
+                        output.accept(ModItems.REDTALE_BUCKET.get());
 
 
-
-
-                        //water flower
-                        output.accept(ModBlocks.WATER_FLOWER.get());
 
 
                     })

@@ -149,12 +149,6 @@ public class ModItems
     public static final DeferredItem<Item> UNKNOWN = ITEMS.register("unknown", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
 
-
-
-
-
-
-
     //
     //  ,---.    ,---.   ,--.  ,--.   ,---.
     // /  O  \  '   .-'  |  '--'  |  /  O  \
@@ -163,57 +157,35 @@ public class ModItems
     //`--' `--' `-----'  `--'  `--' `--' `--'
     //
 
-    public static final DeferredItem<Item> BLUETALE_BUCKET = ITEMS.register("bluetale_bucket",
-            () -> new MobBucketItem(
-                    ModEntities.BLUETALE.get(),
-                    Fluids.WATER,
-                    SoundEvents.BUCKET_EMPTY_FISH,
-                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)
-            )
 
-    );
+    public static final DeferredItem<Item> BLUETALE = ITEMS.register("bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
+    public static final DeferredItem<Item> COOKED_BLUETALE = ITEMS.register("cooked_bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
+    public static final DeferredItem<Item> BLUETALE_BUCKET = ITEMS.register("bluetale_bucket", () ->
+            new MobBucketItem(ModEntities.BLUETALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
+                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
 
-    public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register("redtale_bucket",
-            () -> new MobBucketItem(
-                    ModEntities.REDTALE.get(),
-                    Fluids.WATER,
-                    SoundEvents.BUCKET_EMPTY_FISH,
-                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)
-            )
-
-    );
+    public static final DeferredItem<Item> REDTALE = ITEMS.register("redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
+    public static final DeferredItem<Item> COOKED_REDTALE = ITEMS.register("cooked_redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
+    public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register("redtale_bucket", () ->
+            new MobBucketItem(ModEntities.REDTALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
+                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
 
 
-    public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register(
-            "oakheart_berries", () -> new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES))
-            {
-                @Override
-                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-                {
-                    Laicaps.appendHoverText(stack, tooltipComponents);
-                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-                }
-            });
+
+
+    public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register("oakheart_berries", () -> new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES)));
 
     public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register("oakheart_door", () -> new DoubleHighBlockItem(ModBlocks.OAKHEART_DOOR.get(), new Item.Properties()));
-
     public static final DeferredItem<Item> OAKHEART_SIGN = ITEMS.register("oakheart_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_SIGN.get(), ModBlocks.OAKHEART_WALL_SIGN.get()));
-
     public static final DeferredItem<Item> OAKHEART_HANGING_SIGN = ITEMS.register("oakheart_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_HANGING_SIGN.get(), ModBlocks.OAKHEART_WALL_HANGING_SIGN.get()));
-
     public static final DeferredItem<Item> OAKHEART_BOAT = ITEMS.register("oakheart_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.OAKHEART, new Item.Properties().stacksTo(16)));
-
     public static final DeferredItem<Item> OAKHEART_CHEST_BOAT = ITEMS.register("oakheart_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.OAKHEART, new Item.Properties().stacksTo(16)));
 
 
     public static final DeferredItem<Item> OAKROOT_DOOR = ITEMS.register("oakroot_door", () -> new DoubleHighBlockItem(ModBlocks.OAKROOT_DOOR.get(), new Item.Properties()));
-
     public static final DeferredItem<Item> OAKROOT_HANGING_SIGN = ITEMS.register("oakroot_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKROOT_HANGING_SIGN.get(), ModBlocks.OAKROOT_WALL_HANGING_SIGN.get()));
-
     public static final DeferredItem<Item> OAKROOT_SIGN = ITEMS.register("oakroot_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKROOT_SIGN.get(), ModBlocks.OAKROOT_WALL_SIGN.get()));
-
     public static final DeferredItem<Item> OAKROOT_CHEST_BOAT = ITEMS.register("oakroot_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.OAKROOT, new Item.Properties().stacksTo(16)));
-
     public static final DeferredItem<Item> OAKROOT_BOAT = ITEMS.register("oakroot_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.OAKROOT, new Item.Properties().stacksTo(16)));
 
 

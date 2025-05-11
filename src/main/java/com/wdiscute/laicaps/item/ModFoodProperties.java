@@ -24,8 +24,14 @@ public class ModFoodProperties
             .build();
 
 
+    public static final FoodProperties COOKED_BLUETALE = new FoodProperties.Builder()
+            .nutrition(5)
+            .saturationModifier(0.6f)
+            .build();
 
-
-
+    public static final FoodProperties RAW_BLUETALE = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.1f)
+            .build();
 }
 
