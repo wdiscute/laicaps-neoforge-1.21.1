@@ -66,6 +66,12 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.ADVANCED_MICROCHIP.get());
                                 output.accept(ModItems.ELITE_MICROCHIP.get());
 
+                                //spawn eggs
+                                output.accept(ModItems.BLUETALE_SPAWN_EGG.get());
+                                output.accept(ModItems.REDTALE_SPAWN_EGG.get());
+                                output.accept(ModItems.NIMBLE_SPAWN_EGG.get());
+
+
 
                             })
                             .build()

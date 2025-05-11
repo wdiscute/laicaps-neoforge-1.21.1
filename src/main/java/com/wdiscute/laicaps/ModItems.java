@@ -192,6 +192,10 @@ public class ModItems
                     new MobBucketItem(
                             ModEntities.BLUETALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
                             new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
+    public static final DeferredItem<Item> BLUETALE_SPAWN_EGG = ITEMS.register("bluetale_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.BLUETALE.get(), 123421, 123, new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
+
+
 
     public static final DeferredItem<Item> REDTALE = ITEMS.register("redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_REDTALE = ITEMS.register("cooked_redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
@@ -200,7 +204,11 @@ public class ModItems
                     new MobBucketItem(
                             ModEntities.REDTALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
                             new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
+    public static final DeferredItem<Item> REDTALE_SPAWN_EGG = ITEMS.register("redtale_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.REDTALE.get(), 123421, 123, new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
 
+    public static final DeferredItem<Item> NIMBLE_SPAWN_EGG = ITEMS.register("nimble_spawn_egg",
+            () -> new SpawnEggItem(ModEntities.NIMBLE.get(), 123421, 123, new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
 
     public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register("oakheart_berries", () -> new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES)));
 
