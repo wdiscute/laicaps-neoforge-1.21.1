@@ -7,25 +7,52 @@ import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.item.*;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.enchantment.*;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.extensions.IItemExtension;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ModItems
 {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Laicaps.MOD_ID);
+
+
+    public static final DeferredItem<Item> WEAPON_POISON = ITEMS.register(
+            "weapon_poison", () -> new Item(new Item.Properties().stacksTo(1)
+            )
+            {
+                @Override
+                public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
+                {
+                    ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+
+                    mutable.set(level.holderLookup(Registries.ENCHANTMENT).get(Enchantments.FIRE_ASPECT).get(), 1);
+
+                    stack.set(DataComponents.ENCHANTMENTS, mutable.toImmutable().withTooltip(false));
+                    stack.set(DataComponents.STORED_ENCHANTMENTS, mutable.toImmutable());
+                }
+            });
 
 
     //
@@ -160,17 +187,19 @@ public class ModItems
 
     public static final DeferredItem<Item> BLUETALE = ITEMS.register("bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_BLUETALE = ITEMS.register("cooked_bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
-    public static final DeferredItem<Item> BLUETALE_BUCKET = ITEMS.register("bluetale_bucket", () ->
-            new MobBucketItem(ModEntities.BLUETALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
-                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
+    public static final DeferredItem<Item> BLUETALE_BUCKET = ITEMS.register(
+            "bluetale_bucket", () ->
+                    new MobBucketItem(
+                            ModEntities.BLUETALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
+                            new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
 
     public static final DeferredItem<Item> REDTALE = ITEMS.register("redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_REDTALE = ITEMS.register("cooked_redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
-    public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register("redtale_bucket", () ->
-            new MobBucketItem(ModEntities.REDTALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
-                    new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
-
-
+    public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register(
+            "redtale_bucket", () ->
+                    new MobBucketItem(
+                            ModEntities.REDTALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH,
+                            new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
 
 
     public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register("oakheart_berries", () -> new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES)));

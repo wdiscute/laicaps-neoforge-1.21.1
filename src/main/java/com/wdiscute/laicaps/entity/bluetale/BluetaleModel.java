@@ -48,8 +48,8 @@ public class BluetaleModel<T extends BluetaleEntity> extends HierarchicalModel<T
 
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.animateWalk(BluetaleAnimations.SWIM, limbSwing, limbSwingAmount, 2f, 1f);
-        this.animate(entity.idleAnimationState, BluetaleAnimations.SWIM, ageInTicks, 0.7f);
+        this.animateWalk(BluetaleAnimations.SWIM, limbSwing, limbSwingAmount, 1f, 1f);
+        this.animate(entity.idleAnimationState, BluetaleAnimations.SWIM, ageInTicks, 1f);
 
     }
 

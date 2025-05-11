@@ -6,6 +6,7 @@ import com.wdiscute.laicaps.entity.bluetale.RedtaleEntity;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
+import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -37,15 +38,17 @@ public class ModEntities
 
 
     public static final Supplier<EntityType<BluetaleEntity>> BLUETALE =
-            ENTITY_TYPES.register("bluetale", () -> EntityType.Builder.of(BluetaleEntity::new, MobCategory.CREATURE)
+            ENTITY_TYPES.register("bluetale", () -> EntityType.Builder.of(BluetaleEntity::new, MobCategory.WATER_AMBIENT)
                     .sized(0.5f, 0.35f).build("bluetale"));
 
     public static final Supplier<EntityType<RedtaleEntity>> REDTALE =
-            ENTITY_TYPES.register("redtale", () -> EntityType.Builder.of(RedtaleEntity::new, MobCategory.CREATURE)
+            ENTITY_TYPES.register("redtale", () -> EntityType.Builder.of(RedtaleEntity::new, MobCategory.WATER_AMBIENT)
                     .sized(0.5f, 0.35f).build("redtale"));
 
 
-
+    public static final Supplier<EntityType<NimbleEntity>> NIMBLE =
+            ENTITY_TYPES.register("nimble", () -> EntityType.Builder.of(NimbleEntity::new, MobCategory.CREATURE)
+                    .sized(0.5f, 0.35f).build("nimble"));
 
 
     public static final Supplier<EntityType<RocketEntity>> ROCKET =

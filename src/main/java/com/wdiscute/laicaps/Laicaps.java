@@ -7,6 +7,7 @@ import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleRenderer;
 import com.wdiscute.laicaps.entity.bluetale.RedtaleRenderer;
 import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
+import com.wdiscute.laicaps.entity.nimble.NimbleRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.item.ModDataComponentTypes;
@@ -137,6 +138,7 @@ public class Laicaps
 
             EntityRenderers.register(ModEntities.BLUETALE.get(), BluetaleRenderer::new);
             EntityRenderers.register(ModEntities.REDTALE.get(), RedtaleRenderer::new);
+            EntityRenderers.register(ModEntities.NIMBLE.get(), NimbleRenderer::new);
 
 
         }
