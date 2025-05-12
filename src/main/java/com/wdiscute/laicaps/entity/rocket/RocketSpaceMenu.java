@@ -50,15 +50,33 @@ public class RocketSpaceMenu extends AbstractContainerMenu
                          @Override
                          public boolean mayPlace(ItemStack stack)
                          {
-                             if (!container.getItem(3).is(Items.DIRT)) return false;
+                             return !container.getItem(3).is(Items.DIRT) || stack.is(ModItems.ASTRONOMY_NOTEBOOK);
+                         }
 
-                             return stack.is(ModItems.ASTRONOMY_NOTEBOOK);
+                         @Override
+                         public boolean mayPickup(Player player)
+                         {
+                             if (!container.getItem(3).is(Items.DIRT)) return false;
+                             return super.mayPickup(player);
                          }
                      }
         );
 
         //TODO expansion item and system
-        this.addSlot(new Slot(this.container, 1, -158, 20));
+        this.addSlot(new Slot(this.container, 1, -158, 20)
+        {
+            @Override
+            public boolean mayPlace(ItemStack stack)
+            {
+                return false;
+            }
+
+            @Override
+            public boolean mayPickup(Player player)
+            {
+                return false;
+            }
+        });
 
         //tank
         this.addSlot(new Slot(this.container, 2, -158, 52)
@@ -66,10 +84,15 @@ public class RocketSpaceMenu extends AbstractContainerMenu
             @Override
             public boolean mayPlace(ItemStack stack)
             {
+                return !container.getItem(3).is(Items.DIRT) ||
+                        stack.is(ModItems.TANK) || stack.is(ModItems.MEDIUM_TANK) || stack.is(ModItems.LARGE_TANK);
+            }
+
+            @Override
+            public boolean mayPickup(Player player)
+            {
                 if (!container.getItem(3).is(Items.DIRT)) return false;
-
-                return stack.is(ModItems.TANK) || stack.is(ModItems.MEDIUM_TANK) || stack.is(ModItems.LARGE_TANK);
-
+                return super.mayPickup(player);
             }
         });
 
@@ -109,10 +132,10 @@ public class RocketSpaceMenu extends AbstractContainerMenu
     @Override
     public boolean clickMenuButton(Player player, int id)
     {
-        if (id == 1) container.setItem(0, new ItemStack(ModItems.EMBER.get()));
-        if (id == 2) container.setItem(0, new ItemStack(ModItems.ASHA.get()));
-        if (id == 3) container.setItem(0, new ItemStack(ModItems.OVERWORLD.get()));
-        if (id == 4) container.setItem(0, new ItemStack(ModItems.LUNAMAR.get()));
+        if (id == 1) container.setItem(4, new ItemStack(ModItems.EMBER.get()));
+        if (id == 2) container.setItem(4, new ItemStack(ModItems.ASHA.get()));
+        if (id == 3) container.setItem(4, new ItemStack(ModItems.OVERWORLD.get()));
+        if (id == 4) container.setItem(4, new ItemStack(ModItems.LUNAMAR.get()));
 
 
         return super.clickMenuButton(player, id);

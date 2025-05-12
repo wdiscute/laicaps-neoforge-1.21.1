@@ -294,21 +294,21 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         if (book.isEmpty())
         {
             if (!(guiGraphics == null))
-                guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_notebook"), uiX + 30, uiY + 70, 13186614, true);
+                guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_notebook"), uiX + 30, uiY + 70, 13186614, true);
             return;
         }
 
         if (tank.isEmpty())
         {
             if (!(guiGraphics == null))
-                guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_tank"), uiX + 30, uiY + 70, 13186614, true);
+                guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_tank"), uiX + 30, uiY + 70, 13186614, true);
             return;
         }
 
         //check fuel
         if (!setFuelRequired())
         {
-            guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_fuel"), uiX + 30, uiY + 70, 13186614, true);
+            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_fuel"), uiX + 30, uiY + 70, 13186614, true);
             return;
         }
 
@@ -316,7 +316,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         if (rocketState == 0)
         {
             if (!(guiGraphics == null))
-                guiGraphics.drawString(this.font, Component.translatable("gui.rocket.rocket.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
+                guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
         }
 
     }

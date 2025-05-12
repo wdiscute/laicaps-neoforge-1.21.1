@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -43,9 +44,9 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     private NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 
     private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
-    private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+    private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
     private static final ResourceKey<Level> OVERWORLD_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
-    private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+    private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
 
 
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
@@ -54,14 +55,14 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     }
 
 
-    public static boolean canTakeoff(NonNullList<ItemStack> itemStacks)
+    public static int getFuelRemainingForSelectedDestination(NonNullList<ItemStack> itemStacks)
     {
 
-        if(itemStacks.get(4).isEmpty()) return false;
-        if(itemStacks.get(2).isEmpty()) return false;
-        if(itemStacks.get(1).isEmpty()) return false;
+        if (itemStacks.get(4).isEmpty()) return -1;
+        if (itemStacks.get(2).isEmpty()) return -1;
+        if (itemStacks.get(0).isEmpty()) return -1;
 
-
+        if(Minecraft.getInstance().player == null) return -1;
 
         float fuelRequired = 0;
         int fuelAvailable = itemStacks.get(2).get(ModDataComponentTypes.FUEL);
@@ -111,26 +112,25 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
         }
 
-        return fuelAvailable > fuelRequired;
+        return ((int) (fuelAvailable - fuelRequired));
     }
 
     public void tick()
     {
         super.tick();
 
-        canTakeoff(itemStacks);
-        this.shakeAnimationState.start(this.tickCount);
+        if(this.level().isClientSide) return;
 
+        this.shakeAnimationState.start(this.tickCount);
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
-        Vec3 delta = getDeltaMovement();
 
-        if (state == 0) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
-        if (state == 1) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
-        if (state == 2) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
-        if (state == 3) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
-        if (state == 4) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
+        if (state == 0 && !this.itemStacks.get(3).is(Items.DIRT)) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
+        if (state == 1 && !this.itemStacks.get(3).is(Items.STONE)) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
+        if (state == 2 && !this.itemStacks.get(3).is(Items.ANDESITE)) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
+        if (state == 3 && !this.itemStacks.get(3).is(Items.GRANITE)) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
+        if (state == 4 && !this.itemStacks.get(3).is(Items.DIORITE)) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
 
         //landed aka on-ground
         if (state == 0)
@@ -139,10 +139,27 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             //if(!onGround()) entityData.set(STATE, 4);
 
             //JUMPING handler & countdown display
-            if (getFirstPassenger() instanceof JumpingAcessor player && player.isJumping())
-                entityData.set(JUMPING, entityData.get(JUMPING) + 1);
-            else
-                entityData.set(JUMPING, -1);
+            if (getFirstPassenger() instanceof JumpingAcessor jumpingAcessor )
+            {
+                if(jumpingAcessor.isJumping())
+                {
+                    if(getFuelRemainingForSelectedDestination(itemStacks) > 0)
+                        entityData.set(JUMPING, entityData.get(JUMPING) + 1);
+                    else
+                    {
+                        if(getFirstPassenger() instanceof Player player)
+                        {
+                            player.displayClientMessage(Component.translatable("gui.laicaps.rocket.missing_something"), true);
+                        }
+                        entityData.set(JUMPING, -1);
+                    }
+                }else
+                {
+                    entityData.set(JUMPING, -1);
+                }
+
+
+            }
 
             if (getFirstPassenger() instanceof ServerPlayer player)
             {
@@ -156,51 +173,61 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             {
                 entityData.set(STATE, 1);
                 entityData.set(JUMPING, -1);
+                ItemStack itemStack = new ItemStack(itemStacks.get(2).getItem());
+                itemStack.set(ModDataComponentTypes.FUEL, itemStacks.get(2).get(ModDataComponentTypes.FUEL) - getFuelRemainingForSelectedDestination(itemStacks));
+                itemStacks.set(2, itemStack);
             }
 
+            super.tick();
+            return;
         }
-
 
         //takeoff
         if (state == 1)
         {
             //TODO SMOOTH MOVEMENT
-            setDeltaMovement(0, 1, 0);
+
+            move(MoverType.SELF, new Vec3(0, 0.2f, 0));
 
             if (position().y > 200)
                 entityData.set(STATE, 2);
 
             //TODO SPAWN PARTICLES
+
+
+            super.tick();
+            return;
         }
 
-
-        //ORBIT / TELEPORT TO DIMENTION / TODO MINIGAME
+        //ORBIT / TELEPORT TO DIMENSION / TODO MINIGAME
         if (state == 2)
         {
             //go up to y == 400
-            if (delta.y < 0.3 && position().y < 400) setDeltaMovement(0, 0.35, 0);
-            if (position().y > 400) setDeltaMovement(0, 0, 0);
+            //if (delta.y < 0.3 && position().y < 400) setDeltaMovement(0, 0.35, 0);
+            //if (position().y > 400) setDeltaMovement(0, 0, 0);
+
+
+            entityData.set(STATE, 3);
 
             ResourceKey<Level> key = null;
 
             if (itemStacks.get(4).is(ModItems.EMBER.get()))
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
 
-            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+            if (itemStacks.get(4).is(ModItems.ASHA.get()))
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
 
-            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+            if (itemStacks.get(4).is(ModItems.OVERWORLD.get()))
                 key = ResourceKey.create(
                         Registries.DIMENSION,
                         ResourceLocation.withDefaultNamespace("overworld"));
 
-            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+            if (itemStacks.get(4).is(ModItems.LUNAMAR.get()))
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
-
 
             DimensionTransition dt = new DimensionTransition(
                     level().getServer().getLevel(key),
-                    new Vec3(0, 500,0),
+                    new Vec3(0, 269, 0),
                     new Vec3(0, 0, 0),
                     0.0f,
                     0.0f,
@@ -210,7 +237,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             );
 
             this.changeDimension(dt);
-
+            super.tick();
+            return;
         }
 
 
@@ -223,9 +251,11 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
                 return;
             }
 
-            setDeltaMovement(0, -0.35, 0);
 
+            move(MoverType.SELF, new Vec3(0, -0.5f, 0));
 
+            super.tick();
+            return;
         }
 
 
@@ -241,11 +271,16 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
         if (player.isShiftKeyDown())
         {
-            ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
-            itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
-            if(dimension == EMBER_KEY) itemStacks.set(4, new ItemStack(ModItems.EMBER.get()));
-            if(dimension == ASHA_KEY) itemStacks.set(4, new ItemStack(ModItems.ASHA.get()));
-            if(dimension == LUNAMAR_KEY) itemStacks.set(4, new ItemStack(ModItems.LUNAMAR.get()));
+            if (itemStacks.get(4).isEmpty())
+            {
+                ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
+                itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
+                System.out.println("dimension:" + dimension);
+                System.out.println("ASHA_KEY:" + ASHA_KEY);
+                if (dimension == EMBER_KEY) itemStacks.set(4, new ItemStack(ModItems.EMBER.get()));
+                if (dimension == ASHA_KEY) itemStacks.set(4, new ItemStack(ModItems.ASHA.get()));
+                if (dimension == LUNAMAR_KEY) itemStacks.set(4, new ItemStack(ModItems.LUNAMAR.get()));
+            }
 
             if (!player.level().isClientSide)
                 player.openMenu(this);
