@@ -22,7 +22,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -49,6 +48,9 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
 
 
+    int lerpSteps;
+
+
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
         super(entityType, level);
@@ -62,7 +64,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         if (itemStacks.get(2).isEmpty()) return -1;
         if (itemStacks.get(0).isEmpty()) return -1;
 
-        if(Minecraft.getInstance().player == null) return -1;
+        if (Minecraft.getInstance().player == null) return -1;
 
         float fuelRequired = 0;
         int fuelAvailable = itemStacks.get(2).get(ModDataComponentTypes.FUEL);
@@ -115,45 +117,76 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         return ((int) (fuelAvailable - fuelRequired));
     }
 
+    private void handleClientEntityMovement()
+    {
+        int state = entityData.get(STATE);
+        Vec3 vec3 = position();
+
+
+        if (state == 1)
+        {
+            lerpTo(vec3.x, vec3.y + 0.2f, vec3.z, 0, 0, 0);
+        }
+
+        //landing
+        if (state == 3)
+        {
+            if (onGround())
+            {
+                return;
+            }
+
+            lerpTo(vec3.x, vec3.y - 0.5f, vec3.z, 0, 0, 0);
+            return;
+        }
+
+    }
+
+
+
     public void tick()
     {
         super.tick();
 
-        if(this.level().isClientSide) return;
+        if (level().isClientSide)
+        {
+            handleClientEntityMovement();
+            return;
+        }
+
+        if (Minecraft.getInstance().player == null) return;
 
         this.shakeAnimationState.start(this.tickCount);
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
 
-        if (state == 0 && !this.itemStacks.get(3).is(Items.DIRT)) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
-        if (state == 1 && !this.itemStacks.get(3).is(Items.STONE)) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
-        if (state == 2 && !this.itemStacks.get(3).is(Items.ANDESITE)) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
-        if (state == 3 && !this.itemStacks.get(3).is(Items.GRANITE)) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
-        if (state == 4 && !this.itemStacks.get(3).is(Items.DIORITE)) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
+        ItemStack rocketState = this.itemStacks.get(3);
+        if (state == 0 && !rocketState.is(Items.DIRT)) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
+        if (state == 1 && !rocketState.is(Items.STONE)) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
+        if (state == 2 && !rocketState.is(Items.ANDESITE)) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
+        if (state == 3 && !rocketState.is(Items.GRANITE)) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
+        if (state == 4 && !rocketState.is(Items.DIORITE)) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
 
         //landed aka on-ground
         if (state == 0)
         {
-            //if state is on-ground but not on-ground, then state = landing
-            //if(!onGround()) entityData.set(STATE, 4);
-
             //JUMPING handler & countdown display
-            if (getFirstPassenger() instanceof JumpingAcessor jumpingAcessor )
+            if (getFirstPassenger() instanceof JumpingAcessor jumpingAcessor)
             {
-                if(jumpingAcessor.isJumping())
+                if (jumpingAcessor.isJumping())
                 {
-                    if(getFuelRemainingForSelectedDestination(itemStacks) > 0)
+                    if (getFuelRemainingForSelectedDestination(itemStacks) > 0)
                         entityData.set(JUMPING, entityData.get(JUMPING) + 1);
                     else
                     {
-                        if(getFirstPassenger() instanceof Player player)
+                        if (getFirstPassenger() instanceof Player player)
                         {
                             player.displayClientMessage(Component.translatable("gui.laicaps.rocket.missing_something"), true);
                         }
                         entityData.set(JUMPING, -1);
                     }
-                }else
+                } else
                 {
                     entityData.set(JUMPING, -1);
                 }
@@ -169,16 +202,16 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
 
             //takeoff at 220 jumping ticks
-            if (jumping == 220)
+            //if (jumping == 220)
+            if (jumping == 20)
             {
                 entityData.set(STATE, 1);
                 entityData.set(JUMPING, -1);
                 ItemStack itemStack = new ItemStack(itemStacks.get(2).getItem());
-                itemStack.set(ModDataComponentTypes.FUEL, itemStacks.get(2).get(ModDataComponentTypes.FUEL) - getFuelRemainingForSelectedDestination(itemStacks));
+                itemStack.set(ModDataComponentTypes.FUEL, getFuelRemainingForSelectedDestination(itemStacks));
                 itemStacks.set(2, itemStack);
             }
 
-            super.tick();
             return;
         }
 
@@ -187,7 +220,10 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         {
             //TODO SMOOTH MOVEMENT
 
-            move(MoverType.SELF, new Vec3(0, 0.2f, 0));
+            //move(MoverType.SELF, new Vec3(0, 0.2f, 0));
+
+            Vec3 vec3 = position();
+            lerpTo(vec3.x, vec3.y + 0.2f, vec3.z, 0, 0, 0);
 
             if (position().y > 200)
                 entityData.set(STATE, 2);
@@ -195,7 +231,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             //TODO SPAWN PARTICLES
 
 
-            super.tick();
             return;
         }
 
@@ -237,7 +272,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             );
 
             this.changeDimension(dt);
-            super.tick();
             return;
         }
 
@@ -245,17 +279,24 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         //landing
         if (state == 3)
         {
-            if (onGround())
+            if (level().getBlockState(blockPosition().below()).isAir())
             {
+                Vec3 vec3 = position();
+                lerpTo(vec3.x, vec3.y - 0.5f, vec3.z, 0, 0, 0);
+
+            } else
+            {
+                Vec3 vec3 = position();
+                lerpTo(vec3.x, blockPosition().getY(), vec3.z, 0, 0, 0);
                 entityData.set(STATE, 0);
                 return;
             }
-
-
-            move(MoverType.SELF, new Vec3(0, -0.5f, 0));
-
-            super.tick();
             return;
+        }
+
+        //crashing if minigame failed
+        if (state == 4)
+        {
         }
 
 
@@ -275,8 +316,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             {
                 ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
                 itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
-                System.out.println("dimension:" + dimension);
-                System.out.println("ASHA_KEY:" + ASHA_KEY);
                 if (dimension == EMBER_KEY) itemStacks.set(4, new ItemStack(ModItems.EMBER.get()));
                 if (dimension == ASHA_KEY) itemStacks.set(4, new ItemStack(ModItems.ASHA.get()));
                 if (dimension == LUNAMAR_KEY) itemStacks.set(4, new ItemStack(ModItems.LUNAMAR.get()));
