@@ -51,6 +51,14 @@
   "block.laicaps.rotating_puzzle_block": "Rotating Puzzle Block",
 
 
+  "item.laicaps.telescope_upgrade_kit": "Telescope Upgrade Kit",
+  "item.laicaps.telescope_upgrade_kit.0": "Telescope Upgrade Kit",
+  "item.laicaps.telescope_upgrade_kit.1": "A basic Upgrade Kit to be used on a",
+  "item.laicaps.telescope_upgrade_kit.2": "telescope to improve it's aperture size,",
+  "item.laicaps.telescope_upgrade_kit.3": "allowing you to see further into space.",
+  "item.laicaps.telescope_upgrade_kit.4": "Who knows what else is hiding in the",
+  "item.laicaps.telescope_upgrade_kit.5": "darkness of the skies above?",
+
   "block.laicaps.telescope": "Telescope",
   "block.laicaps.advanced_telescope": "Advanced Telescope",
   "block.laicaps.telescope_stand": "Telescope Stand",

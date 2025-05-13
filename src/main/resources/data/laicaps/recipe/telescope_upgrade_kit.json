@@ -1,28 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "telescope",
+  "group": "teleporters",
   "key": {
-    "S": {
-      "item": "minecraft:spyglass"
-    },
     "G": {
       "item": "minecraft:gold_ingot"
     },
-    "D": {
-      "item": "minecraft:diamond"
+    "M": {
+      "item": "laicaps:basic_microchip"
     },
     "L": {
       "item": "laicaps:telescope_lenses"
     }
   },
   "pattern": [
-    " GL",
-    "GSG",
-    "DG "
+    "GMG",
+    "MLM",
+    "GMG"
   ],
   "result": {
     "count": 1,
-    "id": "laicaps:telescope"
+    "id": "laicaps:telescope_upgrade_kit"
   }
 }

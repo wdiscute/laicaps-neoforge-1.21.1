@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "teleporters",
+  "group": "telescope",
   "key": {
     "B": {
       "item": "minecraft:book"

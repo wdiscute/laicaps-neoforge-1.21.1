@@ -85,7 +85,8 @@ public class ModItems
     //
 
 
-    public static final DeferredItem<Item> TELESCOPE_UPGRADE_KIT = ITEMS.register("telescope_upgrade_kit", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final DeferredItem<Item> TELESCOPE_UPGRADE_KIT = ITEMS.register("telescope_upgrade_kit", () -> new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1)));
+    public static final DeferredItem<Item> TELESCOPE_LENSES = ITEMS.register("telescope_lenses", () -> new Item(new Item.Properties().stacksTo(16)));
 
 
     //
@@ -105,6 +106,7 @@ public class ModItems
                     .stacksTo(1)
                     .component(ModDataComponents.FUEL, 0)
                     .durability(400)
+                    .setNoRepair()
             )
             {
                 @Override
@@ -125,7 +127,8 @@ public class ModItems
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
                     .component(ModDataComponents.FUEL, 0)
-                    .durability(800))
+                    .durability(800)
+                    .setNoRepair())
             {
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
@@ -145,7 +148,8 @@ public class ModItems
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
                     .durability(1500)
-                    .component(ModDataComponents.FUEL, 0))
+                    .component(ModDataComponents.FUEL, 0)
+                    .setNoRepair())
             {
 
                 @Override
