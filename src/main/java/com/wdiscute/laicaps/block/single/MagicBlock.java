@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.singleblocks;
+package com.wdiscute.laicaps.block.single;
 
 import com.wdiscute.laicaps.ModTags;
 import net.minecraft.core.BlockPos;

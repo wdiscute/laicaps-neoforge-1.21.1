@@ -1,9 +1,8 @@
-package com.wdiscute.laicaps.block.singleblocks;
+package com.wdiscute.laicaps.block.single;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.particle.ModParticles;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;

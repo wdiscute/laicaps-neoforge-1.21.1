@@ -3,7 +3,7 @@ package com.wdiscute.laicaps.block.refuelstation;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -100,10 +100,10 @@ public class RefuelStationBlockEntity extends BlockEntity implements MenuProvide
 
             if (tank.is(ModItems.TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
             {
-                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
+                int fuelAvailable = tank.get(ModDataComponents.FUEL);
                 if (fuelAvailable <= 390)
                 {
-                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
+                    tank.set(ModDataComponents.FUEL, fuelAvailable + 10);
                     fuel.shrink(1);
                     inventory.setStackInSlot(0, fuel);
                     inventory.setStackInSlot(1, tank);
@@ -112,10 +112,10 @@ public class RefuelStationBlockEntity extends BlockEntity implements MenuProvide
 
             if (tank.is(ModItems.MEDIUM_TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
             {
-                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
+                int fuelAvailable = tank.get(ModDataComponents.FUEL);
                 if (fuelAvailable <= 790)
                 {
-                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
+                    tank.set(ModDataComponents.FUEL, fuelAvailable + 10);
                     fuel.shrink(1);
                     inventory.setStackInSlot(0, fuel);
                     inventory.setStackInSlot(1, tank);
@@ -124,10 +124,10 @@ public class RefuelStationBlockEntity extends BlockEntity implements MenuProvide
 
             if (tank.is(ModItems.LARGE_TANK.get()) && fuel.is(ModItems.ENDERBLAZE_FUEL.get()))
             {
-                int fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
+                int fuelAvailable = tank.get(ModDataComponents.FUEL);
                 if (fuelAvailable <= 1490)
                 {
-                    tank.set(ModDataComponentTypes.FUEL, fuelAvailable + 10);
+                    tank.set(ModDataComponents.FUEL, fuelAvailable + 10);
                     fuel.shrink(1);
                     inventory.setStackInSlot(0, fuel);
                     inventory.setStackInSlot(1, tank);

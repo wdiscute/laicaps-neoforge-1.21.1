@@ -2,7 +2,7 @@ package com.wdiscute.laicaps.block.symbol;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -117,9 +117,9 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
             {
                 if (pState.getValue(FACING) == Direction.EAST)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pPos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pPos.getY();
 
                     int newx = x;
                     int newz = z;
@@ -128,9 +128,9 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
                 }
                 if (pState.getValue(FACING) == Direction.SOUTH)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pPos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pPos.getY();
 
                     int newx = z;
                     int newz = x * -1;
@@ -139,9 +139,9 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
                 }
                 if (pState.getValue(FACING) == Direction.WEST)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pPos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pPos.getY();
 
                     int newx = x * -1;
                     int newz = z * -1;
@@ -150,9 +150,9 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
                 }
                 if (pState.getValue(FACING) == Direction.NORTH)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pPos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pPos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pPos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pPos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pPos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pPos.getY();
 
                     int newx = z * -1;
                     int newz = x;

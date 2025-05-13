@@ -10,7 +10,7 @@ import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
 import com.wdiscute.laicaps.entity.nimble.NimbleRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
@@ -69,7 +69,7 @@ public class Laicaps
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-        ModDataComponentTypes.register(modEventBus);
+        ModDataComponents.register(modEventBus);
         ModSounds.register(modEventBus);
         ModBlockEntity.register(modEventBus);
         ModEntities.register(modEventBus);

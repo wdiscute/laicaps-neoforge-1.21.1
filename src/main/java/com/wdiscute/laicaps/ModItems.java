@@ -2,35 +2,27 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.ModEntities;
-import com.wdiscute.laicaps.entity.bluetale.BluetaleEntity;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.item.*;
 
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.extensions.IItemExtension;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class ModItems
 {
@@ -111,7 +103,7 @@ public class ModItems
             "tank", () -> new Item(new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
-                    .component(ModDataComponentTypes.FUEL, 0)
+                    .component(ModDataComponents.FUEL, 0)
                     .durability(400)
             )
             {
@@ -124,7 +116,7 @@ public class ModItems
                 @Override
                 public int getDamage(ItemStack stack)
                 {
-                    return (400 - stack.get(ModDataComponentTypes.FUEL) == 0) ? 1 : 400 - stack.get(ModDataComponentTypes.FUEL);
+                    return (400 - stack.get(ModDataComponents.FUEL) == 0) ? 1 : 400 - stack.get(ModDataComponents.FUEL);
                 }
             });
 
@@ -132,7 +124,7 @@ public class ModItems
             "medium_tank", () -> new Item(new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
-                    .component(ModDataComponentTypes.FUEL, 0)
+                    .component(ModDataComponents.FUEL, 0)
                     .durability(800))
             {
                 @Override
@@ -144,7 +136,7 @@ public class ModItems
                 @Override
                 public int getDamage(ItemStack stack)
                 {
-                    return (800 - stack.get(ModDataComponentTypes.FUEL) == 0) ? 1 : 800 - stack.get(ModDataComponentTypes.FUEL);
+                    return (800 - stack.get(ModDataComponents.FUEL) == 0) ? 1 : 800 - stack.get(ModDataComponents.FUEL);
                 }
             });
 
@@ -153,7 +145,7 @@ public class ModItems
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
                     .durability(1500)
-                    .component(ModDataComponentTypes.FUEL, 0))
+                    .component(ModDataComponents.FUEL, 0))
             {
 
                 @Override
@@ -166,7 +158,7 @@ public class ModItems
                 @Override
                 public int getDamage(ItemStack stack)
                 {
-                    return (1500 - stack.get(ModDataComponentTypes.FUEL) == 0) ? 1 : 1500 - stack.get(ModDataComponentTypes.FUEL);
+                    return (1500 - stack.get(ModDataComponents.FUEL) == 0) ? 1 : 1500 - stack.get(ModDataComponents.FUEL);
                 }
             });
 
@@ -258,10 +250,10 @@ public class ModItems
 
             String color = "§4";
 
-            if (stack.get(ModDataComponentTypes.FUEL) > maxFuel / 2) color = "§6";
-            if (stack.get(ModDataComponentTypes.FUEL) > maxFuel / 1.5) color = "§a";
+            if (stack.get(ModDataComponents.FUEL) > maxFuel / 2) color = "§6";
+            if (stack.get(ModDataComponents.FUEL) > maxFuel / 1.5) color = "§a";
 
-            tooltipComponents.add(Component.literal(color + I18n.get("tooltip.laicaps.tank.fuel") + ": §l[" + stack.get(ModDataComponentTypes.FUEL) + " / " + maxFuel + "]"));
+            tooltipComponents.add(Component.literal(color + I18n.get("tooltip.laicaps.tank.fuel") + ": §l[" + stack.get(ModDataComponents.FUEL) + " / " + maxFuel + "]"));
         } else tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
     }
 

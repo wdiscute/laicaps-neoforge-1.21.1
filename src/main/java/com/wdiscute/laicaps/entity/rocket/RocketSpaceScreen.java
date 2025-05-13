@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.telescope.RevealRenderUtil;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -133,10 +133,10 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         {
 
             book = menu.container.getItem(0);
-            emberKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
-            ashaKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+            emberKnowledge = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER);
+            ashaKnowledge = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER);
             overworldKnowledge = 100;
-            lunamarKnowledge = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER);
+            lunamarKnowledge = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER);
         } else
         {
             emberKnowledge = 0;
@@ -149,7 +149,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         if (menu.container.getItem(2).is(ModItems.TANK.get()) || menu.container.getItem(2).is(ModItems.MEDIUM_TANK.get()) || menu.container.getItem(2).is(ModItems.LARGE_TANK.get()))
         {
             tank = menu.container.getItem(2);
-            fuelAvailable = tank.get(ModDataComponentTypes.FUEL);
+            fuelAvailable = tank.get(ModDataComponents.FUEL);
 
         }else
         {

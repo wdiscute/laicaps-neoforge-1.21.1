@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.block.symbol;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModItems;
 import net.minecraft.core.BlockPos;
@@ -47,9 +47,9 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
                 //gets the coords from the chisel and stores offset on be
                 if (state.getValue(FACING) == Direction.EAST)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = x;
                     int newz = z;
@@ -59,9 +59,9 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
                 if (state.getValue(FACING) == Direction.SOUTH)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = z;
                     int newz = x * -1;
@@ -71,9 +71,9 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
                 if (state.getValue(FACING) == Direction.WEST)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = x * -1;
                     int newz = z * -1;
@@ -83,9 +83,9 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
 
                 if (state.getValue(FACING) == Direction.NORTH)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = z * -1;
                     int newz = x;

@@ -10,7 +10,7 @@ import com.wdiscute.laicaps.block.receiversender.SenderPuzzleBLock;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
-import com.wdiscute.laicaps.block.singleblocks.*;
+import com.wdiscute.laicaps.block.single.*;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlock;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlock;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlock;
@@ -44,7 +44,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -53,11 +52,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ISystemReportExtender;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class ModBlocks

@@ -2,7 +2,7 @@ package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
@@ -67,7 +67,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         if (Minecraft.getInstance().player == null) return -1;
 
         float fuelRequired = 0;
-        int fuelAvailable = itemStacks.get(2).get(ModDataComponentTypes.FUEL);
+        int fuelAvailable = itemStacks.get(2).get(ModDataComponents.FUEL);
         boolean flag = false;
 
         if (Minecraft.getInstance().player.level().dimension() == EMBER_KEY)
@@ -208,7 +208,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
                 entityData.set(STATE, 1);
                 entityData.set(JUMPING, -1);
                 ItemStack itemStack = new ItemStack(itemStacks.get(2).getItem());
-                itemStack.set(ModDataComponentTypes.FUEL, getFuelRemainingForSelectedDestination(itemStacks));
+                itemStack.set(ModDataComponents.FUEL, getFuelRemainingForSelectedDestination(itemStacks));
                 itemStacks.set(2, itemStack);
             }
 

@@ -25,7 +25,7 @@ public class ChiselItem extends Item
 
         if (!level.isClientSide() && pContext.getPlayer().isCrouching())
         {
-            pContext.getItemInHand().set(ModDataComponentTypes.COORDINATES.get(), pContext.getClickedPos());
+            pContext.getItemInHand().set(ModDataComponents.COORDINATES.get(), pContext.getClickedPos());
             level.playSound(null, pContext.getClickedPos(), ModSounds.CHISEL_USE.get(), SoundSource.BLOCKS);
             return InteractionResult.SUCCESS;
         }
@@ -37,9 +37,9 @@ public class ChiselItem extends Item
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> tooltipComponents, TooltipFlag pTooltipFlag)
     {
-        if (pStack.get(ModDataComponentTypes.COORDINATES.get()) != null)
+        if (pStack.get(ModDataComponents.COORDINATES.get()) != null)
         {
-            tooltipComponents.add(Component.literal("Last Block Clicked at " + pStack.get(ModDataComponentTypes.COORDINATES.get())));
+            tooltipComponents.add(Component.literal("Last Block Clicked at " + pStack.get(ModDataComponents.COORDINATES.get())));
         }
         super.appendHoverText(pStack, pContext, tooltipComponents, pTooltipFlag);
     }

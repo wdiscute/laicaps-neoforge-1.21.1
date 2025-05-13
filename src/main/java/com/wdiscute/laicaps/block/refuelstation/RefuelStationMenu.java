@@ -2,8 +2,6 @@ package com.wdiscute.laicaps.block.refuelstation;
 
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
 import com.wdiscute.laicaps.types.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

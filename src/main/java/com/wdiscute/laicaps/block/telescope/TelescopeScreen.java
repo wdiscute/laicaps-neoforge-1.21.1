@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -16,14 +16,12 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 
@@ -260,7 +258,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         if (state == 1)
         {
             //ember
-            if (x > 250 && x < 283 && y > 170 && y < 200 && book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER) == 0)
+            if (x > 250 && x < 283 && y > 170 && y < 200 && book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER) == 0)
             {
                 counter = 0;
                 planetSelected = 1;
@@ -272,7 +270,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //asha
-            if (x > 310 && x < 335 && y > 86 && y < 111 && book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA) == 0)
+            if (x > 310 && x < 335 && y > 86 && y < 111 && book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA) == 0)
             {
                 counter = 0;
                 planetSelected = 2;
@@ -284,7 +282,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //lunamar
-            if (x > 444 && x < 589 && y > 16 && y < 65 && book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR) == 0)
+            if (x > 444 && x < 589 && y > 16 && y < 65 && book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR) == 0)
             {
                 counter = 0;
                 planetSelected = 4;
@@ -306,7 +304,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                     transitionMenu = true;
                     counter = 0;
 
-                    book.set(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER, book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER) + 1);
+                    book.set(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER, book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER) + 1);
                     menu.blockEntity.inventory.setStackInSlot(0, book);
                 }
 
@@ -314,7 +312,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 {
                     transitionMenu = true;
                     counter = 0;
-                    book.set(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA, book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA) + 1);
+                    book.set(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA, book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA) + 1);
                     menu.blockEntity.inventory.setStackInSlot(0, book);
                 }
 
@@ -322,7 +320,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 {
                     transitionMenu = true;
                     counter = 0;
-                    book.set(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR, book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR) + 1);
+                    book.set(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR, book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR) + 1);
                     menu.blockEntity.inventory.setStackInSlot(0, book);
                 }
 
@@ -370,7 +368,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 RenderSystem.enableBlend();
 
                 //ember
-                if (book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER) == 0)
+                if (book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER) == 0)
                     rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_BLUR_HIGHLIGHTED : EMBER_BLUR;
                 else
                     rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_HIGHLIGHTED : EMBER;
@@ -378,7 +376,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
 
                 //asha
-                if (book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA) == 0)
+                if (book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA) == 0)
                     rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_BLUR_HIGHLIGHTED : ASHA_BLUR;
                 else
                     rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_HIGHLIGHTED : ASHA;
@@ -390,7 +388,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
 
                 //lunamar
-                if (book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR) == 0)
+                if (book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR) == 0)
                     rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_BLUR_HIGHLIGHTED : LUNAMAR_BLUR;
                 else
                     rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_HIGHLIGHTED : LUNAMAR;
@@ -452,21 +450,21 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 //ember with basic telescope
                 if (x > 250 && x < 283 && y > 170 && y < 200 && menu.blockstate.is(ModBlocks.TELESCOPE))
                 {
-                    tooltips = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur", true) : tooltipHelper("ember");
+                    tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur", true) : tooltipHelper("ember");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
                 //ember with advanced telescope
                 if (x > 250 && x < 283 && y > 170 && y < 200 && menu.blockstate.is(ModBlocks.ADVANCED_TELESCOPE))
                 {
-                    tooltips = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur") : tooltipHelper("ember");
+                    tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur") : tooltipHelper("ember");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
                 //asha
                 if (x > 310 && x < 335 && y > 86 && y < 111)
                 {
-                    tooltips = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA).intValue() == 0 ? tooltipHelper("asha_blur") : tooltipHelper("asha");
+                    tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA).intValue() == 0 ? tooltipHelper("asha_blur") : tooltipHelper("asha");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
@@ -480,7 +478,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 //lunamar
                 if (x > 444 && x < 589 && y > 16 && y < 65)
                 {
-                    tooltips = book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR).intValue() == 0 ? tooltipHelper("lunamar_blur") : tooltipHelper("lunamar");
+                    tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR).intValue() == 0 ? tooltipHelper("lunamar_blur") : tooltipHelper("lunamar");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
                 }
 
@@ -673,14 +671,14 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             if (Objects.equals(input, "ember"))
             {
                 list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
-                if (book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_EMBER) < Laicaps.MAX_EMBER_KNOWLEDGE)
+                if (book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER) < Laicaps.MAX_EMBER_KNOWLEDGE)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
             if (Objects.equals(input, "asha"))
             {
                 list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
-                if (book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_ASHA) < Laicaps.MAX_ASHA_KNOWLEDGE)
+                if (book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA) < Laicaps.MAX_ASHA_KNOWLEDGE)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
@@ -692,7 +690,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             if (Objects.equals(input, "lunamar"))
             {
                 list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
-                if (book.get(ModDataComponentTypes.ASTRONOMY_KNOWLEDGE_LUNAMAR) < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
+                if (book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR) < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
         }

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -67,9 +67,9 @@ public class ChaseControllerBlock extends HorizontalDirectionalBlock implements 
             {
                 if (state.getValue(FACING) == Direction.EAST)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = x;
                     int newz = z;
@@ -80,9 +80,9 @@ public class ChaseControllerBlock extends HorizontalDirectionalBlock implements 
                 }
                 if (state.getValue(FACING) == Direction.SOUTH)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = z;
                     int newz = x * -1;
@@ -92,9 +92,9 @@ public class ChaseControllerBlock extends HorizontalDirectionalBlock implements 
                 }
                 if (state.getValue(FACING) == Direction.WEST)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = x * -1;
                     int newz = z * -1;
@@ -104,9 +104,9 @@ public class ChaseControllerBlock extends HorizontalDirectionalBlock implements 
                 }
                 if (state.getValue(FACING) == Direction.NORTH)
                 {
-                    int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                    int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                    int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                    int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                    int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                    int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                     int newx = z * -1;
                     int newz = x;

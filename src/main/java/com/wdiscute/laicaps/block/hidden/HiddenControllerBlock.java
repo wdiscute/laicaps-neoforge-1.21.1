@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
-import com.wdiscute.laicaps.item.ModDataComponentTypes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -63,9 +63,9 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
         {
             if (state.getValue(FACING) == Direction.EAST && level.getBlockEntity(pos) instanceof HiddenControllerBlockEntity be)
             {
-                int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                 int newx = x;
                 int newz = z;
@@ -76,9 +76,9 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
             }
             if (state.getValue(FACING) == Direction.SOUTH && level.getBlockEntity(pos) instanceof HiddenControllerBlockEntity be)
             {
-                int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                 int newx = z;
                 int newz = x * -1;
@@ -88,9 +88,9 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
             }
             if (state.getValue(FACING) == Direction.WEST && level.getBlockEntity(pos) instanceof HiddenControllerBlockEntity be)
             {
-                int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                 int newx = x * -1;
                 int newz = z * -1;
@@ -100,9 +100,9 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
             }
             if (state.getValue(FACING) == Direction.NORTH && level.getBlockEntity(pos) instanceof HiddenControllerBlockEntity be)
             {
-                int x = stack.get(ModDataComponentTypes.COORDINATES.get()).getX() - pos.getX();
-                int z = stack.get(ModDataComponentTypes.COORDINATES.get()).getZ() - pos.getZ();
-                int y = stack.get(ModDataComponentTypes.COORDINATES.get()).getY() - pos.getY();
+                int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
+                int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
+                int y = stack.get(ModDataComponents.COORDINATES.get()).getY() - pos.getY();
 
                 int newx = z * -1;
                 int newz = x;
