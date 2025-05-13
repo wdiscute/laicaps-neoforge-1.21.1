@@ -14,6 +14,7 @@ import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
+import com.wdiscute.laicaps.particle.LunarveilParticles;
 import com.wdiscute.laicaps.particle.ModParticles;
 import com.wdiscute.laicaps.particle.WaterFlowerParticles;
 import com.wdiscute.laicaps.sound.ModSounds;
@@ -148,6 +149,7 @@ public class Laicaps
         {
             event.registerSpriteSet(ModParticles.CHASE_PUZZLE_PARTICLES.get(), ChasePuzzleParticles.Provider::new);
             event.registerSpriteSet(ModParticles.WATER_FLOWER_PARTICLES.get(), WaterFlowerParticles.Provider::new);
+            event.registerSpriteSet(ModParticles.LUNARVEIL_PARTICLES.get(), LunarveilParticles.Provider::new);
         }
 
         @SubscribeEvent

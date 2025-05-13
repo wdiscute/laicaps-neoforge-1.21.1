@@ -18,6 +18,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.Random;
+
 public class LunarveilBlock extends BushBlock
 {
     public LunarveilBlock(Properties properties)
@@ -25,11 +27,29 @@ public class LunarveilBlock extends BushBlock
         super(properties);
     }
 
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
+    {
+        Random r = new Random();
+        if (state.getValue(OPEN) && r.nextFloat(1) > 0.8f)
+        {
+            level.addParticle(
+                    ModParticles.LUNARVEIL_PARTICLES.get(),
+                    //randomness of 4, +0.5 to center to the block, -2 to offset the randomness by 2
+                    (double) pos.getX() + r.nextFloat(4) + 0.5 - 2f,
+                    (double) pos.getY() + 0.2f + r.nextFloat(2),
+                    (double) pos.getZ() + r.nextFloat(4) + 0.5 - 2f,
+                    0,
+                    0,
+                    0
+            );
+        }
+    }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Vec3 vec3 = state.getOffset(level, pos);
-        VoxelShape shape = Block.box((double)5.0F, (double)0.0F, (double)5.0F, (double)11.0F, (double)15.0F, (double)11.0F);
+        VoxelShape shape = Block.box(5.0F, 0.0F, 5.0F, 11.0F, 15.0F, 11.0F);
         return shape.move(vec3.x, vec3.y, vec3.z);
     }
 
@@ -53,22 +73,6 @@ public class LunarveilBlock extends BushBlock
 
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
 
-    @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom)
-    {
-        if (pState.getValue(OPEN))
-        {
-            pLevel.addParticle(
-                    ModParticles.CHASE_PUZZLE_PARTICLES.get(),
-                    (double) pPos.getX() + 0.5f,
-                    (double) pPos.getY() + 1.2f,
-                    (double) pPos.getZ() + 0.5f,
-                    3.0,
-                    3.0,
-                    3.0
-            );
-        }
-    }
 
 
     @Override

@@ -25,7 +25,8 @@ public class ModParticles
     public static final Supplier<SimpleParticleType> WATER_FLOWER_PARTICLES =
             PARTICLE_TYPES.register("water_flower_particles", () -> new SimpleParticleType(true));
 
-
+    public static final Supplier<SimpleParticleType> LUNARVEIL_PARTICLES =
+            PARTICLE_TYPES.register("lunarveil_particles", () -> new SimpleParticleType(true));
 
 
 
