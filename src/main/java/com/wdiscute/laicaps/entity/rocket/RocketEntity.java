@@ -202,8 +202,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
 
             //takeoff at 220 jumping ticks
-            //if (jumping == 220)
-            if (jumping == 20)
+            if (jumping == 220)
+            //if (jumping == 20)
             {
                 entityData.set(STATE, 1);
                 entityData.set(JUMPING, -1);

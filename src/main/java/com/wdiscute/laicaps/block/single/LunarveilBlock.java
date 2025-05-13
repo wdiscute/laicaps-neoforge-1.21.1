@@ -27,6 +27,8 @@ public class LunarveilBlock extends BushBlock
         super(properties);
     }
 
+    public static final BooleanProperty OPEN = BooleanProperty.create("open");
+
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
@@ -71,7 +73,6 @@ public class LunarveilBlock extends BushBlock
         return null;
     }
 
-    public static final BooleanProperty OPEN = BooleanProperty.create("open");
 
 
 

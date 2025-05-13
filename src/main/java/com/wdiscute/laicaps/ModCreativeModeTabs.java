@@ -38,7 +38,6 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.ASTRONOMY_NOTEBOOK.get());
                                 output.accept(ModBlocks.TELESCOPE_STAND.get());
                                 output.accept(ModBlocks.TELESCOPE.get());
-                                output.accept(ModBlocks.ADVANCED_TELESCOPE.get());
 
                                 output.accept(ModItems.TELESCOPE_UPGRADE_KIT.get());
 

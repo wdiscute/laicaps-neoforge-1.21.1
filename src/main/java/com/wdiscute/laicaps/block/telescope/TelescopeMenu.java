@@ -126,10 +126,6 @@ public class TelescopeMenu extends AbstractContainerMenu
     @Override
     public boolean stillValid(Player player)
     {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.TELESCOPE.get()) ||
-                stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                        player, ModBlocks.ADVANCED_TELESCOPE.get())
-                ;
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.TELESCOPE.get());
     }
 }

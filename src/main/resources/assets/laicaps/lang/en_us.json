@@ -73,7 +73,7 @@
   "gui.rocket.telescope.notebook": "§cInsert Notebook",
   "gui.rocket.telescope.tank": "§cInsert Tank",
 
-  "gui.laicaps.rocket.takeoff.0": "",
+  "gui.laicaps.rocket.takeoff.0": "§l§4All Systems ready...",
   "gui.laicaps.rocket.takeoff.1": "§l10",
   "gui.laicaps.rocket.takeoff.2": "§l9",
   "gui.laicaps.rocket.takeoff.3": "§l8",
@@ -211,11 +211,15 @@
 
 
   "item.laicaps.asha_teleporter": "Asha Teleporter",
-  "tooltip.laicaps.asha_teleporter.0": "quick and dirty creative mode teleporter",
+  "tooltip.laicaps.asha_teleporter.0": "Quick and dirty creative mode teleporter",
   "item.laicaps.lunamar_teleporter": "Lunamar Teleporter",
-  "tooltip.laicaps.lunamar_teleporter.0": "quick and dirty creative mode teleporter",
+  "tooltip.laicaps.lunamar_teleporter.0": "Quick and dirty creative mode teleporter",
   "item.laicaps.ember_teleporter": "Ember Teleporter",
-  "tooltip.laicaps.ember_teleporter.0": "quick and dirty creative mode teleporter",
+  "tooltip.laicaps.ember_teleporter.0": "Quick and dirty creative mode teleporter",
+
+  "block.laicaps.refuel_station": "Refuel Teleporter",
+  "tooltip.laicaps.refuel_station.0": "A refueling station used to",
+  "tooltip.laicaps.refuel_station.1": "refuel tanks with Enderblaze fuel.",
 
 
   "item.laicaps.basic_microchip": "Basic Microchip",

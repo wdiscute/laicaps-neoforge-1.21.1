@@ -1,22 +1,41 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,advanced=false": {
       "model": "laicaps:block/telescope",
       "y": 90
     },
-
-    "facing=north": {
+    "facing=north,advanced=false": {
       "model": "laicaps:block/telescope"
     },
-
-    "facing=south": {
+    "facing=south,advanced=false": {
       "model": "laicaps:block/telescope",
       "y": 180
 
     },
-
-    "facing=west": {
+    "facing=west,advanced=false": {
       "model": "laicaps:block/telescope",
+      "y": 270
+    },
+
+
+
+    "facing=east,advanced=true": {
+      "model": "laicaps:block/telescope_advanced",
+      "y": 90
+    },
+
+    "facing=north,advanced=true": {
+      "model": "laicaps:block/telescope_advanced"
+    },
+
+    "facing=south,advanced=true": {
+      "model": "laicaps:block/telescope_advanced",
+      "y": 180
+
+    },
+
+    "facing=west,advanced=true": {
+      "model": "laicaps:block/telescope_advanced",
       "y": 270
     }
 

@@ -44,6 +44,7 @@ public class TelescopeBlockEntity extends BlockEntity implements MenuProvider
             inv.setItem(i, inventory.getStackInSlot(i));
         }
 
+
         Containers.dropContents(level, this.worldPosition, inv);
     }
 

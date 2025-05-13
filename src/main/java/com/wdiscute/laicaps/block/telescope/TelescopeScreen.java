@@ -455,7 +455,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 }
 
                 //ember with advanced telescope
-                if (x > 250 && x < 283 && y > 170 && y < 200 && menu.blockstate.is(ModBlocks.ADVANCED_TELESCOPE))
+                if (x > 250 && x < 283 && y > 170 && y < 200 && menu.blockstate.getValue(TelescopeBlock.ADVANCED))
                 {
                     tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur") : tooltipHelper("ember");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);

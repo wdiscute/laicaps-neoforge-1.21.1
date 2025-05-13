@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,20 +32,30 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
         super(properties);
     }
 
+    public static final BooleanProperty ADVANCED = BooleanProperty.create("advanced");
+
+
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
 
         if(stack.is(ModItems.TELESCOPE_UPGRADE_KIT) && state.is(ModBlocks.TELESCOPE) && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
         {
-            level.setBlockAndUpdate(pos, ModBlocks.ADVANCED_TELESCOPE.get()
-                    .defaultBlockState().setValue(FACING, level.getBlockState(pos).getValue(FACING)));
-            if(!level.isClientSide) {
-                ((ServerLevel) level).sendParticles(ParticleTypes.HAPPY_VILLAGER,
-                        pos.getX() + 0.5f,
-                        pos.getY() + 0.5f,
-                        pos.getZ() + 0.5f, 20, 0.5f, 0.5f, 0.5f, 0f);
-                tbe.drops();
+            if(!state.getValue(ADVANCED))
+            {
+                level.setBlockAndUpdate(pos, state
+                                .setValue(ADVANCED, true)
+                                .setValue(FACING, level.getBlockState(pos).getValue(FACING)));
+
+                if (!level.isClientSide)
+                {
+                    ((ServerLevel) level).sendParticles(
+                            ParticleTypes.HAPPY_VILLAGER,
+                            pos.getX() + 0.5f,
+                            pos.getY() + 0.5f,
+                            pos.getZ() + 0.5f, 20, 0.5f, 0.5f, 0.5f, 0f);
+                    tbe.drops();
+                }
             }
 
             return ItemInteractionResult.CONSUME;
@@ -86,6 +97,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder)
     {
         pBuilder.add(FACING);
+        pBuilder.add(ADVANCED);
     }
 
 
@@ -95,7 +107,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
         BlockState bellow = context.getLevel().getBlockState(context.getClickedPos().below());
         if (bellow.is(ModBlocks.TELESCOPE_STAND))
         {
-            return defaultBlockState().setValue(FACING, bellow.getValue(FACING));
+            return defaultBlockState().setValue(ADVANCED, false).setValue(FACING, bellow.getValue(FACING));
         }
         context.getPlayer().displayClientMessage(Component.translatable("block.laicaps.telescope.place"), true);
         return null;
