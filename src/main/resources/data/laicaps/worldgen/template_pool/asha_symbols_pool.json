@@ -64,6 +64,24 @@
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_8",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_symbols/symbols_9",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
     }
   ]
 }
