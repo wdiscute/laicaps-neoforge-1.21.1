@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.event;
 
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlockEntity;
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleEntity;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleModel;
 import com.wdiscute.laicaps.entity.boat.ModModelLayers;
@@ -80,9 +81,14 @@ public class ModEventBusEvents
 
         event.register(ModEntities.NIMBLE.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Animal::checkAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                ModEventBusEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
 
+    }
+
+    public static boolean checkNimbleSpawnRules(EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        boolean flag = level.getRawBrightness(pos, 0) > 8;
+        return level.getBlockState(pos.below()).is(ModBlocks.ASHA_GRASS_BLOCK) && flag;
     }
 
 

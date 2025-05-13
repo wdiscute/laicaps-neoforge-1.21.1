@@ -51,6 +51,9 @@
   "block.laicaps.rotating_puzzle_block": "Rotating Puzzle Block",
 
 
+
+  "item.laicaps.telescope_lenses": "Telescope Lenses",
+
   "item.laicaps.telescope_upgrade_kit": "Telescope Upgrade Kit",
   "item.laicaps.telescope_upgrade_kit.0": "Telescope Upgrade Kit",
   "item.laicaps.telescope_upgrade_kit.1": "A basic Upgrade Kit to be used on a",
@@ -66,6 +69,12 @@
   "block.laicaps.telescope.daytime": "§cIt's too bright to see anything through the telescope",
   "gui.laicaps.telescope.missing": "Insert your Astronomy Notebook",
 
+  "block.laicaps.astronomy_research_table": "Astronomy Research Table",
+  "block.laicaps.astronomy_research_table.0": "A handy research table used to gather",
+  "block.laicaps.astronomy_research_table.1": "your thoughts relating to the universe.",
+  "block.laicaps.astronomy_research_table.2": "Essential for those who wish to learn",
+  "block.laicaps.astronomy_research_table.3": "more about the celestial bodies in this system",
+  "block.laicaps.astronomy_research_table.4": "before embarking in a space adventure.",
 
 
   "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
@@ -218,11 +227,11 @@
 
 
 
-  "item.laicaps.asha_teleporter": "Asha Teleporter",
+  "block.laicaps.asha_teleporter": "Asha Teleporter",
   "tooltip.laicaps.asha_teleporter.0": "Quick and dirty creative mode teleporter",
-  "item.laicaps.lunamar_teleporter": "Lunamar Teleporter",
+  "block.laicaps.lunamar_teleporter": "Lunamar Teleporter",
   "tooltip.laicaps.lunamar_teleporter.0": "Quick and dirty creative mode teleporter",
-  "item.laicaps.ember_teleporter": "Ember Teleporter",
+  "block.laicaps.ember_teleporter": "Ember Teleporter",
   "tooltip.laicaps.ember_teleporter.0": "Quick and dirty creative mode teleporter",
 
   "block.laicaps.refuel_station": "Refuel Teleporter",
@@ -358,6 +367,12 @@
   "block.laicaps.asha_grass": "Asha Grass",
   "block.laicaps.asha_short_grass": "Asha Short Grass",
 
+  "block.laicaps.water_flower": "WIP Water Flower",
+
+
+
+  "entity.laicaps.bluetale" : "Bluetale",
+  "item.laicaps.bluetale_spawn_egg" : "Bluetale Spawn Egg",
   "item.laicaps.bluetale" : "Bluetale",
   "tooltip.laicaps.bluetale.0" : "A shimmering fish found in Asha with a glowing blue tail.",
   "tooltip.laicaps.bluetale.1" : "Praised for bringing good luck to anglers.",
@@ -366,11 +381,19 @@
   "tooltip.laicaps.cooked_bluetale.1" : "A shame it had to end like this.",
   "item.laicaps.bluetale_bucket" : "Bucket of Bluetale",
 
+
+  "entity.laicaps.redtale" : "Redtale",
+  "item.laicaps.redtale_spawn_egg" : "Redtale Spawn Egg",
   "item.laicaps.redtale" : "Redtale",
   "tooltip.laicaps.redtale.0" : "A shimmering fish found in Asha with a glowing red tail.",
   "tooltip.laicaps.redtale.1" : "Scorned for bringing bad luck to anglers.",
   "item.laicaps.cooked_redtale" : "Cooked Redtale",
   "tooltip.laicaps.cooked_redtale.0" : "A redtale cooked to perfection.",
   "tooltip.laicaps.cooked_redtale.1" : "The only thing it's good for.",
-  "item.laicaps.redtale_bucket" : "Bucket of Redtale"
+  "item.laicaps.redtale_bucket" : "Bucket of Redtale",
+
+  "entity.laicaps.nimble": "Nimble",
+
+
+  "entity.laicaps.rocket": "WIP Rocket"
 }
