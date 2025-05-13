@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/flower_pot_cross",
+  "textures": {
+    "plant": "laicaps:block/lunarveil_closed"
+  },
+  "render_type": "minecraft:cutout"
+
+}

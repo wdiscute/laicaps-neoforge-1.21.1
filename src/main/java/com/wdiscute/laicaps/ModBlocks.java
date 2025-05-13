@@ -26,9 +26,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -40,7 +42,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -49,9 +53,11 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ISystemReportExtender;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Random;
 import java.util.function.Supplier;
 
 public class ModBlocks
@@ -1257,15 +1263,42 @@ public class ModBlocks
             );
 
 
+    //public static final BooleanProperty OPEN = BooleanProperty.create("open");
 
     public static final DeferredBlock<Block> POTTED_LUNARVEIL =
             registerBlockNoItem("potted_lunarveil",
                     () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.LUNARVEIL,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                                    .randomTicks()
+                                    .lightLevel(state -> state.getValue(LunarveilBlock.OPEN) ? 11 : 0)
                     )
+                    {
+
+                        @Override
+                        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
+                        {
+                            super.createBlockStateDefinition(builder);
+                            builder.add(LunarveilBlock.OPEN);
+                        }
+
+                        @Override
+                        protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
+                        {
+                            int numberOfDays = (int) (level.getDayTime() / 24000f);
+
+                            if (level.getDayTime() - (numberOfDays * 24000L) > 12000 && level.getDayTime() - (numberOfDays * 24000L) < 22500)
+                            {
+                                if (!state.getValue(LunarveilBlock.OPEN))
+                                    level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, true));
+                                return;
+                            }
+
+                            if (state.getValue(LunarveilBlock.OPEN))
+                                level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, false));
+
+                        }
+                    }
             );
-
-
 
 
     //

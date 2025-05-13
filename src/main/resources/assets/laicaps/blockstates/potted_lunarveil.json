@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "laicaps:block/potted_lunarveil"
+    "open=true": {
+      "model": "laicaps:block/potted_lunarveil_open"
+    },
+    "open=false": {
+      "model": "laicaps:block/potted_lunarveil_closed"
     }
   }
 }
