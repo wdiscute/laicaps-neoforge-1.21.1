@@ -3,7 +3,7 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 4,
+      "weight": 5,
       "element": {
         "location": "laicaps:floating_water_cubes/bridges/empty",
         "processors": "minecraft:empty",
