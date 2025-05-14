@@ -1,0 +1,33 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "telescope": {
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:telescope"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.telescope.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:telescope"
+    },
+    "title": {
+      "translate": "advancements.laicaps.telescope.title"
+    }
+  },
+  "requirements": [
+    [
+      "telescope"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

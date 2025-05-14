@@ -2,6 +2,8 @@
   "tag.item.laicaps.oakheart_logs" : "Oakheart Logs",
   "tag.item.laicaps.oakroot_logs" : "Oakheart Logs",
 
+  "tag.item.laicaps.sweetlilies" : "Sweetlilies",
+
 
 
 
@@ -55,12 +57,12 @@
   "item.laicaps.telescope_lenses": "Telescope Lenses",
 
   "item.laicaps.telescope_upgrade_kit": "Telescope Upgrade Kit",
-  "item.laicaps.telescope_upgrade_kit.0": "Telescope Upgrade Kit",
-  "item.laicaps.telescope_upgrade_kit.1": "A basic Upgrade Kit to be used on a",
-  "item.laicaps.telescope_upgrade_kit.2": "telescope to improve it's aperture size,",
-  "item.laicaps.telescope_upgrade_kit.3": "allowing you to see further into space.",
-  "item.laicaps.telescope_upgrade_kit.4": "Who knows what else is hiding in the",
-  "item.laicaps.telescope_upgrade_kit.5": "darkness of the skies above?",
+  "tooltip.laicaps.telescope_upgrade_kit.0": "Telescope Upgrade Kit",
+  "tooltip.laicaps.telescope_upgrade_kit.1": "A basic Upgrade Kit to be used on a",
+  "tooltip.laicaps.telescope_upgrade_kit.2": "telescope to improve it's aperture size,",
+  "tooltip.laicaps.telescope_upgrade_kit.3": "allowing you to see further into space.",
+  "tooltip.laicaps.telescope_upgrade_kit.4": "Who knows what else is hiding in the",
+  "tooltip.laicaps.telescope_upgrade_kit.5": "darkness of the skies above?",
 
   "block.laicaps.telescope": "Telescope",
   "block.laicaps.advanced_telescope": "Advanced Telescope",
@@ -70,11 +72,11 @@
   "gui.laicaps.telescope.missing": "Insert your Astronomy Notebook",
 
   "block.laicaps.astronomy_research_table": "Astronomy Research Table",
-  "block.laicaps.astronomy_research_table.0": "A handy research table used to gather",
-  "block.laicaps.astronomy_research_table.1": "your thoughts relating to the universe.",
-  "block.laicaps.astronomy_research_table.2": "Essential for those who wish to learn",
-  "block.laicaps.astronomy_research_table.3": "more about the celestial bodies in this system",
-  "block.laicaps.astronomy_research_table.4": "before embarking in a space adventure.",
+  "tooltip.laicaps.astronomy_research_table.0": "A handy research table used to gather",
+  "tooltip.laicaps.astronomy_research_table.1": "your thoughts relating to the universe.",
+  "tooltip.laicaps.astronomy_research_table.2": "Essential for those who wish to learn",
+  "tooltip.laicaps.astronomy_research_table.3": "more about the celestial bodies in this system",
+  "tooltip.laicaps.astronomy_research_table.4": "before embarking in a space adventure.",
 
 
   "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
@@ -242,7 +244,7 @@
   "item.laicaps.basic_microchip": "Basic Microchip",
   "tooltip.laicaps.basic_microchip.0": "A small basic microchip found in Asha",
   "tooltip.laicaps.basic_microchip.1": "left behind by whatever once inhabited it.",
-  "item.laicaps.refined_microchip": "Refined Chip",
+  "item.laicaps.refined_microchip": "Refined Microchip",
   "tooltip.laicaps.refined_microchip.0": "A refined microchip found in Lunamar.",
   "tooltip.laicaps.refined_microchip.1": "You are unsure why or how it got there.",
   "item.laicaps.advanced_microchip": "Advanced Microchip",
@@ -273,12 +275,12 @@
   "tooltip.laicaps.tank.fuel": "Fuel",
 
   "item.laicaps.canister": "Canister",
-  "item.laicaps.canister.0": "WIP No use.",
+  "tooltip.laicaps.canister.0": "WIP No use.",
 
   "item.laicaps.rocket": "WIP Rocket",
-  "item.laicaps.rocket.0": "WIP!! eventually there will be a whole progress for",
-  "item.laicaps.rocket.1": "slowly building towards the rocket ship with several in-world building stages",
-  "item.laicaps.rocket.2": "This is a quick dirty workaround for playtesting",
+  "tooltip.laicaps.rocket.0": "WIP!! eventually there will be a whole progress for",
+  "tooltip.laicaps.rocket.1": "slowly building towards the rocket ship with several in-world building stages",
+  "tooltip.laicaps.rocket.2": "This is a quick dirty workaround for playtesting",
 
 
   "item.laicaps.enderblaze_fuel": "Enderblaze Fuel",
@@ -393,7 +395,75 @@
   "item.laicaps.redtale_bucket" : "Bucket of Redtale",
 
   "entity.laicaps.nimble": "Nimble",
+  "item.laicaps.nimble_spawn_egg": "Nimble Spawn Egg",
 
 
-  "entity.laicaps.rocket": "WIP Rocket"
+  "entity.laicaps.rocket": "WIP Rocket",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "advancements.laicaps.root.title" : "Laicaps",
+  "advancements.laicaps.root.description" : "The start of a very spaciaL Adventure",
+
+  "advancements.laicaps.asha.title" : "Asha",
+  "advancements.laicaps.asha.description" : "Land on Asha",
+
+  "advancements.laicaps.lunamar.title" : "Lunamar",
+  "advancements.laicaps.lunamar.description" : "Land on Lunamar",
+
+  "advancements.laicaps.ember.title" : "Ember",
+  "advancements.laicaps.ember.description" : "Land on ember",
+
+  "advancements.laicaps.telescope.title" : "Stars Above",
+  "advancements.laicaps.telescope.description" : "Craft a telescope and look up to the stars",
+
+  "advancements.laicaps.telescope_advanced.title" : "Stars Above, Earth Bellow",
+  "advancements.laicaps.telescope_advanced.description" : "Upgrade a telescope to look even further into space",
+
+  "advancements.laicaps.basic_microchip.title" : "A Lucky Find",
+  "advancements.laicaps.basic_microchip.description" : "Find a basic microchip left behind in Asha",
+
+  "advancements.laicaps.refined_microchip.title" : "An Even Luckier Find",
+  "advancements.laicaps.refined_microchip.description" : "Find a refined microchip that somehow got to Lunamar"
+
+
 }

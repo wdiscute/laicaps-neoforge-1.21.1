@@ -1,0 +1,31 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "ember": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "laicaps:ember"
+      }
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.ember.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:ember"
+    },
+    "title": {
+      "translate": "advancements.laicaps.ember.title"
+    },
+    "frame": "challenge",
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "ember"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

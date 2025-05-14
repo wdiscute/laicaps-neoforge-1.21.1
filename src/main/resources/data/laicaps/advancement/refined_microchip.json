@@ -1,0 +1,33 @@
+{
+  "parent": "laicaps:basic_microchip",
+  "criteria": {
+    "refined_microchip": {
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:refined_microchip"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.refined_microchip.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:refined_microchip"
+    },
+    "title": {
+      "translate": "advancements.laicaps.refined_microchip.title"
+    }
+  },
+  "requirements": [
+    [
+      "refined_microchip"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

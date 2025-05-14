@@ -1,0 +1,31 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "lunamar": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "laicaps:lunamar"
+      }
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.lunamar.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:lunamar"
+    },
+    "title": {
+      "translate": "advancements.laicaps.lunamar.title"
+    },
+    "frame": "challenge",
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "lunamar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

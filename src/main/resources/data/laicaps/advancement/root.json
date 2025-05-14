@@ -1,0 +1,35 @@
+{
+  "criteria": {
+    "telescope": {
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:telescope"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "laicaps:textures/gui/advancements/space.png",
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.laicaps.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:telescope"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.laicaps.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "telescope"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

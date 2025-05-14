@@ -1,0 +1,31 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "asha": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "laicaps:asha"
+      }
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.asha.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:asha"
+    },
+    "title": {
+      "translate": "advancements.laicaps.asha.title"
+    },
+    "frame": "challenge",
+    "announce_to_chat": true
+  },
+  "requirements": [
+    [
+      "asha"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
