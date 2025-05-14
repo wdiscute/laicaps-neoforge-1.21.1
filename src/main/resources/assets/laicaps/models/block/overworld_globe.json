@@ -1,0 +1,7 @@
+{
+  "parent": "laicaps:block/globe",
+  "textures": {
+    "all": "laicaps:block/overworld_globe",
+    "particle": "laicaps:block/overworld_globe"
+  }
+}

@@ -23,6 +23,7 @@ import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
 import com.wdiscute.laicaps.types.ModWoodTypes;
 import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +40,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -107,6 +109,46 @@ public class ModBlocks
                                 }
                             }
             );
+
+    public static final DeferredBlock<Block> EMBER_GLOBE =
+            registerBlock(
+                    "ember_globe", () ->
+                            new GlobeBlock(BlockBehaviour.Properties.of()
+                                    .strength(4)
+                                    .noOcclusion()
+                                    .lightLevel((state) -> 5)
+                                    .sound(SoundType.BAMBOO_WOOD_HANGING_SIGN)
+                            ));
+
+    public static final DeferredBlock<Block> ASHA_GLOBE =
+            registerBlock(
+                    "asha_globe", () ->
+                            new GlobeBlock(BlockBehaviour.Properties.of()
+                                    .strength(4)
+                                    .noOcclusion()
+                                    .sound(SoundType.BAMBOO_WOOD_HANGING_SIGN)
+                            ));
+
+    public static final DeferredBlock<Block> OVERWORLD_GLOBE =
+            registerBlock(
+                    "overworld_globe", () ->
+                            new GlobeBlock(BlockBehaviour.Properties.of()
+                                    .strength(4)
+                                    .noOcclusion()
+                                    .sound(SoundType.BAMBOO_WOOD_HANGING_SIGN)
+                            ));
+
+    public static final DeferredBlock<Block> LUNAMAR_GLOBE =
+            registerBlock(
+                    "lunamar_globe", () ->
+                            new GlobeBlock(BlockBehaviour.Properties.of()
+                                    .strength(4)
+                                    .noOcclusion()
+                                    .sound(SoundType.BAMBOO_WOOD_HANGING_SIGN)
+                            ));
+
+
+
 
 
     public static final DeferredBlock<Block> LUNAMAR_TELEPORTER =

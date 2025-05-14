@@ -258,7 +258,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         if (state == 1)
         {
             //ember
-            if (x > 250 && x < 283 && y > 170 && y < 200 && book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER) == 0)
+            if (x > 250 && x < 283 && y > 170 && y < 200 && book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER) == 0 && menu.blockstate.getValue(TelescopeBlock.ADVANCED))
             {
                 counter = 0;
                 planetSelected = 1;
@@ -282,7 +282,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             }
 
             //lunamar
-            if (x > 444 && x < 589 && y > 16 && y < 65 && book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR) == 0)
+            if (x > 444 && x < 589 && y > 16 && y < 65 && book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR) == 0 && menu.blockstate.getValue(TelescopeBlock.ADVANCED))
             {
                 counter = 0;
                 planetSelected = 4;
@@ -448,7 +448,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 List<Component> tooltips;
 
                 //ember with basic telescope
-                if (x > 250 && x < 283 && y > 170 && y < 200 && menu.blockstate.is(ModBlocks.TELESCOPE))
+                if (x > 250 && x < 283 && y > 170 && y < 200 && !menu.blockstate.getValue(TelescopeBlock.ADVANCED))
                 {
                     tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER).intValue() == 0 ? tooltipHelper("ember_blur", true) : tooltipHelper("ember");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
@@ -476,7 +476,14 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                 }
 
                 //lunamar
-                if (x > 444 && x < 589 && y > 16 && y < 65)
+                if (x > 444 && x < 589 && y > 16 && y < 65 && !menu.blockstate.getValue(TelescopeBlock.ADVANCED))
+                {
+                    tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR).intValue() == 0 ? tooltipHelper("lunamar_blur", true) : tooltipHelper("lunamar");
+                    guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);
+                }
+
+                //lunamar
+                if (x > 444 && x < 589 && y > 16 && y < 65 && menu.blockstate.getValue(TelescopeBlock.ADVANCED))
                 {
                     tooltips = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR).intValue() == 0 ? tooltipHelper("lunamar_blur") : tooltipHelper("lunamar");
                     guiGraphics.renderComponentTooltip(this.font, tooltips, mouseX, mouseY);

@@ -82,8 +82,8 @@
   "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
   "gui.laicaps.telescope.tooltip.generic.research": "§c§l>§r §cThere is more to research here",
   "gui.laicaps.telescope.tooltip.generic.stargaze": "§c§l>>>§r §cClick to Stargaze §c§l<<<§r",
-  "gui.laicaps.telescope.tooltip.generic.advanced.0": "§c§l>§r §cYour telescope is not powerful enough",
-  "gui.laicaps.telescope.tooltip.generic.advanced.1": "§c§l>§r §cto look this far into space",
+  "gui.laicaps.telescope.tooltip.generic.advanced.0": "§c  Your telescope is not advanced",
+  "gui.laicaps.telescope.tooltip.generic.advanced.1": "§c enough to look this far into space",
 
   "gui.laicaps.rocket.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
   "gui.laicaps.rocket.tooltip.generic.knowledge": "§c§k    !!!§r §cMore Knowledge is §c§k!!!§r",
@@ -371,6 +371,9 @@
 
   "block.laicaps.water_flower": "WIP Water Flower",
 
+  "block.laicaps.ember_globe": "WIP Water Flower",
+  "block.laicaps.water_flower": "WIP Water Flower",
+  "block.laicaps.water_flower": "WIP Water Flower",
 
 
   "entity.laicaps.bluetale" : "Bluetale",

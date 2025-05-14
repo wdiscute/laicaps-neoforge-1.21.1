@@ -1,0 +1,7 @@
+{
+  "parent": "laicaps:block/globe",
+  "textures": {
+    "all": "laicaps:block/asha_globe",
+    "particle": "laicaps:block/asha_globe"
+  }
+}

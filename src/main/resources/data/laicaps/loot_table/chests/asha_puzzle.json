@@ -7,20 +7,25 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:diamond",
-          "weight": 2
+          "weight": 20
         },
         {
           "type": "minecraft:item",
           "name": "minecraft:golden_apple",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "minecraft:item",
           "name": "laicaps:basic_microchip",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "minecraft:empty",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "laicaps:asha_globe",
           "weight": 1
         }
       ],

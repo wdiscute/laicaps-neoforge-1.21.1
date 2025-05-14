@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "laicaps:block/overworld_globe"
+    },
+    "facing=east": {
+      "model": "laicaps:block/overworld_globe",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "laicaps:block/overworld_globe",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "laicaps:block/overworld_globe",
+      "y": 270
+    }
+  }
+}

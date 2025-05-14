@@ -1,0 +1,7 @@
+{
+  "parent": "laicaps:block/globe",
+  "textures": {
+    "all": "laicaps:block/lunamar_globe",
+    "particle": "laicaps:block/lunamar_globe"
+  }
+}

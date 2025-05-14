@@ -1,0 +1,7 @@
+{
+  "parent": "laicaps:block/globe",
+  "textures": {
+    "all": "laicaps:block/ember_globe",
+    "particle": "laicaps:block/ember_globe"
+  }
+}
