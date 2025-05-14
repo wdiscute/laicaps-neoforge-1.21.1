@@ -1,5 +1,5 @@
 {
-  "parent": "laicaps:root",
+  "parent": "laicaps:asha",
   "criteria": {
     "basic_microchip": {
       "conditions": {
@@ -29,5 +29,5 @@
       "basic_microchip"
     ]
   ],
-  "sends_telemetry_event": true
+  "sends_telemetry_event": false
 }

@@ -1,0 +1,68 @@
+{
+  "parent": "laicaps:asha",
+  "criteria": {
+    "navy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:navy_sweetlily"
+          }
+        ]
+      }
+    },
+    "cherry": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:cherry_sweetlily"
+          }
+        ]
+      }
+    },
+    "magenta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:magenta_sweetlily"
+          }
+        ]
+      }
+    },
+    "peach": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:peach_sweetlily"
+          }
+        ]
+      }
+    },
+    "violet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:violet_sweetlily"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.sweetlily.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:cherry_sweetlily"
+    },
+    "title": {
+      "translate": "advancements.laicaps.sweetlily.title"
+    }
+  },
+  "sends_telemetry_event": false
+}
