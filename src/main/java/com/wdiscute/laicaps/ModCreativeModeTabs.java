@@ -154,6 +154,8 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.REDTALE.get());
                                 output.accept(ModItems.COOKED_REDTALE.get());
                                 output.accept(ModItems.REDTALE_BUCKET.get());
+                                output.accept(ModItems.NIMBLE_SWEET_TREAT.get());
+
 
                             })
                             .build()
