@@ -371,9 +371,20 @@
 
   "block.laicaps.water_flower": "WIP Water Flower",
 
-  "block.laicaps.ember_globe": "WIP Water Flower",
-  "block.laicaps.water_flower": "WIP Water Flower",
-  "block.laicaps.water_flower": "WIP Water Flower",
+  "block.laicaps.ember_globe": "Ember Globe",
+  "tooltip.laicaps.ember_globe.0": "A surprisingly accurate model of Ember,",
+  "tooltip.laicaps.ember_globe.1": "obtained very rarely from chests",
+  "block.laicaps.asha_globe": "Asha Globe",
+  "tooltip.laicaps.asha_globe.0": "A fascinatingly accurate model of Asha,",
+  "tooltip.laicaps.asha_globe.1": "down to every river and ravine.",
+  "tooltip.laicaps.asha_globe.2": "Obtained very rarely from chests in Asha.",
+  "block.laicaps.overworld_globe": "Overworld Globe",
+  "tooltip.laicaps.overworld_globe.0": "A surprisingly accurate model of the Overworld.",
+  "tooltip.laicaps.overworld_globe.1": "WIP NOT CURRENTLY OBTAINABLE",
+  "block.laicaps.lunamar_globe": "Lunamar Globe",
+  "tooltip.laicaps.lunamar_globe.0": "A model of Lunamar.",
+  "tooltip.laicaps.lunamar_globe.1": "Perhaps accurate? It's mostly water.",
+  "tooltip.laicaps.lunamar_globe.2": "Obtained very rarely from chests in Lunamar",
 
 
   "entity.laicaps.bluetale" : "Bluetale",

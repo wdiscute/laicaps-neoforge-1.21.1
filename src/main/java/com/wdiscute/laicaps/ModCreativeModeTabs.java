@@ -44,6 +44,8 @@ public class ModCreativeModeTabs
 
                                 output.accept(ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
 
+                                output.accept(ModBlocks.OVERWORLD_GLOBE.get());
+
 
                                 //rocket stuff
                                 output.accept(ModItems.ROCKET.get());
@@ -83,6 +85,7 @@ public class ModCreativeModeTabs
                             .title(Component.translatable("creativetab.laicaps.laicaps_asha"))
                             .displayItems((itemDisplayParameters, output) ->
                             {
+                                output.accept(ModBlocks.ASHA_GLOBE.get());
 
                                 //oakheart
                                 output.accept(ModBlocks.OAKHEART_SAPLING.get());
@@ -168,6 +171,8 @@ public class ModCreativeModeTabs
                             .title(Component.translatable("creativetab.laicaps.laicaps_lunamar"))
                             .displayItems((itemDisplayParameters, output) ->
                             {
+                                output.accept(ModBlocks.LUNAMAR_GLOBE.get());
+                                output.accept(ModBlocks.LUNAMAR_TELEPORTER.get());
 
                                 //water flower
                                 output.accept(ModBlocks.WATER_FLOWER.get());
@@ -183,8 +188,8 @@ public class ModCreativeModeTabs
                             .displayItems((itemDisplayParameters, output) ->
                             {
 
-                                //add ember stuff here
-                                output.accept(Items.BARRIER);
+                                output.accept(ModBlocks.EMBER_GLOBE.get());
+                                output.accept(ModBlocks.EMBER_TELEPORTER.get());
 
 
                             }).build());
