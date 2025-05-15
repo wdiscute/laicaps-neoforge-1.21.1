@@ -23,6 +23,18 @@ public class ModFoodProperties
             .usingConvertsTo(Items.STICK)
             .build();
 
+    public static final FoodProperties SNUFFLER_CHOP = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(0.3f)
+            .usingConvertsTo(Items.STICK)
+            .build();
+
+    public static final FoodProperties COOKED_SNUFFLER_CHOP = new FoodProperties.Builder()
+            .nutrition(8)
+            .saturationModifier(0.8f)
+            .usingConvertsTo(Items.STICK)
+            .build();
+
 
     public static final FoodProperties COOKED_BLUETALE = new FoodProperties.Builder()
             .nutrition(5)

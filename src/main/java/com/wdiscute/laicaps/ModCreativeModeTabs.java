@@ -159,6 +159,11 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.REDTALE_BUCKET.get());
                                 output.accept(ModItems.NIMBLE_SWEET_TREAT.get());
 
+                                //snuffler
+                                output.accept(ModItems.SNUFFLER_SPAWN_EGG.get());
+                                output.accept(ModItems.SNUFFLER_CHOP.get());
+                                output.accept(ModItems.COOKED_SNUFFLER_CHOP.get());
+
 
                             })
                             .build()

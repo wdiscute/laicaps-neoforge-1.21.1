@@ -8,6 +8,7 @@ import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
+import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -49,6 +50,10 @@ public class ModEntities
     public static final Supplier<EntityType<NimbleEntity>> NIMBLE =
             ENTITY_TYPES.register("nimble", () -> EntityType.Builder.of(NimbleEntity::new, MobCategory.CREATURE)
                     .sized(0.5f, 0.35f).build("nimble"));
+
+    public static final Supplier<EntityType<SnufflerEntity>> SNUFFLER =
+            ENTITY_TYPES.register("snuffler", () -> EntityType.Builder.of(SnufflerEntity::new, MobCategory.CREATURE)
+                    .sized(1.2f, 0.9f).build("nimble"));
 
 
     public static final Supplier<EntityType<RocketEntity>> ROCKET =

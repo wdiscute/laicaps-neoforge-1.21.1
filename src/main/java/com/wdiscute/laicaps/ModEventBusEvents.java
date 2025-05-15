@@ -1,9 +1,6 @@
-package com.wdiscute.laicaps.event;
+package com.wdiscute.laicaps;
 
 
-import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleEntity;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleModel;
 import com.wdiscute.laicaps.entity.boat.ModModelLayers;
@@ -13,23 +10,20 @@ import com.wdiscute.laicaps.entity.gecko.GeckoModel;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleModel;
 import com.wdiscute.laicaps.entity.rocket.RocketModel;
+import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
+import com.wdiscute.laicaps.entity.snuffler.SnufflerModel;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -55,6 +49,7 @@ public class ModEventBusEvents
         //no need for redtale as it uses the same model
 
         event.registerLayerDefinition(NimbleModel.LAYER_LOCATION, NimbleModel::createBodyLayer);
+        event.registerLayerDefinition(SnufflerModel.LAYER_LOCATION, SnufflerModel::createBodyLayer);
 
         event.registerLayerDefinition(RocketModel.LAYER_LOCATION, RocketModel::createBodyLayer);
     }
@@ -66,6 +61,7 @@ public class ModEventBusEvents
         event.put(ModEntities.BLUETALE.get(), BluetaleEntity.createAttributes().build());
         event.put(ModEntities.REDTALE.get(), BluetaleEntity.createAttributes().build());
         event.put(ModEntities.NIMBLE.get(), NimbleEntity.createAttributes().build());
+        event.put(ModEntities.SNUFFLER.get(), SnufflerEntity.createAttributes().build());
     }
 
     @SubscribeEvent
@@ -83,6 +79,9 @@ public class ModEventBusEvents
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 ModEventBusEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
+        event.register(ModEntities.SNUFFLER.get(), SpawnPlacementTypes.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                ModEventBusEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
     }
 
