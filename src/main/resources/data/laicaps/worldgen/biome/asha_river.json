@@ -51,7 +51,20 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "laicaps:nimble",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "laicaps:snuffler",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 4
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
@@ -59,8 +72,8 @@
       {
         "type": "laicaps:bluetale",
         "weight": 5,
-        "minCount": 3,
-        "maxCount": 6
+        "minCount": 2,
+        "maxCount": 5
       },
       {
         "type": "laicaps:redtale",

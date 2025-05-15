@@ -59,6 +59,12 @@
     "creature": [
       {
         "type": "laicaps:nimble",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "laicaps:snuffler",
         "weight": 5,
         "minCount": 2,
         "maxCount": 4
@@ -67,7 +73,20 @@
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "laicaps:bluetale",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 5
+      },
+      {
+        "type": "laicaps:redtale",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 5
+      }
+    ],
     "water_creature": []
   },
   "temperature": 0.7
