@@ -410,6 +410,15 @@
 
   "entity.laicaps.nimble": "Nimble",
   "item.laicaps.nimble_spawn_egg": "Nimble Spawn Egg",
+  "item.laicaps.nimble_sweet_treat": "Nimble Spawn Egg",
+
+  "entity.laicaps.snuffler": "Snuffler",
+  "item.laicaps.snuffler_spawn_egg": "Snuffler Spawn Egg",
+  "item.laicaps.snuffler_chop": "Snuffler Chop",
+  "item.laicaps.snuffler_chop.0": "A raw cut of meat from a Snuffler",
+  "item.laicaps.cooked_snuffler_chop": "Cooked Snuffler Chop",
+  "item.laicaps.cooked_snuffler_chop.1": "A tasty chop from a snuffler",
+
 
 
   "entity.laicaps.rocket": "WIP Rocket",
