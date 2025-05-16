@@ -32,10 +32,7 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.PlayerAdvancements;
-import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -53,6 +50,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mod(Laicaps.MOD_ID)
@@ -61,76 +59,16 @@ public class Laicaps
     public static final String MOD_ID = "laicaps";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final int MAX_EMBER_KNOWLEDGE = 4;
-    public static final int MAX_ASHA_KNOWLEDGE = 4;
-    public static final int MAX_OVERWORLD_KNOWLEDGE = 4;
-    public static final int MAX_LUNAMAR_KNOWLEDGE = 4;
+    public static final int EMBER_ENTRIES = 4;
+    public static final int ASHA_ENTRIES = 4;
+    public static final int OVERWORLD_ENTRIES = 4;
+    public static final int LUNAMAR_ENTRIES = 4;
 
     public static ResourceLocation rl(String s)
     {
         return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, s);
     }
 
-    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String achievementName)
-    {
-        return hasAdvancement(clientAdvancements, Laicaps.MOD_ID, achievementName);
-    }
-
-    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String namespace, String advancementName)
-    {
-        AdvancementHolder adv = clientAdvancements.get(ResourceLocation.fromNamespaceAndPath(namespace, advancementName));
-
-        if(clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
-            return Iterables.size(acessor.getProgress().get(adv).getCompletedCriteria()) > 0;
-        else
-            return false;
-
-    }
-
-    public static int getEntriesCompletedFromAdvancement(ClientAdvancements clientAdvancements, String achievementName)
-    {
-        return getEntriesCompletedFromAdvancement(clientAdvancements, Laicaps.MOD_ID, achievementName);
-    }
-
-    public static int getEntriesCompletedFromAdvancement(ClientAdvancements clientAdvancements, String namespace, String advancementName)
-    {
-        AdvancementHolder adv = clientAdvancements.get(ResourceLocation.fromNamespaceAndPath(namespace, advancementName));
-
-        if(clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
-        {
-            return Iterables.size(acessor.getProgress().get(adv).getCompletedCriteria());
-        }else
-        {
-            return 0;
-        }
-    }
-
-
-    public static void awardAdvancement(Player player, String achievementName)
-    {
-        awardAdvancement(player, Laicaps.MOD_ID, achievementName);
-    }
-
-
-    public static void awardAdvancement(Player player, String namespace, String achievementName)
-    {
-        if (player instanceof ServerPlayer serverPlayer)
-        {
-            ServerAdvancementManager manager = serverPlayer.server.getAdvancements();
-            AdvancementHolder advHolder = manager.get(ResourceLocation.fromNamespaceAndPath(namespace, achievementName));
-            PlayerAdvancements playerAdvancements = serverPlayer.getAdvancements();
-
-            if (advHolder != null)
-            {
-                AdvancementProgress progress = playerAdvancements.getOrStartProgress(advHolder);
-
-                if (!progress.isDone())
-                {
-                    for (String s : progress.getRemainingCriteria()) playerAdvancements.award(advHolder, s);
-                }
-            }
-        }
-    }
 
 
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)

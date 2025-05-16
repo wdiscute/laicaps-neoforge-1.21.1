@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.entity.rocket;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.telescope.RevealRenderUtil;
@@ -133,13 +134,13 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         ClientAdvancements adv = Minecraft.getInstance().getConnection().getAdvancements();
 
-        emberDiscovered = Laicaps.hasAdvancement(adv, "ember_discovered");
-        ashaDiscovered = Laicaps.hasAdvancement(adv, "asha_discovered");
-        lunamarDiscovered = Laicaps.hasAdvancement(adv, "lunamar_discovered");
+        emberDiscovered = AdvHelper.hasAdvancement(adv, "ember_discovered");
+        ashaDiscovered = AdvHelper.hasAdvancement(adv, "asha_discovered");
+        lunamarDiscovered = AdvHelper.hasAdvancement(adv, "lunamar_discovered");
 
-        emberEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "ember_entries");
-        ashaEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "asha_entries");
-        lunamarEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "lunamar_entries");
+        emberEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "ember_entries");
+        ashaEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "asha_entries");
+        lunamarEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "lunamar_entries");
 
 
         if (menu.container.getItem(2).is(ModItems.TANK.get()) || menu.container.getItem(2).is(ModItems.MEDIUM_TANK.get()) || menu.container.getItem(2).is(ModItems.LARGE_TANK.get()))
@@ -462,14 +463,14 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (Objects.equals(planet, "ember"))
             {
                 list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
-                if (emberEntries < Laicaps.MAX_EMBER_KNOWLEDGE)
+                if (emberEntries < Laicaps.EMBER_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
             if (Objects.equals(planet, "asha"))
             {
                 list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
-                if (ashaEntries < Laicaps.MAX_ASHA_KNOWLEDGE)
+                if (ashaEntries < Laicaps.ASHA_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
@@ -481,7 +482,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (Objects.equals(planet, "lunamar"))
             {
                 list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
-                if (lunamarEntries < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
+                if (lunamarEntries < Laicaps.LUNAMAR_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
         }

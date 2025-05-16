@@ -488,7 +488,20 @@
   "advancements.laicaps.basic_microchip.description" : "Find a basic microchip left behind in Asha",
 
   "advancements.laicaps.refined_microchip.title" : "An Even Luckier Find",
-  "advancements.laicaps.refined_microchip.description" : "Find a refined microchip that somehow got to Lunamar"
+  "advancements.laicaps.refined_microchip.description" : "Find a refined microchip that somehow got to Lunamar",
 
 
+
+
+
+
+  "gui.astronomy_research_table.asha.entry1.name" : "     §dAsha§r - Climate",
+
+  "gui.astronomy_research_table.asha.entry1.left.0" : "image%asha_illustration_1",
+  "gui.astronomy_research_table.asha.entry1.left.8" : "asha is literally so cool omg",
+
+  "gui.astronomy_research_table.asha.entry1.right.0" : "hello this is a sentence at the",
+  "gui.astronomy_research_table.asha.entry1.right.1" : "start of the second page",
+  "gui.astronomy_research_table.asha.entry1.right.10" : "image%asha_illustration_2",
+  "gui.astronomy_research_table.asha.entry1.right.21" : "end of the page"
 }

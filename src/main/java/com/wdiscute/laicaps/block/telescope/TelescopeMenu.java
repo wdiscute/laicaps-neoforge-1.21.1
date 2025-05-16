@@ -1,10 +1,12 @@
 package com.wdiscute.laicaps.block.telescope;
 
+import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.types.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -46,7 +48,7 @@ public class TelescopeMenu extends AbstractContainerMenu
         //player hotbar
         for (int i = 0; i < 9; ++i)
         {
-            this.addSlot(new Slot(inv, i, (8 + i * 18)  - 168, 142));
+            this.addSlot(new Slot(inv, i, (8 + i * 18) - 168, 142));
         }
 
 
@@ -56,12 +58,14 @@ public class TelescopeMenu extends AbstractContainerMenu
     @Override
     public boolean clickMenuButton(Player player, int id)
     {
-        if(id == 1) Laicaps.awardAdvancement(player, "ember_discovered");
+        if (player instanceof ServerPlayer sp)
+        {
+            if (id == 1) AdvHelper.awardAdvancement(sp, "ember_discovered");
 
-        if(id == 2) Laicaps.awardAdvancement(player, "asha_discovered");
+            if (id == 2) AdvHelper.awardAdvancement(sp, "asha_discovered");
 
-        if(id == 4) Laicaps.awardAdvancement(player, "lunamar_discovered");
-
+            if (id == 4) AdvHelper.awardAdvancement(sp, "lunamar_discovered");
+        }
         return false;
     }
 
@@ -79,8 +83,9 @@ public class TelescopeMenu extends AbstractContainerMenu
         if (pIndex < 0 + 36)
         {
             // This is a vanilla container slot so merge the stack into the tile inventory
-            if (!moveItemStackTo(sourceStack, 36, 36
-                    + 1, false))
+            if (!moveItemStackTo(
+                    sourceStack, 36, 36
+                            + 1, false))
             {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }

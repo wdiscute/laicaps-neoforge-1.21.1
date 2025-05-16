@@ -1,14 +1,12 @@
 package com.wdiscute.laicaps.block.telescope;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.ModBlocks;
-import com.wdiscute.laicaps.ModItems;
+import com.wdiscute.laicaps.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -48,7 +46,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
                                 .setValue(ADVANCED, true)
                                 .setValue(FACING, level.getBlockState(pos).getValue(FACING)));
 
-                if (!level.isClientSide)
+                if (!level.isClientSide && player instanceof ServerPlayer sp)
                 {
 
                     ((ServerLevel) level).sendParticles(ParticleTypes.HAPPY_VILLAGER, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 20, 0.5f, 0.5f, 0.5f, 0f);
@@ -57,7 +55,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
 
 
                     System.out.println("tried to give advancement");
-                    Laicaps.awardAdvancement(player,"telescope_advanced");
+                    AdvHelper.awardAdvancement(sp,"telescope_advanced");
 
                 }
             }

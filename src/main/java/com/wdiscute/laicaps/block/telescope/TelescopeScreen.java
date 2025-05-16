@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.block.telescope;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -116,13 +117,13 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
         ClientAdvancements adv = Minecraft.getInstance().getConnection().getAdvancements();
 
-        emberDiscovered = Laicaps.hasAdvancement(adv, "ember_discovered");
-        ashaDiscovered = Laicaps.hasAdvancement(adv, "asha_discovered");
-        lunamarDiscovered = Laicaps.hasAdvancement(adv, "lunamar_discovered");
+        emberDiscovered = AdvHelper.hasAdvancement(adv, "ember_discovered");
+        ashaDiscovered = AdvHelper.hasAdvancement(adv, "asha_discovered");
+        lunamarDiscovered = AdvHelper.hasAdvancement(adv, "lunamar_discovered");
 
-        emberEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "ember_entries");
-        ashaEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "asha_entries");
-        lunamarEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "lunamar_entries");
+        emberEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "ember_entries");
+        ashaEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "asha_entries");
+        lunamarEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "lunamar_entries");
 
         //set size and x/y's
         {
@@ -180,13 +181,13 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     {
         ClientAdvancements adv = Minecraft.getInstance().getConnection().getAdvancements();
 
-        emberDiscovered = Laicaps.hasAdvancement(adv, "ember_discovered");
-        ashaDiscovered = Laicaps.hasAdvancement(adv, "asha_discovered");
-        lunamarDiscovered = Laicaps.hasAdvancement(adv, "lunamar_discovered");
+        emberDiscovered = AdvHelper.hasAdvancement(adv, "ember_discovered");
+        ashaDiscovered = AdvHelper.hasAdvancement(adv, "asha_discovered");
+        lunamarDiscovered = AdvHelper.hasAdvancement(adv, "lunamar_discovered");
 
-        emberEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "ember_entries");
-        ashaEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "asha_entries");
-        lunamarEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "lunamar_entries");
+        emberEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "ember_entries");
+        ashaEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "asha_entries");
+        lunamarEntries = AdvHelper.getEntriesCompletedFromAdvancement(adv, "lunamar_entries");
     }
 
     @Override
@@ -655,14 +656,14 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             if (Objects.equals(input, "ember"))
             {
                 list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
-                if (emberEntries < Laicaps.MAX_EMBER_KNOWLEDGE)
+                if (emberEntries < Laicaps.EMBER_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
             if (Objects.equals(input, "asha"))
             {
                 list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
-                if (ashaEntries < Laicaps.MAX_ASHA_KNOWLEDGE)
+                if (ashaEntries < Laicaps.ASHA_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
@@ -674,7 +675,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
             if (Objects.equals(input, "lunamar"))
             {
                 list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.travel"));
-                if (lunamarEntries < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
+                if (lunamarEntries < Laicaps.LUNAMAR_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
         }

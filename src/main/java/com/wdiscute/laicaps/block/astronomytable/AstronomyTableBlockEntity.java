@@ -21,38 +21,6 @@ public class AstronomyTableBlockEntity extends BlockEntity implements MenuProvid
 {
 
 
-    public final ItemStackHandler inventory = new ItemStackHandler(1) {
-        @Override
-        protected int getStackLimit(int slot, ItemStack stack) {
-            return 1;
-        }
-
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-            if(!level.isClientSide()) {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-        }
-    };
-
-
-
-    public void clearContents()
-    {
-        inventory.setStackInSlot(0, ItemStack.EMPTY);
-    }
-
-    public void drops()
-    {
-        SimpleContainer inv = new SimpleContainer(inventory.getSlots());
-        for (int i = 0; i < inventory.getSlots(); i++)
-        {
-            inv.setItem(i, inventory.getStackInSlot(i));
-        }
-
-        Containers.dropContents(level, this.worldPosition, inv);
-    }
 
     @Override
     public Component getDisplayName()
@@ -70,18 +38,12 @@ public class AstronomyTableBlockEntity extends BlockEntity implements MenuProvid
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
-
-        tag.put("inventory", inventory.serializeNBT(registries));
-
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
-
-        inventory.deserializeNBT(registries, tag.getCompound("inventory"));
-
     }
 
     public AstronomyTableBlockEntity(BlockPos pPos, BlockState pBlockState)

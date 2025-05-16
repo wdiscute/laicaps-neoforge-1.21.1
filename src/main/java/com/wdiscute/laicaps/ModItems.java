@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps;
 
 
+import com.google.common.collect.Iterables;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.item.*;
@@ -11,8 +12,13 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.*;
@@ -22,7 +28,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ModItems
 {
@@ -59,6 +67,53 @@ public class ModItems
 
     public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new AstronomyNotebookItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
 
+    public static final DeferredItem<Item> EMBER_ENTRY = ITEMS.register(
+            "ember_entry", () ->
+                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    {
+                        @Override
+                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+                        {
+                            awardEntry(player, "ember");
+                            return super.use(level, player, usedHand);
+                        }
+                    });
+
+    public static final DeferredItem<Item> ASHA_ENTRY = ITEMS.register(
+            "asha_entry", () ->
+                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    {
+                        @Override
+                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+                        {
+                            awardEntry(player, "asha");
+                            return super.use(level, player, usedHand);
+                        }
+                    });
+
+    public static final DeferredItem<Item> OVERWORLD_ENTRY = ITEMS.register(
+            "overworld_entry", () ->
+                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    {
+                        @Override
+                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+                        {
+                            awardEntry(player, "overworld");
+                            return super.use(level, player, usedHand);
+                        }
+                    });
+
+    public static final DeferredItem<Item> LUNAMAR_ENTRY = ITEMS.register(
+            "lunamar_entry", () ->
+                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    {
+                        @Override
+                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+                        {
+                            awardEntry(player, "lunamar");
+                            return super.use(level, player, usedHand);
+                        }
+                    });
 
     //
     // ,-----. ,--.  ,--. ,--. ,------.   ,---.
@@ -194,7 +249,6 @@ public class ModItems
     public static final DeferredItem<Item> SNUFFLER_SPAWN_EGG = ITEMS.register("snuffler_spawn_egg", () -> new SpawnEggItem(ModEntities.SNUFFLER.get(), 15971928, 13534776, new Item.Properties()));
 
 
-
     public static final DeferredItem<Item> BLUETALE = ITEMS.register("bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_BLUETALE = ITEMS.register("cooked_bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
     public static final DeferredItem<Item> BLUETALE_BUCKET = ITEMS.register("bluetale_bucket", () -> new MobBucketItem(ModEntities.BLUETALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
@@ -211,10 +265,9 @@ public class ModItems
     public static final DeferredItem<Item> NIMBLE_SWEET_TREAT = ITEMS.register("nimble_sweet_treat", () -> new Item(new Item.Properties()));
 
 
-
-
-    public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register("oakheart_berries", () ->
-            new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES)));
+    public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register(
+            "oakheart_berries", () ->
+                    new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES)));
 
     public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register("oakheart_door", () -> new DoubleHighBlockItem(ModBlocks.OAKHEART_DOOR.get(), new Item.Properties()));
     public static final DeferredItem<Item> OAKHEART_SIGN = ITEMS.register("oakheart_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_SIGN.get(), ModBlocks.OAKHEART_WALL_SIGN.get()));
@@ -233,6 +286,22 @@ public class ModItems
     public static void register(IEventBus eventBus)
     {
         ITEMS.register(eventBus);
+    }
+
+
+    private static void awardEntry(Player player, String planet)
+    {
+        if (player instanceof ServerPlayer sp)
+        {
+            Random r = new Random();
+
+            List<String> result = new ArrayList<>();
+            AdvHelper.getEntriesRemainingAsIterable(sp, planet + "_entries").forEach(result::add);
+
+            String criteria = result.get(r.nextInt(result.size()));
+            sp.displayClientMessage(Component.literal("You have unlocked " + criteria + " for " + planet), true);
+            AdvHelper.awardAdvancementCriteria(sp,  planet + "_entries", criteria);
+        }
     }
 
     private static void setHoverTextForTanks(ItemStack stack, List<Component> tooltipComponents, String size)

@@ -9,6 +9,9 @@
     },
     "page3": {
       "trigger": "minecraft:impossible"
+    },
+    "page4": {
+      "trigger": "minecraft:impossible"
     }
   },
   "display": {
