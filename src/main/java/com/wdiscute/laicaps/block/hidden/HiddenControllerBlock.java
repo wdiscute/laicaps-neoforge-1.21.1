@@ -30,8 +30,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -118,7 +121,7 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
             hcbe.CanPlayerObtainDrops(player);
         }
 
-        if(!state.getValue(ACTIVE))
+        if (!state.getValue(ACTIVE))
         {
             return ItemInteractionResult.FAIL;
         }
@@ -132,7 +135,8 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
         if (Minecraft.getInstance().player.getMainHandItem().is(ModItems.CHISEL.get()) || Minecraft.getInstance().player.isCreative())
         {
 
-            level.addParticle(ParticleTypes.CLOUD,
+            level.addParticle(
+                    ParticleTypes.CLOUD,
                     pos.getX() + 0.5f,
                     pos.getY() + 0.5f,
                     pos.getZ() + 0.5f,
@@ -148,29 +152,36 @@ public class HiddenControllerBlock extends HorizontalDirectionalBlock implements
         pBuilder.add(FACING);
     }
 
+
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        boolean creative = false;
-        if (Minecraft.getInstance().player != null)
+        if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player player)
         {
-            creative = Minecraft.getInstance().player.isCreative();
-        }
-
-        if (state.getValue(ACTIVE) || creative)
-        {
-            switch (state.getValue(FACING))
-            {
-                case EAST, WEST:
-                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+            if (player.isCreative() || state.getValue(ACTIVE))
+                return switch (state.getValue(FACING))
+                {
+                    case EAST, WEST -> Shapes.or(
+                            Block.box(1, 0, 1, 15, 13, 15),
                             Block.box(4, 13, 1, 12, 14, 15));
-                default:
-                    return Shapes.or(Block.box(1, 0, 1, 15, 13, 15),
+                    default -> Shapes.or(
+                            Block.box(1, 0, 1, 15, 13, 15),
                             Block.box(1, 13, 4, 15, 14, 12));
-            }
+                };
+            else
+                return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+
         }
 
-        return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        return switch (state.getValue(FACING))
+        {
+            case EAST, WEST -> Shapes.or(
+                    Block.box(1, 0, 1, 15, 13, 15),
+                    Block.box(4, 13, 1, 12, 14, 15));
+            default -> Shapes.or(
+                    Block.box(1, 0, 1, 15, 13, 15),
+                    Block.box(1, 13, 4, 15, 14, 12));
+        };
     }
 
     @Override
