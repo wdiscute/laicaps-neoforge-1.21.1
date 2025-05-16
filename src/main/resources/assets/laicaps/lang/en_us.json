@@ -92,7 +92,7 @@
   "gui.rocket.telescope.notebook": "§cInsert Notebook",
   "gui.rocket.telescope.tank": "§cInsert Tank",
 
-  "gui.laicaps.rocket.takeoff.0": "§l§4Initiating Takeoff...",
+  "gui.laicaps.rocket.takeoff.0": "§l§aInitiating Takeoff...",
   "gui.laicaps.rocket.takeoff.1": "§l10",
   "gui.laicaps.rocket.takeoff.2": "§l9",
   "gui.laicaps.rocket.takeoff.3": "§l8",

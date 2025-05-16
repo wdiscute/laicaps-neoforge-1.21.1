@@ -45,7 +45,7 @@ public class RocketSpaceMenu extends AbstractContainerMenu
         }
 
         //book
-        this.addSlot(new Slot(this.container, 0, -24, 20)
+        this.addSlot(new Slot(this.container, 0, -24, 2220)
                      {
                          @Override
                          public boolean mayPlace(ItemStack stack)
@@ -62,7 +62,7 @@ public class RocketSpaceMenu extends AbstractContainerMenu
         );
 
         //TODO expansion item and system
-        this.addSlot(new Slot(this.container, 1, -158, 20)
+        this.addSlot(new Slot(this.container, 1, -158, 2220)
         {
             @Override
             public boolean mayPlace(ItemStack stack)
@@ -96,7 +96,7 @@ public class RocketSpaceMenu extends AbstractContainerMenu
         });
 
         //rocket state
-        this.addSlot(new Slot(this.container, 3, -158, 0)
+        this.addSlot(new Slot(this.container, 3, -158, 999)
         {
             @Override
             public boolean mayPlace(ItemStack stack)
@@ -112,7 +112,7 @@ public class RocketSpaceMenu extends AbstractContainerMenu
         });
 
         //planet selected
-        this.addSlot(new Slot(this.container, 4, -158, -20)
+        this.addSlot(new Slot(this.container, 4, -158, -99920)
         {
             @Override
             public boolean mayPlace(ItemStack stack)
