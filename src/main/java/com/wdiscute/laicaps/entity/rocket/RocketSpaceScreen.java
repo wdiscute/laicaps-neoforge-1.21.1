@@ -10,6 +10,7 @@ import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.Registries;
@@ -91,14 +92,15 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     int canvasX;
     int canvasY;
 
-    ItemStack book;
     ItemStack tank;
     float fuelAvailable = 0;
 
-    int emberKnowledge = 0;
-    int ashaKnowledge = 0;
-    int overworldKnowledge = 0;
-    int lunamarKnowledge = 0;
+    boolean emberDiscovered;
+    int emberEntries;
+    boolean ashaDiscovered;
+    int ashaEntries;
+    boolean lunamarDiscovered;
+    int lunamarEntries;
 
     int rocketState = 0;
     int counter = 0;
@@ -129,21 +131,15 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         if (menu.container.getItem(3).is(Items.GRANITE)) rocketState = 3;
         if (menu.container.getItem(3).is(Items.DIORITE)) rocketState = 4;
 
-        if (menu.container.getItem(0).is(ModItems.ASTRONOMY_NOTEBOOK.get()))
-        {
+        ClientAdvancements adv = Minecraft.getInstance().getConnection().getAdvancements();
 
-            book = menu.container.getItem(0);
-            emberKnowledge = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER);
-            ashaKnowledge = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER);
-            overworldKnowledge = 100;
-            lunamarKnowledge = book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER);
-        } else
-        {
-            emberKnowledge = 0;
-            ashaKnowledge = 0;
-            overworldKnowledge = 100;
-            lunamarKnowledge = 0;
-        }
+        emberDiscovered = Laicaps.hasAdvancement(adv, "ember_discovered");
+        ashaDiscovered = Laicaps.hasAdvancement(adv, "asha_discovered");
+        lunamarDiscovered = Laicaps.hasAdvancement(adv, "lunamar_discovered");
+
+        emberEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "ember_entries");
+        ashaEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "asha_entries");
+        lunamarEntries = Laicaps.getEntriesCompletedFromAdvancement(adv, "lunamar_entries");
 
 
         if (menu.container.getItem(2).is(ModItems.TANK.get()) || menu.container.getItem(2).is(ModItems.MEDIUM_TANK.get()) || menu.container.getItem(2).is(ModItems.LARGE_TANK.get()))
@@ -151,13 +147,10 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             tank = menu.container.getItem(2);
             fuelAvailable = tank.get(ModDataComponents.FUEL);
 
-        }else
+        } else
         {
             fuelAvailable = 0;
-
         }
-
-
 
 
     }
@@ -215,7 +208,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         float fuelPercentage = ((fuelAvailable * 100 / 1300));
         float fuelPercentageOfBar = fuelPercentage * 128 / 100;
-        fuelPercentageOfBar -=3;
+        fuelPercentageOfBar -= 3;
 
         RevealRenderUtil.renderWithOcclusion(
                 poseStack, uiX + 34, uiY + 105, 129, 8,
@@ -250,33 +243,32 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             RenderSystem.enableBlend();
 
             //ember
-            if (emberKnowledge < 4)
-                rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_BLUR_HIGHLIGHTED : EMBER_BLUR;
-            else
-            {
+            if (emberDiscovered)
                 rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_HIGHLIGHTED : EMBER;
-            }
+            else
+                rl = (x > 250 && x < 283 && y > 170 && y < 200) ? EMBER_BLUR_HIGHLIGHTED : EMBER_BLUR;
 
             renderImage(guiGraphics, rl);
 
 
             //asha
-            if (ashaKnowledge < 4)
-                rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_BLUR_HIGHLIGHTED : ASHA_BLUR;
-            else
+            if (ashaDiscovered)
                 rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_HIGHLIGHTED : ASHA;
+            else
+                rl = (x > 310 && x < 335 && y > 86 && y < 111) ? ASHA_BLUR_HIGHLIGHTED : ASHA_BLUR;
+
             renderImage(guiGraphics, rl);
 
             //overworld
             rl = (x > 392 && x < 429 && y > 121 && y < 160) ? OVERWORLD_HIGHLIGHTED : OVERWORLD;
             renderImage(guiGraphics, rl);
 
-
             //lunamar
-            if (lunamarKnowledge < 4)
-                rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_BLUR_HIGHLIGHTED : LUNAMAR_BLUR;
-            else
+            if (lunamarDiscovered)
                 rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_HIGHLIGHTED : LUNAMAR;
+            else
+                rl = (x > 444 && x < 589 && y > 16 && y < 65) ? LUNAMAR_BLUR_HIGHLIGHTED : LUNAMAR_BLUR;
+
             renderImage(guiGraphics, rl);
 
             RenderSystem.disableBlend();
@@ -291,13 +283,6 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private void checkMissingItemsMessage(@Nullable GuiGraphics guiGraphics)
     {
 
-        if (book.isEmpty())
-        {
-            if (!(guiGraphics == null))
-                guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_notebook"), uiX + 30, uiY + 70, 13186614, true);
-            return;
-        }
-
         if (tank.isEmpty())
         {
             if (!(guiGraphics == null))
@@ -311,7 +296,6 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_fuel"), uiX + 30, uiY + 70, 13186614, true);
             return;
         }
-
 
         if (rocketState == 0)
         {
@@ -438,11 +422,11 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         //ember
         if (x > 250 && x < 283 && y > 170 && y < 200)
-            planet = emberKnowledge > 0 ? "ember" : "ember_blur";
+            planet = emberDiscovered ? "ember" : "ember_blur";
 
         //asha
         if (x > 310 && x < 335 && y > 86 && y < 111)
-            planet = ashaKnowledge > 0 ? "asha" : "asha_blur";
+            planet = ashaDiscovered ? "asha" : "asha_blur";
 
         //overworld
         if (x > 392 && x < 429 && y > 121 && y < 160)
@@ -450,7 +434,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
         //lunamar
         if (x > 444 && x < 589 && y > 16 && y < 65)
-            planet = lunamarKnowledge > 0 ? "lunamar" : "lunamar_blur";
+            planet = lunamarDiscovered ? "lunamar" : "lunamar_blur";
 
         //return if mouse is not hovering a planet
         if (planet.equals("")) return;
@@ -478,14 +462,14 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (Objects.equals(planet, "ember"))
             {
                 list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
-                if (emberKnowledge < Laicaps.MAX_EMBER_KNOWLEDGE)
+                if (emberEntries < Laicaps.MAX_EMBER_KNOWLEDGE)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
             if (Objects.equals(planet, "asha"))
             {
                 list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
-                if (ashaKnowledge < Laicaps.MAX_ASHA_KNOWLEDGE)
+                if (ashaEntries < Laicaps.MAX_ASHA_KNOWLEDGE)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
@@ -497,7 +481,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             if (Objects.equals(planet, "lunamar"))
             {
                 list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
-                if (lunamarKnowledge < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
+                if (lunamarEntries < Laicaps.MAX_LUNAMAR_KNOWLEDGE)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
         }
@@ -525,7 +509,6 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
     private void checkNulls()
     {
-        if (book == null) book = ItemStack.EMPTY;
         if (tank == null) tank = ItemStack.EMPTY;
     }
 

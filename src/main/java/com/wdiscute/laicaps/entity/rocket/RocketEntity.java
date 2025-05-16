@@ -48,9 +48,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
 
 
-    int lerpSteps;
-
-
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
         super(entityType, level);
@@ -62,7 +59,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
         if (itemStacks.get(4).isEmpty()) return -1;
         if (itemStacks.get(2).isEmpty()) return -1;
-        if (itemStacks.get(0).isEmpty()) return -1;
 
         if (Minecraft.getInstance().player == null) return -1;
 

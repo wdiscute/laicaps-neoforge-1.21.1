@@ -50,14 +50,13 @@ public class RocketSpaceMenu extends AbstractContainerMenu
                          @Override
                          public boolean mayPlace(ItemStack stack)
                          {
-                             return !container.getItem(3).is(Items.DIRT) || stack.is(ModItems.ASTRONOMY_NOTEBOOK);
+                             return false;
                          }
 
                          @Override
                          public boolean mayPickup(Player player)
                          {
-                             if (!container.getItem(3).is(Items.DIRT)) return false;
-                             return super.mayPickup(player);
+                             return false;
                          }
                      }
         );
