@@ -1,8 +1,8 @@
 package com.wdiscute.laicaps.block.telescope;
 
+import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.types.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -56,29 +56,13 @@ public class TelescopeMenu extends AbstractContainerMenu
     @Override
     public boolean clickMenuButton(Player player, int id)
     {
-        ItemStack book = this.blockEntity.inventory.getStackInSlot(0);
+        if(id == 1) Laicaps.awardAdvancement(player, "ember_discovered");
 
-        if(!book.is(ModItems.ASTRONOMY_NOTEBOOK)) return false;
+        if(id == 2) Laicaps.awardAdvancement(player, "asha_discovered");
 
-        if(id == 1)
-        {
-            book.set(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER, book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_EMBER) + 1);
-            this.blockEntity.inventory.setStackInSlot(0, book);
-        }
+        if(id == 4) Laicaps.awardAdvancement(player, "lunamar_discovered");
 
-        if(id == 2)
-        {
-            book.set(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA, book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_ASHA) + 1);
-            this.blockEntity.inventory.setStackInSlot(0, book);
-        }
-
-        if(id == 4)
-        {
-            book.set(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR, book.get(ModDataComponents.ASTRONOMY_KNOWLEDGE_LUNAMAR) + 1);
-            this.blockEntity.inventory.setStackInSlot(0, book);
-        }
-
-        return super.clickMenuButton(player, id);
+        return false;
     }
 
 

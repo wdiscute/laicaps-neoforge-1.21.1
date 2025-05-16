@@ -1,5 +1,5 @@
 {
-  "parent": "laicaps:asha",
+  "parent": "laicaps:land_on_asha",
   "criteria": {
     "navy": {
       "trigger": "minecraft:inventory_changed",

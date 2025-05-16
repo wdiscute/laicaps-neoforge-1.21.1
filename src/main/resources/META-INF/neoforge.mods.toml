@@ -23,7 +23,7 @@ license="MIT"
 modId="laicaps" #mandatory
 
 # The version number of the mod
-version="0.0.1" #mandatory
+version="0.1.0" #mandatory
 
 # A display name for the mod
 displayName="Laicaps" #mandatory
@@ -41,10 +41,10 @@ displayName="Laicaps" #mandatory
 #credits="" #optional
 
 # A text field displayed in the mod UI
-authors="wdiscute, Tofushi" #optional
+authors="wdiscute, Tofushi, daffydj" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
-description='''very cool mod i think'''
+description='''A space themed mod focused on exploration'''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]

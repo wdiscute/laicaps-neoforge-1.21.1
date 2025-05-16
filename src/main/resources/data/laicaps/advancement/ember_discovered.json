@@ -1,0 +1,30 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "discover_ember": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.ember_discovered.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:ember_globe"
+    },
+    "title": {
+      "translate": "advancements.laicaps.ember_discovered.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "discover_ember"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

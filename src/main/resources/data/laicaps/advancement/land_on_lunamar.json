@@ -1,30 +1,30 @@
 {
-  "parent": "laicaps:root",
+  "parent": "laicaps:lunamar_discovered",
   "criteria": {
-    "asha": {
+    "lunamar": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "laicaps:asha"
+        "to": "laicaps:lunamar"
       }
     }
   },
   "display": {
     "description": {
-      "translate": "advancements.laicaps.asha.description"
+      "translate": "advancements.laicaps.land_on_lunamar.description"
     },
     "icon": {
       "count": 1,
-      "id": "laicaps:asha"
+      "id": "laicaps:lunamar_globe"
     },
     "title": {
-      "translate": "advancements.laicaps.asha.title"
+      "translate": "advancements.laicaps.land_on_lunamar.title"
     },
     "frame": "challenge",
     "announce_to_chat": true
   },
   "requirements": [
     [
-      "asha"
+      "lunamar"
     ]
   ],
   "sends_telemetry_event": false

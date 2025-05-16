@@ -1,0 +1,25 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "discover_asha": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.asha_discovered.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:asha_globe"
+    },
+    "title": {
+      "translate": "advancements.laicaps.asha_discovered.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "sends_telemetry_event": false
+}

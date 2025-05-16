@@ -1,0 +1,22 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "nothing": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.telescope_advanced.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:telescope"
+    },
+    "title": {
+      "translate": "advancements.laicaps.telescope_advanced.title"
+    },
+    "hidden": true
+  },
+  "sends_telemetry_event": false
+}

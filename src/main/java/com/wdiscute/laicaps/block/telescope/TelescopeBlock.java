@@ -5,23 +5,16 @@ import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -57,25 +50,19 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
 
                 if (!level.isClientSide)
                 {
-                    ((ServerLevel) level).sendParticles(
-                            ParticleTypes.HAPPY_VILLAGER,
-                            pos.getX() + 0.5f,
-                            pos.getY() + 0.5f,
-                            pos.getZ() + 0.5f, 20, 0.5f, 0.5f, 0.5f, 0f);
+
+                    ((ServerLevel) level).sendParticles(ParticleTypes.HAPPY_VILLAGER, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 20, 0.5f, 0.5f, 0.5f, 0f);
+
                     tbe.drops();
-                }else
-                {
-                    //TODO AWARD ADVANCEMENT
-                    //ResourceKey<Advancement> awd = ResourceKey.create(Registries.ADVANCEMENT, Laicaps.rl("asha"));
 
-                    //HolderLookup<Advancement> wad = level.holderLookup(Registries.ADVANCEMENT)
 
-                    //level.registryAccess().lookup()
-                    //((ServerPlayer) player).getAdvancements().award();
+                    System.out.println("tried to give advancement");
+                    Laicaps.awardAdvancement(player,"telescope_advanced");
+
                 }
             }
 
-            return ItemInteractionResult.CONSUME;
+            return ItemInteractionResult.SUCCESS;
         }
 
 

@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps;
 
+import com.google.common.collect.Iterables;
 import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableScreen;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationScreen;
@@ -14,6 +15,7 @@ import com.wdiscute.laicaps.entity.snuffler.SnufflerRenderer;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
+import com.wdiscute.laicaps.mixin.AdvancementProgressAcessor;
 import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
 import com.wdiscute.laicaps.particle.LunarveilParticles;
 import com.wdiscute.laicaps.particle.ModParticles;
@@ -21,12 +23,19 @@ import com.wdiscute.laicaps.particle.WaterFlowerParticles;
 import com.wdiscute.laicaps.sound.ModSounds;
 import com.wdiscute.laicaps.types.ModMenuTypes;
 import com.wdiscute.laicaps.types.ModWoodTypes;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.PlayerAdvancements;
+import net.minecraft.server.ServerAdvancementManager;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -60,6 +69,67 @@ public class Laicaps
     public static ResourceLocation rl(String s)
     {
         return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, s);
+    }
+
+    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String achievementName)
+    {
+        return hasAdvancement(clientAdvancements, Laicaps.MOD_ID, achievementName);
+    }
+
+    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String namespace, String advancementName)
+    {
+        AdvancementHolder adv = clientAdvancements.get(ResourceLocation.fromNamespaceAndPath(namespace, advancementName));
+
+        if(clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
+            return Iterables.size(acessor.getProgress().get(adv).getCompletedCriteria()) > 0;
+        else
+            return false;
+
+    }
+
+    public static int getEntriesCompletedFromAdvancement(ClientAdvancements clientAdvancements, String achievementName)
+    {
+        return getEntriesCompletedFromAdvancement(clientAdvancements, Laicaps.MOD_ID, achievementName);
+    }
+
+    public static int getEntriesCompletedFromAdvancement(ClientAdvancements clientAdvancements, String namespace, String advancementName)
+    {
+        AdvancementHolder adv = clientAdvancements.get(ResourceLocation.fromNamespaceAndPath(namespace, advancementName));
+
+        if(clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
+        {
+            return Iterables.size(acessor.getProgress().get(adv).getCompletedCriteria());
+        }else
+        {
+            return 0;
+        }
+    }
+
+
+    public static void awardAdvancement(Player player, String achievementName)
+    {
+        awardAdvancement(player, Laicaps.MOD_ID, achievementName);
+    }
+
+
+    public static void awardAdvancement(Player player, String namespace, String achievementName)
+    {
+        if (player instanceof ServerPlayer serverPlayer)
+        {
+            ServerAdvancementManager manager = serverPlayer.server.getAdvancements();
+            AdvancementHolder advHolder = manager.get(ResourceLocation.fromNamespaceAndPath(namespace, achievementName));
+            PlayerAdvancements playerAdvancements = serverPlayer.getAdvancements();
+
+            if (advHolder != null)
+            {
+                AdvancementProgress progress = playerAdvancements.getOrStartProgress(advHolder);
+
+                if (!progress.isDone())
+                {
+                    for (String s : progress.getRemainingCriteria()) playerAdvancements.award(advHolder, s);
+                }
+            }
+        }
     }
 
 

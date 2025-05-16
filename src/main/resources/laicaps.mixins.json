@@ -11,6 +11,7 @@
   ],
   "client": [
     "JumpingAcessor",
+    "AdvancementProgressAcessor",
     "TankDurabilityTooltipFix"
   ],
   "injectors": {

@@ -1,0 +1,30 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "discover_lunamar": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.lunamar_discovered.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:lunamar_globe"
+    },
+    "title": {
+      "translate": "advancements.laicaps.lunamar_discovered.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "discover_lunamar"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

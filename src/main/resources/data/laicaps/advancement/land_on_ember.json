@@ -1,30 +1,30 @@
 {
-  "parent": "laicaps:root",
+  "parent": "laicaps:ember_discovered",
   "criteria": {
-    "ember": {
+    "lunamar": {
       "trigger": "minecraft:changed_dimension",
       "conditions": {
-        "to": "laicaps:ember"
+        "to": "laicaps:lunamar"
       }
     }
   },
   "display": {
     "description": {
-      "translate": "advancements.laicaps.ember.description"
+      "translate": "advancements.laicaps.land_on_ember.description"
     },
     "icon": {
       "count": 1,
-      "id": "laicaps:ember"
+      "id": "laicaps:ember_globe"
     },
     "title": {
-      "translate": "advancements.laicaps.ember.title"
+      "translate": "advancements.laicaps.land_on_ember.title"
     },
     "frame": "challenge",
     "announce_to_chat": true
   },
   "requirements": [
     [
-      "ember"
+      "lunamar"
     ]
   ],
   "sends_telemetry_event": false
