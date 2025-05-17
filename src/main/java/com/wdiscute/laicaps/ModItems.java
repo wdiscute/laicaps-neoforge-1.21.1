@@ -262,6 +262,8 @@ public class ModItems
     //`--' `--' `-----'  `--'  `--' `--' `--'
     //
 
+    public static final DeferredItem<Item> SWEETLILY_SUGAR = ITEMS.register("sweetlily_sugar", () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> SNUFFLER_CHOP = ITEMS.register("snuffler_chop", () -> new Item(new Item.Properties().food(ModFoodProperties.SNUFFLER_CHOP)));
     public static final DeferredItem<Item> COOKED_SNUFFLER_CHOP = ITEMS.register("cooked_snuffler_chop", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_SNUFFLER_CHOP)));
     public static final DeferredItem<Item> SNUFFLER_SPAWN_EGG = ITEMS.register("snuffler_spawn_egg", () -> new SpawnEggItem(ModEntities.SNUFFLER.get(), 15971928, 13534776, new Item.Properties()));
