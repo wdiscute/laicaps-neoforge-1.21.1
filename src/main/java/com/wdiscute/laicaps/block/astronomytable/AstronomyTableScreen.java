@@ -24,19 +24,19 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 {
 
     private static final Logger log = LoggerFactory.getLogger(AstronomyTableScreen.class);
-    private static final ResourceLocation INV_BOOK_BACKGROUND = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/book_background.png");
-    private static final ResourceLocation ARROW_PREVIOUS = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/arrow_previous.png");
-    private static final ResourceLocation ARROW_NEXT = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/arrow_next.png");
+    private static final ResourceLocation INV_BOOK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/book_background.png");
+    private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl( "textures/gui/astronomy_table/arrow_previous.png");
+    private static final ResourceLocation ARROW_NEXT = Laicaps.rl( "textures/gui/astronomy_table/arrow_next.png");
 
-    private static final ResourceLocation EMBER_SELECTED = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/ember_selected.png");
-    private static final ResourceLocation ASHA_SELECTED = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/asha_selected.png");
-    private static final ResourceLocation OVERWORLD_SELECTED = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/overworld_selected.png");
-    private static final ResourceLocation LUNAMAR_SELECTED = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/lunamar_selected.png");
+    private static final ResourceLocation EMBER_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/ember_selected.png");
+    private static final ResourceLocation ASHA_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/asha_selected.png");
+    private static final ResourceLocation OVERWORLD_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/overworld_selected.png");
+    private static final ResourceLocation LUNAMAR_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/lunamar_selected.png");
 
-    private static final ResourceLocation EMBER_HIGHLIGHT = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/ember_highlight.png");
-    private static final ResourceLocation ASHA_HIGHLIGHT = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/asha_highlight.png");
-    private static final ResourceLocation OVERWORLD_HIGHLIGHT = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/overworld_highlight.png");
-    private static final ResourceLocation LUNAMAR_HIGHLIGHT = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/gui/astronomy_table/lunamar_highlight.png");
+    private static final ResourceLocation EMBER_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/ember_highlight.png");
+    private static final ResourceLocation ASHA_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/asha_highlight.png");
+    private static final ResourceLocation OVERWORLD_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/overworld_highlight.png");
+    private static final ResourceLocation LUNAMAR_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/lunamar_highlight.png");
 
 
     Random r = new Random();
@@ -53,10 +53,12 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
     private void reObfuscate()
     {
+        //generate list of strings with random amounts of characters for the obfuscated entries
         minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
         obfuscatedLeft.clear();
         obfuscatedRight.clear();
-        for (int i = 0; i < 16; i++)
+        //left
+        for (int i = 0; i < 19; i++)
         {
             if (r.nextFloat(1f) < 0.8)
             {
@@ -70,7 +72,7 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                 obfuscatedLeft.add("");
             }
         }
-
+        //right
         for (int i = 0; i < 19; i++)
         {
             if (r.nextFloat(1f) < 0.8)
@@ -322,59 +324,45 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
         //if entry not unlocked, displays obfuscated text on both pages
         if (!entryUnlocked)
         {
-            Random r = new Random();
+            //left title obfuscated
             guiGraphics.drawString(this.font, Component.literal("            §c§k§l!!!!!!!!!!!!!!!!!!!!!!!!"), uiX + 65, uiY + 20, 0, true);
 
+            //left obfuscated text
             for (int i = 0; i < 16; i++)
-            {
-                guiGraphics.drawString(this.font, Component.literal("§c§k§l" + obfuscatedLeft.get(i)),
-                        uiX + 65, uiY + 60 + (i * 10), 0, true);
-            }
+                guiGraphics.drawString(this.font, Component.literal("§c§k§l" + obfuscatedLeft.get(i)), uiX + 65, uiY + 60 + (i * 10), 0, true);
 
+            //right obfuscated text
             for (int i = 0; i < 19; i++)
-            {
-                guiGraphics.drawString(this.font, Component.literal("§c§k§l" + obfuscatedRight.get(i)),
-                        uiX + 268, uiY + 30 + (i * 10), 0, true);
-            }
+                guiGraphics.drawString(this.font, Component.literal("§c§k§l" + obfuscatedRight.get(i)),uiX + 268, uiY + 30 + (i * 10), 0, true);
 
-
-            return;
         }
 
 
-        for (int i = 0; i < 22; i++)
+        //render text  & image from translation key
+        if(entryUnlocked)
         {
-            String key = "gui.astronomy_research_table.asha.entry" + currentEntry + ".left." + i;
-            if (I18n.exists(key))
-            {
-                guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
-            }
-
+            //render image
             String keyImage = "gui.astronomy_research_table.asha.entry" + currentEntry + ".image";
-            if (I18n.exists(keyImage))
+            if (I18n.exists(keyImage)) renderImage(guiGraphics,Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(keyImage) + ".png"));
+
+            //render text left
+            for (int i = 0; i < 21; i++)
             {
-                renderImage(guiGraphics,Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(keyImage) + ".png"));
+                String key = "gui.astronomy_research_table.asha.entry" + currentEntry + ".left." + i;
+                if (I18n.exists(key)) guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
             }
 
-        }
-
-
-        for (int i = 0; i < 21; i++)
-        {
-            String key = "gui.astronomy_research_table.asha.entry" + currentEntry + ".right." + i;
-            if (I18n.exists(key))
+            //render text right
+            for (int i = 0; i < 21; i++)
             {
-                if (I18n.get(key).contains("image%"))
-                {
-                    renderIllustration(guiGraphics, uiX + 268, uiY + 10 + (i * 10), Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(key).substring(I18n.get(key).lastIndexOf("%") + 1) + ".png"));
-                } else
-                {
-                    guiGraphics.drawString(this.font, Component.translatable(key), uiX + 268, uiY + 10 + (i * 10), 0, false);
-
-                }
-
+                String key = "gui.astronomy_research_table.asha.entry" + currentEntry + ".right." + i;
+                if (I18n.exists(key)) guiGraphics.drawString(this.font, Component.translatable(key), uiX + 268, uiY + 10 + (i * 10), 0, false);
             }
         }
+
+
+        //render text from translation key right
+
 
     }
 

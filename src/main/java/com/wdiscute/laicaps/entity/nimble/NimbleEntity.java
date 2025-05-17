@@ -187,7 +187,7 @@ public class NimbleEntity extends Animal
     @Override
     public boolean isFood(ItemStack itemStack)
     {
-        return itemStack.is(ModItems.OAKHEART_BERRIES);
+        return itemStack.is(ModItems.OAKHEART_BERRIES) || itemStack.is(ModItems.SWEETLILY_SUGAR);
     }
 
     @Override

@@ -313,6 +313,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY)
     {
+        System.out.println("state " + state);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
@@ -383,6 +384,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
                     state = 2;
                     counter = 0;
                 }
+
                 PoseStack poseStack = guiGraphics.pose();
                 poseStack.pushPose();
 
@@ -422,7 +424,6 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
             //render tooltip
             {
-                if (transitionMenu || transitionSearch) return;
                 List<Component> tooltips;
 
                 //ember with basic telescope
@@ -469,7 +470,6 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
 
 
             }
-
         }
 
         //2 = planet searching

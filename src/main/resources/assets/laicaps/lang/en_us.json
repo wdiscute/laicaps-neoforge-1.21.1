@@ -413,6 +413,8 @@
   "item.laicaps.cooked_snuffler_chop": "Cooked Snuffler Chop",
   "item.laicaps.cooked_snuffler_chop.1": "A tasty chop from a snuffler",
 
+  "item.laicaps.sweetlily_sugar": "Sweetlily Sugar",
+
 
 
   "entity.laicaps.rocket": "WIP Rocket",
@@ -587,9 +589,9 @@
   "gui.astronomy_research_table.asha.entry2.right.4" : "scared or bothered with me",
   "gui.astronomy_research_table.asha.entry2.right.5" : "getting close.",
 
-  "gui.astronomy_research_table.asha.entry2.right.8" : "I found these two fish who",
-  "gui.astronomy_research_table.asha.entry2.right.9" : "seem to hate each other, yet",
-  "gui.astronomy_research_table.asha.entry2.right.10" : "they swim together.",
+  "gui.astronomy_research_table.asha.entry2.right.8" : "I found two fish who",
+  "gui.astronomy_research_table.asha.entry2.right.9" : "seem to hate each other,",
+  "gui.astronomy_research_table.asha.entry2.right.10" : "yet they swim together...",
 
 
 
@@ -599,12 +601,12 @@
   "gui.astronomy_research_table.asha.entry3.image" : "asha_illustration_3",
 
   "gui.astronomy_research_table.asha.entry3.left.11" : "I found these unique flowers.",
-  "gui.astronomy_research_table.asha.entry3.left.12" : "I've named them Lunarveil for now.",
 
-  "gui.astronomy_research_table.asha.entry3.left.14" : "They appear to open under",
-  "gui.astronomy_research_table.asha.entry3.left.15" : "the moonlight to release",
-  "gui.astronomy_research_table.asha.entry3.left.16" : "their glittering pollen,",
-  "gui.astronomy_research_table.asha.entry3.left.17" : "lighting up the area in the area.",
+  "gui.astronomy_research_table.asha.entry3.left.13" : "I've named them Lunarveil for now.",
+
+  "gui.astronomy_research_table.asha.entry3.left.15" : "They appear to open under the",
+  "gui.astronomy_research_table.asha.entry3.left.16" : "moonlight to release their glittering",
+  "gui.astronomy_research_table.asha.entry3.left.17" : "pollen, lighting up the area.",
 
   "gui.astronomy_research_table.asha.entry3.left.19" : "Possibly to attract pollinators?",
 
@@ -614,8 +616,8 @@
   "gui.astronomy_research_table.asha.entry3.right.5" : "Overworld. Surely it won't",
   "gui.astronomy_research_table.asha.entry3.right.6" : "hurt to take a few back home...",
 
-  "gui.astronomy_research_table.asha.entry3.right.15" : "... I wonder what my bees",
-  "gui.astronomy_research_table.asha.entry3.right.16" : "will think of them...",
+  "gui.astronomy_research_table.asha.entry3.right.17" : "... I wonder what my bees",
+  "gui.astronomy_research_table.asha.entry3.right.18" : "will think of them...",
 
 
 
@@ -624,15 +626,27 @@
   "gui.astronomy_research_table.asha.entry4.name" : "     §dAsha§r - Sweetlily",
   "gui.astronomy_research_table.asha.entry4.image" : "asha_illustration_4",
 
-  "gui.astronomy_research_table.asha.entry4.left.11" : "This lily-like flower is weirdly",
+  "gui.astronomy_research_table.asha.entry4.left.11" : "This lily-like flower smells weirdly",
   "gui.astronomy_research_table.asha.entry4.left.12" : "sweet. One of the tiny creatures",
   "gui.astronomy_research_table.asha.entry4.left.13" : "just ate the petals right off.",
 
-  "gui.astronomy_research_table.asha.entry4.left.14" : "It only makes sense I name it Sweetlily.",
+  "gui.astronomy_research_table.asha.entry4.left.15" : "It only makes sense I name",
+  "gui.astronomy_research_table.asha.entry4.left.16" : "them Sweetlily.",
 
-  "gui.astronomy_research_table.asha.entry4.left.17" : "Grinding it to a power is easy enough,",
-  "gui.astronomy_research_table.asha.entry4.left.18" : "makes for the perfect replacement of",
-  "gui.astronomy_research_table.asha.entry4.left.19" : "the sugarcane sugar I'm used to."
+  "gui.astronomy_research_table.asha.entry4.right.3" : "Grinding it to a powder is easy",
+  "gui.astronomy_research_table.asha.entry4.right.4" : "enough, it makes for the perfect",
+  "gui.astronomy_research_table.asha.entry4.right.5" : "replacement of the sugarcane",
+  "gui.astronomy_research_table.asha.entry4.right.6" : "I'm used to.",
+
+
+  "gui.astronomy_research_table.asha.entry4.right.15" : "Some tiny creatures I found really",
+  "gui.astronomy_research_table.asha.entry4.right.16" : "liked this powder. If I could find",
+  "gui.astronomy_research_table.asha.entry4.right.17" : "some kind of fruit I could make",
+  "gui.astronomy_research_table.asha.entry4.right.18" : "treats for them and possibly",
+  "gui.astronomy_research_table.asha.entry4.right.19" : "make a friend?"
+
+
+
 
 
 }
