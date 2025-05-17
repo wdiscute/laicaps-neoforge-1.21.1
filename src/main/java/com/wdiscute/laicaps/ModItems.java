@@ -65,52 +65,71 @@ public class ModItems
 
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel", () -> new ChiselItem(new Item.Properties().rarity(Rarity.EPIC)));
 
-    public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new AstronomyNotebookItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
+    public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
 
     public static final DeferredItem<Item> EMBER_ENTRY = ITEMS.register(
             "ember_entry", () ->
-                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                            .stacksTo(1)
+                            .component(ModDataComponents.ENTRY_NAME, "Ember Entry Page")
+                    )
                     {
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
                             awardEntry(player, "ember");
+                            ItemStack itemstack = player.getItemInHand(usedHand);
+                            itemstack.consume(1, player);
                             return super.use(level, player, usedHand);
                         }
                     });
 
     public static final DeferredItem<Item> ASHA_ENTRY = ITEMS.register(
             "asha_entry", () ->
-                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                            .stacksTo(1)
+                            .component(ModDataComponents.ENTRY_NAME, "Asha Entry Page"))
                     {
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
                             awardEntry(player, "asha");
+                            ItemStack itemstack = player.getItemInHand(usedHand);
+                            itemstack.consume(1, player);
                             return super.use(level, player, usedHand);
                         }
                     });
 
     public static final DeferredItem<Item> OVERWORLD_ENTRY = ITEMS.register(
             "overworld_entry", () ->
-                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                            .stacksTo(1)
+                            .component(ModDataComponents.ENTRY_NAME, "Overworld Entry Page")
+                    )
                     {
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
                             awardEntry(player, "overworld");
+                            ItemStack itemstack = player.getItemInHand(usedHand);
+                            itemstack.consume(1, player);
                             return super.use(level, player, usedHand);
                         }
                     });
 
     public static final DeferredItem<Item> LUNAMAR_ENTRY = ITEMS.register(
             "lunamar_entry", () ->
-                    new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1))
+                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                            .stacksTo(1)
+                            .component(ModDataComponents.ENTRY_NAME, "Lunamar Entry Page")
+                    )
                     {
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
                             awardEntry(player, "lunamar");
+                            ItemStack itemstack = player.getItemInHand(usedHand);
+                            itemstack.consume(1, player);
                             return super.use(level, player, usedHand);
                         }
                     });
@@ -206,7 +225,6 @@ public class ModItems
                     .component(ModDataComponents.FUEL, 0)
                     .setNoRepair())
             {
-
                 @Override
                 public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
                 {
@@ -299,8 +317,8 @@ public class ModItems
             AdvHelper.getEntriesRemainingAsIterable(sp, planet + "_entries").forEach(result::add);
 
             String criteria = result.get(r.nextInt(result.size()));
-            sp.displayClientMessage(Component.literal("You have unlocked " + criteria + " for " + planet), true);
-            AdvHelper.awardAdvancementCriteria(sp,  planet + "_entries", criteria);
+            sp.displayClientMessage(Component.literal("You have unlocked the entry " + I18n.get("gui.astronomy_research_table." + planet + "." + criteria + ".name")), true);
+            AdvHelper.awardAdvancementCriteria(sp, planet + "_entries", criteria);
         }
     }
 
@@ -324,7 +342,8 @@ public class ModItems
             if (stack.get(ModDataComponents.FUEL) > maxFuel / 1.5) color = "§a";
 
             tooltipComponents.add(Component.literal(color + I18n.get("tooltip.laicaps.tank.fuel") + ": §l[" + stack.get(ModDataComponents.FUEL) + " / " + maxFuel + "]"));
-        } else tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
+        }
+        else tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
     }
 
 

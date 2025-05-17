@@ -45,6 +45,7 @@ public class ModCreativeModeTabs
                                 output.accept(ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
 
                                 output.accept(ModBlocks.OVERWORLD_GLOBE.get());
+                                output.accept(ModItems.OVERWORLD_ENTRY.get());
 
 
                                 //rocket stuff
@@ -86,6 +87,7 @@ public class ModCreativeModeTabs
                             .displayItems((itemDisplayParameters, output) ->
                             {
                                 output.accept(ModBlocks.ASHA_GLOBE.get());
+                                output.accept(ModItems.ASHA_ENTRY.get());
 
                                 //oakheart
                                 output.accept(ModBlocks.OAKHEART_SAPLING.get());
@@ -178,6 +180,8 @@ public class ModCreativeModeTabs
                             {
                                 output.accept(ModBlocks.LUNAMAR_GLOBE.get());
                                 output.accept(ModBlocks.LUNAMAR_TELEPORTER.get());
+                                output.accept(ModItems.LUNAMAR_ENTRY.get());
+
 
                                 //water flower
                                 output.accept(ModBlocks.WATER_FLOWER.get());
@@ -195,6 +199,8 @@ public class ModCreativeModeTabs
 
                                 output.accept(ModBlocks.EMBER_GLOBE.get());
                                 output.accept(ModBlocks.EMBER_TELEPORTER.get());
+                                output.accept(ModItems.EMBER_ENTRY.get());
+
 
 
                             }).build());

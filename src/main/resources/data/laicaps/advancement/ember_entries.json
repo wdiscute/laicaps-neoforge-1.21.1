@@ -1,16 +1,16 @@
 {
   "parent": "laicaps:land_on_ember",
   "criteria": {
-    "page1": {
+    "entry1": {
       "trigger": "minecraft:impossible"
     },
-    "page2": {
+    "entry2": {
       "trigger": "minecraft:impossible"
     },
-    "page3": {
+    "entry3": {
       "trigger": "minecraft:impossible"
     },
-    "page4": {
+    "entry4": {
       "trigger": "minecraft:impossible"
     }
   },

@@ -61,10 +61,15 @@ public class TelescopeMenu extends AbstractContainerMenu
         if (player instanceof ServerPlayer sp)
         {
             if (id == 1) AdvHelper.awardAdvancement(sp, "ember_discovered");
+            if (id == 1) AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
 
             if (id == 2) AdvHelper.awardAdvancement(sp, "asha_discovered");
+            if (id == 2) AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry1");
+
 
             if (id == 4) AdvHelper.awardAdvancement(sp, "lunamar_discovered");
+            if (id == 4) AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
+
         }
         return false;
     }

@@ -16,14 +16,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.laicaps.discover_asha.description"
+      "translate": "advancements.laicaps.asha_entries.description"
     },
     "icon": {
       "count": 1,
       "id": "laicaps:asha"
     },
     "title": {
-      "translate": "advancements.laicaps.discover_asha.title"
+      "translate": "advancements.laicaps.asha_entries.title"
     },
     "frame": "challenge",
     "show_toast": true,

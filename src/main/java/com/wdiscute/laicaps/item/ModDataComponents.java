@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps.item;
 
+import com.mojang.serialization.Codec;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
@@ -19,14 +20,8 @@ public class ModDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> COORDINATES = register("coordinates",
             builder -> builder.persistent(BlockPos.CODEC));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ASTRONOMY_KNOWLEDGE_EMBER = register("astronomy_knowledge_ember",
-            builder -> builder.persistent(ExtraCodecs.intRange(0, 100)));
-
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ASTRONOMY_KNOWLEDGE_ASHA = register("astronomy_knowledge_asha",
-            builder -> builder.persistent(ExtraCodecs.intRange(0, 100)));
-
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ASTRONOMY_KNOWLEDGE_LUNAMAR = register("astronomy_knowledge_lunamar",
-            builder -> builder.persistent(ExtraCodecs.intRange(0, 100)));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> ENTRY_NAME = register("entry_name",
+            builder -> builder.persistent(Codec.STRING));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FUEL = register("fuel",
             builder -> builder.persistent(ExtraCodecs.intRange(0, 2000)));

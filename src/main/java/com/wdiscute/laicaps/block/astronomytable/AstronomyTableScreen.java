@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +53,7 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
     private void reObfuscate()
     {
+        minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
         obfuscatedLeft.clear();
         obfuscatedRight.clear();
         for (int i = 0; i < 16; i++)
@@ -262,7 +264,6 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
         for (String s : AdvHelper.getEntriesCompletedAsIterable(adv, currentPlanetString + "_entries"))
             if (s.contains("entry" + currentEntry)) entryUnlocked = true;
 
-
         renderImage(guiGraphics, INV_BOOK_BACKGROUND);
 
         if (currentPlanet == 1) renderImage(guiGraphics, EMBER_SELECTED);
@@ -289,7 +290,7 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
             {
                 guiGraphics.drawString(
                         this.font, Component.translatable("gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".name"),
-                        uiX + 100, uiY + 230, 0, false);
+                        uiX + 90, uiY + 230, 0, false);
             } else
             {
                 String s = "";
@@ -304,6 +305,19 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
         }
 
+
+        //render page number on bottom left
+        {
+            int entriesMax = 0;
+            if (currentPlanet == 1) entriesMax = Laicaps.EMBER_ENTRIES;
+            if (currentPlanet == 2) entriesMax = Laicaps.ASHA_ENTRIES;
+            if (currentPlanet == 3) entriesMax = Laicaps.OVERWORLD_ENTRIES;
+            if (currentPlanet == 4) entriesMax = Laicaps.LUNAMAR_ENTRIES;
+
+            guiGraphics.drawString(
+                    this.font, Component.literal("[" + currentEntry + "/" + entriesMax + "]"),
+                    uiX + 213, uiY + 230, 0, false);
+        }
 
         //if entry not unlocked, displays obfuscated text on both pages
         if (!entryUnlocked)
@@ -333,16 +347,15 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
             String key = "gui.astronomy_research_table.asha.entry" + currentEntry + ".left." + i;
             if (I18n.exists(key))
             {
-                if (I18n.get(key).contains("image%"))
-                {
-                    renderIllustration(
-                            guiGraphics, uiX + 65, uiY + 10 + (i * 10),
-                            Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(key).substring(I18n.get(key).lastIndexOf("%") + 1) + ".png"));
-                } else
-                {
-                    guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
-                }
+                guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
             }
+
+            String keyImage = "gui.astronomy_research_table.asha.entry" + currentEntry + ".image";
+            if (I18n.exists(keyImage))
+            {
+                renderImage(guiGraphics,Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(keyImage) + ".png"));
+            }
+
         }
 
 

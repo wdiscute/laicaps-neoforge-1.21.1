@@ -1,5 +1,5 @@
 {
-  "parent": "laicaps:land_on_lunamar",
+  "parent": "laicaps:land_on_overworld",
   "criteria": {
     "entry1": {
       "trigger": "minecraft:impossible"
@@ -16,14 +16,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.laicaps.lunamar_entries.description"
+      "translate": "advancements.laicaps.overworld_entries.description"
     },
     "icon": {
       "count": 1,
-      "id": "laicaps:astronomy_notebook"
+      "id": "laicaps:overworld"
     },
     "title": {
-      "translate": "advancements.laicaps.lunamar_entries.title"
+      "translate": "advancements.laicaps.overworld_entries.title"
     },
     "frame": "challenge",
     "show_toast": true,

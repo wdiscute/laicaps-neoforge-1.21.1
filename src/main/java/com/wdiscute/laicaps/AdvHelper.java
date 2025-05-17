@@ -81,7 +81,6 @@ public class AdvHelper
     public static void awardAdvancementCriteria(ServerPlayer player, String namespace, String achievementName, String criteria)
     {
         AdvancementHolder advHolder = player.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath(namespace, achievementName));
-        System.out.println(advHolder);
         if (advHolder != null)
         {
             player.getAdvancements().award(advHolder, criteria);

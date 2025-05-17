@@ -71,12 +71,7 @@
   "block.laicaps.telescope.daytime": "§cIt's too bright to see anything through the telescope",
   "gui.laicaps.telescope.missing": "Insert your Astronomy Notebook",
 
-  "block.laicaps.astronomy_research_table": "Astronomy Research Table",
-  "tooltip.laicaps.astronomy_research_table.0": "A handy research table used to gather",
-  "tooltip.laicaps.astronomy_research_table.1": "your thoughts relating to the universe.",
-  "tooltip.laicaps.astronomy_research_table.2": "Essential for those who wish to learn",
-  "tooltip.laicaps.astronomy_research_table.3": "more about the celestial bodies in this system",
-  "tooltip.laicaps.astronomy_research_table.4": "before embarking in a space adventure.",
+
 
 
   "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
@@ -116,7 +111,7 @@
   "gui.laicaps.telescope.tooltip.ember.0": "§6            EMBER      ",
   "gui.laicaps.telescope.tooltip.ember.1": "    A flaming hot world :3",
   "gui.laicaps.telescope.tooltip.ember.2": "          (so hot...)",
-  "gui.laicaps.telescope.tooltip.ember.3": "       (but also cold!?)",
+  "gui.laicaps.telescope.tooltip.ember.3": "       (burning even...)",
   "gui.laicaps.telescope.tooltip.ember.4": "",
 
   "gui.laicaps.telescope.tooltip.ember_blur.0": "§6§k         EMBER",
@@ -466,17 +461,43 @@
   "advancements.laicaps.root.title" : "Laicaps",
   "advancements.laicaps.root.description" : "The start of a very spaciaL Adventure",
 
-  "advancements.laicaps.asha.title" : "Asha",
-  "advancements.laicaps.asha.description" : "Land on Asha",
+
+  "advancements.laicaps.ember_discovered.title" : "A Spark In The Dark Sky",
+  "advancements.laicaps.ember_discovered.description" : "Spot the burning fires of Ember through your telescope",
+
+  "advancements.laicaps.land_on_ember.title" : "Ashwalker",
+  "advancements.laicaps.land_on_ember.description" : "Set foot where fire rules the land",
+
+  "advancements.laicaps.ember_entries.title" : "Burned Into Memory",
+  "advancements.laicaps.ember_entries.description" : "Completely fill out your knowledge about Ember",
+
+
+  "advancements.laicaps.asha_discovered.title" : "A Different Planet In The Sky",
+  "advancements.laicaps.asha_discovered.description" : "Look through your telescope and find Asha hiding amongst the stars",
+
+  "advancements.laicaps.land_on_asha.title" : "A small step for Steve",
+  "advancements.laicaps.land_on_asha.description" : "Embark on your first spacial trip and land on asha",
+
+  "advancements.laicaps.asha_entries.title" : "Every Ruin Turned",
+  "advancements.laicaps.asha_entries.description" : "Completely fill out your knowledge about Asha",
+
+
+  "advancements.laicaps.overworld_entries.title" : "Roots of Understanding",
+  "advancements.laicaps.overworld_entries.description" : "Completely fill out your knowledge about the Overworld",
+
+
+  "advancements.laicaps.lunamar_discovered.title" : "Oceans Above",
+  "advancements.laicaps.lunamar_discovered.description" : "Spot the blue planet in the vastness of space",
+
+  "advancements.laicaps.land_on_lunamar.title" : "Moonfall into the Sea",
+  "advancements.laicaps.land_on_lunamar.description" : "The tides rise to greet yet another visitor",
+
+  "advancements.laicaps.lunamar_entries.title" : "Submerged Secrets",
+  "advancements.laicaps.lunamar_entries.description" : "Catalog every plant, fish, and everything in between",
+
 
   "advancements.laicaps.sweetlily.title" : "Lily of the Sweet",
   "advancements.laicaps.sweetlily.description" : "Find and Gather all 5 sweetlilies",
-
-  "advancements.laicaps.lunamar.title" : "Lunamar",
-  "advancements.laicaps.lunamar.description" : "Land on Lunamar",
-
-  "advancements.laicaps.ember.title" : "Ember",
-  "advancements.laicaps.ember.description" : "Land on ember",
 
   "advancements.laicaps.telescope.title" : "Stars Above",
   "advancements.laicaps.telescope.description" : "Craft a telescope and look up to the stars",
@@ -495,13 +516,117 @@
 
 
 
-  "gui.astronomy_research_table.asha.entry1.name" : "     §dAsha§r - Climate",
 
-  "gui.astronomy_research_table.asha.entry1.left.0" : "image%asha_illustration_1",
-  "gui.astronomy_research_table.asha.entry1.left.8" : "asha is literally so cool omg",
 
-  "gui.astronomy_research_table.asha.entry1.right.0" : "hello this is a sentence at the",
-  "gui.astronomy_research_table.asha.entry1.right.1" : "start of the second page",
-  "gui.astronomy_research_table.asha.entry1.right.10" : "image%asha_illustration_2",
-  "gui.astronomy_research_table.asha.entry1.right.21" : "end of the page"
+
+  "item.laicaps.entry.dusty": "Dusty,Lost,Faded,Ruined,Dust-covered,Unlabeled,Weathered,",
+  "item.laicaps.entry.research": "Research,Observation,Data,Field,Journal,Archive,Planetary,Hypothesis,Expedition,Explorer's,Survey",
+  "item.laicaps.entry.paper": "Paper,Log,Entry,Notes,Report,Page,Sheet,Memo,Fragment,Draft,Chart,Note",
+
+  "block.laicaps.astronomy_research_table": "Astronomy Research Table",
+  "tooltip.laicaps.astronomy_research_table.0": "A handy research table used to gather",
+  "tooltip.laicaps.astronomy_research_table.1": "your thoughts relating to the universe.",
+  "tooltip.laicaps.astronomy_research_table.2": "Essential for those who wish to learn",
+  "tooltip.laicaps.astronomy_research_table.3": "more about the celestial bodies in this system",
+  "tooltip.laicaps.astronomy_research_table.4": "before embarking in a space adventure.",
+
+
+
+
+  "gui.astronomy_research_table.asha.entry1.name" : "          §dAsha§r - Planet",
+  "gui.astronomy_research_table.asha.entry1.image" : "asha_illustration_1",
+
+  "gui.astronomy_research_table.asha.entry1.left.9" : "               §c§k!!!§r   §dASHA   §c§k!!!§r",
+
+  "gui.astronomy_research_table.asha.entry1.left.11" : "Asha appears to be a friendly",
+  "gui.astronomy_research_table.asha.entry1.left.12" : "planet with no signs of danger.",
+  "gui.astronomy_research_table.asha.entry1.left.13" : "Soil and mineral composition is",
+  "gui.astronomy_research_table.asha.entry1.left.14" : "similar to the Overworld, so",
+  "gui.astronomy_research_table.asha.entry1.left.15" : "natural resources should be just",
+  "gui.astronomy_research_table.asha.entry1.left.16" : "as easy to obtain.",
+  "gui.astronomy_research_table.asha.entry1.left.18" : "The perfect planet for my first",
+  "gui.astronomy_research_table.asha.entry1.left.19" : "otherworldly expedition!",
+
+
+  "gui.astronomy_research_table.asha.entry1.right.2" : "Surface Temperature:",
+  "gui.astronomy_research_table.asha.entry1.right.3" : "§222°C",
+  "gui.astronomy_research_table.asha.entry1.right.4" : "Atmospheric Composition:",
+  "gui.astronomy_research_table.asha.entry1.right.5" : "§278% Nitrogen, 20% Oxygen, 2% others",
+  "gui.astronomy_research_table.asha.entry1.right.6" : "Atmospheric Pressure:",
+  "gui.astronomy_research_table.asha.entry1.right.7" : "§21.17 atm",
+  "gui.astronomy_research_table.asha.entry1.right.8" : "Orbital Period:",
+  "gui.astronomy_research_table.asha.entry1.right.9" : "§2395 Overworld days",
+  "gui.astronomy_research_table.asha.entry1.right.10" : "Dominant Biomes:",
+  "gui.astronomy_research_table.asha.entry1.right.11" : "§2Forests, rivers and grasslands",
+  "gui.astronomy_research_table.asha.entry1.right.12" : "Orbital Distance:",
+  "gui.astronomy_research_table.asha.entry1.right.13" : "§20.8 AU",
+  "gui.astronomy_research_table.asha.entry1.right.14" : "Seismic Activity:",
+  "gui.astronomy_research_table.asha.entry1.right.15" : "§2Minimal, geologically stable",
+
+  "gui.astronomy_research_table.asha.entry1.right.18" : "Final Analysis:",
+  "gui.astronomy_research_table.asha.entry1.right.19" : "§2No space suit required",
+
+
+
+  "gui.astronomy_research_table.asha.entry2.name" : "  §dAsha§r - Fauna & Flora",
+  "gui.astronomy_research_table.asha.entry2.image" : "asha_illustration_2",
+
+  "gui.astronomy_research_table.asha.entry2.left.11" : "The landing was a success.",
+  "gui.astronomy_research_table.asha.entry2.left.12" : "I can barely believe I'm on a",
+  "gui.astronomy_research_table.asha.entry2.left.13" : "different planet.",
+
+  "gui.astronomy_research_table.asha.entry2.left.15" : "The air is comfortable and",
+  "gui.astronomy_research_table.asha.entry2.left.16" : "refreshing, like a nice new home.",
+
+  "gui.astronomy_research_table.asha.entry2.left.18" : "Fauna and flora flourish ",
+  "gui.astronomy_research_table.asha.entry2.left.19" : "everywhere with no signs of",
+  "gui.astronomy_research_table.asha.entry2.left.20" : "natural predators.",
+
+  "gui.astronomy_research_table.asha.entry2.right.2" : "More research is needed but",
+  "gui.astronomy_research_table.asha.entry2.right.3" : "most creatures seem to not be",
+  "gui.astronomy_research_table.asha.entry2.right.4" : "scared or bothered with me",
+  "gui.astronomy_research_table.asha.entry2.right.5" : "getting close.",
+
+  "gui.astronomy_research_table.asha.entry2.right.8" : "I found these two fish who",
+  "gui.astronomy_research_table.asha.entry2.right.9" : "seem to hate each other, yet",
+  "gui.astronomy_research_table.asha.entry2.right.10" : "they swim together.",
+
+
+
+
+
+  "gui.astronomy_research_table.asha.entry3.name" : "     §dAsha§r - Lunarveil",
+  "gui.astronomy_research_table.asha.entry3.image" : "asha_illustration_3",
+
+  "gui.astronomy_research_table.asha.entry3.left.11" : "I found these unique flowers.",
+  "gui.astronomy_research_table.asha.entry3.left.12" : "I've named them Lunarveil for now.",
+
+  "gui.astronomy_research_table.asha.entry3.left.14" : "They appear to open under",
+  "gui.astronomy_research_table.asha.entry3.left.15" : "the moonlight to release",
+  "gui.astronomy_research_table.asha.entry3.left.16" : "their glittering pollen,",
+  "gui.astronomy_research_table.asha.entry3.left.17" : "lighting up the area in the area.",
+
+  "gui.astronomy_research_table.asha.entry3.left.19" : "Possibly to attract pollinators?",
+
+
+  "gui.astronomy_research_table.asha.entry3.right.3" : "They would look beautiful",
+  "gui.astronomy_research_table.asha.entry3.right.4" : "They would look beautiful",
+  "gui.astronomy_research_table.asha.entry3.right.5" : "They would look beautiful",
+  "gui.astronomy_research_table.asha.entry3.right.6" : "They would look beautiful",
+
+
+
+  "gui.astronomy_research_table.asha.entry3.right.9" : "They would look beautiful",
+  "gui.astronomy_research_table.asha.entry3.right.10" : "in my garden back in the",
+  "gui.astronomy_research_table.asha.entry3.right.11" : "Overworld. Surely it won't",
+  "gui.astronomy_research_table.asha.entry3.right.12" : "hurt to take a few back home...",
+
+  "gui.astronomy_research_table.asha.entry3.right.15" : "... I wonder what my bees",
+  "gui.astronomy_research_table.asha.entry3.right.16" : "will think of them..."
+
+
+
+
+
+
 }
