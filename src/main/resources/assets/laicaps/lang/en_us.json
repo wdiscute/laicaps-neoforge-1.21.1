@@ -610,23 +610,29 @@
 
 
   "gui.astronomy_research_table.asha.entry3.right.3" : "They would look beautiful",
-  "gui.astronomy_research_table.asha.entry3.right.4" : "They would look beautiful",
-  "gui.astronomy_research_table.asha.entry3.right.5" : "They would look beautiful",
-  "gui.astronomy_research_table.asha.entry3.right.6" : "They would look beautiful",
-
-
-
-  "gui.astronomy_research_table.asha.entry3.right.9" : "They would look beautiful",
-  "gui.astronomy_research_table.asha.entry3.right.10" : "in my garden back in the",
-  "gui.astronomy_research_table.asha.entry3.right.11" : "Overworld. Surely it won't",
-  "gui.astronomy_research_table.asha.entry3.right.12" : "hurt to take a few back home...",
+  "gui.astronomy_research_table.asha.entry3.right.4" : "in my garden back in the",
+  "gui.astronomy_research_table.asha.entry3.right.5" : "Overworld. Surely it won't",
+  "gui.astronomy_research_table.asha.entry3.right.6" : "hurt to take a few back home...",
 
   "gui.astronomy_research_table.asha.entry3.right.15" : "... I wonder what my bees",
-  "gui.astronomy_research_table.asha.entry3.right.16" : "will think of them..."
+  "gui.astronomy_research_table.asha.entry3.right.16" : "will think of them...",
 
 
 
 
+
+  "gui.astronomy_research_table.asha.entry4.name" : "     §dAsha§r - Sweetlily",
+  "gui.astronomy_research_table.asha.entry4.image" : "asha_illustration_4",
+
+  "gui.astronomy_research_table.asha.entry4.left.11" : "This lily-like flower is weirdly",
+  "gui.astronomy_research_table.asha.entry4.left.12" : "sweet. One of the tiny creatures",
+  "gui.astronomy_research_table.asha.entry4.left.13" : "just ate the petals right off.",
+
+  "gui.astronomy_research_table.asha.entry4.left.14" : "It only makes sense I name it Sweetlily.",
+
+  "gui.astronomy_research_table.asha.entry4.left.17" : "Grinding it to a power is easy enough,",
+  "gui.astronomy_research_table.asha.entry4.left.18" : "makes for the perfect replacement of",
+  "gui.astronomy_research_table.asha.entry4.left.19" : "the sugarcane sugar I'm used to."
 
 
 }
