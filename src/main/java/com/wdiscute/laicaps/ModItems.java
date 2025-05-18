@@ -8,6 +8,7 @@ import com.wdiscute.laicaps.item.*;
 
 
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -15,12 +16,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
@@ -31,6 +34,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 
 public class ModItems
 {
@@ -77,9 +81,13 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
+                            player.swing(usedHand);
+
+
                             awardEntry(player, "ember");
                             ItemStack itemstack = player.getItemInHand(usedHand);
                             itemstack.consume(1, player);
+
                             return super.use(level, player, usedHand);
                         }
                     });
@@ -216,6 +224,7 @@ public class ModItems
                     return (800 - stack.get(ModDataComponents.FUEL) == 0) ? 1 : 800 - stack.get(ModDataComponents.FUEL);
                 }
             });
+
 
     public static final DeferredItem<Item> LARGE_TANK = ITEMS.register(
             "large_tank", () -> new Item(new Item.Properties()

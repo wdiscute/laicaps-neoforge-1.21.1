@@ -92,23 +92,19 @@ public class ModBlocks
                                     .sound(SoundType.STONE)
                             ));
 
-    public static final DeferredBlock<Block> ASHA_TELEPORTER =
-            registerBlock(
-                    "asha_teleporter", () ->
-                            new SimpleTeleporterBlock(BlockBehaviour.Properties.of()
-                                    .strength(30)
-                                    .sound(SoundType.SCULK)
-                            )
-                            {
-                                @Override
-                                public ResourceKey<Level> getDimensionKey()
-                                {
-                                    return ResourceKey.create(
-                                            Registries.DIMENSION,
-                                            ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha"));
-                                }
-                            }
-            );
+    public static final DeferredBlock<Block> ASHA_TELEPORTER = registerBlock(
+            "asha_teleporter", () ->
+                    new SimpleTeleporterBlock(BlockBehaviour.Properties.of().strength(30).sound(SoundType.SCULK))
+                    {
+                        @Override
+                        public ResourceKey<Level> getDimensionKey()
+                        {
+                            return ResourceKey.create(
+                                    Registries.DIMENSION,
+                                    Laicaps.rl("asha"));
+                        }
+                    }
+    );
 
     public static final DeferredBlock<Block> EMBER_GLOBE =
             registerBlock(
@@ -148,9 +144,6 @@ public class ModBlocks
                             ));
 
 
-
-
-
     public static final DeferredBlock<Block> LUNAMAR_TELEPORTER =
             registerBlock(
                     "lunamar_teleporter", () ->
@@ -162,9 +155,7 @@ public class ModBlocks
                                 @Override
                                 public ResourceKey<Level> getDimensionKey()
                                 {
-                                    return ResourceKey.create(
-                                            Registries.DIMENSION,
-                                            ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "lunamar"));
+                                    return ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
                                 }
                             }
             );
@@ -182,7 +173,7 @@ public class ModBlocks
                                 {
                                     return ResourceKey.create(
                                             Registries.DIMENSION,
-                                            ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "ember"));
+                                            Laicaps.rl("ember"));
                                 }
                             }
             );
@@ -1256,37 +1247,47 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> POTTED_VIOLET_SWEETLILY =
-            registerBlockNoItem("potted_violet_sweetlily",
-                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT,
+            registerBlockNoItem(
+                    "potted_violet_sweetlily",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT,
                             ModBlocks.VIOLET_SWEETLILY,
-                                    BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
-                            )
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
             );
 
     public static final DeferredBlock<Block> POTTED_PEACH_SWEETLILY =
-            registerBlockNoItem("potted_peach_sweetlily",
-                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.PEACH_SWEETLILY,
+            registerBlockNoItem(
+                    "potted_peach_sweetlily",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.PEACH_SWEETLILY,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
                     )
             );
 
     public static final DeferredBlock<Block> POTTED_MAGENTA_SWEETLILY =
-            registerBlockNoItem("potted_magenta_sweetlily",
-                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.MAGENTA_SWEETLILY,
+            registerBlockNoItem(
+                    "potted_magenta_sweetlily",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.MAGENTA_SWEETLILY,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
                     )
             );
 
     public static final DeferredBlock<Block> POTTED_CHERRY_SWEETLILY =
-            registerBlockNoItem("potted_cherry_sweetlily",
-                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.CHERRY_SWEETLILY,
+            registerBlockNoItem(
+                    "potted_cherry_sweetlily",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.CHERRY_SWEETLILY,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
                     )
             );
 
     public static final DeferredBlock<Block> POTTED_NAVY_SWEETLILY =
-            registerBlockNoItem("potted_navy_sweetlily",
-                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.NAVY_SWEETLILY,
+            registerBlockNoItem(
+                    "potted_navy_sweetlily",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.NAVY_SWEETLILY,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
                     )
             );
@@ -1295,8 +1296,10 @@ public class ModBlocks
     //public static final BooleanProperty OPEN = BooleanProperty.create("open");
 
     public static final DeferredBlock<Block> POTTED_LUNARVEIL =
-            registerBlockNoItem("potted_lunarveil",
-                    () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.LUNARVEIL,
+            registerBlockNoItem(
+                    "potted_lunarveil",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.LUNARVEIL,
                             BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
                                     .randomTicks()
                                     .lightLevel(state -> state.getValue(LunarveilBlock.OPEN) ? 11 : 0)

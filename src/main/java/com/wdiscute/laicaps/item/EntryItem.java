@@ -19,7 +19,6 @@ public class EntryItem extends Item
         super(properties);
     }
 
-
     @Override
     public Component getName(ItemStack stack)
     {

@@ -535,10 +535,52 @@
 
 
 
-  "gui.astronomy_research_table.asha.entry1.name" : "          §dAsha§r - Planet",
+
+  "gui.astronomy_research_table.ember.entry1.name" : "      §cEmber§r - Planet",
+  "gui.astronomy_research_table.ember.entry1.image" : "ember_illustration_1",
+
+  "gui.astronomy_research_table.ember.entry1.left.10" : "               §c§k!!!§r   §cEMBER   §c§k!!!§r",
+
+  "gui.astronomy_research_table.ember.entry1.left.12" : "A planet consumed by fire and ash.",
+  "gui.astronomy_research_table.ember.entry1.left.13" : "The surface glows from it's rivers",
+  "gui.astronomy_research_table.ember.entry1.left.14" : "of molten rock.",
+
+  "gui.astronomy_research_table.ember.entry1.left.16" : "Smoke covers the land with no",
+  "gui.astronomy_research_table.ember.entry1.left.17" : "traces of vegetation or water.",
+
+  "gui.astronomy_research_table.ember.entry1.left.19" : "Anything that inhabits it must be",
+  "gui.astronomy_research_table.ember.entry1.left.20" : "just as unwelcoming as it's planet",
+
+
+  "gui.astronomy_research_table.ember.entry1.right.2" : "Surface Temperature:",
+  "gui.astronomy_research_table.ember.entry1.right.3" : "§4523°C",
+  "gui.astronomy_research_table.ember.entry1.right.4" : "Atmospheric Composition:",
+  "gui.astronomy_research_table.ember.entry1.right.5" : "§484% CO2, 12% SO2, 4% others",
+  "gui.astronomy_research_table.ember.entry1.right.6" : "Atmospheric Pressure:",
+  "gui.astronomy_research_table.ember.entry1.right.7" : "§44.6 atm",
+  "gui.astronomy_research_table.ember.entry1.right.8" : "Orbital Period:",
+  "gui.astronomy_research_table.ember.entry1.right.9" : "§4181 Overworld days",
+  "gui.astronomy_research_table.ember.entry1.right.10" : "Dominant Biomes:",
+  "gui.astronomy_research_table.ember.entry1.right.11" : "§4Lava Seas, Ash Deserts",
+  "gui.astronomy_research_table.ember.entry1.right.12" : "Orbital Distance:",
+  "gui.astronomy_research_table.ember.entry1.right.13" : "§40.5 AU",
+  "gui.astronomy_research_table.ember.entry1.right.14" : "Seismic Activity:",
+  "gui.astronomy_research_table.ember.entry1.right.15" : "§4Extreme, frequent eruptions",
+
+  "gui.astronomy_research_table.ember.entry1.right.18" : "Final Analysis:",
+  "gui.astronomy_research_table.ember.entry1.right.19" : "§4Space suit required.",
+
+
+
+
+
+
+
+
+  "gui.astronomy_research_table.asha.entry1.name" : "       §dAsha§r - Planet",
   "gui.astronomy_research_table.asha.entry1.image" : "asha_illustration_1",
 
-  "gui.astronomy_research_table.asha.entry1.left.9" : "               §c§k!!!§r   §dASHA   §c§k!!!§r",
+  "gui.astronomy_research_table.asha.entry1.left.9" : "               §d§k!!!§r   §dASHA   §d§k!!!§r",
 
   "gui.astronomy_research_table.asha.entry1.left.11" : "Asha appears to be a friendly",
   "gui.astronomy_research_table.asha.entry1.left.12" : "planet with no signs of danger.",
@@ -643,8 +685,45 @@
   "gui.astronomy_research_table.asha.entry4.right.16" : "liked this powder. If I could find",
   "gui.astronomy_research_table.asha.entry4.right.17" : "some kind of fruit I could make",
   "gui.astronomy_research_table.asha.entry4.right.18" : "treats for them and possibly",
-  "gui.astronomy_research_table.asha.entry4.right.19" : "make a friend?"
+  "gui.astronomy_research_table.asha.entry4.right.19" : "make a friend?",
 
+
+
+
+
+ "gui.astronomy_research_table.lunamar.entry1.name" : "      §cLunamar§r - Planet",
+ "gui.astronomy_research_table.lunamar.entry1.image" : "lunamar_illustration_1",
+
+ "gui.astronomy_research_table.lunamar.entry1.left.11" : "            §3§k!!!§r   §3lunamar   §3§k!!!§r",
+
+ "gui.astronomy_research_table.lunamar.entry1.left.13" : "A giant, dark ocean-covered",
+ "gui.astronomy_research_table.lunamar.entry1.left.14" : "planet illuminated by shimmering",
+ "gui.astronomy_research_table.lunamar.entry1.left.15" : "lights beneath its surface.",
+
+ "gui.astronomy_research_table.lunamar.entry1.left.17" : "Despite its distance from the Sun,",
+ "gui.astronomy_research_table.lunamar.entry1.left.18" : "Lunamar appears to maintain a mild",
+ "gui.astronomy_research_table.lunamar.entry1.left.19" : "climate, likely due to it's dense",
+ "gui.astronomy_research_table.lunamar.entry1.left.20" : "atmosphere trapping heat below.",
+
+
+ "gui.astronomy_research_table.lunamar.entry1.right.2" : "Surface Temperature:",
+ "gui.astronomy_research_table.lunamar.entry1.right.3" : "§28°C",
+ "gui.astronomy_research_table.lunamar.entry1.right.4" : "Atmospheric Composition:",
+ "gui.astronomy_research_table.lunamar.entry1.right.5" : "§270%% N, 18% O2, 8% CO2, 4% others",
+ "gui.astronomy_research_table.lunamar.entry1.right.6" : "Atmospheric Pressure:",
+ "gui.astronomy_research_table.lunamar.entry1.right.7" : "§22.2 atm",
+ "gui.astronomy_research_table.lunamar.entry1.right.8" : "Orbital Period:",
+ "gui.astronomy_research_table.lunamar.entry1.right.9" : "§2849 Overworld days",
+ "gui.astronomy_research_table.lunamar.entry1.right.10" : "Dominant Biomes:",
+ "gui.astronomy_research_table.lunamar.entry1.right.11" : "§2Oceans, with the very rare",
+ "gui.astronomy_research_table.lunamar.entry1.right.12" : "Orbital Distance:",
+ "gui.astronomy_research_table.lunamar.entry1.right.13" : "§22.06 AU",
+ "gui.astronomy_research_table.lunamar.entry1.right.14" : "Seismic Activity:",
+ "gui.astronomy_research_table.lunamar.entry1.right.15" : "§2Low, underwater vents are common",
+
+ "gui.astronomy_research_table.lunamar.entry1.right.18" : "Final Analysis:",
+ "gui.astronomy_research_table.lunamar.entry1.right.19" : "§2Diving Suit Recommended for.",
+ "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration."
 
 
 

@@ -44,7 +44,7 @@ public class RocketRenderer extends EntityRenderer<RocketEntity>
     @Override
     public ResourceLocation getTextureLocation(RocketEntity rocketEntity)
     {
-        return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/entity/rocket/rocket.png");
+        return Laicaps.rl("textures/entity/rocket/rocket.png");
     }
 
 

@@ -60,7 +60,7 @@ public class ReceiverBlockEntity extends BlockEntity implements TickableBlockEnt
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
                 ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
-                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "asha_puzzle"));
+                        Laicaps.rl("chests/asha_puzzle"));
 
                 arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
 

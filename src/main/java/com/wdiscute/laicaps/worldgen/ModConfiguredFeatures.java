@@ -26,7 +26,7 @@ public class ModConfiguredFeatures
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name)
     {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Laicaps.rl(name));
     }
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration)

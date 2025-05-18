@@ -16,7 +16,7 @@ public class ModTags
 
         private static TagKey<Block> createTag(String name)
         {
-            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, name));
+            return BlockTags.create(Laicaps.rl(name));
         }
     }
 
@@ -26,7 +26,7 @@ public class ModTags
 
         private static TagKey<Item> createTag(String name)
         {
-            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, name));
+            return ItemTags.create(Laicaps.rl(name));
         }
     }
 

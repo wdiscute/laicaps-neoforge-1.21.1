@@ -24,10 +24,11 @@
       "from": [ 0, 0, 0 ],
       "to": [ 16, 16, 16 ],
       "faces": {
-        "north": { "uv": [  0, 0, 16, 16 ], "texture": "#symbol", "neoforge_data": {
-          "block_light": 13,
-          "sky_light": 13
-        }
+        "north": { "uv": [  0, 0, 16, 16 ], "texture": "#symbol",
+          "neoforge_data": {
+            "block_light": 13,
+            "sky_light": 13
+          }
         }
       }
     }

@@ -33,7 +33,7 @@ public class ModSounds
 
 
     private static Supplier<SoundEvent> registerSoundEvent(String name) {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, name);
+        ResourceLocation id = Laicaps.rl(name);
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 

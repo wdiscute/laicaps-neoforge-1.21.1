@@ -15,7 +15,7 @@ public class ModPlacedFeatures
 
     public static ResourceKey<PlacedFeature> registerKey(String name)
     {
-        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, Laicaps.rl(name));
     }
 
 }

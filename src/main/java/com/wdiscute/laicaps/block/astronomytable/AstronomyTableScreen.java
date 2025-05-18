@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 
 public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTableMenu>
@@ -337,25 +338,24 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
         }
 
-
         //render text  & image from translation key
         if(entryUnlocked)
         {
             //render image
-            String keyImage = "gui.astronomy_research_table.asha.entry" + currentEntry + ".image";
+            String keyImage = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".image";
             if (I18n.exists(keyImage)) renderImage(guiGraphics,Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(keyImage) + ".png"));
 
             //render text left
             for (int i = 0; i < 21; i++)
             {
-                String key = "gui.astronomy_research_table.asha.entry" + currentEntry + ".left." + i;
+                String key = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".left." + i;
                 if (I18n.exists(key)) guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
             }
 
             //render text right
             for (int i = 0; i < 21; i++)
             {
-                String key = "gui.astronomy_research_table.asha.entry" + currentEntry + ".right." + i;
+                String key = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".right." + i;
                 if (I18n.exists(key)) guiGraphics.drawString(this.font, Component.translatable(key), uiX + 268, uiY + 10 + (i * 10), 0, false);
             }
         }

@@ -21,7 +21,7 @@ public class ModBoatRenderer extends BoatRenderer
     public ModBoatRenderer(EntityRendererProvider.Context pContext, boolean pChestBoat) {
         super(pContext, pChestBoat);
         this.boatResources = Stream.of(ModBoatEntity.Type.values()).collect(ImmutableMap.toImmutableMap(type -> type,
-                type -> Pair.of(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, getTextureLocation(type, pChestBoat)), this.createBoatModel(pContext, type, pChestBoat))));
+                type -> Pair.of(Laicaps.rl(getTextureLocation(type, pChestBoat)), this.createBoatModel(pContext, type, pChestBoat))));
     }
 
     private static String getTextureLocation(ModBoatEntity.Type pType, boolean pChestBoat) {
@@ -30,7 +30,7 @@ public class ModBoatRenderer extends BoatRenderer
 
     private ListModel<Boat> createBoatModel(EntityRendererProvider.Context context, ModBoatEntity.Type type, boolean chestBoat) {
 
-        ResourceLocation location = ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, type.getName());
+        ResourceLocation location = Laicaps.rl(type.getName());
 
         ModelLayerLocation modellayerlocation = chestBoat ? new ModelLayerLocation(location.withPrefix("chest_boat/"), "main") : new ModelLayerLocation(location.withPrefix("boat/"), "main");
         ModelPart modelpart = context.bakeLayer(modellayerlocation);
@@ -48,7 +48,7 @@ public class ModBoatRenderer extends BoatRenderer
     }
 
     private static ModelLayerLocation createLocation(String pPath, String pModel) {
-        return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, pPath), pModel);
+        return new ModelLayerLocation(Laicaps.rl(pPath), pModel);
     }
 
 

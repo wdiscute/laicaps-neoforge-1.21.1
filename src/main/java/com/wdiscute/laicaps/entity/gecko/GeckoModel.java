@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 public class GeckoModel<T extends GeckoEntity> extends HierarchicalModel<T>
 {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "kaupengecko"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Laicaps.rl("kaupengecko"), "main");
     private final ModelPart Body;
     private final ModelPart head;
 

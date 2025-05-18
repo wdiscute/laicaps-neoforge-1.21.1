@@ -19,7 +19,7 @@ public class SnufflerRenderer extends MobRenderer<SnufflerEntity, SnufflerModel<
     @Override
     public ResourceLocation getTextureLocation(SnufflerEntity snufflerEntity)
     {
-        return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "textures/entity/snuffler/snuffler.png");
+        return Laicaps.rl("textures/entity/snuffler/snuffler.png");
     }
 
     @Override

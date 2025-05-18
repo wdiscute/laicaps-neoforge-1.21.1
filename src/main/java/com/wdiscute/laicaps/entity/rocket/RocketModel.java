@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
 {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "rocket"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Laicaps.rl("rocket"), "main");
     private final ModelPart Root;
 
     public RocketModel(ModelPart root)

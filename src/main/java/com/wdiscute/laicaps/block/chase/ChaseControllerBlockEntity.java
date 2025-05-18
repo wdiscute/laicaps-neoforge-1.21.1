@@ -89,7 +89,7 @@ public class ChaseControllerBlockEntity extends BlockEntity implements TickableB
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
                 ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
-                        ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, "chests/asha_puzzle"));
+                        Laicaps.rl("chests/asha_puzzle"));
 
                 arrayOfItemStacks = level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
 
