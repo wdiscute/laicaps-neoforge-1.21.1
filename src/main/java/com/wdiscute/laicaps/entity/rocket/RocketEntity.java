@@ -9,6 +9,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -47,6 +49,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     private static final ResourceKey<Level> OVERWORLD_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
     private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
 
+    int landingCounter;
 
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
@@ -139,7 +142,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     }
 
 
-
     public void tick()
     {
         super.tick();
@@ -182,7 +184,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
                         }
                         entityData.set(JUMPING, -1);
                     }
-                } else
+                }
+                else
                 {
                     entityData.set(JUMPING, -1);
                 }
@@ -193,7 +196,13 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             if (getFirstPassenger() instanceof ServerPlayer player)
             {
                 if (jumping % 20 == 0)
-                    player.displayClientMessage(Component.translatable("gui.laicaps.rocket.takeoff." + jumping / 20), true);
+                {
+                    Component comp = Component.translatable("gui.laicaps.rocket.takeoff." + jumping / 20);
+
+                    player.connection.send(new ClientboundSetTitleTextPacket(Component.literal("")));
+                    player.connection.send(new ClientboundSetSubtitleTextPacket(comp));
+
+                }
             }
 
 
@@ -267,6 +276,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
                     }
             );
 
+            landingCounter = 0;
             this.changeDimension(dt);
             return;
         }
@@ -275,12 +285,40 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         //landing
         if (state == 3)
         {
+            landingCounter++;
+
+
+            Component comp = null;
+            Component compTitle = Component.literal("WIP");
+
+            comp = switch (landingCounter)
+            {
+                case 1 -> Component.literal("Landing on... <insert planet name>");
+                case 100 -> Component.literal("temperature: idk probably not too bad");
+                case 200 -> Component.literal("Atmosphere: breathable (steve doesnt have lungs)");
+                default -> comp;
+            };
+
+            System.out.println(landingCounter);
+
+
+            if (getFirstPassenger() instanceof ServerPlayer sp && comp != null)
+            {
+                System.out.println("tried to send " + compTitle);
+                sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
+                sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
+
+
+            }
+
+
             if (level().getBlockState(blockPosition().below()).isAir())
             {
                 Vec3 vec3 = position();
                 lerpTo(vec3.x, vec3.y - 0.5f, vec3.z, 0, 0, 0);
 
-            } else
+            }
+            else
             {
                 Vec3 vec3 = position();
                 lerpTo(vec3.x, blockPosition().getY(), vec3.z, 0, 0, 0);
@@ -319,7 +357,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
             if (!player.level().isClientSide)
                 player.openMenu(this);
-        } else
+        }
+        else
             player.startRiding(this);
 
         return super.interactAt(player, vec, hand);
@@ -432,7 +471,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         if (itemstack.isEmpty())
         {
             return ItemStack.EMPTY;
-        } else
+        }
+        else
         {
             this.getItemStacks().set(slot, ItemStack.EMPTY);
             return itemstack;
