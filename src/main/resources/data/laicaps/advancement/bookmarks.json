@@ -1,0 +1,34 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "asha_entry1": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_entry2": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_entry3": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_entry4": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.asha_entries.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:diamond"
+    },
+    "title": {
+      "translate": "advancements.laicaps.asha_entries.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "sends_telemetry_event": false
+}

@@ -26,6 +26,7 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
     private static final Logger log = LoggerFactory.getLogger(AstronomyTableScreen.class);
     private static final ResourceLocation INV_BOOK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/book_background.png");
+    private static final ResourceLocation BOOKMARK = Laicaps.rl("textures/gui/astronomy_table/bookmark.png");
     private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl( "textures/gui/astronomy_table/arrow_previous.png");
     private static final ResourceLocation ARROW_NEXT = Laicaps.rl( "textures/gui/astronomy_table/arrow_next.png");
 
@@ -108,6 +109,9 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
     {
         double x = mouseX - uiX;
         double y = mouseY - uiY;
+
+        System.out.println("mouse x" + mouseX);
+        System.out.println("mouse y" + mouseY);
 
         //previous arrow
         if (x > 68 && x < 105 && y > 230 && y < 240)
@@ -242,6 +246,22 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
             currentEntry = 1;
         }
 
+
+        //save bookmark
+        if (x > 353 && x < 414 && y > 115 && y < 144)
+        {
+            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, currentEntry);
+
+        }
+
+        //bookmark 1
+        if (x > 257 && x < 282 && y > 143 && y < 167)
+        {
+
+        }
+
+
+
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -361,7 +381,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
         }
 
 
-        //render text from translation key right
+        //render bookmark
+        //renderImage(guiGraphics, BOOKMARK);
 
 
     }
