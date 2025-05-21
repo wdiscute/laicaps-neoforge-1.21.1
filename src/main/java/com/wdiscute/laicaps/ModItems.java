@@ -271,6 +271,25 @@ public class ModItems
     //`--' `--' `-----'  `--'  `--' `--' `--'
     //
 
+
+    public static final DeferredItem<Item> STARFLIES_JAR = ITEMS.register("starflies_jar",
+            () -> new Item(new Item.Properties().stacksTo(1))
+            {
+                @Override
+                public InteractionResult useOn(UseOnContext context)
+                {
+                    System.out.println(context.getLevel().getBlockState(context.getClickedPos()));
+                    if(context.getLevel().getBlockState(context.getClickedPos().above()).isAir())
+                    {
+                        context.getLevel().setBlockAndUpdate(context.getClickedPos().above(), ModBlocks.STARFLIES_BLOCK.get().defaultBlockState());
+                    }
+                    return super.useOn(context);
+                }
+            });
+
+    public static final DeferredItem<Item> JAR = ITEMS.register("jar", () -> new Item(new Item.Properties().stacksTo(16)));
+
+
     public static final DeferredItem<Item> SWEETLILY_SUGAR = ITEMS.register("sweetlily_sugar", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> SNUFFLER_CHOP = ITEMS.register("snuffler_chop", () -> new Item(new Item.Properties().food(ModFoodProperties.SNUFFLER_CHOP)));
@@ -297,6 +316,12 @@ public class ModItems
     public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register(
             "oakheart_berries", () ->
                     new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES)));
+
+    public static final DeferredItem<Item> OAKHEART_BERRIES_JAM = ITEMS.register(
+            "oakheart_berries_jam", () ->
+                    new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES_JAM).stacksTo(16)));
+
+
 
     public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register("oakheart_door", () -> new DoubleHighBlockItem(ModBlocks.OAKHEART_DOOR.get(), new Item.Properties()));
     public static final DeferredItem<Item> OAKHEART_SIGN = ITEMS.register("oakheart_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_SIGN.get(), ModBlocks.OAKHEART_WALL_SIGN.get()));

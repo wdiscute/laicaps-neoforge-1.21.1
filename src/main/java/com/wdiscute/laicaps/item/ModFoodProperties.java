@@ -18,8 +18,14 @@ public class ModFoodProperties
 
 
     public static final FoodProperties OAKHEART_BERRIES = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(1)
+            .usingConvertsTo(Items.STICK)
+            .build();
+
+    public static final FoodProperties OAKHEART_BERRIES_JAM = new FoodProperties.Builder()
             .nutrition(4)
-            .saturationModifier(4)
+            .saturationModifier(2)
             .usingConvertsTo(Items.STICK)
             .build();
 

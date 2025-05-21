@@ -59,6 +59,7 @@ public class Laicaps
     public static final String MOD_ID = "laicaps";
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    public static final int MENU_ENTRIES = 4;
     public static final int EMBER_ENTRIES = 4;
     public static final int ASHA_ENTRIES = 4;
     public static final int OVERWORLD_ENTRIES = 4;

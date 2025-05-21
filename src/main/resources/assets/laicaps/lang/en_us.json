@@ -354,7 +354,23 @@
   "block.laicaps.riverthorne_thistle": "Riverthorne Thistle",
   "block.laicaps.riverthorne": "Riverthorne Stem",
 
-  "block.laicaps.lunarveil": "Lunarveil",
+ "block.laicaps.lunarveil": "Lunarveil",
+
+ "item.laicaps.starflies_jar": "Jar of Starflies",
+ "item.laicaps.starflies_jar.0": "A jar filled with glowing Starflies.",
+ "item.laicaps.starflies_jar.1": "Native to Asha, these gentle",
+ "item.laicaps.starflies_jar.2": "creatures drift in the night",
+ "item.laicaps.starflies_jar.3": "lighting up the surrounding area",
+
+ "item.laicaps.jar": "Jar",
+ "item.laicaps.jar.0": "Just a simple glass jar.",
+ "item.laicaps.jar.1": "Can be used to make jam or",
+ "item.laicaps.jar.2": "catch Starflies during nighttime.",
+
+ "item.laicaps.oakheart_berries_jam": "Oakheart Berries Jam",
+ "item.laicaps.oakheart_berries_jam.0": "A delicious Jar of oakheart berries.",
+ "item.laicaps.oakheart_berries_jam.1": "Better be eat it before a Nimble",
+ "item.laicaps.oakheart_berries_jam.2": "tries to steal it!",
 
   "block.laicaps.asha_grass_block": "Asha Grass Block",
   "block.laicaps.asha_dirt": "Asha Dirt",
@@ -535,8 +551,24 @@
 
 
 
+ "gui.astronomy_research_table.menu.entry1.name" : "      MENU - 1",
+ "gui.astronomy_research_table.menu.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.astronomy_research_table.ember.entry1.name" : "      §cEmber§r - Planet",
+ "gui.astronomy_research_table.menu.entry2.name" : "      MENU - 2",
+ "gui.astronomy_research_table.menu.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+
+ "gui.astronomy_research_table.menu.entry3.name" : "      MENU - 3",
+ "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+ "gui.astronomy_research_table.menu.entry4.name" : "      MENU - 4",
+ "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+
+
+
+
+ "gui.astronomy_research_table.ember.entry1.name" : "      §cEmber§r - Planet",
   "gui.astronomy_research_table.ember.entry1.image" : "ember_illustration_1",
 
   "gui.astronomy_research_table.ember.entry1.left.10" : "               §c§k!!!§r   §cEMBER   §c§k!!!§r",
@@ -571,8 +603,14 @@
   "gui.astronomy_research_table.ember.entry1.right.19" : "§4Space suit required.",
 
 
+ "gui.astronomy_research_table.ember.entry2.name" : "      EMBER - 2",
+ "gui.astronomy_research_table.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
+ "gui.astronomy_research_table.ember.entry3.name" : "      MENU - 3",
+ "gui.astronomy_research_table.ember.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
+ "gui.astronomy_research_table.ember.entry4.name" : "      MENU - 4",
+ "gui.astronomy_research_table.ember.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
 
@@ -588,6 +626,7 @@
   "gui.astronomy_research_table.asha.entry1.left.14" : "similar to the Overworld, so",
   "gui.astronomy_research_table.asha.entry1.left.15" : "natural resources should be just",
   "gui.astronomy_research_table.asha.entry1.left.16" : "as easy to obtain.",
+
   "gui.astronomy_research_table.asha.entry1.left.18" : "The perfect planet for my first",
   "gui.astronomy_research_table.asha.entry1.left.19" : "otherworldly expedition!",
 
@@ -595,7 +634,7 @@
   "gui.astronomy_research_table.asha.entry1.right.2" : "Surface Temperature:",
   "gui.astronomy_research_table.asha.entry1.right.3" : "§222°C",
   "gui.astronomy_research_table.asha.entry1.right.4" : "Atmospheric Composition:",
-  "gui.astronomy_research_table.asha.entry1.right.5" : "§278% Nitrogen, 20% Oxygen, 2% others",
+  "gui.astronomy_research_table.asha.entry1.right.5" : "§278% N, 20% O2, 2% others",
   "gui.astronomy_research_table.asha.entry1.right.6" : "Atmospheric Pressure:",
   "gui.astronomy_research_table.asha.entry1.right.7" : "§21.17 atm",
   "gui.astronomy_research_table.asha.entry1.right.8" : "Orbital Period:",
@@ -615,16 +654,16 @@
   "gui.astronomy_research_table.asha.entry2.name" : "  §dAsha§r - Fauna & Flora",
   "gui.astronomy_research_table.asha.entry2.image" : "asha_illustration_2",
 
-  "gui.astronomy_research_table.asha.entry2.left.11" : "The landing was a success.",
-  "gui.astronomy_research_table.asha.entry2.left.12" : "I can barely believe I'm on a",
-  "gui.astronomy_research_table.asha.entry2.left.13" : "different planet.",
+  "gui.astronomy_research_table.asha.entry2.left.11" : "The whole planet feels different",
+  "gui.astronomy_research_table.asha.entry2.left.12" : "yet familiar.",
 
-  "gui.astronomy_research_table.asha.entry2.left.15" : "The air is comfortable and",
-  "gui.astronomy_research_table.asha.entry2.left.16" : "refreshing, like a nice new home.",
+  "gui.astronomy_research_table.asha.entry2.left.13" : "Fauna and flora flourish",
+  "gui.astronomy_research_table.asha.entry2.left.14" : "everywhere with no signs of",
+  "gui.astronomy_research_table.asha.entry2.left.15" : "natural predators.",
 
-  "gui.astronomy_research_table.asha.entry2.left.18" : "Fauna and flora flourish ",
-  "gui.astronomy_research_table.asha.entry2.left.19" : "everywhere with no signs of",
-  "gui.astronomy_research_table.asha.entry2.left.20" : "natural predators.",
+  "gui.astronomy_research_table.asha.entry2.left.17" : "natural predators.",
+  "gui.astronomy_research_table.asha.entry2.left.18" : "full of life be hiding so close",
+  "gui.astronomy_research_table.asha.entry2.left.19" : "to the overworld?",
 
   "gui.astronomy_research_table.asha.entry2.right.2" : "More research is needed but",
   "gui.astronomy_research_table.asha.entry2.right.3" : "most creatures seem to not be",
@@ -681,14 +720,24 @@
   "gui.astronomy_research_table.asha.entry4.right.6" : "I'm used to.",
 
 
-  "gui.astronomy_research_table.asha.entry4.right.15" : "Some tiny creatures I found really",
-  "gui.astronomy_research_table.asha.entry4.right.16" : "liked this powder. If I could find",
-  "gui.astronomy_research_table.asha.entry4.right.17" : "some kind of fruit I could make",
-  "gui.astronomy_research_table.asha.entry4.right.18" : "treats for them and possibly",
-  "gui.astronomy_research_table.asha.entry4.right.19" : "make a friend?",
+  "gui.astronomy_research_table.asha.entry4.right.15" : "Some tiny creatures I found",
+  "gui.astronomy_research_table.asha.entry4.right.16" : "really liked this powder. If I",
+  "gui.astronomy_research_table.asha.entry4.right.17" : "could find some kind of fruit I",
+  "gui.astronomy_research_table.asha.entry4.right.18" : "could make treats for them and",
+  "gui.astronomy_research_table.asha.entry4.right.19" : "possibly make a friend?",
 
 
+ "gui.astronomy_research_table.overworld.entry1.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
+ "gui.astronomy_research_table.overworld.entry2.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+ "gui.astronomy_research_table.overworld.entry3.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+ "gui.astronomy_research_table.overworld.entry4.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
  "gui.astronomy_research_table.lunamar.entry1.name" : "      §cLunamar§r - Planet",
@@ -723,8 +772,17 @@
 
  "gui.astronomy_research_table.lunamar.entry1.right.18" : "Final Analysis:",
  "gui.astronomy_research_table.lunamar.entry1.right.19" : "§2Diving Suit Recommended for.",
- "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration."
+ "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
 
+
+ "gui.astronomy_research_table.lunamar.entry2.name" : "      MENU - 4",
+ "gui.astronomy_research_table.lunamar.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+ "gui.astronomy_research_table.lunamar.entry3.name" : "      MENU - 4",
+ "gui.astronomy_research_table.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+ "gui.astronomy_research_table.lunamar.entry4.name" : "      MENU - 4",
+ "gui.astronomy_research_table.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
 
 
 

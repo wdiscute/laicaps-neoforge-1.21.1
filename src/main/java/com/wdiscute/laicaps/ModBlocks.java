@@ -895,6 +895,21 @@ public class ModBlocks
     //`------' `--'  `--'     `-'     `--' `--' '--'  `-----'  `--'  `--' `--'   `--' `------' `--'  `--'    `--'
     //
 
+    public static final DeferredBlock<Block> STARFLIES_BLOCK =
+            registerBlockNoItem(
+                    "starflies_block", () ->
+                            new StarfliesBlock(BlockBehaviour.Properties.of()
+                                    .sound(SoundType.SCULK)
+                                    .strength(-1.0F)
+                                    .mapColor(MapColor.COLOR_YELLOW)
+                                    .noCollission()
+                                    .noOcclusion()
+                                    .lightLevel(state -> state.getValue(StarfliesBlock.ACTIVE) ? 14 : 0)
+                                    .pushReaction(PushReaction.DESTROY)
+                                    .replaceable()
+                            ));
+
+
 
     public static final DeferredBlock<Block> ASHA_GRASS_BLOCK =
             registerBlock(

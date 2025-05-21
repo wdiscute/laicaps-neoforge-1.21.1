@@ -77,8 +77,16 @@ public class LunarveilBlock extends BushBlock
 
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext)
+    public BlockState getStateForPlacement(BlockPlaceContext context)
     {
+        Level level = context.getLevel();
+        int numberOfDays = (int) (level.getDayTime() / 24000f);
+
+        if (level.getDayTime() - (numberOfDays * 24000L) > 12000 && level.getDayTime() - (numberOfDays * 24000L) < 22500)
+        {
+            return defaultBlockState().setValue(OPEN, true);
+        }
+
         return defaultBlockState().setValue(OPEN, false);
     }
 
@@ -90,13 +98,13 @@ public class LunarveilBlock extends BushBlock
         if (level.getDayTime() - (numberOfDays * 24000L) > 12000 && level.getDayTime() - (numberOfDays * 24000L) < 22500)
         {
 
-            if (!state.getValue(LunarveilBlock.OPEN))
-                level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, true));
+            if (!state.getValue(OPEN))
+                level.setBlockAndUpdate(pos, state.setValue(OPEN, true));
             return;
         }
 
-        if (state.getValue(LunarveilBlock.OPEN))
-            level.setBlockAndUpdate(pos, state.setValue(LunarveilBlock.OPEN, false));
+        if (state.getValue(OPEN))
+            level.setBlockAndUpdate(pos, state.setValue(OPEN, false));
 
     }
 
