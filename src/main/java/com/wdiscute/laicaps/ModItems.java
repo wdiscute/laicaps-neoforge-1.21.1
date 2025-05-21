@@ -278,11 +278,12 @@ public class ModItems
                 @Override
                 public InteractionResult useOn(UseOnContext context)
                 {
-                    System.out.println(context.getLevel().getBlockState(context.getClickedPos()));
                     if(context.getLevel().getBlockState(context.getClickedPos().above()).isAir())
                     {
                         context.getLevel().setBlockAndUpdate(context.getClickedPos().above(), ModBlocks.STARFLIES_BLOCK.get().defaultBlockState());
+                        return InteractionResult.SUCCESS;
                     }
+
                     return super.useOn(context);
                 }
             });

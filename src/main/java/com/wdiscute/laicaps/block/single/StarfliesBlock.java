@@ -1,8 +1,11 @@
 package com.wdiscute.laicaps.block.single;
 
+import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.particle.ModParticles;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -68,6 +71,19 @@ public class StarfliesBlock extends Block
                     0
             );
         }
+
+
+        if(Minecraft.getInstance().player.getMainHandItem().is(ModItems.STARFLIES_JAR.asItem()))
+        {
+
+            level.addParticle(
+                    ParticleTypes.CLOUD,
+                    pos.getX() + 0.5f,
+                    pos.getY() + 0.5f,
+                    pos.getZ() + 0.5f,
+                    0,0,0);
+        }
+
     }
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)

@@ -907,6 +907,7 @@ public class ModBlocks
                                     .lightLevel(state -> state.getValue(StarfliesBlock.ACTIVE) ? 14 : 0)
                                     .pushReaction(PushReaction.DESTROY)
                                     .replaceable()
+                                    .randomTicks()
                             ));
 
 

@@ -96,7 +96,6 @@ public class NotesControllerBlockEntity extends BlockEntity implements TickableB
                 ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
                         Laicaps.rl("chests/asha_puzzle"));
                 arrayOfItemStacks = this.level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
-                System.out.println(arrayOfItemStacks);
                 return;
             }
 

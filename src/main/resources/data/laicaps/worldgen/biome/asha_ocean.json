@@ -43,7 +43,8 @@
       "minecraft:ore_diamond_buried",
       "minecraft:ore_lapis",
       "minecraft:ore_lapis_buried",
-      "minecraft:ore_copper"
+      "minecraft:ore_copper",
+      "laicaps:starflies_placed"
     ]
   ],
   "has_precipitation": true,

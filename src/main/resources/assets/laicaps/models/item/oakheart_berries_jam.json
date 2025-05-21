@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "laicaps:item/oakheart_berries_jar"
+    "layer0": "laicaps:item/oakheart_berries_jam"
   }
 }

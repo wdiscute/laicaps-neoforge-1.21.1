@@ -299,16 +299,10 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
                 default -> comp;
             };
 
-            System.out.println(landingCounter);
-
-
             if (getFirstPassenger() instanceof ServerPlayer sp && comp != null)
             {
-                System.out.println("tried to send " + compTitle);
                 sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
                 sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
-
-
             }
 
 

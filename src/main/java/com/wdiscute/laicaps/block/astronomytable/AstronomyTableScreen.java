@@ -26,18 +26,18 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
     private static final ResourceLocation INV_BOOK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/book_background.png");
     private static final ResourceLocation BOOKMARK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/bookmark_background.png");
     private static final ResourceLocation BOOKMARK = Laicaps.rl("textures/gui/astronomy_table/bookmark.png");
-    private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl( "textures/gui/astronomy_table/arrow_previous.png");
-    private static final ResourceLocation ARROW_NEXT = Laicaps.rl( "textures/gui/astronomy_table/arrow_next.png");
+    private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl("textures/gui/astronomy_table/arrow_previous.png");
+    private static final ResourceLocation ARROW_NEXT = Laicaps.rl("textures/gui/astronomy_table/arrow_next.png");
 
-    private static final ResourceLocation EMBER_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/ember_selected.png");
-    private static final ResourceLocation ASHA_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/asha_selected.png");
-    private static final ResourceLocation OVERWORLD_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/overworld_selected.png");
-    private static final ResourceLocation LUNAMAR_SELECTED = Laicaps.rl( "textures/gui/astronomy_table/lunamar_selected.png");
+    private static final ResourceLocation EMBER_SELECTED = Laicaps.rl("textures/gui/astronomy_table/ember_selected.png");
+    private static final ResourceLocation ASHA_SELECTED = Laicaps.rl("textures/gui/astronomy_table/asha_selected.png");
+    private static final ResourceLocation OVERWORLD_SELECTED = Laicaps.rl("textures/gui/astronomy_table/overworld_selected.png");
+    private static final ResourceLocation LUNAMAR_SELECTED = Laicaps.rl("textures/gui/astronomy_table/lunamar_selected.png");
 
-    private static final ResourceLocation EMBER_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/ember_highlight.png");
-    private static final ResourceLocation ASHA_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/asha_highlight.png");
-    private static final ResourceLocation OVERWORLD_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/overworld_highlight.png");
-    private static final ResourceLocation LUNAMAR_HIGHLIGHT = Laicaps.rl( "textures/gui/astronomy_table/lunamar_highlight.png");
+    private static final ResourceLocation EMBER_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/ember_highlight.png");
+    private static final ResourceLocation ASHA_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/asha_highlight.png");
+    private static final ResourceLocation OVERWORLD_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/overworld_highlight.png");
+    private static final ResourceLocation LUNAMAR_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/lunamar_highlight.png");
 
 
     List<String> bookmarks = new ArrayList<>();
@@ -52,16 +52,6 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
     List<String> obfuscatedLeft = new ArrayList<>();
     List<String> obfuscatedRight = new ArrayList<>();
-
-
-    @Override
-    protected void containerTick()
-    {
-
-        System.out.println("currentPlanet " + currentPlanet);
-        System.out.println("currentEntry " + currentEntry);
-        super.containerTick();
-    }
 
     private void reObfuscate()
     {
@@ -79,7 +69,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                     s = r.nextFloat() < 0.85 ? s.concat("|") : s.concat(" ");
 
                 obfuscatedLeft.add(s);
-            } else
+            }
+            else
             {
                 obfuscatedLeft.add("");
             }
@@ -94,7 +85,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                     s = r.nextFloat() < 0.85 ? s.concat("|") : s.concat(" ");
 
                 obfuscatedRight.add(s);
-            } else
+            }
+            else
             {
                 obfuscatedRight.add("");
             }
@@ -121,57 +113,62 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
-        System.out.println("mouse x" + x);
-        System.out.println("mouse y" + y);
-
         //previous arrow
         if (x > 68 && x < 105 && y > 230 && y < 240)
         {
-            if (currentEntry > 0)
+
+            if(currentEntry == 1 && currentPlanet == 0)
             {
-                if(currentPlanet != 0)
-                    currentEntry--;
-                reObfuscate();
                 return false;
             }
 
-            if (currentEntry == 0)
+            if (currentEntry > 0)
             {
-                if (currentPlanet == 0) return false;
-                if (currentPlanet == 1)
-                {
-                    currentPlanet--;
-                    currentEntry = Laicaps.MENU_ENTRIES;
-                    reObfuscate();
-                    return false;
-                }
+                currentEntry--;
+                reObfuscate();
 
-                if (currentPlanet == 2)
+                if(currentEntry == 0)
                 {
-                    currentPlanet--;
-                    currentEntry = Laicaps.EMBER_ENTRIES;
-                    reObfuscate();
-                    return false;
-                }
+                    if (currentPlanet == 1)
+                    {
+                        currentPlanet--;
+                        currentEntry = Laicaps.MENU_ENTRIES;
+                        reObfuscate();
+                        return false;
+                    }
 
-                if (currentPlanet == 3)
-                {
-                    currentPlanet--;
-                    currentEntry = Laicaps.ASHA_ENTRIES;
-                    reObfuscate();
-                    return false;
-                }
+                    if (currentPlanet == 2)
+                    {
+                        currentPlanet--;
+                        currentEntry = Laicaps.EMBER_ENTRIES;
+                        reObfuscate();
+                        return false;
+                    }
 
-                if (currentPlanet == 4)
-                {
-                    currentPlanet--;
-                    currentEntry = Laicaps.OVERWORLD_ENTRIES;
-                    reObfuscate();
-                    return false;
-                }
+                    if (currentPlanet == 3)
+                    {
+                        currentPlanet--;
+                        currentEntry = Laicaps.ASHA_ENTRIES;
+                        reObfuscate();
+                        return false;
+                    }
 
+                    if (currentPlanet == 4)
+                    {
+                        currentPlanet--;
+                        currentEntry = Laicaps.OVERWORLD_ENTRIES;
+                        reObfuscate();
+                        return false;
+                    }
+                }
+                return false;
             }
+
+
+
+
         }
+
 
         //next arrow
         if (x > 420 && x < 440 && y > 230 && y < 240)
@@ -182,7 +179,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                 {
                     currentEntry++;
                     reObfuscate();
-                } else
+                }
+                else
                 {
                     currentEntry = 1;
                     currentPlanet++;
@@ -196,7 +194,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                 {
                     currentEntry++;
                     reObfuscate();
-                } else
+                }
+                else
                 {
                     currentEntry = 1;
                     currentPlanet++;
@@ -210,7 +209,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                 {
                     currentEntry++;
                     reObfuscate();
-                } else
+                }
+                else
                 {
                     currentEntry = 1;
                     currentPlanet++;
@@ -224,7 +224,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                 {
                     currentEntry++;
                     reObfuscate();
-                } else
+                }
+                else
                 {
                     currentEntry = 1;
                     currentPlanet++;
@@ -277,30 +278,32 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
         if (x > 277 && x < 298 && y > 3 && y < 29)
         {
             int entry = currentEntry;
-            if(currentPlanet == 1) entry = Laicaps.MENU_ENTRIES + currentEntry;
-            if(currentPlanet == 2) entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + currentEntry;
-            if(currentPlanet == 3) entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + currentEntry;
-            if(currentPlanet == 4) entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES + currentEntry;
+            if (currentPlanet == 1) entry = Laicaps.MENU_ENTRIES + currentEntry;
+            if (currentPlanet == 2) entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + currentEntry;
+            if (currentPlanet == 3)
+                entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + currentEntry;
+            if (currentPlanet == 4)
+                entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES + currentEntry;
 
 
-            minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId,entry);
+            minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, entry);
 
         }
 
         for (int i = 0; i < 10; i++)
         {
-            if(bookmarks.size() < i) break;
+            if (bookmarks.size() < i) break;
 
-            if (x > 31 && x < 59 && y > 7  + (i * 26) && y < 31  + (i * 26))
+            if (x > 31 && x < 59 && y > 7 + (i * 26) && y < 31 + (i * 26))
             {
 
                 String s = bookmarks.get(i);
 
-                if(s.contains("menu")) currentPlanet = 0;
-                if(s.contains("ember")) currentPlanet = 1;
-                if(s.contains("asha")) currentPlanet = 2;
-                if(s.contains("overworld")) currentPlanet = 3;
-                if(s.contains("lunamar")) currentPlanet = 4;
+                if (s.contains("menu")) currentPlanet = 0;
+                if (s.contains("ember")) currentPlanet = 1;
+                if (s.contains("asha")) currentPlanet = 2;
+                if (s.contains("overworld")) currentPlanet = 3;
+                if (s.contains("lunamar")) currentPlanet = 4;
 
 
                 currentEntry = Integer.parseInt(bookmarks.get(i).substring(bookmarks.get(i).indexOf("_") + 1));
@@ -310,8 +313,6 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
         return super.mouseClicked(mouseX, mouseY, button);
     }
-
-
 
 
     @Override
@@ -351,7 +352,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
 
         //render arrows above everything else
-        if (!(currentPlanet == 0)) guiGraphics.blit(ARROW_PREVIOUS, uiX + 65, uiY + 227, 0, 0, 23, 13, 23, 13);
+        if (!(currentPlanet == 0 && currentEntry == 1))
+            guiGraphics.blit(ARROW_PREVIOUS, uiX + 65, uiY + 227, 0, 0, 23, 13, 23, 13);
         if (!(currentPlanet == 4 && currentEntry == Laicaps.LUNAMAR_ENTRIES))
             guiGraphics.blit(ARROW_NEXT, uiX + 420, uiY + 227, 0, 0, 23, 13, 23, 13);
 
@@ -363,7 +365,8 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                 guiGraphics.drawString(
                         this.font, Component.translatable("gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".name"),
                         uiX + 90, uiY + 230, 0, false);
-            } else
+            }
+            else
             {
                 String s = "";
                 if (currentPlanet == 1) s = "      §6Ember§r - §c§k!!!!!!!!!";
@@ -404,29 +407,32 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
             //right obfuscated text
             for (int i = 0; i < 19; i++)
-                guiGraphics.drawString(this.font, Component.literal("§c§k§l" + obfuscatedRight.get(i)),uiX + 268, uiY + 30 + (i * 10), 0, true);
+                guiGraphics.drawString(this.font, Component.literal("§c§k§l" + obfuscatedRight.get(i)), uiX + 268, uiY + 30 + (i * 10), 0, true);
 
         }
 
         //render text  & image from translation key
-        if(entryUnlocked)
+        if (entryUnlocked)
         {
             //render image
             String keyImage = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".image";
-            if (I18n.exists(keyImage)) renderImage(guiGraphics,Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(keyImage) + ".png"));
+            if (I18n.exists(keyImage))
+                renderImage(guiGraphics, Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(keyImage) + ".png"));
 
             //render text left
             for (int i = 0; i < 21; i++)
             {
                 String key = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".left." + i;
-                if (I18n.exists(key)) guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
+                if (I18n.exists(key))
+                    guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
             }
 
             //render text right
             for (int i = 0; i < 21; i++)
             {
                 String key = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".right." + i;
-                if (I18n.exists(key)) guiGraphics.drawString(this.font, Component.translatable(key), uiX + 272, uiY + 10 + (i * 10), 0, false);
+                if (I18n.exists(key))
+                    guiGraphics.drawString(this.font, Component.translatable(key), uiX + 272, uiY + 10 + (i * 10), 0, false);
             }
         }
 
@@ -435,7 +441,7 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
         RenderSystem.enableBlend();
         renderImage(guiGraphics, BOOKMARK_BACKGROUND);
-        if(AdvHelper.hasAdvancementCriteria(adv, "bookmarks", currentPlanetString + "_" + currentEntry))
+        if (AdvHelper.hasAdvancementCriteria(adv, "bookmarks", currentPlanetString + "_" + currentEntry))
         {
             renderImage(guiGraphics, BOOKMARK);
         }
@@ -449,12 +455,14 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
         for (int i = 0; i < bookmarks.size(); i++)
         {
             ResourceLocation bookmarkImage = Laicaps.rl("textures/gui/astronomy_table/bookmark_" + bookmarks.get(i) + ".png");
-            renderImage(guiGraphics, bookmarkImage, i * 26);
+
+            if (!(Objects.equals(bookmarks.getFirst(), "none")))
+                renderImage(guiGraphics, bookmarkImage, i * 26);
         }
 
 
     }
-    
+
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
     {

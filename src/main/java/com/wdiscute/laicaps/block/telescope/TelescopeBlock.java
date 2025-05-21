@@ -53,8 +53,6 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
 
                     tbe.drops();
 
-
-                    System.out.println("tried to give advancement");
                     AdvHelper.awardAdvancement(sp,"telescope_advanced");
 
                 }
