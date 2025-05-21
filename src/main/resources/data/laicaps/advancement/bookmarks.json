@@ -1,32 +1,85 @@
 {
   "parent": "laicaps:root",
   "criteria": {
-    "asha_entry1": {
+    "menu_1": {
       "trigger": "minecraft:impossible"
     },
-    "asha_entry2": {
+    "menu_2": {
       "trigger": "minecraft:impossible"
     },
-    "asha_entry3": {
+    "menu_3": {
       "trigger": "minecraft:impossible"
     },
-    "asha_entry4": {
+    "menu_4": {
+      "trigger": "minecraft:impossible"
+    },
+    "menu_5": {
+      "trigger": "minecraft:impossible"
+    },
+    "menu_6": {
+      "trigger": "minecraft:impossible"
+    },
+    "ember_1": {
+      "trigger": "minecraft:impossible"
+    },
+    "ember_2": {
+      "trigger": "minecraft:impossible"
+    },
+    "ember_3": {
+      "trigger": "minecraft:impossible"
+    },
+    "ember_4": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_1": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_2": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_3": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_4": {
+      "trigger": "minecraft:impossible"
+    },
+    "asha_5": {
+      "trigger": "minecraft:impossible"
+    },
+    "overworld_1": {
+      "trigger": "minecraft:impossible"
+    },
+    "overworld_2": {
+      "trigger": "minecraft:impossible"
+    },
+    "overworld_3": {
+      "trigger": "minecraft:impossible"
+    },
+    "overworld_4": {
+      "trigger": "minecraft:impossible"
+    },
+    "lunamar_1": {
+      "trigger": "minecraft:impossible"
+    },
+    "lunamar_2": {
+      "trigger": "minecraft:impossible"
+    },
+    "lunamar_3": {
+      "trigger": "minecraft:impossible"
+    },
+    "lunamar_4": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
-    "description": {
-      "translate": "advancements.laicaps.asha_entries.description"
-    },
+    "description": "Laicaps dev advanceemnt to store bookmarks server side",
     "icon": {
       "count": 1,
       "id": "minecraft:diamond"
     },
-    "title": {
-      "translate": "advancements.laicaps.asha_entries.title"
-    },
+    "title": "Bookmarks",
     "frame": "challenge",
-    "show_toast": true,
+    "show_toast": false,
     "announce_to_chat": false,
     "hidden": false
   },

@@ -28,8 +28,58 @@ public class AdvHelper
             return false;
     }
 
+    public static boolean hasAdvancementCriteria(ClientAdvancements clientAdvancements, String achievementName, String criteria)
+    {
+        return hasAdvancementCriteria(clientAdvancements, Laicaps.MOD_ID, achievementName, criteria);
+    }
+
+    public static boolean hasAdvancementCriteria(ClientAdvancements clientAdvancements, String namespace, String advancementName, String criteria)
+    {
+        AdvancementHolder adv = clientAdvancements.get(ResourceLocation.fromNamespaceAndPath(namespace, advancementName));
+
+        if (clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
+        {
+
+            List<String> completedCriteria = new ArrayList<>();
+            acessor.getProgress().get(adv).getCompletedCriteria().forEach(completedCriteria::add);
+
+            for (int i = 0; i < completedCriteria.size(); i++)
+            {
+                if(completedCriteria.get(i).contains(criteria)) return true;
+            }
+
+        }
+
+        return false;
+    }
 
 
+    public static boolean hasAdvancementCriteria(ServerPlayer sp, String advancement, String criteria)
+    {
+        return hasAdvancementCriteria(sp, Laicaps.MOD_ID, advancement, criteria);
+    }
+
+
+    public static boolean hasAdvancementCriteria(ServerPlayer sp, String namespace, String advancement, String criteria)
+    {
+        AdvancementHolder advHolder = sp.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath(namespace, advancement));
+
+        if (advHolder != null)
+        {
+            AdvancementProgress progress = sp.getAdvancements().getOrStartProgress(advHolder);
+
+            List<String> completedCriteria = new ArrayList<>();
+            progress.getCompletedCriteria().forEach(completedCriteria::add);
+
+            for (String s : completedCriteria)
+            {
+                if (s.contains(criteria)) return true;
+            }
+
+        }
+
+        return false;
+    }
 
 
     public static Iterable<String> getEntriesCompletedAsIterable(ClientAdvancements clientAdvancements, String achievementName)
@@ -44,7 +94,8 @@ public class AdvHelper
         if (clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
         {
             return acessor.getProgress().get(adv).getCompletedCriteria();
-        } else
+        }
+        else
         {
             List<String> list = new ArrayList<>();
             list.add("none");
@@ -52,6 +103,28 @@ public class AdvHelper
         }
     }
 
+
+    public static int getEntriesCompletedFromAdvancement(ServerPlayer sp, String achievementName)
+    {
+        return getEntriesCompletedFromAdvancement(sp, Laicaps.MOD_ID, achievementName);
+    }
+
+    public static int getEntriesCompletedFromAdvancement(ServerPlayer sp, String namespace, String advancementName)
+    {
+        AdvancementHolder advHolder = sp.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath(namespace, advancementName));
+
+        if (advHolder != null)
+        {
+            AdvancementProgress progress = sp.getAdvancements().getOrStartProgress(advHolder);
+
+            List<String> completedCriteria = new ArrayList<>();
+            progress.getCompletedCriteria().forEach(completedCriteria::add);
+
+            return completedCriteria.size();
+        }
+
+        return 0;
+    }
 
     public static int getEntriesCompletedFromAdvancement(ClientAdvancements clientAdvancements, String achievementName)
     {
@@ -65,12 +138,29 @@ public class AdvHelper
         if (clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
         {
             return Iterables.size(acessor.getProgress().get(adv).getCompletedCriteria());
-        } else
+        }
+        else
         {
             return 0;
         }
     }
 
+
+    public static void revokeAdvancementCriteria(ServerPlayer player, String achievementName, String criteria)
+    {
+        revokeAdvancementCriteria(player, Laicaps.MOD_ID, achievementName, criteria);
+    }
+
+
+    public static void revokeAdvancementCriteria(ServerPlayer player, String namespace, String achievementName, String criteria)
+    {
+        AdvancementHolder advHolder = player.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath(namespace, achievementName));
+        if (advHolder != null)
+        {
+            player.getAdvancements().revoke(advHolder, criteria);
+        }
+
+    }
 
     public static void awardAdvancementCriteria(ServerPlayer player, String achievementName, String criteria)
     {
@@ -103,7 +193,8 @@ public class AdvHelper
 
             if (!progress.isDone())
             {
-                for (String criteria : progress.getRemainingCriteria()) player.getAdvancements().award(advHolder, criteria);
+                for (String criteria : progress.getRemainingCriteria())
+                    player.getAdvancements().award(advHolder, criteria);
             }
         }
     }
