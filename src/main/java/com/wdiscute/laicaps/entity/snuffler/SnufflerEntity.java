@@ -23,9 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class SnufflerEntity extends Animal
 {
-    public final AnimationState idleAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
-
     public SnufflerEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
@@ -57,24 +54,6 @@ public class SnufflerEntity extends Animal
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
         return ModEntities.SNUFFLER.get().create(level);
-    }
-
-    private void setupAnimationStates() {
-        if(this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 80;
-            this.idleAnimationState.start(this.tickCount);
-        } else {
-            --this.idleAnimationTimeout;
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        if(this.level().isClientSide()) {
-            this.setupAnimationStates();
-        }
     }
 
     @Override
