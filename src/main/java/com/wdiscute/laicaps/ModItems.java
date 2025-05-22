@@ -83,10 +83,7 @@ public class ModItems
                         {
                             player.swing(usedHand);
 
-
-                            awardEntry(player, "ember");
-                            ItemStack itemstack = player.getItemInHand(usedHand);
-                            itemstack.consume(1, player);
+                            if(awardEntry(player, "ember")) player.getItemInHand(usedHand).consume(1, player);
 
                             return super.use(level, player, usedHand);
                         }
@@ -101,9 +98,10 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
-                            awardEntry(player, "asha");
-                            ItemStack itemstack = player.getItemInHand(usedHand);
-                            itemstack.consume(1, player);
+                            player.swing(usedHand);
+
+                            if(awardEntry(player, "asha")) player.getItemInHand(usedHand).consume(1, player);
+
                             return super.use(level, player, usedHand);
                         }
                     });
@@ -118,9 +116,10 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
-                            awardEntry(player, "overworld");
-                            ItemStack itemstack = player.getItemInHand(usedHand);
-                            itemstack.consume(1, player);
+                            player.swing(usedHand);
+
+                            if(awardEntry(player, "overworld")) player.getItemInHand(usedHand).consume(1, player);
+
                             return super.use(level, player, usedHand);
                         }
                     });
@@ -135,9 +134,10 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
-                            awardEntry(player, "lunamar");
-                            ItemStack itemstack = player.getItemInHand(usedHand);
-                            itemstack.consume(1, player);
+                            player.swing(usedHand);
+
+                            if(awardEntry(player, "lunamar")) player.getItemInHand(usedHand).consume(1, player);
+
                             return super.use(level, player, usedHand);
                         }
                     });
@@ -344,7 +344,7 @@ public class ModItems
     }
 
 
-    private static void awardEntry(Player player, String planet)
+    private static boolean awardEntry(Player player, String planet)
     {
         if (player instanceof ServerPlayer sp)
         {
@@ -352,11 +352,18 @@ public class ModItems
 
             List<String> result = new ArrayList<>();
             AdvHelper.getEntriesRemainingAsIterable(sp, planet + "_entries").forEach(result::add);
-
             String criteria = result.get(r.nextInt(result.size()));
-            sp.displayClientMessage(Component.literal("You have unlocked the entry " + I18n.get("gui.astronomy_research_table." + planet + "." + criteria + ".name")), true);
+
+            if(criteria.equals("none"))
+            {
+                sp.displayClientMessage(Component.literal("There are no entries left to unlock"), true);
+                return false;
+            }
+            sp.displayClientMessage(Component.literal("You have unlocked the entry ").append(Component.translatable("gui.astronomy_research_table." + planet + "." + criteria + ".name")), true);
             AdvHelper.awardAdvancementCriteria(sp, planet + "_entries", criteria);
         }
+
+        return false;
     }
 
     private static void setHoverTextForTanks(ItemStack stack, List<Component> tooltipComponents, String size)

@@ -537,9 +537,9 @@
 
 
 
-  "item.laicaps.entry.dusty": "Dusty,Lost,Faded,Ruined,Dust-covered,Unlabeled,Weathered,",
-  "item.laicaps.entry.research": "Research,Observation,Data,Field,Journal,Archive,Planetary,Hypothesis,Expedition,Explorer's,Survey",
-  "item.laicaps.entry.paper": "Paper,Log,Entry,Notes,Report,Page,Sheet,Memo,Fragment,Draft,Chart,Note",
+  "item.laicaps.entry.dusty": "Dusty,Lost,Faded,Ruined,Dust-covered,Unlabeled,Weathered,Stained,Abandoned,Ancient,Forgotten,Bleached",
+  "item.laicaps.entry.research": "Research,Observation,Data,Field,Journal,Archive,Planetary,Expedition,Explorer's,Survey,Analysis,Study",
+  "item.laicaps.entry.paper": "Paper,Log,Entry,Notes,Report,Page,Sheet,Memo,Fragment,Draft,Chart,Note,Logbook,Document,Blueprint,Script,Annotation",
 
   "block.laicaps.astronomy_research_table": "Astronomy Research Table",
   "tooltip.laicaps.astronomy_research_table.0": "A handy research table used to gather",

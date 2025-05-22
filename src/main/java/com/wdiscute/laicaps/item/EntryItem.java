@@ -6,6 +6,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,40 +21,41 @@ public class EntryItem extends Item
         super(properties);
     }
 
+
+    @OnlyIn(Dist.CLIENT)
     @Override
     public Component getName(ItemStack stack)
     {
-        return stack.get(ModDataComponents.ENTRY_NAME) == null ?
-                Component.literal("Entry Page") :
-                Component.literal(stack.get(ModDataComponents.ENTRY_NAME));
+
+        String entryName = stack.get(ModDataComponents.ENTRY_NAME);
+
+        if (entryName.contains("Entry Page")) return Component.literal(entryName);
+
+        String[] numbers = entryName.split(",");
+
+        String[] dusty = I18n.get("item.laicaps.entry.dusty").split(",");
+        String[] research = I18n.get("item.laicaps.entry.research").split(",");
+        String[] paper = I18n.get("item.laicaps.entry.paper").split(",");
+
+        int dustyIndex = Integer.parseInt(numbers[0]) % dusty.length;
+        int researchIndex = Integer.parseInt(numbers[1]) % research.length;
+        int paperIndex = Integer.parseInt(numbers[2]) % paper.length;
+
+        String finalstring = dusty[dustyIndex] + " " + research[researchIndex] + " " + paper[paperIndex];
+
+        return Component.literal(finalstring);
     }
+
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
     {
         if (stack.get(ModDataComponents.ENTRY_NAME) == null) stack.set(ModDataComponents.ENTRY_NAME, "Entry Page");
-        if (stack.get(ModDataComponents.ENTRY_NAME).contains("Entry Page"))
+        if (stack.get(ModDataComponents.ENTRY_NAME).contains("Entry Page") && !level.isClientSide)
         {
             Random r = new Random();
 
-            String[] dusty = I18n.get("item.laicaps.entry.dusty").split(",");
-            List<String> dustylist;
-            dustylist = Arrays.stream(dusty).toList();
-
-            String[] research = I18n.get("item.laicaps.entry.research").split(",");
-            List<String> researchlist;
-            researchlist = Arrays.stream(research).toList();
-
-            String[] paper = I18n.get("item.laicaps.entry.paper").split(",");
-            List<String> paperlist;
-            paperlist = Arrays.stream(paper).toList();
-
-
-            String s = dustylist.get(r.nextInt(dustylist.size())) + " " + researchlist.get(r.nextInt(researchlist.size())) + " " + paperlist.get(r.nextInt(paperlist.size()));
-
-            stack.set(
-                    ModDataComponents.ENTRY_NAME, s);
-
+            stack.set(ModDataComponents.ENTRY_NAME, r.nextInt(100) + "," + r.nextInt(100) + "," + r.nextInt(100));
         }
     }
 
