@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "laicaps:jar"
+    },
+    {
+      "item": "laicaps:oakheart_berries"
+    },
+    {
+      "item": "laicaps:oakheart_berries"
+    }
+  ],
+  "result": {
+    "id": "laicaps:oakheart_berries_jam",
+    "count": 1
+  }
+}

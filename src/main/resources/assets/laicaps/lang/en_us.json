@@ -288,8 +288,6 @@
   "tooltip.laicaps.pristine_enderpearl_dust.1": "It's incredibly shiny and radiating with energy.",
 
 
-  "block.laicaps.water_container": "Water Container",
-  "block.laicaps.water_container_helper": "Water Container Helper",
 
   "block.laicaps.oakheart_sapling": "Oakheart Sapling",
   "block.laicaps.stripped_oakheart_log": "Stripped Oakheart Log",
@@ -431,6 +429,13 @@
 
   "item.laicaps.sweetlily_sugar": "Sweetlily Sugar",
 
+
+ "block.laicaps.water_container": "Water Container",
+ "block.laicaps.water_container_helper": "Water Container Helper",
+
+ "block.laicaps.moonshade_kelp": "Moonshade Kelp",
+ "item.laicaps.moonshade_fruit": "Moonshade Fruit",
+ "item.laicaps.moonshade_fruit.0": "a Fruit WDAWDWADAW///",
 
 
   "entity.laicaps.rocket": "WIP Rocket",

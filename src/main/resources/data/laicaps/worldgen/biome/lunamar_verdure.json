@@ -16,7 +16,12 @@
     "water_color": 3262875,
     "water_fog_color": 6473384
   },
-  "features": [],
+  "features": [
+    [
+      "laicaps:moonshade_kelp_placed",
+      "laicaps:moonshade_kelp_verdure_placed"
+    ]
+  ],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {},

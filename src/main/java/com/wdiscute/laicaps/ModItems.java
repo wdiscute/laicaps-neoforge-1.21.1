@@ -338,6 +338,23 @@ public class ModItems
     public static final DeferredItem<Item> OAKROOT_BOAT = ITEMS.register("oakroot_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.OAKROOT, new Item.Properties().stacksTo(16)));
 
 
+
+
+
+    //
+    //,--.    ,--. ,--. ,--.  ,--.   ,---.   ,--.   ,--.   ,---.   ,------.
+    //|  |    |  | |  | |  ,'.|  |  /  O  \  |   `.'   |  /  O  \  |  .--. '
+    //|  |    |  | |  | |  |' '  | |  .-.  | |  |'.'|  | |  .-.  | |  '--'.'
+    //|  '--. '  '-'  ' |  | `   | |  | |  | |  |   |  | |  | |  | |  |\  \
+    //`-----'  `-----'  `--'  `--' `--' `--' `--'   `--' `--' `--' `--' '--'
+    //
+
+
+    public static final DeferredItem<Item> MOONSHADE_FRUIT = ITEMS.register("moonshade_fruit", () -> new Item(new Item.Properties().food(ModFoodProperties.MOONSHADE_FRUIT)));
+
+
+
+
     public static void register(IEventBus eventBus)
     {
         ITEMS.register(eventBus);

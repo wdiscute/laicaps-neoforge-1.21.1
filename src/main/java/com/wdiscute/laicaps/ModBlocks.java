@@ -20,7 +20,7 @@ import com.wdiscute.laicaps.block.telescope.TelescopeBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
 import com.wdiscute.laicaps.types.ModWoodTypes;
-import com.wdiscute.laicaps.worldgen.tree.ModTreeGrowers;
+import com.wdiscute.laicaps.worldgen.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -68,11 +68,7 @@ public class ModBlocks
     public static final DeferredBlock<Block> SALT =
             registerBlock(
                     "salt", () ->
-                            new SaltBlock(BlockBehaviour.Properties.of()
-                                    .strength(30)
-                                    .sound(SoundType.SCULK)
-                                    .noOcclusion()
-                                    .noCollission()
+                            new PressurePlateBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().instabreak()
                             )
             );
 
@@ -939,7 +935,6 @@ public class ModBlocks
                     "riverthorne", () ->
                             new Riverthorne(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
-                                    .strength(0.6F)
                                     .noCollission()
                                     .noOcclusion()
                                     .instabreak()
@@ -1154,11 +1149,11 @@ public class ModBlocks
 
 
     //
-    //,--.   ,--.   ,---.   ,--------. ,------. ,------.
-    //|  |   |  |  /  O  \  '--.  .--' |  .---' |  .--. '
-    //|  |.'.|  | |  .-.  |    |  |    |  `--,  |  '--'.'
-    //|   ,'.   | |  | |  |    |  |    |  `---. |  |\  \
-    //'--'   '--' `--' `--'    `--'    `------' `--' '--'
+    //,--.    ,--. ,--. ,--.  ,--.   ,---.   ,--.   ,--.   ,---.   ,------.
+    //|  |    |  | |  | |  ,'.|  |  /  O  \  |   `.'   |  /  O  \  |  .--. '
+    //|  |    |  | |  | |  |' '  | |  .-.  | |  |'.'|  | |  .-.  | |  '--'.'
+    //|  '--. '  '-'  ' |  | `   | |  | |  | |  |   |  | |  | |  | |  |\  \
+    //`-----'  `-----'  `--'  `--' `--' `--' `--'   `--' `--' `--' `--' '--'
     //
 
 
@@ -1207,6 +1202,29 @@ public class ModBlocks
                                     .offsetType(BlockBehaviour.OffsetType.XZ)
                             )
             );
+
+
+
+
+    public static final DeferredBlock<Block> MOONSHADE_KELP =
+            registerBlock(
+                    "moonshade_kelp", () ->
+                            new MoonshadeKelpBlock(BlockBehaviour.Properties.of()
+                                    .sound(SoundType.BAMBOO_SAPLING)
+                                    .isValidSpawn(Blocks::never)
+                                    .pushReaction(PushReaction.DESTROY)
+                                    .randomTicks()
+                                    .instabreak()
+                                    .noOcclusion()
+                                    .noCollission()
+                                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                                    .lightLevel(state -> state.getValue(MoonshadeKelpBlock.GROWN) ? 11 : 0)
+                            )
+            );
+
+
+
+
 
 
     //

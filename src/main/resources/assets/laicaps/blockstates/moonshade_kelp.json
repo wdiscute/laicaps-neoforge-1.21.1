@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "grown=true": {
+      "model": "laicaps:block/moonshade_kelp_grown"
+    },
+    "grown=false": {
+      "model": "laicaps:block/moonshade_kelp"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps.item;
 
+import com.wdiscute.laicaps.ModItems;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -24,21 +25,19 @@ public class ModFoodProperties
             .build();
 
     public static final FoodProperties OAKHEART_BERRIES_JAM = new FoodProperties.Builder()
-            .nutrition(4)
-            .saturationModifier(2)
-            .usingConvertsTo(Items.STICK)
+            .nutrition(5)
+            .saturationModifier(3)
+            .usingConvertsTo(ModItems.JAR)
             .build();
 
     public static final FoodProperties SNUFFLER_CHOP = new FoodProperties.Builder()
             .nutrition(3)
             .saturationModifier(0.3f)
-            .usingConvertsTo(Items.STICK)
             .build();
 
     public static final FoodProperties COOKED_SNUFFLER_CHOP = new FoodProperties.Builder()
             .nutrition(8)
             .saturationModifier(0.8f)
-            .usingConvertsTo(Items.STICK)
             .build();
 
 
@@ -51,5 +50,14 @@ public class ModFoodProperties
             .nutrition(2)
             .saturationModifier(0.1f)
             .build();
+
+
+    public static final FoodProperties MOONSHADE_FRUIT = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(2)
+            .build();
+
+
+
 }
 

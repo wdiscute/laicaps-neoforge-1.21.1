@@ -16,7 +16,11 @@
     "water_color": 7967176,
     "water_fog_color": 9613241
   },
-  "features": [],
+  "features": [
+    [
+      "laicaps:moonshade_kelp_placed"
+    ]
+  ],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {},

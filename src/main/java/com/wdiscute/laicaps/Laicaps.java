@@ -23,6 +23,7 @@ import com.wdiscute.laicaps.particle.WaterFlowerParticles;
 import com.wdiscute.laicaps.sound.ModSounds;
 import com.wdiscute.laicaps.types.ModMenuTypes;
 import com.wdiscute.laicaps.types.ModWoodTypes;
+import com.wdiscute.laicaps.worldgen.ModFeatures;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.multiplayer.ClientAdvancements;
@@ -86,6 +87,7 @@ public class Laicaps
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModFeatures.register(modEventBus);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

@@ -93,7 +93,6 @@ public class ModCreativeModeTabs
                                 output.accept(ModBlocks.OAKHEART_SAPLING.get());
                                 output.accept(ModBlocks.OAKHEART_LEAVES.get());
                                 output.accept(ModBlocks.FLOWERING_OAKHEART_LEAVES.get());
-                                output.accept(ModItems.OAKHEART_BERRIES.get());
                                 output.accept(ModBlocks.OAKHEART_LOG.get());
                                 output.accept(ModBlocks.STRIPPED_OAKHEART_LOG.get());
                                 output.accept(ModBlocks.OAKHEART_WOOD.get());
@@ -159,12 +158,21 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.REDTALE.get());
                                 output.accept(ModItems.COOKED_REDTALE.get());
                                 output.accept(ModItems.REDTALE_BUCKET.get());
-                                output.accept(ModItems.NIMBLE_SWEET_TREAT.get());
 
                                 //snuffler
                                 output.accept(ModItems.SNUFFLER_SPAWN_EGG.get());
                                 output.accept(ModItems.SNUFFLER_CHOP.get());
                                 output.accept(ModItems.COOKED_SNUFFLER_CHOP.get());
+
+                                //oakheart berries
+                                output.accept(ModItems.NIMBLE_SWEET_TREAT.get());
+                                output.accept(ModItems.OAKHEART_BERRIES.get());
+
+                                //jar
+                                output.accept(ModItems.OAKHEART_BERRIES_JAM.get());
+                                output.accept(ModItems.JAR.get());
+                                output.accept(ModItems.STARFLIES_JAR.get());
+
 
 
                             })
@@ -185,6 +193,8 @@ public class ModCreativeModeTabs
 
                                 //water flower
                                 output.accept(ModBlocks.WATER_FLOWER.get());
+                                output.accept(ModBlocks.MOONSHADE_KELP.get());
+                                output.accept(ModItems.MOONSHADE_FRUIT.get());
 
 
                             })
