@@ -44,10 +44,8 @@ public class AstronomyTableBlock extends HorizontalDirectionalBlock implements E
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof AstronomyTableBlockEntity atbe)
         {
             player.openMenu(new SimpleMenuProvider(atbe, Component.literal("Astronomy Table")), pos);
-            return ItemInteractionResult.SUCCESS;
         }
-
-        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        return ItemInteractionResult.SUCCESS;
     }
 
     @Override
