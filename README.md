@@ -1,11 +1,27 @@
-LAICAPS isn’t just a mod. It’s an interstellar symphony of rocket-fueled ambition, unholy science, and pixel-perfect insanity. LAICAPS has everything an astronaut could ask for. Rockets. Planets. That's it.
+
+![laicaps](https://github.com/user-attachments/assets/75e2c258-71e7-4bb0-9bb6-0eba9783b9b6)
+
+
+Laicaps is a space exploration mod with big emphasizes in exploration, environmental storytelling & atmosphere, with a gradual sense of progression from one planet to the next. 
+
+Use your telescope to discover new planets, harvest unfamiliar flora with unique properties, explore and learn about the ecosystems, and solve puzzles as you expand your knowledge.
+
+
+![laicaps_1](https://github.com/user-attachments/assets/f81a8048-e926-4d47-ae3f-fbb30b8f355e)
 
 
 
-🌍 Explore unique planets that may or may not kill you
+Laicaps allows you to travel to three distinct worlds, exploring them at your own pace while gathering materials and knowledge to continue your journey forward.
 
-👾 Encounter intelligent life. Ignore it. Build over it
+Asha – A peaceful, overworld-like planet with gentle terrain and no visible threats. Lush forests and glowing wildlife make it an ideal target for your first space expedition!
 
-🔭 Look through telescopes? Who knows what you might find
 
-Hi :3
+
+Lunamar – A vast ocean planet locked in permanent night. Peaceful marine life and bioluminescent plants create a quiet, mysterious underwater environment.
+
+
+
+
+Ember – A volatile volcanic world cloaked in ash. Dangerous terrain and extreme heat pose a challenge, but valuable resources await.
+
+
