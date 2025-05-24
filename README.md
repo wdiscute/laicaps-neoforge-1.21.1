@@ -1,5 +1,6 @@
 
-![laicaps](https://github.com/user-attachments/assets/75e2c258-71e7-4bb0-9bb6-0eba9783b9b6)
+
+![Laicaps](https://github.com/user-attachments/assets/03f91846-c348-4c0b-9fd4-250f987d9e0c)
 
 
 Laicaps is a space mod that emphasizes exploration, environmental storytelling, and atmosphere, with a gradual sense of progression from one planet to the next.
@@ -10,14 +11,14 @@ Laicaps is a space mod that emphasizes exploration, environmental storytelling, 
 - Solve puzzles as you uncover the traces of those who came before you.
 
 
-![laicaps_1](https://github.com/user-attachments/assets/f81a8048-e926-4d47-ae3f-fbb30b8f355e)
+![Telescope](https://github.com/user-attachments/assets/f81a8048-e926-4d47-ae3f-fbb30b8f355e)
 
 
 Laicaps adds three distinct planets, allowing you to explore them at your own pace while gathering materials and knowledge to continue your journey forward.
 
 It features an entry-based, unlockable in-game guide that expands as you explore and learn about each planet and its features.
 
-![image](https://github.com/user-attachments/assets/a6ffcede-77be-4b93-8f5b-175a61342cd5)
+![book](https://github.com/user-attachments/assets/a6ffcede-77be-4b93-8f5b-175a61342cd5)
 
 
 **Asha**
@@ -31,7 +32,7 @@ A peaceful, earth-like planet scattered with ruins from those who came before yo
 A vast ocean planet tidally locked into an endless night. Peaceful marine life and bioluminescent plants create a mysterious environment with little to fear.
 
 
-![LUNAMAR](https://github.com/user-attachments/assets/ea102136-f22c-498e-9807-1dcce8afb969)
+![lunamar](https://github.com/user-attachments/assets/ea102136-f22c-498e-9807-1dcce8afb969)
 
 
 **Ember** (Coming later)
