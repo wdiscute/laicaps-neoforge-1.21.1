@@ -3,9 +3,9 @@
 ![Laicaps](https://github.com/user-attachments/assets/03f91846-c348-4c0b-9fd4-250f987d9e0c)
 
 
-Laicaps is a space mod that emphasizes exploration, environmental storytelling, and atmosphere, with a gradual sense of progression from one planet to the next.
+Laicaps is a fantasy space exploration mod that emphasizes adventure, environmental storytelling, and atmosphere.
 
-- Use your telescope to discover new planets. 
+- Look through a telescope to discover new planets. 
 - Harvest unfamiliar flora with unique properties. 
 - Explore three vastly different planets, each with its own atmosphere and ecosystem.
 - Solve puzzles as you uncover the traces of those who came before you.
