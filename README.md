@@ -19,20 +19,21 @@ It features a custom in-game "guide" built into the exploration and natural prog
 
 
 
-      **Asha** 
-A peaceful, overworld-like planet with gentle terrain and . Lush forests and glowing wildlife make it an ideal target for your first space expedition!
+**Asha**
+
+A peaceful, overworld-like planet filled with ruins of those who came before you. Lush forests and glowing wildlife make it an ideal target for your first space expedition!
 
 ![asha](https://github.com/user-attachments/assets/09a57bdf-2ca9-45e3-91e8-3330d7c0a925)
 
 
-      **Lunamar** 
-A vast ocean planet tidally lock into a permanent night. Peaceful marine life and bioluminescent plants create a mysterious underwater environment.
+**Lunamar** 
+A vast ocean planet tidally locked into an endless night. Peaceful marine life and bioluminescent plants create a mysterious underwater environment with little to fear.
 
 
 ![LUNAMAR](https://github.com/user-attachments/assets/ea102136-f22c-498e-9807-1dcce8afb969)
 
 
-      **Ember**
-A volatile volcanic planet cloaked in ash. A hard to navigate planet with hostile creatures
+**Ember**
+A volatile volcanic planet cloaked in ash. A hard to navigate planet with hostile creatures unwelcoming of your presence.
 
 
