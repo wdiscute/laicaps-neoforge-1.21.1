@@ -1189,10 +1189,10 @@ public class ModBlocks
             );
 
 
-    public static final DeferredBlock<Block> WATER_FLOWER =
+    public static final DeferredBlock<Block> ILLUMA =
             registerBlock(
-                    "water_flower", () ->
-                            new WaterFlower(BlockBehaviour.Properties.of()
+                    "illuma", () ->
+                            new IllumaBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
                                     .isValidSpawn(Blocks::never)
                                     .pushReaction(PushReaction.DESTROY)
@@ -1200,6 +1200,7 @@ public class ModBlocks
                                     .instabreak()
                                     .noOcclusion()
                                     .noCollission()
+                                    .lightLevel(state -> state.getValue(IllumaBlock.OPEN) ? 12 : 0)
                                     .offsetType(BlockBehaviour.OffsetType.XZ)
                             )
             );

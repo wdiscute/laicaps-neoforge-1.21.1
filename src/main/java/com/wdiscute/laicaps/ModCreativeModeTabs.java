@@ -1,15 +1,10 @@
 package com.wdiscute.laicaps;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -182,7 +177,7 @@ public class ModCreativeModeTabs
 
     public static final Supplier<CreativeModeTab> LAICAPS_LUNAMAR =
             CREATIVE_MODE_TABS.register(
-                    "laicaps_lunamar", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.WATER_FLOWER.get()))
+                    "laicaps_lunamar", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.ILLUMA.get()))
                             .title(Component.translatable("creativetab.laicaps.laicaps_lunamar"))
                             .displayItems((itemDisplayParameters, output) ->
                             {
@@ -192,7 +187,7 @@ public class ModCreativeModeTabs
 
 
                                 //water flower
-                                output.accept(ModBlocks.WATER_FLOWER.get());
+                                output.accept(ModBlocks.ILLUMA.get());
                                 output.accept(ModBlocks.MOONSHADE_KELP.get());
                                 output.accept(ModItems.MOONSHADE_FRUIT.get());
 

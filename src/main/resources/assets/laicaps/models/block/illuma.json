@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "laicaps:block/water_flower"
+    "cross": "laicaps:block/illuma"
   },
   "render_type": "cutout"
 }

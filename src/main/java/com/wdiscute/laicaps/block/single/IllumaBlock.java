@@ -24,19 +24,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
 
-public class WaterFlower extends BushBlock implements SimpleWaterloggedBlock
+public class IllumaBlock extends BushBlock implements SimpleWaterloggedBlock
 {
 
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
-    @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
-    {
-        if (state.is(ModBlocks.ASHA_DIRT)) return true;
-        if (state.is(ModBlocks.ASHA_GRASS_BLOCK)) return true;
-        return super.mayPlaceOn(state, level, pos);
-    }
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
@@ -82,7 +74,7 @@ public class WaterFlower extends BushBlock implements SimpleWaterloggedBlock
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        BlockState bs = defaultBlockState().setValue(OPEN, false);
+        BlockState bs = defaultBlockState().setValue(OPEN, context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.WATER));
         bs = bs.setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.WATER));
         return bs;
     }
@@ -97,7 +89,7 @@ public class WaterFlower extends BushBlock implements SimpleWaterloggedBlock
     }
 
 
-    public WaterFlower(Properties properties)
+    public IllumaBlock(Properties properties)
     {
         super(properties);
     }

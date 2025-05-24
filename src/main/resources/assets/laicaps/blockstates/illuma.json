@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "laicaps:block/illuma"
+    },
+    "open=true": {
+      "model": "laicaps:block/illuma_open"
+    }
+  }
+}
