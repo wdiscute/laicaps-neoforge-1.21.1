@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tanks",
+  "key": {
+    "N": {
+      "item": "minecraft:writable_book"
+    },
+    "E": {
+      "item": "laicaps:pristine_enderpearl_dust"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "GEG",
+    "ENE",
+    "GEG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "laicaps:astronomy_notebook"
+  }
+}

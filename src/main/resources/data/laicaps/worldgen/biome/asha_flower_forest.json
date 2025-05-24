@@ -49,10 +49,11 @@
       "laicaps:lunarveil_patch_placed",
       "laicaps:asha_grass_placed",
       "laicaps:asha_sweetlily_placed",
-      "laicaps:starflies_placed"
-    ],
-    [
-      "minecraft:freeze_top_layer"
+      "laicaps:starflies_placed",
+      "laicaps:lunarveil_extra_patch_placed",
+      "laicaps:asha_extra_sweetlily_placed",
+      "laicaps:tiny_oakheart_placed",
+      "laicaps:tiny_oakroot_placed"
     ]
   ],
   "has_precipitation": true,

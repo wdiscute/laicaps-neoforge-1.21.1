@@ -297,6 +297,8 @@ public class ModItems
     public static final DeferredItem<Item> COOKED_SNUFFLER_CHOP = ITEMS.register("cooked_snuffler_chop", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_SNUFFLER_CHOP)));
     public static final DeferredItem<Item> SNUFFLER_SPAWN_EGG = ITEMS.register("snuffler_spawn_egg", () -> new SpawnEggItem(ModEntities.SNUFFLER.get(), 15971928, 13534776, new Item.Properties()));
 
+    public static final DeferredItem<Item> SWIBBLE_SPAWN_EGG = ITEMS.register("swibble_spawn_egg", () -> new SpawnEggItem(ModEntities.SNUFFLER.get(), 4892577, 13534776, new Item.Properties()));
+
 
     public static final DeferredItem<Item> BLUETALE = ITEMS.register("bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_BLUETALE = ITEMS.register("cooked_bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));

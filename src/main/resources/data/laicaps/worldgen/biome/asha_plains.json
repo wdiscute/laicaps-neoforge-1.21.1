@@ -49,7 +49,9 @@
       "laicaps:asha_sweetlily_placed",
       "laicaps:oakheart_plains_placed",
       "laicaps:oakroot_plains_placed",
-      "laicaps:starflies_placed"
+      "laicaps:starflies_placed",
+      "laicaps:tiny_oakheart_placed",
+      "laicaps:tiny_oakroot_placed"
     ]
   ],
   "has_precipitation": true,

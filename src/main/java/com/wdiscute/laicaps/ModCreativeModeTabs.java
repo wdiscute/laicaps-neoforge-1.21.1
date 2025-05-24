@@ -177,7 +177,7 @@ public class ModCreativeModeTabs
 
     public static final Supplier<CreativeModeTab> LAICAPS_LUNAMAR =
             CREATIVE_MODE_TABS.register(
-                    "laicaps_lunamar", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.ILLUMA.get()))
+                    "laicaps_lunamar", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.MOONSHADE_FRUIT.get()))
                             .title(Component.translatable("creativetab.laicaps.laicaps_lunamar"))
                             .displayItems((itemDisplayParameters, output) ->
                             {

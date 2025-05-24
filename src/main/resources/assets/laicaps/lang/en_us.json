@@ -84,7 +84,6 @@
   "gui.laicaps.rocket.tooltip.generic.knowledge": "§c§k    !!!§r §cMore Knowledge is §c§k!!!§r",
   "gui.laicaps.rocket.tooltip.generic.knowledge.2": "§c§k!!!§r §cRequired Before Travel §c§k!!!§r",
 
-  "gui.rocket.telescope.notebook": "§cInsert Notebook",
   "gui.rocket.telescope.tank": "§cInsert Tank",
 
   "gui.laicaps.rocket.takeoff.0": "§l§aInitiating Takeoff...",
@@ -252,19 +251,19 @@
   "tooltip.laicaps.tank.small.0": "A small tank capable of storing",
   "tooltip.laicaps.tank.small.1": "enough enderblaze fuel for a",
   "tooltip.laicaps.tank.small.2": "single one-way journey.",
-  "tooltip.laicaps.tank.small.3": "",
+  "tooltip.laicaps.tank.small.3": "Refuel it at a Refuel Station.",
 
   "item.laicaps.medium_tank": "Medium Tank",
   "tooltip.laicaps.tank.medium.0": "A medium sized tank capable of storing",
   "tooltip.laicaps.tank.medium.1": "a decent amount of enderblaze fuel.",
   "tooltip.laicaps.tank.medium.2": "Possibly enough for a short journey and back.",
-  "tooltip.laicaps.tank.medium.3": "",
+  "tooltip.laicaps.tank.medium.3": "Refuel it at a Refuel Station.",
 
   "item.laicaps.large_tank": "Large Tank",
   "tooltip.laicaps.tank.large.0": "A large tank capable of storing",
   "tooltip.laicaps.tank.large.1": "a huge amount of enderblaze fuel.",
   "tooltip.laicaps.tank.large.2": "It makes space travel a breeze.",
-  "tooltip.laicaps.tank.large.3": "",
+  "tooltip.laicaps.tank.large.3": "Refuel it at a Refuel Station.",
 
   "tooltip.laicaps.tank.fuel": "Fuel",
 
@@ -272,7 +271,7 @@
   "tooltip.laicaps.canister.0": "WIP No use.",
 
   "item.laicaps.rocket": "WIP Rocket",
-  "tooltip.laicaps.rocket.0": "WIP!! eventually there will be a whole progress for",
+  "tooltip.laicaps.rocket.0": "WIP!! eventually there will be a whole process for",
   "tooltip.laicaps.rocket.1": "slowly building towards the rocket ship with several in-world building stages",
   "tooltip.laicaps.rocket.2": "This is a quick dirty workaround for playtesting",
 
@@ -377,7 +376,7 @@
   "block.laicaps.asha_grass": "Asha Grass",
   "block.laicaps.asha_short_grass": "Asha Short Grass",
 
-  "block.laicaps.water_flower": "WIP Water Flower",
+  "block.laicaps.illuma": "Illuma",
 
   "block.laicaps.ember_globe": "Ember Globe",
   "tooltip.laicaps.ember_globe.0": "A surprisingly accurate model of Ember,",
@@ -415,6 +414,10 @@
   "tooltip.laicaps.cooked_redtale.0" : "A redtale cooked to perfection.",
   "tooltip.laicaps.cooked_redtale.1" : "The only thing it's good for.",
   "item.laicaps.redtale_bucket" : "Bucket of Redtale",
+
+
+ "entity.laicaps.swibble": "Nimble",
+ "item.laicaps.swibble_spawn_egg": "Nimble Spawn Egg",
 
   "entity.laicaps.nimble": "Nimble",
   "item.laicaps.nimble_spawn_egg": "Nimble Spawn Egg",
@@ -661,21 +664,21 @@
   "gui.astronomy_research_table.asha.entry2.name" : "  §dAsha§r - Fauna & Flora",
   "gui.astronomy_research_table.asha.entry2.image" : "asha_illustration_2",
 
-  "gui.astronomy_research_table.asha.entry2.left.11" : "The whole planet feels different",
-  "gui.astronomy_research_table.asha.entry2.left.12" : "yet familiar.",
+  "gui.astronomy_research_table.asha.entry2.left.11" : "The whole planet feels familiar.",
+  "gui.astronomy_research_table.asha.entry2.left.12" : "Like a twin planet to the Overworld.",
 
-  "gui.astronomy_research_table.asha.entry2.left.13" : "Fauna and flora flourish",
-  "gui.astronomy_research_table.asha.entry2.left.14" : "everywhere with no signs of",
-  "gui.astronomy_research_table.asha.entry2.left.15" : "natural predators.",
+  "gui.astronomy_research_table.asha.entry2.left.14" : "Fauna and flora flourish",
+  "gui.astronomy_research_table.asha.entry2.left.15" : "everywhere with no signs of",
+  "gui.astronomy_research_table.asha.entry2.left.16" : "natural predators.",
 
-  "gui.astronomy_research_table.asha.entry2.left.17" : "natural predators.",
-  "gui.astronomy_research_table.asha.entry2.left.18" : "full of life be hiding so close",
-  "gui.astronomy_research_table.asha.entry2.left.19" : "to the overworld?",
+  "gui.astronomy_research_table.asha.entry2.left.18" : "I can barely believe a planet so",
+  "gui.astronomy_research_table.asha.entry2.left.19" : "full of life was hiding right next",
+  "gui.astronomy_research_table.asha.entry2.left.20" : "to the overworld in the sky.",
 
-  "gui.astronomy_research_table.asha.entry2.right.2" : "More research is needed but",
-  "gui.astronomy_research_table.asha.entry2.right.3" : "most creatures seem to not be",
-  "gui.astronomy_research_table.asha.entry2.right.4" : "scared or bothered with me",
-  "gui.astronomy_research_table.asha.entry2.right.5" : "getting close.",
+  "gui.astronomy_research_table.asha.entry2.right.2" : "Further research and testing is",
+  "gui.astronomy_research_table.asha.entry2.right.3" : "needed but every creature I come",
+  "gui.astronomy_research_table.asha.entry2.right.4" : "across seems curious rather than",
+  "gui.astronomy_research_table.asha.entry2.right.5" : "afraid of me getting close.",
 
   "gui.astronomy_research_table.asha.entry2.right.8" : "I found two fish who",
   "gui.astronomy_research_table.asha.entry2.right.9" : "seem to hate each other,",

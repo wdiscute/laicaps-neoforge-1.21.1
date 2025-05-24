@@ -1,10 +1,12 @@
 package com.wdiscute.laicaps.block.astronomytable;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -41,6 +43,8 @@ public class AstronomyTableBlock extends HorizontalDirectionalBlock implements E
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
+        if(player instanceof ServerPlayer sp)
+            AdvHelper.awardAdvancement(sp, "root");
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof AstronomyTableBlockEntity atbe)
         {
             player.openMenu(new SimpleMenuProvider(atbe, Component.literal("Astronomy Table")), pos);
