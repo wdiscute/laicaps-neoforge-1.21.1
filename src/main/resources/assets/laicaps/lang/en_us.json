@@ -435,7 +435,9 @@
 
  "block.laicaps.moonshade_kelp": "Moonshade Kelp",
  "item.laicaps.moonshade_fruit": "Moonshade Fruit",
- "item.laicaps.moonshade_fruit.0": "a Fruit WDAWDWADAW///",
+ "tooltip.laicaps.moonshade_fruit.0": "A strange, moon-shaped fruit",
+ "tooltip.laicaps.moonshade_fruit.1": "glowing with a soft purple hue.",
+ "tooltip.laicaps.moonshade_fruit.2": "It pulses gently, as if alive.",
 
 
   "entity.laicaps.rocket": "WIP Rocket",

@@ -2,6 +2,7 @@ package com.wdiscute.laicaps;
 
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlock;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
+import com.wdiscute.laicaps.block.combat.CombatControllerBlock;
 import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
 import com.wdiscute.laicaps.block.receiversender.ReceiverBlock;
@@ -322,7 +323,7 @@ public class ModBlocks
     public static final DeferredBlock<Block> COMBAT_CONTROLLER_BLOCK =
             registerBlock(
                     "combat_controller_block", () ->
-                            new HiddenControllerBlock(BlockBehaviour.Properties.of()
+                            new CombatControllerBlock(BlockBehaviour.Properties.of()
                                     .strength(30)
                                     .sound(SoundType.WOOD)
                                     .noCollission()
