@@ -12,6 +12,7 @@ import com.wdiscute.laicaps.entity.nimble.NimbleRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerRenderer;
+import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
@@ -151,6 +152,7 @@ public class Laicaps
 
             EntityRenderers.register(ModEntities.BLUETALE.get(), BluetaleRenderer::new);
             EntityRenderers.register(ModEntities.REDTALE.get(), RedtaleRenderer::new);
+            EntityRenderers.register(ModEntities.SWIBBLE.get(), SwibbleRenderer::new);
             EntityRenderers.register(ModEntities.NIMBLE.get(), NimbleRenderer::new);
             EntityRenderers.register(ModEntities.SNUFFLER.get(), SnufflerRenderer::new);
 

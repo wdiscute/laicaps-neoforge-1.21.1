@@ -9,6 +9,8 @@ import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
+import com.wdiscute.laicaps.entity.swibble.SwibbleEntity;
+import com.wdiscute.laicaps.entity.swibble.SwibbleModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -45,6 +47,10 @@ public class ModEntities
     public static final Supplier<EntityType<RedtaleEntity>> REDTALE =
             ENTITY_TYPES.register("redtale", () -> EntityType.Builder.of(RedtaleEntity::new, MobCategory.WATER_AMBIENT)
                     .sized(0.5f, 0.35f).build("redtale"));
+
+    public static final Supplier<EntityType<SwibbleEntity>> SWIBBLE =
+            ENTITY_TYPES.register("swibble", () -> EntityType.Builder.of(SwibbleEntity::new, MobCategory.WATER_CREATURE)
+                    .sized(0.5f, 0.35f).build("swibble"));
 
 
     public static final Supplier<EntityType<NimbleEntity>> NIMBLE =
