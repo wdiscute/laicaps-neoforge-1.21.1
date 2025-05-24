@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.block.single;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.ModTags;
 import com.wdiscute.laicaps.particle.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -9,6 +9,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -79,6 +80,17 @@ public class IllumaBlock extends BushBlock implements SimpleWaterloggedBlock
         return bs;
     }
 
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos)
+    {
+        return level.getBlockState(pos.below()).is(ModTags.Blocks.ILLUMA_CAN_SURVIVE);
+    }
+
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos)
+    {
+        return level.getBlockState(pos.below()).is(ModTags.Blocks.ILLUMA_CAN_SURVIVE);
+    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder)

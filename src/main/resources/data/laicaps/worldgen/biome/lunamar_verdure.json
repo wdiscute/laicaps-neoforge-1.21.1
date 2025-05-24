@@ -19,11 +19,21 @@
   "features": [
     [
       "laicaps:moonshade_kelp_placed",
-      "laicaps:moonshade_kelp_verdure_placed"
+      "laicaps:moonshade_kelp_verdure_placed",
+      "laicaps:illuma_patch_placed"
     ]
   ],
   "has_precipitation": true,
   "spawn_costs": {},
-  "spawners": {},
+  "spawners": {
+    "water_creature": [
+      {
+        "type": "laicaps:swibble",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ]
+  },
   "temperature": 0.7
 }

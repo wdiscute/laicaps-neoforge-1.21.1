@@ -13,6 +13,7 @@ public class ModTags
 
         public static final TagKey<Block> RIVERTHORNE_CAN_SURVIVE = createTag("riverthorne_can_survive");
         public static final TagKey<Block> MOONSHADE_KELP_CAN_SURVIVE = createTag("moonshade_kelp_can_survive");
+        public static final TagKey<Block> ILLUMA_CAN_SURVIVE = createTag("illuma_can_survive");
 
 
         private static TagKey<Block> createTag(String name)
