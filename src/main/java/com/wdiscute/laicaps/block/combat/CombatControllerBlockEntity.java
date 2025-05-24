@@ -2,23 +2,22 @@ package com.wdiscute.laicaps.block.combat;
 
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
-import com.wdiscute.laicaps.particle.ModParticles;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.Objects;
 import java.util.Random;
@@ -35,14 +33,21 @@ import java.util.UUID;
 
 public class CombatControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
+
     private int state = 0;
     private int counter = -1;
-    public BlockPos particlePosition = new BlockPos(0, 0, 0);
     private final Random r = new Random();
+
+    UUID mob1 = null;
 
     private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
     private final UUID[] arrayuuid = new UUID[15];
 
+
+    public void start()
+    {
+        state = 1;
+    }
 
     public void resetPlayersSaved()
     {
@@ -89,6 +94,7 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
         }
     }
 
+
     @Override
     public void tick()
     {
@@ -98,26 +104,41 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
         //idle
         if (state == 0)
         {
-
         }
 
-        //spawning mobs
+        //spawning particles and checking if player is close
         if (state == 1)
         {
+            for (int i = 0; i < 3; i++)
+            {
+                Drowned drowned = new Drowned(EntityType.DROWNED, getLevel());
+                drowned.moveTo(getBlockPos().getX(), getBlockPos().getY() + 1, getBlockPos().getZ(), 1, 1);
+                getLevel().addFreshEntity(drowned);
+
+                mob1 = drowned.getUUID();
+            }
+
+
+            state = 2;
 
         }
 
-        //waiting for all mobs to die
-        if (state == 2)
+
+        
+        if(state == 2)
         {
+            if(level instanceof ServerLevel sv)
+            {
+               System.out.println(sv.getEntities().get(mob1));
+            }
+
 
         }
 
 
-        //challenge complete - waiting for a valid player to claim loot
+        //puzzle complete - waiting for a valid player to claim loot
         if (state == 5)
         {
-
             //particles + sound 5 seconds before closing
             if (counter == 1100)
             {
@@ -168,14 +189,13 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
             {
                 //reset stuff
                 state = 0;
-                BlockState bs = level.getBlockState(getBlockPos());
-                level.setBlockAndUpdate(getBlockPos(), bs);
 
                 //play closing sound
                 level.playSound(null, getBlockPos(), SoundEvents.TRIAL_SPAWNER_DETECT_PLAYER, SoundSource.BLOCKS);
                 ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() - 0.5f, getBlockPos().getY(), getBlockPos().getZ() - 0.5f, 50, 1f, 1f, 1f, 0f);
 
             }
+
         }
 
         //drop items stored in arrayOfItemStacks
@@ -183,7 +203,6 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
         {
             if (counter % 4 == 0)
             {
-                ((ServerLevel) level).sendParticles(ModParticles.CHASE_PUZZLE_PARTICLES.get(), getBlockPos().getX() + 0.5f, getBlockPos().getY() + 1.2f, getBlockPos().getZ() + 0.5f, 1, 0, 0, 0, 0);
 
                 //runs if array has something
                 if (arrayOfItemStacks != null)
@@ -238,7 +257,17 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
     {
         super.saveAdditional(tag, registries);
 
+        for (int i = 0; i < this.arrayuuid.length; i++)
+        {
+            if (this.arrayuuid[i] == null)
+            {
+                if (tag.contains("user" + i)) tag.remove("user" + i);
 
+            } else
+            {
+                tag.putUUID("user" + i, this.arrayuuid[i]);
+            }
+        }
     }
 
     @Override
@@ -246,6 +275,11 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
     {
         super.loadAdditional(tag, registries);
 
+        for (int i = 0; i < arrayuuid.length; i++)
+        {
+            if (tag.contains("user" + i))
+                this.arrayuuid[i] = tag.getUUID("user" + i);
+        }
 
     }
 

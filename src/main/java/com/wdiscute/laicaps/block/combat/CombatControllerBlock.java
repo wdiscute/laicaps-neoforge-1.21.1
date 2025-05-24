@@ -2,7 +2,6 @@ package com.wdiscute.laicaps.block.combat;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.block.chase.ChaseControllerBlockEntity;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -49,7 +48,7 @@ public class CombatControllerBlock extends HorizontalDirectionalBlock implements
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
 
-        if(!level.isClientSide && level.getBlockEntity(pos) instanceof ChaseControllerBlockEntity ccbe && hand == InteractionHand.MAIN_HAND)
+        if(!level.isClientSide && level.getBlockEntity(pos) instanceof CombatControllerBlockEntity ccbe && hand == InteractionHand.MAIN_HAND)
         {
             if(stack.is(Items.BARRIER))
             {
@@ -59,6 +58,8 @@ public class CombatControllerBlock extends HorizontalDirectionalBlock implements
             }
 
             ccbe.CanPlayerObtainDrops(player);
+
+            ccbe.start();
 
         }
 
