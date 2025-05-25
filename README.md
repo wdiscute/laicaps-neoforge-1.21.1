@@ -1,6 +1,8 @@
+### [!!!] This mod is still in development and is quite barebones! Although playable, there are lots of textures, models, and features left to be added and polished. Join the discord if you wish to give feedback and help playtest! [!!!]
 
 
-![Laicaps](https://github.com/user-attachments/assets/03f91846-c348-4c0b-9fd4-250f987d9e0c)
+
+![laicaps title](https://github.com/user-attachments/assets/5eaedf1b-dd8a-4020-95bc-3cb1e359a6f1)
 
 
 Laicaps is a fantasy space exploration mod that emphasizes adventure, environmental storytelling, and atmosphere.
