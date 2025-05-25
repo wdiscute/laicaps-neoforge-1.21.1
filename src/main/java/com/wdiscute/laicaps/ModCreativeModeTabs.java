@@ -191,6 +191,7 @@ public class ModCreativeModeTabs
                                 output.accept(ModBlocks.MOONSHADE_KELP.get());
                                 output.accept(ModItems.MOONSHADE_FRUIT.get());
 
+                                output.accept(ModItems.SWIBBLE_SPAWN_EGG.get());
 
                             })
                             .build());

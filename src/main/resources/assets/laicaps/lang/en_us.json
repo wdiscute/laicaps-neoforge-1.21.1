@@ -57,12 +57,11 @@
   "item.laicaps.telescope_lenses": "Telescope Lenses",
 
   "item.laicaps.telescope_upgrade_kit": "Telescope Upgrade Kit",
-  "tooltip.laicaps.telescope_upgrade_kit.0": "Telescope Upgrade Kit",
-  "tooltip.laicaps.telescope_upgrade_kit.1": "A basic Upgrade Kit to be used on a",
-  "tooltip.laicaps.telescope_upgrade_kit.2": "telescope to improve it's aperture size,",
-  "tooltip.laicaps.telescope_upgrade_kit.3": "allowing you to see further into space.",
-  "tooltip.laicaps.telescope_upgrade_kit.4": "Who knows what else is hiding in the",
-  "tooltip.laicaps.telescope_upgrade_kit.5": "darkness of the skies above?",
+  "tooltip.laicaps.telescope_upgrade_kit.0": "A basic Upgrade Kit to be used on a",
+  "tooltip.laicaps.telescope_upgrade_kit.1": "telescope to improve it's aperture size,",
+  "tooltip.laicaps.telescope_upgrade_kit.2": "allowing you to see further into space.",
+  "tooltip.laicaps.telescope_upgrade_kit.3": "Who knows what else is hiding in the",
+  "tooltip.laicaps.telescope_upgrade_kit.4": "darkness of the skies above?",
 
   "block.laicaps.telescope": "Telescope",
   "block.laicaps.advanced_telescope": "Advanced Telescope",

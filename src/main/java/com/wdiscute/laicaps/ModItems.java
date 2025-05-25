@@ -81,9 +81,13 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
-                            player.swing(usedHand);
 
-                            if(awardEntry(player, "ember")) player.getItemInHand(usedHand).consume(1, player);
+                            if (awardEntry(player, "ember"))
+                            {
+                                ItemStack is = player.getItemInHand(usedHand);
+                                is.shrink(1);
+                                return InteractionResultHolder.consume(is);
+                            }
 
                             return super.use(level, player, usedHand);
                         }
@@ -98,9 +102,13 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
-                            player.swing(usedHand);
 
-                            if(awardEntry(player, "asha")) player.getItemInHand(usedHand).consume(1, player);
+                            if (awardEntry(player, "asha"))
+                            {
+                                ItemStack is = player.getItemInHand(usedHand);
+                                is.shrink(1);
+                                return InteractionResultHolder.consume(is);
+                            }
 
                             return super.use(level, player, usedHand);
                         }
@@ -116,9 +124,13 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
-                            player.swing(usedHand);
 
-                            if(awardEntry(player, "overworld")) player.getItemInHand(usedHand).consume(1, player);
+                            if (awardEntry(player, "overworld"))
+                            {
+                                ItemStack is = player.getItemInHand(usedHand);
+                                is.shrink(1);
+                                return InteractionResultHolder.consume(is);
+                            }
 
                             return super.use(level, player, usedHand);
                         }
@@ -134,9 +146,13 @@ public class ModItems
                         @Override
                         public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
                         {
-                            player.swing(usedHand);
 
-                            if(awardEntry(player, "lunamar")) player.getItemInHand(usedHand).consume(1, player);
+                            if (awardEntry(player, "lunamar"))
+                            {
+                                ItemStack is = player.getItemInHand(usedHand);
+                                is.shrink(1);
+                                return InteractionResultHolder.consume(is);
+                            }
 
                             return super.use(level, player, usedHand);
                         }
@@ -272,13 +288,14 @@ public class ModItems
     //
 
 
-    public static final DeferredItem<Item> STARFLIES_JAR = ITEMS.register("starflies_jar",
+    public static final DeferredItem<Item> STARFLIES_JAR = ITEMS.register(
+            "starflies_jar",
             () -> new Item(new Item.Properties().stacksTo(1))
             {
                 @Override
                 public InteractionResult useOn(UseOnContext context)
                 {
-                    if(context.getLevel().getBlockState(context.getClickedPos().above()).isAir())
+                    if (context.getLevel().getBlockState(context.getClickedPos().above()).isAir())
                     {
                         context.getLevel().setBlockAndUpdate(context.getClickedPos().above(), ModBlocks.STARFLIES_BLOCK.get().defaultBlockState());
                         return InteractionResult.SUCCESS;
@@ -325,7 +342,6 @@ public class ModItems
                     new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES_JAM).stacksTo(16)));
 
 
-
     public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register("oakheart_door", () -> new DoubleHighBlockItem(ModBlocks.OAKHEART_DOOR.get(), new Item.Properties()));
     public static final DeferredItem<Item> OAKHEART_SIGN = ITEMS.register("oakheart_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_SIGN.get(), ModBlocks.OAKHEART_WALL_SIGN.get()));
     public static final DeferredItem<Item> OAKHEART_HANGING_SIGN = ITEMS.register("oakheart_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_HANGING_SIGN.get(), ModBlocks.OAKHEART_WALL_HANGING_SIGN.get()));
@@ -340,9 +356,6 @@ public class ModItems
     public static final DeferredItem<Item> OAKROOT_BOAT = ITEMS.register("oakroot_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.OAKROOT, new Item.Properties().stacksTo(16)));
 
 
-
-
-
     //
     //,--.    ,--. ,--. ,--.  ,--.   ,---.   ,--.   ,--.   ,---.   ,------.
     //|  |    |  | |  | |  ,'.|  |  /  O  \  |   `.'   |  /  O  \  |  .--. '
@@ -353,8 +366,6 @@ public class ModItems
 
 
     public static final DeferredItem<Item> MOONSHADE_FRUIT = ITEMS.register("moonshade_fruit", () -> new Item(new Item.Properties().food(ModFoodProperties.MOONSHADE_FRUIT)));
-
-
 
 
     public static void register(IEventBus eventBus)
@@ -373,13 +384,14 @@ public class ModItems
             AdvHelper.getEntriesRemainingAsIterable(sp, planet + "_entries").forEach(result::add);
             String criteria = result.get(r.nextInt(result.size()));
 
-            if(criteria.equals("none"))
+            if (criteria.equals("none"))
             {
                 sp.displayClientMessage(Component.literal("There are no entries left to unlock"), true);
                 return false;
             }
             sp.displayClientMessage(Component.literal("You have unlocked the entry ").append(Component.translatable("gui.astronomy_research_table." + planet + "." + criteria + ".name")), true);
             AdvHelper.awardAdvancementCriteria(sp, planet + "_entries", criteria);
+            return true;
         }
 
         return false;

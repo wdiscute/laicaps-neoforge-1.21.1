@@ -79,7 +79,7 @@ public class SnufflerModel<T extends SnufflerEntity> extends HierarchicalModel<T
     {
 
         this.root().getAllParts().forEach(ModelPart::resetPose);
-        //this.applyHeadRotation(netHeadYaw, headPitch);
+        this.applyHeadRotation(netHeadYaw, headPitch);
 
         this.animateWalk(SnufflerAnimations.WALK, limbSwing, limbSwingAmount, 2f, 1f);
 
