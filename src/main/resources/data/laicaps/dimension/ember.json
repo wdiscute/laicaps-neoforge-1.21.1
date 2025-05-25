@@ -1,15 +1,15 @@
 {
-  "type": "laicaps:asha_type",
+  "type": "laicaps:ember_type",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "laicaps:asha_noise",
+    "settings": "laicaps:ember_noise",
     "biome_source": {
       "type": "multi_noise",
       "biomes": [
         {
-          "biome": "laicaps:asha_forest",
+          "biome": "minecraft:desert",
           "parameters": {
-            "continentalness": -0.19,
+            "continentalness": 0.0,
             "depth": 0.0,
             "erosion": 0.0,
             "humidity": 0.0,

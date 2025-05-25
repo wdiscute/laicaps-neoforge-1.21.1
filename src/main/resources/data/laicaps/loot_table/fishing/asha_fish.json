@@ -2,7 +2,7 @@
   "type": "minecraft:fishing",
   "pools": [
     {
-      "bonus_rolls": 0.0,
+      "bonus_rolls": 0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -17,15 +17,20 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:stick",
-          "weight": 6
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "laicaps:jar",
+          "weight": 4
         },
         {
           "type": "minecraft:item",
           "name": "laicaps:oakheart_berries",
-          "weight": 6
+          "weight": 4
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "minecraft:gameplay/fishing/fish"
