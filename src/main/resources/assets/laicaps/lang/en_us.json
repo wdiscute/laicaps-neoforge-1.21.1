@@ -25,7 +25,8 @@
 
 
   "item.laicaps.chisel": "Chisel",
-  "tooltip.laicaps.chisel.0": "Doesn't actually chisel anything",
+  "tooltip.laicaps.chisel.0": "Doesn't actually chisel anything.",
+  "tooltip.laicaps.chisel.1": "Dev item for setting up puzzles and structures.",
 
 
   "block.laicaps.treasure_chest": "Treasure Chest",
@@ -98,9 +99,10 @@
   "gui.laicaps.rocket.takeoff.10": "§l1",
   "gui.laicaps.rocket.takeoff.11": "§l§cTAKEOFF",
 
-  "gui.laicaps.rocket.missing_tank": "§cInsert Tank",
-  "gui.laicaps.rocket.missing_fuel": "§cNot Enough Fuel",
-  "gui.laicaps.rocket.missing_nothing": "§aReady for Takeoff",
+  "gui.laicaps.rocket.missing_tank":      "§c     Insert Tank",
+  "gui.laicaps.rocket.missing_fuel":      "§c    Not Enough Fuel",
+  "gui.laicaps.rocket.missing_knowledge": "§   Undiscovered planet",
+  "gui.laicaps.rocket.missing_nothing":   "§a   Ready for Takeoff",
 
   "gui.laicaps.rocket.missing_something": "§cThe rocket is not ready for takeoff",
 
@@ -415,9 +417,11 @@
 
 
   "block.laicaps.water_container": "Water Container",
-  "block.laicaps.water_container.0": "Dev block to contain water in the",
-  "block.laicaps.water_container.1": "floating water cubes of lunamar",
+  "tooltip.laicaps.water_container.0": "Dev block to contain water in the",
+  "tooltip.laicaps.water_container.1": "floating water cubes of lunamar",
   "block.laicaps.water_container_helper": "Water Container Helper",
+  "tooltip.laicaps.water_container_helper.0": "This block deletes itself when.",
+  "tooltip.laicaps.water_container_helper.1": "naturally generated through structures",
 
   "block.laicaps.moonshade_kelp": "Moonshade Kelp",
   "item.laicaps.moonshade_fruit": "Moonshade Fruit",

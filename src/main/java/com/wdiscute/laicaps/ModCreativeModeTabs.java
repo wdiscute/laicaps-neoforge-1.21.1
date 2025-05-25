@@ -242,8 +242,8 @@ public class ModCreativeModeTabs
                                 output.accept(ModBlocks.HIDDEN_CONTROLLER_BLOCK.get());
 
                                 //rotating
-                                output.accept(ModBlocks.ROTATING_CONTROLLER_BLOCK.get());
-                                output.accept(ModBlocks.ROTATING_PUZZLE_BLOCK.get());
+                                //output.accept(ModBlocks.ROTATING_CONTROLLER_BLOCK.get());
+                                //output.accept(ModBlocks.ROTATING_PUZZLE_BLOCK.get());
 
                                 //notes
                                 output.accept(ModBlocks.NOTES_PUZZLE_BLOCK.get());

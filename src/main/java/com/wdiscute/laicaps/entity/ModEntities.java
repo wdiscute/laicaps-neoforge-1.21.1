@@ -50,7 +50,7 @@ public class ModEntities
 
     public static final Supplier<EntityType<SwibbleEntity>> SWIBBLE =
             ENTITY_TYPES.register("swibble", () -> EntityType.Builder.of(SwibbleEntity::new, MobCategory.WATER_CREATURE)
-                    .sized(0.5f, 0.35f).build("swibble"));
+                    .sized(0.9f, 1.5f).build("swibble"));
 
 
     public static final Supplier<EntityType<NimbleEntity>> NIMBLE =

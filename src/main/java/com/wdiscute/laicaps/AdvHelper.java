@@ -13,20 +13,39 @@ import java.util.List;
 
 public class AdvHelper
 {
-    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String achievementName)
+    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String advancement)
     {
-        return hasAdvancement(clientAdvancements, Laicaps.MOD_ID, achievementName);
+        return hasAdvancement(clientAdvancements, Laicaps.MOD_ID, advancement);
     }
 
-    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String namespace, String advancementName)
+    public static boolean hasAdvancement(ClientAdvancements clientAdvancements, String namespace, String advancement)
     {
-        AdvancementHolder adv = clientAdvancements.get(ResourceLocation.fromNamespaceAndPath(namespace, advancementName));
+        AdvancementHolder adv = clientAdvancements.get(ResourceLocation.fromNamespaceAndPath(namespace, advancement));
 
         if (clientAdvancements instanceof AdvancementProgressAcessor acessor && adv != null)
             return Iterables.size(acessor.getProgress().get(adv).getCompletedCriteria()) > 0;
         else
             return false;
     }
+
+    public static boolean hasAdvancement(ServerPlayer sp, String advancement)
+    {
+        return hasAdvancement(sp, Laicaps.MOD_ID, advancement);
+    }
+
+    public static boolean hasAdvancement(ServerPlayer sp, String namespace, String advancement)
+    {
+        AdvancementHolder advHolder = sp.server.getAdvancements().get(ResourceLocation.fromNamespaceAndPath(namespace, advancement));
+
+        if (advHolder != null)
+        {
+            AdvancementProgress progress = sp.getAdvancements().getOrStartProgress(advHolder);
+            return progress.isDone();
+        }
+
+        return false;
+    }
+
 
     public static boolean hasAdvancementCriteria(ClientAdvancements clientAdvancements, String achievementName, String criteria)
     {

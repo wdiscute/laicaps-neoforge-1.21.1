@@ -1,10 +1,12 @@
 package com.wdiscute.laicaps.entity.rocket;
 
+import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -57,7 +59,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     }
 
 
-    public static int getFuelRemainingForSelectedDestination(NonNullList<ItemStack> itemStacks)
+    public int getFuelRemainingForSelectedDestination(NonNullList<ItemStack> itemStacks)
     {
 
         if (itemStacks.get(4).isEmpty()) return -1;
@@ -67,6 +69,32 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
         float fuelRequired = 0;
         int fuelAvailable = itemStacks.get(2).get(ModDataComponents.FUEL);
+
+        //check knowledge
+        boolean canTravel = false;
+
+        if (getFirstPassenger() instanceof ServerPlayer sp)
+        {
+            boolean emberDiscovered = AdvHelper.hasAdvancement(sp, "ember_discovered");
+            boolean ashaDiscovered = AdvHelper.hasAdvancement(sp, "asha_discovered");
+            boolean lunamarDiscovered = AdvHelper.hasAdvancement(sp, "lunamar_discovered");
+
+            if (itemStacks.get(4).is(ModItems.EMBER) && emberDiscovered) canTravel = true;
+            if (itemStacks.get(4).is(ModItems.ASHA) && ashaDiscovered) canTravel = true;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) canTravel = true;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR) && lunamarDiscovered) canTravel = true;
+
+            if (!canTravel)
+            {
+                return -1;
+            }
+        }
+        else
+        {
+            return -1;
+        }
+
+
         boolean flag = false;
 
         if (Minecraft.getInstance().player.level().dimension() == EMBER_KEY)
