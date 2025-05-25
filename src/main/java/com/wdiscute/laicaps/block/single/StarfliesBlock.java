@@ -50,10 +50,13 @@ public class StarfliesBlock extends Block
     {
         if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player player)
         {
-            if (player.isCreative() || context.isHoldingItem(ModItems.STARFLIES_JAR.get()) || context.isHoldingItem(ModItems.JAR.get()))
+            if (player.isCreative())
                 return Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
-            else
-                return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+
+            if ((context.isHoldingItem(ModItems.STARFLIES_JAR.get()) || context.isHoldingItem(ModItems.JAR.get())) && state.getValue(ACTIVE))
+                return Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
+
+            return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
         }
 
         return Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
@@ -71,8 +74,7 @@ public class StarfliesBlock extends Block
         Random r = new Random();
         if (state.getValue(ACTIVE) && r.nextFloat(1) > 0.5f)
         {
-            level.addParticle(
-                    ModParticles.LUNARVEIL_PARTICLES.get(),
+            level.addParticle(ModParticles.LUNARVEIL_PARTICLES.get(),
                     //randomness of 4, +0.5 to center to the block, -2 to offset the randomness by 2
                     (double) pos.getX() + r.nextFloat(4) + 0.5 - 2f,
                     (double) pos.getY() + 0.2f + r.nextFloat(4) - 2,
@@ -82,19 +84,6 @@ public class StarfliesBlock extends Block
                     0
             );
         }
-
-
-        if(Minecraft.getInstance().player.getMainHandItem().is(ModItems.STARFLIES_JAR.asItem()))
-        {
-
-            level.addParticle(
-                    ParticleTypes.CLOUD,
-                    pos.getX() + 0.5f,
-                    pos.getY() + 0.5f,
-                    pos.getZ() + 0.5f,
-                    0,0,0);
-        }
-
     }
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)

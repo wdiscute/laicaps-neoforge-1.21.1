@@ -354,8 +354,6 @@
 
   "block.laicaps.asha_grass_block": "Asha Grass Block",
   "block.laicaps.asha_dirt": "Asha Dirt",
-
-
   "block.laicaps.asha_grass": "Asha Grass",
   "block.laicaps.asha_short_grass": "Asha Short Grass",
 
@@ -399,8 +397,8 @@
   "item.laicaps.redtale_bucket" : "Bucket of Redtale",
 
 
- "entity.laicaps.swibble": "Nimble",
- "item.laicaps.swibble_spawn_egg": "Nimble Spawn Egg",
+ "entity.laicaps.swibble": "Swibble",
+ "item.laicaps.swibble_spawn_egg": "Swibble Spawn Egg",
 
   "entity.laicaps.nimble": "Nimble",
   "item.laicaps.nimble_spawn_egg": "Nimble Spawn Egg",
@@ -411,19 +409,21 @@
   "item.laicaps.snuffler_chop": "Snuffler Chop",
   "item.laicaps.snuffler_chop.0": "A raw cut of meat from a Snuffler",
   "item.laicaps.cooked_snuffler_chop": "Cooked Snuffler Chop",
-  "item.laicaps.cooked_snuffler_chop.1": "A tasty chop from a snuffler",
+  "item.laicaps.cooked_snuffler_chop.0": "A tasty chop from a snuffler",
 
   "item.laicaps.sweetlily_sugar": "Sweetlily Sugar",
 
 
- "block.laicaps.water_container": "Water Container",
- "block.laicaps.water_container_helper": "Water Container Helper",
+  "block.laicaps.water_container": "Water Container",
+  "block.laicaps.water_container.0": "Dev block to contain water in the",
+  "block.laicaps.water_container.1": "floating water cubes of lunamar",
+  "block.laicaps.water_container_helper": "Water Container Helper",
 
- "block.laicaps.moonshade_kelp": "Moonshade Kelp",
- "item.laicaps.moonshade_fruit": "Moonshade Fruit",
- "tooltip.laicaps.moonshade_fruit.0": "A strange, moon-shaped fruit",
- "tooltip.laicaps.moonshade_fruit.1": "glowing with a soft purple hue.",
- "tooltip.laicaps.moonshade_fruit.2": "It pulses gently, as if alive.",
+  "block.laicaps.moonshade_kelp": "Moonshade Kelp",
+  "item.laicaps.moonshade_fruit": "Moonshade Fruit",
+  "tooltip.laicaps.moonshade_fruit.0": "A strange, moon-shaped fruit",
+  "tooltip.laicaps.moonshade_fruit.1": "glowing with a soft purple hue.",
+  "tooltip.laicaps.moonshade_fruit.2": "It pulses gently, as if alive.",
 
 
   "entity.laicaps.rocket": "WIP Rocket",
@@ -480,17 +480,17 @@
   "advancements.laicaps.land_on_ember.description" : "Set foot where fire rules the land",
 
   "advancements.laicaps.ember_entries.title" : "Burned Into Memory",
-  "advancements.laicaps.ember_entries.description" : "Completely fill out your knowledge about Ember",
+  "advancements.laicaps.ember_entries.description" : "Completely fill out your knowledge of Ember",
 
 
   "advancements.laicaps.asha_discovered.title" : "A Different Planet In The Sky",
   "advancements.laicaps.asha_discovered.description" : "Look through your telescope and find Asha hiding amongst the stars",
 
   "advancements.laicaps.land_on_asha.title" : "A small step for Steve",
-  "advancements.laicaps.land_on_asha.description" : "Embark on your first spacial trip and land on asha",
+  "advancements.laicaps.land_on_asha.description" : "Embark on your first spaciaL trip and land on asha",
 
-  "advancements.laicaps.asha_entries.title" : "Every Ruin Turned",
-  "advancements.laicaps.asha_entries.description" : "Completely fill out your knowledge about Asha",
+  "advancements.laicaps.asha_entries.title" : "Every Ruin Cleaned Up",
+  "advancements.laicaps.asha_entries.description" : "Completely fill out your knowledge of Asha",
 
 
   "advancements.laicaps.overworld_entries.title" : "Roots of Understanding",
@@ -504,16 +504,16 @@
   "advancements.laicaps.land_on_lunamar.description" : "The tides rise to greet yet another visitor",
 
   "advancements.laicaps.lunamar_entries.title" : "Submerged Secrets",
-  "advancements.laicaps.lunamar_entries.description" : "Catalog every plant, fish, and everything in between",
+  "advancements.laicaps.lunamar_entries.description" : "Completely fill out your knowledge of Lunamar",
 
 
-  "advancements.laicaps.sweetlily.title" : "Lily of the Sweet",
+  "advancements.laicaps.sweetlily.title" : "All the Lilies",
   "advancements.laicaps.sweetlily.description" : "Find and Gather all 5 sweetlilies",
 
-  "advancements.laicaps.telescope.title" : "Stars Above",
+  "advancements.laicaps.telescope.title" : "Oh, The Stars Above",
   "advancements.laicaps.telescope.description" : "Craft a telescope and look up to the stars",
 
-  "advancements.laicaps.telescope_advanced.title" : "Stars Above, Earth Bellow",
+  "advancements.laicaps.telescope_advanced.title" : "A deeper look into space",
   "advancements.laicaps.telescope_advanced.description" : "Upgrade a telescope to look even further into space",
 
   "advancements.laicaps.basic_microchip.title" : "A Lucky Find",
@@ -521,10 +521,6 @@
 
   "advancements.laicaps.refined_microchip.title" : "An Even Luckier Find",
   "advancements.laicaps.refined_microchip.description" : "Find a refined microchip that somehow got to Lunamar",
-
-
-
-
 
 
 
@@ -544,18 +540,20 @@
 
 
 
+
+
  "gui.astronomy_research_table.menu.entry1.name" : "      MENU - 1",
- "gui.astronomy_research_table.menu.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+ "gui.astronomy_research_table.menu.entry1.left.3" : "               §c§k!!!§r   §cWIP telescope guide §c§k!!!§r",
 
  "gui.astronomy_research_table.menu.entry2.name" : "      MENU - 2",
- "gui.astronomy_research_table.menu.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+ "gui.astronomy_research_table.menu.entry2.left.3" : "               §c§k!!!§r   §cWIP  rocket guide §c§k!!!§r",
 
 
  "gui.astronomy_research_table.menu.entry3.name" : "      MENU - 3",
- "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+ "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP  fuel guide §c§k!!!§r",
 
  "gui.astronomy_research_table.menu.entry4.name" : "      MENU - 4",
- "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+ "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP  astronomy table guide §c§k!!!§r",
 
 
 
@@ -596,13 +594,13 @@
   "gui.astronomy_research_table.ember.entry1.right.19" : "§4Space suit required.",
 
 
- "gui.astronomy_research_table.ember.entry2.name" : "      EMBER - 2",
+ "gui.astronomy_research_table.ember.entry2.name" : "      Ember - 2",
  "gui.astronomy_research_table.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.ember.entry3.name" : "      MENU - 3",
+ "gui.astronomy_research_table.ember.entry3.name" : "      Ember - 3",
  "gui.astronomy_research_table.ember.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.ember.entry4.name" : "      MENU - 4",
+ "gui.astronomy_research_table.ember.entry4.name" : "      Ember - 4",
  "gui.astronomy_research_table.ember.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
@@ -720,16 +718,16 @@
   "gui.astronomy_research_table.asha.entry4.right.19" : "possibly make a friend?",
 
 
- "gui.astronomy_research_table.overworld.entry1.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry1.name" : "    Overworld - 1",
  "gui.astronomy_research_table.overworld.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.overworld.entry2.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry2.name" : "    Overworld - 2",
  "gui.astronomy_research_table.overworld.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.overworld.entry3.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry3.name" : "    Overworld - 3",
  "gui.astronomy_research_table.overworld.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.overworld.entry4.name" : "      MENU - 4",
+ "gui.astronomy_research_table.overworld.entry4.name" : "    Overworld - 4",
  "gui.astronomy_research_table.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
@@ -768,13 +766,20 @@
  "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
 
 
- "gui.astronomy_research_table.lunamar.entry2.name" : "      MENU - 4",
- "gui.astronomy_research_table.lunamar.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.lunamar.entry2.name" : "      Lunamar - Illuma",
+  "gui.astronomy_research_table.lunamar.entry2.image" : "lunamar_illustration_2",
 
- "gui.astronomy_research_table.lunamar.entry3.name" : "      MENU - 4",
+  "gui.astronomy_research_table.lunamar.entry2.left.11" : "These shiny flowers bloom",
+  "gui.astronomy_research_table.lunamar.entry2.left.12" : "when underwater or during rain time.",
+
+  "gui.astronomy_research_table.lunamar.entry2.left.14" : "While blooming they emit a",
+  "gui.astronomy_research_table.lunamar.entry2.left.15" : "soft glow which lights up the",
+  "gui.astronomy_research_table.lunamar.entry2.left.16" : "ocean floor.",
+
+ "gui.astronomy_research_table.lunamar.entry3.name" : "      Lunamar - 3",
  "gui.astronomy_research_table.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.lunamar.entry4.name" : "      MENU - 4",
+ "gui.astronomy_research_table.lunamar.entry4.name" : "      Lunamar - 4",
  "gui.astronomy_research_table.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
 
 

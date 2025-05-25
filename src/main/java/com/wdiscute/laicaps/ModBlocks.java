@@ -47,6 +47,10 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -895,7 +899,6 @@ public class ModBlocks
                             ));
 
 
-
     public static final DeferredBlock<Block> ASHA_GRASS_BLOCK =
             registerBlock(
                     "asha_grass_block", () ->
@@ -975,6 +978,15 @@ public class ModBlocks
                                     .pushReaction(PushReaction.DESTROY)
                                     .replaceable()
                             )
+                            {
+                                @Override
+                                protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+                                {
+                                    Vec3 vec3 = state.getOffset(level, pos);
+                                    VoxelShape shape = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 7.0F, 13.0F);
+                                    return shape.move(vec3.x, vec3.y, vec3.z);
+                                }
+                            }
             );
 
     public static final DeferredBlock<Block> ASHA_GRASS =
@@ -989,6 +1001,15 @@ public class ModBlocks
                                     .pushReaction(PushReaction.DESTROY)
                                     .replaceable()
                             )
+                            {
+                                @Override
+                                protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+                                {
+                                    Vec3 vec3 = state.getOffset(level, pos);
+                                    VoxelShape shape = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 11.0F, 13.0F);
+                                    return shape.move(vec3.x, vec3.y, vec3.z);
+                                }
+                            }
             );
 
 
@@ -1206,8 +1227,6 @@ public class ModBlocks
             );
 
 
-
-
     public static final DeferredBlock<Block> MOONSHADE_KELP =
             registerBlock(
                     "moonshade_kelp", () ->
@@ -1223,10 +1242,6 @@ public class ModBlocks
                                     .lightLevel(state -> state.getValue(MoonshadeKelpBlock.GROWN) ? 11 : 0)
                             )
             );
-
-
-
-
 
 
     //
