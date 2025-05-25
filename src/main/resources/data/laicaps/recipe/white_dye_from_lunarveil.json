@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "laicaps:lunarveil"
+    }
+  ],
+  "result": {
+    "id": "minecraft:white_dye",
+    "count": 1
+  }
+}

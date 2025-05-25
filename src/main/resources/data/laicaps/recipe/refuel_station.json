@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tanks",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_block"
+    },
+    "E": {
+      "item": "laicaps:enderblaze_fuel"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "III",
+    "IEI",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "laicaps:refuel_station"
+  }
+}

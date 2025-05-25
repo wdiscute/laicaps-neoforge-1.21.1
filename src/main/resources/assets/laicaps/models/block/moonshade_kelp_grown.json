@@ -3,6 +3,7 @@
   "ambientocclusion": false,
   "textures": {
     "kelp": "laicaps:block/moonshade_kelp",
+    "particle": "laicaps:block/moonshade_kelp",
     "fruit": "laicaps:block/moonshade_kelp_fruit"
   },
   "elements": [

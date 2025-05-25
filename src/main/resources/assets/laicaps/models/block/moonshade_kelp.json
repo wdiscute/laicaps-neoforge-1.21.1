@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
+    "particle": "laicaps:block/moonshade_kelp",
     "cross": "laicaps:block/moonshade_kelp"
   },
   "render_type":"cutout"

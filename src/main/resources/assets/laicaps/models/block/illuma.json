@@ -1,7 +1,8 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "laicaps:block/illuma"
+    "cross": "laicaps:block/illuma",
+    "particle": "laicaps:block/illuma"
   },
   "render_type": "cutout"
 }

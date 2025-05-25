@@ -14,7 +14,7 @@ loaderVersion="[2,]" #mandatory
 license="MIT"
 
 # A URL to refer people to when problems occur with this mod
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+issueTrackerURL="https://discord.gg/WsuFsGSegD" #optional
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
@@ -23,7 +23,7 @@ license="MIT"
 modId="laicaps" #mandatory
 
 # The version number of the mod
-version="0.1.0" #mandatory
+version="0.1" #mandatory
 
 # A display name for the mod
 displayName="Laicaps" #mandatory
@@ -32,10 +32,10 @@ displayName="Laicaps" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 
 # A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+displayURL="http://curseforge.com/minecraft/mc-mods/laicaps" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="laicaps 400x400.png" #optional
 
 # A text field displayed in the mod UI
 #credits="" #optional
@@ -44,7 +44,7 @@ displayName="Laicaps" #mandatory
 authors="wdiscute, Tofushi, daffydj" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
-description='''A space themed mod focused on exploration'''
+description='''A fantasy space exploration mod'''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]

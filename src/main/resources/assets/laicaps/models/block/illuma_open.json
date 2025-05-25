@@ -3,6 +3,7 @@
   "ambientocclusion": false,
   "textures": {
     "illuma": "laicaps:block/illuma_open",
+    "particle": "laicaps:block/illuma_open",
     "glow": "laicaps:block/illuma_glow"
   },
   "elements": [
