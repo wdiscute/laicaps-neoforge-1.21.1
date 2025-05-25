@@ -25,7 +25,11 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -44,8 +48,15 @@ public class StarfliesBlock extends Block
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
+        if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player player)
+        {
+            if (player.isCreative() || context.isHoldingItem(ModItems.STARFLIES_JAR.get()) || context.isHoldingItem(ModItems.JAR.get()))
+                return Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
+            else
+                return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        }
 
-        return super.getShape(state, level, pos, context);
+        return Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
     }
 
     @Override

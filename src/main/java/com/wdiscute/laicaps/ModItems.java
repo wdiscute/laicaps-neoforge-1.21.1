@@ -264,13 +264,8 @@ public class ModItems
                 }
             });
 
-    public static final DeferredItem<Item> CANISTER = ITEMS.register("canister", () -> new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(1)));
-
-
     public static final DeferredItem<Item> ENDERBLAZE_FUEL = ITEMS.register("enderblaze_fuel", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-
     public static final DeferredItem<Item> PRISTINE_ENDERPEARL_DUST = ITEMS.register("pristine_enderpearl_dust", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-
 
     public static final DeferredItem<Item> EMBER = ITEMS.register("ember", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final DeferredItem<Item> ASHA = ITEMS.register("asha", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
@@ -298,6 +293,8 @@ public class ModItems
                     if (context.getLevel().getBlockState(context.getClickedPos().above()).isAir())
                     {
                         context.getLevel().setBlockAndUpdate(context.getClickedPos().above(), ModBlocks.STARFLIES_BLOCK.get().defaultBlockState());
+                        context.getItemInHand().shrink(1);
+                        context.getPlayer().addItem(new ItemStack(ModItems.JAR.get()));
                         return InteractionResult.SUCCESS;
                     }
 

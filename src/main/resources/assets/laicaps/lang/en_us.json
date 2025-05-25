@@ -112,9 +112,9 @@
   "gui.laicaps.telescope.tooltip.ember.3": "       (burning even...)",
   "gui.laicaps.telescope.tooltip.ember.4": "",
 
-  "gui.laicaps.telescope.tooltip.ember_blur.0": "§6§k         EMBER",
+  "gui.laicaps.telescope.tooltip.ember_blur.0": "§6§kEMBER",
   "gui.laicaps.telescope.tooltip.ember_blur.1": "",
-  "gui.laicaps.telescope.tooltip.ember_blur.2": "    ????????????",
+  "gui.laicaps.telescope.tooltip.ember_blur.2": "§k????????????",
   "gui.laicaps.telescope.tooltip.ember_blur.3": "",
 
 
@@ -125,10 +125,10 @@
   "gui.laicaps.telescope.tooltip.asha.3": "      nice planet",
   "gui.laicaps.telescope.tooltip.asha.4": "",
 
-  "gui.laicaps.telescope.tooltip.asha_blur.0": "§d§k          ASHA",
+  "gui.laicaps.telescope.tooltip.asha_blur.0": "§d§kASHA",
   "gui.laicaps.telescope.tooltip.asha_blur.1": "",
-  "gui.laicaps.telescope.tooltip.asha_blur.2": "    ????????????",
- "gui.laicaps.telescope.tooltip.asha_blur.3": "",
+  "gui.laicaps.telescope.tooltip.asha_blur.2": "§k????????????",
+  "gui.laicaps.telescope.tooltip.asha_blur.3": "",
 
 
 
@@ -148,9 +148,9 @@
   "gui.laicaps.telescope.tooltip.lunamar.6": "So glub glub glub...",
   "gui.laicaps.telescope.tooltip.lunamar.7": "",
 
-  "gui.laicaps.telescope.tooltip.lunamar_blur.0": "§9§k        LUNAMAR",
+  "gui.laicaps.telescope.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
   "gui.laicaps.telescope.tooltip.lunamar_blur.1": "",
-  "gui.laicaps.telescope.tooltip.lunamar_blur.2": "    ????????????",
+  "gui.laicaps.telescope.tooltip.lunamar_blur.2": "§k????????????",
   "gui.laicaps.telescope.tooltip.lunamar_blur.3": "",
 
 
@@ -166,9 +166,9 @@
   "gui.laicaps.rocket.tooltip.ember.4": "",
   "gui.laicaps.rocket.tooltip.ember.5": "      §a§l>§r§a Rocket Travel Available §a§l<§r",
 
-  "gui.laicaps.rocket.tooltip.ember_blur.0": "§6§k         EMBER",
+  "gui.laicaps.rocket.tooltip.ember_blur.0": "§6§kEMBER",
   "gui.laicaps.rocket.tooltip.ember_blur.1": "",
-  "gui.laicaps.rocket.tooltip.ember_blur.2": "    ????????????",
+  "gui.laicaps.rocket.tooltip.ember_blur.2": "§k????????????",
   "gui.laicaps.rocket.tooltip.ember_blur.3": "",
 
 
@@ -180,9 +180,9 @@
   "gui.laicaps.rocket.tooltip.asha.4": "",
   "gui.laicaps.rocket.tooltip.asha.5": "      §a§l>§r§a Rocket Travel Available §a§l<§r",
 
-  "gui.laicaps.rocket.tooltip.asha_blur.0": "§d§k          ASHA",
+  "gui.laicaps.rocket.tooltip.asha_blur.0": "§d§kASHA",
   "gui.laicaps.rocket.tooltip.asha_blur.1": "",
-  "gui.laicaps.rocket.tooltip.asha_blur.2": "    ????????????",
+  "gui.laicaps.rocket.tooltip.asha_blur.2": "§k????????????",
   "gui.laicaps.rocket.tooltip.asha_blur.3": "",
 
 
@@ -202,9 +202,9 @@
   "gui.laicaps.rocket.tooltip.lunamar.4": "",
   "gui.laicaps.rocket.tooltip.lunamar.5": "      §a§l>§r§a Rocket Travel Available §a§l<§r",
 
-  "gui.laicaps.rocket.tooltip.lunamar_blur.0": "§9§k        LUNAMAR",
+  "gui.laicaps.rocket.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
   "gui.laicaps.rocket.tooltip.lunamar_blur.1": "",
-  "gui.laicaps.rocket.tooltip.lunamar_blur.2": "    ????????????",
+  "gui.laicaps.rocket.tooltip.lunamar_blur.2": "§k????????????",
   "gui.laicaps.rocket.tooltip.lunamar_blur.3": "",
 
 
@@ -216,10 +216,6 @@
   "tooltip.laicaps.astronomy_notebook.2" : "Place at an Astronomy Table",
   "tooltip.laicaps.astronomy_notebook.3" : "to read your notes.",
 
-  "item.laicaps.astronomy_table": "Astronomy Notebook",
-
-
-
 
   "block.laicaps.asha_teleporter": "Asha Teleporter",
   "tooltip.laicaps.asha_teleporter.0": "Quick and dirty creative mode teleporter",
@@ -228,7 +224,7 @@
   "block.laicaps.ember_teleporter": "Ember Teleporter",
   "tooltip.laicaps.ember_teleporter.0": "Quick and dirty creative mode teleporter",
 
-  "block.laicaps.refuel_station": "Refuel Teleporter",
+  "block.laicaps.refuel_station": "Refuel Station",
   "tooltip.laicaps.refuel_station.0": "A refueling station used to",
   "tooltip.laicaps.refuel_station.1": "refuel tanks with Enderblaze fuel.",
 
@@ -266,9 +262,6 @@
 
   "tooltip.laicaps.tank.fuel": "Fuel",
 
-  "item.laicaps.canister": "Canister",
-  "tooltip.laicaps.canister.0": "WIP No use.",
-
   "item.laicaps.rocket": "WIP Rocket",
   "tooltip.laicaps.rocket.0": "WIP!! eventually there will be a whole process for",
   "tooltip.laicaps.rocket.1": "slowly building towards the rocket ship with several in-world building stages",
@@ -286,17 +279,9 @@
   "tooltip.laicaps.pristine_enderpearl_dust.1": "It's incredibly shiny and radiating with energy.",
 
 
-
   "block.laicaps.oakheart_sapling": "Oakheart Sapling",
   "block.laicaps.stripped_oakheart_log": "Stripped Oakheart Log",
   "block.laicaps.oakheart_log": "Oakheart Log",
-  "tooltip.laicaps.oakheart_log.0" : "this oakheart log is very tasty!",
-  "tooltip.laicaps.oakheart_log.1" : "But",
-  "tooltip.laicaps.oakheart_log.2" : "you",
-  "tooltip.laicaps.oakheart_log.3" : "should",
-  "tooltip.laicaps.oakheart_log.4" : "§cNOT",
-  "tooltip.laicaps.oakheart_log.5" : "eat",
-  "tooltip.laicaps.oakheart_log.6" : "it",
   "block.laicaps.stripped_oakheart_wood": "Stripped Oakheart Wood",
   "block.laicaps.oakheart_wood": "Oakheart Wood",
   "block.laicaps.oakheart_leaves": "Oakheart Leaves",
@@ -338,7 +323,6 @@
   "block.laicaps.oakroot_hanging_sign": "Oakroot Hanging Sign",
   "item.laicaps.oakroot_boat" : "Oakroot Boat",
   "item.laicaps.oakroot_chest_boat" : "Oakroot Boat with Chest",
-
 
 
   "block.laicaps.violet_sweetlily": "Violet Sweetlily",

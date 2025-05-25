@@ -1,16 +1,22 @@
 package com.wdiscute.laicaps.block.watercontainer;
 
 import com.wdiscute.laicaps.ModBlocks;
+import com.wdiscute.laicaps.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class WaterContainerBlock extends Block
 {
@@ -37,13 +43,18 @@ public class WaterContainerBlock extends Block
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        if(context.isHoldingItem(ModBlocks.WATER_CONTAINER.asItem()))
-            return Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+        if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player player)
+        {
+            if (context.isHoldingItem(ModBlocks.WATER_CONTAINER.asItem()))
+                return Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
 
-        if(Minecraft.getInstance().player.isCreative())
-            return Block.box(5.0, 5.0, 5.0, 11.0, 11.0, 11.0);
+            if(player.isCreative())
+                return Block.box(5.0, 5.0, 5.0, 11.0, 11.0, 11.0);
 
-        return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+            return Block.box(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        }
+
+        return Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
     }
 
     @Override
