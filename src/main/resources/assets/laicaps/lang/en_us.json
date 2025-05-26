@@ -399,6 +399,18 @@
   "item.laicaps.redtale_bucket" : "Bucket of Redtale",
 
 
+  "entity.laicaps.bubblemouth" : "Bubblemouth",
+  "item.laicaps.bubblemouth_spawn_egg" : "Bubblemouth Spawn Egg",
+  "item.laicaps.bubblemouth" : "Bubblemouth",
+  "tooltip.laicaps.bubblemouth.0" : "A chubby slow-swimming fish from Lunamar.",
+  "tooltip.laicaps.bubblemouth.1" : "Often seen drifting through moonshade kelp,",
+  "tooltip.laicaps.bubblemouth.2" : "blowing tiny bubbles for no apparent reason.",
+  "item.laicaps.cooked_bubblemouth" : "Cooked Bubblemouth",
+  "tooltip.laicaps.cooked_bubblemouth.0" : "A tasty smoked Bubblemouth.",
+  "tooltip.laicaps.cooked_bubblemouth.1" : "Goes perfect with some moonshade fruit.",
+  "item.laicaps.bubblemouth_bucket" : "Bucket of Bubblemouth",
+
+
  "entity.laicaps.swibble": "Swibble",
  "item.laicaps.swibble_spawn_egg": "Swibble Spawn Egg",
 

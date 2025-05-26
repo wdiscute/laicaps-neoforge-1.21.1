@@ -32,6 +32,14 @@
         "minCount": 1,
         "maxCount": 3
       }
+    ],
+    "water_ambient": [
+      {
+        "type": "laicaps:bubblemouth",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
+      }
     ]
   },
   "temperature": 0.7

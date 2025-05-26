@@ -67,6 +67,9 @@ public class ModCreativeModeTabs
                                 //spawn eggs
                                 output.accept(ModItems.BLUETALE_SPAWN_EGG.get());
                                 output.accept(ModItems.REDTALE_SPAWN_EGG.get());
+                                output.accept(ModItems.BUBBLEMOUTH_SPAWN_EGG.get());
+                                output.accept(ModItems.SWIBBLE_SPAWN_EGG.get());
+                                output.accept(ModItems.SNUFFLER_SPAWN_EGG.get());
                                 output.accept(ModItems.NIMBLE_SPAWN_EGG.get());
 
 
@@ -82,6 +85,7 @@ public class ModCreativeModeTabs
                             .displayItems((itemDisplayParameters, output) ->
                             {
                                 output.accept(ModBlocks.ASHA_GLOBE.get());
+                                output.accept(ModBlocks.ASHA_TELEPORTER.get());
                                 output.accept(ModItems.ASHA_ENTRY.get());
 
                                 //oakheart
@@ -148,9 +152,11 @@ public class ModCreativeModeTabs
 
                                 //bluetale & redtale
                                 output.accept(ModItems.BLUETALE.get());
+                                output.accept(ModItems.BLUETALE_SPAWN_EGG.get());
                                 output.accept(ModItems.COOKED_BLUETALE.get());
                                 output.accept(ModItems.BLUETALE_BUCKET.get());
                                 output.accept(ModItems.REDTALE.get());
+                                output.accept(ModItems.REDTALE_SPAWN_EGG.get());
                                 output.accept(ModItems.COOKED_REDTALE.get());
                                 output.accept(ModItems.REDTALE_BUCKET.get());
 
@@ -186,10 +192,17 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.LUNAMAR_ENTRY.get());
 
 
-                                //water flower
+                                //illuma
                                 output.accept(ModBlocks.ILLUMA.get());
                                 output.accept(ModBlocks.MOONSHADE_KELP.get());
                                 output.accept(ModItems.MOONSHADE_FRUIT.get());
+
+                                //bubblemouth
+                                output.accept(ModItems.BUBBLEMOUTH.get());
+                                output.accept(ModItems.BUBBLEMOUTH_SPAWN_EGG.get());
+                                output.accept(ModItems.COOKED_BUBBLEMOUTH.get());
+                                output.accept(ModItems.BUBBLEMOUTH_BUCKET.get());
+
 
                                 output.accept(ModItems.SWIBBLE_SPAWN_EGG.get());
 

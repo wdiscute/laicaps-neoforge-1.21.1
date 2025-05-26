@@ -5,6 +5,7 @@ import com.wdiscute.laicaps.entity.bluetale.BluetaleEntity;
 import com.wdiscute.laicaps.entity.bluetale.RedtaleEntity;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
+import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthEntity;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
@@ -48,10 +49,13 @@ public class ModEntities
             ENTITY_TYPES.register("redtale", () -> EntityType.Builder.of(RedtaleEntity::new, MobCategory.WATER_AMBIENT)
                     .sized(0.5f, 0.35f).build("redtale"));
 
+    public static final Supplier<EntityType<BubblemouthEntity>> BUBBLEMOUTH =
+            ENTITY_TYPES.register("bubblemouth", () -> EntityType.Builder.of(BubblemouthEntity::new, MobCategory.WATER_AMBIENT)
+                    .sized(0.5f, 0.35f).build("bubblemouth"));
+
     public static final Supplier<EntityType<SwibbleEntity>> SWIBBLE =
             ENTITY_TYPES.register("swibble", () -> EntityType.Builder.of(SwibbleEntity::new, MobCategory.WATER_CREATURE)
                     .sized(0.9f, 1.5f).build("swibble"));
-
 
     public static final Supplier<EntityType<NimbleEntity>> NIMBLE =
             ENTITY_TYPES.register("nimble", () -> EntityType.Builder.of(NimbleEntity::new, MobCategory.CREATURE)

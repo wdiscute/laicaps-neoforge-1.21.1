@@ -44,7 +44,7 @@
               "function": "minecraft:furnace_smelt"
             }
           ],
-          "name": "laicaps:bluetale"
+          "name": "laicaps:bubblemouth"
         }
       ],
       "rolls": 1
@@ -66,5 +66,5 @@
       "rolls": 1
     }
   ],
-  "random_sequence": "laicaps:entities/bluetale"
+  "random_sequence": "laicaps:entities/bubblemouth"
 }
