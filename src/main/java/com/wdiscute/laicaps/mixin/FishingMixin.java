@@ -28,9 +28,16 @@ public abstract class FishingMixin extends Projectile{
     private ResourceKey<LootTable> resourceKeyFix(ResourceKey<LootTable> lootTableKey)
     {
         final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
-        final ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE, Laicaps.rl("fishing/asha_fish"));
+        final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
+        final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+        final ResourceKey<LootTable> lootTableAsha = ResourceKey.create(Registries.LOOT_TABLE, Laicaps.rl("fishing/asha_fish"));
+        final ResourceKey<LootTable> lootTableLunamar = ResourceKey.create(Registries.LOOT_TABLE, Laicaps.rl("fishing/lunamar_fish"));
+        final ResourceKey<LootTable> lootTableEmber = ResourceKey.create(Registries.LOOT_TABLE, Laicaps.rl("fishing/Ember_fish"));
 
-        return (this.level().dimension() == ASHA_KEY) ? lootTable : lootTableKey;
+        if(this.level().dimension() == ASHA_KEY) return lootTableAsha;
+        if(this.level().dimension() == LUNAMAR_KEY) return lootTableLunamar;
+        if(this.level().dimension() == EMBER_KEY) return lootTableEmber;
+        return lootTableKey;
     }
 
     @Shadow
