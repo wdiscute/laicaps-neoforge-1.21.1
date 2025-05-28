@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
 public class BubblemouthModel<T extends BubblemouthEntity> extends HierarchicalModel<T>
 {
@@ -51,11 +52,17 @@ public class BubblemouthModel<T extends BubblemouthEntity> extends HierarchicalM
     @Override
     public void setupAnim(BubblemouthEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
-
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
         this.animateWalk(BubblemouthAnimations.SWIM, limbSwing, limbSwingAmount, 1f, 1f);
         this.animate(entity.idleAnimationState, BubblemouthAnimations.SWIM, ageInTicks, 1f);
+
+        //wobble when out of water
+        if (!entity.isInWater()) {
+            float f = 1.3F;
+            float f1 = 1.7F;
+            this.body.yRot = -f * 0.25F * Mth.sin(f1 * 0.6F * ageInTicks);
+        }
     }
 
     @Override

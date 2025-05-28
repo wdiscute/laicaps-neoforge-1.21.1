@@ -20,8 +20,6 @@ import org.jetbrains.annotations.Nullable;
 public class AstronomyTableBlockEntity extends BlockEntity implements MenuProvider
 {
 
-
-
     @Override
     public Component getDisplayName()
     {
@@ -50,7 +48,5 @@ public class AstronomyTableBlockEntity extends BlockEntity implements MenuProvid
     {
         super(ModBlockEntity.ASTRONOMY_TABLE.get(), pPos, pBlockState);
     }
-
-
 
 }
