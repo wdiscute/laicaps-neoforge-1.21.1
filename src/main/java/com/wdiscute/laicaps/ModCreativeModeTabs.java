@@ -203,6 +203,12 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.COOKED_BUBBLEMOUTH.get());
                                 output.accept(ModItems.BUBBLEMOUTH_BUCKET.get());
 
+                                //glimpuff
+                                output.accept(ModItems.GLIMPUFF.get());
+                                output.accept(ModItems.GLIMPUFF_SPAWN_EGG.get());
+                                output.accept(ModItems.COOKED_GLIMPUFF.get());
+                                output.accept(ModItems.GLIMPUFF_BUCKET.get());
+
 
                                 output.accept(ModItems.SWIBBLE_SPAWN_EGG.get());
 

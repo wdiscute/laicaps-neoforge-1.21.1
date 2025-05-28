@@ -17,6 +17,8 @@ public class ModSounds
 
     public static final Supplier<SoundEvent> CHISEL_USE = registerSoundEvent("chisel_use");
 
+    public static final Supplier<SoundEvent> GLIMPUFF_CARROT = registerSoundEvent("glimpuff_carrot");
+
     public static final Supplier<SoundEvent> MAGIC_BLOCK_BREAK = registerSoundEvent("magic_block_break");
     public static final Supplier<SoundEvent> MAGIC_BLOCK_STEP = registerSoundEvent("magic_block_step");
     public static final Supplier<SoundEvent> MAGIC_BLOCK_PLACE = registerSoundEvent("magic_block_place");
@@ -30,6 +32,8 @@ public class ModSounds
             ModSounds.MAGIC_BLOCK_HIT,
             ModSounds.MAGIC_BLOCK_FALL
     );
+
+
 
 
     private static Supplier<SoundEvent> registerSoundEvent(String name) {

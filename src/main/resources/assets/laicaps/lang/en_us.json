@@ -410,6 +410,17 @@
   "tooltip.laicaps.cooked_bubblemouth.1" : "Goes perfect with some moonshade fruit.",
   "item.laicaps.bubblemouth_bucket" : "Bucket of Bubblemouth",
 
+  "entity.laicaps.glimpuff" : "Glimpuff",
+  "item.laicaps.glimpuff_spawn_egg" : "Glimpuff Spawn Egg",
+  "item.laicaps.glimpuff" : "Glimpuff",
+  "tooltip.laicaps.glimpuff.0" : "A chubby slow-swimming fish from Lunamar.",
+  "tooltip.laicaps.glimpuff.1" : "Often seen drifting through moonshade kelp,",
+  "tooltip.laicaps.glimpuff.2" : "blowing tiny bubbles for no apparent reason.",
+  "item.laicaps.cooked_glimpuff" : "Cooked Glimpuff",
+  "tooltip.laicaps.cooked_glimpuff.0" : "A tasty smoked Glimpuff.",
+  "tooltip.laicaps.cooked_glimpuff.1" : "Goes perfect with some moonshade fruit.",
+  "item.laicaps.glimpuff_bucket" : "Bucket of Glimpuff",
+
 
  "entity.laicaps.swibble": "Swibble",
  "item.laicaps.swibble_spawn_egg": "Swibble Spawn Egg",

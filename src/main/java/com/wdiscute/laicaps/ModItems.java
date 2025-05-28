@@ -327,9 +327,13 @@ public class ModItems
 
     public static final DeferredItem<Item> BUBBLEMOUTH = ITEMS.register("bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_BUBBLEMOUTH = ITEMS.register("cooked_bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
-    public static final DeferredItem<Item> BUBBLEMOUTH_BUCKET = ITEMS.register("bubblemouth_bucket", () -> new MobBucketItem(ModEntities.REDTALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
-    public static final DeferredItem<Item> BUBBLEMOUTH_SPAWN_EGG = ITEMS.register("bubblemouth_spawn_egg", () -> new SpawnEggItem(ModEntities.REDTALE.get(), 9429956, 14919099, new Item.Properties()));
+    public static final DeferredItem<Item> BUBBLEMOUTH_BUCKET = ITEMS.register("bubblemouth_bucket", () -> new MobBucketItem(ModEntities.BUBBLEMOUTH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
+    public static final DeferredItem<Item> BUBBLEMOUTH_SPAWN_EGG = ITEMS.register("bubblemouth_spawn_egg", () -> new SpawnEggItem(ModEntities.BUBBLEMOUTH.get(), 9429956, 14919099, new Item.Properties()));
 
+    public static final DeferredItem<Item> GLIMPUFF = ITEMS.register("glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
+    public static final DeferredItem<Item> COOKED_GLIMPUFF = ITEMS.register("cooked_glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
+    public static final DeferredItem<Item> GLIMPUFF_BUCKET = ITEMS.register("glimpuff_bucket", () -> new MobBucketItem(ModEntities.GLIMPUFF.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
+    public static final DeferredItem<Item> GLIMPUFF_SPAWN_EGG = ITEMS.register("glimpuff_spawn_egg", () -> new SpawnEggItem(ModEntities.GLIMPUFF.get(), 9429956, 14919099, new Item.Properties()));
 
 
     public static final DeferredItem<Item> NIMBLE_SPAWN_EGG = ITEMS.register("nimble_spawn_egg", () -> new SpawnEggItem(ModEntities.NIMBLE.get(), 14531970, 14714721, new Item.Properties()));

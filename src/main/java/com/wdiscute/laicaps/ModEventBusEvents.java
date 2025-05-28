@@ -9,6 +9,8 @@ import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthModel;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.gecko.GeckoModel;
+import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
+import com.wdiscute.laicaps.entity.glimpuff.GlimpuffModel;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleModel;
 import com.wdiscute.laicaps.entity.rocket.RocketModel;
@@ -52,6 +54,7 @@ public class ModEventBusEvents
         event.registerLayerDefinition(BluetaleModel.LAYER_LOCATION, BluetaleModel::createBodyLayer);
         //no need for redtale as it uses the same model
         event.registerLayerDefinition(BubblemouthModel.LAYER_LOCATION, BubblemouthModel::createBodyLayer);
+        event.registerLayerDefinition(GlimpuffModel.LAYER_LOCATION, GlimpuffModel::createBodyLayer);
 
 
         event.registerLayerDefinition(SwibbleModel.LAYER_LOCATION, SwibbleModel::createBodyLayer);
@@ -69,6 +72,7 @@ public class ModEventBusEvents
         event.put(ModEntities.BLUETALE.get(), BluetaleEntity.createAttributes().build());
         event.put(ModEntities.REDTALE.get(), BluetaleEntity.createAttributes().build());
         event.put(ModEntities.BUBBLEMOUTH.get(), BubblemouthEntity.createAttributes().build());
+        event.put(ModEntities.GLIMPUFF.get(), GlimpuffEntity.createAttributes().build());
         event.put(ModEntities.SWIBBLE.get(), SwibbleEntity.createAttributes().build());
         event.put(ModEntities.NIMBLE.get(), NimbleEntity.createAttributes().build());
         event.put(ModEntities.SNUFFLER.get(), SnufflerEntity.createAttributes().build());
@@ -89,6 +93,9 @@ public class ModEventBusEvents
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
+        event.register(ModEntities.GLIMPUFF.get(), SpawnPlacementTypes.IN_WATER,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
         event.register(ModEntities.SWIBBLE.get(), SpawnPlacementTypes.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,

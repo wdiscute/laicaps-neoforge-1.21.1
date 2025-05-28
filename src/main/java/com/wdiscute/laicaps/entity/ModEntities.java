@@ -7,6 +7,7 @@ import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthEntity;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
+import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
@@ -51,7 +52,11 @@ public class ModEntities
 
     public static final Supplier<EntityType<BubblemouthEntity>> BUBBLEMOUTH =
             ENTITY_TYPES.register("bubblemouth", () -> EntityType.Builder.of(BubblemouthEntity::new, MobCategory.WATER_AMBIENT)
-                    .sized(0.5f, 0.35f).build("bubblemouth"));
+                    .sized(0.5f, 0.55f).build("bubblemouth"));
+
+    public static final Supplier<EntityType<GlimpuffEntity>> GLIMPUFF =
+            ENTITY_TYPES.register("glimpuff", () -> EntityType.Builder.of(GlimpuffEntity::new, MobCategory.WATER_AMBIENT)
+                    .sized(0.5f, 0.55f).build("glimpuff"));
 
     public static final Supplier<EntityType<SwibbleEntity>> SWIBBLE =
             ENTITY_TYPES.register("swibble", () -> EntityType.Builder.of(SwibbleEntity::new, MobCategory.WATER_CREATURE)
