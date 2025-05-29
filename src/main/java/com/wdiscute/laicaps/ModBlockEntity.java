@@ -6,7 +6,6 @@ import com.wdiscute.laicaps.block.combat.CombatControllerBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModHangingSignBlockEntity;
 import com.wdiscute.laicaps.block.generics.ModSignBlockEntity;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlockEntity;
-import com.wdiscute.laicaps.block.receiversender.ReceiverBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlockEntity;
@@ -27,9 +26,10 @@ public class ModBlockEntity
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Laicaps.MOD_ID);
 
-    public static final Supplier<BlockEntityType<ReceiverBlockEntity>> RECEIVER_BLOCK = BLOCK_ENTITIES.register("receiver_block",
-            () -> BlockEntityType.Builder.of(ReceiverBlockEntity::new, ModBlocks.RECEIVER_BLOCK.get())
-                    .build(null));
+    //TODO REWORK THIS
+//    public static final Supplier<BlockEntityType<ReceiverBlockEntity>> RECEIVER_BLOCK = BLOCK_ENTITIES.register("receiver_block",
+//            () -> BlockEntityType.Builder.of(ReceiverBlockEntity::new, ModBlocks.RECEIVER_BLOCK.get())
+//                    .build(null));
 
     public static final Supplier<BlockEntityType<SymbolPuzzleBlockEntity>> SYMBOL_PUZZLE_BLOCK = BLOCK_ENTITIES.register("symbol_puzzle_block",
             () -> BlockEntityType.Builder.of(SymbolPuzzleBlockEntity::new, ModBlocks.SYMBOL_PUZZLE_BLOCK.get())

@@ -5,11 +5,7 @@ import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.combat.CombatControllerBlock;
 import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
-import com.wdiscute.laicaps.block.receiversender.ReceiverBlock;
-import com.wdiscute.laicaps.block.receiversender.SenderPuzzleBLock;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlock;
-import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
-import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
 import com.wdiscute.laicaps.block.single.*;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlock;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlock;
@@ -221,23 +217,25 @@ public class ModBlocks
                             )
             );
 
-    public static final DeferredBlock<Block> SENDER_PUZZLE_BLOCK =
-            registerBlock(
-                    "sender_puzzle_block", () ->
-                            new SenderPuzzleBLock(BlockBehaviour.Properties.of()
-                                    .strength(30)
-                                    .sound(SoundType.AMETHYST)
-                            )
-            );
 
-    public static final DeferredBlock<Block> RECEIVER_BLOCK =
-            registerBlock(
-                    "receiver_block", () ->
-                            new ReceiverBlock(BlockBehaviour.Properties.of()
-                                    .strength(30)
-                                    .sound(SoundType.AMETHYST)
-                            )
-            );
+    //TODO REWORK THESE
+//    public static final DeferredBlock<Block> SENDER_PUZZLE_BLOCK =
+//            registerBlock(
+//                    "sender_puzzle_block", () ->
+//                            new SenderPuzzleBLock(BlockBehaviour.Properties.of()
+//                                    .strength(30)
+//                                    .sound(SoundType.AMETHYST)
+//                            )
+//            );
+
+//    public static final DeferredBlock<Block> RECEIVER_BLOCK =
+//            registerBlock(
+//                    "receiver_block", () ->
+//                            new ReceiverBlock(BlockBehaviour.Properties.of()
+//                                    .strength(30)
+//                                    .sound(SoundType.AMETHYST)
+//                            )
+//            );
 
     public static final DeferredBlock<Block> SYMBOL_PUZZLE_BLOCK =
             registerBlock(
@@ -286,23 +284,24 @@ public class ModBlocks
                             )
             );
 
-    public static final DeferredBlock<Block> ROTATING_PUZZLE_BLOCK =
-            registerBlock(
-                    "rotating_puzzle_block", () ->
-                            new RotatingPuzzleBlock(BlockBehaviour.Properties.of()
-                                    .strength(30)
-                                    .sound(SoundType.STONE)
-                            )
-            );
-
-    public static final DeferredBlock<Block> ROTATING_CONTROLLER_BLOCK =
-            registerBlock(
-                    "rotating_controller_block", () ->
-                            new RotatingControllerBlock(BlockBehaviour.Properties.of()
-                                    .strength(30)
-                                    .sound(SoundType.WOOD)
-                            )
-            );
+    //TODO ROTATING PUZZLE BLOCK
+//    public static final DeferredBlock<Block> ROTATING_PUZZLE_BLOCK =
+//            registerBlock(
+//                    "rotating_puzzle_block", () ->
+//                            new RotatingPuzzleBlock(BlockBehaviour.Properties.of()
+//                                    .strength(30)
+//                                    .sound(SoundType.STONE)
+//                            )
+//            );
+//
+//    public static final DeferredBlock<Block> ROTATING_CONTROLLER_BLOCK =
+//            registerBlock(
+//                    "rotating_controller_block", () ->
+//                            new RotatingControllerBlock(BlockBehaviour.Properties.of()
+//                                    .strength(30)
+//                                    .sound(SoundType.WOOD)
+//                            )
+//            );
 
 
     public static final DeferredBlock<Block> CHASE_CONTROLLER_BLOCK =

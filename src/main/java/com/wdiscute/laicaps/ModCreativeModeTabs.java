@@ -246,9 +246,9 @@ public class ModCreativeModeTabs
                                 //treasure chest
                                 output.accept(ModBlocks.TREASURE_CHEST.get());
 
-                                //sender receiver
-                                output.accept(ModBlocks.SENDER_PUZZLE_BLOCK.get());
-                                output.accept(ModBlocks.RECEIVER_BLOCK.get());
+                                //TODO sender receiver
+                                //output.accept(ModBlocks.SENDER_PUZZLE_BLOCK.get());
+                                //output.accept(ModBlocks.RECEIVER_BLOCK.get());
 
                                 //symbols
                                 output.accept(ModBlocks.SYMBOL_PUZZLE_BLOCK_INACTIVE.get());
@@ -261,7 +261,7 @@ public class ModCreativeModeTabs
                                 //hidden
                                 output.accept(ModBlocks.HIDDEN_CONTROLLER_BLOCK.get());
 
-                                //rotating
+                                //TODO rotating
                                 //output.accept(ModBlocks.ROTATING_CONTROLLER_BLOCK.get());
                                 //output.accept(ModBlocks.ROTATING_PUZZLE_BLOCK.get());
 
