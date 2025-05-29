@@ -39,6 +39,12 @@
         "weight": 1,
         "minCount": 2,
         "maxCount": 4
+      },
+      {
+        "type": "laicaps:glimpuff",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
       }
     ]
   },
