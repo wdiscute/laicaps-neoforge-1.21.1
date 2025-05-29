@@ -68,6 +68,7 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.BLUETALE_SPAWN_EGG.get());
                                 output.accept(ModItems.REDTALE_SPAWN_EGG.get());
                                 output.accept(ModItems.BUBBLEMOUTH_SPAWN_EGG.get());
+                                output.accept(ModItems.GLIMPUFF_SPAWN_EGG.get());
                                 output.accept(ModItems.SWIBBLE_SPAWN_EGG.get());
                                 output.accept(ModItems.SNUFFLER_SPAWN_EGG.get());
                                 output.accept(ModItems.NIMBLE_SPAWN_EGG.get());
@@ -263,6 +264,9 @@ public class ModCreativeModeTabs
                                 //rotating
                                 //output.accept(ModBlocks.ROTATING_CONTROLLER_BLOCK.get());
                                 //output.accept(ModBlocks.ROTATING_PUZZLE_BLOCK.get());
+
+                                //combat
+                                output.accept(ModBlocks.COMBAT_CONTROLLER_BLOCK.get());
 
                                 //notes
                                 output.accept(ModBlocks.NOTES_PUZZLE_BLOCK.get());

@@ -330,7 +330,6 @@ public class ModBlocks
                             new CombatControllerBlock(BlockBehaviour.Properties.of()
                                     .strength(30)
                                     .sound(SoundType.WOOD)
-                                    .noCollission()
                             )
             );
 

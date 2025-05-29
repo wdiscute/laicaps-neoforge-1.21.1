@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.player.Player;
@@ -26,10 +25,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.Objects;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class CombatControllerBlockEntity extends BlockEntity implements TickableBlockEntity
 {
@@ -38,15 +36,36 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
     private int counter = -1;
     private final Random r = new Random();
 
-    UUID mob1 = null;
-
     private ObjectArrayList<ItemStack> arrayOfItemStacks = new ObjectArrayList<ItemStack>(new ItemStack[]{});
     private final UUID[] arrayuuid = new UUID[15];
+    private List<UUID> enemiesList = new ArrayList<>();
+    private int mobsToSpawn = 5;
+    private int mobsRemaining = 0;
+    private float rangeVertical = 0f;
+    private float rangeHorizontal = 9.0f;
 
 
     public void start()
     {
-        state = 1;
+        if(state == 1)
+        {
+            ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.5f);
+        }
+
+        if(state == 2)
+        {
+            ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.5f);
+        }
+
+        if (state == 0)
+        {
+            level.setBlockAndUpdate(getBlockPos(), level.getBlockState(getBlockPos()).setValue(CombatControllerBlock.MOBS_TO_SPAWN, Math.clamp(mobsToSpawn, 0, 7)));
+            state = 1;
+            counter = 0;
+            enemiesList.clear();
+        }
     }
 
     public void resetPlayersSaved()
@@ -84,7 +103,8 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
                 LootParams.Builder builder = new LootParams.Builder((ServerLevel) this.level);
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
 
-                ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE,
+                ResourceKey<LootTable> lootTable = ResourceKey.create(
+                        Registries.LOOT_TABLE,
                         Laicaps.rl("chests/asha_puzzle"));
 
                 arrayOfItemStacks = level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
@@ -106,35 +126,80 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
         {
         }
 
-        //spawning particles and checking if player is close
-        if (state == 1)
+        //spawning mobs one by one
+        if (state == 1 && !level.isClientSide)
         {
-            for (int i = 0; i < 3; i++)
+            if (counter == 1)
+                level.playSound(null, getBlockPos(), SoundEvents.TRIAL_SPAWNER_CLOSE_SHUTTER, SoundSource.BLOCKS);
+
+            //run every 35 ticks
+            if ((counter + 5) % 35 == 0)
             {
+                Vec3 vec3 = new Vec3(
+                        getBlockPos().getX() + 0.5 + r.nextFloat(rangeHorizontal + 0.1f) - (double) rangeHorizontal / 2,
+                        getBlockPos().getY() + 0.5 + r.nextFloat(rangeVertical + 0.1f) - (double) rangeVertical / 2,
+                        getBlockPos().getZ() + 0.5 + r.nextFloat(rangeHorizontal + 0.1f) - (double) rangeHorizontal / 2);
+
+                //check if pos inside block, if it is, retry another pos
+                for (int i = 0; i < 100; i++)
+                {
+                    if(level.getBlockState(new BlockPos((int) vec3.x, ((int) vec3.y), ((int) vec3.z))).isAir())
+                    {
+                        break;
+                    }else
+                    {
+                        vec3 = new Vec3(
+                                getBlockPos().getX() + 0.5 + r.nextFloat(rangeHorizontal + 0.1f) - (double) rangeHorizontal / 2,
+                                getBlockPos().getY() + 0.5 + r.nextFloat(rangeVertical + 0.1f) - (double) rangeVertical / 2,
+                                getBlockPos().getZ() + 0.5 + r.nextFloat(rangeHorizontal + 0.1f) - (double) rangeHorizontal / 2);
+                    }
+                }
+
                 Drowned drowned = new Drowned(EntityType.DROWNED, getLevel());
-                drowned.moveTo(getBlockPos().getX(), getBlockPos().getY() + 1, getBlockPos().getZ(), 1, 1);
+                drowned.moveTo(vec3.x, vec3.y, vec3.z, 1, 1);
                 getLevel().addFreshEntity(drowned);
 
-                mob1 = drowned.getUUID();
+                ((ServerLevel) level).sendParticles(ParticleTypes.LAVA,vec3.x, vec3.y + 0.5, vec3.z, 7, 0, 0.5, 0, 0);
+                level.playSound(null, vec3.x, vec3.y, vec3.z, SoundEvents.TRIAL_SPAWNER_SPAWN_MOB, SoundSource.BLOCKS);
+                enemiesList.add(drowned.getUUID());
+                mobsRemaining++;
             }
 
-
-            state = 2;
-
-        }
-
-
-        
-        if(state == 2)
-        {
-            if(level instanceof ServerLevel sv)
+            if (enemiesList.size() >= mobsToSpawn)
             {
-               System.out.println(sv.getEntities().get(mob1));
+                state = 2;
             }
 
 
         }
 
+
+        if (state == 2)
+        {
+            if (level instanceof ServerLevel sv)
+            {
+                mobsRemaining = 0;
+                for (int i = 0; i < enemiesList.size(); i++)
+                {
+                    if (sv.getEntities().get(enemiesList.get(i)) != null)
+                    {
+                        mobsRemaining++;
+                    }
+                }
+
+                if(level.getBlockState(getBlockPos()).getValue(CombatControllerBlock.MOBS_KILLED) != mobsToSpawn - Math.clamp(mobsRemaining, 0, 7))
+                {
+                    level.setBlockAndUpdate(getBlockPos(), level.getBlockState(getBlockPos()).setValue(CombatControllerBlock.MOBS_KILLED, mobsToSpawn - Math.clamp(mobsRemaining, 0, 7)));
+                }
+
+                if (mobsRemaining == 0)
+                {
+                    counter = 0;
+                    state = 5;
+                }
+
+            }
+        }
 
         //puzzle complete - waiting for a valid player to claim loot
         if (state == 5)
@@ -189,9 +254,13 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
             {
                 //reset stuff
                 state = 0;
-
+                mobsRemaining = 0;
+                counter = -1;
+                enemiesList.clear();
                 //play closing sound
                 level.playSound(null, getBlockPos(), SoundEvents.TRIAL_SPAWNER_DETECT_PLAYER, SoundSource.BLOCKS);
+                //reset mobs killed BS
+                level.setBlockAndUpdate(getBlockPos(), level.getBlockState(getBlockPos()).setValue(CombatControllerBlock.MOBS_KILLED, 0));
                 ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() - 0.5f, getBlockPos().getY(), getBlockPos().getZ() - 0.5f, 50, 1f, 1f, 1f, 0f);
 
             }
@@ -203,7 +272,6 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
         {
             if (counter % 4 == 0)
             {
-
                 //runs if array has something
                 if (arrayOfItemStacks != null)
                 {
@@ -251,29 +319,39 @@ public class CombatControllerBlockEntity extends BlockEntity implements Tickable
 
     }
 
-
+    @SuppressWarnings("SpellCheckingInspection")
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
+
+        tag.putInt("mobstospawn", mobsToSpawn);
+        tag.putFloat("rangehorizontal", rangeHorizontal);
+        tag.putFloat("rangevertical", rangeVertical);
 
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
             if (this.arrayuuid[i] == null)
             {
                 if (tag.contains("user" + i)) tag.remove("user" + i);
-
-            } else
+            }
+            else
             {
                 tag.putUUID("user" + i, this.arrayuuid[i]);
             }
         }
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
+
+        mobsToSpawn = tag.getInt("mobstospawn");
+
+        rangeHorizontal = tag.getFloat("rangehorizontal") + 0.1f;
+        rangeVertical = tag.getFloat("rangevertical") + 0.1f;
 
         for (int i = 0; i < arrayuuid.length; i++)
         {

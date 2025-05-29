@@ -76,16 +76,15 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
     }
 
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom)
+    public void animateTick(BlockState pState, Level level, BlockPos pos, RandomSource random)
     {
         if (pState.getValue(ACTIVE))
         {
-            Random r = new Random();
-
-            pLevel.addParticle(ParticleTypes.HAPPY_VILLAGER,
-                    pPos.getX() - 0.5 + r.nextFloat(2f),
-                    pPos.getY() + 0 + r.nextFloat(1.5f),
-                    pPos.getZ() - 0.5 + r.nextFloat(2f),
+            level.addParticle(
+                    ParticleTypes.HAPPY_VILLAGER,
+                    pos.getX() + 0.5 + random.nextFloat() * 2 - 1,
+                    pos.getY() + random.nextFloat() * 1.5,
+                    pos.getZ() + 0.5 + random.nextFloat() * 2 - 1,
                     0,
                     0,
                     0);

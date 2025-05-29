@@ -50,6 +50,8 @@
 
   "block.laicaps.hidden_controller_block": "Hidden Puzzle Controller",
 
+  "block.laicaps.combat_controller_block": "Combat Puzzle Controller",
+
   "block.laicaps.rotating_controller_block": "Rotating Puzzle Controller",
   "block.laicaps.rotating_puzzle_block": "Rotating Puzzle Block",
 
