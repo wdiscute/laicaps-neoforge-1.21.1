@@ -6,7 +6,6 @@ import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -32,6 +31,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -51,11 +51,37 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     private static final ResourceKey<Level> OVERWORLD_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
     private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
 
+    private final RocketPart[] subEntities;
+
     int landingCounter;
 
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
         super(entityType, level);
+
+        RocketPart head = new RocketPart(this, "cockpit", 1.0F, 1.0F);
+        RocketPart cockpit = new RocketPart(this, "neck", 3.0F, 3.0F);
+
+        this.subEntities = new RocketPart[]{head, cockpit};
+
+        this.setId(ENTITY_COUNTER.getAndAdd(this.subEntities.length + 1) + 1);
+    }
+
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public PartEntity<?>[] getParts() {
+        return this.subEntities;
+    }
+
+    @Override
+    public boolean canBeCollidedWith()
+    {
+        return true;
     }
 
 
@@ -358,7 +384,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
     }
 
-
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
@@ -404,6 +429,11 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     //
     //                                                                `---'
 
+    @Override
+    public Vec3 getPassengerRidingPosition(Entity entity)
+    {
+        return new Vec3(position().x, position().y + 1.7, position().z - 1.5);
+    }
 
     @Override
     public boolean isPickable()

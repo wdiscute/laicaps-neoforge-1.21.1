@@ -71,9 +71,10 @@ public class ModEntities
                     .sized(1.2f, 0.9f).build("nimble"));
 
 
+
     public static final Supplier<EntityType<RocketEntity>> ROCKET =
             ENTITY_TYPES.register("rocket", () -> EntityType.Builder.of(RocketEntity::new, MobCategory.MISC)
-                    .sized(2.0f, 2.0f).build("rocket"));
+                    .sized(4.5f, 5.0f).build("rocket"));
 
     public static void register(IEventBus eventBus)
     {
