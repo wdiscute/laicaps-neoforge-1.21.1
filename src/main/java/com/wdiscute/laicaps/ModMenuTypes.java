@@ -1,9 +1,7 @@
-package com.wdiscute.laicaps.types;
+package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableMenu;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationMenu;
-import com.wdiscute.laicaps.block.refuelstation.RefuelStationScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
 import net.minecraft.core.registries.Registries;

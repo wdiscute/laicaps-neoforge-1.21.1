@@ -16,7 +16,6 @@ import com.wdiscute.laicaps.block.telescope.TelescopeBaseBlock;
 import com.wdiscute.laicaps.block.telescope.TelescopeBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
-import com.wdiscute.laicaps.types.ModWoodTypes;
 import com.wdiscute.laicaps.worldgen.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -45,7 +44,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -80,6 +78,7 @@ public class ModBlocks
                             new RefuelStationBlock(BlockBehaviour.Properties.of()
                                     .strength(30)
                                     .sound(SoundType.STONE)
+                                    .noOcclusion()
                             ));
 
     public static final DeferredBlock<Block> ASHA_TELEPORTER = registerBlock(

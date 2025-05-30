@@ -18,7 +18,7 @@ public class GlimpuffRenderer extends MobRenderer<GlimpuffEntity, GlimpuffModel<
     }
 
     @Override
-    public ResourceLocation getTextureLocation(GlimpuffEntity bubblemouthEntity)
+    public ResourceLocation getTextureLocation(GlimpuffEntity glimpuffEntity)
     {
         return Laicaps.rl("textures/entity/glimpuff/glimpuff.png");
     }

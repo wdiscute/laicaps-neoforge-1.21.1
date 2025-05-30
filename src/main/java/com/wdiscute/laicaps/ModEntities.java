@@ -1,6 +1,5 @@
-package com.wdiscute.laicaps.entity;
+package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleEntity;
 import com.wdiscute.laicaps.entity.bluetale.RedtaleEntity;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
@@ -12,7 +11,6 @@ import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
 import com.wdiscute.laicaps.entity.swibble.SwibbleEntity;
-import com.wdiscute.laicaps.entity.swibble.SwibbleModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

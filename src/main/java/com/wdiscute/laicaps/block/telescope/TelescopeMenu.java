@@ -1,10 +1,8 @@
 package com.wdiscute.laicaps.block.telescope;
 
 import com.wdiscute.laicaps.AdvHelper;
-import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlocks;
-import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.types.ModMenuTypes;
+import com.wdiscute.laicaps.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;

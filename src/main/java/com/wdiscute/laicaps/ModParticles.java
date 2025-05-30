@@ -1,6 +1,5 @@
-package com.wdiscute.laicaps.particle;
+package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;

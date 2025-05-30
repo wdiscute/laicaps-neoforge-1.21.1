@@ -1,6 +1,5 @@
 package com.wdiscute.laicaps;
 
-import com.google.common.collect.Iterables;
 import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableScreen;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationScreen;
@@ -16,27 +15,17 @@ import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerRenderer;
 import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
 import com.wdiscute.laicaps.item.ModDataComponents;
-import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
-import com.wdiscute.laicaps.mixin.AdvancementProgressAcessor;
 import com.wdiscute.laicaps.particle.ChasePuzzleParticles;
 import com.wdiscute.laicaps.particle.LunarveilParticles;
-import com.wdiscute.laicaps.particle.ModParticles;
 import com.wdiscute.laicaps.particle.WaterFlowerParticles;
-import com.wdiscute.laicaps.sound.ModSounds;
-import com.wdiscute.laicaps.types.ModMenuTypes;
-import com.wdiscute.laicaps.types.ModWoodTypes;
 import com.wdiscute.laicaps.worldgen.ModFeatures;
-import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -54,7 +43,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Mod(Laicaps.MOD_ID)

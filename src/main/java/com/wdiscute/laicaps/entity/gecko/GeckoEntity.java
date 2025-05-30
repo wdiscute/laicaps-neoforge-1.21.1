@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.entity.gecko;
 
-import com.wdiscute.laicaps.entity.ModEntities;
+import com.wdiscute.laicaps.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;

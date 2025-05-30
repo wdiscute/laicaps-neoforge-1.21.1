@@ -7,7 +7,6 @@ import com.wdiscute.laicaps.entity.boat.ModModelLayers;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthEntity;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthModel;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
-import com.wdiscute.laicaps.entity.ModEntities;
 import com.wdiscute.laicaps.entity.gecko.GeckoModel;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffModel;

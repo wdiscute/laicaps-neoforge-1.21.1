@@ -1,6 +1,5 @@
-package com.wdiscute.laicaps.sound;
+package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

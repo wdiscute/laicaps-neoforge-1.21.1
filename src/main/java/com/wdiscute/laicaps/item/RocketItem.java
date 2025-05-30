@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.item;
 
-import com.wdiscute.laicaps.entity.ModEntities;
+import com.wdiscute.laicaps.ModEntities;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;

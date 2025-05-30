@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.types.ModMenuTypes;
+import com.wdiscute.laicaps.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
