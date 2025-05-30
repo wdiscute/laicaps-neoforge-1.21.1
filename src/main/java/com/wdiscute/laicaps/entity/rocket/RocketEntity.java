@@ -30,6 +30,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -58,32 +59,11 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
         super(entityType, level);
-
-        RocketPart head = new RocketPart(this, "cockpit", 1.0F, 1.0F);
-        RocketPart cockpit = new RocketPart(this, "neck", 3.0F, 3.0F);
-
+        RocketPart head = new RocketPart(this, 1.0F, 1.0F, new Vec3(0, 0, 0));
+        RocketPart cockpit = new RocketPart(this, 1.8F, 2F, new Vec3(0, 1.5, -1.7));
         this.subEntities = new RocketPart[]{head, cockpit};
-
-        this.setId(ENTITY_COUNTER.getAndAdd(this.subEntities.length + 1) + 1);
+        //this.setId(ENTITY_COUNTER.getAndAdd(this.subEntities.length + 1) + 1);
     }
-
-
-    @Override
-    public boolean isMultipartEntity() {
-        return true;
-    }
-
-    @Override
-    public PartEntity<?>[] getParts() {
-        return this.subEntities;
-    }
-
-    @Override
-    public boolean canBeCollidedWith()
-    {
-        return true;
-    }
-
 
     public int getFuelRemainingForSelectedDestination(NonNullList<ItemStack> itemStacks)
     {
@@ -199,6 +179,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public void tick()
     {
         super.tick();
+
+        fixParts();
 
         if (level().isClientSide)
         {
@@ -411,6 +393,12 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         return super.interactAt(player, vec, hand);
     }
 
+    @Override
+    public AABB getBoundingBoxForCulling()
+    {
+        System.out.println(getBoundingBox());
+        return super.getBoundingBoxForCulling();
+    }
 
     @Override
     public boolean hurt(DamageSource source, float amount)
@@ -428,6 +416,29 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
     //
     //                                                                `---'
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public PartEntity<?>[] getParts() {
+        return this.subEntities;
+    }
+
+    @Override
+    public boolean canBeCollidedWith()
+    {
+        return false;
+    }
+
+
+    private void fixParts()
+    {
+        subEntities[0].updatePos(position());
+        subEntities[1].updatePos(position());
+    }
 
     @Override
     public Vec3 getPassengerRidingPosition(Entity entity)

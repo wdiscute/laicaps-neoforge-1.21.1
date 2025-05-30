@@ -5,47 +5,55 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerEntity;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 
 import javax.annotation.Nullable;
 
 public class RocketPart extends PartEntity<RocketEntity> {
     public RocketEntity parentMob;
-    public String name;
     private EntityDimensions size;
+    private Vec3 offset = new Vec3(1,1,1);
 
-    public RocketPart(RocketEntity parentMob, String name, float width, float height) {
+    public RocketPart(RocketEntity parentMob, float width, float height, Vec3 offset) {
         super(parentMob);
         this.size = EntityDimensions.scalable(width, height);
         this.refreshDimensions();
+        this.offset = offset;
         this.parentMob = parentMob;
-        this.name = name;
-        System.out.println("constructor! hello i am " + name + " and my parent is " + parentMob);
-        System.out.println("constructor! hello i am " + name + " and my parent is " + parentMob);
-
+        this.setPos(parentMob.getX(),parentMob.getY(), parentMob.getZ());
     }
 
     @Override
-    public void setPos(double x, double y, double z) {
-        System.out.println("hello i am " + name + " and my parent is " + parentMob);
-        super.setPos(x, y, z);
-
-        if(parentMob != null)
-        {
-            this.xo = parentMob.xo;
-            this.yo =  parentMob.yo;
-            this.zo =  parentMob.zo;
-            this.xOld =  parentMob.xOld;
-            this.yOld =  parentMob.yOld;
-            this.zOld =  parentMob.zOld;
-        }
-
+    public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
+    {
+        System.out.println("level is " + level());
+        return parentMob.interactAt(player, vec, hand);
     }
+
+    public void updatePos(Vec3 vec3)
+    {
+        double x = vec3.x;
+        double y = vec3.y;
+        double z = vec3.z;
+
+        super.setPos(x + offset.x, y + offset.y, z + offset.z);
+        this.xo = x + offset.x;
+        this.yo = y + offset.y;
+        this.zo = z + offset.z;
+        this.xOld = x + offset.x;
+        this.yOld = y + offset.y;
+        this.zOld = z + offset.z;
+    }
+
 
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
     }
@@ -54,6 +62,12 @@ public class RocketPart extends PartEntity<RocketEntity> {
     }
 
     protected void addAdditionalSaveData(CompoundTag compound) {
+    }
+
+    @Override
+    public boolean canBeCollidedWith()
+    {
+        return true;
     }
 
     public boolean isPickable() {
