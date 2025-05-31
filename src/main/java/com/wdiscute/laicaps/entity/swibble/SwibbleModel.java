@@ -161,7 +161,7 @@ public class SwibbleModel<T extends SwibbleEntity> extends HierarchicalModel<T> 
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
         this.animateWalk(SwibbleAnimations.attack, limbSwing, limbSwingAmount, 1f, 1f);
-        this.animate(entity.idleAnimationState, SwibbleAnimations.attack, ageInTicks, 1f);
+        //this.animate(entity.idleAnimationState, SwibbleAnimations.attack, ageInTicks, 1f);
 
     }
 
