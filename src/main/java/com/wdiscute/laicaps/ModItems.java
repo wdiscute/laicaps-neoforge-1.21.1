@@ -391,7 +391,7 @@ public class ModItems
                 sp.displayClientMessage(Component.literal("There are no entries left to unlock"), true);
                 return false;
             }
-            sp.displayClientMessage(Component.literal("You have unlocked the entry ").append(Component.translatable("gui.astronomy_research_table." + planet + "." + criteria + ".name")), true);
+            sp.displayClientMessage(Component.translatable("tooltip.laicaps.entry_page.unlock.before").append(Component.translatable("gui.astronomy_research_table." + planet + "." + criteria + ".name")).append(Component.translatable("tooltip.laicaps.entry_page.unlock.before")), true);
             AdvHelper.awardAdvancementCriteria(sp, planet + "_entries", criteria);
             return true;
         }
