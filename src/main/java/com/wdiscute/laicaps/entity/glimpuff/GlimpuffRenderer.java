@@ -15,6 +15,7 @@ public class GlimpuffRenderer extends MobRenderer<GlimpuffEntity, GlimpuffModel<
     public GlimpuffRenderer(EntityRendererProvider.Context context)
     {
         super(context, new GlimpuffModel<>(context.bakeLayer(GlimpuffModel.LAYER_LOCATION)), 0.25f);
+        this.addLayer(new GlimpuffGlowLayer(this));
     }
 
     @Override
