@@ -163,6 +163,8 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
+        if(rocketState != 0) return false;
+
         //ember
         if (x > 250 && x < 283 && y > 170 && y < 200)
             getMinecraft().gameMode.handleInventoryButtonClick(menu.containerId, 1);
@@ -452,19 +454,19 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             planet = lunamarDiscovered ? "lunamar" : "lunamar_blur";
 
         //return if mouse is not hovering a planet
-        if (planet.equals("")) return;
+        if (planet.isEmpty()) return;
 
         //add base tooltips for each planet
         List<Component> list = new ArrayList<>();
         for (int i = 0; i < 100; i++)
         {
-            if (I18n.exists("gui.laicaps.telescope.tooltip." + planet + "." + i))
+            if (I18n.exists("gui.laicaps.rocket.tooltip." + planet + "." + i))
             {
-                list.add(Component.translatable("gui.laicaps.telescope.tooltip." + planet + "." + i));
+                list.add(Component.translatable("gui.laicaps.rocket.tooltip." + planet + "." + i));
             } else
             {
                 if (i == 0)
-                    list.add(Component.literal("translation key missing! gui.laicaps.telescope.tooltip." + planet + "." + i));
+                    list.add(Component.literal("translation key missing! gui.laicaps.rocket.tooltip." + planet + "." + i));
                 if (i == 0) list.add(Component.literal("Report to @wdiscute on discord"));
                 if (i == 0) list.add(Component.literal("or whoever is translating the mod! :3"));
                 break;
@@ -473,6 +475,7 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
 
 
         //add "there's more to research" and "Click to Select" for non-blurred
+        if(false)
         {
             if (Objects.equals(planet, "ember"))
             {
@@ -505,8 +508,8 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
         //add "more knowledge required" for blurred planets
         if (Objects.equals(planet, "ember_blur") || Objects.equals(planet, "asha_blur") || Objects.equals(planet, "lunamar_blur"))
         {
-            list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.knowledge"));
-            list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.knowledge.2"));
+            //list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.knowledge"));
+            //list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.knowledge.2"));
         }
 
         guiGraphics.renderComponentTooltip(this.font, list, ((int) mouseX), ((int) mouseY));

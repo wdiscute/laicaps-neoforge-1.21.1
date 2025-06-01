@@ -50,7 +50,7 @@ public class TelescopeMenu extends AbstractContainerMenu
         }
 
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, -88, 35));
+        //this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, -88, 35));
     }
 
     @Override

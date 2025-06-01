@@ -115,11 +115,13 @@ public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
 
         PartDefinition cube_r14 = cockpitdecorations.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(84, 216).addBox(-2.0F, 0.0F, -1.0F, 4.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-22.0F, -3.0F, -2.0F, 0.0F, -0.5236F, 0.0F));
 
-        PartDefinition cube_r15 = cockpitdecorations.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(72, 216).addBox(-1.5F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-22.5F, -5.5F, -6.5F, -0.6643F, -0.625F, 0.4296F));
+        PartDefinition cube_r15 = cockpitdecorations.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(0, 245).addBox(-6.0F, -3.605F, -1.0092F, 13.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, -4.0F, 2.0F, 0.0F, -1.5708F, 0.4363F));
 
-        PartDefinition cube_r16 = cockpitdecorations.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(0, 245).addBox(-6.0F, -3.605F, -1.0092F, 13.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, -4.0F, 2.0F, 0.0F, -1.5708F, 0.4363F));
+        PartDefinition cube_r16 = cockpitdecorations.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(224, 85).addBox(-6.0F, -11.5307F, -4.6955F, 13.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-13.0F, 2.0F, 1.75F, 0.6545F, 0.0F, 0.0F));
 
-        PartDefinition cube_r17 = cockpitdecorations.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(224, 85).addBox(-6.0F, -11.5307F, -4.6955F, 13.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-13.0F, 2.0F, 1.75F, 0.6545F, 0.0F, 0.0F));
+        PartDefinition globe = cockpitdecorations.addOrReplaceChild("globe", CubeListBuilder.create(), PartPose.offset(-22.5F, -5.5F, -6.5F));
+
+        PartDefinition cube_r17 = globe.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(72, 216).addBox(-1.5F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.6643F, -0.625F, 0.4296F));
 
         return LayerDefinition.create(meshdefinition, 512, 512);
     }
@@ -129,7 +131,7 @@ public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
     {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        this.animate(entity.shakeAnimationState, RocketAnimation.ANIM_ROCKET_SHAKE, ageInTicks, 1f);
+        this.animate(entity.globeSpinAnimationState, RocketAnimation.GLOBE_SPIN, ageInTicks, entity.globeSpinCounter/10);
 
     }
 

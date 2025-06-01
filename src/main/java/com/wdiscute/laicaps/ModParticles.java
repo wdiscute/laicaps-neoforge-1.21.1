@@ -27,9 +27,11 @@ public class ModParticles
     public static final Supplier<SimpleParticleType> LUNARVEIL_PARTICLES =
             PARTICLE_TYPES.register("lunarveil_particles", () -> new SimpleParticleType(true));
 
+    public static final Supplier<SimpleParticleType> ROCKET_FIRE_PARTICLES =
+            PARTICLE_TYPES.register("rocket_fire_particles", () -> new SimpleParticleType(true));
 
-
-
+    public static final Supplier<SimpleParticleType> ROCKET_FIRE_SIMPLE_PARTICLES =
+            PARTICLE_TYPES.register("rocket_fire_simple_particles", () -> new SimpleParticleType(true));
 
 
 

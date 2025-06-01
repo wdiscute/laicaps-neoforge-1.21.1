@@ -9,35 +9,52 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 
 import javax.annotation.Nullable;
 
-public class RocketPart extends PartEntity<RocketEntity> {
-    public RocketEntity parentMob;
-    private EntityDimensions size;
-    private Vec3 offset = new Vec3(1,1,1);
+public class RocketPart extends PartEntity<RocketEntity>
+{
+    public final RocketEntity parentRocket;
+    public final InteractionsEnum interaction;
+    private final Vec3 offset;
+    private AABB aabb;
+    private final boolean canRiderInteract;
+    private final boolean canCollide;
 
-    public RocketPart(RocketEntity parentMob, float width, float height, Vec3 offset) {
-        super(parentMob);
-        this.size = EntityDimensions.scalable(width, height);
+    public RocketPart(RocketEntity parentRocket, InteractionsEnum interaction, AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide)
+    {
+        super(parentRocket);
+        this.offset = offsetFromCenter;
+        this.canRiderInteract = canRiderInteract;
+        this.canCollide = canCollide;
         this.refreshDimensions();
-        this.offset = offset;
-        this.parentMob = parentMob;
-        this.setPos(parentMob.getX(),parentMob.getY(), parentMob.getZ());
+        this.parentRocket = parentRocket;
+        this.interaction = interaction;
+        this.aabb = hitboxSize;
+    }
+
+
+    @Override
+    protected AABB makeBoundingBox()
+    {
+        if (aabb == null) return super.makeBoundingBox();
+
+        return aabb.move(position());
     }
 
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
-        System.out.println("level is " + level());
-        return parentMob.interactAt(player, vec, hand);
+        if(hand == InteractionHand.OFF_HAND) return InteractionResult.PASS;
+
+        return parentRocket.interactWithPart(player, interaction);
     }
+
 
     public void updatePos(Vec3 vec3)
     {
@@ -45,57 +62,82 @@ public class RocketPart extends PartEntity<RocketEntity> {
         double y = vec3.y;
         double z = vec3.z;
 
-        super.setPos(x + offset.x, y + offset.y, z + offset.z);
-        this.xo = x + offset.x;
-        this.yo = y + offset.y;
-        this.zo = z + offset.z;
-        this.xOld = x + offset.x;
-        this.yOld = y + offset.y;
-        this.zOld = z + offset.z;
+        this.xo = position().x;
+        this.yo = position().y;
+        this.zo = position().z;
+        this.xOld = position().x;
+        this.yOld = position().y;
+        this.zOld = position().z;
+
+        super.setPos(x + offset.x, y + offset.y + parentRocket.getAcc(), z + offset.z);
+
     }
 
 
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-    }
-
-    protected void readAdditionalSaveData(CompoundTag compound) {
-    }
-
-    protected void addAdditionalSaveData(CompoundTag compound) {
+    @Override
+    public boolean canRiderInteract()
+    {
+        return canRiderInteract;
     }
 
     @Override
     public boolean canBeCollidedWith()
     {
-        return true;
+        return canCollide;
     }
 
-    public boolean isPickable() {
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder)
+    {
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag compound)
+    {
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag compound)
+    {
+    }
+
+
+
+    @Override
+    public boolean isPickable()
+    {
         return true;
     }
 
     @Nullable
-    public ItemStack getPickResult() {
-        return this.parentMob.getPickResult();
+    @Override
+    public ItemStack getPickResult()
+    {
+        return this.parentRocket.getPickResult();
     }
 
-    public boolean hurt(DamageSource source, float amount) {
-        return this.isInvulnerableTo(source) ? false : this.parentMob.hurt(source, amount);
+    @Override
+    public boolean hurt(DamageSource source, float amount)
+    {
+        return this.isInvulnerableTo(source) ? false : this.parentRocket.hurt(source, amount);
     }
 
-    public boolean is(Entity entity) {
-        return this == entity || this.parentMob == entity;
+    @Override
+    public boolean is(Entity entity)
+    {
+        return this == entity || this.parentRocket == entity;
     }
 
-    public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity entity) {
+    @Override
+    public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity entity)
+    {
         throw new UnsupportedOperationException();
     }
 
-    public EntityDimensions getDimensions(Pose pose) {
-        return this.size;
-    }
-
-    public boolean shouldBeSaved() {
+    @Override
+    public boolean shouldBeSaved()
+    {
         return false;
     }
 }

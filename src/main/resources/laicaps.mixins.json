@@ -10,8 +10,8 @@
     "TankDurabilityTooltipFix"
   ],
   "client": [
-    "JumpingAcessor",
     "AdvancementProgressAcessor",
+    "JumpingAcessor",
     "TankDurabilityTooltipFix"
   ],
   "injectors": {
