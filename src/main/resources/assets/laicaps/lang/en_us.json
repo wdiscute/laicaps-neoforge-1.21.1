@@ -71,9 +71,6 @@
   "block.laicaps.telescope_stand": "Telescope Stand",
   "block.laicaps.telescope.place": "§cThe telescope must be placed on a stand",
   "block.laicaps.telescope.daytime": "§cIt's too bright to see anything through the telescope",
-  "gui.laicaps.telescope.missing": "Insert your Astronomy Notebook",
-
-
 
 
   "gui.laicaps.telescope.tooltip.generic.travel": "§a§l>§r§a Rocket Travel Available",
@@ -82,39 +79,28 @@
   "gui.laicaps.telescope.tooltip.generic.advanced.0": "§cYour telescope is not advanced",
   "gui.laicaps.telescope.tooltip.generic.advanced.1": "§cenough to look this far into space",
 
-  "gui.laicaps.rocket.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
+  "gui.laicaps.telescope.tooltip.ember.0": "§6Ember",
+  "gui.laicaps.telescope.tooltip.ember.1": "",
+  "gui.laicaps.telescope.tooltip.ember.2": "A planet consumed by fire and ash.",
+  "gui.laicaps.telescope.tooltip.ember.3": "",
+  "gui.laicaps.telescope.tooltip.ember.4": "Check your Astronomy Research",
+  "gui.laicaps.telescope.tooltip.ember.5": "Table for more information.",
+  "gui.laicaps.telescope.tooltip.ember.6": "",
 
-  "gui.laicaps.rocket.missing_tank":      "§c        Insert Tank",
-  "gui.laicaps.rocket.missing_fuel":      "§c     Not Enough Fuel",
-  "gui.laicaps.rocket.missing_knowledge": "§   Undiscovered planet",
-  "gui.laicaps.rocket.missing_nothing":   "§a     Ready for Takeoff",
-
-  "gui.laicaps.rocket.missing_something": "§cThe rocket is not ready for takeoff",
-
-
-
-  "gui.laicaps.telescope.tooltip.ember.0": "",
-  "gui.laicaps.telescope.tooltip.ember.1": "§6                    EMBER                    ",
-  "gui.laicaps.telescope.tooltip.ember.2": "",
-  "gui.laicaps.telescope.tooltip.ember.3": "Check your Astronomy Research Table",
-  "gui.laicaps.telescope.tooltip.ember.4": " for useful information before travel.",
-  "gui.laicaps.telescope.tooltip.ember.5": "",
-
-  "gui.laicaps.telescope.tooltip.ember_blur.0": "",
-  "gui.laicaps.telescope.tooltip.ember_blur.1": "§6§k                  EMBER                    ",
-  "gui.laicaps.telescope.tooltip.ember_blur.2": "",
-
+  "gui.laicaps.telescope.tooltip.ember_blur.0": "§6§kEMBER",
+  "gui.laicaps.telescope.tooltip.ember_blur.1": "",
 
 
   "gui.laicaps.telescope.tooltip.asha.0": "§dAsha",
   "gui.laicaps.telescope.tooltip.asha.1": "",
-  "gui.laicaps.telescope.tooltip.asha.2": "Check your Astronomy Research Table",
-  "gui.laicaps.telescope.tooltip.asha.3": "for useful information before travel.",
-  "gui.laicaps.telescope.tooltip.asha.4": "",
+  "gui.laicaps.telescope.tooltip.asha.2": "An overworld-like planet welcoming of your visit.",
+  "gui.laicaps.telescope.tooltip.asha.3": "",
+  "gui.laicaps.telescope.tooltip.asha.4": "Check your Astronomy Research Table for",
+  "gui.laicaps.telescope.tooltip.asha.5": "more information.",
+  "gui.laicaps.telescope.tooltip.asha.6": "",
 
-  "gui.laicaps.telescope.tooltip.asha_blur.0": "",
-  "gui.laicaps.telescope.tooltip.asha_blur.1": "§d§k                    ASHA                    ",
-  "gui.laicaps.telescope.tooltip.asha_blur.2": "",
+  "gui.laicaps.telescope.tooltip.asha_blur.0": "§d§kASHA",
+  "gui.laicaps.telescope.tooltip.asha_blur.1": "",
 
 
 
@@ -122,41 +108,45 @@
   "gui.laicaps.telescope.tooltip.overworld.1": "",
   "gui.laicaps.telescope.tooltip.overworld.2": "Home sweet home.",
   "gui.laicaps.telescope.tooltip.overworld.3": "",
+  "gui.laicaps.telescope.tooltip.overworld.4": "Check your Astronomy Research",
+  "gui.laicaps.telescope.tooltip.overworld.5": "Table for more information.",
+  "gui.laicaps.telescope.tooltip.overworld.6": "",
 
 
 
-  "gui.laicaps.telescope.tooltip.lunamar.1": "§9Lunamar",
-  "gui.laicaps.telescope.tooltip.lunamar.2": "",
-  "gui.laicaps.telescope.tooltip.lunamar.3": "Check your Astronomy Research Table",
-  "gui.laicaps.telescope.tooltip.lunamar.4": "for useful information before travel.",
-  "gui.laicaps.telescope.tooltip.lunamar.5": "",
+  "gui.laicaps.telescope.tooltip.lunamar.0": "§9Lunamar",
+  "gui.laicaps.telescope.tooltip.lunamar.1": "",
+  "gui.laicaps.telescope.tooltip.lunamar.2": "An ocean planet full of life.",
+  "gui.laicaps.telescope.tooltip.lunamar.3": "",
+  "gui.laicaps.telescope.tooltip.lunamar.4": "Check your Astronomy Research ",
+  "gui.laicaps.telescope.tooltip.lunamar.5": "Table for more information.",
+  "gui.laicaps.telescope.tooltip.lunamar.6": "",
 
-  "gui.laicaps.telescope.tooltip.lunamar_blur.1": "§9§kLUNAMAR",
-  "gui.laicaps.telescope.tooltip.lunamar_blur.2": "",
-
-
-
-
+  "gui.laicaps.telescope.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
+  "gui.laicaps.telescope.tooltip.lunamar_blur.1": "",
 
 
+
+
+  "gui.laicaps.rocket.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
+
+  "gui.laicaps.rocket.missing_tank":      "§c        Insert Tank",
+  "gui.laicaps.rocket.missing_fuel":      "§c     Not Enough Fuel",
+  "gui.laicaps.rocket.missing_knowledge": "§c   Undiscovered planet",
+  "gui.laicaps.rocket.missing_nothing":   "§a     Ready for Takeoff",
+
+  "gui.laicaps.rocket.missing_something": "§cThe rocket is not ready for takeoff",
 
   "gui.laicaps.rocket.tooltip.ember.0": "§6Ember",
-
   "gui.laicaps.rocket.tooltip.ember_blur.0": "§6§kEMBER",
 
   "gui.laicaps.rocket.tooltip.asha.0": "§dAsha",
-
   "gui.laicaps.rocket.tooltip.asha_blur.0": "§d§kASHA",
 
-
   "gui.laicaps.rocket.tooltip.overworld.0": "§2Overworld",
-  "gui.laicaps.rocket.tooltip.overworld.4": "§a§l>§r§a Rocket Travel Available §a§l<§r",
-
 
   "gui.laicaps.rocket.tooltip.lunamar.0": "§9Lunamar",
-
   "gui.laicaps.rocket.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
-
 
 
   "item.laicaps.astronomy_notebook": "Astronomy Notebook",

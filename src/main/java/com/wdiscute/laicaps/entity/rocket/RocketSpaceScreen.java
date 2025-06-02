@@ -286,6 +286,21 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
     private void checkMissingItemsMessage(@Nullable GuiGraphics guiGraphics)
     {
 
+
+        //check knowledge
+        boolean canTravel = false;
+        if(menu.container.getItem(4).is(ModItems.EMBER) && emberDiscovered) canTravel = true;
+        if(menu.container.getItem(4).is(ModItems.ASHA) && ashaDiscovered) canTravel = true;
+        if(menu.container.getItem(4).is(ModItems.OVERWORLD)) canTravel = true;
+        if(menu.container.getItem(4).is(ModItems.LUNAMAR) && lunamarDiscovered) canTravel = true;
+
+        if (!canTravel)
+        {
+            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_knowledge"), uiX + 30, uiY + 70, 13186614, true);
+            return;
+        }
+
+
         if (tank.isEmpty())
         {
             if (!(guiGraphics == null))
@@ -300,18 +315,6 @@ public class RocketSpaceScreen extends AbstractContainerScreen<RocketSpaceMenu>
             return;
         }
 
-        //check knowledge
-        boolean canTravel = false;
-        if(menu.container.getItem(4).is(ModItems.EMBER) && emberDiscovered) canTravel = true;
-        if(menu.container.getItem(4).is(ModItems.ASHA) && ashaDiscovered) canTravel = true;
-        if(menu.container.getItem(4).is(ModItems.OVERWORLD)) canTravel = true;
-        if(menu.container.getItem(4).is(ModItems.LUNAMAR) && lunamarDiscovered) canTravel = true;
-
-        if (!canTravel)
-        {
-            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_knowledge"), uiX + 30, uiY + 70, 13186614, true);
-            return;
-        }
 
 
         if (rocketState == 0)
