@@ -37,23 +37,6 @@ public class ModItems
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Laicaps.MOD_ID);
 
 
-    public static final DeferredItem<Item> WEAPON_POISON = ITEMS.register(
-            "weapon_poison", () -> new Item(new Item.Properties().stacksTo(1)
-            )
-            {
-                @Override
-                public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
-                {
-                    ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
-
-                    mutable.set(level.holderLookup(Registries.ENCHANTMENT).get(Enchantments.FIRE_ASPECT).get(), 1);
-
-                    stack.set(DataComponents.ENCHANTMENTS, mutable.toImmutable().withTooltip(false));
-                    stack.set(DataComponents.STORED_ENCHANTMENTS, mutable.toImmutable());
-                }
-            });
-
-
     //
     //,--.   ,--. ,--.  ,---.    ,-----.
     //|   `.'   | |  | '   .-'  '  .--./
