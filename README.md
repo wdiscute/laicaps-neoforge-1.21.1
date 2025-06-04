@@ -2,7 +2,7 @@
 
 
 
-![laicaps title](https://github.com/user-attachments/assets/5eaedf1b-dd8a-4020-95bc-3cb1e359a6f1)
+![laicaps title](https://github.com/user-attachments/assets/75687045-f2a0-44f0-9c9d-a2eb1b0cf376)
 
 
 Laicaps is a fantasy space exploration mod that emphasizes adventure, environmental storytelling, and atmosphere.
