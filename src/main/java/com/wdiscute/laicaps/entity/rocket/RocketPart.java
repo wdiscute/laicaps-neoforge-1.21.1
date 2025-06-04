@@ -22,11 +22,11 @@ public class RocketPart extends PartEntity<RocketEntity>
     public final RocketEntity parentRocket;
     public final InteractionsEnum interaction;
     private final Vec3 offset;
-    private AABB aabb;
+    private final AABB aabb;
     private final boolean canRiderInteract;
     private final boolean canCollide;
 
-    public RocketPart(RocketEntity parentRocket, InteractionsEnum interaction, AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide)
+    public RocketPart(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RocketEntity parentRocket, InteractionsEnum interaction)
     {
         super(parentRocket);
         this.offset = offsetFromCenter;
@@ -50,6 +50,7 @@ public class RocketPart extends PartEntity<RocketEntity>
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
+        if(parentRocket.getFirstPassenger() == player && interaction == InteractionsEnum.RIDE) return InteractionResult.PASS;
         if(hand == InteractionHand.OFF_HAND) return InteractionResult.PASS;
 
         return parentRocket.interactWithPart(player, interaction);

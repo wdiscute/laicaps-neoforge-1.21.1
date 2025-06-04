@@ -10,6 +10,7 @@ public enum InteractionsEnum implements StringRepresentable
     RIDE("ride"),
     OPEN_MAIN_SCREEN("open_main_screen"),
     GLOBE_SPIN("globe_spin"),
+    TOGGLE_DOOR("toggle_door"),
     NONE("none");
 
     private final String name;

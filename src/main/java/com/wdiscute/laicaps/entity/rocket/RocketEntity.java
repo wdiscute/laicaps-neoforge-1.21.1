@@ -7,7 +7,6 @@ import com.wdiscute.laicaps.ModParticles;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +22,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
@@ -42,11 +40,15 @@ import org.jetbrains.annotations.Nullable;
 public class RocketEntity extends Entity implements PlayerRideable, MenuProvider, ContainerEntity
 {
     public final AnimationState globeSpinAnimationState = new AnimationState();
+    public final AnimationState doorSpinAnimationState = new AnimationState();
     public float globeSpinCounter;
+
     public static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> JUMPING = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> MISSING_FUEL = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> DOOR = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> MISSING_KNOWLEDGE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
+
     public NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 
     private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
@@ -63,14 +65,26 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     {
         super(entityType, level);
 
-        RocketPart cockpitTop = new RocketPart(this, InteractionsEnum.RIDE, new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 3.45, -2.6), false, true);
-        RocketPart cockpitBottom = new RocketPart(this, InteractionsEnum.RIDE, new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true);
+        //cockpit
+        RocketPart cockpitTop         = new RocketPart(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 3.45, -2.6), false, true, this, InteractionsEnum.RIDE);
+        RocketPart cockpitBottom      = new RocketPart(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
 
-        RocketPart mainScreen = new RocketPart(this, InteractionsEnum.OPEN_MAIN_SCREEN, new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false);
-        RocketPart globe = new RocketPart(this, InteractionsEnum.GLOBE_SPIN, new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false);
-        RocketPart mainBody = new RocketPart(this, InteractionsEnum.RIDE, new AABB(0, 0, 0, 4.5, 5, 3), new Vec3(-2.25, 0, -1), false, true);
+        RocketPart cockpitWindowRight = new RocketPart(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(0.85, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
+        RocketPart cockpitWindowLeft  = new RocketPart(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
+        RocketPart cockpitWindowFront = new RocketPart(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
 
-        this.subEntities = new RocketPart[]{cockpitTop, mainScreen, mainBody, cockpitBottom, globe};
+        RocketPart cockpitStairs      = new RocketPart(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.TOGGLE_DOOR);
+
+        RocketPart mainScreen         = new RocketPart(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false, this, InteractionsEnum.OPEN_MAIN_SCREEN);
+        RocketPart globe              = new RocketPart(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, InteractionsEnum.GLOBE_SPIN);
+
+
+        //main body
+        RocketPart mainBody           = new RocketPart(new AABB(0, 0, 0, 4.5, 0.08, 3), new Vec3(-2.25, 0.8, -1), false, true, this, InteractionsEnum.RIDE);
+
+
+
+        this.subEntities = new RocketPart[]{cockpitStairs, cockpitTop, mainScreen, mainBody, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
     }
 
@@ -472,6 +486,14 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             return InteractionResult.SUCCESS;
         }
 
+        //open door
+        if (interaction.equals(InteractionsEnum.TOGGLE_DOOR))
+        {
+            doorSpinAnimationState.start(tickCount);
+            entityData.set(DOOR, !entityData.get(DOOR));
+            return InteractionResult.SUCCESS;
+        }
+
 
         return InteractionResult.PASS;
     }
@@ -549,6 +571,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         builder.define(STATE, 0);
+        builder.define(DOOR, false);
         builder.define(JUMPING, 0);
         builder.define(MISSING_FUEL, false);
         builder.define(MISSING_KNOWLEDGE, false);
@@ -665,6 +688,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public void addAdditionalSaveData(CompoundTag compound)
     {
         compound.putInt("state", this.entityData.get(STATE));
+        compound.putBoolean("door", this.entityData.get(DOOR));
         compound.putInt("jumping", this.entityData.get(JUMPING));
 
         ItemStackHandler inventory = new ItemStackHandler(5);
@@ -680,6 +704,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public void readAdditionalSaveData(CompoundTag compound)
     {
         this.entityData.set(STATE, compound.getInt("state"));
+        this.entityData.set(DOOR, compound.getBoolean("door"));
         this.entityData.set(JUMPING, compound.getInt("jumping"));
 
         ItemStackHandler inventory = new ItemStackHandler(5);
