@@ -21,12 +21,17 @@ import com.wdiscute.laicaps.worldgen.ModFeatures;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -39,6 +44,7 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.neoforged.neoforge.event.level.ChunkEvent;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -65,6 +71,7 @@ public class Laicaps
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
         NeoForge.EVENT_BUS.addListener(this::ModifyItemTooltip);
+        NeoForge.EVENT_BUS.addListener(this::CeilingGeneration);
 
         ModCreativeModeTabs.register(modEventBus);
 
@@ -106,6 +113,25 @@ public class Laicaps
                 tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
             }
 
+        }
+    }
+
+
+    public void CeilingGeneration(ChunkEvent.Load event)
+    {
+
+        ResourceKey<Level> ember = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+        ChunkAccess chunk = event.getChunk();
+
+        if(chunk.getLevel().dimension() == ember && event.isNewChunk())
+        {
+            for (int i = 0; i < 16; i++) {
+                for (int j = 0; j < 16; j++) {
+                    int x = chunk.getPos().getBlockX(i);
+                    int z = chunk.getPos().getBlockZ(i);
+                    chunk.setBlockState(new BlockPos(x, 120, z), Blocks.DIAMOND_BLOCK.defaultBlockState(), true);
+                }
+            }
         }
     }
 

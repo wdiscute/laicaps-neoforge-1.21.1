@@ -71,19 +71,28 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RocketPart cockpitWindowRight = new RocketPart(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(0.85, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
         RocketPart cockpitWindowLeft  = new RocketPart(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
         RocketPart cockpitWindowFront = new RocketPart(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
-        RocketPart cockpitDoor        = new RocketPart(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -1.3), false, true, this, InteractionsEnum.RIDE);
+        //RocketPart cockpitDoor        = new RocketPart(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -1.3), false, true, this, InteractionsEnum.RIDE);
+        RocketPart cockpitStairs      = new RocketPart(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.TOGGLE_DOOR);
 
         RocketPart mainScreen         = new RocketPart(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false, this, InteractionsEnum.OPEN_MAIN_SCREEN);
         RocketPart globe              = new RocketPart(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, InteractionsEnum.GLOBE_SPIN);
 
+
         //main body
-        RocketPart mainBody           = new RocketPart(new AABB(0, 0, 0, 4.5, 0.08, 3), new Vec3(-2.25, 0.8, -1), false, true, this, InteractionsEnum.NONE);
-        RocketPart leftWall           = new RocketPart(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.NONE);
-        RocketPart cockpitStairs      = new RocketPart(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.TOGGLE_DOOR);
+        RocketPart mainFloor          = new RocketPart(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RocketPart mainCeiling        = new RocketPart(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
+        RocketPart extraCeiling       = new RocketPart(new AABB(-1.45, 0, -0.45, 1.45, 0.45, 1.65), new Vec3(0, 4.35, 0), false, true, this, InteractionsEnum.NONE);
+        RocketPart leftWall           = new RocketPart(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RocketPart rightWall          = new RocketPart(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(1.92, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+
+
+        //door
+        RocketDoorStairs doorStairs   = new RocketDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, true, this, InteractionsEnum.NONE);
+        RocketPart doorFloor          = new RocketPart(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
 
 
 
-        this.subEntities = new RocketPart[]{cockpitStairs, cockpitTop, mainScreen, mainBody, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        this.subEntities = new RocketPart[]{doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall , cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
     }
 
@@ -179,7 +188,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public double getAcc()
     {
         int state = entityData.get(STATE);
-        Vec3 vec3 = position();
 
         //takeoff
         if (state == 1)

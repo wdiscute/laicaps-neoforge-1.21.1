@@ -38,7 +38,6 @@ public class RocketPart extends PartEntity<RocketEntity>
         this.aabb = hitboxSize;
     }
 
-
     @Override
     protected AABB makeBoundingBox()
     {
@@ -84,6 +83,8 @@ public class RocketPart extends PartEntity<RocketEntity>
     @Override
     public boolean canBeCollidedWith()
     {
+
+
         return canCollide;
     }
 
