@@ -1,9 +1,10 @@
 package com.wdiscute.laicaps.entity.rocket;
 
-import com.wdiscute.laicaps.AdvHelper;
-import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.ModParticles;
+import com.wdiscute.laicaps.*;
+import com.wdiscute.laicaps.entity.rocket.rocketparts.RP;
+import com.wdiscute.laicaps.entity.rocket.rocketparts.RPCarpet;
+import com.wdiscute.laicaps.entity.rocket.rocketparts.RPDoorStairs;
+import com.wdiscute.laicaps.entity.rocket.rocketparts.RPGlobe;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import net.minecraft.client.Minecraft;
@@ -40,7 +41,10 @@ import org.jetbrains.annotations.Nullable;
 public class RocketEntity extends Entity implements PlayerRideable, MenuProvider, ContainerEntity
 {
     public final AnimationState globeSpinAnimationState = new AnimationState();
-    public final AnimationState doorSpinAnimationState = new AnimationState();
+    public final AnimationState doorOpenAnimationState = new AnimationState();
+    public final AnimationState doorCloseAnimationState = new AnimationState();
+    private boolean doorOpen;
+
     public float globeSpinCounter;
 
     public static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
@@ -48,6 +52,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public static final EntityDataAccessor<Boolean> MISSING_FUEL = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> DOOR = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> MISSING_KNOWLEDGE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<ItemStack> CARPET = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.ITEM_STACK);
+    public static final EntityDataAccessor<ItemStack> GLOBE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.ITEM_STACK);
 
     public NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 
@@ -56,7 +62,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     private static final ResourceKey<Level> OVERWORLD_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
     private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
 
-    private RocketPart[] subEntities;
+    private final RP[] subEntities;
 
     public int landingCounter;
     public int takeoffCounter;
@@ -66,144 +72,36 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         super(entityType, level);
 
         //cockpit
-        RocketPart cockpitTop         = new RocketPart(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 3.45, -2.6), false, true, this, InteractionsEnum.RIDE);
-        RocketPart cockpitBottom      = new RocketPart(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
-        RocketPart cockpitWindowRight = new RocketPart(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(0.85, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
-        RocketPart cockpitWindowLeft  = new RocketPart(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
-        RocketPart cockpitWindowFront = new RocketPart(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.RIDE);
-        //RocketPart cockpitDoor        = new RocketPart(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -1.3), false, true, this, InteractionsEnum.RIDE);
-        RocketPart cockpitStairs      = new RocketPart(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.TOGGLE_DOOR);
+        RP cockpitTop = new RP(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 3.45, -2.6), false, true, this, InteractionsEnum.NONE);
+        RP cockpitBottom = new RP(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
+        RPCarpet cockpitCarpet = new RPCarpet(new AABB(-0.5, 0, -0.5, 0.5, 0.1, 0.5), new Vec3(0, 1.50, -1.5), false, false, this, InteractionsEnum.RIDE);
+        RP cockpitWindowRight = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(0.85, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
+        RP cockpitWindowLeft = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
+        RP cockpitWindowFront = new RP(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
+        RP cockpitStairs = new RP(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.TOGGLE_DOOR);
 
-        RocketPart mainScreen         = new RocketPart(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false, this, InteractionsEnum.OPEN_MAIN_SCREEN);
-        RocketPart globe              = new RocketPart(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, InteractionsEnum.GLOBE_SPIN);
+        RP mainScreen = new RP(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false, this, InteractionsEnum.OPEN_MAIN_SCREEN);
+        RPGlobe globe = new RPGlobe(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, InteractionsEnum.GLOBE_SPIN);
 
 
         //main body
-        RocketPart mainFloor          = new RocketPart(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RocketPart mainCeiling        = new RocketPart(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
-        RocketPart extraCeiling       = new RocketPart(new AABB(-1.45, 0, -0.45, 1.45, 0.45, 1.65), new Vec3(0, 4.35, 0), false, true, this, InteractionsEnum.NONE);
-        RocketPart leftWall           = new RocketPart(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RocketPart rightWall          = new RocketPart(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(1.92, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP mainFloor = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP mainCeiling = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
+        RP extraCeiling = new RP(new AABB(-1.45, 0, -0.45, 1.45, 0.45, 1.65), new Vec3(0, 4.35, 0), false, true, this, InteractionsEnum.NONE);
+        RP leftWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP rightWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(1.92, 0.8, 0), false, true, this, InteractionsEnum.NONE);
 
 
         //door
-        RocketDoorStairs doorStairs   = new RocketDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, true, this, InteractionsEnum.NONE);
-        RocketPart doorFloor          = new RocketPart(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+        RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, InteractionsEnum.NONE);
+        RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+        //RP door = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
 
 
-
-        this.subEntities = new RocketPart[]{doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall , cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        this.subEntities = new RP[]{cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
     }
 
-
-    public static boolean checkPlanetUnlocked(Entity firstPassenger, NonNullList<ItemStack> itemStacks)
-    {
-
-        boolean canTravel = false;
-
-        if (firstPassenger instanceof ServerPlayer sp)
-        {
-            boolean emberDiscovered = AdvHelper.hasAdvancement(sp, "ember_discovered");
-            boolean ashaDiscovered = AdvHelper.hasAdvancement(sp, "asha_discovered");
-            boolean lunamarDiscovered = AdvHelper.hasAdvancement(sp, "lunamar_discovered");
-
-            if (itemStacks.get(4).is(ModItems.EMBER) && emberDiscovered) canTravel = true;
-            if (itemStacks.get(4).is(ModItems.ASHA) && ashaDiscovered) canTravel = true;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) canTravel = true;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR) && lunamarDiscovered) canTravel = true;
-
-            return canTravel;
-        }
-
-
-        return false;
-    }
-
-
-    public static int getFuelRemainingForSelectedDestination(NonNullList<ItemStack> itemStacks)
-    {
-
-        if (itemStacks.get(4).isEmpty()) return -1;
-        if (itemStacks.get(2).isEmpty()) return -1;
-
-        if (Minecraft.getInstance().player == null) return -1;
-
-        float fuelRequired = 0;
-        int fuelAvailable = itemStacks.get(2).get(ModDataComponents.FUEL);
-
-
-        boolean isCurrentDimensionUnknown = true;
-        ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
-
-        if (dimension == EMBER_KEY)
-        {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 490;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 700;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 1240;
-            isCurrentDimensionUnknown = false;
-        }
-
-        if (dimension == ASHA_KEY)
-        {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 490;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 330;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 870;
-            isCurrentDimensionUnknown = false;
-        }
-
-        if (dimension == OVERWORLD_KEY)
-        {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 790;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 330;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 660;
-            isCurrentDimensionUnknown = false;
-        }
-
-        if (dimension == LUNAMAR_KEY)
-        {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 1240;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 870;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 660;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
-            isCurrentDimensionUnknown = false;
-        }
-
-        if (isCurrentDimensionUnknown)
-        {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
-        }
-
-        return ((int) (fuelAvailable - fuelRequired));
-    }
-
-
-
-    public double getAcc()
-    {
-        int state = entityData.get(STATE);
-
-        //takeoff
-        if (state == 1)
-        {
-            return Math.min((double) (takeoffCounter * takeoffCounter) /150000, 0.4);
-        }
-
-
-        //landing
-        if (state == 3)
-        {
-            return -0.5;
-        }
-
-        return 0;
-    }
 
     public void handleClientEntityMovement()
     {
@@ -240,10 +138,34 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     }
 
 
+    private void handleClientAnimations()
+    {
+
+        //globe
+        if (tickCount == 20) globeSpinAnimationState.start(tickCount);
+        if (level().isClientSide && globeSpinCounter > 0) globeSpinCounter--;
+
+        //door open/close
+        boolean door = entityData.get(DOOR);
+        if (door != doorOpen)
+        {
+            doorOpen = door;
+            if (doorOpen)
+            {
+                doorOpenAnimationState.start(tickCount);
+                doorCloseAnimationState.stop();
+            }
+            else
+            {
+                doorCloseAnimationState.start(tickCount);
+                doorOpenAnimationState.stop();
+            }
+        }
+    }
+
     public void tick()
     {
         super.tick();
-
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
@@ -292,12 +214,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
             }
 
-            //globe spin
-            {
-                if (tickCount == 20) globeSpinAnimationState.start(tickCount);
-                if (level().isClientSide && globeSpinCounter > 0) globeSpinCounter--;
-            }
             handleClientEntityMovement();
+            handleClientAnimations();
             return;
         }
 
@@ -363,9 +281,9 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
             Vec3 vec3 = position();
 
-            double acc = Math.min((double) (takeoffCounter * takeoffCounter) /150000, 0.4);
+            double acc = Math.min((double) (takeoffCounter * takeoffCounter) / 150000, 0.4);
 
-            System.out.println(level() + " - " +  acc);
+            System.out.println(level() + " - " + acc);
 
             lerpTo(vec3.x, vec3.y + acc, vec3.z, 0, 0, 0);
 
@@ -489,14 +407,12 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         //make globe go weeeeee and spin
         if (interaction.equals(InteractionsEnum.GLOBE_SPIN) && level().isClientSide)
         {
-            if (globeSpinCounter < 150) globeSpinCounter += 10;
-            return InteractionResult.SUCCESS;
+
         }
 
         //open door
         if (interaction.equals(InteractionsEnum.TOGGLE_DOOR))
         {
-            doorSpinAnimationState.start(tickCount);
             entityData.set(DOOR, !entityData.get(DOOR));
             return InteractionResult.SUCCESS;
         }
@@ -505,12 +421,111 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         return InteractionResult.PASS;
     }
 
-    @Override
-    public AABB getBoundingBoxForCulling()
+    public static boolean checkPlanetUnlocked(Entity firstPassenger, NonNullList<ItemStack> itemStacks)
     {
-        AABB box = new AABB(-3.5, 0, -3.5, 3.5, 5, 3.5);
-        return box.move(position());
+
+        boolean canTravel = false;
+
+        if (firstPassenger instanceof ServerPlayer sp)
+        {
+            boolean emberDiscovered = AdvHelper.hasAdvancement(sp, "ember_discovered");
+            boolean ashaDiscovered = AdvHelper.hasAdvancement(sp, "asha_discovered");
+            boolean lunamarDiscovered = AdvHelper.hasAdvancement(sp, "lunamar_discovered");
+
+            if (itemStacks.get(4).is(ModItems.EMBER) && emberDiscovered) canTravel = true;
+            if (itemStacks.get(4).is(ModItems.ASHA) && ashaDiscovered) canTravel = true;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) canTravel = true;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR) && lunamarDiscovered) canTravel = true;
+
+            return canTravel;
+        }
+
+
+        return false;
     }
+
+    public static int getFuelRemainingForSelectedDestination(NonNullList<ItemStack> itemStacks)
+    {
+
+        if (itemStacks.get(4).isEmpty()) return -1;
+        if (itemStacks.get(2).isEmpty()) return -1;
+
+        if (Minecraft.getInstance().player == null) return -1;
+
+        float fuelRequired = 0;
+        int fuelAvailable = itemStacks.get(2).get(ModDataComponents.FUEL);
+
+
+        boolean isCurrentDimensionUnknown = true;
+        ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
+
+        if (dimension == EMBER_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 490;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 700;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 1240;
+            isCurrentDimensionUnknown = false;
+        }
+
+        if (dimension == ASHA_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 490;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 330;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 870;
+            isCurrentDimensionUnknown = false;
+        }
+
+        if (dimension == OVERWORLD_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 790;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 330;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 660;
+            isCurrentDimensionUnknown = false;
+        }
+
+        if (dimension == LUNAMAR_KEY)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 1240;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 870;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 660;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+            isCurrentDimensionUnknown = false;
+        }
+
+        if (isCurrentDimensionUnknown)
+        {
+            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+        }
+
+        return ((int) (fuelAvailable - fuelRequired));
+    }
+
+    public double getAcc()
+    {
+        int state = entityData.get(STATE);
+
+        //takeoff
+        if (state == 1)
+        {
+            return Math.min((double) (takeoffCounter * takeoffCounter) / 150000, 0.4);
+        }
+
+
+        //landing
+        if (state == 3)
+        {
+            return -0.5;
+        }
+
+        return 0;
+    }
+
 
     @Override
     public boolean hurt(DamageSource source, float amount)
@@ -528,6 +543,26 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     //`--''--'  `---'        `--'    `---'   `----'   `---' `--' `--' .-'  /
     //
     //                                                                `---'
+
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder)
+    {
+        builder.define(STATE, 0);
+        builder.define(DOOR, false);
+        builder.define(JUMPING, 0);
+        builder.define(MISSING_FUEL, false);
+        builder.define(MISSING_KNOWLEDGE, false);
+        builder.define(CARPET, new ItemStack(Items.CYAN_CARPET));
+        builder.define(GLOBE, new ItemStack(ModBlocks.OVERWORLD_GLOBE));
+    }
+
+    @Override
+    public AABB getBoundingBoxForCulling()
+    {
+        AABB box = new AABB(-3.5, 0, -3.5, 3.5, 5, 3.5);
+        return box.move(position());
+    }
 
     @Override
     public void setId(int id)
@@ -572,16 +607,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public boolean isPickable()
     {
         return !this.isRemoved();
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder)
-    {
-        builder.define(STATE, 0);
-        builder.define(DOOR, false);
-        builder.define(JUMPING, 0);
-        builder.define(MISSING_FUEL, false);
-        builder.define(MISSING_KNOWLEDGE, false);
     }
 
     @Override

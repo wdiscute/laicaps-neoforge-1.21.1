@@ -3,13 +3,11 @@ package com.wdiscute.laicaps.entity.rocket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.entity.gecko.GeckoAnimations;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 
 public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
 {
@@ -143,7 +141,8 @@ public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
         this.animate(entity.globeSpinAnimationState, RocketAnimation.GLOBE_SPIN, ageInTicks, entity.globeSpinCounter/10);
-        this.animate(entity.doorSpinAnimationState, RocketAnimation.DOOR, ageInTicks, (entity.getEntityData().get(RocketEntity.DOOR) ? 1 : -1));
+        this.animate(entity.doorOpenAnimationState, RocketAnimation.DOOR_OPEN, ageInTicks, 1);
+        this.animate(entity.doorCloseAnimationState, RocketAnimation.DOOR_CLOSE, ageInTicks, 1);
 
     }
 

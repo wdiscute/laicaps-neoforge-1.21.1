@@ -29,10 +29,13 @@ public class RocketRenderer extends EntityRenderer<RocketEntity>
 
         this.model.setupAnim(rocketEntity, 0.0F, 0.0F, rocketEntity.tickCount + partialTicks, 0.0F, 0.0F);
 
-        RocketMainScreenLayer.renderLayer(model, rocketEntity, poseStack, buffer, packedLight);
-
         VertexConsumer vertexconsumer = buffer.getBuffer(this.model.renderType(this.getTextureLocation(rocketEntity)));
         this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
+
+        RocketLayers.renderScreenLayer(model, rocketEntity, poseStack, buffer, packedLight);
+        RocketLayers.renderGlobeLayer(model, rocketEntity, poseStack, buffer, packedLight);
+        RocketLayers.renderCarpetLayer(model, rocketEntity, poseStack, buffer, packedLight);
+
         poseStack.popPose();
     }
 
