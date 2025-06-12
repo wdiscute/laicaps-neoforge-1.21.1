@@ -1,10 +1,7 @@
 package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.*;
-import com.wdiscute.laicaps.entity.rocket.rocketparts.RP;
-import com.wdiscute.laicaps.entity.rocket.rocketparts.RPCarpet;
-import com.wdiscute.laicaps.entity.rocket.rocketparts.RPDoorStairs;
-import com.wdiscute.laicaps.entity.rocket.rocketparts.RPGlobe;
+import com.wdiscute.laicaps.entity.rocket.rocketparts.*;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import net.minecraft.client.Minecraft;
@@ -78,7 +75,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RP cockpitWindowRight = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(0.85, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
         RP cockpitWindowLeft = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
         RP cockpitWindowFront = new RP(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
-        RP cockpitStairs = new RP(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.TOGGLE_DOOR);
+        RP cockpitStairs = new RP(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.NONE);
 
         RP mainScreen = new RP(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false, this, InteractionsEnum.OPEN_MAIN_SCREEN);
         RPGlobe globe = new RPGlobe(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, InteractionsEnum.GLOBE_SPIN);
@@ -93,12 +90,15 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
 
         //door
-        RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, InteractionsEnum.NONE);
+        RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, InteractionsEnum.TOGGLE_DOOR);
         RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
-        //RP door = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+
+        RP doorLeft       = new RP(new AABB(-0.3, 0, 0, 0.3, 3.3, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
+        RPDoor door   = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.3, 0.08), new Vec3( 0.00, 0.8, 2.75), false, this, InteractionsEnum.NONE);
+        RP doorRight      = new RP(new AABB(-0.3, 0, 0, 0.3, 3.3, 0.08), new Vec3( 1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
 
 
-        this.subEntities = new RP[]{cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        this.subEntities = new RP[]{doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
     }
 
