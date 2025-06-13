@@ -82,24 +82,29 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
 
         //main body
-        RP mainFloor = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RP mainCeiling = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
+        RP mainFloor    = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP mainCeiling  = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
         RP extraCeiling = new RP(new AABB(-1.45, 0, -0.45, 1.45, 0.45, 1.65), new Vec3(0, 4.35, 0), false, true, this, InteractionsEnum.NONE);
-        RP leftWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RP rightWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.3), new Vec3(1.92, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP leftWall     = new RP(new AABB(0, 0, -1,  0.08, 3.52, 2.27), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP rightWall    = new RP(new AABB(0, 0, -1, -0.08, 3.52, 2.27), new Vec3( 2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
 
-
-        //door
+        //door inner
         RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, InteractionsEnum.TOGGLE_DOOR);
         RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+        RP doorInnerLeft       = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(-1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+        RP doorInnerRight      = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3( 1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
 
-        RP doorLeft       = new RP(new AABB(-0.3, 0, 0, 0.3, 3.3, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
-        RPDoor door   = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.3, 0.08), new Vec3( 0.00, 0.8, 2.75), false, this, InteractionsEnum.NONE);
-        RP doorRight      = new RP(new AABB(-0.3, 0, 0, 0.3, 3.3, 0.08), new Vec3( 1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
+        //door outer
+        RP doorLeft       = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
+        RPDoor door   = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3( 0.00, 0.8, 2.75), false, this, InteractionsEnum.NONE);
+        RP doorRight      = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3( 1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
 
 
-        this.subEntities = new RP[]{doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+
+        this.subEntities = new RP[]{doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
+
+
     }
 
 
