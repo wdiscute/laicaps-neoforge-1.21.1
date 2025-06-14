@@ -6,6 +6,7 @@ import com.wdiscute.laicaps.block.combat.CombatControllerBlock;
 import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlock;
+import com.wdiscute.laicaps.block.researchstation.ResearchStationBlock;
 import com.wdiscute.laicaps.block.single.*;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlock;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlock;
@@ -68,6 +69,15 @@ public class ModBlocks
             registerBlock(
                     "salt", () ->
                             new PressurePlateBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().instabreak()
+                            )
+            );
+
+    public static final DeferredBlock<Block> RESEARCH_STATION =
+            registerBlock(
+                    "research_station", () ->
+                            new ResearchStationBlock(BlockBehaviour.Properties.of()
+                                    .strength(5f)
+                                    .noOcclusion()
                             )
             );
 

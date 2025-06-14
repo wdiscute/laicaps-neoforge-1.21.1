@@ -2,6 +2,7 @@ package com.wdiscute.laicaps;
 
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableMenu;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationMenu;
+import com.wdiscute.laicaps.block.researchstation.ResearchStationMenu;
 import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
 import net.minecraft.core.registries.Registries;
@@ -34,7 +35,8 @@ public class ModMenuTypes
     public static final Supplier<MenuType<RefuelStationMenu>> REFUEL_STATION_MENU =
             registerMenuType("refuel_station_menu", RefuelStationMenu::new);
 
-
+    public static final Supplier<MenuType<ResearchStationMenu>> RESEARCH_STATION_MENU =
+            registerMenuType("research_station_menu", ResearchStationMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,
                                                                                                               IContainerFactory<T> factory) {

@@ -7,12 +7,10 @@ import org.spongepowered.asm.mixin.Mixin;
 public class BrushCraftingRemainingFix extends Item
 {
 
-
     public BrushCraftingRemainingFix(Properties properties)
     {
         super(properties);
     }
-
 
     @Override
     public boolean hasCraftingRemainingItem(ItemStack stack)
@@ -23,10 +21,11 @@ public class BrushCraftingRemainingFix extends Item
     @Override
     public ItemStack getCraftingRemainingItem(ItemStack itemStack)
     {
-        if(itemStack.getDamageValue() == itemStack.getMaxDamage())
+        if (itemStack.getDamageValue() == itemStack.getMaxDamage())
         {
             return ItemStack.EMPTY;
-        }else
+        }
+        else
         {
             ItemStack brush = new ItemStack(Items.BRUSH);
             brush.setDamageValue(itemStack.getDamageValue() + 1);

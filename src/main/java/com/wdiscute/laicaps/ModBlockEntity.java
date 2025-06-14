@@ -9,6 +9,7 @@ import com.wdiscute.laicaps.block.hidden.HiddenControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlockEntity;
+import com.wdiscute.laicaps.block.researchstation.ResearchStationBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockEntity;
 import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
@@ -73,6 +74,10 @@ public class ModBlockEntity
 
     public static final Supplier<BlockEntityType<RefuelStationBlockEntity>> REFUEL_STATION = BLOCK_ENTITIES.register("refuel_station",
             () -> BlockEntityType.Builder.of(RefuelStationBlockEntity::new, ModBlocks.REFUEL_STATION.get())
+                    .build(null));
+
+    public static final Supplier<BlockEntityType<ResearchStationBlockEntity>> RESEARCH_STATION = BLOCK_ENTITIES.register("research_station",
+            () -> BlockEntityType.Builder.of(ResearchStationBlockEntity::new, ModBlocks.RESEARCH_STATION.get())
                     .build(null));
 
 
