@@ -7,6 +7,9 @@
   "tag.item.laicaps.globes" : "Globes",
   "tag.block.laicaps.globes" : "Globes",
 
+  "tag.item.laicaps.blueprints" : "Blueprints",
+  "tag.item.laicaps.completed_blueprints" : "Completed Blueprints",
+
 
 
 
@@ -59,6 +62,9 @@
   "block.laicaps.rotating_puzzle_block": "Rotating Puzzle Block",
 
 
+
+  "item.laicaps.rocket_blueprint": "Rocket Blueprint",
+  "item.laicaps.rocket_blueprint_sketch": "Rocket Blueprint Sketch",
 
   "item.laicaps.telescope_lenses": "Telescope Lenses",
 

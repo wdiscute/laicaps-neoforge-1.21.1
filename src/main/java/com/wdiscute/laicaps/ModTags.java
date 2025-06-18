@@ -26,6 +26,8 @@ public class ModTags
 
         public static final TagKey<Item> MAGIC_BLOCK_EGGS = createTag("magic_block_eggs");
         public static final TagKey<Item> GLOBES = createTag("globes");
+        public static final TagKey<Item> BLUEPRINTS = createTag("blueprints");
+        public static final TagKey<Item> COMPLETED_BLUEPRINTS = createTag("completed_blueprints");
 
         private static TagKey<Item> createTag(String name)
         {

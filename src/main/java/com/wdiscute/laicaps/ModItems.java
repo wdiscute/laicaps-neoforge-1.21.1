@@ -47,6 +47,10 @@ public class ModItems
 
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel", () -> new ChiselItem(new Item.Properties().rarity(Rarity.EPIC)));
 
+
+    public static final DeferredItem<Item> ROCKET_BLUEPRINT = ITEMS.register("rocket_blueprint", () -> new RocketItem(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> ROCKET_BLUEPRINT_SKETCH = ITEMS.register("rocket_blueprint_sketch", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+
     public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
 
     public static final DeferredItem<Item> EMBER_ENTRY = ITEMS.register(
