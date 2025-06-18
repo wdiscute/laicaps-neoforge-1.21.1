@@ -24,13 +24,10 @@ public class GlimpuffGlowLayer extends RenderLayer<GlimpuffEntity, GlimpuffModel
     {
         if(glimpuffEntity.getEntityData().get(GlimpuffEntity.FULL))
         {
-            VertexConsumer vertexconsumer = buffer.getBuffer(this.renderType());
+            VertexConsumer vertexconsumer = buffer.getBuffer(GLOW);
             this.getParentModel().renderToBuffer(poseStack, vertexconsumer, 3355443, OverlayTexture.NO_OVERLAY);
         }
 
     }
 
-    public RenderType renderType() {
-        return GLOW;
-    }
 }
