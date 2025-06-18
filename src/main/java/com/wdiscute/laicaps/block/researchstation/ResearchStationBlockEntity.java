@@ -10,12 +10,33 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class ResearchStationBlockEntity extends BlockEntity implements MenuProvider
 {
+
+    public final ItemStackHandler inventory = new ItemStackHandler(1)
+    {
+        @Override
+        protected int getStackLimit(int slot, ItemStack stack)
+        {
+            return 1;
+        }
+
+        @Override
+        protected void onContentsChanged(int slot)
+        {
+            setChanged();
+            if (!level.isClientSide())
+            {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+    };
 
     @Override
     public Component getDisplayName()
@@ -33,12 +54,14 @@ public class ResearchStationBlockEntity extends BlockEntity implements MenuProvi
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
+        tag.put("inventory", inventory.serializeNBT(registries));
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
+        inventory.deserializeNBT(registries, tag.getCompound("inventory"));
     }
 
     public ResearchStationBlockEntity(BlockPos pPos, BlockState pBlockState)
