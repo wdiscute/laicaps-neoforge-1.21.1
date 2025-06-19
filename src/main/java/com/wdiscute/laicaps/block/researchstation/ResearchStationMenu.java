@@ -1,19 +1,13 @@
 package com.wdiscute.laicaps.block.researchstation;
 
 import com.wdiscute.laicaps.*;
-import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlockEntity;
-import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlockEntity;
-import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -64,8 +58,8 @@ public class ResearchStationMenu extends AbstractContainerMenu
     {
         if(id == 1)
         {
-            if(blockEntity.inventory.getStackInSlot(0).is(ModItems.ROCKET_BLUEPRINT_SKETCH))
-                blockEntity.inventory.setStackInSlot(0, new ItemStack(ModItems.ROCKET_BLUEPRINT.get()));
+            if(blockEntity.inventory.getStackInSlot(0).is(ModItems.SPACESHIP_BLUEPRINT_SKETCH))
+                blockEntity.inventory.setStackInSlot(0, new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get()));
         }
 
         return super.clickMenuButton(player, id);

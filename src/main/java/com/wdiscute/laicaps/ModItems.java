@@ -8,19 +8,16 @@ import com.wdiscute.laicaps.item.*;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
@@ -48,8 +45,8 @@ public class ModItems
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel", () -> new ChiselItem(new Item.Properties().rarity(Rarity.EPIC)));
 
 
-    public static final DeferredItem<Item> ROCKET_BLUEPRINT = ITEMS.register("rocket_blueprint", () -> new RocketItem(new Item.Properties().rarity(Rarity.EPIC)));
-    public static final DeferredItem<Item> ROCKET_BLUEPRINT_SKETCH = ITEMS.register("rocket_blueprint_sketch", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> SPACESHIP_BLUEPRINT = ITEMS.register("spaceship_blueprint", () -> new SpaceshipItem(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final DeferredItem<Item> SPACESHIP_BLUEPRINT_SKETCH = ITEMS.register("spaceship_blueprint_sketch", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
 
@@ -178,7 +175,7 @@ public class ModItems
     //
 
 
-    public static final DeferredItem<Item> ROCKET = ITEMS.register("rocket", () -> new RocketItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
+    public static final DeferredItem<Item> ROCKET = ITEMS.register("rocket", () -> new SpaceshipItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
 
     public static final DeferredItem<Item> TANK = ITEMS.register(
             "tank", () -> new Item(new Item.Properties()

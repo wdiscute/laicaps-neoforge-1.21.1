@@ -6,10 +6,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 
-public class RocketItem extends Item {
+public class SpaceshipItem extends Item {
 
 
-    public RocketItem(Properties pProperties) {
+    public SpaceshipItem(Properties pProperties) {
         super(pProperties);
     }
 

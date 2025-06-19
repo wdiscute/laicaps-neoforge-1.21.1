@@ -4,17 +4,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.ModTags;
-import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.datafix.fixes.ChunkToProtochunkFix;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
@@ -58,7 +53,7 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
     private void scramble()
     {
         jigsaws.clear();
-        if (menu.blockEntity.inventory.getStackInSlot(0).is(ModItems.ROCKET_BLUEPRINT))
+        if (menu.blockEntity.inventory.getStackInSlot(0).is(ModItems.SPACESHIP_BLUEPRINT))
         {
             for (int i = 0; i < 5; i++)
             {
@@ -210,16 +205,18 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
     {
         super.mouseClicked(mouseX, mouseY, button);
 
-        if (itemStack.isEmpty() && itemStack.is(ModTags.Items.COMPLETED_BLUEPRINTS)) return false;
+        if (itemStack.isEmpty() || itemStack.is(ModTags.Items.COMPLETED_BLUEPRINTS)) return false;
 
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
-        for (int i = 0; i < 5; i++)
+        //reverse for loop to account for which piece is being rendered at the top
+        for (int i = 4; i >= 0; i--)
         {
-            for (int j = 0; j < 7; j++)
+            for (int j = 6; j >= 0; j--)
             {
                 int index = i * 7 + j;
+
                 //x offset from 0,0 = 222
                 //y offset from 0,0 = 41
                 if (x > jigsaws.get(index).x + 222 + (j * 35) && x < jigsaws.get(index).x + 222 + 35 + (j * 35) &&
