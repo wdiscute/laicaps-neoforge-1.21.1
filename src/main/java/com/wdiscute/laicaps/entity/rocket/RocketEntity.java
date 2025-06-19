@@ -99,9 +99,15 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RPDoor door   = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3( 0.00, 0.8, 2.75), false, this, InteractionsEnum.NONE);
         RP doorRight      = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3( 1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
 
+        RP doorCeiling      = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, InteractionsEnum.NONE);
 
 
-        this.subEntities = new RP[]{doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        //tanks
+        RP tankLeft     = new RP(new AABB(0, 0, 0, -1.05, 2.2, 0.95), new Vec3(-2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
+        RP tankRight    = new RP(new AABB(0, 0, 0,  1.05, 2.2, 0.95), new Vec3( 2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
+
+
+        this.subEntities = new RP[]{doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
 
 
@@ -587,7 +593,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     @Override
     public @Nullable ItemStack getPickResult()
     {
-        return new ItemStack(ModItems.ROCKET.get());
+        return new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get());
     }
 
     @Override
