@@ -1,7 +1,8 @@
 {
   "parent": "laicaps:block/globe",
   "textures": {
-    "all": "laicaps:block/lunamar_globe",
-    "particle": "laicaps:block/lunamar_globe"
+    "globe": "laicaps:block/lunamar_globe",
+    "top": "minecraft:block/spruce_log",
+    "bottom": "minecraft:block/polished_blackstone_bricks"
   }
 }
