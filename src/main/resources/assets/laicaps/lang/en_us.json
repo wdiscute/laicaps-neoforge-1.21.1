@@ -63,16 +63,15 @@
 
 
 
-  "item.laicaps.rocket_blueprint": "Rocket Blueprint",
-  "tooltip.laicaps.rocket_blueprint.0": "A perfectly engineered blueprint",
-  "tooltip.laicaps.rocket_blueprint.1": "of a hopefully working spaceship.",
-  "tooltip.laicaps.rocket_blueprint.3": "",
-  "tooltip.laicaps.rocket_blueprint.4": "WIP",
-  "item.laicaps.rocket_blueprint_sketch": "Rocket Blueprint Sketch",
-  "item.laicaps.rocket_blueprint_sketch.0": "A rough sketch of a spaceship.",
-  "item.laicaps.rocket_blueprint_sketch.1": "Must be finalized in a blueprint station.",
-  "item.laicaps.rocket_blueprint_sketch.2": "Spa Blueprint Sketch",
-  "item.laicaps.rocket_blueprint_sketch.3": "Rocket Blueprint Sketch",
+  "item.laicaps.spaceship_blueprint": "Spaceship Blueprint",
+  "tooltip.laicaps.spaceship_blueprint.0": "A perfectly engineered blueprint",
+  "tooltip.laicaps.spaceship_blueprint.1": "of a hopefully working spaceship.",
+  "tooltip.laicaps.spaceship_blueprint.3": "",
+  "tooltip.laicaps.spaceship_blueprint.4": "WIP",
+  "tooltip.laicaps.spaceship_blueprint.5": "You can place this down to summon the spaceship",
+  "item.laicaps.spaceship_blueprint_sketch": "Spaceship Blueprint Sketch",
+  "item.laicaps.spaceship_blueprint_sketch.0": "A rough sketch of a spaceship.",
+  "item.laicaps.spaceship_blueprint_sketch.1": "Must be finalized in a blueprint station.",
 
   "item.laicaps.telescope_lenses": "Telescope Lenses",
 
