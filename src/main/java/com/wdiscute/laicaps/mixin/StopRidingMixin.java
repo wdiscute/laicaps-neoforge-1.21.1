@@ -20,8 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class StopRidingMixin extends Player
 {
 
-    @Shadow @Final private static Logger LOGGER;
-
     @Shadow public abstract void displayClientMessage(Component chatComponent, boolean actionBar);
 
     public StopRidingMixin(Level level, BlockPos pos, float yRot, GameProfile gameProfile)
@@ -34,7 +32,6 @@ public abstract class StopRidingMixin extends Player
     {
         if(this.getVehicle() instanceof RocketEntity re)
         {
-            System.out.println(re);
             if(re.getEntityData().get(RocketEntity.STATE) != 0)
             {
                 displayClientMessage(Component.translatable("gui.laicaps.rocket.unsafe"), true);
@@ -43,17 +40,5 @@ public abstract class StopRidingMixin extends Player
         }
 
 
-    }
-
-    @Override
-    public boolean isSpectator()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isCreative()
-    {
-        return false;
     }
 }
