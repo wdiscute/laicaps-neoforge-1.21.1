@@ -33,7 +33,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RocketEntity extends Entity implements PlayerRideable, MenuProvider, ContainerEntity
 {
@@ -82,34 +86,35 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
 
         //main body
-        RP mainFloor    = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RP mainCeiling  = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
+        RP mainFloor = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP mainCeiling = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
         RP extraCeiling = new RP(new AABB(-1.45, 0, -0.45, 1.45, 0.45, 1.65), new Vec3(0, 4.35, 0), false, true, this, InteractionsEnum.NONE);
-        RP leftWall     = new RP(new AABB(0, 0, -1,  0.08, 3.52, 2.27), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RP rightWall    = new RP(new AABB(0, 0, -1, -0.08, 3.52, 2.27), new Vec3( 2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP leftWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.27), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP rightWall = new RP(new AABB(0, 0, -1, -0.08, 3.52, 2.27), new Vec3(2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
 
         //door inner
         RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, InteractionsEnum.TOGGLE_DOOR);
         RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
-        RP doorInnerLeft       = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(-1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
-        RP doorInnerRight      = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3( 1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+        RP doorInnerLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(-1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+        RP doorInnerRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
 
         //door outer
-        RP doorLeft       = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
-        RPDoor door   = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3( 0.00, 0.8, 2.75), false, this, InteractionsEnum.NONE);
-        RP doorRight      = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3( 1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
+        RP doorLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
+        RPDoor door = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3(0.00, 0.8, 2.75), false, this, InteractionsEnum.NONE);
+        RP doorRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
 
-        RP doorCeiling      = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, InteractionsEnum.NONE);
+        RP doorCeiling = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, InteractionsEnum.NONE);
 
 
         //tanks
-        RP tankLeft     = new RP(new AABB(0, 0, 0, -1.05, 2.2, 0.95), new Vec3(-2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
-        RP tankRight    = new RP(new AABB(0, 0, 0,  1.05, 2.2, 0.95), new Vec3( 2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
+        RP tankLeft = new RP(new AABB(0, 0, 0, -1.05, 2.2, 0.95), new Vec3(-2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
+        RP tankRight = new RP(new AABB(0, 0, 0, 1.05, 2.2, 0.95), new Vec3(2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
 
 
         this.subEntities = new RP[]{doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
 
+        if (!level().isClientSide) itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
 
     }
 
@@ -174,17 +179,20 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         }
     }
 
+
     public void tick()
     {
         super.tick();
 
+        System.out.println(level() + "  " + entityData.get(MISSING_KNOWLEDGE));
+
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
 
-        for (int i = 0; i < subEntities.length; i++)
+        for (RP subEntity : subEntities)
         {
-            subEntities[i].updatePos(position());
-            subEntities[i].tick();
+            subEntity.updatePos(position());
+            subEntity.tick();
         }
 
         if (level().isClientSide)
@@ -239,12 +247,9 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         if (state == 3 && !rocketState.is(Items.GRANITE)) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
         if (state == 4 && !rocketState.is(Items.DIORITE)) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
 
-        if (!level().isClientSide)
-            entityData.set(MISSING_FUEL, !(getFuelRemainingForSelectedDestination(itemStacks) > 0));
-        if (!level().isClientSide && getFirstPassenger() != null)
-            entityData.set(MISSING_KNOWLEDGE, !checkPlanetUnlocked(getFirstPassenger(), itemStacks));
-        if (!level().isClientSide && itemStacks.get(4).isEmpty())
-            itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
+
+        if (!level().isClientSide) entityData.set(MISSING_FUEL, !(getFuelRemainingForSelectedDestination() > 0));
+        if (!level().isClientSide) entityData.set(MISSING_KNOWLEDGE, !isPlanetSelectedUnlocked());
 
         //landed aka on-ground
         if (state == 0)
@@ -255,7 +260,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             {
                 if (jumpingAcessor.isJumping())
                 {
-                    if (getFuelRemainingForSelectedDestination(itemStacks) > 0 && checkPlanetUnlocked(getFirstPassenger(), itemStacks))
+                    if (getFuelRemainingForSelectedDestination() > 0 && isPlanetSelectedUnlocked())
                         entityData.set(JUMPING, entityData.get(JUMPING) + 1);
                     else
                     {
@@ -294,14 +299,12 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
             double acc = Math.min((double) (takeoffCounter * takeoffCounter) / 150000, 0.4);
 
-            System.out.println(level() + " - " + acc);
-
             lerpTo(vec3.x, vec3.y + acc, vec3.z, 0, 0, 0);
 
             if (position().y > 200)
             {
                 ItemStack itemStack = new ItemStack(itemStacks.get(2).getItem());
-                itemStack.set(ModDataComponents.FUEL, getFuelRemainingForSelectedDestination(itemStacks));
+                itemStack.set(ModDataComponents.FUEL, getFuelRemainingForSelectedDestination());
                 itemStacks.set(2, itemStack);
                 entityData.set(STATE, 2);
                 takeoffCounter = 0;
@@ -312,10 +315,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         //ORBIT / TELEPORT TO DIMENSION / TODO MINIGAME
         if (state == 2)
         {
-            //go up to y == 400
-            //if (delta.y < 0.3 && position().y < 400) setDeltaMovement(0, 0.35, 0);
-            //if (position().y > 400) setDeltaMovement(0, 0, 0);
-
             entityData.set(STATE, 3);
 
             ResourceKey<Level> key = null;
@@ -327,23 +326,16 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
 
             if (itemStacks.get(4).is(ModItems.OVERWORLD.get()))
-                key = ResourceKey.create(
-                        Registries.DIMENSION,
-                        ResourceLocation.withDefaultNamespace("overworld"));
+                key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
 
             if (itemStacks.get(4).is(ModItems.LUNAMAR.get()))
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
 
             DimensionTransition dt = new DimensionTransition(
                     level().getServer().getLevel(key),
-                    new Vec3(0, 269, 0),
-                    new Vec3(0, 0, 0),
-                    0.0f,
-                    0.0f,
-                    entity ->
-                    {
-                    }
-            );
+                    new Vec3(0, 269, 0), new Vec3(0, 0, 0), 0.0f, 0.0f, entity ->
+            {
+            });
 
             landingCounter = 0;
             this.changeDimension(dt);
@@ -432,30 +424,46 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         return InteractionResult.PASS;
     }
 
-    public static boolean checkPlanetUnlocked(Entity firstPassenger, NonNullList<ItemStack> itemStacks)
+    public boolean isPlanetSelectedUnlocked()
     {
+        ServerPlayer spToCheck = null;
 
-        boolean canTravel = false;
 
-        if (firstPassenger instanceof ServerPlayer sp)
+        if (getFirstPassenger() instanceof ServerPlayer serverPlayer)
         {
-            boolean emberDiscovered = AdvHelper.hasAdvancement(sp, "ember_discovered");
-            boolean ashaDiscovered = AdvHelper.hasAdvancement(sp, "asha_discovered");
-            boolean lunamarDiscovered = AdvHelper.hasAdvancement(sp, "lunamar_discovered");
+            spToCheck = serverPlayer;
+        }
+        else
+        {
+            //if theres no first passenger, gets closest player in a 10x10x10
+            AABB aabb = new AABB(-5, -5, -5, 5, 5, 5).move(position());
 
-            if (itemStacks.get(4).is(ModItems.EMBER) && emberDiscovered) canTravel = true;
-            if (itemStacks.get(4).is(ModItems.ASHA) && ashaDiscovered) canTravel = true;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) canTravel = true;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR) && lunamarDiscovered) canTravel = true;
+            List<Entity> entityList = level().getEntities(null, aabb);
 
-            return canTravel;
+            //TODO CHECK WHICH PLAYER IS CLOSEST TO SCREEN INSTEAD OF JUST THE FIRST FOUND
+            for (Entity entities : entityList)
+            {
+                if (entities instanceof ServerPlayer serverPlayer)
+                {
+                    spToCheck = serverPlayer;
+                    break;
+                }
+            }
         }
 
+        //if no player was found, keeps whatever was already there
+        if(spToCheck == null) return !entityData.get(MISSING_KNOWLEDGE);
+
+        //return if player has discovered the planet selected
+        if (itemStacks.get(4).is(ModItems.EMBER)) return AdvHelper.hasAdvancement(spToCheck, "ember_discovered");
+        if (itemStacks.get(4).is(ModItems.ASHA)) return AdvHelper.hasAdvancement(spToCheck, "asha_discovered");
+        if (itemStacks.get(4).is(ModItems.OVERWORLD)) return true;
+        if (itemStacks.get(4).is(ModItems.LUNAMAR)) return AdvHelper.hasAdvancement(spToCheck, "lunamar_discovered");
 
         return false;
     }
 
-    public static int getFuelRemainingForSelectedDestination(NonNullList<ItemStack> itemStacks)
+    public int getFuelRemainingForSelectedDestination()
     {
 
         if (itemStacks.get(4).isEmpty()) return -1;
