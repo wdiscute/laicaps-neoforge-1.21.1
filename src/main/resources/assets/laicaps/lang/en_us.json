@@ -146,6 +146,8 @@
 
   "gui.laicaps.rocket.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
 
+  "gui.laicaps.rocket.unsafe": "It is not safe to dismount now",
+
   "gui.laicaps.rocket.missing_tank":      "§c        Insert Tank",
   "gui.laicaps.rocket.missing_fuel":      "§c     Not Enough Fuel",
   "gui.laicaps.rocket.missing_knowledge": "§c   Undiscovered planet",
