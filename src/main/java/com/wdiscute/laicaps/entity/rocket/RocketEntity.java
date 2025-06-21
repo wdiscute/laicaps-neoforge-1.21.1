@@ -38,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RocketEntity extends Entity implements PlayerRideable, MenuProvider, ContainerEntity
 {
@@ -58,15 +59,12 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
     public NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 
-    private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
-    private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
-    private static final ResourceKey<Level> OVERWORLD_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
-    private static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
-
     private final RP[] subEntities;
 
     public int landingCounter;
     public int takeoffCounter;
+
+    private final Random r = new Random();
 
     public RocketEntity(EntityType<? extends Entity> entityType, Level level)
     {
@@ -333,7 +331,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
             DimensionTransition dt = new DimensionTransition(
                     level().getServer().getLevel(key),
-                    new Vec3(0, 269, 0), new Vec3(0, 0, 0), 0.0f, 0.0f, entity ->
+                    new Vec3(0, 469, 0), new Vec3(0, 0, 0), 0.0f, 0.0f, entity ->
             {
             });
 
@@ -348,25 +346,124 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         {
             landingCounter++;
 
-
+            Component compTitle = Component.literal("");
             Component comp = null;
-            Component compTitle = Component.literal("WIP");
 
-            comp = switch (landingCounter)
-            {
-                case 1 -> Component.literal("Landing on... <insert planet name>");
-                case 100 -> Component.literal("temperature: idk probably not too bad");
-                case 200 -> Component.literal("Atmosphere: breathable (steve doesnt have lungs)");
-                default -> comp;
-            };
+            AABB aabb = new AABB(-5, -5, -5, 5, 5, 5).move(position());
+            List<Entity> entites = level().getEntities(null, aabb);
 
-            if (getFirstPassenger() instanceof ServerPlayer sp && comp != null)
+            List<ServerPlayer> sps = new ArrayList<>();
+
+            for (Entity entity : entites)
             {
-                sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
-                sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
+                if (entity instanceof ServerPlayer sp)
+                {
+                    sps.add(sp);
+                }
             }
 
 
+            //landing on
+            if (landingCounter == 50)
+            {
+                Component planet = Component.translatable("gui.laicaps.landing.landing.overworld");
+
+                if (level().dimension().equals(Laicaps.EMBER_KEY)) planet = Component.translatable("gui.laicaps.landing.landing.ember");
+                if (level().dimension().equals(Laicaps.ASHA_KEY)) planet = Component.translatable("gui.laicaps.landing.landing.asha");
+                if (level().dimension().equals(Laicaps.OVERWORLD_KEY)) planet = Component.translatable("gui.laicaps.landing.landing.overworld");
+                if (level().dimension().equals(Laicaps.LUNAMAR_KEY)) planet = Component.translatable("gui.laicaps.landing.landing.lunamar");
+
+                comp = Component.translatable("gui.laicaps.landing.landing.base").append(planet);
+
+                for (ServerPlayer sp : sps)
+                {
+                    sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
+                    sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
+                }
+            }
+
+
+            //temperature
+            if (landingCounter == 200)
+            {
+
+                int temp = 0;
+
+                if (level().dimension().equals(Laicaps.EMBER_KEY)) temp = r.nextInt(100) - 50 + 523;
+                if (level().dimension().equals(Laicaps.ASHA_KEY)) temp = r.nextInt(10) - 5 + 22;
+                if (level().dimension().equals(Laicaps.OVERWORLD_KEY)) temp = r.nextInt(100) - 50 + 523;
+                if (level().dimension().equals(Laicaps.LUNAMAR_KEY)) temp = r.nextInt(100) - 50 + 523;
+
+                if (level().rainLevel > 20) temp -= 10;
+
+                String tempString = temp + "";
+
+                if (temp > 50)
+                {
+                    tempString = "§c" + tempString;
+                }
+                else
+                {
+                    tempString = "§2" + tempString;
+                }
+
+                comp = Component.translatable("gui.laicaps.landing.temperature.base").append(Component.literal(tempString + "°c"));
+            }
+
+
+            //weather
+            if (landingCounter == 350)
+            {
+
+                Component weather = Component.translatable("gui.laicaps.landing.weather.clear");;
+
+                int random = r.nextInt(3);
+
+                if (level().rainLevel > 20)
+                {
+                    if (random == 0) weather = Component.translatable("gui.laicaps.landing.weather.light_rain");
+                    if (random == 1) weather = Component.translatable("gui.laicaps.landing.weather.moderate_rain");
+                    if (random == 2) weather = Component.translatable("gui.laicaps.landing.weather.strong_rain");
+                }
+
+                if (level().thunderLevel > 20)
+                {
+                    if (random == 0) weather = Component.translatable("gui.laicaps.landing.weather.light_thunder");
+                    if (random == 1) weather = Component.translatable("gui.laicaps.landing.weather.moderate_thunder");
+                    if (random == 2) weather = Component.translatable("gui.laicaps.landing.weather.strong_thunder");
+                }
+
+
+                comp = Component.translatable("gui.laicaps.landing.weather.base").append(weather);
+            }
+
+
+            //atmosphere
+            if (landingCounter == 500)
+            {
+
+                Component atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.breathable");
+
+                if (level().dimension().equals(Laicaps.EMBER_KEY)) atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.unbreathable");
+
+                comp = Component.translatable("gui.laicaps.landing.atmosphere.base").append(atmosphere);
+            }
+
+
+
+
+            //send packet
+            if(comp != null)
+            {
+                for (ServerPlayer sp : sps)
+                {
+                    sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
+                    sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
+                }
+            }
+
+
+            //check if landed
             if (level().getBlockState(blockPosition().below()).isAir())
             {
                 Vec3 vec3 = position();
@@ -452,7 +549,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         }
 
         //if no player was found, keeps whatever was already there
-        if(spToCheck == null) return !entityData.get(MISSING_KNOWLEDGE);
+        if (spToCheck == null) return !entityData.get(MISSING_KNOWLEDGE);
 
         //return if player has discovered the planet selected
         if (itemStacks.get(4).is(ModItems.EMBER)) return AdvHelper.hasAdvancement(spToCheck, "ember_discovered");
@@ -478,7 +575,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         boolean isCurrentDimensionUnknown = true;
         ResourceKey<Level> dimension = Minecraft.getInstance().player.level().dimension();
 
-        if (dimension == EMBER_KEY)
+        if (dimension == Laicaps.EMBER_KEY)
         {
             if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
             if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 490;
@@ -487,7 +584,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             isCurrentDimensionUnknown = false;
         }
 
-        if (dimension == ASHA_KEY)
+        if (dimension == Laicaps.ASHA_KEY)
         {
             if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 490;
             if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
@@ -496,7 +593,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             isCurrentDimensionUnknown = false;
         }
 
-        if (dimension == OVERWORLD_KEY)
+        if (dimension == Laicaps.OVERWORLD_KEY)
         {
             if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 790;
             if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 330;
@@ -505,7 +602,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             isCurrentDimensionUnknown = false;
         }
 
-        if (dimension == LUNAMAR_KEY)
+        if (dimension == Laicaps.LUNAMAR_KEY)
         {
             if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 1240;
             if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 870;

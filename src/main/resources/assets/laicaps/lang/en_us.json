@@ -28,6 +28,28 @@
   "tooltip.laicaps.generic.players_reset" : "§cThe players available to loot have been reset.",
 
 
+  "gui.laicaps.landing.landing.base" : "Landing on ",
+  "gui.laicaps.landing.landing.ember" : "§cEmber",
+  "gui.laicaps.landing.landing.asha" : "§dAsha",
+  "gui.laicaps.landing.landing.overworld" : "§2Overworld",
+  "gui.laicaps.landing.landing.lunamar" : "§3Lunamar",
+
+
+  "gui.laicaps.landing.temperature.base" : "Temperature: ",
+
+  "gui.laicaps.landing.atmosphere.base" : "Atmosphere: ",
+  "gui.laicaps.landing.atmosphere.breathable" : "§2Breathable",
+  "gui.laicaps.landing.atmosphere.unbreathable" : "§cUnbreathable",
+
+
+  "gui.laicaps.landing.weather.base" : "Weather: ",
+  "gui.laicaps.landing.weather.clear" : "Clear",
+  "gui.laicaps.landing.weather.light_rain" : "Light Rain",
+  "gui.laicaps.landing.weather.moderate_rain" : "Raining",
+  "gui.laicaps.landing.weather.strong_rain" : "Strong Rain",
+  "gui.laicaps.landing.weather.light_thunder" : "Light Storm",
+  "gui.laicaps.landing.weather.moderate_thunder" : "Storming",
+  "gui.laicaps.landing.weather.strong_thunder" : "Strong Storm",
 
 
   "item.laicaps.chisel": "Chisel",
@@ -727,7 +749,7 @@
  "gui.astronomy_research_table.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
- "gui.astronomy_research_table.lunamar.entry1.name" : "      §cLunamar§r - Planet",
+ "gui.astronomy_research_table.lunamar.entry1.name" : "      §3Lunamar§r - Planet",
  "gui.astronomy_research_table.lunamar.entry1.image" : "lunamar_illustration_1",
 
  "gui.astronomy_research_table.lunamar.entry1.left.11" : "            §3§k!!!§r   §3lunamar   §3§k!!!§r",
@@ -762,7 +784,7 @@
  "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
 
 
-  "gui.astronomy_research_table.lunamar.entry2.name" : "      Lunamar - Illuma",
+  "gui.astronomy_research_table.lunamar.entry2.name" : "     §3Lunamar§r - Illuma",
   "gui.astronomy_research_table.lunamar.entry2.image" : "lunamar_illustration_2",
 
   "gui.astronomy_research_table.lunamar.entry2.left.11" : "These shiny flowers bloom",
@@ -772,10 +794,10 @@
   "gui.astronomy_research_table.lunamar.entry2.left.15" : "soft glow which lights up the",
   "gui.astronomy_research_table.lunamar.entry2.left.16" : "ocean floor.",
 
- "gui.astronomy_research_table.lunamar.entry3.name" : "      Lunamar - 3",
+ "gui.astronomy_research_table.lunamar.entry3.name" : "      §3Lunamar§r - 3",
  "gui.astronomy_research_table.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.lunamar.entry4.name" : "      Lunamar - 4",
+ "gui.astronomy_research_table.lunamar.entry4.name" : "      §3Lunamar§r - 4",
  "gui.astronomy_research_table.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
 
 
