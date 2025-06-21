@@ -23,7 +23,7 @@ issueTrackerURL="https://discord.gg/WsuFsGSegD" #optional
 modId="laicaps" #mandatory
 
 # The version number of the mod
-version="0.2 alpha" #mandatory
+version="0.3 alpha" #mandatory
 
 # A display name for the mod
 displayName="Laicaps" #mandatory
@@ -41,7 +41,7 @@ logoFile="laicaps 400x400.png" #optional
 #credits="" #optional
 
 # A text field displayed in the mod UI
-authors="wdiscute, Tofushi, daffydj" #optional
+authors="wdiscute, tofushi, Nikdo53, daffydj" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''A fantasy space exploration mod'''
