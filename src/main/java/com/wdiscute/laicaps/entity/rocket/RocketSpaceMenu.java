@@ -28,7 +28,6 @@ public class RocketSpaceMenu extends AbstractContainerMenu
 
         container.startOpen(playerInventory.player);
 
-
         //player inventory
         for (int i = 0; i < 3; ++i)
         {

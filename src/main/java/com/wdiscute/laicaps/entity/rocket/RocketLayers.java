@@ -55,7 +55,6 @@ public class RocketLayers
 
     public static void renderScreenLayer(RocketModel<RocketEntity> model, RocketEntity rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
-        System.out.println();
         int jumping = rocketEntity.getEntityData().get(RocketEntity.JUMPING) / 20;
         int state = rocketEntity.getEntityData().get(RocketEntity.STATE);
         int countdown = 11 - jumping;
@@ -68,7 +67,6 @@ public class RocketLayers
             //if missing knowledge
             if (rocketEntity.getEntityData().get(RocketEntity.MISSING_KNOWLEDGE))
             {
-                System.out.println("missing knowledge");
                 VertexConsumer vertexconsumer = buffer.getBuffer(
                         RenderType.breezeEyes(Laicaps.rl("textures/entity/rocket/main_screen/knowledge.png")));
                 model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
@@ -78,7 +76,6 @@ public class RocketLayers
             //if missing fuel
             if (rocketEntity.getEntityData().get(RocketEntity.MISSING_FUEL))
             {
-                System.out.println("missing fuel");
                 VertexConsumer vertexconsumer = buffer.getBuffer(
                         RenderType.breezeEyes(Laicaps.rl("textures/entity/rocket/main_screen/fuel.png")));
                 model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);

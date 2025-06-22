@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class AstronomyTableMenu extends AbstractContainerMenu
 {
-    public final AstronomyTableBlockEntity blockEntity;
+    //public final AstronomyTableBlockEntity blockEntity;
     public final Level level;
 
 
@@ -58,13 +58,13 @@ public class AstronomyTableMenu extends AbstractContainerMenu
 
     public AstronomyTableMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
-        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
+        this(containerId, inv);
     }
 
-    public AstronomyTableMenu(int containerId, Inventory inv, BlockEntity blockEntity)
+    public AstronomyTableMenu(int containerId, Inventory inv)
     {
         super(ModMenuTypes.ASTRONOMY_TABLE_MENU.get(), containerId);
-        this.blockEntity = ((AstronomyTableBlockEntity) blockEntity);
+        //this.blockEntity = ((AstronomyTableBlockEntity) blockEntity);
         this.level = inv.player.level();
     }
 
@@ -78,8 +78,9 @@ public class AstronomyTableMenu extends AbstractContainerMenu
     @Override
     public boolean stillValid(Player player)
     {
-        return stillValid(
-                ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
+        return true;
+//        return stillValid(
+//                ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
+//                player, ModBlocks.ASTRONOMY_RESEARCH_TABLE.get());
     }
 }

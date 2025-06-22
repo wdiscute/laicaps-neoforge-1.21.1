@@ -24,6 +24,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -33,7 +34,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -104,12 +104,15 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RP doorCeiling = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, InteractionsEnum.NONE);
 
 
+        RPTable table = new RPTable(new AABB(0, 0, 0, 1, 1, 1), new Vec3(0, 2, 0), false, true, this, InteractionsEnum.OPEN_RESEARCH_SCREEN);
+
+
         //tanks
         RP tankLeft = new RP(new AABB(0, 0, 0, -1.05, 2.2, 0.95), new Vec3(-2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
         RP tankRight = new RP(new AABB(0, 0, 0, 1.05, 2.2, 0.95), new Vec3(2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
 
 
-        this.subEntities = new RP[]{doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        this.subEntities = new RP[]{table, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
 
         if (!level().isClientSide) itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
@@ -181,8 +184,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     public void tick()
     {
         super.tick();
-
-        System.out.println(level() + "  " + entityData.get(MISSING_KNOWLEDGE));
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
@@ -504,6 +505,14 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             return InteractionResult.SUCCESS;
         }
 
+        //open research menu
+        if (interaction.equals(InteractionsEnum.OPEN_RESEARCH_SCREEN) && !level().isClientSide)
+        {
+
+            player.openMenu(new SimpleMenuProvider((MenuConstructor) new RocketSpaceMenu(45674574, new Inventory(player), this), Component.literal("Astronomy Table")));
+            return InteractionResult.SUCCESS;
+        }
+
         //make globe go weeeeee and spin
         if (interaction.equals(InteractionsEnum.GLOBE_SPIN) && level().isClientSide)
         {
@@ -642,11 +651,10 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         return 0;
     }
 
-
     @Override
     public boolean hurt(DamageSource source, float amount)
     {
-        this.kill();
+        //this.kill();
         return super.hurt(source, amount);
     }
 
@@ -691,7 +699,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity passenger)
     {
-
         return position().add(new Vec3(0, 1.55, -1.5));
     }
 
@@ -724,6 +731,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     {
         return !this.isRemoved();
     }
+
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)

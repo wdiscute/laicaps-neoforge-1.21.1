@@ -29,7 +29,7 @@ public class AstronomyTableBlockEntity extends BlockEntity implements MenuProvid
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        return new AstronomyTableMenu(i, inventory, this);
+        return new AstronomyTableMenu(i, inventory);
     }
 
     @Override
