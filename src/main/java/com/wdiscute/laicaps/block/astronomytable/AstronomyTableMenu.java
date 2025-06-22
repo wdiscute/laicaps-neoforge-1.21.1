@@ -39,7 +39,6 @@ public class AstronomyTableMenu extends AbstractContainerMenu
             if (id > Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES)
                 entry = "lunamar_" + (id - (Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES));
 
-
             if (AdvHelper.hasAdvancementCriteria(sp, "bookmarks", entry))
             {
                 AdvHelper.revokeAdvancementCriteria(sp, "bookmarks", entry);

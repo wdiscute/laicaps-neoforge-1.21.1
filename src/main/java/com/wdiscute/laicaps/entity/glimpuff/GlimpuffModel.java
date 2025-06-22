@@ -62,7 +62,6 @@ public class GlimpuffModel<T extends GlimpuffEntity> extends HierarchicalModel<T
 
         AnimationDefinition animation = entity.getEntityData().get(GlimpuffEntity.FULL) ? GlimpuffAnimations.FULL_SWIM : GlimpuffAnimations.SWIM;
 
-        //System.out.println("played animation with " + animation);
         this.animateWalk(animation, limbSwing, limbSwingAmount, 1f, 1f);
         this.animate(entity.idleAnimationState, animation, ageInTicks, 1f);
 

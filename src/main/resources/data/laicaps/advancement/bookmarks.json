@@ -72,16 +72,16 @@
     }
   },
   "display": {
-    "description": "Laicaps dev advanceemnt to store bookmarks server side",
+    "description": "Save some bookmarks!",
     "icon": {
       "count": 1,
-      "id": "minecraft:diamond"
+      "id": "laicaps:astronomy_notebook"
     },
     "title": "Bookmarks",
     "frame": "challenge",
     "show_toast": false,
     "announce_to_chat": false,
-    "hidden": true
+    "hidden": false
   },
   "sends_telemetry_event": false
 }

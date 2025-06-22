@@ -169,7 +169,6 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
 
         }
 
-
         //next arrow
         if (x > 420 && x < 440 && y > 230 && y < 240)
         {
@@ -284,7 +283,6 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
                 entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + currentEntry;
             if (currentPlanet == 4)
                 entry = Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES + currentEntry;
-
 
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, entry);
 
