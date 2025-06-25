@@ -3,18 +3,13 @@ package com.wdiscute.laicaps.entity.rocket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModTags;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.Tags;
 
 public class RocketLayers
 {
@@ -22,14 +17,36 @@ public class RocketLayers
 
     public static void renderCarpetLayer(RocketModel<RocketEntity> model, RocketEntity rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
-        if (rocketEntity.getEntityData().get(RocketEntity.CARPET).is(ItemTags.WOOL_CARPETS))
+        if (rocketEntity.getEntityData().get(RocketEntity.CARPET_FIRST_SEAT).is(ItemTags.WOOL_CARPETS))
         {
-            Item item = rocketEntity.getEntityData().get(RocketEntity.CARPET).getItem();
+            Item item = rocketEntity.getEntityData().get(RocketEntity.CARPET_FIRST_SEAT).getItem();
 
             String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
             String path      = BuiltInRegistries.ITEM.getKey(item).getPath();
 
-            VertexConsumer vertex = buffer.getBuffer(RenderType.entityCutout(Laicaps.rl("textures/entity/rocket/carpet/" + namespace + "_" + path + ".png")));
+            VertexConsumer vertex = buffer.getBuffer(RenderType.entityCutoutNoCull(Laicaps.rl("textures/entity/rocket/carpet_first_seat/" + namespace + "_" + path + ".png")));
+            model.renderToBuffer(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
+        }
+
+        if (rocketEntity.getEntityData().get(RocketEntity.CARPET_SECOND_SEAT).is(ItemTags.WOOL_CARPETS))
+        {
+            Item item = rocketEntity.getEntityData().get(RocketEntity.CARPET_SECOND_SEAT).getItem();
+
+            String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
+            String path      = BuiltInRegistries.ITEM.getKey(item).getPath();
+
+            VertexConsumer vertex = buffer.getBuffer(RenderType.entityCutoutNoCull(Laicaps.rl("textures/entity/rocket/carpet_second_seat/" + namespace + "_" + path + ".png")));
+            model.renderToBuffer(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
+        }
+
+        if (rocketEntity.getEntityData().get(RocketEntity.CARPET_THIRD_SEAT).is(ItemTags.WOOL_CARPETS))
+        {
+            Item item = rocketEntity.getEntityData().get(RocketEntity.CARPET_THIRD_SEAT).getItem();
+
+            String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
+            String path      = BuiltInRegistries.ITEM.getKey(item).getPath();
+
+            VertexConsumer vertex = buffer.getBuffer(RenderType.entityCutoutNoCull(Laicaps.rl("textures/entity/rocket/carpet_third_seat/" + namespace + "_" + path + ".png")));
             model.renderToBuffer(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
         }
 
