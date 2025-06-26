@@ -206,6 +206,11 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.COOKED_BUBBLEMOUTH.get());
                                 output.accept(ModItems.BUBBLEMOUTH_BUCKET.get());
 
+                                //moonray
+                                output.accept(ModItems.MOONRAY.get());
+                                output.accept(ModItems.MOONRAY_SPAWN_EGG.get());
+                                output.accept(ModItems.MOONRAY_BUCKET.get());
+
                                 //glimpuff
                                 output.accept(ModItems.GLIMPUFF.get());
                                 output.accept(ModItems.GLIMPUFF_SPAWN_EGG.get());

@@ -301,13 +301,18 @@ public class ModItems
 
     public static final DeferredItem<Item> REDTALE = ITEMS.register("redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_REDTALE = ITEMS.register("cooked_redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
-    public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register("redtale_bucket", () -> new MobBucketItem(ModEntities.BUBBLEMOUTH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
+    public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register("redtale_bucket", () -> new MobBucketItem(ModEntities.REDTALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final DeferredItem<Item> REDTALE_SPAWN_EGG = ITEMS.register("redtale_spawn_egg", () -> new SpawnEggItem(ModEntities.BUBBLEMOUTH.get(), 9429956, 14919099, new Item.Properties()));
 
     public static final DeferredItem<Item> BUBBLEMOUTH = ITEMS.register("bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_BUBBLEMOUTH = ITEMS.register("cooked_bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
     public static final DeferredItem<Item> BUBBLEMOUTH_BUCKET = ITEMS.register("bubblemouth_bucket", () -> new MobBucketItem(ModEntities.BUBBLEMOUTH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final DeferredItem<Item> BUBBLEMOUTH_SPAWN_EGG = ITEMS.register("bubblemouth_spawn_egg", () -> new SpawnEggItem(ModEntities.BUBBLEMOUTH.get(), 9429956, 14919099, new Item.Properties()));
+
+    public static final DeferredItem<Item> MOONRAY = ITEMS.register("moonray", () -> new Item(new Item.Properties().food(ModFoodProperties.MOONRAY)));
+    public static final DeferredItem<Item> MOONRAY_BUCKET = ITEMS.register("moonray_bucket", () -> new MobBucketItem(ModEntities.MOONRAY.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
+    public static final DeferredItem<Item> MOONRAY_SPAWN_EGG = ITEMS.register("moonray_spawn_egg", () -> new SpawnEggItem(ModEntities.MOONRAY.get(), 9429956, 14919099, new Item.Properties()));
+
 
     public static final DeferredItem<Item> GLIMPUFF = ITEMS.register("glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
     public static final DeferredItem<Item> COOKED_GLIMPUFF = ITEMS.register("cooked_glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));

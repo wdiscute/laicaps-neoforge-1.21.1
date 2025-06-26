@@ -57,6 +57,13 @@ public class ModFoodProperties
             .saturationModifier(2)
             .build();
 
+    public static final FoodProperties MOONRAY = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(2)
+            .effect(new MobEffectInstance(MobEffects.POISON, 100, 0), 0.6F)
+            .build();
+
+
 
 
 }

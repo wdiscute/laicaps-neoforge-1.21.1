@@ -10,6 +10,7 @@ import com.wdiscute.laicaps.entity.bluetale.RedtaleRenderer;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthRenderer;
 import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffRenderer;
+import com.wdiscute.laicaps.entity.moonray.MoonrayRenderer;
 import com.wdiscute.laicaps.entity.nimble.NimbleRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
@@ -176,6 +177,7 @@ public class Laicaps
             EntityRenderers.register(ModEntities.BLUETALE.get(), BluetaleRenderer::new);
             EntityRenderers.register(ModEntities.REDTALE.get(), RedtaleRenderer::new);
             EntityRenderers.register(ModEntities.BUBBLEMOUTH.get(), BubblemouthRenderer::new);
+            EntityRenderers.register(ModEntities.MOONRAY.get(), MoonrayRenderer::new);
             EntityRenderers.register(ModEntities.GLIMPUFF.get(), GlimpuffRenderer::new);
             EntityRenderers.register(ModEntities.SWIBBLE.get(), SwibbleRenderer::new);
             EntityRenderers.register(ModEntities.NIMBLE.get(), NimbleRenderer::new);
