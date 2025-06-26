@@ -29,12 +29,9 @@ public class MoonrayRenderer extends MobRenderer<MoonrayEntity, MoonrayModel<Moo
         super.setupRotations(entity, poseStack, bob, yBodyRot, partialTick, scale);
         if (!entity.isInWater())
         {
-            float f = 1.3F;
-            float f1 = 1.7F;
-            float f2 = f * 4.3F * Mth.sin(f1 * 0.6F * bob);
-            poseStack.mulPose(Axis.YP.rotationDegrees(f2));
-            poseStack.translate(0.2F, 0.1F, 0.0F);
-            poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
+            float f2 = 1.3F * 4.3F * Mth.sin(1.7F * 0.6F * bob);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(f2));
+            poseStack.translate(0.2F, -0.6F, 0.0F);
         }
     }
 
