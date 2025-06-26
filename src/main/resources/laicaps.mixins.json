@@ -12,6 +12,7 @@
   ],
   "client": [
     "AdvancementProgressAcessor",
+    "GetMaxZoomMixin",
     "JumpingAcessor",
     "TankDurabilityTooltipFix"
   ],
