@@ -432,6 +432,10 @@
   "tooltip.laicaps.water_container_helper.1": "naturally generated through structures",
 
   "block.laicaps.moonshade_kelp": "Moonshade Kelp",
+  "block.laicaps.moonshade_seagrass": "Moonshade Seagrass",
+  "tooltip.laicaps.moonshade_seagrass.0": "Seagrass resembling that of the overworld,",
+  "tooltip.laicaps.moonshade_seagrass.1": "but due to the lack of sunlight it has a bluer tint.",
+  "block.laicaps.moonshade_tall_seagrass": "Tall Moonshade Seagrass",
   "item.laicaps.moonshade_fruit": "Moonshade Fruit",
   "tooltip.laicaps.moonshade_fruit.0": "A strange, moon-shaped fruit",
   "tooltip.laicaps.moonshade_fruit.1": "glowing with a soft purple hue.",

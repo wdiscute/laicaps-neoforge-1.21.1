@@ -7,6 +7,8 @@ import com.wdiscute.laicaps.block.generics.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlock;
 import com.wdiscute.laicaps.block.researchstation.ResearchStationBlock;
+import com.wdiscute.laicaps.block.seagrass.MoonshadeSeagrassBlock;
+import com.wdiscute.laicaps.block.seagrass.MoonshadeTallSeagrassBlock;
 import com.wdiscute.laicaps.block.single.*;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlock;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlock;
@@ -1228,7 +1230,7 @@ public class ModBlocks
                                     .instabreak()
                                     .noOcclusion()
                                     .noCollission()
-                                    .lightLevel(state -> state.getValue(IllumaBlock.OPEN) ? 12 : 0)
+                                    .lightLevel(state -> state.getValue(IllumaBlock.OPEN) ? 7 : 0)
                                     .offsetType(BlockBehaviour.OffsetType.XZ)
                             )
             );
@@ -1247,6 +1249,35 @@ public class ModBlocks
                                     .noCollission()
                                     .offsetType(BlockBehaviour.OffsetType.XZ)
                                     .lightLevel(state -> state.getValue(MoonshadeKelpBlock.GROWN) ? 11 : 0)
+                            )
+            );
+
+    public static final DeferredBlock<Block> MOONSHADE_SEAGRASS =
+            registerBlock(
+                    "moonshade_seagrass", () ->
+                            new MoonshadeSeagrassBlock(BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.WATER)
+                                    .replaceable()
+                                    .noCollission()
+                                    .instabreak()
+                                    .sound(SoundType.WET_GRASS)
+                                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                                    .pushReaction(PushReaction.DESTROY)
+                            )
+            );
+
+
+    public static final DeferredBlock<Block> MOONSHADE_TALL_SEAGRASS =
+            registerBlockNoItem(
+                    "moonshade_tall_seagrass", () ->
+                            new MoonshadeTallSeagrassBlock(BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.WATER)
+                                    .replaceable()
+                                    .noCollission()
+                                    .instabreak()
+                                    .sound(SoundType.WET_GRASS)
+                                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                                    .pushReaction(PushReaction.DESTROY)
                             )
             );
 

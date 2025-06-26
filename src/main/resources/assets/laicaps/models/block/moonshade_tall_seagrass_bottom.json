@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_seagrass",
+  "render_type":"cutout",
+  "textures": {
+    "texture": "laicaps:block/moonshade_tall_seagrass_bottom"
+  }
+}
