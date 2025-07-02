@@ -81,7 +81,6 @@ public class Laicaps
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
         NeoForge.EVENT_BUS.addListener(this::ModifyItemTooltip);
-        NeoForge.EVENT_BUS.addListener(this::CeilingGeneration);
 
         ModCreativeModeTabs.register(modEventBus);
 
@@ -123,25 +122,6 @@ public class Laicaps
                 tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
             }
 
-        }
-    }
-
-
-    public void CeilingGeneration(ChunkEvent.Load event)
-    {
-
-        ResourceKey<Level> ember = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
-        ChunkAccess chunk = event.getChunk();
-
-        if(chunk.getLevel().dimension() == ember && event.isNewChunk())
-        {
-            for (int i = 0; i < 16; i++) {
-                for (int j = 0; j < 16; j++) {
-                    int x = chunk.getPos().getBlockX(i);
-                    int z = chunk.getPos().getBlockZ(i);
-                    chunk.setBlockState(new BlockPos(x, 120, z), Blocks.DIAMOND_BLOCK.defaultBlockState(), true);
-                }
-            }
         }
     }
 
