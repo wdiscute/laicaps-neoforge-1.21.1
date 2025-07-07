@@ -1,13 +1,11 @@
 package com.wdiscute.laicaps.block.combat;
 
 import com.mojang.serialization.MapCodec;
-import com.sun.jna.platform.win32.WinRas;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -38,8 +36,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class CombatControllerBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock
 {
@@ -154,7 +150,7 @@ public class CombatControllerBlock extends HorizontalDirectionalBlock implements
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType)
     {
-        return TickableBlockEntity.getTicketHBelper(pLevel);
+        return TickableBlockEntity.getTicketHelper(pLevel);
     }
 
 }

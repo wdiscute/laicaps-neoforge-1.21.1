@@ -34,8 +34,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
 public class SymbolControllerBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
     public SymbolControllerBlock(Properties properties)
@@ -194,7 +192,7 @@ public class SymbolControllerBlock extends HorizontalDirectionalBlock implements
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType)
     {
-        return TickableBlockEntity.getTicketHBelper(pLevel);
+        return TickableBlockEntity.getTicketHelper(pLevel);
     }
 
 

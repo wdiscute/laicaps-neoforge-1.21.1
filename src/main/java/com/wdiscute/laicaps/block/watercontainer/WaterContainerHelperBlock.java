@@ -3,11 +3,8 @@ package com.wdiscute.laicaps.block.watercontainer;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -43,7 +40,7 @@ public class WaterContainerHelperBlock extends Block implements EntityBlock
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType)
     {
-        return TickableBlockEntity.getTicketHBelper(pLevel);
+        return TickableBlockEntity.getTicketHelper(pLevel);
     }
 
 }

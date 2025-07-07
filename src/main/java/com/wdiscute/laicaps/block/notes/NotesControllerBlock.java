@@ -219,7 +219,7 @@ public class NotesControllerBlock extends HorizontalDirectionalBlock implements 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType)
     {
-        return TickableBlockEntity.getTicketHBelper(pLevel);
+        return TickableBlockEntity.getTicketHelper(pLevel);
     }
 
 

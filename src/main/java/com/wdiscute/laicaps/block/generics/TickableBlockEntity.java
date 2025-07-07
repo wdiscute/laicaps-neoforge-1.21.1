@@ -8,7 +8,7 @@ public interface TickableBlockEntity
 {
     void tick();
 
-    static <T extends BlockEntity>BlockEntityTicker<T> getTicketHBelper(Level level) {
+    static <T extends BlockEntity>BlockEntityTicker<T> getTicketHelper(Level level) {
         return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) -> ((TickableBlockEntity)blockEntity).tick();
     }
 }
