@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:translucent",
   "parent": "minecraft:block/template_orientable_trapdoor_top",
   "textures": {
     "texture": "laicaps:block/oakroot_trapdoor"
