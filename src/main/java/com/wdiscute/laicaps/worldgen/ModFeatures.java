@@ -16,6 +16,10 @@ public class ModFeatures {
     public static final Supplier<Feature<NoneFeatureConfiguration>> MOONSHADE_KELP = FEATURES.register("moonshade_kelp",
             () -> new MoonshadeKelpFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final Supplier<Feature<NoneFeatureConfiguration>> MOONSHADE_SEAGRASS = FEATURES.register("moonshade_seagrass",
+            () -> new MoonshadeSeagrassFeature(NoneFeatureConfiguration.CODEC));
+
+
 
     public static void register(IEventBus eventBus) {
         FEATURES.register(eventBus);

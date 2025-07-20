@@ -18,7 +18,8 @@
   },
   "features": [
     [
-      "laicaps:moonshade_kelp_placed"
+      "laicaps:moonshade_kelp_placed",
+      "laicaps:moonshade_seagrass_placed"
     ]
   ],
   "has_precipitation": true,
