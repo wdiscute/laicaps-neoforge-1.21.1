@@ -21,6 +21,7 @@ import com.wdiscute.laicaps.block.watercontainer.WaterContainerBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
 import com.wdiscute.laicaps.worldgen.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -36,14 +37,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -72,6 +76,44 @@ public class ModBlocks
                     "salt", () ->
                             new PressurePlateBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().instabreak()
                             )
+            );
+
+
+
+    public static final DeferredBlock<Block> TEST_BLOCK =
+            registerBlock(
+                    "test_block", () ->
+                            new Block(
+                                    BlockBehaviour.Properties.of()
+                                    .strength(5f)
+                                    .noOcclusion()
+                            )
+                            {
+                                public static final BooleanProperty POWERED = BooleanProperty.create("powered");
+
+                                @Override
+                                protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
+                                {
+                                    super.createBlockStateDefinition(builder);
+                                    builder.add(POWERED);
+                                }
+
+
+                                @Override
+                                protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+                                {
+                                    AABB aabb = new AABB(-2,-2,-2, 2,2,2).move(pos);
+                                    boolean powered = !level.getEntities(null, aabb).isEmpty();
+
+                                    if(state.getValue(POWERED) != powered)
+                                    {
+                                        level.setBlockAndUpdate(pos, state.setValue(POWERED, powered));
+                                    }
+
+
+                                    super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+                                }
+                            }
             );
 
     public static final DeferredBlock<Block> RESEARCH_STATION =

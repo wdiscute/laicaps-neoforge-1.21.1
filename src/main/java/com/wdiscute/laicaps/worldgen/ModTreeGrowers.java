@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class ModTreeGrowers
 {
-    //make one of these for each type of trees, also accepts big tree varients it seems
+    //make one of these for each type of trees, also accepts big tree variants it seems
 
     public static final TreeGrower OAKHEART = new TreeGrower(Laicaps.MOD_ID + ":oakheart",
             Optional.empty(), Optional.of(ModConfiguredFeatures.OAKHEART_KEY), Optional.empty());
