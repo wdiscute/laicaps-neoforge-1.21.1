@@ -39,19 +39,6 @@ public class ModBoatRenderer extends BoatRenderer
 
     }
 
-    public static ModelLayerLocation createBoatModelName(ModBoatEntity.Type pType) {
-        return createLocation("boat/" + pType.getName(), "main");
-    }
-
-    public static ModelLayerLocation createChestBoatModelName(ModBoatEntity.Type pType) {
-        return createLocation("chest_boat/" + pType.getName(), "main");
-    }
-
-    private static ModelLayerLocation createLocation(String pPath, String pModel) {
-        return new ModelLayerLocation(Laicaps.rl(pPath), pModel);
-    }
-
-
     public Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(Boat boat) {
         if(boat instanceof ModBoatEntity modBoat) {
             return this.boatResources.get(modBoat.getModVariant());
