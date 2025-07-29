@@ -333,7 +333,8 @@ public class ModItems
                     new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES_JAM).stacksTo(16)));
 
 
-    public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register("oakheart_door", () -> new DoubleHighBlockItem(ModBlocks.OAKHEART_DOOR.get(), new Item.Properties()));
+    public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register("oakheart_door",
+            () -> new DoubleHighBlockItem(ModBlocks.OAKHEART_DOOR.get(), new Item.Properties()));
     public static final DeferredItem<Item> OAKHEART_SIGN = ITEMS.register("oakheart_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_SIGN.get(), ModBlocks.OAKHEART_WALL_SIGN.get()));
     public static final DeferredItem<Item> OAKHEART_HANGING_SIGN = ITEMS.register("oakheart_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_HANGING_SIGN.get(), ModBlocks.OAKHEART_WALL_HANGING_SIGN.get()));
     public static final DeferredItem<Item> OAKHEART_BOAT = ITEMS.register("oakheart_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.OAKHEART, new Item.Properties().stacksTo(16)));
