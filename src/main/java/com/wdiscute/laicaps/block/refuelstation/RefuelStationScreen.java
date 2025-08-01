@@ -60,6 +60,5 @@ public class RefuelStationScreen extends AbstractContainerScreen<RefuelStationMe
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
-        super.renderLabels(guiGraphics, mouseX, mouseY);
     }
 }
