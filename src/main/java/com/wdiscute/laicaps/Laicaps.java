@@ -16,6 +16,8 @@ import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerRenderer;
 import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
+import com.wdiscute.laicaps.fishing.FishingBobEntity;
+import com.wdiscute.laicaps.fishing.FishingBobRenderer;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.*;
@@ -146,6 +148,7 @@ public class Laicaps
             EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
 
             EntityRenderers.register(ModEntities.ROCKET.get(), RocketRenderer::new);
+            EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
 
 
             //animals

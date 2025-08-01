@@ -142,9 +142,7 @@ public class ModBlocks
                         @Override
                         public ResourceKey<Level> getDimensionKey()
                         {
-                            return ResourceKey.create(
-                                    Registries.DIMENSION,
-                                    Laicaps.rl("asha"));
+                            return ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
                         }
                     }
     );

@@ -43,24 +43,9 @@ public class RefuelStationMenu extends AbstractContainerMenu
         }
 
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 53, 35)
-        {
-            @Override
-            public boolean mayPlace(ItemStack stack)
-            {
-                return stack.is(ModItems.ENDERBLAZE_FUEL);
-            }
-        });
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 107, 35)
-        {
-            @Override
-            public boolean mayPlace(ItemStack stack)
-            {
-                return stack.is(ModItems.TANK) || stack.is(ModItems.MEDIUM_TANK) || stack.is(ModItems.LARGE_TANK);
-            }
-        });
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 53, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 107, 35));
     }
-
 
     //Made by diesieben07 | https://github.com/diesieben07/SevenCommons
     @Override

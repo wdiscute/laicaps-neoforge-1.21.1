@@ -57,9 +57,9 @@ public class RefuelStationScreen extends AbstractContainerScreen<RefuelStationMe
         menu = refuelStationMenu;
     }
 
-    //empty so it doesn't render "inventory"  and "telescope" text
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
+        super.renderLabels(guiGraphics, mouseX, mouseY);
     }
 }

@@ -2,6 +2,7 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
+import com.wdiscute.laicaps.fishing.ModFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 
@@ -43,6 +44,9 @@ public class ModItems
     //
 
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel", () -> new ChiselItem(new Item.Properties().rarity(Rarity.EPIC)));
+
+
+    public static final DeferredItem<Item> CUSTOM_FISHING_ROD = ITEMS.register("custom_fishing_rod", () -> new ModFishingRod(new Item.Properties().rarity(Rarity.EPIC)));
 
 
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT = ITEMS.register("spaceship_blueprint", () -> new SpaceshipItem(new Item.Properties().rarity(Rarity.EPIC)));
