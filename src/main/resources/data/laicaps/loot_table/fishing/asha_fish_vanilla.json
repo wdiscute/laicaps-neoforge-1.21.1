@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "laicaps:redtale",
+          "weight": 44
+        },
+        {
+          "type": "minecraft:item",
+          "name": "laicaps:bluetale",
+          "weight": 44
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:stick",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "laicaps:jar",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "laicaps:oakheart_berries",
+          "weight": 4
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "minecraft:gameplay/fishing/fish"
+}
