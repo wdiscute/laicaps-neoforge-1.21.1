@@ -36,14 +36,8 @@ public class MoonshadeSeagrassFeature extends Feature<NoneFeatureConfiguration>
         BlockState originBS = level.getBlockState(new BlockPos(originBP.getX(), originHeight, originBP.getZ()));
         BlockState originBSAbove = level.getBlockState(new BlockPos(originBP.getX(), originHeight + 1, originBP.getZ()));
 
-
-        System.out.println("tried to spawn seagrass at " + originBP);
-
         if (originBS.is(Blocks.WATER) && originBSAbove.is(Blocks.WATER))
         {
-
-            System.out.println("both blocks are water " + originBP + " and " + originBSAbove);
-
             BlockState tinySeagrass = ModBlocks.MOONSHADE_SEAGRASS.get().defaultBlockState();
 
             BlockState tallSeagrassLower = ModBlocks.MOONSHADE_TALL_SEAGRASS.get().defaultBlockState();

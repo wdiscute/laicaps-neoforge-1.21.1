@@ -84,15 +84,15 @@ public class ModEntities
                     .sized(1f, 1f).build("rocket"));
 
     public static final Supplier<EntityType<FishingBobEntity>> FISHING_BOB =
-            ENTITY_TYPES.register("fishing_bob", () -> EntityType.Builder.<FishingBobEntity>of(FishingBobEntity::new, MobCategory.MISC)
-                    .sized(1f, 1f).build("fishing_bob"));
+            registerKapiten("fishing_bob", FishingBobEntity::new, MobCategory.MISC,
+                    b -> b.noSummon().noSave().sized(0.3f, 0.3f));
 
     public static void register(IEventBus eventBus)
     {
         ENTITY_TYPES.register(eventBus);
     }
 
-    static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.EntityFactory<T> factory, MobCategory category, UnaryOperator<EntityType.Builder<T>> provider) {
+    static <T extends Entity> Supplier<EntityType<T>> registerKapiten(String name, EntityType.EntityFactory<T> factory, MobCategory category, UnaryOperator<EntityType.Builder<T>> provider) {
         return ENTITY_TYPES.register(name, () -> provider.apply(EntityType.Builder.of(factory, category)).build(name));
     }
 

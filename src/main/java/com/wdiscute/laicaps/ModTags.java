@@ -28,6 +28,7 @@ public class ModTags
         public static final TagKey<Item> GLOBES = createTag("globes");
         public static final TagKey<Item> BLUEPRINTS = createTag("blueprints");
         public static final TagKey<Item> COMPLETED_BLUEPRINTS = createTag("completed_blueprints");
+        public static final TagKey<Item> FISH = createTag("fishing_game_items");
 
         private static TagKey<Item> createTag(String name)
         {
