@@ -92,6 +92,8 @@ public class Laicaps
         ModParticles.register(modEventBus);
         ModMenuTypes.register(modEventBus);
         ModFeatures.register(modEventBus);
+        ModDataAttachments.register(modEventBus);
+
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

@@ -19,11 +19,14 @@ import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerModel;
 import com.wdiscute.laicaps.entity.swibble.SwibbleEntity;
 import com.wdiscute.laicaps.entity.swibble.SwibbleModel;
+import com.wdiscute.laicaps.network.PayloadReceiver;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.network.ServerPlayerConnection;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -32,11 +35,15 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(modid = Laicaps.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents
@@ -84,39 +91,69 @@ public class ModEventBusEvents
     @SubscribeEvent
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event)
     {
-        event.register(ModEntities.BLUETALE.get(), SpawnPlacementTypes.IN_WATER,
+        event.register(
+                ModEntities.BLUETALE.get(), SpawnPlacementTypes.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
-        event.register(ModEntities.REDTALE.get(), SpawnPlacementTypes.IN_WATER,
+        event.register(
+                ModEntities.REDTALE.get(), SpawnPlacementTypes.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
-        event.register(ModEntities.BUBBLEMOUTH.get(), SpawnPlacementTypes.IN_WATER,
+        event.register(
+                ModEntities.BUBBLEMOUTH.get(), SpawnPlacementTypes.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
-        event.register(ModEntities.GLIMPUFF.get(), SpawnPlacementTypes.IN_WATER,
+        event.register(
+                ModEntities.GLIMPUFF.get(), SpawnPlacementTypes.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
-        event.register(ModEntities.SWIBBLE.get(), SpawnPlacementTypes.IN_WATER,
+        event.register(
+                ModEntities.SWIBBLE.get(), SpawnPlacementTypes.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 WaterAnimal::checkSurfaceWaterAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
-        event.register(ModEntities.NIMBLE.get(), SpawnPlacementTypes.ON_GROUND,
+        event.register(
+                ModEntities.NIMBLE.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 ModEventBusEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
-        event.register(ModEntities.SNUFFLER.get(), SpawnPlacementTypes.ON_GROUND,
+        event.register(
+                ModEntities.SNUFFLER.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 ModEventBusEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
     }
 
-    public static boolean checkNimbleSpawnRules(EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+    public static boolean checkNimbleSpawnRules(EntityType<? extends Animal> animal, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random)
+    {
         boolean flag = level.getRawBrightness(pos, 0) > 8;
         return level.getBlockState(pos.below()).is(ModBlocks.ASHA_GRASS_BLOCK) && flag;
+    }
+
+
+    @SubscribeEvent
+    public static void registerPayloads(final RegisterPayloadHandlersEvent event)
+    {
+        final PayloadRegistrar registrar = event.registrar("1");
+        registrar.playToClient(
+                Payloads.FishingPayload.TYPE,
+                Payloads.FishingPayload.STREAM_CODEC,
+                PayloadReceiver::receiveFishingClient
+
+        );
+
+        registrar.playToServer(
+                Payloads.FishingCompletedPayload.TYPE,
+                Payloads.FishingCompletedPayload.STREAM_CODEC,
+                PayloadReceiver::receiveFishingCompletedServer
+
+        );
+
+
     }
 
 
@@ -126,9 +163,6 @@ public class ModEventBusEvents
         event.registerBlockEntityRenderer(ModBlockEntity.MOD_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntity.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
     }
-
-
-
 
 
 }
