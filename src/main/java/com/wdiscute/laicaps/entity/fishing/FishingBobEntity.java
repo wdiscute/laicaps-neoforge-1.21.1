@@ -1,9 +1,8 @@
-package com.wdiscute.laicaps.fishing;
+package com.wdiscute.laicaps.entity.fishing;
 
 import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.network.Payloads;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -35,6 +34,12 @@ public class FishingBobEntity extends Projectile
     private FishHookState currentState;
     public ItemStack stack;
 
+    int minTicksToFish;
+    int maxTicksToFish;
+    int chanceToFishEachTick;
+
+    int ticksInWater;
+
     enum FishHookState
     {
         FLYING,
@@ -55,6 +60,12 @@ public class FishingBobEntity extends Projectile
         this.player = player;
         {
             this.setOwner(player);
+
+            minTicksToFish = 100;
+            maxTicksToFish = 300;
+            chanceToFishEachTick = 100;
+
+
             float f = player.getXRot();
             float f1 = player.getYRot();
             float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -212,15 +223,16 @@ public class FishingBobEntity extends Projectile
 
     private void checkForFish()
     {
-
-
-
         if (!level().isClientSide && currentState == FishHookState.BOBBING)
         {
-            sendPacket();
+            ticksInWater++;
+            int i = random.nextInt(chanceToFishEachTick);
+            if((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
+            {
+                currentState = FishHookState.FISHING;
+                sendPacket();
+            }
         }
-
-        currentState = FishHookState.FISHING;
 
     }
 

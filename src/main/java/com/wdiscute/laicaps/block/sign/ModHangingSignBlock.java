@@ -1,14 +1,14 @@
-package com.wdiscute.laicaps.block.generics;
+package com.wdiscute.laicaps.block.sign;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.WallHangingSignBlock;
+import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
-public class ModWallHangingSignBlock extends WallHangingSignBlock
+public class ModHangingSignBlock extends CeilingHangingSignBlock
 {
-    public ModWallHangingSignBlock(WoodType type, Properties properties)
+    public ModHangingSignBlock(WoodType type, Properties properties)
     {
         super(type, properties);
     }

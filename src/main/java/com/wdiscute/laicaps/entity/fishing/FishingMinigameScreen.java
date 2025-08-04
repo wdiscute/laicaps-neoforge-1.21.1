@@ -1,10 +1,9 @@
-package com.wdiscute.laicaps.fishing;
+package com.wdiscute.laicaps.entity.fishing;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.network.Payloads;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -15,7 +14,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.TickRateManager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -187,10 +185,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         //POINTER
         {
-
-
-            System.out.println(partialTick);
-
+            //TODO make it not use the partial ticks from rendering thread of whatever honestly its just nerd stuff that no one will care about
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -219,7 +214,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         //FISH
         {
-
             guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 60, height / 2 - 8 + 20 - completionSmooth);
         }
     }

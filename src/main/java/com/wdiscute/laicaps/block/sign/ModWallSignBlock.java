@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.generics;
+package com.wdiscute.laicaps.block.sign;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.WallSignBlock;

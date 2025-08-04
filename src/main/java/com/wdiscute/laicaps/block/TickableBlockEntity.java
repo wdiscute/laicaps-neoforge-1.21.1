@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.block.generics;
+package com.wdiscute.laicaps.block;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

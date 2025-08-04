@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.block.watercontainer;
 
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.block.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

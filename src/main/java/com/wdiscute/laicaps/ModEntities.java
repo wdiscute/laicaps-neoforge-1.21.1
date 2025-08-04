@@ -12,14 +12,12 @@ import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RocketEntity;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
 import com.wdiscute.laicaps.entity.swibble.SwibbleEntity;
-import com.wdiscute.laicaps.fishing.FishingBobEntity;
-import net.minecraft.core.Registry;
+import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;

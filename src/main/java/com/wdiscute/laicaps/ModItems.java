@@ -2,7 +2,7 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
-import com.wdiscute.laicaps.fishing.ModFishingRod;
+import com.wdiscute.laicaps.entity.fishing.ModFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 

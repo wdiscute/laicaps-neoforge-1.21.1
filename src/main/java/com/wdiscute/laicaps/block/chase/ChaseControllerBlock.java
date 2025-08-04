@@ -3,7 +3,7 @@ package com.wdiscute.laicaps.block.chase;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.block.TickableBlockEntity;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

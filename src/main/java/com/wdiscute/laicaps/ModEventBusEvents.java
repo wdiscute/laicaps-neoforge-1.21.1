@@ -19,6 +19,7 @@ import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerModel;
 import com.wdiscute.laicaps.entity.swibble.SwibbleEntity;
 import com.wdiscute.laicaps.entity.swibble.SwibbleModel;
+import com.wdiscute.laicaps.entity.fishing.FishingBobModel;
 import com.wdiscute.laicaps.network.PayloadReceiver;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.model.BoatModel;
@@ -69,6 +70,8 @@ public class ModEventBusEvents
         event.registerLayerDefinition(SnufflerModel.LAYER_LOCATION, SnufflerModel::createBodyLayer);
 
         event.registerLayerDefinition(RocketModel.LAYER_LOCATION, RocketModel::createBodyLayer);
+
+        event.registerLayerDefinition(FishingBobModel.LAYER_LOCATION, FishingBobModel::createBodyLayer);
     }
 
     @SubscribeEvent

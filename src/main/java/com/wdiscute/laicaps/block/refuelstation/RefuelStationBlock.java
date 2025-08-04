@@ -2,7 +2,7 @@ package com.wdiscute.laicaps.block.refuelstation;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.block.generics.TickableBlockEntity;
+import com.wdiscute.laicaps.block.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
