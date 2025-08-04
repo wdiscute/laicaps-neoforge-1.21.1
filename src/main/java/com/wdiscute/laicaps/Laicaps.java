@@ -16,7 +16,6 @@ import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerRenderer;
 import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
-import com.wdiscute.laicaps.fishing.FishingBobEntity;
 import com.wdiscute.laicaps.fishing.FishingBobRenderer;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
@@ -74,8 +73,6 @@ public class Laicaps
     {
         return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, s);
     }
-
-
 
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
