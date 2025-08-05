@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "laicaps:oakheart_berries"
+    }
+  ],
+  "result": {
+    "id": "minecraft:oakheart_berries_bait",
+    "count": 1
+  }
+}
