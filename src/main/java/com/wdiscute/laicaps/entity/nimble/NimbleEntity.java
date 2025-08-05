@@ -55,21 +55,28 @@ public class NimbleEntity extends Animal
     }
 
     @Override
+    public float getVoicePitch()
+    {
+        return this.random.nextFloat() - this.random.nextFloat() * 1.5F + 0.2F;
+
+    }
+
+    @Override
     protected SoundEvent getAmbientSound()
     {
-        return SoundEvents.ANVIL_PLACE;
+        return SoundEvents.ARMADILLO_ROLL;
     }
 
     @Override
     protected SoundEvent getDeathSound()
     {
-        return SoundEvents.ANVIL_PLACE;
+        return SoundEvents.ARMADILLO_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource)
     {
-        return SoundEvents.ANVIL_PLACE;
+        return SoundEvents.ARMADILLO_HURT;
     }
 
 
