@@ -23,6 +23,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -128,10 +129,8 @@ public class FishingBobEntity extends Projectile
     private boolean shouldStopFishing(Player player)
     {
         ItemStack main = player.getMainHandItem();
-        ItemStack off = player.getOffhandItem();
-        boolean flag = main.is(ModItems.CUSTOM_FISHING_ROD);
-        boolean flag1 = off.is(ModItems.CUSTOM_FISHING_ROD);
-        if (!player.isRemoved() && player.isAlive() && (flag || flag1) && !(this.distanceToSqr(player) > (double) 1024.0F))
+        boolean flag = main.is(ModItems.STARCATCHER_FISHING_ROD);
+        if (!player.isRemoved() && player.isAlive() && flag && !(this.distanceToSqr(player) > (double) 1024.0F))
         {
             return false;
         }
@@ -207,7 +206,7 @@ public class FishingBobEntity extends Projectile
 
 
             this.move(MoverType.SELF, this.getDeltaMovement());
-            this.updateRotation();
+            //this.updateRotation();
 
             if (this.onGround() || this.horizontalCollision)
             {
@@ -235,6 +234,15 @@ public class FishingBobEntity extends Projectile
         }
 
     }
+
+
+    @Override
+    public AABB getBoundingBoxForCulling()
+    {
+        AABB box = new AABB(-10, -10, -10, 10, 10, 10);
+        return box.move(position());
+    }
+
 
 
     @Override

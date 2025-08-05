@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -25,6 +27,17 @@ public class ModDataComponents
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FUEL = register("fuel",
             builder -> builder.persistent(ExtraCodecs.intRange(0, 2000)));
+
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BOBBER = register("bobber",
+            builder -> builder.persistent(ItemContainerContents.CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BAIT = register("bait",
+            builder -> builder.persistent(ItemContainerContents.CODEC));
+
+
+
+
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
