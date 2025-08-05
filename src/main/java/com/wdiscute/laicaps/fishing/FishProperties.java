@@ -1,0 +1,164 @@
+package com.wdiscute.laicaps.fishing;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+
+import java.util.List;
+
+public class FishProperties
+{
+
+    final public Item fish;
+    final public List<ResourceKey<Biome>> biome;
+    final public List<ResourceKey<Level>> dim;
+    final public int baseChance;
+
+    public List<Item> incorrectBaits = List.of();
+
+    public boolean mustBeRaining = false;
+    public boolean mustBeThundering = false;
+    public int mustBeCaughtBellowY = Integer.MAX_VALUE;
+    public int mustBeCaughtAboveY = Integer.MIN_VALUE;
+    public boolean mustHaveCorrectBait = false;
+    public Item correctBait = ItemStack.EMPTY.getItem();
+    public int correctBaitChanceAdded = 0;
+    public boolean shouldSkipMinigame = false;
+
+
+    public FishProperties(Item fish, List<ResourceKey<Level>> dimension, List<ResourceKey<Biome>> biome, int baseChance)
+    {
+        this.fish = fish;
+        this.dim = dimension;
+        this.biome = biome;
+        this.baseChance = baseChance;
+    }
+
+    public FishProperties skipsMinigame()
+    {
+        this.shouldSkipMinigame = true;
+        return this;
+    }
+
+    public FishProperties incorrectBaits(List<Item> blacklist)
+    {
+        this.incorrectBaits = blacklist;
+        return this;
+    }
+
+    public FishProperties mustBeRaining()
+    {
+        this.mustBeRaining = true;
+        return this;
+    }
+
+    public FishProperties mustBeCaughtBellowY(int i)
+    {
+        this.mustBeCaughtBellowY = i;
+        return this;
+    }
+
+    public FishProperties mustBeCaughtAboveY(int i)
+    {
+        this.mustBeCaughtAboveY = i;
+        return this;
+    }
+
+    public FishProperties mustHaveCorrectBait()
+    {
+        this.mustHaveCorrectBait = true;
+        return this;
+    }
+
+    public FishProperties correctBaitChanceAdded(Item item, int i)
+    {
+        this.correctBait = item;
+        this.correctBaitChanceAdded = i;
+        return this;
+    }
+
+
+    public int getChance(Level level, BlockPos pos, ItemStack bobber, ItemStack bait)
+    {
+
+        int chance = baseChance;
+
+        //dimension  check
+        if (dim != null)
+        {
+            if (!this.dim.contains(level.dimension()))
+            {
+                return 0;
+            }
+        }
+
+        //biome check
+        if (biome != null)
+        {
+            if (!this.biome.contains(level.getBiome(pos).getKey()))
+            {
+                return 0;
+            }
+        }
+
+        //blacklisted baits
+        if (incorrectBaits.contains(bait.getItem()))
+        {
+            return 0;
+        }
+
+        //y level check
+        if (pos.getY() > mustBeCaughtBellowY)
+        {
+            return 0;
+        }
+
+        //y level check
+        if (pos.getY() < mustBeCaughtAboveY)
+        {
+            return 0;
+        }
+
+        //rain check
+        if (mustBeRaining && level.getRainLevel(0) < 0.5)
+        {
+            return 0;
+        }
+
+        //thunder check
+        if (mustBeThundering && level.getThunderLevel(0) < 0.5)
+        {
+            return 0;
+        }
+
+        //correct bait check
+        if (mustHaveCorrectBait)
+        {
+            if (bait.is(correctBait))
+            {
+                chance += correctBaitChanceAdded;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            if (correctBaitChanceAdded > 0)
+            {
+                if (bait.is(correctBait))
+                {
+                    chance += correctBaitChanceAdded;
+                }
+            }
+        }
+
+        return chance;
+    }
+
+
+}
