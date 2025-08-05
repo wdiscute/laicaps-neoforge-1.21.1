@@ -4,13 +4,10 @@ import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.fishing.FishProperties;
 import com.wdiscute.laicaps.fishing.Fishes;
 import com.wdiscute.laicaps.network.Payloads;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
@@ -20,23 +17,25 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SuspiciousStewItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FishingBobEntity extends Projectile
 {
     private static final Logger log = LoggerFactory.getLogger(FishingBobEntity.class);
+
+
+    public static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(FishingBobEntity.class, EntityDataSerializers.INT);
+
+
     public final Player player;
     private FishHookState currentState;
     public ItemStack stack;
@@ -54,6 +53,7 @@ public class FishingBobEntity extends Projectile
         FLYING,
         HOOKED_IN_ENTITY,
         BOBBING,
+        BITING,
         FISHING
     }
 
@@ -66,6 +66,7 @@ public class FishingBobEntity extends Projectile
     public FishingBobEntity(Level level, Player player, ItemStack bobber, ItemStack bait)
     {
         super(ModEntities.FISHING_BOB.get(), level);
+
         this.player = player;
 
         this.bobber = bobber;
@@ -107,7 +108,7 @@ public class FishingBobEntity extends Projectile
 
     private void sendPacket()
     {
-        List<FishProperties> available = new java.util.ArrayList<>(List.of());
+        List<FishProperties> available = new ArrayList<>(List.of());
 
         for (FishProperties fp : Fishes.entries)
         {
@@ -156,78 +157,115 @@ public class FishingBobEntity extends Projectile
     {
         super.tick();
 
+        if (!level().isClientSide)
+        {
+            if (currentState == FishHookState.FLYING) entityData.set(STATE, 1);
+            if (currentState == FishHookState.BOBBING) entityData.set(STATE, 2);
+            if (currentState == FishHookState.BITING) entityData.set(STATE, 3);
+            if (currentState == FishHookState.FISHING) entityData.set(STATE, 4);
+        }
+        else
+        {
+            if (entityData.get(STATE) == 1) currentState = FishHookState.FLYING;
+            if (entityData.get(STATE) == 2) currentState = FishHookState.BOBBING;
+            if (entityData.get(STATE) == 3) currentState = FishHookState.BITING;
+            if (entityData.get(STATE) == 4) currentState = FishHookState.FISHING;
+        }
+
         Player player = ((Player) this.getOwner());
-        if (player == null)
+        if (player == null || this.shouldStopFishing(player))
         {
             this.discard();
             player.setData(ModDataAttachments.FISHING.get(), "");
         }
 
-        if (this.level().isClientSide || !this.shouldStopFishing(player))
+        BlockPos blockpos = this.blockPosition();
+        FluidState fluidstate = this.level().getFluidState(blockpos);
+        FluidState fluidstate1 = this.level().getFluidState(blockpos.below());
+
+        if (this.currentState == FishHookState.FLYING)
+        {
+            if (getDeltaMovement().y < 1.2f)
+                this.setDeltaMovement(this.getDeltaMovement().add(0, -0.02, 0));
+
+            if (fluidstate.is(FluidTags.WATER))
+            {
+                this.setDeltaMovement(this.getDeltaMovement().multiply(0.3, 0.3, 0.3));
+                if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
+                return;
+            }
+        }
+
+        if (this.currentState == FishHookState.BITING)
+        {
+            if (level().isClientSide)
+            {
+                System.out.println("wad");
+                level().addParticle(
+                        ModParticles.ROCKET_FIRE_PARTICLES.get(),
+                        position().x, position().y + 1, position().z,
+                        0, 0, 0);
+            }
+
+        }
+
+        if (!fluidstate.is(FluidTags.WATER) && !fluidstate1.is(FluidTags.WATER))
+        {
+            if (!level().isClientSide) currentState = FishHookState.FLYING;
+        }
+
+
+        //TODO check for water level instead of just blockstate to make the entity sit better in water
+        if (this.currentState == FishHookState.BOBBING || this.currentState == FishHookState.FISHING)
         {
 
-            BlockPos blockpos = this.blockPosition();
-            FluidState fluidstate = this.level().getFluidState(blockpos);
-            FluidState fluidstate1 = this.level().getFluidState(blockpos.below());
+            checkForFish();
 
-            if (this.currentState == FishHookState.FLYING)
+            if (fluidstate.is(FluidTags.WATER))
             {
-                if (getDeltaMovement().y < 1.2f)
-                    this.setDeltaMovement(this.getDeltaMovement().add(0, -0.02, 0));
-
-                if (fluidstate.is(FluidTags.WATER))
-                {
-                    this.setDeltaMovement(this.getDeltaMovement().multiply(0.3, 0.3, 0.3));
-                    this.currentState = FishHookState.BOBBING;
-                    return;
-                }
+                setDeltaMovement(this.getDeltaMovement().add(0.0F, 0.01, 0.0F));
             }
-
-            if (!fluidstate.is(FluidTags.WATER) && !fluidstate1.is(FluidTags.WATER))
+            else
             {
-                currentState = FishHookState.FLYING;
-            }
-
-
-            //TODO check for water level instead of just blockstate to make the entity sit better in water
-            if (this.currentState == FishHookState.BOBBING || this.currentState == FishHookState.FISHING)
-            {
-
-
-                checkForFish();
-
-                if (fluidstate.is(FluidTags.WATER))
+                if (random.nextFloat() > 0.02)
                 {
-                    setDeltaMovement(this.getDeltaMovement().add(0.0F, 0.01, 0.0F));
+                    setDeltaMovement(this.getDeltaMovement().add(0.0F, -0.03, 0.0F));
                 }
                 else
                 {
-                    if (random.nextFloat() > 0.02)
-                    {
-                        setDeltaMovement(this.getDeltaMovement().add(0.0F, -0.03, 0.0F));
-                    }
-                    else
-                    {
-                        setDeltaMovement(this.getDeltaMovement().add(0.0F, -0.01, 0.0F));
-                    }
+                    setDeltaMovement(this.getDeltaMovement().add(0.0F, -0.01, 0.0F));
                 }
             }
-
-
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            //this.updateRotation();
-
-            if (this.onGround() || this.horizontalCollision)
-            {
-                this.setDeltaMovement(Vec3.ZERO);
-            }
-
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.92));
-            this.reapplyPosition();
         }
+
+
+        this.move(MoverType.SELF, this.getDeltaMovement());
+        //this.updateRotation();
+
+        if (this.onGround() || this.horizontalCollision)
+        {
+            this.setDeltaMovement(Vec3.ZERO);
+        }
+
+        this.setDeltaMovement(this.getDeltaMovement().scale(0.92));
+        this.reapplyPosition();
+
 
     }
 
+    public boolean checkBiting()
+    {
+        if (currentState == FishHookState.BITING)
+        {
+            if (!level().isClientSide) currentState = FishHookState.FISHING;
+            if (!level().isClientSide) sendPacket();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     private void checkForFish()
     {
@@ -237,8 +275,8 @@ public class FishingBobEntity extends Projectile
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
             {
-                currentState = FishHookState.FISHING;
-                sendPacket();
+                this.setPos(position().x, position().y - 0.5f, position().z);
+                if (!level().isClientSide) currentState = FishHookState.BITING;
             }
         }
 
@@ -252,29 +290,10 @@ public class FishingBobEntity extends Projectile
         return box.move(position());
     }
 
-
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
-
-    }
-
-    @Override
-    public void onSyncedDataUpdated(List<SynchedEntityData.DataValue<?>> key)
-    {
-        super.onSyncedDataUpdated(key);
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag)
-    {
-
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag)
-    {
-
+        builder.define(STATE, 0);
     }
 
 }

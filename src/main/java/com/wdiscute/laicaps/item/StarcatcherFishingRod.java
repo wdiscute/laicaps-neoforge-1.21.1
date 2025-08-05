@@ -69,7 +69,7 @@ public class StarcatcherFishingRod extends Item
             {
                 if (entity.getUUID().toString().equals(player.getData(ModDataAttachments.FISHING.get())))
                 {
-                    if (entity instanceof FishingBobEntity fbe)
+                    if (entity instanceof FishingBobEntity fbe && !fbe.checkBiting())
                     {
                         fbe.kill();
                     }
