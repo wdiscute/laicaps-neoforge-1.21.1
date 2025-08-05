@@ -2,7 +2,7 @@ package com.wdiscute.laicaps.network;
 
 import com.wdiscute.laicaps.ModDataAttachments;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
-import com.wdiscute.laicaps.entity.fishing.FishingMinigameScreen;
+import com.wdiscute.laicaps.fishing.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;

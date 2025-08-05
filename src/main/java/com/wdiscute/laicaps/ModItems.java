@@ -67,8 +67,6 @@ public class ModItems
 
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel", () -> new ChiselItem(new Item.Properties().rarity(Rarity.EPIC)));
 
-    static List<ItemStack> emptyListOfItemStacks = Arrays.asList(new ItemStack[]{ItemStack.EMPTY});
-
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT = ITEMS.register("spaceship_blueprint", () -> new SpaceshipItem(new Item.Properties().rarity(Rarity.EPIC)));
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT_SKETCH = ITEMS.register("spaceship_blueprint_sketch", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
@@ -76,7 +74,8 @@ public class ModItems
 
     public static final DeferredItem<Item> EMBER_ENTRY = ITEMS.register(
             "ember_entry", () ->
-                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                    new EntryItem(new Item.Properties()
+                            .rarity(Rarity.RARE)
                             .stacksTo(1)
                             .component(ModDataComponents.ENTRY_NAME, "Ember Entry Page")
                     )

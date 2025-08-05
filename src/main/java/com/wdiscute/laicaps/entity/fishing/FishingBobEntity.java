@@ -1,6 +1,8 @@
 package com.wdiscute.laicaps.entity.fishing;
 
 import com.wdiscute.laicaps.*;
+import com.wdiscute.laicaps.fishing.FishProperties;
+import com.wdiscute.laicaps.fishing.Fishes;
 import com.wdiscute.laicaps.network.Payloads;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SuspiciousStewItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -26,14 +29,19 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class FishingBobEntity extends Projectile
 {
+    private static final Logger log = LoggerFactory.getLogger(FishingBobEntity.class);
     public final Player player;
     private FishHookState currentState;
     public ItemStack stack;
+    public ItemStack bobber;
+    public ItemStack bait;
 
     int minTicksToFish;
     int maxTicksToFish;
@@ -55,10 +63,14 @@ public class FishingBobEntity extends Projectile
         player = null;
     }
 
-    public FishingBobEntity(Level level, Player player)
+    public FishingBobEntity(Level level, Player player, ItemStack bobber, ItemStack bait)
     {
         super(ModEntities.FISHING_BOB.get(), level);
         this.player = player;
+
+        this.bobber = bobber;
+        this.bait = bait;
+
         {
             this.setOwner(player);
 
@@ -95,34 +107,31 @@ public class FishingBobEntity extends Projectile
 
     private void sendPacket()
     {
-        LootParams.Builder builder = new LootParams.Builder((ServerLevel) level());
-        LootParams params = builder.create(LootContextParamSets.EMPTY);
+        List<FishProperties> available = new java.util.ArrayList<>(List.of());
 
-        ResourceKey<LootTable> lootTable = ResourceKey.create(
-                Registries.LOOT_TABLE,
-                Laicaps.rl("fishing/asha_1"));
-
-        ObjectArrayList<ItemStack> arrayOfItemStacks = level().getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
-
-        int randomInt = getRandom().nextInt(arrayOfItemStacks.size());
-        ItemStack randomItemStack = arrayOfItemStacks.get(randomInt);
-
-        stack = randomItemStack;
-
-        if (stack.is(ModTags.Items.FISH))
+        for (FishProperties fp : Fishes.entries)
         {
-            PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishingPayload(randomItemStack, 3));
+            for (int i = 0; i < fp.getChance(level(), blockPosition(), bobber, bait); i++)
+            {
+                available.add(fp);
+            }
+        }
+
+        if (available.isEmpty()) available.add(Fishes.STICK);
+
+        FishProperties fp = available.get(random.nextInt(available.size()));
+
+        this.stack = new ItemStack(fp.fish);
+
+        if (fp.shouldSkipMinigame)
+        {
+            level().addFreshEntity(new ItemEntity(level(), player.position().x + 0.5f, player.position().y + 1.2f, player.position().z, stack));
+            kill();
         }
         else
         {
-            level().addFreshEntity(new ItemEntity(
-                    level(), player.position().x + 0.5f, player.position().y + 1.2f, player.position().z,
-                    stack));
-            player.setData(ModDataAttachments.FISHING.get(), "");
-            kill();
+            PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishingPayload(new ItemStack(fp.fish), 3));
         }
-
-
     }
 
 
@@ -163,7 +172,7 @@ public class FishingBobEntity extends Projectile
 
             if (this.currentState == FishHookState.FLYING)
             {
-                if(getDeltaMovement().y < 1.2f)
+                if (getDeltaMovement().y < 1.2f)
                     this.setDeltaMovement(this.getDeltaMovement().add(0, -0.02, 0));
 
                 if (fluidstate.is(FluidTags.WATER))
@@ -226,7 +235,7 @@ public class FishingBobEntity extends Projectile
         {
             ticksInWater++;
             int i = random.nextInt(chanceToFishEachTick);
-            if((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
+            if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
             {
                 currentState = FishHookState.FISHING;
                 sendPacket();
@@ -242,7 +251,6 @@ public class FishingBobEntity extends Projectile
         AABB box = new AABB(-10, -10, -10, 10, 10, 10);
         return box.move(position());
     }
-
 
 
     @Override

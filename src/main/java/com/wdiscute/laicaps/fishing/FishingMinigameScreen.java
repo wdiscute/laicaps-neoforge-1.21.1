@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.entity.fishing;
+package com.wdiscute.laicaps.fishing;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,13 +14,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
 
-public class FishingMinigameScreen extends Screen implements GuiEventListener
+public class
+FishingMinigameScreen extends Screen implements GuiEventListener
 {
 
     private static final ResourceLocation CIRCLE = Laicaps.rl("textures/gui/fishing/circle.png");
@@ -224,6 +226,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue())
         {
+            Minecraft.getInstance().player.swing(InteractionHand.MAIN_HAND, true);
+
             boolean safe = false;
 
             Vec3 pos = Minecraft.getInstance().player.position();
