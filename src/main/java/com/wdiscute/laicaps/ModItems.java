@@ -2,7 +2,7 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
-import com.wdiscute.laicaps.entity.fishing.ModFishingRod;
+import com.wdiscute.laicaps.item.StarcatcherFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 
@@ -18,6 +18,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
@@ -26,6 +27,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +35,26 @@ public class ModItems
 {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Laicaps.MOD_ID);
+
+    //
+    //,------. ,--.  ,---.   ,--.  ,--. ,--. ,--.  ,--.  ,----.
+    //|  .---' |  | '   .-'  |  '--'  | |  | |  ,'.|  | '  .-./
+    //|  `--,  |  | `.  `-.  |  .--.  | |  | |  |' '  | |  | .---.
+    //|  |`    |  | .-'    | |  |  |  | |  | |  | `   | '  '--'  |
+    //`--'     `--' `-----'  `--'  `--' `--' `--'  `--'  `------'
+    //
+
+    public static final DeferredItem<Item> STARCATCHER_FISHING_ROD = ITEMS.register(
+            "starcatcher_fishing_rod",
+            () -> new StarcatcherFishingRod(
+                    new Item.Properties()
+                            .rarity(Rarity.EPIC)
+                            .component(ModDataComponents.BOBBER.get(), ItemContainerContents.fromItems(List.of(ItemStack.EMPTY)))
+                            .component(ModDataComponents.BAIT.get(), ItemContainerContents.fromItems(List.of(ItemStack.EMPTY))))
+    );
+
+    public static final DeferredItem<Item> OAKHEART_BERRIES_BAIT = ITEMS.register("oakheart_berries_bait", () -> new Item(new Item.Properties()));
+
 
 
     //
@@ -45,9 +67,7 @@ public class ModItems
 
     public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel", () -> new ChiselItem(new Item.Properties().rarity(Rarity.EPIC)));
 
-
-    public static final DeferredItem<Item> CUSTOM_FISHING_ROD = ITEMS.register("custom_fishing_rod", () -> new ModFishingRod(new Item.Properties().rarity(Rarity.EPIC)));
-
+    static List<ItemStack> emptyListOfItemStacks = Arrays.asList(new ItemStack[]{ItemStack.EMPTY});
 
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT = ITEMS.register("spaceship_blueprint", () -> new SpaceshipItem(new Item.Properties().rarity(Rarity.EPIC)));
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT_SKETCH = ITEMS.register("spaceship_blueprint_sketch", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
@@ -337,7 +357,8 @@ public class ModItems
                     new Item(new Item.Properties().food(ModFoodProperties.OAKHEART_BERRIES_JAM).stacksTo(16)));
 
 
-    public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register("oakheart_door",
+    public static final DeferredItem<Item> OAKHEART_DOOR = ITEMS.register(
+            "oakheart_door",
             () -> new DoubleHighBlockItem(ModBlocks.OAKHEART_DOOR.get(), new Item.Properties()));
     public static final DeferredItem<Item> OAKHEART_SIGN = ITEMS.register("oakheart_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_SIGN.get(), ModBlocks.OAKHEART_WALL_SIGN.get()));
     public static final DeferredItem<Item> OAKHEART_HANGING_SIGN = ITEMS.register("oakheart_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKHEART_HANGING_SIGN.get(), ModBlocks.OAKHEART_WALL_HANGING_SIGN.get()));

@@ -54,6 +54,19 @@
   "gui.laicaps.landing.weather.strong_thunder" : "Strong Storm",
 
 
+  "item.laicaps.starcatcher_fishing_rod": "Starcatcher's Fishing Rod",
+  "item.laicaps.starcatcher_fishing_rod.0": "A special fishing rod which allows",
+  "item.laicaps.starcatcher_fishing_rod.1": "for the use of bobbers and bait.",
+  "item.laicaps.starcatcher_fishing_rod.2": "Who knows what you might catch",
+  "item.laicaps.starcatcher_fishing_rod.3": "given the right conditions are met!",
+  "item.laicaps.starcatcher_fishing_rod.4": "",
+  "item.laicaps.starcatcher_fishing_rod.5": "Crouch + Right click to open",
+  "item.laicaps.starcatcher_fishing_rod.6": "bobber and bait selection",
+
+  "item.laicaps.oakheart_berries_bait": "Oakheart Berries Bait",
+
+
+
   "item.laicaps.chisel": "Chisel",
   "tooltip.laicaps.chisel.0": "Doesn't actually chisel anything.",
   "tooltip.laicaps.chisel.1": "Dev item for setting up puzzles and structures.",
