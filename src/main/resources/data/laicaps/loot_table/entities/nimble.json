@@ -7,11 +7,11 @@
         {
           "type": "minecraft:item",
           "functions": [],
-          "name": "minecraft:anvil"
+          "name": "minecraft:oakheart_berries"
         }
       ],
       "rolls": 1
     }
   ],
-  "random_sequence": "laicaps:entities/redtale"
+  "random_sequence": "laicaps:entities/nimble"
 }
