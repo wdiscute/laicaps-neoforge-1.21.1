@@ -273,12 +273,12 @@ public class FishingBobEntity extends Projectile
     {
         if (!level().isClientSide && currentState == FishHookState.BOBBING)
         {
-            sendPacket();
-            this.setPos(position().x, position().y - 0.5f, position().z);
-            if (!level().isClientSide) currentState = FishHookState.BITING;
-            if(true) return;
-
-            //TODO REMOVE THINGS ABOVE
+//            sendPacket();
+//            this.setPos(position().x, position().y - 0.5f, position().z);
+//            if (!level().isClientSide) currentState = FishHookState.BITING;
+//            if(true) return;
+//
+//            //TODO REMOVE THINGS ABOVE
             ticksInWater++;
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
