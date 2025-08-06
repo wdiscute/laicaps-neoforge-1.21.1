@@ -55,13 +55,18 @@
 
 
   "item.laicaps.starcatcher_fishing_rod": "Starcatcher's Fishing Rod",
-  "item.laicaps.starcatcher_fishing_rod.0": "A special fishing rod which allows",
-  "item.laicaps.starcatcher_fishing_rod.1": "for the use of bobbers and bait.",
-  "item.laicaps.starcatcher_fishing_rod.2": "Who knows what you might catch",
-  "item.laicaps.starcatcher_fishing_rod.3": "given the right conditions are met!",
-  "item.laicaps.starcatcher_fishing_rod.4": "",
-  "item.laicaps.starcatcher_fishing_rod.5": "Crouch + Right click to open",
-  "item.laicaps.starcatcher_fishing_rod.6": "bobber and bait selection",
+  "tooltip.laicaps.starcatcher_fishing_rod.0": "A special fishing rod which allows",
+  "tooltip.laicaps.starcatcher_fishing_rod.1": "for the use of bobbers and bait.",
+  "tooltip.laicaps.starcatcher_fishing_rod.2": "Who knows what you might catch",
+  "tooltip.laicaps.starcatcher_fishing_rod.3": "given the right conditions are met!",
+  "tooltip.laicaps.starcatcher_fishing_rod.4": "",
+  "tooltip.laicaps.starcatcher_fishing_rod.5": "Crouch + Right click to open",
+  "tooltip.laicaps.starcatcher_fishing_rod.6": "bobber and bait selection",
+
+  "item.laicaps.starcatcher_twine": "Starcatcher's Twine",
+  "tooltip.laicaps.starcatcher_twine.0": "A delicate twine covered",
+  "tooltip.laicaps.starcatcher_twine.1": "in enderpearl dust.",
+  "tooltip.laicaps.starcatcher_twine.2": "Vansire can be heard emitting from it.",
 
   "item.laicaps.oakheart_berries_bait": "Oakheart Berries Bait",
 

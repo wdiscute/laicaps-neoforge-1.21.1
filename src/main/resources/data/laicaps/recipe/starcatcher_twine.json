@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "teleporters",
+  "ingredients": [
+    {
+      "item": "laicaps:pristine_enderpearl_dust"
+    },
+    {
+      "item": "laicaps:pristine_enderpearl_dust"
+    },
+    {
+      "item": "laicaps:pristine_enderpearl_dust"
+    },
+    {
+      "item": "laicaps:pristine_enderpearl_dust"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "laicaps:starcatcher_twine"
+  }
+}

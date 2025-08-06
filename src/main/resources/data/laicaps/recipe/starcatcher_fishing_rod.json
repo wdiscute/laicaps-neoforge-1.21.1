@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "tanks",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "T": {
+      "item": "laicaps:starcatcher_twine"
+    },
+    "B": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "  S",
+    " ST",
+    "S B"
+  ],
+  "result": {
+    "count": 1,
+    "id": "laicaps:starcatcher_fishing_rod"
+  }
+}
