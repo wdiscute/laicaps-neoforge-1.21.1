@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "functions": [],
-          "name": "minecraft:oakheart_berries"
+          "name": "laicaps:oakheart_berries"
         }
       ],
       "rolls": 1
