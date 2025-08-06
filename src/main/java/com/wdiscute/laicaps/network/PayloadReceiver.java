@@ -21,6 +21,7 @@ public class PayloadReceiver
 {
     public static void receiveFishingCompletedServer(final Payloads.FishingCompletedPayload data, final IPayloadContext context)
     {
+
         Player player = context.player();
         ServerLevel level = ((ServerLevel) context.player().level());
 
@@ -28,19 +29,38 @@ public class PayloadReceiver
 
         for (Entity entity : entities)
         {
-            if(entity.getUUID().toString().equals(player.getData(ModDataAttachments.FISHING.get())))
+            if (entity.getUUID().toString().equals(player.getData(ModDataAttachments.FISHING.get())))
             {
-                if(entity instanceof FishingBobEntity fbe)
+                if (entity instanceof FishingBobEntity fbe)
                 {
-                    if(data.time() > 1)
+                    if (data.time() != -1)
                     {
-                        level.addFreshEntity(new ItemEntity(level, player.position().x + 0.5f, player.position().y + 1.2f, player.position().z,
-                                fbe.stack));
+                        Entity itemFished = new ItemEntity(
+                                level,
+                                fbe.position().x,
+                                fbe.position().y + 1.2f,
+                                fbe.position().z,
+                                fbe.stack);
+
+
+                        double x = (player.position().x - fbe.position().x) / 25;
+                        double y = (player.position().y - fbe.position().y) / 20;
+                        double z = (player.position().z - fbe.position().z) / 25;
+
+                        x = Math.clamp(x, -1, 1);
+                        y = Math.clamp(y, -1, 1);
+                        z = Math.clamp(z, -1, 1);
+
+                        Vec3 vec3 = new Vec3(x, 0.7 + y, z);
+
+                        itemFished.setDeltaMovement(vec3);
+
+                        level.addFreshEntity(itemFished);
 
                         Vec3 p = player.position();
-
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
-                    }else
+                    }
+                    else
                     {
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_NO, SoundSource.AMBIENT);
