@@ -79,7 +79,6 @@ public class FishingBobEntity extends Projectile
             maxTicksToFish = 300;
             chanceToFishEachTick = 100;
 
-
             float f = player.getXRot();
             float f1 = player.getYRot();
             float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -98,6 +97,9 @@ public class FishingBobEntity extends Projectile
             this.setXRot((float) (Mth.atan2(vec3.y, vec3.horizontalDistance()) * (double) 180.0F / (double) (float) Math.PI));
             this.yRotO = this.getYRot();
             this.xRotO = this.getXRot();
+
+            //sendPacket();
+
         }
 
         if (!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), this.uuid.toString());
@@ -106,7 +108,7 @@ public class FishingBobEntity extends Projectile
     }
 
 
-    private void sendPacket()
+    public void sendPacket()
     {
         List<FishProperties> available = new ArrayList<>(List.of());
 
@@ -127,6 +129,7 @@ public class FishingBobEntity extends Projectile
         if (fp.shouldSkipMinigame)
         {
             level().addFreshEntity(new ItemEntity(level(), player.position().x + 0.5f, player.position().y + 1.2f, player.position().z, stack));
+            player.setData(ModDataAttachments.FISHING, "");
             kill();
         }
         else
@@ -200,7 +203,6 @@ public class FishingBobEntity extends Projectile
         {
             if (level().isClientSide)
             {
-                System.out.println("wad");
                 level().addParticle(
                         ModParticles.ROCKET_FIRE_PARTICLES.get(),
                         position().x, position().y + 1, position().z,
@@ -271,6 +273,12 @@ public class FishingBobEntity extends Projectile
     {
         if (!level().isClientSide && currentState == FishHookState.BOBBING)
         {
+            sendPacket();
+            this.setPos(position().x, position().y - 0.5f, position().z);
+            if (!level().isClientSide) currentState = FishHookState.BITING;
+            if(true) return;
+
+            //TODO REMOVE THINGS ABOVE
             ticksInWater++;
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)

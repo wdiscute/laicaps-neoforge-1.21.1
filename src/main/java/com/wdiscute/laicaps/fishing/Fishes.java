@@ -26,7 +26,7 @@ public record Fishes()
             Items.STICK,
             null,
             null,
-            5
+            1
     ).skipsMinigame();
 
     public static final FishProperties SEEDS = new FishProperties(
@@ -60,7 +60,6 @@ public record Fishes()
     ).correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20);
 
 
-
     public static final FishProperties REDTALE = new FishProperties(
             ModItems.REDTALE.get(),
             List.of(getDimResourceKey("asha")),
@@ -69,6 +68,21 @@ public record Fishes()
     ).correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20);
 
 
+
+    public static final FishProperties SUPER_SPECIAL_FISH = new FishProperties(
+            Items.COD,                                      //item rewarded on fishing
+            List.of(getDimResourceKey("asha")),   //list of dimensions it can "spawn" in - null for all
+            null,                                           //list of biomes it can "spawn" in - null for all
+            2                                               //base chance
+    )
+            .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20)
+            .mustBeCaughtAboveY(100)
+            .mustBeCaughtBellowY(120)
+            .mustBeRaining()
+            .mustBeThundering()
+            .incorrectBaits(List.of(Items.ROTTEN_FLESH, Items.DIAMOND))
+            .mustHaveCorrectBait();
+
     //
     //,--.
     //|  | ,--.,--. ,--,--,   ,--,--. ,--,--,--.  ,--,--. ,--.--.
@@ -76,12 +90,6 @@ public record Fishes()
     //|  | '  ''  ' |  ||  | \ '-'  | |  |  |  | \ '-'  | |  |
     //`--'  `----'  `--''--'  `--`--' `--`--`--'  `--`--' `--'
     //
-
-
-
-
-
-
 
 
     public static final List<FishProperties> entries = List.of(STICK, SEEDS, BLUETALE, REDTALE, GOLD_NUGGET);

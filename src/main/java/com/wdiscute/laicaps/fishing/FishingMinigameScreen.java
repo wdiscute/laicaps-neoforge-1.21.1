@@ -30,6 +30,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     private static final ResourceLocation CIRCLE_SWEET_SPOT = Laicaps.rl("textures/gui/fishing/circle_sweet_spot.png");
     private static final ResourceLocation CIRCLE_SWEET_SPOT_THIN = Laicaps.rl("textures/gui/fishing/circle_sweet_spot_thin.png");
     private static final ResourceLocation POINTER = Laicaps.rl("textures/gui/fishing/pointer.png");
+    private static final ResourceLocation TEXTURE = Laicaps.rl("textures/gui/fishing/fishing.png");
 
     final ItemStack itemBeingFished;
 
@@ -39,8 +40,8 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
     Random r = new Random();
 
-    int sweetSpot1Pos = r.nextInt(360);
-    int sweetSpot2Pos = r.nextInt(360);
+    int sweetSpot1Pos;
+    int sweetSpotThinPos;
 
     int hitReward = 10;
     int hitRewardThin = 15;
@@ -65,7 +66,12 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         super(title);
         this.itemBeingFished = stack;
 
-        if(dif == 1)
+        sweetSpot1Pos = r.nextInt(360);
+        sweetSpotThinPos = 60 + r.nextInt(240) + sweetSpot1Pos;
+
+        if (sweetSpotThinPos > 360) sweetSpotThinPos -= 360;
+
+        if (dif == 1)
         {
             hitReward = 10;
             hitRewardThin = 20;
@@ -80,7 +86,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
 
-        if(dif == 2)
+        if (dif == 2)
         {
             hitReward = 10;
             hitRewardThin = 15;
@@ -95,7 +101,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
 
-        if(dif == 3)
+        if (dif == 3)
         {
             hitReward = 10;
             hitRewardThin = 15;
@@ -109,7 +115,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             shouldHaveThinSweetSpot = true;
         }
 
-        if(dif == 4)
+        if (dif == 4)
         {
             hitReward = 5;
             hitRewardThin = 15;
@@ -126,7 +132,6 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
 
-
     }
 
 
@@ -141,9 +146,16 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, CIRCLE);
 
+
+        //tank background
         guiGraphics.blit(
-                CIRCLE, width / 2 - 32, height / 2 - 32,
-                0, 0, 64, 64, 64, 64);
+                TEXTURE, width / 2 - 42 - 100, height / 2 - 48,
+                85, 97, 0, 0, 85, 97, 256, 256);
+
+        //wheel background
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 32, height / 2 - 32,
+                64, 64, 0, 192, 64, 64, 256, 256);
 
 
         //SWEET_SPOT_1
@@ -159,14 +171,15 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
-                    CIRCLE_SWEET_SPOT, width / 2 - 32, height / 2 - 32,
-                    0, 0, 64, 64, 64, 64);
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 16, 160, 16, 16, 256, 256);
 
             poseStack.popPose();
         }
 
         //SWEET_SPOT_2
-        if(shouldHaveThinSweetSpot){
+        if (shouldHaveThinSweetSpot)
+        {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -174,16 +187,21 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpot2Pos)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpotThinPos)));
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
-                    CIRCLE_SWEET_SPOT_THIN, width / 2 - 32, height / 2 - 32,
-                    0, 0, 64, 64, 64, 64);
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 48, 160, 16, 16, 256, 256);
 
             poseStack.popPose();
         }
 
+
+        //wheel second layer
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 32, height / 2 - 32,
+                64, 64, 64, 192, 64, 64, 256, 256);
 
         //POINTER
         {
@@ -198,25 +216,35 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pointerPos + ((currentSpeed * partialTick) * currentRotation))));
             poseStack.translate(-centerX, -centerY, 0);
 
+            //16 offset on y for texture centering
             guiGraphics.blit(
-                    POINTER, width / 2 - 32, height / 2 - 32,
-                    0, 0, 64, 64, 64, 64);
+                    TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
+                    64, 64, 128, 192, 64, 64, 256, 256);
 
             poseStack.popPose();
         }
 
+        //
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 16, height / 2 - 16,
+                32, 32, 208, 208, 32, 32, 256, 256);
 
-        //METER
-        {
-            guiGraphics.blit(
-                    METER, width / 2 - 128 - 60, height / 2 - 128 - 16,
-                    0, 0, 256, 256, 256, 256);
-        }
+        //fishing rod
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 32 - 70, height / 2 - 24 - 57,
+                64, 48, 192, 0, 64, 48, 256, 256);
 
+        //fishing line
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 6 - 102, height / 2 - 56 - 18,
+                16, 112 - completionSmooth,
+                176, 0 + completionSmooth,
+                16, 112 - completionSmooth,
+                256, 256);
 
         //FISH
         {
-            guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 60, height / 2 - 8 + 20 - completionSmooth);
+            guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
         }
     }
 
@@ -233,54 +261,59 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             Vec3 pos = Minecraft.getInstance().player.position();
             ClientLevel level = Minecraft.getInstance().level;
 
-            if(Math.abs(sweetSpot1Pos - (pointerPos + ((currentSpeed * partial) * currentRotation))) < 20 || Math.abs(sweetSpot1Pos - (pointerPos + ((currentSpeed * partial) * currentRotation))) > 340)
+            float pointerPrecise = (pointerPos + ((currentSpeed * partial) * currentRotation));
+
+
+            //if hit sweet spot
+            if (Math.abs(sweetSpot1Pos - pointerPrecise) < 12 || Math.abs(sweetSpot1Pos - pointerPrecise) > 348)
             {
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
 
-                sweetSpot1Pos = 60 + r.nextInt(240) + sweetSpot1Pos;
-                if(sweetSpot1Pos > 360) sweetSpot1Pos -= 360;
-
-                if(shouldFlipRotation)
+                //reposition sweet spot without overlapping old position or the other sweet spot
+                int attempted;
+                do
                 {
-                    currentRotation *= -1;
+                    attempted = (60 + r.nextInt(240) + sweetSpotThinPos) % 360;
                 }
+                while (Math.abs(attempted - sweetSpotThinPos) < 30);
 
-                if(shouldChangeSpeedEveryHit)
-                {
-                    currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
-                }
+                sweetSpot1Pos = attempted;
 
+                //difficulty checks
+                if (shouldFlipRotation) currentRotation *= -1;
+                if (shouldChangeSpeedEveryHit) currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
 
                 completion += hitReward;
                 safe = true;
             }
 
-            if(Math.abs(sweetSpot2Pos - (pointerPos + ((currentSpeed * partial) * currentRotation))) < 5 || Math.abs(sweetSpot2Pos - (pointerPos + ((currentSpeed * partial) * currentRotation))) > 355)
+            //if hit sweet spot thin
+            if (Math.abs(sweetSpotThinPos - pointerPrecise) < 5 || Math.abs(sweetSpotThinPos - pointerPrecise) > 355)
             {
-                if(!shouldHaveThinSweetSpot) return false;
+                if (!shouldHaveThinSweetSpot) return false;
 
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
 
-                sweetSpot2Pos = 60 + r.nextInt(240) + sweetSpot2Pos;
-
-                if(shouldFlipRotation)
+                //reposition sweet spot without overlapping old position or the other sweet spot
+                int attempted;
+                do
                 {
-                    currentRotation *= -1;
+                    attempted = (60 + r.nextInt(240) + sweetSpotThinPos) % 360;
                 }
+                while (Math.abs(attempted - sweetSpot1Pos) < 30);
 
-                if(shouldChangeSpeedEveryHit)
-                {
-                    currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
-                }
+                sweetSpotThinPos = attempted;
 
-                if(sweetSpot2Pos > 360) sweetSpot2Pos -= 360;
+                //difficulty checks
+                if (shouldFlipRotation) currentRotation *= -1;
+                if (shouldChangeSpeedEveryHit) currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
 
                 completion += hitRewardThin;
                 safe = true;
             }
 
 
-            if(!safe)
+            if (!safe)
             {
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 1, 1, false);
                 completion -= 5;
@@ -296,8 +329,8 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     {
         pointerPos += currentSpeed * currentRotation;
 
-        if(pointerPos > 360) pointerPos -= 360;
-        if(pointerPos < 0) pointerPos += 360;
+        if (pointerPos > 360) pointerPos -= 360;
+        if (pointerPos < 0) pointerPos += 360;
 
         tickCount++;
 
@@ -316,10 +349,10 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             this.onClose();
         }
 
-        if (completionSmooth > 70)
+        //if (completionSmooth > 10)
+        if (completionSmooth > 75)
         {
             PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount));
-
             this.onClose();
         }
 

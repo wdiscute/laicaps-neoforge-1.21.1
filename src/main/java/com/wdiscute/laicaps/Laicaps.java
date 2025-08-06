@@ -79,7 +79,6 @@ public class Laicaps
         NeoForge.EVENT_BUS.addListener(this::ModifyItemTooltip);
 
         ModCreativeModeTabs.register(modEventBus);
-
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModDataComponents.register(modEventBus);
@@ -92,7 +91,6 @@ public class Laicaps
         ModDataAttachments.register(modEventBus);
 
 
-        // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 

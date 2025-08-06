@@ -43,6 +43,13 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.OVERWORLD_ENTRY.get());
 
 
+                                //fishing
+                                output.accept(ModItems.STARCATCHER_FISHING_ROD.get());
+                                output.accept(ModItems.STARCATCHER_TWINE.get());
+
+                                output.accept(ModItems.OAKHEART_BERRIES_BAIT.get());
+
+
                                 //rocket stuff
                                 output.accept(ModItems.SPACESHIP_BLUEPRINT.get());
                                 output.accept(ModItems.SPACESHIP_BLUEPRINT_SKETCH.get());

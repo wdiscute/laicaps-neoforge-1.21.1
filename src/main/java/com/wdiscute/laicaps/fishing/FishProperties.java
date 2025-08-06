@@ -13,19 +13,20 @@ public class FishProperties
 {
 
     final public Item fish;
-    final public List<ResourceKey<Biome>> biome;
-    final public List<ResourceKey<Level>> dim;
-    final public int baseChance;
+    final private List<ResourceKey<Biome>> biome;
+    final private List<ResourceKey<Level>> dim;
+    final private int baseChance;
 
-    public List<Item> incorrectBaits = List.of();
+    private List<Item> incorrectBaits = List.of();
 
-    public boolean mustBeRaining = false;
-    public boolean mustBeThundering = false;
-    public int mustBeCaughtBellowY = Integer.MAX_VALUE;
-    public int mustBeCaughtAboveY = Integer.MIN_VALUE;
-    public boolean mustHaveCorrectBait = false;
-    public Item correctBait = ItemStack.EMPTY.getItem();
-    public int correctBaitChanceAdded = 0;
+    private boolean mustBeRaining = false;
+    private boolean mustBeThundering = false;
+    private int mustBeCaughtBellowY = Integer.MAX_VALUE;
+    private int mustBeCaughtAboveY = Integer.MIN_VALUE;
+    private boolean mustHaveCorrectBait = false;
+    private Item correctBait = ItemStack.EMPTY.getItem();
+    private int correctBaitChanceAdded = 0;
+
     public boolean shouldSkipMinigame = false;
 
 
@@ -46,6 +47,12 @@ public class FishProperties
     public FishProperties incorrectBaits(List<Item> blacklist)
     {
         this.incorrectBaits = blacklist;
+        return this;
+    }
+
+    public FishProperties mustBeThundering()
+    {
+        this.mustBeThundering = true;
         return this;
     }
 

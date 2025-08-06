@@ -55,7 +55,9 @@ public class StarcatcherFishingRod extends Item
                     bait = itemstack.get(DataComponents.CONTAINER).getStackInSlot(1);
                 }
 
-                level.addFreshEntity(new FishingBobEntity(level, player, bobber, bait));
+                Entity entity = new FishingBobEntity(level, player, bobber, bait);
+                level.addFreshEntity(entity);
+                if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
             }
 
             player.awardStat(Stats.ITEM_USED.get(this));
@@ -72,11 +74,11 @@ public class StarcatcherFishingRod extends Item
                     if (entity instanceof FishingBobEntity fbe && !fbe.checkBiting())
                     {
                         fbe.kill();
+                        if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), "");
                     }
                 }
             }
 
-            player.setData(ModDataAttachments.FISHING.get(), "");
         }
 
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
