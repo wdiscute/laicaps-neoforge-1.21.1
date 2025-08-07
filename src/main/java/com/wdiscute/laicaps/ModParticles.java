@@ -33,10 +33,11 @@ public class ModParticles
     public static final Supplier<SimpleParticleType> ROCKET_FIRE_SIMPLE_PARTICLES =
             PARTICLE_TYPES.register("rocket_fire_simple_particles", () -> new SimpleParticleType(true));
 
+    public static final Supplier<SimpleParticleType> FISHING_NOTIFICATION =
+            PARTICLE_TYPES.register("fishing_notification", () -> new SimpleParticleType(true));
 
-
-
-
+    public static final Supplier<SimpleParticleType> FISHING_BITING =
+            PARTICLE_TYPES.register("fishing_biting", () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus)
     {
