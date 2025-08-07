@@ -1,10 +1,14 @@
 package com.wdiscute.laicaps.entity.fishing;
 
+import com.mojang.datafixers.util.Pair;
 import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.fishing.FishProperties;
 import com.wdiscute.laicaps.fishing.Fishes;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -18,6 +22,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.Climate;
+import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
+import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -288,8 +299,38 @@ public class FishingBobEntity extends Projectile
             }
         }
 
+
+
+
+
+
     }
 
+    public static void bootstrapStem(BootstrapContext<LevelStem> context)
+    {
+
+        HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
+        HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
+
+        NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
+                MultiNoiseBiomeSource.createFromList(
+                        new Climate.ParameterList<>(List.of(Pair.of(Climate.parameters(0.0F, 0.0F,
+                                                0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
+                                        biomeRegistry.getOrThrow(Biomes.END_BARRENS)),
+                                Pair.of(
+                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F,
+                                                0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.BIRCH_FOREST)),
+                                Pair.of(
+                                        Climate.parameters(0.3F, 0.6F, 0.1F,
+                                                0.1F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.OCEAN)),
+                                Pair.of(
+                                        Climate.parameters(0.4F, 0.3F,
+                                                0.2F, 0.1F, 0.0F, 0.0F,
+                                                0.0F), biomeRegistry.getOrThrow(Biomes.DARK_FOREST))
+                        ))),
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.AMPLIFIED));
+
+    }
 
     @Override
     public AABB getBoundingBoxForCulling()

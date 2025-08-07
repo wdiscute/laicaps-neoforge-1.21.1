@@ -25,11 +25,6 @@ public class
 FishingMinigameScreen extends Screen implements GuiEventListener
 {
 
-    private static final ResourceLocation CIRCLE = Laicaps.rl("textures/gui/fishing/circle.png");
-    private static final ResourceLocation METER = Laicaps.rl("textures/gui/fishing/meter.png");
-    private static final ResourceLocation CIRCLE_SWEET_SPOT = Laicaps.rl("textures/gui/fishing/circle_sweet_spot.png");
-    private static final ResourceLocation CIRCLE_SWEET_SPOT_THIN = Laicaps.rl("textures/gui/fishing/circle_sweet_spot_thin.png");
-    private static final ResourceLocation POINTER = Laicaps.rl("textures/gui/fishing/pointer.png");
     private static final ResourceLocation TEXTURE = Laicaps.rl("textures/gui/fishing/fishing.png");
 
     final ItemStack itemBeingFished;
@@ -144,7 +139,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, CIRCLE);
+        RenderSystem.setShaderTexture(0, TEXTURE);
 
 
         //tank background

@@ -30,11 +30,11 @@ public class FishProperties
     public boolean shouldSkipMinigame = false;
 
 
-    public FishProperties(Item fish, List<ResourceKey<Level>> dimension, List<ResourceKey<Biome>> biome, int baseChance)
+    public FishProperties(Item fish, List<ResourceKey<Level>> dimensionList, List<ResourceKey<Biome>> biomeList, int baseChance)
     {
         this.fish = fish;
-        this.dim = dimension;
-        this.biome = biome;
+        this.dim = dimensionList;
+        this.biome = biomeList;
         this.baseChance = baseChance;
     }
 
@@ -80,10 +80,10 @@ public class FishProperties
         return this;
     }
 
-    public FishProperties correctBaitChanceAdded(Item item, int i)
+    public FishProperties correctBaitChanceAdded(Item item, int addedChance)
     {
         this.correctBait = item;
-        this.correctBaitChanceAdded = i;
+        this.correctBaitChanceAdded = addedChance;
         return this;
     }
 
