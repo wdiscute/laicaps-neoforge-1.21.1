@@ -12,6 +12,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
@@ -56,6 +57,8 @@ public class FishingBobEntity extends Projectile
     int minTicksToFish;
     int maxTicksToFish;
     int chanceToFishEachTick;
+
+    int timeBiting;
 
     int ticksInWater;
 
@@ -212,14 +215,26 @@ public class FishingBobEntity extends Projectile
 
         if (this.currentState == FishHookState.BITING)
         {
-            if (level().isClientSide)
+            timeBiting++;
+            for (int i = 0; i < 5; i++)
             {
                 level().addParticle(
-                        ModParticles.ROCKET_FIRE_PARTICLES.get(),
-                        position().x, position().y + 1, position().z,
+                        ModParticles.FISHING_BITING.get(),
+                        position().x + random.nextFloat() - 0.5,
+                        position().y + random.nextFloat() * 0.5 - 0.25,
+                        position().z + random.nextFloat() - 0.5,
                         0, 0, 0);
             }
 
+            if(timeBiting > 80)
+            {
+                player.setData(ModDataAttachments.FISHING, "");
+                kill();
+            }
+        }
+        else
+        {
+            timeBiting = 0;
         }
 
         if (!fluidstate.is(FluidTags.WATER) && !fluidstate1.is(FluidTags.WATER))
@@ -284,24 +299,28 @@ public class FishingBobEntity extends Projectile
     {
         if (!level().isClientSide && currentState == FishHookState.BOBBING)
         {
+
 //            sendPacket();
 //            this.setPos(position().x, position().y - 0.5f, position().z);
 //            if (!level().isClientSide) currentState = FishHookState.BITING;
 //            if(true) return;
 //
 //            //TODO REMOVE THINGS ABOVE
+
+
             ticksInWater++;
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
             {
+                ((ServerLevel) level()).sendParticles(
+                        ModParticles.FISHING_NOTIFICATION.get(),
+                        position().x, position().y + 1, position().z,
+                        1, 0, 0, 0, 0);
+
                 this.setPos(position().x, position().y - 0.5f, position().z);
                 if (!level().isClientSide) currentState = FishHookState.BITING;
             }
         }
-
-
-
-
 
 
     }
@@ -314,17 +333,23 @@ public class FishingBobEntity extends Projectile
 
         NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(Pair.of(Climate.parameters(0.0F, 0.0F,
+                        new Climate.ParameterList<>(List.of(
+                                Pair.of(
+                                        Climate.parameters(
+                                                0.0F, 0.0F,
                                                 0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
                                         biomeRegistry.getOrThrow(Biomes.END_BARRENS)),
                                 Pair.of(
-                                        Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F,
+                                        Climate.parameters(
+                                                0.1F, 0.2F, 0.0F, 0.2F,
                                                 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.BIRCH_FOREST)),
                                 Pair.of(
-                                        Climate.parameters(0.3F, 0.6F, 0.1F,
+                                        Climate.parameters(
+                                                0.3F, 0.6F, 0.1F,
                                                 0.1F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.OCEAN)),
                                 Pair.of(
-                                        Climate.parameters(0.4F, 0.3F,
+                                        Climate.parameters(
+                                                0.4F, 0.3F,
                                                 0.2F, 0.1F, 0.0F, 0.0F,
                                                 0.0F), biomeRegistry.getOrThrow(Biomes.DARK_FOREST))
                         ))),
