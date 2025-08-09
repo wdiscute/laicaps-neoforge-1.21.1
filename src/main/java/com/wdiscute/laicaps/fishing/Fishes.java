@@ -5,7 +5,6 @@ import com.wdiscute.laicaps.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -14,6 +13,7 @@ import java.util.List;
 
 public record Fishes()
 {
+
     //                                                               ,--.    ,--.
     // ,---.  ,--.  ,--.  ,---.  ,--.--. ,--.   ,--.  ,---.  ,--.--. |  |  ,-|  |
     //| .-. |  \  `'  /  | .-. : |  .--' |  |.'.|  | | .-. | |  .--' |  | ' .-. |
@@ -126,15 +126,17 @@ public record Fishes()
                     getBiomeResourceKey("minecraft", "snowy_slopes"),
                     getBiomeResourceKey("minecraft", "snowy_taiga")
             ),
-            2
-    ).skipsMinigame();
+            3
+    )
+            .skipsMinigame()
+            .canBeBucketed(Items.POWDER_SNOW_BUCKET);
 
 
     public static final FishProperties SALMON = new FishProperties(
             Items.SALMON,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
-            10
+            20
     )
             .mustBeCaughtAboveY(50)
             .canBeBucketed(Items.SALMON_BUCKET);
@@ -144,7 +146,7 @@ public record Fishes()
             Items.COD,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
-            10
+            20
     )
             .mustBeCaughtAboveY(50)
             .canBeBucketed(Items.COD_BUCKET);
@@ -180,7 +182,7 @@ public record Fishes()
             Items.GOLD_NUGGET,
             List.of(getDimResourceKey("asha")),
             null,
-            3
+            32
     ).skipsMinigame();
 
     public static final FishProperties BLUETALE = new FishProperties(
