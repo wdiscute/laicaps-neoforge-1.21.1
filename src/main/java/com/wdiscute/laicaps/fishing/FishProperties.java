@@ -13,6 +13,7 @@ public class FishProperties
 {
 
     final public Item fish;
+    public Item bucket_fish;
     final private List<ResourceKey<Biome>> biome;
     final private List<ResourceKey<Level>> dim;
     final private int baseChance;
@@ -24,7 +25,9 @@ public class FishProperties
     private int mustBeCaughtBellowY = Integer.MAX_VALUE;
     private int mustBeCaughtAboveY = Integer.MIN_VALUE;
     private boolean mustHaveCorrectBait = false;
+    private boolean mustHaveCorrectBobber = false;
     private Item correctBait = ItemStack.EMPTY.getItem();
+    private Item correctBobber = ItemStack.EMPTY.getItem();
     private int correctBaitChanceAdded = 0;
 
     public boolean shouldSkipMinigame = false;
@@ -43,6 +46,14 @@ public class FishProperties
         this.shouldSkipMinigame = true;
         return this;
     }
+
+    public FishProperties mustHaveCorrectBobber(Item bobber)
+    {
+        this.mustHaveCorrectBobber = true;
+        this.correctBobber = bobber;
+        return this;
+    }
+
 
     public FishProperties incorrectBaits(List<Item> blacklist)
     {
@@ -84,6 +95,12 @@ public class FishProperties
     {
         this.correctBait = item;
         this.correctBaitChanceAdded = addedChance;
+        return this;
+    }
+
+    public FishProperties canBeBucketed(Item bucket_of_fish)
+    {
+        this.bucket_fish = bucket_of_fish;
         return this;
     }
 
@@ -161,6 +178,15 @@ public class FishProperties
                 {
                     chance += correctBaitChanceAdded;
                 }
+            }
+        }
+
+        //correct bobber check
+        if (mustHaveCorrectBobber)
+        {
+            if (!bobber.is(correctBobber))
+            {
+                return 0;
             }
         }
 
