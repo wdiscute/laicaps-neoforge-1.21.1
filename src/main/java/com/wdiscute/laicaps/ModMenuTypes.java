@@ -5,6 +5,7 @@ import com.wdiscute.laicaps.block.refuelstation.RefuelStationMenu;
 import com.wdiscute.laicaps.block.researchstation.ResearchStationMenu;
 import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
 import com.wdiscute.laicaps.entity.rocket.RocketSpaceMenu;
+import com.wdiscute.laicaps.fishing.FishingRodMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -37,6 +38,9 @@ public class ModMenuTypes
 
     public static final Supplier<MenuType<ResearchStationMenu>> RESEARCH_STATION_MENU =
             registerMenuType("research_station_menu", ResearchStationMenu::new);
+
+    public static final Supplier<MenuType<FishingRodMenu>> FISHING_ROD_MENU =
+            registerMenuType("fishing_rod_menu", FishingRodMenu::new);
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,
                                                                                                               IContainerFactory<T> factory) {

@@ -2,7 +2,10 @@ package com.wdiscute.laicaps.item;
 
 import com.sun.jna.platform.win32.OaIdl;
 import com.wdiscute.laicaps.ModDataAttachments;
+import com.wdiscute.laicaps.ModItems;
+import com.wdiscute.laicaps.block.refuelstation.RefuelStationMenu;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
+import com.wdiscute.laicaps.fishing.FishingRodMenu;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -11,8 +14,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -20,20 +26,29 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class StarcatcherFishingRod extends Item
+public class StarcatcherFishingRod extends Item implements MenuProvider
 {
     public StarcatcherFishingRod(Properties properties)
     {
         super(properties);
     }
 
+
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
-
         ItemStack itemstack = player.getItemInHand(hand).copy();
+
+        if(player.isCrouching() && hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD.get()))
+        {
+            player.openMenu(this);
+            return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+        }
+
 
         if (player.getData(ModDataAttachments.FISHING.get()).isEmpty())
         {
@@ -51,8 +66,8 @@ public class StarcatcherFishingRod extends Item
                 }
                 else
                 {
-                    bobber = itemstack.get(DataComponents.CONTAINER).getStackInSlot(0);
-                    bait = itemstack.get(DataComponents.CONTAINER).getStackInSlot(1);
+                    bobber = itemstack.get(ModDataComponents.BOBBER.get()).copyOne();
+                    bait = itemstack.get(ModDataComponents.BAIT.get()).copyOne();
                 }
 
                 Entity entity = new FishingBobEntity(level, player, bobber, bait);
@@ -91,6 +106,19 @@ public class StarcatcherFishingRod extends Item
 
 
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    @Override
+    public Component getDisplayName()
+    {
+        return Component.literal("test fishing rod menu");
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
+    {
+        return new FishingRodMenu(i, inventory, player.getMainHandItem());
+
     }
 }
 

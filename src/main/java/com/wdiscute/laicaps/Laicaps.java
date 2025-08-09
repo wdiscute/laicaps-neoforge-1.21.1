@@ -17,6 +17,7 @@ import com.wdiscute.laicaps.entity.rocket.RocketSpaceScreen;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerRenderer;
 import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
 import com.wdiscute.laicaps.entity.fishing.FishingBobRenderer;
+import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.*;
@@ -183,6 +184,7 @@ public class Laicaps
             event.register(ModMenuTypes.ASTRONOMY_TABLE_MENU.get(), AstronomyTableScreen::new);
             event.register(ModMenuTypes.ROCKET_SPACE_MENU.get(), RocketSpaceScreen::new);
             event.register(ModMenuTypes.REFUEL_STATION_MENU.get(), RefuelStationScreen::new);
+            event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
         }
 
     }
