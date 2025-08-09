@@ -24,17 +24,10 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
-import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
-import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -131,8 +124,6 @@ public class FishingBobEntity extends Projectile
     {
         List<FishProperties> available = new ArrayList<>(List.of());
 
-
-
         bobber = player.getMainHandItem().getComponents().get(ModDataComponents.BOBBER.get()).copyOne();
         bait = player.getMainHandItem().getComponents().get(ModDataComponents.BAIT.get()).copyOne();
 
@@ -160,7 +151,6 @@ public class FishingBobEntity extends Projectile
         }
 
 
-
         if (fp.shouldSkipMinigame)
         {
             Entity itemFished = new ItemEntity(
@@ -171,7 +161,6 @@ public class FishingBobEntity extends Projectile
                     stack);
 
 
-
             double x = (player.position().x - position().x) / 25;
             double y = (player.position().y - position().y) / 20;
             double z = (player.position().z - position().z) / 25;
@@ -180,8 +169,8 @@ public class FishingBobEntity extends Projectile
             y = Math.clamp(y, -1, 1);
             z = Math.clamp(z, -1, 1);
 
-            //spawn creeper
-            if(bobber.is(ModItems.CREEPER_BOBBER))
+            //override stack with a creeper and bigger deltaMovement to align creeper angle
+            if (bobber.is(ModItems.CREEPER_BOBBER))
             {
                 itemFished = new Creeper(EntityType.CREEPER, level());
 
@@ -206,14 +195,26 @@ public class FishingBobEntity extends Projectile
         {
             PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishingPayload(stack, 3));
         }
+
+
+        //decrease bait
+        ItemStack is = player.getMainHandItem().get(ModDataComponents.BAIT).copyOne();
+
+        is.setCount(is.getCount() - 1);
+
+        player.getMainHandItem().set(
+                ModDataComponents.BAIT.get(),
+                ItemContainerContents.fromItems(List.of(is))
+        );
+
+
     }
 
 
     private boolean shouldStopFishing(Player player)
     {
         ItemStack main = player.getMainHandItem();
-        boolean flag = main.is(ModItems.STARCATCHER_FISHING_ROD);
-        if (!player.isRemoved() && player.isAlive() && flag && !(this.distanceToSqr(player) > (double) 1024.0F))
+        if (!player.isRemoved() && player.isAlive() && main.is(ModItems.STARCATCHER_FISHING_ROD) && !(this.distanceToSqr(player) > 1024))
         {
             return false;
         }
@@ -356,14 +357,6 @@ public class FishingBobEntity extends Projectile
         if (!level().isClientSide && currentState == FishHookState.BOBBING)
         {
 
-//            sendPacket();
-//            this.setPos(position().x, position().y - 0.5f, position().z);
-//            if (!level().isClientSide) currentState = FishHookState.BITING;
-//            if(true) return;
-//
-//            //TODO REMOVE THINGS ABOVE
-
-
             ticksInWater++;
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
@@ -378,38 +371,6 @@ public class FishingBobEntity extends Projectile
             }
         }
 
-
-    }
-
-    public static void bootstrapStem(BootstrapContext<LevelStem> context)
-    {
-
-        HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
-        HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
-
-        NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(
-                                Pair.of(
-                                        Climate.parameters(
-                                                0.0F, 0.0F,
-                                                0.0F, 0.0F, 0.0F, 0.0F, 0.0F),
-                                        biomeRegistry.getOrThrow(Biomes.END_BARRENS)),
-                                Pair.of(
-                                        Climate.parameters(
-                                                0.1F, 0.2F, 0.0F, 0.2F,
-                                                0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.BIRCH_FOREST)),
-                                Pair.of(
-                                        Climate.parameters(
-                                                0.3F, 0.6F, 0.1F,
-                                                0.1F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.OCEAN)),
-                                Pair.of(
-                                        Climate.parameters(
-                                                0.4F, 0.3F,
-                                                0.2F, 0.1F, 0.0F, 0.0F,
-                                                0.0F), biomeRegistry.getOrThrow(Biomes.DARK_FOREST))
-                        ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.AMPLIFIED));
 
     }
 

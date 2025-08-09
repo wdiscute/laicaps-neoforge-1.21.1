@@ -49,6 +49,12 @@ public class ModCreativeModeTabs
 
                                 output.accept(ModItems.OAKHEART_BERRIES_BAIT.get());
 
+                                output.accept(ModItems.BAIT_SAVING_BOBBER.get());
+                                output.accept(ModItems.DIFFICULTY_BOBBER.get());
+                                output.accept(ModItems.CREEPER_BOBBER.get());
+                                output.accept(ModItems.TREASURE_BOBBER.get());
+                                output.accept(ModItems.FAST_BITING_BOBBER.get());
+
 
                                 //rocket stuff
                                 output.accept(ModItems.SPACESHIP_BLUEPRINT.get());

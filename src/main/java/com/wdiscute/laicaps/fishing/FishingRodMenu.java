@@ -78,7 +78,6 @@ public class FishingRodMenu extends AbstractContainerMenu
                     ModDataComponents.BAIT.get(),
                     ItemContainerContents.fromItems(List.of(inventory.getStackInSlot(1).copy())));
 
-            player.setItemInHand(InteractionHand.MAIN_HAND, player.getMainHandItem());
         }
 
 
