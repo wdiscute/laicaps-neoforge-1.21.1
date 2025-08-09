@@ -56,6 +56,8 @@ public class ModItems
     public static final DeferredItem<Item> OAKHEART_BERRIES_BAIT = ITEMS.register("oakheart_berries_bait", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<Item> CREEPER_BOBBER = ITEMS.register("creeper_bobber", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> TREASURE_BOBBER = ITEMS.register("creeper_bobber", () -> new Item(new Item.Properties()));
 
 
     //

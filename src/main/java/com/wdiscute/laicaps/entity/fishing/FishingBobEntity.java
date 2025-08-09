@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.fishing.FishProperties;
 import com.wdiscute.laicaps.fishing.Fishes;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
@@ -16,12 +17,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -126,6 +131,12 @@ public class FishingBobEntity extends Projectile
     {
         List<FishProperties> available = new ArrayList<>(List.of());
 
+
+
+        bobber = player.getMainHandItem().getComponents().get(ModDataComponents.BOBBER.get()).copyOne();
+        bait = player.getMainHandItem().getComponents().get(ModDataComponents.BAIT.get()).copyOne();
+
+
         for (FishProperties fp : Fishes.entries)
         {
             for (int i = 0; i < fp.getChance(level(), blockPosition(), bobber, bait); i++)
@@ -138,17 +149,62 @@ public class FishingBobEntity extends Projectile
 
         FishProperties fp = available.get(random.nextInt(available.size()));
 
-        this.stack = new ItemStack(fp.fish);
+
+        if (bait.is(Items.BUCKET) && fp.bucket_fish != null)
+        {
+            stack = new ItemStack(fp.bucket_fish);
+        }
+        else
+        {
+            stack = new ItemStack(fp.fish);
+        }
+
+
 
         if (fp.shouldSkipMinigame)
         {
-            level().addFreshEntity(new ItemEntity(level(), player.position().x + 0.5f, player.position().y + 1.2f, player.position().z, stack));
+            Entity itemFished = new ItemEntity(
+                    level(),
+                    position().x,
+                    position().y + 1.2f,
+                    position().z,
+                    stack);
+
+
+
+            double x = (player.position().x - position().x) / 25;
+            double y = (player.position().y - position().y) / 20;
+            double z = (player.position().z - position().z) / 25;
+
+            x = Math.clamp(x, -1, 1);
+            y = Math.clamp(y, -1, 1);
+            z = Math.clamp(z, -1, 1);
+
+            //spawn creeper
+            if(bobber.is(ModItems.CREEPER_BOBBER))
+            {
+                itemFished = new Creeper(EntityType.CREEPER, level());
+
+                itemFished.setPos(position().add(0, 1.2f, 0));
+
+                x *= 2.5;
+                y *= 2;
+                z *= 2.5;
+            }
+
+
+            Vec3 vec3 = new Vec3(x, 0.7 + y, z);
+
+            itemFished.setDeltaMovement(vec3);
+
+            level().addFreshEntity(itemFished);
+
             player.setData(ModDataAttachments.FISHING, "");
             kill();
         }
         else
         {
-            PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishingPayload(new ItemStack(fp.fish), 3));
+            PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishingPayload(stack, 3));
         }
     }
 
@@ -226,7 +282,7 @@ public class FishingBobEntity extends Projectile
                         0, 0, 0);
             }
 
-            if(timeBiting > 80)
+            if (timeBiting > 80)
             {
                 player.setData(ModDataAttachments.FISHING, "");
                 kill();

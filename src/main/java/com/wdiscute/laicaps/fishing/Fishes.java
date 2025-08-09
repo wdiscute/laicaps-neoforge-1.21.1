@@ -135,7 +135,9 @@ public record Fishes()
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             10
-    ).mustBeCaughtAboveY(50);
+    )
+            .mustBeCaughtAboveY(50)
+            .canBeBucketed(Items.SALMON_BUCKET);
 
 
     public static final FishProperties COD = new FishProperties(
@@ -143,7 +145,9 @@ public record Fishes()
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             10
-    ).mustBeCaughtAboveY(50);
+    )
+            .mustBeCaughtAboveY(50)
+            .canBeBucketed(Items.COD_BUCKET);
 
 
     public static final FishProperties AXOLOTL_BUCKET = new FishProperties(
@@ -184,7 +188,9 @@ public record Fishes()
             List.of(getDimResourceKey("asha")),
             null,
             5
-    ).correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20);
+    )
+            .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20)
+            .canBeBucketed(ModItems.BLUETALE_BUCKET.get());
 
 
     public static final FishProperties REDTALE = new FishProperties(
@@ -192,7 +198,9 @@ public record Fishes()
             List.of(getDimResourceKey("asha")),
             null,
             5
-    ).correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20);
+    )
+            .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20)
+            .canBeBucketed(ModItems.REDTALE_BUCKET.get());
 
 
 
