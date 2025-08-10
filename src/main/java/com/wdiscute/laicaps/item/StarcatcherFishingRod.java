@@ -96,7 +96,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
 
         }
 
-        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+        return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
     }
 
 

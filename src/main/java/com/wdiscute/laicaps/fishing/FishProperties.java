@@ -30,6 +30,8 @@ public class FishProperties
     private Item correctBobber = ItemStack.EMPTY.getItem();
     private int correctBaitChanceAdded = 0;
 
+    public boolean consumesBait = true;
+
     public boolean shouldSkipMinigame = false;
 
 
@@ -51,6 +53,12 @@ public class FishProperties
     {
         this.mustHaveCorrectBobber = true;
         this.correctBobber = bobber;
+        return this;
+    }
+
+    public FishProperties doesNotConsumeBait()
+    {
+        this.consumesBait = false;
         return this;
     }
 

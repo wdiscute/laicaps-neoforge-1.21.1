@@ -26,63 +26,63 @@ public record Fishes()
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties LEATHER_BOOTS = new FishProperties(
             Items.LEATHER_BOOTS,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties WHEAT_SEEDS = new FishProperties(
             Items.WHEAT_SEEDS,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties BONE = new FishProperties(
             Items.BONE,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties STRING = new FishProperties(
             Items.STRING,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties BOWL = new FishProperties(
             Items.BOWL,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties INK_SAC = new FishProperties(
             Items.INK_SAC,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties TRIPWIRE_HOOK = new FishProperties(
             Items.TRIPWIRE_HOOK,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties ROTTEN_FLESH = new FishProperties(
             Items.ROTTEN_FLESH,
             List.of(getDimResourceKey("minecraft", "overworld")),
             null,
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties BAMBOO = new FishProperties(
             Items.BAMBOO,
@@ -92,7 +92,7 @@ public record Fishes()
                     getBiomeResourceKey("minecraft", "sparse_jungle"),
                     getBiomeResourceKey("minecraft", "bamboo_jungle")),
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties LILY_PAD = new FishProperties(
             Items.LILY_PAD,
@@ -101,7 +101,7 @@ public record Fishes()
                     getBiomeResourceKey("minecraft", "swamp"),
                     getBiomeResourceKey("minecraft", "mangrove_swamp")),
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties SEAGRASS = new FishProperties(
             Items.SEAGRASS,
@@ -111,7 +111,7 @@ public record Fishes()
                     getBiomeResourceKey("minecraft", "frozen_river")
             ),
             1
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties SNOWBALL = new FishProperties(
             Items.SNOWBALL,
@@ -129,7 +129,8 @@ public record Fishes()
             3
     )
             .skipsMinigame()
-            .canBeBucketed(Items.POWDER_SNOW_BUCKET);
+            .canBeBucketed(Items.POWDER_SNOW_BUCKET)
+            .doesNotConsumeBait();
 
 
     public static final FishProperties SALMON = new FishProperties(
@@ -176,14 +177,14 @@ public record Fishes()
             List.of(getDimResourceKey("asha")),
             null,
             3
-    ).skipsMinigame();
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties GOLD_NUGGET = new FishProperties(
             Items.GOLD_NUGGET,
             List.of(getDimResourceKey("asha")),
             null,
-            32
-    ).skipsMinigame();
+            3
+    ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties BLUETALE = new FishProperties(
             ModItems.BLUETALE.get(),
@@ -217,6 +218,31 @@ public record Fishes()
     //
 
 
+    public static final FishProperties GLIMPUFF = new FishProperties(
+            ModItems.GLIMPUFF.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    )
+            .canBeBucketed(ModItems.GLIMPUFF_BUCKET.get());
+
+    public static final FishProperties BUBBLEMOUTH = new FishProperties(
+            ModItems.BUBBLEMOUTH.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    )
+            .canBeBucketed(ModItems.BUBBLEMOUTH_BUCKET.get());
+
+    public static final FishProperties MOONRAY = new FishProperties(
+            ModItems.MOONRAY.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    )
+            .canBeBucketed(ModItems.MOONRAY_BUCKET.get());
+
+
     public static final FishProperties SUPER_SPECIAL_FISH = new FishProperties(//
             Items.COD,                                      //item rewarded on fishing
             List.of(getDimResourceKey("asha")),   //list of dimensions it can "spawn" in - null for all
@@ -229,7 +255,9 @@ public record Fishes()
             .mustBeRaining()
             .mustBeThundering()
             .incorrectBaits(List.of(Items.ROTTEN_FLESH, Items.DIAMOND))
-            .mustHaveCorrectBait();
+            .mustHaveCorrectBait()
+            .doesNotConsumeBait()
+            .skipsMinigame();
 
     public static ResourceKey<Level> getDimResourceKey(String laicapsName)
     {

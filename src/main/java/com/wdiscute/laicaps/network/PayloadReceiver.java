@@ -78,8 +78,10 @@ public class PayloadReceiver
     public static void receiveFishingClient(final Payloads.FishingPayload data, final IPayloadContext context)
     {
         Minecraft.getInstance().setScreen(new FishingMinigameScreen(
-                Component.literal("Fishing minigame"),
+                Component.literal("Fishing"),
                 data.stack(),
+                data.bobber(),
+                data.bait(),
                 data.difficulty()
         ));
     }

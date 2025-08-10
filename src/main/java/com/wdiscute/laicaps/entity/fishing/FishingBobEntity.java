@@ -8,6 +8,7 @@ import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -17,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
@@ -24,8 +26,10 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
@@ -37,6 +41,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FishingBobEntity extends Projectile
 {
@@ -80,7 +85,6 @@ public class FishingBobEntity extends Projectile
         super(ModEntities.FISHING_BOB.get(), level);
 
         this.player = player;
-
         this.bobber = bobber;
         this.bait = bait;
 
@@ -109,8 +113,6 @@ public class FishingBobEntity extends Projectile
             this.setXRot((float) (Mth.atan2(vec3.y, vec3.horizontalDistance()) * (double) 180.0F / (double) (float) Math.PI));
             this.yRotO = this.getYRot();
             this.xRotO = this.getXRot();
-
-            //sendPacket();
 
         }
 
@@ -193,19 +195,37 @@ public class FishingBobEntity extends Projectile
         }
         else
         {
-            PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishingPayload(stack, 3));
+            ItemStack bobber = player.getMainHandItem().get(ModDataComponents.BOBBER).copyOne();
+            ItemStack bait = player.getMainHandItem().get(ModDataComponents.BOBBER).copyOne();
+
+            if(bait.isEmpty()) bobber = new ItemStack(Items.STONE);
+            if(bait.isEmpty()) bait = new ItemStack(Items.STONE);
+
+            PacketDistributor.sendToPlayer(
+                    ((ServerPlayer) player),
+                    new Payloads.FishingPayload(stack, bobber, bait, 3)
+            );
         }
 
 
-        //decrease bait
-        ItemStack is = player.getMainHandItem().get(ModDataComponents.BAIT).copyOne();
+        //consume bait
+        if (fp.consumesBait)
+        {
+            ItemStack bait = player.getMainHandItem().get(ModDataComponents.BAIT).copyOne();
 
-        is.setCount(is.getCount() - 1);
+            if (bobber.is(ModItems.BAIT_SAVING_BOBBER))
+            {
+                if (random.nextFloat() > 0.5f) bait.setCount(bait.getCount() - 1);
+            }
+            else
+            {
+                bait.setCount(bait.getCount() - 1);
+            }
 
-        player.getMainHandItem().set(
-                ModDataComponents.BAIT.get(),
-                ItemContainerContents.fromItems(List.of(is))
-        );
+            player.getMainHandItem().set(
+                    ModDataComponents.BAIT,
+                    ItemContainerContents.fromItems(List.of(bait)));
+        }
 
 
     }
@@ -230,6 +250,7 @@ public class FishingBobEntity extends Projectile
     public void tick()
     {
         super.tick();
+
 
         if (!level().isClientSide)
         {
@@ -340,6 +361,7 @@ public class FishingBobEntity extends Projectile
 
     public boolean checkBiting()
     {
+
         if (currentState == FishHookState.BITING)
         {
             if (!level().isClientSide) currentState = FishHookState.FISHING;
@@ -356,7 +378,6 @@ public class FishingBobEntity extends Projectile
     {
         if (!level().isClientSide && currentState == FishHookState.BOBBING)
         {
-
             ticksInWater++;
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)

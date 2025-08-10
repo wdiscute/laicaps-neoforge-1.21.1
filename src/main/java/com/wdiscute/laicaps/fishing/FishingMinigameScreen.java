@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.fishing;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -28,9 +29,13 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     private static final ResourceLocation TEXTURE = Laicaps.rl("textures/gui/fishing/fishing.png");
 
     final ItemStack itemBeingFished;
+    final ItemStack bobber;
+    final ItemStack bait;
 
     int completion = 20;
     int completionSmooth = 20;
+
+
     int tickCount = 0;
 
     Random r = new Random();
@@ -57,19 +62,17 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
     float partial;
 
-    boolean canSpawnTreasure;
     boolean treasureActive;
     boolean treasureCompleted;
     int treasureProgress = 0;
+    int treasureProgressSmooth = 0;
 
-    public FishingMinigameScreen(Component title, ItemStack stack, int dif)
+    public FishingMinigameScreen(Component title, ItemStack stack, ItemStack bobber, ItemStack bait, int dif)
     {
         super(title);
         this.itemBeingFished = stack;
-
-        canSpawnTreasure = r.nextFloat() > 0.5;
-
-        canSpawnTreasure = true;
+        this.bobber = bobber;
+        this.bait = bait;
 
         sweetSpot1Pos = r.nextInt(360);
         sweetSpot2Pos = 60 + r.nextInt(240) + sweetSpot1Pos;
@@ -156,10 +159,21 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
         if (treasureActive)
         {
-            //treasure icon
+
+            //treasure bar
             guiGraphics.blit(
-                    TEXTURE, width / 2 - 16 - 200, height / 2 - 8 + 20,
-                    32, 16, 80, 160, 32, 16, 256, 256);
+                    TEXTURE, width / 2 - 158, height / 2 - 42 + (int)(64 - (64f * treasureProgressSmooth) / 100),
+                    5, 64 * treasureProgressSmooth / 100,
+                    141, 6  + 64 - (float) (64 * treasureProgressSmooth) / 100,
+                    5, 64 * treasureProgressSmooth / 100,
+                    256, 256);
+
+            //treasure bar
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
+                    32, 96, 96, 0, 32, 96, 256, 256);
+
+
         }
 
         //tank background
@@ -399,9 +413,16 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
         tickCount++;
 
-        if (canSpawnTreasure && !treasureActive)
+        if (!treasureActive)
         {
-            if (r.nextFloat() < 0.001f)
+            float chance = 0.0005f;
+
+            if(bobber.is(ModItems.TREASURE_BOBBER))
+            {
+                chance = 0.0025f;
+            }
+
+            if (r.nextFloat() < chance)
             {
                 treasureActive = true;
                 treasureProgress = 0;
@@ -423,6 +444,8 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         completionSmooth += (int) Math.signum(completion - completionSmooth);
+
+        treasureProgressSmooth += (int) Math.signum(treasureProgress - treasureProgressSmooth);
 
         if (tickCount % 5 == 0)
         {

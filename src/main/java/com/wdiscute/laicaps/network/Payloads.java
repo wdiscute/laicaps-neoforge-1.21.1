@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 public class Payloads
 {
 
-    public record FishingPayload(ItemStack stack, int difficulty) implements CustomPacketPayload
+    public record FishingPayload(ItemStack stack, ItemStack bobber, ItemStack bait, int difficulty) implements CustomPacketPayload
     {
 
         public static final CustomPacketPayload.Type<FishingPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("fishing"));
@@ -19,6 +19,10 @@ public class Payloads
         public static final StreamCodec<ByteBuf, FishingPayload> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.fromCodec(ItemStack.CODEC),
                 FishingPayload::stack,
+                ByteBufCodecs.fromCodec(ItemStack.CODEC),
+                FishingPayload::bobber,
+                ByteBufCodecs.fromCodec(ItemStack.CODEC),
+                FishingPayload::bait,
                 ByteBufCodecs.INT,
                 FishingPayload::difficulty,
                 FishingPayload::new
