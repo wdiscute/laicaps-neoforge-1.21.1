@@ -3,6 +3,9 @@ package com.wdiscute.laicaps;
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlockEntity;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlockEntity;
 import com.wdiscute.laicaps.block.combat.CombatControllerBlockEntity;
+import com.wdiscute.laicaps.block.rotating.RotatingControllerBlockentity;
+import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
+import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlockentity;
 import com.wdiscute.laicaps.block.sign.ModHangingSignBlockEntity;
 import com.wdiscute.laicaps.block.sign.ModSignBlockEntity;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlockEntity;
@@ -80,7 +83,13 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(ResearchStationBlockEntity::new, ModBlocks.RESEARCH_STATION.get())
                     .build(null));
 
+    public static final Supplier<BlockEntityType<RotatingPuzzleBlockentity>> ROTATING_PUZZLE = BLOCK_ENTITIES.register("rotating_puzzle",
+            () -> BlockEntityType.Builder.of(RotatingPuzzleBlockentity::new, ModBlocks.ROTATING_PUZZLE_BLOCK.get())
+                    .build(null));
 
+    public static final Supplier<BlockEntityType<RotatingControllerBlockentity>> ROTATING_CONTROLLER = BLOCK_ENTITIES.register("rotating_controller",
+            () -> BlockEntityType.Builder.of(RotatingControllerBlockentity::new, ModBlocks.ROTATING_CONTROLLER_BLOCK.get())
+                    .build(null));
 
 
 

@@ -3,6 +3,8 @@ package com.wdiscute.laicaps;
 import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlock;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.combat.CombatControllerBlock;
+import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
+import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
 import com.wdiscute.laicaps.block.sign.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlock;
@@ -334,23 +336,24 @@ public class ModBlocks
             );
 
     //TODO ROTATING PUZZLE BLOCK
-//    public static final DeferredBlock<Block> ROTATING_PUZZLE_BLOCK =
-//            registerBlock(
-//                    "rotating_puzzle_block", () ->
-//                            new RotatingPuzzleBlock(BlockBehaviour.Properties.of()
-//                                    .strength(30)
-//                                    .sound(SoundType.STONE)
-//                            )
-//            );
-//
-//    public static final DeferredBlock<Block> ROTATING_CONTROLLER_BLOCK =
-//            registerBlock(
-//                    "rotating_controller_block", () ->
-//                            new RotatingControllerBlock(BlockBehaviour.Properties.of()
-//                                    .strength(30)
-//                                    .sound(SoundType.WOOD)
-//                            )
-//            );
+
+    public static final DeferredBlock<Block> ROTATING_PUZZLE_BLOCK =
+            registerBlock(
+                    "rotating_puzzle_block", () ->
+                            new RotatingPuzzleBlock(BlockBehaviour.Properties.of()
+                                    .strength(30)
+                                    .sound(SoundType.STONE)
+                            )
+            );
+
+    public static final DeferredBlock<Block> ROTATING_CONTROLLER_BLOCK =
+            registerBlock(
+                    "rotating_controller_block", () ->
+                            new RotatingControllerBlock(BlockBehaviour.Properties.of()
+                                    .strength(30)
+                                    .sound(SoundType.WOOD)
+                            )
+            );
 
 
     public static final DeferredBlock<Block> CHASE_CONTROLLER_BLOCK =
