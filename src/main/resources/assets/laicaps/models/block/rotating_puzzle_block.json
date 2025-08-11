@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "laicaps:block/red",
+    "down": "laicaps:block/red",
+    "up": "laicaps:block/red",
+    "north": "laicaps:block/green",
+    "east": "laicaps:block/red",
+    "south": "laicaps:block/red",
+    "west": "laicaps:block/red"
+  }
+}

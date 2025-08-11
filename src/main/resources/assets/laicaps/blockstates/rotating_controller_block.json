@@ -1,0 +1,626 @@
+{
+  "multipart": [
+
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "0"},
+      "apply":
+      {"model": "laicaps:block/treasure_chest", "y": 90}
+    },
+
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "0"},
+      "apply":
+      {"model": "laicaps:block/treasure_chest"}
+    },
+
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "0"},
+      "apply":
+      {"model": "laicaps:block/treasure_chest", "y": 180}
+    },
+
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "0"},
+      "apply":
+      {"model": "laicaps:block/treasure_chest", "y": 270}
+    },
+
+
+
+
+
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_01", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_02", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_03", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_04", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_05", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_06", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "0", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_07", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "1", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_11", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "1", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_12", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "1", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_13", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "1", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_14", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "1", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_15", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "1", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_16", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "1", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_17", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "2", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_22", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "2", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_23", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "2", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_24", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "2", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_25", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "2", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_26", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "2", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_27", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "3", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_33", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "3", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_34", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "3", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_35", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "3", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_36", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "3", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_37", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "4", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_44", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "4", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_45", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "4", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_46", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "4", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_47", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "5", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_55", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "5", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_56", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "5", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_57", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "6", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_66", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "6", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_67", "y": 90}
+    },
+    {"when": {"facing": "east", "blocks_completed": "7", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_77", "y": 90}
+    },
+
+
+
+
+
+
+
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_01"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_02"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_03"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_04"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_05"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_06"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "0", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_07"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_11"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_12"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_13"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_14"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_15"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_16"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_17"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_22"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "2", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_23"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "2", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_24"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "2", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_25"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "2", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_26"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "2", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_27"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "3", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_33"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "3", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_34"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "3", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_35"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "3", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_36"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "3", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_37"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "4", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_44"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "4", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_45"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "4", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_46"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "4", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_47"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "5", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_55"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "5", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_56"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "5", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_57"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "6", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_66"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "6", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_67"}
+    },
+    {"when": {"facing": "north", "blocks_completed": "7", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_77"}
+    },
+
+
+
+
+
+
+
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_01", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_02", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_03", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_04", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_05", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_06", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "0", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_07", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_11", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_12", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_13", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_14", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_15", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_16", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_17", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_22", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "2", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_23", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "2", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_24", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "2", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_25", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "2", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_26", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "2", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_27", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "3", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_33", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "3", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_34", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "3", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_35", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "3", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_36", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "3", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_37", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "4", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_44", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "4", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_45", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "4", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_46", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "4", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_47", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "5", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_55", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "5", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_56", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "5", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_57", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "6", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_66", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "6", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_67", "y": 180}
+    },
+    {"when": {"facing": "south", "blocks_completed": "7", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_77", "y": 180}
+    },
+
+
+
+
+
+
+
+
+
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_01", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_02", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_03", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_04", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_05", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_06", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "0", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_07", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "1"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_11", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_12", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_13", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_14", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_15", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_16", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_17", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "2"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_22", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "2", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_23", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "2", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_24", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "2", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_25", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "2", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_26", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "2", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_27", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "3", "blocks": "3"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_33", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "3", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_34", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "3", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_35", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "3", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_36", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "3", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_37", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "4", "blocks": "4"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_44", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "4", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_45", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "4", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_46", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "4", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_47", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "5", "blocks": "5"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_55", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "5", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_56", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "5", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_57", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "6", "blocks": "6"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_66", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "6", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_67", "y": 270}
+    },
+    {"when": {"facing": "west", "blocks_completed": "7", "blocks": "7"},
+      "apply":
+      {"model": "laicaps:block/chase_controller_block_77", "y": 270}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ]
+}

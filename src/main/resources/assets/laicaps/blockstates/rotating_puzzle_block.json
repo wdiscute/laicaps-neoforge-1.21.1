@@ -1,10 +1,22 @@
 {
   "variants": {
     "facing=east": {
-      "model": "laicaps:block/notes_puzzle_block_active"
+      "model": "laicaps:block/rotating_puzzle_block",
+      "y": 90
     },
-    "active=false": {
-      "model": "laicaps:block/notes_puzzle_block"
+
+    "facing=north": {
+      "model": "laicaps:block/rotating_puzzle_block"
+    },
+
+    "facing=south": {
+      "model": "laicaps:block/rotating_puzzle_block",
+      "y": 180
+    },
+
+    "facing=west": {
+      "model": "laicaps:block/rotating_puzzle_block",
+      "y": 270
     }
   }
 }
