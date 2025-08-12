@@ -1179,8 +1179,24 @@ public class ModBlocks
                     )
             );
 
+    public static final DeferredBlock<Block> POTTED_OAKHEART_SAPLING =
+            registerBlockNoItem(
+                    "potted_oakheart_sapling",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.OAKHEART_SAPLING,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
+            );
 
-    //public static final BooleanProperty OPEN = BooleanProperty.create("open");
+    public static final DeferredBlock<Block> POTTED_OAKROOT_SAPLING =
+            registerBlockNoItem(
+                    "potted_oakroot_sapling",
+                    () -> new FlowerPotBlock(
+                            () -> (FlowerPotBlock) Blocks.FLOWER_POT, ModBlocks.OAKROOT_SAPLING,
+                            BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_AZALEA)
+                    )
+            );
+
 
     public static final DeferredBlock<Block> POTTED_LUNARVEIL =
             registerBlockNoItem(

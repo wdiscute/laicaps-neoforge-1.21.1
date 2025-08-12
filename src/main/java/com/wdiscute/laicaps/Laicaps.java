@@ -140,6 +140,8 @@ public class Laicaps
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.MAGENTA_SWEETLILY.getId(), ModBlocks.POTTED_MAGENTA_SWEETLILY);
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.NAVY_SWEETLILY.getId(), ModBlocks.POTTED_NAVY_SWEETLILY);
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.LUNARVEIL.getId(), ModBlocks.POTTED_LUNARVEIL);
+                ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.OAKHEART_SAPLING.getId(), ModBlocks.POTTED_OAKHEART_SAPLING);
+                ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.OAKROOT_SAPLING.getId(), ModBlocks.POTTED_OAKROOT_SAPLING);
             });
 
             EntityRenderers.register(ModEntities.MOD_BOAT.get(), context -> new ModBoatRenderer(context, false));
