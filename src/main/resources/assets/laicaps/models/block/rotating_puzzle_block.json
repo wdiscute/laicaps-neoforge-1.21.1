@@ -1,12 +1,52 @@
 {
-  "parent": "block/cube",
+  "format_version": "1.21.6",
+  "credit": "Made with Blockbench",
   "textures": {
-    "particle": "laicaps:block/red",
-    "down": "laicaps:block/red",
-    "up": "laicaps:block/red",
-    "north": "laicaps:block/green",
-    "east": "laicaps:block/red",
-    "south": "laicaps:block/red",
-    "west": "laicaps:block/red"
-  }
+    "base": "minecraft:block/cobblestone",
+    "extra": "minecraft:block/spruce_planks"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 16, 12],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+      "color": 6,
+      "faces": {
+        "north": {"uv": [0, 0, 8, 16], "texture": "#base"},
+        "east": {"uv": [0, 0, 8, 16], "texture": "#base"},
+        "south": {"uv": [0, 0, 8, 16], "texture": "#base"},
+        "west": {"uv": [0, 0, 8, 16], "texture": "#base"},
+        "up": {"uv": [0, 0, 8, 8], "texture": "#base"},
+        "down": {"uv": [0, 0, 8, 8], "texture": "#base"}
+      }
+    },
+    {
+      "from": [7, 6, 1],
+      "to": [9, 10, 4],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 0]},
+      "color": 6,
+      "faces": {
+        "north": {"uv": [0, 0, 2, 4], "texture": "#base"},
+        "east": {"uv": [0, 0, 3, 4], "texture": "#base"},
+        "south": {"uv": [0, 0, 2, 4], "texture": "#base"},
+        "west": {"uv": [0, 0, 3, 4], "texture": "#base"},
+        "up": {"uv": [0, 0, 2, 3], "texture": "#base"},
+        "down": {"uv": [0, 0, 2, 3], "texture": "#base"}
+      }
+    },
+    {
+      "from": [2, 4, 0],
+      "to": [14, 13, 1],
+      "rotation": {"angle": 0, "axis": "y", "origin": [9, 4, 0]},
+      "color": 3,
+      "faces": {
+        "north": {"uv": [0, 0, 12, 9], "texture": "#extra"},
+        "east": {"uv": [0, 0, 1, 9], "texture": "#extra"},
+        "south": {"uv": [0, 0, 12, 9], "texture": "#extra"},
+        "west": {"uv": [0, 0, 1, 9], "texture": "#extra"},
+        "up": {"uv": [0, 0, 12, 1], "texture": "#extra"},
+        "down": {"uv": [0, 0, 12, 1], "texture": "#extra"}
+      }
+    }
+  ]
 }
