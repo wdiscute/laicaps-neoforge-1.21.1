@@ -1,0 +1,15 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 112,
+    "separation": 7,
+    "spacing": 12,
+    "spread_type": "triangular"
+  },
+  "structures": [
+    {
+      "structure": "laicaps:asha_invisible_structure",
+      "weight": 1
+    }
+  ]
+}
