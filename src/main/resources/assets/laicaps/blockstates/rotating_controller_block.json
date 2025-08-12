@@ -228,7 +228,7 @@
       "apply":
       {"model": "laicaps:block/chase_controller_block_17"}
     },
-    {"when": {"facing": "north", "blocks_completed": "1", "blocks": "2"},
+    {"when": {"facing": "north", "blocks_completed": "2", "blocks": "2"},
       "apply":
       {"model": "laicaps:block/chase_controller_block_22"}
     },
@@ -375,7 +375,7 @@
       "apply":
       {"model": "laicaps:block/chase_controller_block_17", "y": 180}
     },
-    {"when": {"facing": "south", "blocks_completed": "1", "blocks": "2"},
+    {"when": {"facing": "south", "blocks_completed": "2", "blocks": "2"},
       "apply":
       {"model": "laicaps:block/chase_controller_block_22", "y": 180}
     },

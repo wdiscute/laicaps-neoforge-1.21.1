@@ -228,7 +228,7 @@
       "apply":
       {"model": "laicaps:block/chase_controller_block_17"}
     },
-    {"when": {"facing": "north", "waypoints_completed": "1", "waypoints": "2"},
+    {"when": {"facing": "north", "waypoints_completed": "2", "waypoints": "2"},
       "apply":
       {"model": "laicaps:block/chase_controller_block_22"}
     },
@@ -375,7 +375,7 @@
       "apply":
       {"model": "laicaps:block/chase_controller_block_17", "y": 180}
     },
-    {"when": {"facing": "south", "waypoints_completed": "1", "waypoints": "2"},
+    {"when": {"facing": "south", "waypoints_completed": "2", "waypoints": "2"},
       "apply":
       {"model": "laicaps:block/chase_controller_block_22", "y": 180}
     },
@@ -524,7 +524,7 @@
       "apply":
       {"model": "laicaps:block/chase_controller_block_17", "y": 270}
     },
-    {"when": {"facing": "west", "waypoints_completed": "1", "waypoints": "2"},
+    {"when": {"facing": "west", "waypoints_completed": "2", "waypoints": "2"},
       "apply":
       {"model": "laicaps:block/chase_controller_block_22", "y": 270}
     },
