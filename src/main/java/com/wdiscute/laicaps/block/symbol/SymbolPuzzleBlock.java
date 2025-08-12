@@ -116,6 +116,7 @@ public class SymbolPuzzleBlock extends HorizontalDirectionalBlock implements Ent
                     {
                         //play sound and set block to the next symbol that is found inside the list
                         pLevel.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1f, 0.5f);
+                        pLevel.playSound(null, pos, SoundEvents.STONE_BREAK, SoundSource.BLOCKS, 1f, 0.5f);
                         pLevel.setBlockAndUpdate(pos, state.setValue(SYMBOLS, nextSymbol));
                         break;
                     }

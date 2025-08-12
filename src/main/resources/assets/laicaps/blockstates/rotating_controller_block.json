@@ -524,7 +524,7 @@
       "apply":
       {"model": "laicaps:block/chase_controller_block_17", "y": 270}
     },
-    {"when": {"facing": "west", "blocks_completed": "1", "blocks": "2"},
+    {"when": {"facing": "west", "blocks_completed": "2", "blocks": "2"},
       "apply":
       {"model": "laicaps:block/chase_controller_block_22", "y": 270}
     },

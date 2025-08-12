@@ -117,7 +117,7 @@ public class RotatingControllerBlock extends HorizontalDirectionalBlock implemen
                 return ItemInteractionResult.SUCCESS;
             }
 
-            rcbe.canPlayerObtainDrops(player);
+            rcbe.obtainDrops(player);
         }
 
         return ItemInteractionResult.SUCCESS;
