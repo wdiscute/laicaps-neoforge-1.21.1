@@ -26,11 +26,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "laicaps:lunarveil_sweetlily"
+          "name": "laicaps:lunarveil"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "laicaps:blocks/potted_lunarveil_sweetlily"
+  "random_sequence": "laicaps:blocks/potted_lunarveil"
 }
