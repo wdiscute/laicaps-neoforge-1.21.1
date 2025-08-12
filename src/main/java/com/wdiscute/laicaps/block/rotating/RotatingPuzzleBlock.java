@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -48,6 +49,8 @@ public class RotatingPuzzleBlock extends HorizontalDirectionalBlock implements E
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
+    public static final DirectionProperty ORIENTATION = DirectionProperty.create("orientation", Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST);
+
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
@@ -56,7 +59,7 @@ public class RotatingPuzzleBlock extends HorizontalDirectionalBlock implements E
         {
             if(stack.is(ModItems.CHISEL))
             {
-                if (state.getValue(FACING) == Direction.EAST)
+                if (state.getValue(ORIENTATION) == Direction.EAST)
                 {
                     int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
                     int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
@@ -69,7 +72,7 @@ public class RotatingPuzzleBlock extends HorizontalDirectionalBlock implements E
                     rpbe.SetNextLinkedBlock(bp, player);
 
                 }
-                if (state.getValue(FACING) == Direction.SOUTH)
+                if (state.getValue(ORIENTATION) == Direction.SOUTH)
                 {
                     int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
                     int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
@@ -81,7 +84,7 @@ public class RotatingPuzzleBlock extends HorizontalDirectionalBlock implements E
                     BlockPos bp = new BlockPos(newx, y, newz);
                     rpbe.SetNextLinkedBlock(bp, player);
                 }
-                if (state.getValue(FACING) == Direction.WEST)
+                if (state.getValue(ORIENTATION) == Direction.WEST)
                 {
                     int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
                     int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
@@ -93,7 +96,7 @@ public class RotatingPuzzleBlock extends HorizontalDirectionalBlock implements E
                     BlockPos bp = new BlockPos(newx, y, newz);
                     rpbe.SetNextLinkedBlock(bp, player);
                 }
-                if (state.getValue(FACING) == Direction.NORTH)
+                if (state.getValue(ORIENTATION) == Direction.NORTH)
                 {
                     int x = stack.get(ModDataComponents.COORDINATES.get()).getX() - pos.getX();
                     int z = stack.get(ModDataComponents.COORDINATES.get()).getZ() - pos.getZ();
@@ -125,6 +128,7 @@ public class RotatingPuzzleBlock extends HorizontalDirectionalBlock implements E
     {
         pBuilder.add(FACING);
         pBuilder.add(WATERLOGGED);
+        pBuilder.add(ORIENTATION);
     }
 
     @Override
@@ -143,6 +147,7 @@ public class RotatingPuzzleBlock extends HorizontalDirectionalBlock implements E
             bs = bs.setValue(WATERLOGGED, false);
 
         bs = bs.setValue(FACING, context.getHorizontalDirection().getOpposite());
+        bs = bs.setValue(ORIENTATION, context.getHorizontalDirection().getOpposite());
         return bs;
     }
 

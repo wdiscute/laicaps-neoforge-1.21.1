@@ -7,6 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -27,9 +29,13 @@ public class RotatingPuzzleBlockentity extends BlockEntity implements TickableBl
     {
         rotateSelf();
 
+        level.playSound(null, getBlockPos(), SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1f, r.nextFloat(0.1f) + 0.95f);
+        level.playSound(null, getBlockPos(), SoundEvents.STONE_BREAK, SoundSource.BLOCKS, 1f, r.nextFloat(0.1f) + 0.95f);
+        level.playSound(null, getBlockPos(), SoundEvents.STONE_BREAK, SoundSource.BLOCKS, 1f, r.nextFloat(0.1f) + 0.95f);
+
         for (int i = 0; i < getTotalWaypoints(); i++)
         {
-            Direction dir = level.getBlockState(getBlockPos()).getValue(HorizontalDirectionalBlock.FACING);
+            Direction dir = level.getBlockState(getBlockPos()).getValue(RotatingPuzzleBlock.ORIENTATION);
 
             if (level.getBlockEntity(decodeBlockPosWithOffset(dir, blocksLinked[i])) instanceof RotatingPuzzleBlockentity rpbe)
             {

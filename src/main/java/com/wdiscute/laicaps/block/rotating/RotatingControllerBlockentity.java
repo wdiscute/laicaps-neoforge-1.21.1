@@ -51,11 +51,18 @@ public class RotatingControllerBlockentity extends BlockEntity implements Tickab
     }
 
 
-    public void canPlayerObtainDrops(Player player)
+    public void obtainDrops(Player player)
     {
         setChanged();
         if (this.level.isClientSide) return;
-        if (state != 5) return;
+
+        BlockState bs = level.getBlockState(getBlockPos());
+        if (!bs.getValue(RotatingControllerBlock.CORRECT_BLOCKS).equals(bs.getValue(RotatingControllerBlock.BLOCKS)))
+        {
+            level.playSound(null, this.getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.5f);
+            ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
+            return;
+        }
 
         for (int i = 0; i < this.arrayuuid.length; i++)
         {
@@ -73,6 +80,7 @@ public class RotatingControllerBlockentity extends BlockEntity implements Tickab
             {
                 this.arrayuuid[i] = uuid;
                 state = 6;
+                counter = 0;
 
                 LootParams.Builder builder = new LootParams.Builder((ServerLevel) this.level);
                 LootParams params = builder.create(LootContextParamSets.EMPTY);
@@ -140,20 +148,11 @@ public class RotatingControllerBlockentity extends BlockEntity implements Tickab
         return new BlockPos(0, 0, 0);
     }
 
-
-    @Override
-    public void onLoad()
-    {
-        super.onLoad();
-        level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(RotatingControllerBlock.CORRECT_BLOCKS, 0));
-    }
-
     @Override
     public void tick()
     {
 
         if (counter > -1) counter++;
-        if (counter > 199099) counter = 20000;
 
         //idle
         if (state == 0)
@@ -161,17 +160,18 @@ public class RotatingControllerBlockentity extends BlockEntity implements Tickab
             BlockState bs = level.getBlockState(getBlockPos());
             Direction main = bs.getValue(HorizontalDirectionalBlock.FACING);
 
-            boolean safe = true;
             int numberOfCorrectBlocks = 0;
             if (getTotalBlocksLinked() == 0) return;
 
             for (int i = 0; i < getTotalBlocksLinked(); i++)
             {
-                if (level.getBlockEntity(decodeBlockPosWithOffset(main, blocksLinkedBP[i])) instanceof RotatingPuzzleBlockentity)
+                BlockState r = level.getBlockState(decodeBlockPosWithOffset(main, blocksLinkedBP[i]));
+                if (r.is(ModBlocks.ROTATING_PUZZLE_BLOCK))
                 {
-                    Direction d = level.getBlockState(decodeBlockPosWithOffset(main, blocksLinkedBP[i])).getValue(HorizontalDirectionalBlock.FACING);
-                    if (!main.equals(d)) safe = false;
-                    numberOfCorrectBlocks++;
+                    if(r.getValue(HorizontalDirectionalBlock.FACING) == bs.getValue(HorizontalDirectionalBlock.FACING))
+                    {
+                        numberOfCorrectBlocks++;
+                    }
                 }
                 else
                 {
@@ -179,87 +179,14 @@ public class RotatingControllerBlockentity extends BlockEntity implements Tickab
                 }
             }
 
-            if (level.getBlockState(getBlockPos()).getValue(RotatingControllerBlock.CORRECT_BLOCKS) != numberOfCorrectBlocks - 1)
+            if (level.getBlockState(getBlockPos()).getValue(RotatingControllerBlock.CORRECT_BLOCKS) != numberOfCorrectBlocks)
             {
+                setChanged();
                 level.setBlockAndUpdate(getBlockPos(), bs.setValue(RotatingControllerBlock.CORRECT_BLOCKS, numberOfCorrectBlocks));
             }
 
-            if (safe)
-            {
-                //todo
-                state = 5;
-                counter = 0;
-            }
-
         }
 
-
-        //puzzle complete - waiting for a valid player to claim loot
-        if (state == 5)
-        {
-
-            //particles + sound 5 seconds before closing
-            if (counter == 1100)
-            {
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1.2f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-            }
-
-            //particles + sound 4 seconds before closing
-            if (counter == 1120)
-            {
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1.1f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-            }
-
-            //particles + sound 3 seconds before closing
-            if (counter == 1140)
-            {
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 1f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-            }
-
-            //particles + sound 2 seconds before closing
-            if (counter == 1160)
-            {
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.9f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-            }
-
-            //particles + sound 1 second before closing
-            if (counter == 1180)
-            {
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
-                level.playSound(null, getBlockPos(), SoundEvents.CRAFTER_FAIL, SoundSource.BLOCKS, 3f, 0.8f);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() + 0.5f, getBlockPos().getY() + 0.5f, getBlockPos().getZ() + 0.5f, 50, 0.5f, 0.5f, 0.5f, 0f);
-            }
-
-            //resets if 1 minute goes by without players claiming loot
-            if (counter == 1200)
-            {
-                //reset stuff
-                state = 0;
-                BlockState bs = level.getBlockState(getBlockPos());
-                bs = bs.setValue(RotatingControllerBlock.BLOCKS, getTotalBlocksLinked());
-                bs = bs.setValue(RotatingControllerBlock.CORRECT_BLOCKS, 0);
-                level.setBlockAndUpdate(getBlockPos(), bs);
-
-                //play closing sound
-                level.playSound(null, getBlockPos(), SoundEvents.TRIAL_SPAWNER_DETECT_PLAYER, SoundSource.BLOCKS);
-                ((ServerLevel) level).sendParticles(ParticleTypes.ASH, getBlockPos().getX() - 0.5f, getBlockPos().getY(), getBlockPos().getZ() - 0.5f, 50, 1f, 1f, 1f, 0f);
-
-            }
-
-        }
 
         //drop items stored in arrayOfItemStacks
         if (state == 6)
@@ -272,7 +199,8 @@ public class RotatingControllerBlockentity extends BlockEntity implements Tickab
                 {
                     if (arrayOfItemStacks.isEmpty())
                     {
-                        state = 5;
+                        state = 0;
+                        counter = -1;
                         return;
                     }
 
