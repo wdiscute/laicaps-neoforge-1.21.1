@@ -25,6 +25,7 @@ import com.wdiscute.laicaps.worldgen.ModFeatures;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -34,6 +35,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.RedstoneLampBlock;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -46,6 +49,7 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.neoforged.neoforge.event.level.ChunkEvent;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -78,6 +82,7 @@ public class Laicaps
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
         NeoForge.EVENT_BUS.addListener(this::ModifyItemTooltip);
+        //NeoForge.EVENT_BUS.addListener(this::ceilingStuff);
 
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
@@ -93,6 +98,41 @@ public class Laicaps
 
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+
+    public void ceilingStuff(ChunkEvent.Load event)
+    {
+
+        ChunkAccess chunk = event.getChunk();
+
+        if(event.isNewChunk() && event.getChunk().getLevel().dimension() == Laicaps.LUNAMAR_KEY)
+        {
+            System.out.println("new chunk");
+
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 16; j++)
+                {
+                    int x = event.getChunk().getPos().getBlockX(i);
+                    int z = event.getChunk().getPos().getBlockZ(j);
+
+                    chunk.setBlockState(new BlockPos(x, 100, z), Blocks.LAPIS_BLOCK.defaultBlockState(), false);
+                }
+            }
+
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 16; j++)
+                {
+                    int x = event.getChunk().getPos().getBlockX(i);
+                    int z = event.getChunk().getPos().getBlockZ(j);
+
+                    if(x % 6 == 0 && z % 6 == 0)
+                        chunk.setBlockState(new BlockPos(x, 99, z), Blocks.REDSTONE_LAMP.defaultBlockState().setValue(RedstoneLampBlock.LIT, true), false);
+                }
+            }
+        }
     }
 
     public void ModifyItemTooltip(ItemTooltipEvent event)
