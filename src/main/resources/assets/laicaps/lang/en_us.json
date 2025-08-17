@@ -334,23 +334,23 @@
   "block.laicaps.riverthorne_thistle": "Riverthorne Thistle",
   "block.laicaps.riverthorne": "Riverthorne Stem",
 
- "block.laicaps.lunarveil": "Lunarveil",
+  "block.laicaps.lunarveil": "Lunarveil",
 
- "item.laicaps.starflies_jar": "Jar of Starflies",
- "item.laicaps.starflies_jar.0": "A jar filled with glowing Starflies.",
- "item.laicaps.starflies_jar.1": "Native to Asha, these gentle",
- "item.laicaps.starflies_jar.2": "creatures drift in the night",
- "item.laicaps.starflies_jar.3": "lighting up the surrounding area",
+  "item.laicaps.starflies_jar": "Jar of Starflies",
+  "item.laicaps.starflies_jar.0": "A jar filled with glowing Starflies.",
+  "item.laicaps.starflies_jar.1": "Native to Asha, these gentle",
+  "item.laicaps.starflies_jar.2": "creatures drift in the night",
+  "item.laicaps.starflies_jar.3": "lighting up the surrounding area",
 
- "item.laicaps.jar": "Jar",
- "item.laicaps.jar.0": "Just a simple glass jar.",
- "item.laicaps.jar.1": "Can be used to make jam or",
- "item.laicaps.jar.2": "catch Starflies during nighttime.",
+  "item.laicaps.jar": "Jar",
+  "item.laicaps.jar.0": "Just a simple glass jar.",
+  "item.laicaps.jar.1": "Can be used to make jam or",
+  "item.laicaps.jar.2": "catch Starflies during nighttime.",
 
- "item.laicaps.oakheart_berries_jam": "Oakheart Berries Jam",
- "item.laicaps.oakheart_berries_jam.0": "A delicious Jar of oakheart berries.",
- "item.laicaps.oakheart_berries_jam.1": "Better be eat it before a Nimble",
- "item.laicaps.oakheart_berries_jam.2": "tries to steal it!",
+  "item.laicaps.oakheart_berries_jam": "Oakheart Berries Jam",
+  "item.laicaps.oakheart_berries_jam.0": "A delicious Jar of oakheart berries.",
+  "item.laicaps.oakheart_berries_jam.1": "Better be eat it before a Nimble",
+  "item.laicaps.oakheart_berries_jam.2": "tries to steal it!",
 
   "block.laicaps.asha_grass_block": "Asha Grass Block",
   "block.laicaps.asha_dirt": "Asha Dirt",
@@ -427,8 +427,8 @@
   "item.laicaps.glimpuff_bucket" : "Bucket of Glimpuff",
 
 
- "entity.laicaps.swibble": "Swibble",
- "item.laicaps.swibble_spawn_egg": "Swibble Spawn Egg",
+  "entity.laicaps.swibble": "Swibble",
+  "item.laicaps.swibble_spawn_egg": "Swibble Spawn Egg",
 
   "entity.laicaps.nimble": "Nimble",
   "item.laicaps.nimble_spawn_egg": "Nimble Spawn Egg",
@@ -591,24 +591,71 @@
 
 
 
- "gui.astronomy_research_table.menu.entry1.name" : "      MENU - 1",
- "gui.astronomy_research_table.menu.entry1.left.3" : "               §c§k!!!§r   §cWIP telescope guide §c§k!!!§r",
-
- "gui.astronomy_research_table.menu.entry2.name" : "      MENU - 2",
- "gui.astronomy_research_table.menu.entry2.left.3" : "               §c§k!!!§r   §cWIP  rocket guide §c§k!!!§r",
-
-
- "gui.astronomy_research_table.menu.entry3.name" : "      MENU - 3",
- "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP  fuel guide §c§k!!!§r",
-
- "gui.astronomy_research_table.menu.entry4.name" : "      MENU - 4",
- "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP  astronomy table guide §c§k!!!§r",
+  "gui.astronomy_research_table.menu.entry1.image" : "menu_illustration_1",
+  "gui.astronomy_research_table.menu.entry1.name" : "      Introduction",
 
 
 
+  "gui.astronomy_research_table.menu.entry1.left.2" : "If I am to succeed into my space",
+  "gui.astronomy_research_table.menu.entry1.left.3" : "journey, it's best to keep all",
+  "gui.astronomy_research_table.menu.entry1.left.4" : "my findings in a centralized space.",
+
+  "gui.astronomy_research_table.menu.entry1.left.7" : "This notebook will do perfectly.",
+
+  "gui.astronomy_research_table.menu.entry1.left.9" : "Anytime I find something interesting",
+  "gui.astronomy_research_table.menu.entry1.left.10" : "I'll note it down for future me!",
 
 
- "gui.astronomy_research_table.ember.entry1.name" : "      §cEmber§r - Planet",
+  "gui.astronomy_research_table.menu.entry1.right.3" : "I can easily bookmark relevant",
+  "gui.astronomy_research_table.menu.entry1.right.4" : "pages and come back when needed!",
+  "gui.astronomy_research_table.menu.entry1.right.5" : "So handy!",
+
+
+
+  "gui.astronomy_research_table.menu.entry1.right.16" : "Using these markers at the bottom",
+  "gui.astronomy_research_table.menu.entry1.right.17" : "I can quickly cycle through the",
+  "gui.astronomy_research_table.menu.entry1.right.18" : "pages.",
+
+
+
+  "gui.astronomy_research_table.menu.entry2.image" : "menu_illustration_2",
+  "gui.astronomy_research_table.menu.entry2.name" : " About the Telescope",
+
+  "gui.astronomy_research_table.menu.entry2.left.2" : "The first step of space travel is",
+  "gui.astronomy_research_table.menu.entry2.left.3" : "picking a good target. For that",
+  "gui.astronomy_research_table.menu.entry2.left.4" : "I will of course need a telescope!",
+
+
+
+  "gui.astronomy_research_table.menu.entry2.left.15" : "Once I have a telescope built it",
+  "gui.astronomy_research_table.menu.entry2.left.16" : "should be easy enough to wait for",
+  "gui.astronomy_research_table.menu.entry2.left.17" : "the right atmospheric conditions",
+  "gui.astronomy_research_table.menu.entry2.left.18" : "and gaze upon the vast emptiness",
+  "gui.astronomy_research_table.menu.entry2.left.19" : "of space.",
+
+
+  "gui.astronomy_research_table.menu.entry2.right.3" : "With a diamond, some gold, and",
+  "gui.astronomy_research_table.menu.entry2.right.4" : "some better lenses, I should be",
+  "gui.astronomy_research_table.menu.entry2.right.5" : "able to upgrade a spyglass into",
+  "gui.astronomy_research_table.menu.entry2.right.6" : "a telescope! ",
+
+  "gui.astronomy_research_table.menu.entry2.right.8" : "I will also need a stronger base",
+  "gui.astronomy_research_table.menu.entry2.right.9" : "to support the heavier spyglass",
+
+
+
+
+  "gui.astronomy_research_table.menu.entry3.name" : "      MENU - 3",
+  "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP  fuel guide §c§k!!!§r",
+
+  "gui.astronomy_research_table.menu.entry4.name" : "      MENU - 4",
+  "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP  astronomy table guide §c§k!!!§r",
+
+
+
+
+
+  "gui.astronomy_research_table.ember.entry1.name" : "      §cEmber§r - Planet",
   "gui.astronomy_research_table.ember.entry1.image" : "ember_illustration_1",
 
   "gui.astronomy_research_table.ember.entry1.left.10" : "               §c§k!!!§r   §cEMBER   §c§k!!!§r",
@@ -643,14 +690,14 @@
   "gui.astronomy_research_table.ember.entry1.right.19" : "§4Space suit required.",
 
 
- "gui.astronomy_research_table.ember.entry2.name" : "      Ember - 2",
- "gui.astronomy_research_table.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.ember.entry2.name" : "      Ember - 2",
+  "gui.astronomy_research_table.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.ember.entry3.name" : "      Ember - 3",
- "gui.astronomy_research_table.ember.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.ember.entry3.name" : "      Ember - 3",
+  "gui.astronomy_research_table.ember.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.ember.entry4.name" : "      Ember - 4",
- "gui.astronomy_research_table.ember.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.ember.entry4.name" : "      Ember - 4",
+  "gui.astronomy_research_table.ember.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
 
@@ -767,52 +814,52 @@
   "gui.astronomy_research_table.asha.entry4.right.19" : "possibly make a friend?",
 
 
- "gui.astronomy_research_table.overworld.entry1.name" : "    Overworld - 1",
- "gui.astronomy_research_table.overworld.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.overworld.entry1.name" : "    Overworld - 1",
+  "gui.astronomy_research_table.overworld.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.overworld.entry2.name" : "    Overworld - 2",
- "gui.astronomy_research_table.overworld.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.overworld.entry2.name" : "    Overworld - 2",
+  "gui.astronomy_research_table.overworld.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.overworld.entry3.name" : "    Overworld - 3",
- "gui.astronomy_research_table.overworld.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.overworld.entry3.name" : "    Overworld - 3",
+  "gui.astronomy_research_table.overworld.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.overworld.entry4.name" : "    Overworld - 4",
- "gui.astronomy_research_table.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
-
-
- "gui.astronomy_research_table.lunamar.entry1.name" : "      §3Lunamar§r - Planet",
- "gui.astronomy_research_table.lunamar.entry1.image" : "lunamar_illustration_1",
-
- "gui.astronomy_research_table.lunamar.entry1.left.11" : "            §3§k!!!§r   §3lunamar   §3§k!!!§r",
-
- "gui.astronomy_research_table.lunamar.entry1.left.13" : "A giant, dark ocean-covered",
- "gui.astronomy_research_table.lunamar.entry1.left.14" : "planet illuminated by shimmering",
- "gui.astronomy_research_table.lunamar.entry1.left.15" : "lights beneath its surface.",
-
- "gui.astronomy_research_table.lunamar.entry1.left.17" : "Despite its distance from the Sun,",
- "gui.astronomy_research_table.lunamar.entry1.left.18" : "Lunamar appears to maintain a mild",
- "gui.astronomy_research_table.lunamar.entry1.left.19" : "climate, likely due to it's dense",
- "gui.astronomy_research_table.lunamar.entry1.left.20" : "atmosphere trapping heat below.",
+  "gui.astronomy_research_table.overworld.entry4.name" : "    Overworld - 4",
+  "gui.astronomy_research_table.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
- "gui.astronomy_research_table.lunamar.entry1.right.2" : "Surface Temperature:",
- "gui.astronomy_research_table.lunamar.entry1.right.3" : "§28°C",
- "gui.astronomy_research_table.lunamar.entry1.right.4" : "Atmospheric Composition:",
- "gui.astronomy_research_table.lunamar.entry1.right.5" : "§270%% N, 18% O2, 8% CO2, 4% others",
- "gui.astronomy_research_table.lunamar.entry1.right.6" : "Atmospheric Pressure:",
- "gui.astronomy_research_table.lunamar.entry1.right.7" : "§22.2 atm",
- "gui.astronomy_research_table.lunamar.entry1.right.8" : "Orbital Period:",
- "gui.astronomy_research_table.lunamar.entry1.right.9" : "§2849 Overworld days",
- "gui.astronomy_research_table.lunamar.entry1.right.10" : "Dominant Biomes:",
- "gui.astronomy_research_table.lunamar.entry1.right.11" : "§2Oceans, with the very rare",
- "gui.astronomy_research_table.lunamar.entry1.right.12" : "Orbital Distance:",
- "gui.astronomy_research_table.lunamar.entry1.right.13" : "§22.06 AU",
- "gui.astronomy_research_table.lunamar.entry1.right.14" : "Seismic Activity:",
- "gui.astronomy_research_table.lunamar.entry1.right.15" : "§2Low, underwater vents are common",
+  "gui.astronomy_research_table.lunamar.entry1.name" : "      §3Lunamar§r - Planet",
+  "gui.astronomy_research_table.lunamar.entry1.image" : "lunamar_illustration_1",
 
- "gui.astronomy_research_table.lunamar.entry1.right.18" : "Final Analysis:",
- "gui.astronomy_research_table.lunamar.entry1.right.19" : "§2Diving Suit Recommended for.",
- "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
+  "gui.astronomy_research_table.lunamar.entry1.left.11" : "            §3§k!!!§r   §3lunamar   §3§k!!!§r",
+
+  "gui.astronomy_research_table.lunamar.entry1.left.13" : "A giant, dark ocean-covered",
+  "gui.astronomy_research_table.lunamar.entry1.left.14" : "planet illuminated by shimmering",
+  "gui.astronomy_research_table.lunamar.entry1.left.15" : "lights beneath its surface.",
+
+  "gui.astronomy_research_table.lunamar.entry1.left.17" : "Despite its distance from the Sun,",
+  "gui.astronomy_research_table.lunamar.entry1.left.18" : "Lunamar appears to maintain a mild",
+  "gui.astronomy_research_table.lunamar.entry1.left.19" : "climate, likely due to it's dense",
+  "gui.astronomy_research_table.lunamar.entry1.left.20" : "atmosphere trapping heat below.",
+
+
+  "gui.astronomy_research_table.lunamar.entry1.right.2" : "Surface Temperature:",
+  "gui.astronomy_research_table.lunamar.entry1.right.3" : "§28°C",
+  "gui.astronomy_research_table.lunamar.entry1.right.4" : "Atmospheric Composition:",
+  "gui.astronomy_research_table.lunamar.entry1.right.5" : "§270%% N, 18% O2, 8% CO2, 4% others",
+  "gui.astronomy_research_table.lunamar.entry1.right.6" : "Atmospheric Pressure:",
+  "gui.astronomy_research_table.lunamar.entry1.right.7" : "§22.2 atm",
+  "gui.astronomy_research_table.lunamar.entry1.right.8" : "Orbital Period:",
+  "gui.astronomy_research_table.lunamar.entry1.right.9" : "§2849 Overworld days",
+  "gui.astronomy_research_table.lunamar.entry1.right.10" : "Dominant Biomes:",
+  "gui.astronomy_research_table.lunamar.entry1.right.11" : "§2Oceans, with the very rare",
+  "gui.astronomy_research_table.lunamar.entry1.right.12" : "Orbital Distance:",
+  "gui.astronomy_research_table.lunamar.entry1.right.13" : "§22.06 AU",
+  "gui.astronomy_research_table.lunamar.entry1.right.14" : "Seismic Activity:",
+  "gui.astronomy_research_table.lunamar.entry1.right.15" : "§2Low, underwater vents are common",
+
+  "gui.astronomy_research_table.lunamar.entry1.right.18" : "Final Analysis:",
+  "gui.astronomy_research_table.lunamar.entry1.right.19" : "§2Diving Suit Recommended for.",
+  "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
 
 
   "gui.astronomy_research_table.lunamar.entry2.name" : "     §3Lunamar§r - Illuma",
@@ -825,11 +872,11 @@
   "gui.astronomy_research_table.lunamar.entry2.left.15" : "soft glow which lights up the",
   "gui.astronomy_research_table.lunamar.entry2.left.16" : "ocean floor.",
 
- "gui.astronomy_research_table.lunamar.entry3.name" : "      §3Lunamar§r - 3",
- "gui.astronomy_research_table.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.astronomy_research_table.lunamar.entry3.name" : "      §3Lunamar§r - 3",
+  "gui.astronomy_research_table.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
- "gui.astronomy_research_table.lunamar.entry4.name" : "      §3Lunamar§r - 4",
- "gui.astronomy_research_table.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
+  "gui.astronomy_research_table.lunamar.entry4.name" : "      §3Lunamar§r - 4",
+  "gui.astronomy_research_table.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
 
 
 
