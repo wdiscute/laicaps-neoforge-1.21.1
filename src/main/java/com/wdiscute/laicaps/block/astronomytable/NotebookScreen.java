@@ -23,21 +23,21 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 {
 
     private static final Logger log = LoggerFactory.getLogger(NotebookScreen.class);
-    private static final ResourceLocation INV_BOOK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/book_background.png");
-    private static final ResourceLocation BOOKMARK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/bookmark_background.png");
-    private static final ResourceLocation BOOKMARK = Laicaps.rl("textures/gui/astronomy_table/bookmark.png");
-    private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl("textures/gui/astronomy_table/arrow_previous.png");
-    private static final ResourceLocation ARROW_NEXT = Laicaps.rl("textures/gui/astronomy_table/arrow_next.png");
+    private static final ResourceLocation INV_BOOK_BACKGROUND = Laicaps.rl("textures/gui/notebook/book_background.png");
+    private static final ResourceLocation BOOKMARK_BACKGROUND = Laicaps.rl("textures/gui/notebook/bookmark_background.png");
+    private static final ResourceLocation BOOKMARK = Laicaps.rl("textures/gui/notebook/bookmark.png");
+    private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl("textures/gui/notebook/arrow_previous.png");
+    private static final ResourceLocation ARROW_NEXT = Laicaps.rl("textures/gui/notebook/arrow_next.png");
 
-    private static final ResourceLocation EMBER_SELECTED = Laicaps.rl("textures/gui/astronomy_table/ember_selected.png");
-    private static final ResourceLocation ASHA_SELECTED = Laicaps.rl("textures/gui/astronomy_table/asha_selected.png");
-    private static final ResourceLocation OVERWORLD_SELECTED = Laicaps.rl("textures/gui/astronomy_table/overworld_selected.png");
-    private static final ResourceLocation LUNAMAR_SELECTED = Laicaps.rl("textures/gui/astronomy_table/lunamar_selected.png");
+    private static final ResourceLocation EMBER_SELECTED = Laicaps.rl("textures/gui/notebook/ember_selected.png");
+    private static final ResourceLocation ASHA_SELECTED = Laicaps.rl("textures/gui/notebook/asha_selected.png");
+    private static final ResourceLocation OVERWORLD_SELECTED = Laicaps.rl("textures/gui/notebook/overworld_selected.png");
+    private static final ResourceLocation LUNAMAR_SELECTED = Laicaps.rl("textures/gui/notebook/lunamar_selected.png");
 
-    private static final ResourceLocation EMBER_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/ember_highlight.png");
-    private static final ResourceLocation ASHA_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/asha_highlight.png");
-    private static final ResourceLocation OVERWORLD_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/overworld_highlight.png");
-    private static final ResourceLocation LUNAMAR_HIGHLIGHT = Laicaps.rl("textures/gui/astronomy_table/lunamar_highlight.png");
+    private static final ResourceLocation EMBER_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/ember_highlight.png");
+    private static final ResourceLocation ASHA_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/asha_highlight.png");
+    private static final ResourceLocation OVERWORLD_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/overworld_highlight.png");
+    private static final ResourceLocation LUNAMAR_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/lunamar_highlight.png");
 
 
     List<String> bookmarks = new ArrayList<>();
@@ -358,7 +358,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 
         //render page index at the bottom
         {
-            if (entryUnlocked && currentPlanet != 0)
+            if (entryUnlocked)
             {
                 guiGraphics.drawString(
                         this.font, Component.translatable("gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".name"),
@@ -409,13 +409,14 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 
         }
 
+
         //render text  & image from translation key
         if (entryUnlocked)
         {
             //render image
             String keyImage = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".image";
             if (I18n.exists(keyImage))
-                renderImage(guiGraphics, Laicaps.rl("textures/gui/astronomy_table/" + I18n.get(keyImage) + ".png"));
+                renderImage(guiGraphics, Laicaps.rl("textures/gui/notebook/illustration/" + I18n.get(keyImage) + ".png"));
 
             //render text left
             for (int i = 0; i < 21; i++)
@@ -452,7 +453,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 
         for (int i = 0; i < bookmarks.size(); i++)
         {
-            ResourceLocation bookmarkImage = Laicaps.rl("textures/gui/astronomy_table/bookmark_" + bookmarks.get(i) + ".png");
+            ResourceLocation bookmarkImage = Laicaps.rl("textures/gui/notebook/bookmark_" + bookmarks.get(i) + ".png");
 
             if (!(Objects.equals(bookmarks.getFirst(), "none")))
                 renderImage(guiGraphics, bookmarkImage, i * 26);
