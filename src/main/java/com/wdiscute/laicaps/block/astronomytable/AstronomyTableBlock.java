@@ -74,7 +74,9 @@ public class AstronomyTableBlock extends HorizontalDirectionalBlock implements E
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pPos, @NotNull BlockState pState)
     {
-        return ModBlockEntity.ASTRONOMY_TABLE.get().create(pPos, pState);
+
+        //return ModBlockEntity.ASTRONOMY_TABLE.get().create(pPos, pState);
+        return null;
     }
 
     @Override

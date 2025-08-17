@@ -2,19 +2,16 @@ package com.wdiscute.laicaps.block.astronomytable;
 
 import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class AstronomyTableMenu extends AbstractContainerMenu
+public class NotebookMenu extends AbstractContainerMenu
 {
     //public final AstronomyTableBlockEntity blockEntity;
     public final Level level;
@@ -55,14 +52,14 @@ public class AstronomyTableMenu extends AbstractContainerMenu
         return super.clickMenuButton(player, id);
     }
 
-    public AstronomyTableMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
+    public NotebookMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
         this(containerId, inv);
     }
 
-    public AstronomyTableMenu(int containerId, Inventory inv)
+    public NotebookMenu(int containerId, Inventory inv)
     {
-        super(ModMenuTypes.ASTRONOMY_TABLE_MENU.get(), containerId);
+        super(ModMenuTypes.NOTEBOOK_MENU.get(), containerId);
         //this.blockEntity = ((AstronomyTableBlockEntity) blockEntity);
         this.level = inv.player.level();
     }

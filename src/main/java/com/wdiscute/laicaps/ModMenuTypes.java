@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.block.astronomytable.AstronomyTableMenu;
+import com.wdiscute.laicaps.block.astronomytable.NotebookMenu;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationMenu;
 import com.wdiscute.laicaps.block.researchstation.ResearchStationMenu;
 import com.wdiscute.laicaps.block.telescope.TelescopeMenu;
@@ -27,8 +27,8 @@ public class ModMenuTypes
     public static final DeferredHolder<MenuType<?>, MenuType<TelescopeMenu>> TELESCOPE_MENU =
             registerMenuType("telescope_menu", TelescopeMenu::new);
 
-    public static final DeferredHolder<MenuType<?>, MenuType<AstronomyTableMenu>> ASTRONOMY_TABLE_MENU =
-            registerMenuType("astronomy_table_menu", AstronomyTableMenu::new);
+    public static final DeferredHolder<MenuType<?>, MenuType<NotebookMenu>> NOTEBOOK_MENU =
+            registerMenuType("notebook_menu", NotebookMenu::new);
 
     public static final Supplier<MenuType<RocketSpaceMenu>> ROCKET_SPACE_MENU =
             registerMenuType("rocket_space_menu", RocketSpaceMenu::new);

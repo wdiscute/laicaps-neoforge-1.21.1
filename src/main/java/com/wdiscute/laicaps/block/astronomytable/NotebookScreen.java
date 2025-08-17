@@ -19,10 +19,10 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 
-public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTableMenu>
+public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 {
 
-    private static final Logger log = LoggerFactory.getLogger(AstronomyTableScreen.class);
+    private static final Logger log = LoggerFactory.getLogger(NotebookScreen.class);
     private static final ResourceLocation INV_BOOK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/book_background.png");
     private static final ResourceLocation BOOKMARK_BACKGROUND = Laicaps.rl("textures/gui/astronomy_table/bookmark_background.png");
     private static final ResourceLocation BOOKMARK = Laicaps.rl("textures/gui/astronomy_table/bookmark.png");
@@ -469,7 +469,7 @@ public class AstronomyTableScreen extends AbstractContainerScreen<AstronomyTable
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
-    public AstronomyTableScreen(AstronomyTableMenu astronomyTableMenu, Inventory playerInventory, Component title)
+    public NotebookScreen(NotebookMenu astronomyTableMenu, Inventory playerInventory, Component title)
     {
         super(astronomyTableMenu, playerInventory, title);
     }

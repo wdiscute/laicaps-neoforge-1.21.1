@@ -71,9 +71,10 @@ public class ModBlockEntity
             () -> BlockEntityType.Builder.of(TelescopeBlockEntity::new, ModBlocks.TELESCOPE.get())
                     .build(null));
 
-    public static final Supplier<BlockEntityType<AstronomyTableBlockEntity>> ASTRONOMY_TABLE = BLOCK_ENTITIES.register("astronomy_table",
-            () -> BlockEntityType.Builder.of(AstronomyTableBlockEntity::new, ModBlocks.ASTRONOMY_RESEARCH_TABLE.get())
-                    .build(null));
+    //todo make notebook table
+//    public static final Supplier<BlockEntityType<AstronomyTableBlockEntity>> ASTRONOMY_TABLE = BLOCK_ENTITIES.register("astronomy_table",
+//            () -> BlockEntityType.Builder.of(AstronomyTableBlockEntity::new, ModBlocks.ASTRONOMY_RESEARCH_TABLE.get())
+//                    .build(null));
 
     public static final Supplier<BlockEntityType<RefuelStationBlockEntity>> REFUEL_STATION = BLOCK_ENTITIES.register("refuel_station",
             () -> BlockEntityType.Builder.of(RefuelStationBlockEntity::new, ModBlocks.REFUEL_STATION.get())

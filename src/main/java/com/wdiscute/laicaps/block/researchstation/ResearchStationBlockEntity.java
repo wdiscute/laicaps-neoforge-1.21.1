@@ -1,7 +1,6 @@
 package com.wdiscute.laicaps.block.researchstation;
 
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.block.astronomytable.AstronomyTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

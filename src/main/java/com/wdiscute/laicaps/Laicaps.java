@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
-import com.wdiscute.laicaps.block.astronomytable.AstronomyTableScreen;
+import com.wdiscute.laicaps.block.astronomytable.NotebookScreen;
 import com.wdiscute.laicaps.block.refuelstation.RefuelStationScreen;
 import com.wdiscute.laicaps.block.researchstation.ResearchStationScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
@@ -223,7 +223,7 @@ public class Laicaps
         {
             event.register(ModMenuTypes.TELESCOPE_MENU.get(), TelescopeScreen::new);
             event.register(ModMenuTypes.RESEARCH_STATION_MENU.get(), ResearchStationScreen::new);
-            event.register(ModMenuTypes.ASTRONOMY_TABLE_MENU.get(), AstronomyTableScreen::new);
+            event.register(ModMenuTypes.NOTEBOOK_MENU.get(), NotebookScreen::new);
             event.register(ModMenuTypes.ROCKET_SPACE_MENU.get(), RocketSpaceScreen::new);
             event.register(ModMenuTypes.REFUEL_STATION_MENU.get(), RefuelStationScreen::new);
             event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);

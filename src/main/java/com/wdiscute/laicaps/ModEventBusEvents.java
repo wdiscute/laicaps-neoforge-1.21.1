@@ -142,14 +142,12 @@ public class ModEventBusEvents
                 Payloads.FishingPayload.TYPE,
                 Payloads.FishingPayload.STREAM_CODEC,
                 PayloadReceiver::receiveFishingClient
-
         );
 
         registrar.playToServer(
                 Payloads.FishingCompletedPayload.TYPE,
                 Payloads.FishingCompletedPayload.STREAM_CODEC,
                 PayloadReceiver::receiveFishingCompletedServer
-
         );
 
 

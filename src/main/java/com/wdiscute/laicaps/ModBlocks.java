@@ -239,15 +239,17 @@ public class ModBlocks
                             )
             );
 
-    public static final DeferredBlock<Block> ASTRONOMY_RESEARCH_TABLE =
-            registerBlock(
-                    "astronomy_research_table", () ->
-                            new AstronomyTableBlock(BlockBehaviour.Properties.of()
-                                    .strength(6)
-                                    .sound(SoundType.WOOD)
-                                    .noOcclusion()
-                            )
-            );
+
+    //todo make a model and make book placeable on it
+//    public static final DeferredBlock<Block> ASTRONOMY_RESEARCH_TABLE =
+//            registerBlock(
+//                    "astronomy_research_table", () ->
+//                            new AstronomyTableBlock(BlockBehaviour.Properties.of()
+//                                    .strength(6)
+//                                    .sound(SoundType.WOOD)
+//                                    .noOcclusion()
+//                            )
+//            );
 
 
     //
