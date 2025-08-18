@@ -132,10 +132,14 @@ public class FishingBobEntity extends Projectile
 
         for (FishProperties fp : Fishes.entries)
         {
-            for (int i = 0; i < fp.getChance(level(), blockPosition(), bobber, bait); i++)
+            int chance = fp.getChance(level(), blockPosition(), bobber, bait);
+            if(chance > 0) System.out.println("fish: " + fp.fish + ": " +  chance);
+
+            for (int i = 0; i < chance; i++)
             {
                 available.add(fp);
             }
+
         }
 
         if (available.isEmpty()) available.add(Fishes.STICK);

@@ -176,15 +176,25 @@ public record Fishes()
             Items.STICK,
             List.of(getDimResourceKey("asha")),
             null,
-            3
+            2
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties GOLD_NUGGET = new FishProperties(
             Items.GOLD_NUGGET,
             List.of(getDimResourceKey("asha")),
             null,
-            3
+            2
     ).skipsMinigame().doesNotConsumeBait();
+
+    public static final FishProperties GOLD_INGOT = new FishProperties(
+            Items.GOLD_INGOT,
+            List.of(getDimResourceKey("asha")),
+            null,
+            3
+    )
+            .skipsMinigame()
+            .doesNotConsumeBait()
+            .timeRestrictions(FishProperties.daytime.MIDNIGHT);
 
     public static final FishProperties BLUETALE = new FishProperties(
             ModItems.BLUETALE.get(),
@@ -209,6 +219,128 @@ public record Fishes()
 
 
 
+    public static final FishProperties RED_HERRING = new FishProperties(
+            ModItems.RED_HERRING.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            5
+    );
+
+
+    public static final FishProperties AVIAN = new FishProperties(
+            ModItems.AVIAN.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            2
+    ).timeRestrictions(FishProperties.daytime.NIGHT);
+
+
+    public static final FishProperties TWILIGHT_TROUT = new FishProperties(
+            ModItems.TWILIGHT_TROUT.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            10
+    ).timeRestrictions(FishProperties.daytime.MIDNIGHT);
+
+
+    public static final FishProperties THUNDERCHARGED_EEL = new FishProperties(
+            ModItems.THUNDERCHARGED_EEL.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            25
+    )
+            .mustBeThundering()
+            .timeRestrictions(FishProperties.daytime.NIGHT);
+
+
+    public static final FishProperties EEL = new FishProperties(
+            ModItems.EEL.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            5
+    )
+            .timeRestrictions(FishProperties.daytime.NIGHT);
+
+
+    public static final FishProperties MEADOW_PERCH = new FishProperties(
+            ModItems.MEADOW_PERCH.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            5
+    )
+            .timeRestrictions(FishProperties.daytime.DAY);
+
+
+    public static final FishProperties SOLAR_CARP = new FishProperties(
+            ModItems.SOLAR_CARP.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            5
+    )
+            .timeRestrictions(FishProperties.daytime.DAY)
+            .biomeBlacklist(getBiomeResourceKey("asha_ocean"));
+
+
+    public static final FishProperties VERY_TINY_SHARK = new FishProperties(
+            ModItems.VERY_TINY_SHARK.get(),
+            List.of(getDimResourceKey("asha")),
+            List.of(getBiomeResourceKey("asha_ocean")),
+            2
+    );
+
+    public static final FishProperties AZURE_TUNA = new FishProperties(
+            ModItems.AZURE_TUNA.get(),
+            List.of(getDimResourceKey("asha")),
+            List.of(getBiomeResourceKey("asha_ocean")),
+            5
+    );
+
+    public static final FishProperties SCARLET_TUNA = new FishProperties(
+            ModItems.AZURE_TUNA.get(),
+            List.of(getDimResourceKey("asha")),
+            List.of(getBiomeResourceKey("asha_ocean")),
+            5
+    );
+
+    public static final FishProperties SAGE_TUNA = new FishProperties(
+            ModItems.AZURE_TUNA.get(),
+            List.of(getDimResourceKey("asha")),
+            List.of(getBiomeResourceKey("asha_ocean")),
+            5
+    );
+
+    public static final FishProperties KARPENJOE = new FishProperties(
+            ModItems.KARPENJOE.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            1
+    )
+            .timeRestrictions(FishProperties.daytime.DAY)
+            .mustBeClear()
+            .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 10)
+            .biomeBlacklist(getBiomeResourceKey("asha_ocean"));
+
+    public static final FishProperties STORMSAIL_RAY = new FishProperties(
+            ModItems.STORMSAIL_RAY.get(),
+            List.of(getDimResourceKey("asha")),
+            List.of(getBiomeResourceKey("asha_ocean")),
+            15
+    )
+            .mustBeRaining();
+
+    public static final FishProperties SUNFANG_EEL = new FishProperties(
+            ModItems.SUNFANG_EEL.get(),
+            List.of(getDimResourceKey("asha")),
+            null,
+            5
+    )
+            .timeRestrictions(FishProperties.daytime.DAY)
+            .mustBeClear();
+
+
+
+
+
     //
     //,--.
     //|  | ,--.,--. ,--,--,   ,--,--. ,--,--,--.  ,--,--. ,--.--.
@@ -216,6 +348,7 @@ public record Fishes()
     //|  | '  ''  ' |  ||  | \ '-'  | |  |  |  | \ '-'  | |  |
     //`--'  `----'  `--''--'  `--`--' `--`--`--'  `--`--' `--'
     //
+
 
 
     public static final FishProperties GLIMPUFF = new FishProperties(
@@ -280,7 +413,31 @@ public record Fishes()
     }
 
 
-    public static final List<FishProperties> entries = List.of(LEATHER_BOOTS, WHEAT_SEEDS, BONE, STRING, BOWL, INK_SAC, TRIPWIRE_HOOK,
-            ROTTEN_FLESH, BAMBOO, LILY_PAD, SALMON, COD,AXOLOTL_BUCKET, STICK_ASHA, GOLD_NUGGET, BLUETALE, REDTALE, SEAGRASS, SNOWBALL);
+    public static final List<FishProperties> entries = List.of(
+            LEATHER_BOOTS,
+            WHEAT_SEEDS,
+            BONE, STRING,
+            BOWL, INK_SAC,
+            TRIPWIRE_HOOK,
+            ROTTEN_FLESH, BAMBOO,
+            LILY_PAD, SALMON,
+            COD,AXOLOTL_BUCKET,
+            STICK_ASHA, GOLD_INGOT,
+            GOLD_NUGGET,
+            BLUETALE, REDTALE,
+            SEAGRASS, SNOWBALL,
+            GLIMPUFF, BUBBLEMOUTH,
+            SUNFANG_EEL, STORMSAIL_RAY,
+            MOONRAY, KARPENJOE,
+            AZURE_TUNA, SCARLET_TUNA, SAGE_TUNA,
+            VERY_TINY_SHARK,
+            SOLAR_CARP, MEADOW_PERCH,
+            EEL, THUNDERCHARGED_EEL,
+            RED_HERRING, AVIAN,
+            TWILIGHT_TROUT
+
+
+
+    );
 
 }

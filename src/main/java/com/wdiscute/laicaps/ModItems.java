@@ -15,6 +15,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
@@ -27,7 +30,6 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -323,19 +325,19 @@ public class ModItems
     public static final DeferredItem<Item> SWIBBLE_SPAWN_EGG = ITEMS.register("swibble_spawn_egg", () -> new SpawnEggItem(ModEntities.SNUFFLER.get(), 4892577, 13534776, new Item.Properties()));
 
 
-    public static final DeferredItem<Item> BLUETALE = ITEMS.register("bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
-    public static final DeferredItem<Item> COOKED_BLUETALE = ITEMS.register("cooked_bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
+    public static final DeferredItem<Item> BLUETALE = ITEMS.register("bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> COOKED_BLUETALE = ITEMS.register("cooked_bluetale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BASIC_FISH)));
     public static final DeferredItem<Item> BLUETALE_BUCKET = ITEMS.register("bluetale_bucket", () -> new MobBucketItem(ModEntities.BLUETALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final DeferredItem<Item> BLUETALE_SPAWN_EGG = ITEMS.register("bluetale_spawn_egg", () -> new SpawnEggItem(ModEntities.BLUETALE.get(), 9429956, 10858979, new Item.Properties()));
 
 
-    public static final DeferredItem<Item> REDTALE = ITEMS.register("redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
-    public static final DeferredItem<Item> COOKED_REDTALE = ITEMS.register("cooked_redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
+    public static final DeferredItem<Item> REDTALE = ITEMS.register("redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> COOKED_REDTALE = ITEMS.register("cooked_redtale", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BASIC_FISH)));
     public static final DeferredItem<Item> REDTALE_BUCKET = ITEMS.register("redtale_bucket", () -> new MobBucketItem(ModEntities.REDTALE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final DeferredItem<Item> REDTALE_SPAWN_EGG = ITEMS.register("redtale_spawn_egg", () -> new SpawnEggItem(ModEntities.BUBBLEMOUTH.get(), 9429956, 14919099, new Item.Properties()));
 
-    public static final DeferredItem<Item> BUBBLEMOUTH = ITEMS.register("bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
-    public static final DeferredItem<Item> COOKED_BUBBLEMOUTH = ITEMS.register("cooked_bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
+    public static final DeferredItem<Item> BUBBLEMOUTH = ITEMS.register("bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> COOKED_BUBBLEMOUTH = ITEMS.register("cooked_bubblemouth", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BASIC_FISH)));
     public static final DeferredItem<Item> BUBBLEMOUTH_BUCKET = ITEMS.register("bubblemouth_bucket", () -> new MobBucketItem(ModEntities.BUBBLEMOUTH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final DeferredItem<Item> BUBBLEMOUTH_SPAWN_EGG = ITEMS.register("bubblemouth_spawn_egg", () -> new SpawnEggItem(ModEntities.BUBBLEMOUTH.get(), 9429956, 14919099, new Item.Properties()));
 
@@ -344,14 +346,64 @@ public class ModItems
     public static final DeferredItem<Item> MOONRAY_SPAWN_EGG = ITEMS.register("moonray_spawn_egg", () -> new SpawnEggItem(ModEntities.MOONRAY.get(), 9429956, 14919099, new Item.Properties()));
 
 
-    public static final DeferredItem<Item> GLIMPUFF = ITEMS.register("glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_BLUETALE)));
-    public static final DeferredItem<Item> COOKED_GLIMPUFF = ITEMS.register("cooked_glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BLUETALE)));
+    public static final DeferredItem<Item> GLIMPUFF = ITEMS.register("glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> COOKED_GLIMPUFF = ITEMS.register("cooked_glimpuff", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_BASIC_FISH)));
     public static final DeferredItem<Item> GLIMPUFF_BUCKET = ITEMS.register("glimpuff_bucket", () -> new MobBucketItem(ModEntities.GLIMPUFF.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1).component(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY)));
     public static final DeferredItem<Item> GLIMPUFF_SPAWN_EGG = ITEMS.register("glimpuff_spawn_egg", () -> new SpawnEggItem(ModEntities.GLIMPUFF.get(), 9429956, 14919099, new Item.Properties()));
 
 
     public static final DeferredItem<Item> NIMBLE_SPAWN_EGG = ITEMS.register("nimble_spawn_egg", () -> new SpawnEggItem(ModEntities.NIMBLE.get(), 14531970, 14714721, new Item.Properties()));
     public static final DeferredItem<Item> NIMBLE_SWEET_TREAT = ITEMS.register("nimble_sweet_treat", () -> new Item(new Item.Properties()));
+
+    //fishing fishes
+    public static final DeferredItem<Item> RED_HERRING = ITEMS.register("red_herring", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> AVIAN = ITEMS.register("avian", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> TWILIGHT_TROUT = ITEMS.register("twilight_trout", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> EEL = ITEMS.register("eel", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> MEADOW_PERCH = ITEMS.register("meadow_perch", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SOLAR_CARP = ITEMS.register("solar_carp", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> VERY_TINY_SHARK = ITEMS.register("very_tiny_shark", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> AZURE_TUNA = ITEMS.register("azure_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SCARLET_TUNA = ITEMS.register("scarlet_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SAGE_TUNA = ITEMS.register("sage_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> KARPENJOE = ITEMS.register("karpenjoe", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> STORMSAIL_RAY = ITEMS.register("stormsail_ray", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SUNFANG_EEL = ITEMS.register("sunfang_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+
+
+    //todo add mobeffect that makes player unable to move because of being zapped
+    public static final DeferredItem<Item> THUNDERCHARGED_EEL = ITEMS.register(
+            "thundercharged_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.THUNDERCHARGED_EEL))
+            {
+                @Override
+                public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
+                {
+                    if(isSelected && entity instanceof ServerPlayer sp)
+                    {
+                        Random r = new Random();
+                        if(r.nextFloat() > 0.99f)
+                        {
+                            var damage = entity.damageSources().damageTypes;
+                            var holder = damage.getHolderOrThrow(DamageTypes.LIGHTNING_BOLT);
+                            entity.hurt(new DamageSource(holder), 0.5f);
+
+                            if(r.nextFloat() > 0.9f)
+                            {
+                                stack.shrink(1);
+                                sp.addItem(new ItemStack(ModItems.EEL.get()));
+                            }
+                        }
+                    }
+                    super.inventoryTick(stack, level, entity, slotId, isSelected);
+                }
+            });
+
+
+
+
+
+
+
 
 
     public static final DeferredItem<Item> OAKHEART_BERRIES = ITEMS.register(

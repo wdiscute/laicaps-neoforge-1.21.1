@@ -5,7 +5,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 
 public class ModFoodProperties
 {
@@ -41,12 +40,12 @@ public class ModFoodProperties
             .build();
 
 
-    public static final FoodProperties COOKED_BLUETALE = new FoodProperties.Builder()
+    public static final FoodProperties COOKED_BASIC_FISH = new FoodProperties.Builder()
             .nutrition(5)
             .saturationModifier(0.6f)
             .build();
 
-    public static final FoodProperties RAW_BLUETALE = new FoodProperties.Builder()
+    public static final FoodProperties BASIC_RAW_FISH = new FoodProperties.Builder()
             .nutrition(2)
             .saturationModifier(0.1f)
             .build();
@@ -63,8 +62,22 @@ public class ModFoodProperties
             .effect(new MobEffectInstance(MobEffects.POISON, 100, 0), 0.6F)
             .build();
 
+    public static final FoodProperties THUNDERCHARGED_EEL = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(2)
+            .effect(new MobEffectInstance(MobEffects.POISON, 100, 2), 1F)
+            .build();
 
+    public static final FoodProperties EEL = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(2)
+            .effect(new MobEffectInstance(MobEffects.POISON, 100, 1), 1F)
+            .build();
 
-
+    public static final FoodProperties KARPENJOE = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(2)
+            .effect(new MobEffectInstance(MobEffects.ABSORPTION, 6000, 3), 1F)
+            .build();
 }
 

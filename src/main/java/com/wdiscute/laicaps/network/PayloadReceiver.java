@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps.network;
 
 import com.wdiscute.laicaps.ModDataAttachments;
+import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
 import com.wdiscute.laicaps.fishing.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
@@ -9,10 +10,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.List;
@@ -35,6 +39,14 @@ public class PayloadReceiver
                 {
                     if (data.time() != -1)
                     {
+                        if(fbe.stack.is(ModItems.THUNDERCHARGED_EEL))
+                        {
+                            LightningBolt strike = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+                            strike.setPos(fbe.position());
+                            strike.setVisualOnly(true);
+                            level.addFreshEntity(strike);
+                        }
+
                         Entity itemFished = new ItemEntity(
                                 level,
                                 fbe.position().x,

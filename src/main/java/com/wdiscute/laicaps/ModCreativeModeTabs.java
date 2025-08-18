@@ -166,16 +166,6 @@ public class ModCreativeModeTabs
                                 output.accept(ModBlocks.MAGENTA_SWEETLILY.get());
                                 output.accept(ModBlocks.CHERRY_SWEETLILY.get());
 
-                                //bluetale & redtale
-                                output.accept(ModItems.BLUETALE.get());
-                                output.accept(ModItems.BLUETALE_SPAWN_EGG.get());
-                                output.accept(ModItems.COOKED_BLUETALE.get());
-                                output.accept(ModItems.BLUETALE_BUCKET.get());
-                                output.accept(ModItems.REDTALE.get());
-                                output.accept(ModItems.REDTALE_SPAWN_EGG.get());
-                                output.accept(ModItems.COOKED_REDTALE.get());
-                                output.accept(ModItems.REDTALE_BUCKET.get());
-
                                 //snuffler
                                 output.accept(ModItems.SNUFFLER_SPAWN_EGG.get());
                                 output.accept(ModItems.SNUFFLER_CHOP.get());
@@ -190,7 +180,31 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.JAR.get());
                                 output.accept(ModItems.STARFLIES_JAR.get());
 
+                                //bluetale & redtale
+                                output.accept(ModItems.BLUETALE.get());
+                                output.accept(ModItems.BLUETALE_SPAWN_EGG.get());
+                                output.accept(ModItems.COOKED_BLUETALE.get());
+                                output.accept(ModItems.BLUETALE_BUCKET.get());
+                                output.accept(ModItems.REDTALE.get());
+                                output.accept(ModItems.REDTALE_SPAWN_EGG.get());
+                                output.accept(ModItems.COOKED_REDTALE.get());
+                                output.accept(ModItems.REDTALE_BUCKET.get());
 
+                                //fishing
+                                output.accept(ModItems.RED_HERRING.get());
+                                output.accept(ModItems.AVIAN.get());
+                                output.accept(ModItems.TWILIGHT_TROUT.get());
+                                output.accept(ModItems.THUNDERCHARGED_EEL.get());
+                                output.accept(ModItems.EEL.get());
+                                output.accept(ModItems.MEADOW_PERCH.get());
+                                output.accept(ModItems.SOLAR_CARP.get());
+                                output.accept(ModItems.VERY_TINY_SHARK.get());
+                                output.accept(ModItems.AZURE_TUNA.get());
+                                output.accept(ModItems.SCARLET_TUNA.get());
+                                output.accept(ModItems.SAGE_TUNA.get());
+                                output.accept(ModItems.KARPENJOE.get());
+                                output.accept(ModItems.STORMSAIL_RAY.get());
+                                output.accept(ModItems.SUNFANG_EEL.get());
 
                             })
                             .build()

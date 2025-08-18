@@ -397,6 +397,75 @@
   "item.laicaps.redtale_bucket" : "Bucket of Redtale",
 
 
+
+
+  "item.laicaps.red_herring" : "Red Herring",
+  "tooltip.laicaps.red_herring.0" : "A great sign of more fishes to come!",
+  "tooltip.laicaps.red_herring.1" : "Or maybe that's why it's got that name?",
+
+  "item.laicaps.avian" : "Avian",
+  "tooltip.laicaps.avian.0" : "A rare type of fish that is found at night.",
+
+  "item.laicaps.twilight_trout" : "Twilight Trout",
+  "tooltip.laicaps.twilight_trout.0" : "A rare trout which only surfaces around midnight.",
+
+  "item.laicaps.thundercharged_eel" : "Thundercharged Eel",
+  "tooltip.laicaps.thundercharged_eel.0" : "This Eel was hit by a lightning strike",
+  "tooltip.laicaps.thundercharged_eel.1" : "and became electrified. Better not to touch it.",
+
+  "item.laicaps.eel" : "Eel",
+  "tooltip.laicaps.eel.0" : "A slithery Eel.",
+
+  "item.laicaps.meadow_perch" : "Meadow Perch",
+  "tooltip.laicaps.meadow_perch.0" : "A beautiful perch. Would make for a great",
+  "tooltip.laicaps.meadow_perch.1" : "meal if it weren't for it's sharp scales.",
+
+  "item.laicaps.solar_carp" : "Solar Carp",
+  "tooltip.laicaps.solar_carp.0" : "A carp most common to surface during daytime.",
+  "tooltip.laicaps.solar_carp.1" : "Easy enough to catch, makes for a decent",
+  "tooltip.laicaps.solar_carp.2" : "meal when prepared correctly.",
+
+  "item.laicaps.very_tiny_shark" : "Very Tiny Shark",
+  "tooltip.laicaps.very_tiny_shark.0" : "An incredibly tiny shark! Although small, still fierce.",
+
+  "item.laicaps.azure_tuna" : "Azure Tuna",
+  "tooltip.laicaps.azure_tuna.0" : "A beautiful azure-tinted Tuna.",
+  "tooltip.laicaps.azure_tuna.1" : "A common catch in the high sea.",
+
+  "item.laicaps.scarlet_tuna" : "Scarlet Tuna",
+  "tooltip.laicaps.scarlet_tuna.0" : "A beautiful scarlet-tinted Tuna.",
+  "tooltip.laicaps.scarlet_tuna.1" : "A common catch in the high sea.",
+
+  "item.laicaps.sage_tuna" : "Azure Tuna",
+  "tooltip.laicaps.sage_tuna.0" : "A beautiful sage-tinted Tuna.",
+  "tooltip.laicaps.sage_tuna.1" : "A common catch in the high sea.",
+
+  "item.laicaps.karpenjoe" : "Karpenjoe",
+  "tooltip.laicaps.karpenjoe.0" : "A majestic carp glowing in modding knowledge.",
+  "tooltip.laicaps.karpenjoe.1" : "It is said anglers eat it for good luck before debugging.",
+
+  "item.laicaps.stormsail_ray" : "Stormsail Ray",
+  "tooltip.laicaps.stormsail_ray.0" : "A rare ray which surfaces only whilst raining.",
+  "tooltip.laicaps.stormsail_ray.1" : "Unfortunately it's thick meat doesn't allow",
+  "tooltip.laicaps.stormsail_ray.2" : "for much other than admiring.",
+
+  "item.laicaps.sunfang_eel" : "Sunfang Eel",
+  "tooltip.laicaps.sunfang_eel.0" : "An Eel who hate the rain and will hide",
+  "tooltip.laicaps.sunfang_eel.1" : "away at any sign of precipitation.",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   "entity.laicaps.bubblemouth" : "Bubblemouth",
   "item.laicaps.bubblemouth_spawn_egg" : "Bubblemouth Spawn Egg",
   "item.laicaps.bubblemouth" : "Bubblemouth",
