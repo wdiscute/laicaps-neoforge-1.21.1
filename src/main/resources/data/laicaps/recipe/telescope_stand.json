@@ -3,9 +3,6 @@
   "category": "misc",
   "group": "telescope",
   "key": {
-    "B": {
-      "item": "minecraft:book"
-    },
     "W": {
       "tag": "minecraft:wooden_slabs"
     },
@@ -18,7 +15,7 @@
   },
   "pattern": [
     " S ",
-    "SBS",
+    "S S",
     "LWL"
   ],
   "result": {

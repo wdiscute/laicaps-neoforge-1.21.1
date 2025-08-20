@@ -21,7 +21,9 @@ import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.*;
+import com.wdiscute.laicaps.toast.EntryUnlockedToast;
 import com.wdiscute.laicaps.worldgen.ModFeatures;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
@@ -79,9 +81,16 @@ public class Laicaps
         return ResourceLocation.fromNamespaceAndPath(Laicaps.MOD_ID, s);
     }
 
+
+    public static void sendToast(String menuName, String entryName)
+    {
+        Minecraft.getInstance().getToasts().addToast(new EntryUnlockedToast(menuName, entryName));
+    }
+
+
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
-        NeoForge.EVENT_BUS.addListener(this::ModifyItemTooltip);
+        NeoForge.EVENT_BUS.addListener(this::modifyItemTooltip);
         //NeoForge.EVENT_BUS.addListener(this::ceilingStuff);
 
         ModCreativeModeTabs.register(modEventBus);
@@ -135,7 +144,7 @@ public class Laicaps
         }
     }
 
-    public void ModifyItemTooltip(ItemTooltipEvent event)
+    public void modifyItemTooltip(ItemTooltipEvent event)
     {
         List<Component> tooltipComponents = event.getToolTip();
         ItemStack stack = event.getItemStack();

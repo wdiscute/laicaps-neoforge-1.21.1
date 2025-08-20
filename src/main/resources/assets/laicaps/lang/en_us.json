@@ -436,7 +436,7 @@
   "tooltip.laicaps.scarlet_tuna.0" : "A beautiful scarlet-tinted Tuna.",
   "tooltip.laicaps.scarlet_tuna.1" : "A common catch in the high sea.",
 
-  "item.laicaps.sage_tuna" : "Azure Tuna",
+  "item.laicaps.sage_tuna" : "Sage Tuna",
   "tooltip.laicaps.sage_tuna.0" : "A beautiful sage-tinted Tuna.",
   "tooltip.laicaps.sage_tuna.1" : "A common catch in the high sea.",
 
@@ -658,11 +658,11 @@
 
 
 
-
+  "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
 
   "gui.astronomy_research_table.menu.entry1.image" : "menu_illustration_1",
   "gui.astronomy_research_table.menu.entry1.name" : "      Introduction",
-
+  "gui.astronomy_research_table.menu.entry1.toast" : "Introduction",
 
 
   "gui.astronomy_research_table.menu.entry1.left.2" : "If I am to succeed into my space",
@@ -689,6 +689,7 @@
 
   "gui.astronomy_research_table.menu.entry2.image" : "menu_illustration_2",
   "gui.astronomy_research_table.menu.entry2.name" : " About the Telescope",
+  "gui.astronomy_research_table.menu.entry2.toast" : "About the Telescope",
 
   "gui.astronomy_research_table.menu.entry2.left.2" : "The first step of space travel is",
   "gui.astronomy_research_table.menu.entry2.left.3" : "picking a good target. For that",
@@ -715,16 +716,18 @@
 
 
   "gui.astronomy_research_table.menu.entry3.name" : "      MENU - 3",
-  "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP  fuel guide §c§k!!!§r",
+  "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP  spaceship guide §c§k!!!§r",
 
   "gui.astronomy_research_table.menu.entry4.name" : "      MENU - 4",
-  "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP  astronomy table guide §c§k!!!§r",
+  "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP  fishing guide §c§k!!!§r",
 
 
 
 
 
   "gui.astronomy_research_table.ember.entry1.name" : "      §cEmber§r - Planet",
+  "gui.astronomy_research_table.ember.entry1.toast" : "Ember - Planet",
+
   "gui.astronomy_research_table.ember.entry1.image" : "ember_illustration_1",
 
   "gui.astronomy_research_table.ember.entry1.left.10" : "               §c§k!!!§r   §cEMBER   §c§k!!!§r",
@@ -760,6 +763,7 @@
 
 
   "gui.astronomy_research_table.ember.entry2.name" : "      Ember - 2",
+  "gui.astronomy_research_table.ember.entry2.toast" : "Ember - 2",
   "gui.astronomy_research_table.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
   "gui.astronomy_research_table.ember.entry3.name" : "      Ember - 3",
@@ -772,6 +776,7 @@
 
 
   "gui.astronomy_research_table.asha.entry1.name" : "       §dAsha§r - Planet",
+  "gui.astronomy_research_table.asha.entry1.toast" : "Asha - Planet",
   "gui.astronomy_research_table.asha.entry1.image" : "asha_illustration_1",
 
   "gui.astronomy_research_table.asha.entry1.left.9" : "               §d§k!!!§r   §dASHA   §d§k!!!§r",
@@ -808,6 +813,7 @@
 
 
   "gui.astronomy_research_table.asha.entry2.name" : "  §dAsha§r - Fauna & Flora",
+  "gui.astronomy_research_table.asha.entry2.toast" : "Asha - Fauna & Flora",
   "gui.astronomy_research_table.asha.entry2.image" : "asha_illustration_2",
 
   "gui.astronomy_research_table.asha.entry2.left.11" : "The whole planet feels familiar.",

@@ -1,14 +1,21 @@
 package com.wdiscute.laicaps.item;
 
+import com.wdiscute.laicaps.AdvHelper;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,11 +23,51 @@ import java.util.Random;
 
 public class EntryItem extends Item
 {
-    public EntryItem(Properties properties)
+    public EntryItem(String planet, Properties properties)
     {
         super(properties);
+        this.planet = planet;
     }
 
+    private final String planet;
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+    {
+
+        if (awardEntry(player, planet))
+        {
+            ItemStack is = player.getItemInHand(usedHand);
+            is.shrink(1);
+            return InteractionResultHolder.consume(is);
+        }
+
+        return super.use(level, player, usedHand);
+    }
+
+
+    private static boolean awardEntry(Player player, String planet)
+    {
+        if (player instanceof ServerPlayer sp)
+        {
+            Random r = new Random();
+
+            List<String> result = new ArrayList<>();
+            AdvHelper.getEntriesRemainingAsIterable(sp, planet + "_entries").forEach(result::add);
+            String criteria = result.get(r.nextInt(result.size()));
+
+            if (criteria.equals("none"))
+            {
+                sp.displayClientMessage(Component.literal("There are no entries left to unlock"), true);
+                return false;
+            }
+            sp.displayClientMessage(Component.translatable("tooltip.laicaps.entry_page.unlock.before").append(Component.translatable("gui.astronomy_research_table." + planet + "." + criteria + ".name")).append(Component.translatable("tooltip.laicaps.entry_page.unlock.after")), true);
+            AdvHelper.awardAdvancementCriteria(sp, planet + "_entries", criteria);
+            return true;
+        }
+
+        return false;
+    }
 
     @OnlyIn(Dist.CLIENT)
     @Override

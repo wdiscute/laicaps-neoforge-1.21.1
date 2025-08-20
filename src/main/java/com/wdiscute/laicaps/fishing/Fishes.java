@@ -200,7 +200,7 @@ public record Fishes()
             ModItems.BLUETALE.get(),
             List.of(getDimResourceKey("asha")),
             null,
-            5
+            522
     )
             .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20)
             .canBeBucketed(ModItems.BLUETALE_BUCKET.get());

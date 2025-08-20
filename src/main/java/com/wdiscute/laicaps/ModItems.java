@@ -6,32 +6,18 @@ import com.wdiscute.laicaps.item.StarcatcherFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.resources.language.I18n;
+import com.wdiscute.laicaps.toast.ToastItem;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ModItems
 {
@@ -66,6 +52,9 @@ public class ModItems
     public static final DeferredItem<Item> FAST_BITING_BOBBER = ITEMS.register("fast_biting_bobber", () -> new Item(new Item.Properties()));
 
 
+
+    public static final DeferredItem<Item> TOAST = ITEMS.register("toast", () -> new ToastItem(new Item.Properties()));
+
     //
     //,--.   ,--. ,--.  ,---.    ,-----.
     //|   `.'   | |  | '   .-'  '  .--./
@@ -83,91 +72,34 @@ public class ModItems
 
     public static final DeferredItem<Item> EMBER_ENTRY = ITEMS.register(
             "ember_entry", () ->
-                    new EntryItem(new Item.Properties()
-                            .rarity(Rarity.RARE)
+                    new EntryItem("ember",new Item.Properties()
+                            .rarity(Rarity.UNCOMMON)
                             .stacksTo(1)
                             .component(ModDataComponents.ENTRY_NAME, "Ember Entry Page")
-                    )
-                    {
-                        @Override
-                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
-                        {
-
-                            if (awardEntry(player, "ember"))
-                            {
-                                ItemStack is = player.getItemInHand(usedHand);
-                                is.shrink(1);
-                                return InteractionResultHolder.consume(is);
-                            }
-
-                            return super.use(level, player, usedHand);
-                        }
-                    });
+                    ));
 
     public static final DeferredItem<Item> ASHA_ENTRY = ITEMS.register(
             "asha_entry", () ->
-                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                    new EntryItem("asha", new Item.Properties().rarity(Rarity.RARE)
+                            .rarity(Rarity.UNCOMMON)
                             .stacksTo(1)
-                            .component(ModDataComponents.ENTRY_NAME, "Asha Entry Page"))
-                    {
-                        @Override
-                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
-                        {
-
-                            if (awardEntry(player, "asha"))
-                            {
-                                ItemStack is = player.getItemInHand(usedHand);
-                                is.shrink(1);
-                                return InteractionResultHolder.consume(is);
-                            }
-
-                            return super.use(level, player, usedHand);
-                        }
-                    });
+                            .component(ModDataComponents.ENTRY_NAME, "Asha Entry Page")));
 
     public static final DeferredItem<Item> OVERWORLD_ENTRY = ITEMS.register(
             "overworld_entry", () ->
-                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                    new EntryItem("overworld", new Item.Properties().rarity(Rarity.RARE)
+                            .rarity(Rarity.UNCOMMON)
                             .stacksTo(1)
                             .component(ModDataComponents.ENTRY_NAME, "Overworld Entry Page")
-                    )
-                    {
-                        @Override
-                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
-                        {
-
-                            if (awardEntry(player, "overworld"))
-                            {
-                                ItemStack is = player.getItemInHand(usedHand);
-                                is.shrink(1);
-                                return InteractionResultHolder.consume(is);
-                            }
-
-                            return super.use(level, player, usedHand);
-                        }
-                    });
+                    ));
 
     public static final DeferredItem<Item> LUNAMAR_ENTRY = ITEMS.register(
             "lunamar_entry", () ->
-                    new EntryItem(new Item.Properties().rarity(Rarity.RARE)
+                    new EntryItem("lunamar", new Item.Properties().rarity(Rarity.RARE)
+                            .rarity(Rarity.UNCOMMON)
                             .stacksTo(1)
                             .component(ModDataComponents.ENTRY_NAME, "Lunamar Entry Page")
-                    )
-                    {
-                        @Override
-                        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
-                        {
-
-                            if (awardEntry(player, "lunamar"))
-                            {
-                                ItemStack is = player.getItemInHand(usedHand);
-                                is.shrink(1);
-                                return InteractionResultHolder.consume(is);
-                            }
-
-                            return super.use(level, player, usedHand);
-                        }
-                    });
+                    ));
 
     //
     // ,-----. ,--.  ,--. ,--. ,------.   ,---.
@@ -207,73 +139,30 @@ public class ModItems
     //
 
 
-    public static final DeferredItem<Item> ROCKET = ITEMS.register("rocket", () -> new SpaceshipItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
-
     public static final DeferredItem<Item> TANK = ITEMS.register(
-            "tank", () -> new Item(new Item.Properties()
+            "tank", () -> new TankItem("small", 400, new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
                     .component(ModDataComponents.FUEL, 0)
                     .durability(400)
-                    .setNoRepair()
-            )
-            {
-                @Override
-                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-                {
-                    setHoverTextForTanks(stack, tooltipComponents, "small");
-                }
-
-                @Override
-                public int getDamage(ItemStack stack)
-                {
-                    return (400 - stack.get(ModDataComponents.FUEL) == 0) ? 1 : 400 - stack.get(ModDataComponents.FUEL);
-                }
-            });
+                    .setNoRepair()));
 
     public static final DeferredItem<Item> MEDIUM_TANK = ITEMS.register(
-            "medium_tank", () -> new Item(new Item.Properties()
+            "medium_tank", () -> new TankItem("medium", 800, new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
                     .component(ModDataComponents.FUEL, 0)
                     .durability(800)
-                    .setNoRepair())
-            {
-                @Override
-                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-                {
-                    setHoverTextForTanks(stack, tooltipComponents, "medium");
-                }
-
-                @Override
-                public int getDamage(ItemStack stack)
-                {
-                    return (800 - stack.get(ModDataComponents.FUEL) == 0) ? 1 : 800 - stack.get(ModDataComponents.FUEL);
-                }
-            });
+                    .setNoRepair()));
 
 
     public static final DeferredItem<Item> LARGE_TANK = ITEMS.register(
-            "large_tank", () -> new Item(new Item.Properties()
+            "large_tank", () -> new TankItem("large", 1500, new Item.Properties()
                     .rarity(Rarity.RARE)
                     .stacksTo(1)
                     .durability(1500)
                     .component(ModDataComponents.FUEL, 0)
-                    .setNoRepair())
-            {
-                @Override
-                public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-                {
-
-                    setHoverTextForTanks(stack, tooltipComponents, "large");
-                }
-
-                @Override
-                public int getDamage(ItemStack stack)
-                {
-                    return (1500 - stack.get(ModDataComponents.FUEL) == 0) ? 1 : 1500 - stack.get(ModDataComponents.FUEL);
-                }
-            });
+                    .setNoRepair()));
 
     public static final DeferredItem<Item> ENDERBLAZE_FUEL = ITEMS.register("enderblaze_fuel", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final DeferredItem<Item> PRISTINE_ENDERPEARL_DUST = ITEMS.register("pristine_enderpearl_dust", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
@@ -294,33 +183,15 @@ public class ModItems
     //
 
 
-    public static final DeferredItem<Item> STARFLIES_JAR = ITEMS.register(
-            "starflies_jar",
-            () -> new Item(new Item.Properties().stacksTo(1))
-            {
-                @Override
-                public InteractionResult useOn(UseOnContext context)
-                {
-                    if (context.getLevel().getBlockState(context.getClickedPos().above()).isAir())
-                    {
-                        context.getLevel().setBlockAndUpdate(context.getClickedPos().above(), ModBlocks.STARFLIES_BLOCK.get().defaultBlockState());
-                        context.getItemInHand().shrink(1);
-                        context.getPlayer().addItem(new ItemStack(ModItems.JAR.get()));
-                        return InteractionResult.SUCCESS;
-                    }
-
-                    return super.useOn(context);
-                }
-            });
-
+    public static final DeferredItem<Item> STARFLIES_JAR = ITEMS.register("starflies_jar", () -> new Starflies_jar(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> JAR = ITEMS.register("jar", () -> new Item(new Item.Properties().stacksTo(16)));
-
 
     public static final DeferredItem<Item> SWEETLILY_SUGAR = ITEMS.register("sweetlily_sugar", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> SNUFFLER_CHOP = ITEMS.register("snuffler_chop", () -> new Item(new Item.Properties().food(ModFoodProperties.SNUFFLER_CHOP)));
     public static final DeferredItem<Item> COOKED_SNUFFLER_CHOP = ITEMS.register("cooked_snuffler_chop", () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_SNUFFLER_CHOP)));
     public static final DeferredItem<Item> SNUFFLER_SPAWN_EGG = ITEMS.register("snuffler_spawn_egg", () -> new SpawnEggItem(ModEntities.SNUFFLER.get(), 15971928, 13534776, new Item.Properties()));
+
 
     public static final DeferredItem<Item> SWIBBLE_SPAWN_EGG = ITEMS.register("swibble_spawn_egg", () -> new SpawnEggItem(ModEntities.SNUFFLER.get(), 4892577, 13534776, new Item.Properties()));
 
@@ -373,30 +244,7 @@ public class ModItems
 
     //todo add mobeffect that makes player unable to move because of being zapped
     public static final DeferredItem<Item> THUNDERCHARGED_EEL = ITEMS.register(
-            "thundercharged_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.THUNDERCHARGED_EEL))
-            {
-                @Override
-                public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
-                {
-                    if(isSelected && entity instanceof ServerPlayer sp)
-                    {
-                        Random r = new Random();
-                        if(r.nextFloat() > 0.99f)
-                        {
-                            var damage = entity.damageSources().damageTypes;
-                            var holder = damage.getHolderOrThrow(DamageTypes.LIGHTNING_BOLT);
-                            entity.hurt(new DamageSource(holder), 0.5f);
-
-                            if(r.nextFloat() > 0.9f)
-                            {
-                                stack.shrink(1);
-                                sp.addItem(new ItemStack(ModItems.EEL.get()));
-                            }
-                        }
-                    }
-                    super.inventoryTick(stack, level, entity, slotId, isSelected);
-                }
-            });
+            "thundercharged_eel", () -> new ThunderchargedEel(new Item.Properties().food(ModFoodProperties.THUNDERCHARGED_EEL)));
 
 
 
@@ -423,7 +271,6 @@ public class ModItems
     public static final DeferredItem<Item> OAKHEART_BOAT = ITEMS.register("oakheart_boat", () -> new ModBoatItem(false, ModBoatEntity.Type.OAKHEART, new Item.Properties().stacksTo(16)));
     public static final DeferredItem<Item> OAKHEART_CHEST_BOAT = ITEMS.register("oakheart_chest_boat", () -> new ModBoatItem(true, ModBoatEntity.Type.OAKHEART, new Item.Properties().stacksTo(16)));
 
-
     public static final DeferredItem<Item> OAKROOT_DOOR = ITEMS.register("oakroot_door", () -> new DoubleHighBlockItem(ModBlocks.OAKROOT_DOOR.get(), new Item.Properties()));
     public static final DeferredItem<Item> OAKROOT_HANGING_SIGN = ITEMS.register("oakroot_hanging_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKROOT_HANGING_SIGN.get(), ModBlocks.OAKROOT_WALL_HANGING_SIGN.get()));
     public static final DeferredItem<Item> OAKROOT_SIGN = ITEMS.register("oakroot_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.OAKROOT_SIGN.get(), ModBlocks.OAKROOT_WALL_SIGN.get()));
@@ -446,54 +293,6 @@ public class ModItems
     public static void register(IEventBus eventBus)
     {
         ITEMS.register(eventBus);
-    }
-
-
-    private static boolean awardEntry(Player player, String planet)
-    {
-        if (player instanceof ServerPlayer sp)
-        {
-            Random r = new Random();
-
-            List<String> result = new ArrayList<>();
-            AdvHelper.getEntriesRemainingAsIterable(sp, planet + "_entries").forEach(result::add);
-            String criteria = result.get(r.nextInt(result.size()));
-
-            if (criteria.equals("none"))
-            {
-                sp.displayClientMessage(Component.literal("There are no entries left to unlock"), true);
-                return false;
-            }
-            sp.displayClientMessage(Component.translatable("tooltip.laicaps.entry_page.unlock.before").append(Component.translatable("gui.astronomy_research_table." + planet + "." + criteria + ".name")).append(Component.translatable("tooltip.laicaps.entry_page.unlock.after")), true);
-            AdvHelper.awardAdvancementCriteria(sp, planet + "_entries", criteria);
-            return true;
-        }
-
-        return false;
-    }
-
-    private static void setHoverTextForTanks(ItemStack stack, List<Component> tooltipComponents, String size)
-    {
-        int maxFuel = stack.getMaxDamage();
-        if (Screen.hasShiftDown())
-        {
-            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
-            tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
-            for (int i = 0; i < 100; i++)
-            {
-                if (!I18n.exists("tooltip.laicaps.tank." + size + "." + i)) break;
-                tooltipComponents.add(Component.translatable("tooltip.laicaps.tank." + size + "." + i));
-            }
-
-
-            String color = "§4";
-
-            if (stack.get(ModDataComponents.FUEL) > maxFuel / 2) color = "§6";
-            if (stack.get(ModDataComponents.FUEL) > maxFuel / 1.5) color = "§a";
-
-            tooltipComponents.add(Component.literal(color + I18n.get("tooltip.laicaps.tank.fuel") + ": §l[" + stack.get(ModDataComponents.FUEL) + " / " + maxFuel + "]"));
-        }
-        else tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
     }
 
 
