@@ -21,7 +21,7 @@ import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.particle.*;
-import com.wdiscute.laicaps.toast.EntryUnlockedToast;
+import com.wdiscute.laicaps.notebook.EntryUnlockedToast;
 import com.wdiscute.laicaps.worldgen.ModFeatures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
@@ -31,14 +31,20 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -91,7 +97,7 @@ public class Laicaps
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
         NeoForge.EVENT_BUS.addListener(this::modifyItemTooltip);
-        //NeoForge.EVENT_BUS.addListener(this::ceilingStuff);
+        //NeoForge.EVENT_BUS.addListener(EntriesChecks::itemPickupEvent);
 
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
@@ -112,6 +118,21 @@ public class Laicaps
 
     public void ceilingStuff(ChunkEvent.Load event)
     {
+
+        Level level = event.getChunk().getLevel();
+
+        if(level instanceof ServerLevel sl)
+        {
+            List<Entity> da = sl.getEntities(null, new AABB(-5,-5,-5,5,5,5));
+
+            for (Entity wad : da)
+            {
+                if(wad instanceof ServerPlayer sp)
+                {
+                    sp.connection.send(new ClientboundStopSoundPacket(null, null));
+                }
+            }
+        }
 
         ChunkAccess chunk = event.getChunk();
 

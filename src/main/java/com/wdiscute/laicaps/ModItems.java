@@ -6,7 +6,7 @@ import com.wdiscute.laicaps.item.StarcatcherFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 
-import com.wdiscute.laicaps.toast.ToastItem;
+import com.wdiscute.laicaps.notebook.ToastItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;

@@ -867,6 +867,7 @@
 
 
   "gui.astronomy_research_table.asha.entry4.name" : "     §dAsha§r - Sweetlily",
+  "gui.astronomy_research_table.asha.entry4.toast" : "Asha - Sweetlilies",
   "gui.astronomy_research_table.asha.entry4.image" : "asha_illustration_4",
 
   "gui.astronomy_research_table.asha.entry4.left.11" : "This lily-like flower smells weirdly",

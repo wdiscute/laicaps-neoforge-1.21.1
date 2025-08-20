@@ -304,7 +304,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
                 if (s.contains("lunamar")) currentPlanet = 4;
 
 
-                currentEntry = Integer.parseInt(bookmarks.get(i).substring(bookmarks.get(i).indexOf("_") + 1));
+                currentEntry = Integer.parseInt(bookmarks.get(i).substring(bookmarks.get(i).indexOf("_") + 6));
             }
         }
 
@@ -440,7 +440,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 
         RenderSystem.enableBlend();
         renderImage(guiGraphics, BOOKMARK_BACKGROUND);
-        if (AdvHelper.hasAdvancementCriteria(adv, "bookmarks", currentPlanetString + "_" + currentEntry))
+        if (AdvHelper.hasAdvancementCriteria(adv, "bookmarks", currentPlanetString + "_entry" + currentEntry))
         {
             renderImage(guiGraphics, BOOKMARK);
         }
@@ -453,7 +453,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 
         for (int i = 0; i < bookmarks.size(); i++)
         {
-            ResourceLocation bookmarkImage = Laicaps.rl("textures/gui/notebook/bookmark_" + bookmarks.get(i) + ".png");
+            ResourceLocation bookmarkImage = Laicaps.rl("textures/gui/notebook/bookmark/bookmark_" + bookmarks.get(i) + ".png");
 
             if (!(Objects.equals(bookmarks.getFirst(), "none")))
                 renderImage(guiGraphics, bookmarkImage, i * 26);

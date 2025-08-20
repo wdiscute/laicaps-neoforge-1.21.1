@@ -1,73 +1,73 @@
 {
   "parent": "laicaps:root",
   "criteria": {
-    "menu_1": {
+    "menu_entry1": {
       "trigger": "minecraft:impossible"
     },
-    "menu_2": {
+    "menu_entry2": {
       "trigger": "minecraft:impossible"
     },
-    "menu_3": {
+    "menu_entry3": {
       "trigger": "minecraft:impossible"
     },
-    "menu_4": {
+    "menu_entry4": {
       "trigger": "minecraft:impossible"
     },
-    "menu_5": {
+    "menu_entry5": {
       "trigger": "minecraft:impossible"
     },
-    "menu_6": {
+    "menu_entry6": {
       "trigger": "minecraft:impossible"
     },
-    "ember_1": {
+    "ember_entry1": {
       "trigger": "minecraft:impossible"
     },
-    "ember_2": {
+    "ember_entry2": {
       "trigger": "minecraft:impossible"
     },
-    "ember_3": {
+    "ember_entry3": {
       "trigger": "minecraft:impossible"
     },
-    "ember_4": {
+    "ember_entry4": {
       "trigger": "minecraft:impossible"
     },
-    "asha_1": {
+    "asha_entry1": {
       "trigger": "minecraft:impossible"
     },
-    "asha_2": {
+    "asha_entry2": {
       "trigger": "minecraft:impossible"
     },
-    "asha_3": {
+    "asha_entry3": {
       "trigger": "minecraft:impossible"
     },
-    "asha_4": {
+    "asha_entry4": {
       "trigger": "minecraft:impossible"
     },
-    "asha_5": {
+    "asha_entry5": {
       "trigger": "minecraft:impossible"
     },
-    "overworld_1": {
+    "overworld_entry1": {
       "trigger": "minecraft:impossible"
     },
-    "overworld_2": {
+    "overworld_entry2": {
       "trigger": "minecraft:impossible"
     },
-    "overworld_3": {
+    "overworld_entry3": {
       "trigger": "minecraft:impossible"
     },
-    "overworld_4": {
+    "overworld_entry4": {
       "trigger": "minecraft:impossible"
     },
-    "lunamar_1": {
+    "lunamar_entry1": {
       "trigger": "minecraft:impossible"
     },
-    "lunamar_2": {
+    "lunamar_entry2": {
       "trigger": "minecraft:impossible"
     },
-    "lunamar_3": {
+    "lunamar_entry3": {
       "trigger": "minecraft:impossible"
     },
-    "lunamar_4": {
+    "lunamar_entry4": {
       "trigger": "minecraft:impossible"
     }
   },

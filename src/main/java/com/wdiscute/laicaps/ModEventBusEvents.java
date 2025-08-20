@@ -151,6 +151,13 @@ public class ModEventBusEvents
         );
 
 
+        registrar.playToClient(
+                Payloads.ToastPayload.TYPE,
+                Payloads.ToastPayload.STREAM_CODEC,
+                PayloadReceiver::receiveToast
+        );
+
+
     }
 
 

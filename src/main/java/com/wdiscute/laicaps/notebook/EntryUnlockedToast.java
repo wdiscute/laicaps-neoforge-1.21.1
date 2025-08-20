@@ -1,6 +1,5 @@
-package com.wdiscute.laicaps.toast;
+package com.wdiscute.laicaps.notebook;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,7 +19,7 @@ public class EntryUnlockedToast implements Toast
     private final ResourceLocation icon;
     private final Component title;
     private final String description;
-    private static final String gibberish = "§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    private static final String gibberish = "§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     private int old;
     private static final Random r = new Random();
 
@@ -39,11 +38,11 @@ public class EntryUnlockedToast implements Toast
 
         guiGraphics.drawString(toastComponent.getMinecraft().font, this.title, 30, 7, 16746751, false);
 
-        int lettersRevealed = Math.clamp((timeSinceLastVisible - 500) / 300, 0, description.length());
+        int lettersRevealed = Math.clamp((timeSinceLastVisible - 500) / 150, 0, description.length());
 
         if(old != lettersRevealed)
         {
-            Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.7f, r.nextFloat(0.2f) + 1.3f);
+            Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.4f, r.nextFloat(0.2f) + 1.3f);
             old = lettersRevealed;
         }
 

@@ -22,19 +22,19 @@ public class NotebookMenu extends AbstractContainerMenu
     {
         if (player instanceof ServerPlayer sp)
         {
-            String entry = "menu_" + id;
+            String entry = "menu_entry" + id;
 
             if (id > Laicaps.MENU_ENTRIES)
-                entry = "ember_" + (id - Laicaps.MENU_ENTRIES);
+                entry = "ember_entry" + (id - Laicaps.MENU_ENTRIES);
 
             if (id > Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES)
-                entry = "asha_" + (id - (Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES));
+                entry = "asha_entry" + (id - (Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES));
 
             if (id > Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES)
-                entry = "overworld_" + (id - (Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES));
+                entry = "overworld_entry" + (id - (Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES));
 
             if (id > Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES)
-                entry = "lunamar_" + (id - (Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES));
+                entry = "lunamar_entry" + (id - (Laicaps.MENU_ENTRIES + Laicaps.EMBER_ENTRIES + Laicaps.ASHA_ENTRIES + Laicaps.OVERWORLD_ENTRIES));
 
             if (AdvHelper.hasAdvancementCriteria(sp, "bookmarks", entry))
             {

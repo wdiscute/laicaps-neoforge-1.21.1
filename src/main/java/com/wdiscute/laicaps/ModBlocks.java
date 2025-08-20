@@ -1,6 +1,5 @@
 package com.wdiscute.laicaps;
 
-import com.wdiscute.laicaps.block.astronomytable.AstronomyTableBlock;
 import com.wdiscute.laicaps.block.chase.ChaseControllerBlock;
 import com.wdiscute.laicaps.block.combat.CombatControllerBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
@@ -21,6 +20,7 @@ import com.wdiscute.laicaps.block.telescope.TelescopeBaseBlock;
 import com.wdiscute.laicaps.block.telescope.TelescopeBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerBlock;
 import com.wdiscute.laicaps.block.watercontainer.WaterContainerHelperBlock;
+import com.wdiscute.laicaps.item.InventoryTickBlockItem;
 import com.wdiscute.laicaps.worldgen.ModTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -971,7 +971,7 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> LUNARVEIL =
-            registerBlock(
+            registerEntryUnlockableBlock("asha_entries", "entry3", "asha",
                     "lunarveil", () ->
                             new LunarveilBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
@@ -1066,7 +1066,7 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> VIOLET_SWEETLILY =
-            registerBlock(
+            registerEntryUnlockableBlock("asha_entries", "entry4", "asha",
                     "violet_sweetlily", () ->
                             new SweetlilyBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
@@ -1080,7 +1080,7 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> PEACH_SWEETLILY =
-            registerBlock(
+            registerEntryUnlockableBlock("asha_entries", "entry4", "asha",
                     "peach_sweetlily", () ->
                             new SweetlilyBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
@@ -1094,7 +1094,7 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> MAGENTA_SWEETLILY =
-            registerBlock(
+            registerEntryUnlockableBlock("asha_entries", "entry4", "asha",
                     "magenta_sweetlily", () ->
                             new SweetlilyBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
@@ -1108,7 +1108,7 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> NAVY_SWEETLILY =
-            registerBlock(
+            registerEntryUnlockableBlock("asha_entries", "entry4", "asha",
                     "navy_sweetlily", () ->
                             new SweetlilyBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
@@ -1122,7 +1122,7 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> CHERRY_SWEETLILY =
-            registerBlock(
+            registerEntryUnlockableBlock("asha_entries", "entry4", "asha",
                     "cherry_sweetlily", () ->
                             new SweetlilyBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)
@@ -1364,6 +1364,13 @@ public class ModBlocks
     {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
+        return toReturn;
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerEntryUnlockableBlock(String advancementName, String entryNameInAdvancement, String planetName, String blockName, Supplier<T> block)
+    {
+        DeferredBlock<T> toReturn = BLOCKS.register(blockName, block);
+        ModItems.ITEMS.register(blockName, () -> new InventoryTickBlockItem(toReturn.get(), new Item.Properties(), advancementName, entryNameInAdvancement, planetName));
         return toReturn;
     }
 
