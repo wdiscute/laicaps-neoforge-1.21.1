@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps.network;
 
+import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModDataAttachments;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.List;
@@ -84,6 +84,12 @@ public class PayloadReceiver
 
         player.setData(ModDataAttachments.FISHING.get(), "");
 
+    }
+
+
+    public static void receiveToast(final Payloads.ToastPayload data, final IPayloadContext context)
+    {
+        Laicaps.sendToast(data.menuName(), data.entryName());
     }
 
 

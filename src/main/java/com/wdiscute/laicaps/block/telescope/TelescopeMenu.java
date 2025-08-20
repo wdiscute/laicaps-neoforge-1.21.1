@@ -1,8 +1,10 @@
 package com.wdiscute.laicaps.block.telescope;
 
 import com.wdiscute.laicaps.AdvHelper;
+import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModMenuTypes;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class TelescopeMenu extends AbstractContainerMenu
 {
@@ -58,16 +61,27 @@ public class TelescopeMenu extends AbstractContainerMenu
     {
         if (player instanceof ServerPlayer sp)
         {
-            if (id == 1) AdvHelper.awardAdvancement(sp, "ember_discovered");
-            if (id == 1) AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
 
-            if (id == 2) AdvHelper.awardAdvancement(sp, "asha_discovered");
-            if (id == 2) AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry1");
+            switch (id)
+            {
+                case 1:
+                    AdvHelper.awardAdvancement(sp, "ember_discovered");
+                    AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
+                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember", "entry1"));
+                    break;
 
+                case 2:
+                    AdvHelper.awardAdvancement(sp, "asha_discovered");
+                    AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry1");
+                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha", "entry1"));
+                    break;
 
-            if (id == 4) AdvHelper.awardAdvancement(sp, "lunamar_discovered");
-            if (id == 4) AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
+                case 3:
+                    AdvHelper.awardAdvancement(sp, "lunamar_discovered");
+                    AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
+                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar", "entry1"));
 
+            }
         }
         return false;
     }

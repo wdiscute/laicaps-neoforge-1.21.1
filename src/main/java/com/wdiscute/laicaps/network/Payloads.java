@@ -53,4 +53,24 @@ public class Payloads
     }
 
 
+    public record ToastPayload(String menuName, String entryName) implements CustomPacketPayload
+    {
+
+        public static final CustomPacketPayload.Type<ToastPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("sendToast"));
+
+        public static final StreamCodec<ByteBuf, ToastPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8,
+                ToastPayload::menuName,
+                ByteBufCodecs.STRING_UTF8,
+                ToastPayload::entryName,
+                ToastPayload::new
+        );
+
+        @Override
+        public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+
 }
