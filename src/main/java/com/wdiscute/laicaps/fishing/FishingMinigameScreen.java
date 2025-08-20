@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps.fishing;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
@@ -301,6 +302,13 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers)
     {
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
+        {
+            this.onClose();
+            return true;
+        }
+
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue())
         {
             Minecraft.getInstance().player.swing(InteractionHand.MAIN_HAND, true);
@@ -402,6 +410,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
+
 
     @Override
     public void tick()
