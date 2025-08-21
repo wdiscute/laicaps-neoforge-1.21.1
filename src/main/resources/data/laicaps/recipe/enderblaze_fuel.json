@@ -4,16 +4,16 @@
   "group": "teleporters",
   "ingredients": [
     {
-      "item": "minecraft:blaze_powder"
+      "tag": "minecraft:coals"
     },
     {
-      "item": "minecraft:blaze_powder"
+      "tag": "minecraft:coals"
     },
     {
-      "item": "minecraft:blaze_powder"
+      "tag": "minecraft:coals"
     },
     {
-      "item": "minecraft:blaze_powder"
+      "tag": "minecraft:coals"
     },
     {
       "item": "laicaps:pristine_enderpearl_dust"

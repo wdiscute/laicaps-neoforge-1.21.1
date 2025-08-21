@@ -211,10 +211,9 @@
 
   "item.laicaps.astronomy_notebook": "Astronomy Notebook",
   "item.laicaps.astronomy_notebook.use": "§cPlace at an Astronomy Table to open",
-  "tooltip.laicaps.astronomy_notebook.0" : "A trusty Astronomy Notebook where",
-  "tooltip.laicaps.astronomy_notebook.1" : "you note down all of your findings.",
-  "tooltip.laicaps.astronomy_notebook.2" : "Place at an Astronomy Table",
-  "tooltip.laicaps.astronomy_notebook.3" : "to read your notes.",
+  "tooltip.laicaps.astronomy_notebook.0" : "A trusty Notebook where you note down",
+  "tooltip.laicaps.astronomy_notebook.1" : "all of your findings and thoughts about",
+  "tooltip.laicaps.astronomy_notebook.2" : "the stars above and the earth bellow.",
 
 
   "block.laicaps.asha_teleporter": "Asha Teleporter",
@@ -716,7 +715,7 @@
 
 
   "gui.astronomy_research_table.menu.entry3.image" : "menu_illustration_3",
-  "gui.astronomy_research_table.menu.entry3.name" : "Building a Spaceship",
+  "gui.astronomy_research_table.menu.entry3.name" : "  Building a Spaceship",
   "gui.astronomy_research_table.menu.entry3.toast" : "Building a Spaceship",
 
   "gui.astronomy_research_table.menu.entry3.left.2" : "§cWORK IN PROGRESS",
@@ -745,8 +744,19 @@
 
 
   "gui.astronomy_research_table.menu.entry4.image" : "menu_illustration_4",
-  "gui.astronomy_research_table.menu.entry4.name" : "Building a Spaceship",
-  "gui.astronomy_research_table.menu.entry4.toast" : "Building a Spaceship",
+  "gui.astronomy_research_table.menu.entry4.name" : "    Spaceship Fuel",
+  "gui.astronomy_research_table.menu.entry4.toast" : "Spaceship Fuel",
+
+
+  "gui.astronomy_research_table.menu.entry5.left.4" : "Getting to space requires a",
+  "gui.astronomy_research_table.menu.entry5.left.5" : "lot of power, thankfully with some",
+  "gui.astronomy_research_table.menu.entry5.left.6" : "coal and pristine enderpearl dust",
+  "gui.astronomy_research_table.menu.entry5.left.7" : "I can make a powerful fuel to fill",
+  "gui.astronomy_research_table.menu.entry5.left.8" : "the spaceship tanks with.",
+
+
+
+
 
 
 

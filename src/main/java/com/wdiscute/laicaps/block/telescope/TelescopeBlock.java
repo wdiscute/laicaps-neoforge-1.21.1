@@ -38,11 +38,12 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
 
-        if(stack.is(ModItems.TELESCOPE_UPGRADE_KIT) && state.is(ModBlocks.TELESCOPE) && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
+        if (stack.is(ModItems.TELESCOPE_UPGRADE_KIT) && state.is(ModBlocks.TELESCOPE) && level.getBlockEntity(pos) instanceof TelescopeBlockEntity tbe)
         {
-            if(!state.getValue(ADVANCED))
+            if (!state.getValue(ADVANCED))
             {
-                level.setBlockAndUpdate(pos, state
+                level.setBlockAndUpdate(
+                        pos, state
                                 .setValue(ADVANCED, true)
                                 .setValue(FACING, level.getBlockState(pos).getValue(FACING)));
 
@@ -53,7 +54,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
 
                     tbe.drops();
 
-                    AdvHelper.awardAdvancement(sp,"telescope_advanced");
+                    AdvHelper.awardAdvancement(sp, "telescope_advanced");
 
                 }
             }
@@ -69,7 +70,16 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
             if (level.getDayTime() - (numberOfDays * 24000L) > 14000 && level.getDayTime() - (numberOfDays * 24000L) < 23000)
             {
                 player.openMenu(new SimpleMenuProvider(tbe, Component.literal("Telescope")), pos);
-            }else
+
+                //unlock "building a spaceship" entry
+                if (player instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry3"))
+                {
+                    AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry3");
+                    Laicaps.sendToast("menu", "entry3");
+                }
+
+            }
+            else
             {
                 player.displayClientMessage(Component.translatable("block.laicaps.telescope.daytime"), true);
             }

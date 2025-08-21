@@ -26,7 +26,7 @@ public class NotebookItem extends EntryUnlockableItem implements MenuProvider
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
         player.openMenu(this);
-        if(player instanceof ServerPlayer sp)
+        if(player instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry2"))
         {
             AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry2");
             Laicaps.sendToast("menu", "entry2");

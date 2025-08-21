@@ -29,11 +29,13 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
     private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl("textures/gui/notebook/arrow_previous.png");
     private static final ResourceLocation ARROW_NEXT = Laicaps.rl("textures/gui/notebook/arrow_next.png");
 
+    private static final ResourceLocation MENU_SELECTED = Laicaps.rl("textures/gui/notebook/menu_selected.png");
     private static final ResourceLocation EMBER_SELECTED = Laicaps.rl("textures/gui/notebook/ember_selected.png");
     private static final ResourceLocation ASHA_SELECTED = Laicaps.rl("textures/gui/notebook/asha_selected.png");
     private static final ResourceLocation OVERWORLD_SELECTED = Laicaps.rl("textures/gui/notebook/overworld_selected.png");
     private static final ResourceLocation LUNAMAR_SELECTED = Laicaps.rl("textures/gui/notebook/lunamar_selected.png");
 
+    private static final ResourceLocation MENU_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/menu_highlight.png");
     private static final ResourceLocation EMBER_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/ember_highlight.png");
     private static final ResourceLocation ASHA_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/asha_highlight.png");
     private static final ResourceLocation OVERWORLD_HIGHLIGHT = Laicaps.rl("textures/gui/notebook/overworld_highlight.png");
@@ -243,29 +245,37 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 
         }
 
+        //menu lil planet
+        if (x >= 297 && x <= 312 && y >= 226 && y <= 241)
+        {
+            reObfuscate();
+            currentPlanet = 0;
+            currentEntry = 1;
+        }
+
         //ember lil planet
-        if (x > 308 && x < 323 && y > 226 && y < 241)
+        if (x >= 324 && x <= 339 && y >= 226 && y <= 241)
         {
             reObfuscate();
             currentPlanet = 1;
             currentEntry = 1;
         }
         //asha lil planet
-        if (x > 335 && x < 350 && y > 226 && y < 241)
+        if (x >= 351 && x <= 366 && y >= 226 && y <= 241)
         {
             reObfuscate();
             currentPlanet = 2;
             currentEntry = 1;
         }
         //overworld lil planet
-        if (x > 362 && x < 377 && y > 226 && y < 241)
+        if (x >= 378 && x <= 393 && y >= 226 && y <= 241)
         {
             reObfuscate();
             currentPlanet = 3;
             currentEntry = 1;
         }
         //lunamar lil planet
-        if (x > 389 && x < 404 && y > 226 && y < 241)
+        if (x >= 405 && x <= 420 && y >= 226 && y <= 241)
         {
             reObfuscate();
             currentPlanet = 4;
@@ -325,7 +335,6 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
         ClientAdvancements adv = Minecraft.getInstance().getConnection().getAdvancements();
         boolean entryUnlocked = false;
         String currentPlanetString = "menu";
-        if (currentPlanet == 0) entryUnlocked = true;
         if (currentPlanet == 1) currentPlanetString = "ember";
         if (currentPlanet == 2) currentPlanetString = "asha";
         if (currentPlanet == 3) currentPlanetString = "overworld";
@@ -333,20 +342,26 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
 
         //check if entry is unlocked
         for (String s : AdvHelper.getEntriesCompletedAsIterable(adv, currentPlanetString + "_entries"))
-            if (s.contains("entry" + currentEntry)) entryUnlocked = true;
+            if (s.contains("entry" + currentEntry))
+            {
+                entryUnlocked = true;
+                break;
+            }
 
         renderImage(guiGraphics, INV_BOOK_BACKGROUND);
 
+        if (currentPlanet == 0) renderImage(guiGraphics, MENU_SELECTED);
         if (currentPlanet == 1) renderImage(guiGraphics, EMBER_SELECTED);
         if (currentPlanet == 2) renderImage(guiGraphics, ASHA_SELECTED);
         if (currentPlanet == 3) renderImage(guiGraphics, OVERWORLD_SELECTED);
         if (currentPlanet == 4) renderImage(guiGraphics, LUNAMAR_SELECTED);
 
 
-        if (x > 308 && x < 323 && y > 226 && y < 241) renderImage(guiGraphics, EMBER_HIGHLIGHT);
-        if (x > 335 && x < 350 && y > 226 && y < 241) renderImage(guiGraphics, ASHA_HIGHLIGHT);
-        if (x > 362 && x < 377 && y > 226 && y < 241) renderImage(guiGraphics, OVERWORLD_HIGHLIGHT);
-        if (x > 389 && x < 404 && y > 226 && y < 241) renderImage(guiGraphics, LUNAMAR_HIGHLIGHT);
+        if (x >= 297 && x <= 312 && y >= 226 && y <= 241) renderImage(guiGraphics, MENU_HIGHLIGHT);
+        if (x >= 324 && x <= 339 && y >= 226 && y <= 241) renderImage(guiGraphics, EMBER_HIGHLIGHT);
+        if (x >= 351 && x <= 366 && y >= 226 && y <= 241) renderImage(guiGraphics, ASHA_HIGHLIGHT);
+        if (x >= 378 && x <= 393 && y >= 226 && y <= 241) renderImage(guiGraphics, OVERWORLD_HIGHLIGHT);
+        if (x >= 405 && x <= 420 && y >= 226 && y <= 241) renderImage(guiGraphics, LUNAMAR_HIGHLIGHT);
 
 
         //render arrows above everything else
@@ -367,6 +382,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
             else
             {
                 String s = "";
+                if (currentPlanet == 0) s = "         §c§k!!!!!!!!!!!!!";
                 if (currentPlanet == 1) s = "      §6Ember§r - §c§k!!!!!!!!!";
                 if (currentPlanet == 2) s = "       §dAsha§r - §c§k!!!!!!!!!";
                 if (currentPlanet == 3) s = "  §2Overworld§r - §c§k!!!!!!!!!";
