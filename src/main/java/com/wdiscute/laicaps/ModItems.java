@@ -63,7 +63,9 @@ public class ModItems
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT = ITEMS.register("spaceship_blueprint", () -> new SpaceshipItem(new Item.Properties().rarity(Rarity.EPIC)));
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT_SKETCH = ITEMS.register("spaceship_blueprint_sketch", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
-    public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new NotebookItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
+    public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new
+            NotebookItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1),
+            "menu_entries", "entry1", "menu"));
 
     public static final DeferredItem<Item> EMBER_ENTRY = ITEMS.register(
             "ember_entry", () ->

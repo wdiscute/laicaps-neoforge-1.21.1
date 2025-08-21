@@ -1,0 +1,43 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "entry1": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry2": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry3": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry4": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry5": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry6": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry7": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.laicaps.asha_entries.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "laicaps:asha"
+    },
+    "title": {
+      "translate": "advancements.laicaps.asha_entries.title"
+    },
+    "frame": "challenge",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "sends_telemetry_event": false
+}

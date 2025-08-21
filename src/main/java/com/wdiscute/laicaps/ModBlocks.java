@@ -971,7 +971,7 @@ public class ModBlocks
 
 
     public static final DeferredBlock<Block> LUNARVEIL =
-            registerEntryUnlockableBlock("asha_entries", "entry3", "asha",
+            registerBlock(
                     "lunarveil", () ->
                             new LunarveilBlock(BlockBehaviour.Properties.of()
                                     .sound(SoundType.GRASS)

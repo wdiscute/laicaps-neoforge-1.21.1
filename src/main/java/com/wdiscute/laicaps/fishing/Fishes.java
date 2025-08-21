@@ -190,7 +190,7 @@ public record Fishes()
             Items.GOLD_INGOT,
             List.of(getDimResourceKey("asha")),
             null,
-            3
+            20
     )
             .skipsMinigame()
             .doesNotConsumeBait()
@@ -214,8 +214,6 @@ public record Fishes()
     )
             .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20)
             .canBeBucketed(ModItems.REDTALE_BUCKET.get());
-
-
 
 
 
@@ -336,8 +334,6 @@ public record Fishes()
     )
             .timeRestrictions(FishProperties.daytime.DAY)
             .mustBeClear();
-
-
 
 
 

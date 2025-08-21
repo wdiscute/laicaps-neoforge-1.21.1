@@ -709,19 +709,44 @@
   "gui.astronomy_research_table.menu.entry2.right.5" : "able to upgrade a spyglass into",
   "gui.astronomy_research_table.menu.entry2.right.6" : "a telescope! ",
 
-  "gui.astronomy_research_table.menu.entry2.right.8" : "I will also need a stronger base",
+  "gui.astronomy_research_table.menu.entry2.right.8" : "I will also need a stronger stand",
   "gui.astronomy_research_table.menu.entry2.right.9" : "to support the heavier spyglass",
 
 
 
 
-  "gui.astronomy_research_table.menu.entry3.name" : "      MENU - 3",
-  "gui.astronomy_research_table.menu.entry3.left.3" : "               §c§k!!!§r   §cWIP  spaceship guide §c§k!!!§r",
+  "gui.astronomy_research_table.menu.entry3.image" : "menu_illustration_3",
+  "gui.astronomy_research_table.menu.entry3.name" : "Building a Spaceship",
+  "gui.astronomy_research_table.menu.entry3.toast" : "Building a Spaceship",
 
-  "gui.astronomy_research_table.menu.entry4.name" : "      MENU - 4",
-  "gui.astronomy_research_table.menu.entry4.left.3" : "               §c§k!!!§r   §cWIP  fishing guide §c§k!!!§r",
+  "gui.astronomy_research_table.menu.entry3.left.2" : "§cWORK IN PROGRESS",
+  "gui.astronomy_research_table.menu.entry3.left.3" : "§c[The progression and method of",
+  "gui.astronomy_research_table.menu.entry3.left.4" : "§cbuilding a spaceship is not final",
+  "gui.astronomy_research_table.menu.entry3.left.5" : "§cand is unlikely to stay]",
 
 
+  "gui.astronomy_research_table.menu.entry3.left.8" : "To start working towards",
+  "gui.astronomy_research_table.menu.entry3.left.9" : "a spaceship it's better I",
+  "gui.astronomy_research_table.menu.entry3.left.10" : "sketch out a blueprint with",
+  "gui.astronomy_research_table.menu.entry3.left.11" : "some lapis lazuli and paper.",
+
+  "gui.astronomy_research_table.menu.entry3.right.3" : "Once I got a sketch I'll need",
+  "gui.astronomy_research_table.menu.entry3.right.4" : "to settle down on the design",
+  "gui.astronomy_research_table.menu.entry3.right.5" : "by crafting a Research Station",
+  "gui.astronomy_research_table.menu.entry3.right.6" : "with some planks and paper.",
+
+
+
+
+  "gui.astronomy_research_table.menu.entry3.right.15" : "§cWORK IN PROGRESS",
+  "gui.astronomy_research_table.menu.entry3.right.16" : "§c[The progression and method of",
+  "gui.astronomy_research_table.menu.entry3.right.17" : "§cbuilding a spaceship is not final",
+  "gui.astronomy_research_table.menu.entry3.right.18" : "§cand is unlikely to stay]",
+
+
+  "gui.astronomy_research_table.menu.entry4.image" : "menu_illustration_4",
+  "gui.astronomy_research_table.menu.entry4.name" : "Building a Spaceship",
+  "gui.astronomy_research_table.menu.entry4.toast" : "Building a Spaceship",
 
 
 
