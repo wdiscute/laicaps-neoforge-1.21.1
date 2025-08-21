@@ -4,6 +4,7 @@ import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.entity.rocket.rocketparts.*;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
@@ -34,6 +35,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -101,6 +103,9 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RP leftWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.27), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
         RP rightWall = new RP(new AABB(0, 0, -1, -0.08, 3.52, 2.27), new Vec3(2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
 
+        RP rightCockpitWall = new RP(new AABB(-0.6, 0, -0.08, 0.6, 3.52, 0), new Vec3(1.4, 0.8, -1), false, true, this, InteractionsEnum.NONE);
+        RP leftCockpitWall = new RP(new AABB(-0.6, 0, -0.08, 0.6, 3.52, 0), new Vec3(-1.4, 0.8, -1), false, true, this, InteractionsEnum.NONE);
+
         //door inner
         RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, InteractionsEnum.TOGGLE_DOOR);
         RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
@@ -123,7 +128,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RP tankRight = new RP(new AABB(0, 0, 0, 1.05, 2.2, 0.95), new Vec3(2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
 
 
-        this.subEntities = new RP[]{secondSeatCarpet, thirdSeatCarpet, table, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall, secondSeatCarpet, thirdSeatCarpet, table, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        //this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
 
         if (!level().isClientSide) itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
@@ -350,16 +356,51 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
             ResourceKey<Level> key = null;
 
             if (itemStacks.get(4).is(ModItems.EMBER.get()))
+            {
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
 
+                for (Entity entity : getPassengers())
+                {
+                    if(entity instanceof ServerPlayer sp)
+                    {
+                        AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry2");
+                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember", "entry2"));
+                    }
+                }
+            }
+
             if (itemStacks.get(4).is(ModItems.ASHA.get()))
+            {
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
 
+                for (Entity entity : getPassengers())
+                {
+                    if(entity instanceof ServerPlayer sp)
+                    {
+                        AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry2");
+                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha", "entry2"));
+                    }
+                }
+            }
+
             if (itemStacks.get(4).is(ModItems.OVERWORLD.get()))
-                key = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
+            {
+                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
+            }
 
             if (itemStacks.get(4).is(ModItems.LUNAMAR.get()))
+            {
                 key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
+
+                for (Entity entity : getPassengers())
+                {
+                    if(entity instanceof ServerPlayer sp)
+                    {
+                        AdvHelper.awardAdvancementCriteria(sp, "lunamar_entries", "entry2");
+                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar", "entry2"));
+                    }
+                }
+            }
 
             DimensionTransition dt = new DimensionTransition(
                     level().getServer().getLevel(key),

@@ -6,7 +6,6 @@ import com.wdiscute.laicaps.item.StarcatcherFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 
-import com.wdiscute.laicaps.notebook.ToastItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
@@ -50,10 +49,6 @@ public class ModItems
     public static final DeferredItem<Item> BAIT_SAVING_BOBBER = ITEMS.register("bait_saving_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> DIFFICULTY_BOBBER = ITEMS.register("difficulty_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> FAST_BITING_BOBBER = ITEMS.register("fast_biting_bobber", () -> new Item(new Item.Properties()));
-
-
-
-    public static final DeferredItem<Item> TOAST = ITEMS.register("toast", () -> new ToastItem(new Item.Properties()));
 
     //
     //,--.   ,--. ,--.  ,---.    ,-----.

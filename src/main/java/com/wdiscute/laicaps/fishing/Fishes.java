@@ -176,14 +176,14 @@ public record Fishes()
             Items.STICK,
             List.of(getDimResourceKey("asha")),
             null,
-            2
+            10
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties GOLD_NUGGET = new FishProperties(
             Items.GOLD_NUGGET,
             List.of(getDimResourceKey("asha")),
             null,
-            2
+            10
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties GOLD_INGOT = new FishProperties(
@@ -200,7 +200,7 @@ public record Fishes()
             ModItems.BLUETALE.get(),
             List.of(getDimResourceKey("asha")),
             null,
-            522
+            5
     )
             .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20)
             .canBeBucketed(ModItems.BLUETALE_BUCKET.get());
