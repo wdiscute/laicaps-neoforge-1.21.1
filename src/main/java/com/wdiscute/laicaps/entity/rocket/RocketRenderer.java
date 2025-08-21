@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-public class RocketRenderer extends EntityRenderer<RocketEntity>
+public class RocketRenderer extends EntityRenderer<RE>
 {
-    protected RocketModel<RocketEntity> model;
+    protected RocketModel<RE> model;
 
     public RocketRenderer(EntityRendererProvider.Context context)
     {
@@ -19,7 +19,7 @@ public class RocketRenderer extends EntityRenderer<RocketEntity>
         this.model = new RocketModel<>(context.bakeLayer(RocketModel.LAYER_LOCATION));
     }
 
-    public void render(RocketEntity rocketEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    public void render(RE rocketEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
         super.render(rocketEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         poseStack.pushPose();
@@ -41,7 +41,7 @@ public class RocketRenderer extends EntityRenderer<RocketEntity>
 
 
     @Override
-    public ResourceLocation getTextureLocation(RocketEntity rocketEntity)
+    public ResourceLocation getTextureLocation(RE rocketEntity)
     {
         return Laicaps.rl("textures/entity/rocket/rocket.png");
     }

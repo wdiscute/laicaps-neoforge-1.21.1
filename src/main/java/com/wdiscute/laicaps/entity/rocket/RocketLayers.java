@@ -15,11 +15,11 @@ public class RocketLayers
 {
 
 
-    public static void renderCarpetLayer(RocketModel<RocketEntity> model, RocketEntity rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    public static void renderCarpetLayer(RocketModel<RE> model, RE rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
-        if (rocketEntity.getEntityData().get(RocketEntity.CARPET_FIRST_SEAT).is(ItemTags.WOOL_CARPETS))
+        if (rocketEntity.getEntityData().get(RE.CARPET_FIRST_SEAT).is(ItemTags.WOOL_CARPETS))
         {
-            Item item = rocketEntity.getEntityData().get(RocketEntity.CARPET_FIRST_SEAT).getItem();
+            Item item = rocketEntity.getEntityData().get(RE.CARPET_FIRST_SEAT).getItem();
 
             String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
             String path      = BuiltInRegistries.ITEM.getKey(item).getPath();
@@ -28,9 +28,9 @@ public class RocketLayers
             model.renderToBuffer(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
         }
 
-        if (rocketEntity.getEntityData().get(RocketEntity.CARPET_SECOND_SEAT).is(ItemTags.WOOL_CARPETS))
+        if (rocketEntity.getEntityData().get(RE.CARPET_SECOND_SEAT).is(ItemTags.WOOL_CARPETS))
         {
-            Item item = rocketEntity.getEntityData().get(RocketEntity.CARPET_SECOND_SEAT).getItem();
+            Item item = rocketEntity.getEntityData().get(RE.CARPET_SECOND_SEAT).getItem();
 
             String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
             String path      = BuiltInRegistries.ITEM.getKey(item).getPath();
@@ -39,9 +39,9 @@ public class RocketLayers
             model.renderToBuffer(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY);
         }
 
-        if (rocketEntity.getEntityData().get(RocketEntity.CARPET_THIRD_SEAT).is(ItemTags.WOOL_CARPETS))
+        if (rocketEntity.getEntityData().get(RE.CARPET_THIRD_SEAT).is(ItemTags.WOOL_CARPETS))
         {
-            Item item = rocketEntity.getEntityData().get(RocketEntity.CARPET_THIRD_SEAT).getItem();
+            Item item = rocketEntity.getEntityData().get(RE.CARPET_THIRD_SEAT).getItem();
 
             String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
             String path      = BuiltInRegistries.ITEM.getKey(item).getPath();
@@ -53,12 +53,12 @@ public class RocketLayers
     }
 
 
-    public static void renderGlobeLayer(RocketModel<RocketEntity> model, RocketEntity rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    public static void renderGlobeLayer(RocketModel<RE> model, RE rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
 
-        if (rocketEntity.getEntityData().get(RocketEntity.GLOBE).is(ModTags.Items.GLOBES))
+        if (rocketEntity.getEntityData().get(RE.GLOBE).is(ModTags.Items.GLOBES))
         {
-            Item item = rocketEntity.getEntityData().get(RocketEntity.GLOBE).getItem();
+            Item item = rocketEntity.getEntityData().get(RE.GLOBE).getItem();
 
             String namespace = BuiltInRegistries.ITEM.getKey(item).getNamespace();
             String path      = BuiltInRegistries.ITEM.getKey(item).getPath();
@@ -70,10 +70,10 @@ public class RocketLayers
     }
 
 
-    public static void renderScreenLayer(RocketModel<RocketEntity> model, RocketEntity rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    public static void renderScreenLayer(RocketModel<RE> model, RE rocketEntity, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
-        int jumping = rocketEntity.getEntityData().get(RocketEntity.JUMPING) / 20;
-        int state = rocketEntity.getEntityData().get(RocketEntity.STATE);
+        int jumping = rocketEntity.getEntityData().get(RE.JUMPING) / 20;
+        int state = rocketEntity.getEntityData().get(RE.STATE);
         int countdown = 11 - jumping;
         if (countdown < 0) countdown = 0;
 
@@ -82,7 +82,7 @@ public class RocketLayers
         {
 
             //if missing knowledge
-            if (rocketEntity.getEntityData().get(RocketEntity.MISSING_KNOWLEDGE))
+            if (rocketEntity.getEntityData().get(RE.MISSING_KNOWLEDGE))
             {
                 VertexConsumer vertexconsumer = buffer.getBuffer(
                         RenderType.breezeEyes(Laicaps.rl("textures/entity/rocket/main_screen/knowledge.png")));
@@ -91,7 +91,7 @@ public class RocketLayers
             }
 
             //if missing fuel
-            if (rocketEntity.getEntityData().get(RocketEntity.MISSING_FUEL))
+            if (rocketEntity.getEntityData().get(RE.MISSING_FUEL))
             {
                 VertexConsumer vertexconsumer = buffer.getBuffer(
                         RenderType.breezeEyes(Laicaps.rl("textures/entity/rocket/main_screen/fuel.png")));

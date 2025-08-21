@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.entity.rocket.rocketparts;
 
 import com.wdiscute.laicaps.entity.rocket.InteractionsEnum;
-import com.wdiscute.laicaps.entity.rocket.RocketEntity;
+import com.wdiscute.laicaps.entity.rocket.RE;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
@@ -21,7 +21,7 @@ public class RPCarpet extends RP
     private final EntityDataAccessor<ItemStack> carpet;
     private final EntityDataAccessor<Optional<UUID>> seat;
 
-    public RPCarpet(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RocketEntity parentRocket, InteractionsEnum interaction, EntityDataAccessor<ItemStack> carpetDataAccessor, EntityDataAccessor<Optional<UUID>> seatDataAccessor)
+    public RPCarpet(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RE parentRocket, InteractionsEnum interaction, EntityDataAccessor<ItemStack> carpetDataAccessor, EntityDataAccessor<Optional<UUID>> seatDataAccessor)
     {
         super(hitboxSize, offsetFromCenter, canRiderInteract, canCollide, parentRocket, interaction);
         this.carpet = carpetDataAccessor;
@@ -41,9 +41,9 @@ public class RPCarpet extends RP
         }
         else
         {
-            parentRocket.checkPassengers(RocketEntity.FIRST_SEAT);
-            parentRocket.checkPassengers(RocketEntity.SECOND_SEAT);
-            parentRocket.checkPassengers(RocketEntity.THIRD_SEAT);
+            parentRocket.checkPassengers(RE.FIRST_SEAT);
+            parentRocket.checkPassengers(RE.SECOND_SEAT);
+            parentRocket.checkPassengers(RE.THIRD_SEAT);
 
             if (getPassengers().isEmpty())
             {

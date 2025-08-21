@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
+public class RocketModel<T extends RE> extends HierarchicalModel<T>
 {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Laicaps.rl("rocket"), "main");
@@ -136,7 +136,7 @@ public class RocketModel<T extends RocketEntity> extends HierarchicalModel<T>
     }
 
     @Override
-    public void setupAnim(RocketEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
+    public void setupAnim(RE entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
         this.root().getAllParts().forEach(ModelPart::resetPose);
 

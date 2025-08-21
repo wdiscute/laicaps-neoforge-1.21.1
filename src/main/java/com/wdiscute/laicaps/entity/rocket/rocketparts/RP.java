@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.entity.rocket.rocketparts;
 
 import com.wdiscute.laicaps.entity.rocket.InteractionsEnum;
-import com.wdiscute.laicaps.entity.rocket.RocketEntity;
+import com.wdiscute.laicaps.entity.rocket.RE;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -16,19 +16,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 
-public class RP extends PartEntity<RocketEntity>
+public class RP extends PartEntity<RE>
 {
-    public final RocketEntity parentRocket;
+    private static final Logger log = LoggerFactory.getLogger(RP.class);
+    public final RE parentRocket;
     public final InteractionsEnum interaction;
     private final Vec3 offset;
     private final AABB aabb;
     private final boolean canRiderInteract;
     private final boolean canCollide;
 
-    public RP(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RocketEntity parentRocket, InteractionsEnum interaction)
+    public RP(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RE parentRocket, InteractionsEnum interaction)
     {
         super(parentRocket);
         this.offset = offsetFromCenter;

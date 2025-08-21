@@ -9,7 +9,7 @@ import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
 import com.wdiscute.laicaps.entity.moonray.MoonrayEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
-import com.wdiscute.laicaps.entity.rocket.RocketEntity;
+import com.wdiscute.laicaps.entity.rocket.RE;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerEntity;
 import com.wdiscute.laicaps.entity.swibble.SwibbleEntity;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
@@ -77,8 +77,8 @@ public class ModEntities
                     .sized(1.2f, 0.9f).build("nimble"));
 
 
-    public static final Supplier<EntityType<RocketEntity>> ROCKET =
-            ENTITY_TYPES.register("rocket", () -> EntityType.Builder.of(RocketEntity::new, MobCategory.MISC)
+    public static final Supplier<EntityType<RE>> ROCKET =
+            ENTITY_TYPES.register("rocket", () -> EntityType.Builder.of(RE::new, MobCategory.MISC)
                     .sized(1f, 1f).build("rocket"));
 
     public static final Supplier<EntityType<FishingBobEntity>> FISHING_BOB =

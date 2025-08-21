@@ -2,10 +2,12 @@ package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.entity.rocket.rocketparts.*;
+import com.wdiscute.laicaps.entity.rocket.spacemenu.RocketSpaceScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +18,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,7 +26,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ContainerEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class RocketEntity extends Entity implements PlayerRideable, MenuProvider, ContainerEntity
+public class RE extends Entity implements PlayerRideable
 {
     public final AnimationState globeSpinAnimationState = new AnimationState();
     public final AnimationState doorOpenAnimationState = new AnimationState();
@@ -49,20 +49,22 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
     public float globeSpinCounter;
 
-    public static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> JUMPING = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> MISSING_FUEL = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Boolean> DOOR = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Boolean> MISSING_KNOWLEDGE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<ItemStack> CARPET_FIRST_SEAT = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.ITEM_STACK);
-    public static final EntityDataAccessor<ItemStack> CARPET_SECOND_SEAT = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.ITEM_STACK);
-    public static final EntityDataAccessor<ItemStack> CARPET_THIRD_SEAT = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.ITEM_STACK);
-    public static final EntityDataAccessor<ItemStack> GLOBE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.ITEM_STACK);
+    public static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(RE.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<ItemStack> PLANET_SELECTED = SynchedEntityData.defineId(RE.class, EntityDataSerializers.ITEM_STACK);
+    public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RE.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> JUMPING = SynchedEntityData.defineId(RE.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> MISSING_FUEL = SynchedEntityData.defineId(RE.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> DOOR = SynchedEntityData.defineId(RE.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> MISSING_KNOWLEDGE = SynchedEntityData.defineId(RE.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<ItemStack> CARPET_FIRST_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.ITEM_STACK);
+    public static final EntityDataAccessor<ItemStack> CARPET_SECOND_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.ITEM_STACK);
+    public static final EntityDataAccessor<ItemStack> CARPET_THIRD_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.ITEM_STACK);
+    public static final EntityDataAccessor<ItemStack> GLOBE = SynchedEntityData.defineId(RE.class, EntityDataSerializers.ITEM_STACK);
 
 
-    public static final EntityDataAccessor<Optional<UUID>> FIRST_SEAT = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    public static final EntityDataAccessor<Optional<UUID>> SECOND_SEAT = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.OPTIONAL_UUID);
-    public static final EntityDataAccessor<Optional<UUID>> THIRD_SEAT = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<Optional<UUID>> FIRST_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<Optional<UUID>> SECOND_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.OPTIONAL_UUID);
+    public static final EntityDataAccessor<Optional<UUID>> THIRD_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.OPTIONAL_UUID);
 
 
     public NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
@@ -74,7 +76,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
     private final Random r = new Random();
 
-    public RocketEntity(EntityType<? extends Entity> entityType, Level level)
+    public RE(EntityType<? extends Entity> entityType, Level level)
     {
         super(entityType, level);
 
@@ -120,7 +122,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RP doorCeiling = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, InteractionsEnum.NONE);
 
 
-        RPTable table = new RPTable(new AABB(0, 0, 0, 1, 1, 1), new Vec3(1, 1, 0), false, false, this, InteractionsEnum.OPEN_RESEARCH_SCREEN);
+        //RPTable table = new RPTable(new AABB(0, 0, 0, 1, 1, 1), new Vec3(1, 1, 0), false, false, this, InteractionsEnum.OPEN_RESEARCH_SCREEN);
 
 
         //tanks
@@ -128,8 +130,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         RP tankRight = new RP(new AABB(0, 0, 0, 1.05, 2.2, 0.95), new Vec3(2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
 
 
-        this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall, secondSeatCarpet, thirdSeatCarpet, table, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
-        //this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall};
+        this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall, secondSeatCarpet, thirdSeatCarpet, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
 
         if (!level().isClientSide) itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
@@ -170,7 +171,6 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
         return;
     }
-
 
     private void handleClientAnimations()
     {
@@ -361,7 +361,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
                 for (Entity entity : getPassengers())
                 {
-                    if(entity instanceof ServerPlayer sp)
+                    if (entity instanceof ServerPlayer sp)
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry2");
                         PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember", "entry2"));
@@ -375,7 +375,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
                 for (Entity entity : getPassengers())
                 {
-                    if(entity instanceof ServerPlayer sp)
+                    if (entity instanceof ServerPlayer sp)
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry2");
                         PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha", "entry2"));
@@ -394,7 +394,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
                 for (Entity entity : getPassengers())
                 {
-                    if(entity instanceof ServerPlayer sp)
+                    if (entity instanceof ServerPlayer sp)
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "lunamar_entries", "entry2");
                         PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar", "entry2"));
@@ -575,17 +575,12 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
         }
 
         //open main menu
-        if (interaction.equals(InteractionsEnum.OPEN_MAIN_SCREEN) && !level().isClientSide)
-        {
-            player.openMenu(this);
-            return InteractionResult.SUCCESS;
-        }
-
-        //open research menu
-        if (interaction.equals(InteractionsEnum.OPEN_RESEARCH_SCREEN) && !level().isClientSide)
+        if (interaction.equals(InteractionsEnum.OPEN_MAIN_SCREEN) && level().isClientSide)
         {
 
-            player.openMenu(new SimpleMenuProvider((MenuConstructor) new RocketSpaceMenu(45674574, new Inventory(player), this), Component.literal("Astronomy Table")));
+            Minecraft.getInstance().setScreen(new RocketSpaceScreen(this));
+
+
             return InteractionResult.SUCCESS;
         }
 
@@ -781,6 +776,8 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         builder.define(STATE, 0);
+        builder.define(PLANET_SELECTED, new ItemStack(ModItems.OVERWORLD.get()));
+        builder.define(FUEL, 0);
         builder.define(DOOR, false);
         builder.define(JUMPING, 0);
         builder.define(MISSING_FUEL, false);
@@ -828,7 +825,7 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
     }
 
     @Override
-    public PartEntity<RocketEntity>[] getParts()
+    public PartEntity<RE>[] getParts()
     {
         return this.subEntities;
     }
@@ -848,110 +845,11 @@ public class RocketEntity extends Entity implements PlayerRideable, MenuProvider
 
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
-    {
-        return new RocketSpaceMenu(i, inventory, this);
-    }
-
-    @Override
     protected void positionRider(Entity passenger, MoveFunction callback)
     {
         Vec3 vec3 = this.getPassengerRidingPosition(passenger);
         Vec3 vec31 = passenger.getVehicleAttachmentPoint(this);
         callback.accept(passenger, vec3.x - vec31.x, vec3.y - vec31.y + 0.2f, vec3.z - vec31.z);
-    }
-
-    @Override
-    public @Nullable ResourceKey<LootTable> getLootTable()
-    {
-        return null;
-    }
-
-    @Override
-    public void setLootTable(@Nullable ResourceKey<LootTable> resourceKey)
-    {
-
-    }
-
-    @Override
-    public long getLootTableSeed()
-    {
-        return 0;
-    }
-
-    @Override
-    public void setLootTableSeed(long l)
-    {
-
-    }
-
-    @Override
-    public NonNullList<ItemStack> getItemStacks()
-    {
-        return this.itemStacks;
-    }
-
-    @Override
-    public void clearItemStacks()
-    {
-        this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-    }
-
-    @Override
-    public int getContainerSize()
-    {
-        return 5;
-    }
-
-    @Override
-    public ItemStack getItem(int index)
-    {
-        return this.itemStacks.get(index);
-    }
-
-    @Override
-    public ItemStack removeItem(int slot, int amount)
-    {
-        return ContainerHelper.removeItem(this.getItemStacks(), slot, amount);
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int slot)
-    {
-        ItemStack itemstack = (ItemStack) this.getItemStacks().get(slot);
-        if (itemstack.isEmpty())
-        {
-            return ItemStack.EMPTY;
-        }
-        else
-        {
-            this.getItemStacks().set(slot, ItemStack.EMPTY);
-            return itemstack;
-        }
-    }
-
-    @Override
-    public void setItem(int index, ItemStack stack)
-    {
-        this.itemStacks.set(index, stack);
-    }
-
-    @Override
-    public void setChanged()
-    {
-
-    }
-
-    @Override
-    public boolean stillValid(Player player)
-    {
-        return false;
-    }
-
-    @Override
-    public void clearContent()
-    {
-
     }
 
     @Override

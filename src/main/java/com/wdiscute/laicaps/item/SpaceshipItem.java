@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.item;
 
 import com.wdiscute.laicaps.ModEntities;
-import com.wdiscute.laicaps.entity.rocket.RocketEntity;
+import com.wdiscute.laicaps.entity.rocket.RE;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
@@ -16,7 +16,7 @@ public class SpaceshipItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
-        RocketEntity rocketEntity = new RocketEntity(ModEntities.ROCKET.get(), context.getLevel());
+        RE rocketEntity = new RE(ModEntities.ROCKET.get(), context.getLevel());
         rocketEntity.moveTo(context.getClickedPos().getX(), context.getClickedPos().getY() + 1, context.getClickedPos().getZ(), 0, 0);
         context.getLevel().addFreshEntity(rocketEntity);
         context.getItemInHand().setCount(context.getItemInHand().getCount() - 1);

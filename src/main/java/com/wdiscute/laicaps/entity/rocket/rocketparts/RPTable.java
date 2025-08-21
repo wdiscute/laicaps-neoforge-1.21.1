@@ -2,7 +2,7 @@ package com.wdiscute.laicaps.entity.rocket.rocketparts;
 
 import com.wdiscute.laicaps.block.astronomytable.NotebookMenu;
 import com.wdiscute.laicaps.entity.rocket.InteractionsEnum;
-import com.wdiscute.laicaps.entity.rocket.RocketEntity;
+import com.wdiscute.laicaps.entity.rocket.RE;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class RPTable extends RP implements MenuProvider
 {
 
-    public RPTable(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RocketEntity parentRocket, InteractionsEnum interaction)
+    public RPTable(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RE parentRocket, InteractionsEnum interaction)
     {
         super(hitboxSize, offsetFromCenter, canRiderInteract, canCollide, parentRocket, interaction);
     }
