@@ -1,6 +1,5 @@
 package com.wdiscute.laicaps.entity.rocket.rocketparts;
 
-import com.wdiscute.laicaps.entity.rocket.InteractionsEnum;
 import com.wdiscute.laicaps.entity.rocket.RE;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -25,13 +24,13 @@ public class RP extends PartEntity<RE>
 {
     private static final Logger log = LoggerFactory.getLogger(RP.class);
     public final RE parentRocket;
-    public final InteractionsEnum interaction;
+    public final RE.interact interaction;
     private final Vec3 offset;
     private final AABB aabb;
     private final boolean canRiderInteract;
     private final boolean canCollide;
 
-    public RP(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RE parentRocket, InteractionsEnum interaction)
+    public RP(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RE parentRocket, RE.interact interaction)
     {
         super(parentRocket);
         this.offset = offsetFromCenter;
@@ -54,7 +53,7 @@ public class RP extends PartEntity<RE>
     @Override
     public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand)
     {
-        if(parentRocket.getFirstPassenger() == player && interaction == InteractionsEnum.RIDE) return InteractionResult.PASS;
+        if(parentRocket.getFirstPassenger() == player && interaction == RE.interact.RIDE) return InteractionResult.PASS;
         if(hand == InteractionHand.OFF_HAND) return InteractionResult.PASS;
 
         return parentRocket.interactWithPart(player, interaction);

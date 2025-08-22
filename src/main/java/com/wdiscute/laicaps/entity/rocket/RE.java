@@ -2,7 +2,6 @@ package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.entity.rocket.rocketparts.*;
-import com.wdiscute.laicaps.entity.rocket.spacemenu.RocketSpaceScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import com.wdiscute.laicaps.network.Payloads;
@@ -21,7 +20,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -35,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class RE extends Entity implements PlayerRideable
+public class RE extends Entity implements PlayerRideable, MenuProvider
 {
     public final AnimationState globeSpinAnimationState = new AnimationState();
     public final AnimationState doorOpenAnimationState = new AnimationState();
@@ -76,56 +77,56 @@ public class RE extends Entity implements PlayerRideable
         super(entityType, level);
 
         //cockpit
-        RP cockpitTop = new RP(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 3.45, -2.6), false, true, this, InteractionsEnum.NONE);
-        RP cockpitBottom = new RP(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
-        RPCarpet cockpitCarpet = new RPCarpet(new AABB(-0.5, 0, -0.5, 0.5, 0.1, 0.5), new Vec3(0, 1.50, -1.5), false, false, this, InteractionsEnum.RIDE, CARPET_FIRST_SEAT, FIRST_SEAT);
-        RP cockpitWindowRight = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(0.85, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
-        RP cockpitWindowLeft = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
-        RP cockpitWindowFront = new RP(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, InteractionsEnum.NONE);
-        RP cockpitStairs = new RP(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, InteractionsEnum.NONE);
+        RP cockpitTop = new RP(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 3.45, -2.6), false, true, this, interact.NONE);
+        RP cockpitBottom = new RP(new AABB(0, 0, 0, 1.8, 0.08, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, interact.NONE);
+        RPCarpet cockpitCarpet = new RPCarpet(new AABB(-0.5, 0, -0.5, 0.5, 0.1, 0.5), new Vec3(0, 1.50, -1.5), false, false, this, interact.RIDE, CARPET_FIRST_SEAT, FIRST_SEAT);
+        RP cockpitWindowRight = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(0.85, 1.45, -2.6), false, true, this, interact.NONE);
+        RP cockpitWindowLeft = new RP(new AABB(0, 0, 0, 0.08, 2.05, 1.6), new Vec3(-0.9, 1.45, -2.6), false, true, this, interact.NONE);
+        RP cockpitWindowFront = new RP(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, interact.NONE);
+        RP cockpitStairs = new RP(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, interact.NONE);
 
-        RP mainScreen = new RP(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false, this, InteractionsEnum.OPEN_MAIN_SCREEN);
-        RPGlobe globe = new RPGlobe(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, InteractionsEnum.GLOBE_SPIN);
-
+        RP mainScreen = new RP(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-1, 1.4, -1.5), true, false, this, interact.OPEN_MAIN_SCREEN);
+        RP refuelScreen = new RP(new AABB(-0.1, -0.2, -0.45, 0.1, 0.2, 0.45), new Vec3(-0.65, 2.3, -1.7), true, false, this, interact.OPEN_REFUEL_SCREEN);
+        RPGlobe globe = new RPGlobe(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, interact.GLOBE_SPIN);
 
         //extra seats
-        RPCarpet secondSeatCarpet = new RPCarpet(new AABB(-0.5, 0, -0.5, 0.5, 0.1, 0.5), new Vec3(-1.3, 1, -0.3), false, false, this, InteractionsEnum.RIDE, CARPET_SECOND_SEAT, SECOND_SEAT);
-        RPCarpet thirdSeatCarpet = new RPCarpet(new AABB(-0.5, 0, -0.5, 0.5, 0.1, 0.5), new Vec3(-1.3, 1, 1.5), false, false, this, InteractionsEnum.RIDE, CARPET_THIRD_SEAT, THIRD_SEAT);
-
+        RPCarpet secondSeatCarpet = new RPCarpet(new AABB(-0.5, 0, -0.5, 0.5, 0.1, 0.5), new Vec3(-1.3, 1, -0.3), false, false, this, interact.RIDE, CARPET_SECOND_SEAT, SECOND_SEAT);
+        RPCarpet thirdSeatCarpet = new RPCarpet(new AABB(-0.5, 0, -0.5, 0.5, 0.1, 0.5), new Vec3(-1.3, 1, 1.5), false, false, this, interact.RIDE, CARPET_THIRD_SEAT, THIRD_SEAT);
 
         //main body
-        RP mainFloor = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RP mainCeiling = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, InteractionsEnum.NONE);
-        RP extraCeiling = new RP(new AABB(-1.45, 0, -0.45, 1.45, 0.45, 1.65), new Vec3(0, 4.35, 0), false, true, this, InteractionsEnum.NONE);
-        RP leftWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.27), new Vec3(-2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
-        RP rightWall = new RP(new AABB(0, 0, -1, -0.08, 3.52, 2.27), new Vec3(2.04, 0.8, 0), false, true, this, InteractionsEnum.NONE);
+        RP mainFloor = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 0.8, 0), false, true, this, interact.NONE);
+        RP mainCeiling = new RP(new AABB(-2, 0, -1.05, 2, 0.08, 2.2), new Vec3(0, 4.25, 0), false, true, this, interact.NONE);
+        RP extraCeiling = new RP(new AABB(-1.45, 0, -0.45, 1.45, 0.45, 1.65), new Vec3(0, 4.35, 0), false, true, this, interact.NONE);
+        RP leftWall = new RP(new AABB(0, 0, -1, 0.08, 3.52, 2.27), new Vec3(-2.04, 0.8, 0), false, true, this, interact.NONE);
+        RP rightWall = new RP(new AABB(0, 0, -1, -0.08, 3.52, 2.27), new Vec3(2.04, 0.8, 0), false, true, this, interact.NONE);
 
-        RP rightCockpitWall = new RP(new AABB(-0.6, 0, -0.08, 0.6, 3.52, 0), new Vec3(1.4, 0.8, -1), false, true, this, InteractionsEnum.NONE);
-        RP leftCockpitWall = new RP(new AABB(-0.6, 0, -0.08, 0.6, 3.52, 0), new Vec3(-1.4, 0.8, -1), false, true, this, InteractionsEnum.NONE);
+        RP rightCockpitWall = new RP(new AABB(-0.6, 0, -0.08, 0.6, 3.52, 0), new Vec3(1.4, 0.8, -1), false, true, this, interact.NONE);
+        RP leftCockpitWall = new RP(new AABB(-0.6, 0, -0.08, 0.6, 3.52, 0), new Vec3(-1.4, 0.8, -1), false, true, this, interact.NONE);
 
         //door inner
-        RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, InteractionsEnum.TOGGLE_DOOR);
-        RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
-        RP doorInnerLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(-1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
-        RP doorInnerRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(1.70, 0.8, 2.2), false, true, this, InteractionsEnum.NONE);
+        RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, interact.TOGGLE_DOOR);
+        RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, interact.NONE);
+        RP doorInnerLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(-1.70, 0.8, 2.2), false, true, this, interact.NONE);
+        RP doorInnerRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(1.70, 0.8, 2.2), false, true, this, interact.NONE);
 
         //door outer
-        RP doorLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
-        RPDoor door = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3(0.00, 0.8, 2.75), false, this, InteractionsEnum.NONE);
-        RP doorRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(1.15, 0.8, 2.75), false, true, this, InteractionsEnum.NONE);
+        RP doorLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, interact.NONE);
+        RPDoor door = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3(0.00, 0.8, 2.75), false, this, interact.NONE);
+        RP doorRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(1.15, 0.8, 2.75), false, true, this, interact.NONE);
 
-        RP doorCeiling = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, InteractionsEnum.NONE);
+        RP doorCeiling = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, interact.NONE);
 
 
         //RPTable table = new RPTable(new AABB(0, 0, 0, 1, 1, 1), new Vec3(1, 1, 0), false, false, this, InteractionsEnum.OPEN_RESEARCH_SCREEN);
 
 
         //tanks
-        RP tankLeft = new RP(new AABB(0, 0, 0, -1.05, 2.2, 0.95), new Vec3(-2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
-        RP tankRight = new RP(new AABB(0, 0, 0, 1.05, 2.2, 0.95), new Vec3(2.25, 1.4, 0.25), false, true, this, InteractionsEnum.NONE);
+        RP tankLeft = new RP(new AABB(0, 0, 0, -1.05, 2.2, 0.95), new Vec3(-2.25, 1.4, 0.25), false, true, this, interact.NONE);
+        RP tankRight = new RP(new AABB(0, 0, 0, 1.05, 2.2, 0.95), new Vec3(2.25, 1.4, 0.25), false, true, this, interact.NONE);
 
 
-        this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall, secondSeatCarpet, thirdSeatCarpet, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        //this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall, secondSeatCarpet, thirdSeatCarpet, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        this.subEntities = new RP[]{refuelScreen};
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
 
         if (!level().isClientSide) itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
@@ -560,32 +561,40 @@ public class RE extends Entity implements PlayerRideable
 
     }
 
-    public InteractionResult interactWithPart(Player player, InteractionsEnum interaction)
+    public InteractionResult interactWithPart(Player player, interact interaction)
     {
         //ride
-        if (interaction.equals(InteractionsEnum.RIDE) && !level().isClientSide)
+        if (interaction.equals(interact.RIDE) && !level().isClientSide)
         {
             player.startRiding(this);
             return InteractionResult.SUCCESS;
         }
 
         //open main menu
-        if (interaction.equals(InteractionsEnum.OPEN_MAIN_SCREEN) && level().isClientSide)
+        if (interaction.equals(interact.OPEN_MAIN_SCREEN) && level().isClientSide)
         {
 
-            Minecraft.getInstance().setScreen(new RocketSpaceScreen(this));
+            Minecraft.getInstance().setScreen(new MainScreen(this));
             
             return InteractionResult.SUCCESS;
         }
 
+        //open refuel screen
+        if (interaction.equals(interact.OPEN_REFUEL_SCREEN) && level().isClientSide)
+        {
+
+            player.openMenu(this);
+            return InteractionResult.SUCCESS;
+        }
+
         //make globe go weeeeee and spin
-        if (interaction.equals(InteractionsEnum.GLOBE_SPIN) && level().isClientSide)
+        if (interaction.equals(interact.GLOBE_SPIN) && level().isClientSide)
         {
 
         }
 
         //open door
-        if (interaction.equals(InteractionsEnum.TOGGLE_DOOR))
+        if (interaction.equals(interact.TOGGLE_DOOR))
         {
             entityData.set(DOOR, !entityData.get(DOOR));
             return InteractionResult.SUCCESS;
@@ -878,6 +887,23 @@ public class RE extends Entity implements PlayerRideable
         itemStacks.set(4, inventory.getStackInSlot(4));
         compound.put("inventory", inventory.serializeNBT(registryAccess()));
 
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
+    {
+        return new RefuelMenu(i, inventory);
+    }
+
+    public enum interact
+    {
+        RIDE,
+        OPEN_MAIN_SCREEN,
+        OPEN_RESEARCH_SCREEN,
+        OPEN_REFUEL_SCREEN,
+        GLOBE_SPIN,
+        TOGGLE_DOOR,
+        NONE
     }
 
 }

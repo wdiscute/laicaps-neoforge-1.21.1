@@ -6,7 +6,6 @@ import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
 import com.wdiscute.laicaps.block.sign.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
-import com.wdiscute.laicaps.block.refuelstation.RefuelStationBlock;
 import com.wdiscute.laicaps.block.researchstation.ResearchStationBlock;
 import com.wdiscute.laicaps.block.seagrass.MoonshadeSeagrassBlock;
 import com.wdiscute.laicaps.block.seagrass.MoonshadeTallSeagrassBlock;
@@ -125,15 +124,6 @@ public class ModBlocks
                             )
             );
 
-
-    public static final DeferredBlock<Block> REFUEL_STATION =
-            registerBlock(
-                    "refuel_station", () ->
-                            new RefuelStationBlock(BlockBehaviour.Properties.of()
-                                    .strength(30)
-                                    .sound(SoundType.STONE)
-                                    .noOcclusion()
-                            ));
 
     public static final DeferredBlock<Block> ASHA_TELEPORTER = registerBlock(
             "asha_teleporter", () ->

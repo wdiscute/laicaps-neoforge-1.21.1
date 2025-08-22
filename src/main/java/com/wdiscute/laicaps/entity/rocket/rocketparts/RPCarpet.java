@@ -1,6 +1,5 @@
 package com.wdiscute.laicaps.entity.rocket.rocketparts;
 
-import com.wdiscute.laicaps.entity.rocket.InteractionsEnum;
 import com.wdiscute.laicaps.entity.rocket.RE;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.tags.ItemTags;
@@ -21,7 +20,7 @@ public class RPCarpet extends RP
     private final EntityDataAccessor<ItemStack> carpet;
     private final EntityDataAccessor<Optional<UUID>> seat;
 
-    public RPCarpet(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RE parentRocket, InteractionsEnum interaction, EntityDataAccessor<ItemStack> carpetDataAccessor, EntityDataAccessor<Optional<UUID>> seatDataAccessor)
+    public RPCarpet(AABB hitboxSize, Vec3 offsetFromCenter, boolean canRiderInteract, boolean canCollide, RE parentRocket, RE.interact interaction, EntityDataAccessor<ItemStack> carpetDataAccessor, EntityDataAccessor<Optional<UUID>> seatDataAccessor)
     {
         super(hitboxSize, offsetFromCenter, canRiderInteract, canCollide, parentRocket, interaction);
         this.carpet = carpetDataAccessor;
