@@ -2,7 +2,6 @@ package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.block.astronomytable.NotebookScreen;
-import com.wdiscute.laicaps.block.refuelstation.RefuelStationScreen;
 import com.wdiscute.laicaps.block.researchstation.ResearchStationScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleRenderer;
@@ -12,8 +11,8 @@ import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffRenderer;
 import com.wdiscute.laicaps.entity.moonray.MoonrayRenderer;
 import com.wdiscute.laicaps.entity.nimble.NimbleRenderer;
+import com.wdiscute.laicaps.entity.rocket.RefuelScreen;
 import com.wdiscute.laicaps.entity.rocket.RocketRenderer;
-import com.wdiscute.laicaps.entity.rocket.spacemenu.RocketSpaceScreen;
 import com.wdiscute.laicaps.entity.snuffler.SnufflerRenderer;
 import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
 import com.wdiscute.laicaps.entity.fishing.FishingBobRenderer;
@@ -253,8 +252,8 @@ public class Laicaps
             event.register(ModMenuTypes.TELESCOPE_MENU.get(), TelescopeScreen::new);
             event.register(ModMenuTypes.RESEARCH_STATION_MENU.get(), ResearchStationScreen::new);
             event.register(ModMenuTypes.NOTEBOOK_MENU.get(), NotebookScreen::new);
-            event.register(ModMenuTypes.REFUEL_STATION_MENU.get(), RefuelStationScreen::new);
             event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
+            event.register(ModMenuTypes.REFUEL_MENU.get(), RefuelScreen::new);
         }
 
     }
