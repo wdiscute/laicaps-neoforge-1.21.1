@@ -61,7 +61,6 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.SPACESHIP_BLUEPRINT_SKETCH.get());
                                 output.accept(ModBlocks.RESEARCH_STATION.get());
 
-                                output.accept(ModBlocks.REFUEL_STATION.get());
                                 output.accept(ModItems.TANK.get());
                                 output.accept(ModItems.MEDIUM_TANK.get());
                                 output.accept(ModItems.LARGE_TANK.get());

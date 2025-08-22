@@ -223,11 +223,6 @@
   "block.laicaps.ember_teleporter": "Ember Teleporter",
   "tooltip.laicaps.ember_teleporter.0": "Quick and dirty creative mode teleporter",
 
-  "block.laicaps.refuel_station": "Refuel Station",
-  "tooltip.laicaps.refuel_station.0": "A refueling station used to",
-  "tooltip.laicaps.refuel_station.1": "refuel tanks with Enderblaze fuel.",
-
-
   "item.laicaps.basic_microchip": "Basic Microchip",
   "tooltip.laicaps.basic_microchip.0": "A small basic microchip found in Asha",
   "tooltip.laicaps.basic_microchip.1": "left behind by whatever once inhabited it.",

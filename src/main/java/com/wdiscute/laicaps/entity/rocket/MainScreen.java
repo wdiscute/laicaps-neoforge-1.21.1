@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.entity.rocket.spacemenu;
+package com.wdiscute.laicaps.entity.rocket;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -7,7 +7,6 @@ import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.telescope.RevealRenderUtil;
-import com.wdiscute.laicaps.entity.rocket.RE;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,21 +20,19 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.ISystemReportExtender;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 
-public class RocketSpaceScreen extends Screen
+public class MainScreen extends Screen
 {
 
-    private static final Logger log = LoggerFactory.getLogger(RocketSpaceScreen.class);
+    private static final Logger log = LoggerFactory.getLogger(MainScreen.class);
 
     private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/rocket/inventory_overlay.png");
     private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/rocket/planet_screen_background.png");
@@ -489,7 +486,7 @@ public class RocketSpaceScreen extends Screen
         guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
 
-    public RocketSpaceScreen(RE re)
+    public MainScreen(RE re)
     {
         super(Component.empty());
 
