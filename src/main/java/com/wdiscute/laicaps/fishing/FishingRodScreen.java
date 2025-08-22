@@ -1,5 +1,6 @@
 package com.wdiscute.laicaps.fishing;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,6 +18,19 @@ public class FishingRodScreen extends AbstractContainerScreen<FishingRodMenu>
     public FishingRodScreen(FishingRodMenu menu, Inventory playerInventory, Component title)
     {
         super(menu, playerInventory, title);
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    {
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
+        {
+            this.onClose();
+            return true;
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override

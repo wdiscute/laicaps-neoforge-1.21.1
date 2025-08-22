@@ -31,7 +31,7 @@ public abstract class StopRidingMixin extends Player
         {
             if(re.getEntityData().get(RE.STATE) != 0)
             {
-                displayClientMessage(Component.translatable("gui.laicaps.rocket.unsafe"), true);
+                displayClientMessage(Component.translatable("gui.laicaps.spaceship.unsafe"), true);
                 ci.cancel();
             }
         }

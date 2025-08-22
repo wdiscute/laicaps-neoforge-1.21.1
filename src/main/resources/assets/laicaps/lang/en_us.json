@@ -186,27 +186,27 @@
 
 
 
-  "gui.laicaps.rocket.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
+  "gui.laicaps.main_screen.tooltip.generic.chart": "§a§l>>>§r §aClick to Chart §a§l<<<§r",
 
-  "gui.laicaps.rocket.unsafe": "It is not safe to dismount now",
+  "gui.laicaps.spaceship.unsafe": "It is not safe to dismount now",
 
-  "gui.laicaps.rocket.missing_tank":      "§c        Insert Tank",
-  "gui.laicaps.rocket.missing_fuel":      "§c     Not Enough Fuel",
-  "gui.laicaps.rocket.missing_knowledge": "§c   Undiscovered planet",
-  "gui.laicaps.rocket.missing_nothing":   "§a     Ready for Takeoff",
+  "gui.laicaps.main_screen.missing_tank":      "§c        Insert Tank",
+  "gui.laicaps.main_screen.missing_fuel":      "§c     Not Enough Fuel",
+  "gui.laicaps.main_screen.missing_knowledge": "§c   Undiscovered planet",
+  "gui.laicaps.main_screen.missing_nothing":   "§a     Ready for Takeoff",
 
-  "gui.laicaps.rocket.missing_something": "§cThe rocket is not ready for takeoff",
+  "gui.laicaps.main_screen.missing_something": "§cThe rocket is not ready for takeoff",
 
-  "gui.laicaps.rocket.tooltip.ember.0": "§6Ember",
-  "gui.laicaps.rocket.tooltip.ember_blur.0": "§6§kEMBER",
+  "gui.laicaps.main_screen.tooltip.ember.0": "§6Ember",
+  "gui.laicaps.main_screen.tooltip.ember_blur.0": "§6§kEMBER",
 
-  "gui.laicaps.rocket.tooltip.asha.0": "§dAsha",
-  "gui.laicaps.rocket.tooltip.asha_blur.0": "§d§kASHA",
+  "gui.laicaps.main_screen.tooltip.asha.0": "§dAsha",
+  "gui.laicaps.main_screen.tooltip.asha_blur.0": "§d§kASHA",
 
-  "gui.laicaps.rocket.tooltip.overworld.0": "§2Overworld",
+  "gui.laicaps.main_screen.tooltip.overworld.0": "§2Overworld",
 
-  "gui.laicaps.rocket.tooltip.lunamar.0": "§9Lunamar",
-  "gui.laicaps.rocket.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
+  "gui.laicaps.main_screen.tooltip.lunamar.0": "§9Lunamar",
+  "gui.laicaps.main_screen.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
 
 
   "item.laicaps.astronomy_notebook": "Astronomy Notebook",

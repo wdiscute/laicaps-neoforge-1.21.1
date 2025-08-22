@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps.entity.rocket;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.AdvHelper;
@@ -34,10 +35,10 @@ public class MainScreen extends Screen
 
     private static final Logger log = LoggerFactory.getLogger(MainScreen.class);
 
-    private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/rocket/inventory_overlay.png");
-    private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/rocket/planet_screen_background.png");
+    private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/main_screen/inventory_overlay.png");
+    private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/main_screen/planet_screen_background.png");
     private static final ResourceLocation BLACK_OVERLAY = Laicaps.rl("textures/gui/telescope/black.png");
-    private static final ResourceLocation FUEL = Laicaps.rl("textures/gui/rocket/fuel.png");
+    private static final ResourceLocation FUEL = Laicaps.rl("textures/gui/main_screen/fuel.png");
 
     private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
     private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl( "asha"));
@@ -59,30 +60,30 @@ public class MainScreen extends Screen
     private static final ResourceLocation LUNAMAR_BLUR = Laicaps.rl("textures/gui/telescope/lunamar_blur.png");
     private static final ResourceLocation LUNAMAR_BLUR_HIGHLIGHTED = Laicaps.rl("textures/gui/telescope/lunamar_blur_highlighted.png");
 
-    private static final ResourceLocation EMBER_TO_EMBER = Laicaps.rl("textures/gui/rocket/ember_to_ember.png");
-    private static final ResourceLocation EMBER_TO_ASHA = Laicaps.rl("textures/gui/rocket/ember_to_asha.png");
-    private static final ResourceLocation EMBER_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/ember_to_overworld.png");
-    private static final ResourceLocation EMBER_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/ember_to_lunamar.png");
+    private static final ResourceLocation EMBER_TO_EMBER = Laicaps.rl("textures/gui/main_screen/ember_to_ember.png");
+    private static final ResourceLocation EMBER_TO_ASHA = Laicaps.rl("textures/gui/main_screen/ember_to_asha.png");
+    private static final ResourceLocation EMBER_TO_OVERWORLD = Laicaps.rl("textures/gui/main_screen/ember_to_overworld.png");
+    private static final ResourceLocation EMBER_TO_LUNAMAR = Laicaps.rl("textures/gui/main_screen/ember_to_lunamar.png");
 
-    private static final ResourceLocation ASHA_TO_EMBER = Laicaps.rl("textures/gui/rocket/asha_to_ember.png");
-    private static final ResourceLocation ASHA_TO_ASHA = Laicaps.rl("textures/gui/rocket/asha_to_asha.png");
-    private static final ResourceLocation ASHA_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/asha_to_overworld.png");
-    private static final ResourceLocation ASHA_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/asha_to_lunamar.png");
+    private static final ResourceLocation ASHA_TO_EMBER = Laicaps.rl("textures/gui/main_screen/asha_to_ember.png");
+    private static final ResourceLocation ASHA_TO_ASHA = Laicaps.rl("textures/gui/main_screen/asha_to_asha.png");
+    private static final ResourceLocation ASHA_TO_OVERWORLD = Laicaps.rl("textures/gui/main_screen/asha_to_overworld.png");
+    private static final ResourceLocation ASHA_TO_LUNAMAR = Laicaps.rl("textures/gui/main_screen/asha_to_lunamar.png");
 
-    private static final ResourceLocation OVERWORLD_TO_EMBER = Laicaps.rl("textures/gui/rocket/overworld_to_ember.png");
-    private static final ResourceLocation OVERWORLD_TO_ASHA = Laicaps.rl("textures/gui/rocket/overworld_to_asha.png");
-    private static final ResourceLocation OVERWORLD_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/overworld_to_overworld.png");
-    private static final ResourceLocation OVERWORLD_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/overworld_to_lunamar.png");
+    private static final ResourceLocation OVERWORLD_TO_EMBER = Laicaps.rl("textures/gui/main_screen/overworld_to_ember.png");
+    private static final ResourceLocation OVERWORLD_TO_ASHA = Laicaps.rl("textures/gui/main_screen/overworld_to_asha.png");
+    private static final ResourceLocation OVERWORLD_TO_OVERWORLD = Laicaps.rl("textures/gui/main_screen/overworld_to_overworld.png");
+    private static final ResourceLocation OVERWORLD_TO_LUNAMAR = Laicaps.rl("textures/gui/main_screen/overworld_to_lunamar.png");
 
-    private static final ResourceLocation LUNAMAR_TO_EMBER = Laicaps.rl("textures/gui/rocket/lunamar_to_ember.png");
-    private static final ResourceLocation LUNAMAR_TO_ASHA = Laicaps.rl("textures/gui/rocket/lunamar_to_asha.png");
-    private static final ResourceLocation LUNAMAR_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/lunamar_to_overworld.png");
-    private static final ResourceLocation LUNAMAR_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/lunamar_to_lunamar.png");
+    private static final ResourceLocation LUNAMAR_TO_EMBER = Laicaps.rl("textures/gui/main_screen/lunamar_to_ember.png");
+    private static final ResourceLocation LUNAMAR_TO_ASHA = Laicaps.rl("textures/gui/main_screen/lunamar_to_asha.png");
+    private static final ResourceLocation LUNAMAR_TO_OVERWORLD = Laicaps.rl("textures/gui/main_screen/lunamar_to_overworld.png");
+    private static final ResourceLocation LUNAMAR_TO_LUNAMAR = Laicaps.rl("textures/gui/main_screen/lunamar_to_lunamar.png");
 
-    private static final ResourceLocation UNKNOWN_TO_EMBER = Laicaps.rl("textures/gui/rocket/unknown_to_ember.png");
-    private static final ResourceLocation UNKNOWN_TO_ASHA = Laicaps.rl("textures/gui/rocket/unknown_to_asha.png");
-    private static final ResourceLocation UNKNOWN_TO_OVERWORLD = Laicaps.rl("textures/gui/rocket/unknown_to_overworld.png");
-    private static final ResourceLocation UNKNOWN_TO_LUNAMAR = Laicaps.rl("textures/gui/rocket/unknown_to_lunamar.png");
+    private static final ResourceLocation UNKNOWN_TO_EMBER = Laicaps.rl("textures/gui/main_screen/unknown_to_ember.png");
+    private static final ResourceLocation UNKNOWN_TO_ASHA = Laicaps.rl("textures/gui/main_screen/unknown_to_asha.png");
+    private static final ResourceLocation UNKNOWN_TO_OVERWORLD = Laicaps.rl("textures/gui/main_screen/unknown_to_overworld.png");
+    private static final ResourceLocation UNKNOWN_TO_LUNAMAR = Laicaps.rl("textures/gui/main_screen/unknown_to_lunamar.png");
 
     private final RE re;
 
@@ -170,47 +171,29 @@ public class MainScreen extends Screen
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, BLACK_OVERLAY);
 
+
+
         //renders background
         renderImage(guiGraphics, PLANET_SCREEN_BACKGROUND);
 
 
-        checkMissingItemsMessage(guiGraphics);
-
         //render fuel
-        PoseStack poseStack = guiGraphics.pose();
-        poseStack.pushPose();
-
-        RenderSystem.setShaderTexture(0, FUEL);
-
         fuel = re.getEntityData().get(RE.FUEL);
 
         float fuelPercentage = (((float) (fuel * 100) / 1300));
         float fuelPercentageOfBar = fuelPercentage * 128 / 100;
-        fuelPercentageOfBar -= 3;
 
-        RevealRenderUtil.renderWithOcclusion(
-                poseStack, uiX + 34, uiY + 105, 129, 8,
-                Lists.newArrayList(
-                        new Vector2f(uiX + 44 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 60 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 75 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 90 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 105 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 120 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 135 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 150 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 165 + fuelPercentageOfBar, uiY + 109),
-                        new Vector2f(uiX + 180 + fuelPercentageOfBar, uiY + 109)
-                ),
-                Lists.newArrayList(
-                        0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f, 0.08f
-                ));
+        //guiGraphics.fill(uiX + 3, uiY + 28, uiX + 157, uiY + 29, -1);
+        guiGraphics.fill(uiX + 31, uiY + 102, uiX + ((int) (31 + fuelPercentageOfBar)), uiY + 115,-5020);
 
-        poseStack.popPose();
+
+
+
+
+        checkMissingItemsMessage(guiGraphics);
 
         //render inventory overlay
         renderImage(guiGraphics, INV_AND_BORDER_BACKGROUND);
-
 
         //render planet selected arrow
         renderPlanetArrows(guiGraphics);
@@ -273,14 +256,14 @@ public class MainScreen extends Screen
 
         if (!planetDiscovered)
         {
-            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_knowledge"), uiX + 30, uiY + 70, 13186614, true);
+            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.main_screen.missing_knowledge"), uiX + 30, uiY + 70, 13186614, true);
             return;
         }
 
         //check fuel
         if (!getFuelRequired())
         {
-            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_fuel"), uiX + 30, uiY + 70, 13186614, true);
+            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.main_screen.missing_fuel"), uiX + 30, uiY + 70, 13186614, true);
             return;
         }
 
@@ -288,9 +271,23 @@ public class MainScreen extends Screen
 
         if (rocketState == 0)
         {
-            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
+            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.main_screen.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
         }
 
+    }
+
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    {
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
+        {
+            this.onClose();
+            return true;
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     private boolean getFuelRequired()
@@ -347,15 +344,6 @@ public class MainScreen extends Screen
         return fuel > fuelRequired;
 
     }
-
-    //commented out because there is no need to render tooltips since theres no inv
-//    @Override
-//    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
-//    {
-//        super.render(guiGraphics, mouseX, mouseY, partialTick);
-//        this.renderTooltip(guiGraphics, mouseX, mouseY);
-//    }
-
 
     private void renderPlanetArrows(GuiGraphics guiGraphics)
     {
@@ -433,13 +421,13 @@ public class MainScreen extends Screen
         List<Component> list = new ArrayList<>();
         for (int i = 0; i < 100; i++)
         {
-            if (I18n.exists("gui.laicaps.rocket.tooltip." + planet + "." + i))
+            if (I18n.exists("gui.laicaps.main_screen.tooltip." + planet + "." + i))
             {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip." + planet + "." + i));
+                list.add(Component.translatable("gui.laicaps.main_screen.tooltip." + planet + "." + i));
             } else
             {
                 if (i == 0)
-                    list.add(Component.literal("translation key missing! gui.laicaps.rocket.tooltip." + planet + "." + i));
+                    list.add(Component.literal("translation key missing! gui.laicaps.main_screen.tooltip." + planet + "." + i));
                 if (i == 0) list.add(Component.literal("Report to @wdiscute on discord"));
                 if (i == 0) list.add(Component.literal("or whoever is translating the mod! :3"));
                 break;
@@ -452,26 +440,26 @@ public class MainScreen extends Screen
         {
             if (Objects.equals(planet, "ember"))
             {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+                list.add(Component.translatable("gui.laicaps.main_screen.tooltip.generic.chart"));
                 if (emberEntries < Laicaps.EMBER_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
             if (Objects.equals(planet, "asha"))
             {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+                list.add(Component.translatable("gui.laicaps.main_screen.tooltip.generic.chart"));
                 if (ashaEntries < Laicaps.ASHA_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }
 
             if (Objects.equals(planet, "overworld"))
             {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+                list.add(Component.translatable("gui.laicaps.main_screen.tooltip.generic.chart"));
             }
 
             if (Objects.equals(planet, "lunamar"))
             {
-                list.add(Component.translatable("gui.laicaps.rocket.tooltip.generic.chart"));
+                list.add(Component.translatable("gui.laicaps.main_screen.tooltip.generic.chart"));
                 if (lunamarEntries < Laicaps.LUNAMAR_ENTRIES)
                     list.add(Component.translatable("gui.laicaps.telescope.tooltip.generic.research"));
             }

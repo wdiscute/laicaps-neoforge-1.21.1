@@ -85,7 +85,8 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         RP cockpitWindowFront = new RP(new AABB(0, 0, 0, 1.75, 2.05, 0.08), new Vec3(-0.9, 1.45, -2.6), false, true, this, interact.NONE);
         RP cockpitStairs = new RP(new AABB(0, 0, 0, 1, 0.5, 0.5), new Vec3(-0.5, 0.8, -1), false, true, this, interact.NONE);
 
-        RP mainScreen = new RP(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-1, 1.4, -1.5), true, false, this, interact.OPEN_MAIN_SCREEN);
+        //interactables cockpit
+        RP mainScreen = new RP(new AABB(0, 0, 0, 0.8, 0.6, 0.3), new Vec3(-0.43, 1.8, -2.3), true, false, this, interact.OPEN_MAIN_SCREEN);
         RP refuelScreen = new RP(new AABB(-0.1, -0.2, -0.45, 0.1, 0.2, 0.45), new Vec3(-0.65, 2.3, -1.7), true, false, this, interact.OPEN_REFUEL_SCREEN);
         RPGlobe globe = new RPGlobe(new AABB(0, 0, 0, 0.2, 0.2, 0.2), new Vec3(0.5, 2.2, -2.4), true, false, this, interact.GLOBE_SPIN);
 
@@ -117,7 +118,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         RP doorCeiling = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, interact.NONE);
 
 
-        //RPTable table = new RPTable(new AABB(0, 0, 0, 1, 1, 1), new Vec3(1, 1, 0), false, false, this, InteractionsEnum.OPEN_RESEARCH_SCREEN);
+        RPTable table = new RPTable(new AABB(0, 0, 0, 1, 1, 1), new Vec3(1, 1, 0), false, false, this, interact.OPEN_RESEARCH_SCREEN);
 
 
         //tanks
@@ -125,8 +126,9 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         RP tankRight = new RP(new AABB(0, 0, 0, 1.05, 2.2, 0.95), new Vec3(2.25, 1.4, 0.25), false, true, this, interact.NONE);
 
 
-        //this.subEntities = new RP[]{rightCockpitWall, leftCockpitWall, secondSeatCarpet, thirdSeatCarpet, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
-        this.subEntities = new RP[]{refuelScreen};
+        this.subEntities = new RP[]{refuelScreen, rightCockpitWall, leftCockpitWall, secondSeatCarpet, thirdSeatCarpet, doorCeiling, tankRight, tankLeft, doorInnerLeft, doorInnerRight, doorRight, doorLeft, door, cockpitCarpet, doorFloor, doorStairs, cockpitStairs, cockpitTop, mainScreen, mainFloor, mainCeiling, extraCeiling, leftWall, rightWall, cockpitBottom, cockpitWindowRight, cockpitWindowLeft, cockpitWindowFront, globe};
+        //this.subEntities = new RP[]{refuelScreen};
+
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
 
         if (!level().isClientSide) itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
@@ -292,13 +294,13 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             {
                 if (jumpingAcessor.isJumping())
                 {
-                    if (getFuelRemainingForSelectedDestination() > 0 && isPlanetSelectedUnlocked() || true)
+                    if (getFuelRemainingForSelectedDestination() > 0 && isPlanetSelectedUnlocked())
                         entityData.set(JUMPING, entityData.get(JUMPING) + 1);
                     else
                     {
                         if (getFirstPassenger() instanceof Player player)
                         {
-                            player.displayClientMessage(Component.translatable("gui.laicaps.rocket.missing_something"), true);
+                            player.displayClientMessage(Component.translatable("gui.laicaps.main_screen.missing_something"), true);
                         }
                         entityData.set(JUMPING, -1);
                     }
@@ -557,8 +559,6 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         if (state == 4)
         {
         }
-
-
     }
 
     public InteractionResult interactWithPart(Player player, interact interaction)
@@ -580,7 +580,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         }
 
         //open refuel screen
-        if (interaction.equals(interact.OPEN_REFUEL_SCREEN) && level().isClientSide)
+        if (interaction.equals(interact.OPEN_REFUEL_SCREEN) && !level().isClientSide)
         {
 
             player.openMenu(this);
@@ -892,7 +892,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        return new RefuelMenu(i, inventory);
+        return new RefuelMenu(inventory, i, this);
     }
 
     public enum interact
