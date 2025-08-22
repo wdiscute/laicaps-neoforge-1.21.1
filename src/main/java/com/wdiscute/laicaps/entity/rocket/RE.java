@@ -7,7 +7,6 @@ import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -22,15 +21,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.ContainerEntity;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.DimensionTransition;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
@@ -296,7 +291,7 @@ public class RE extends Entity implements PlayerRideable
             {
                 if (jumpingAcessor.isJumping())
                 {
-                    if (getFuelRemainingForSelectedDestination() > 0 && isPlanetSelectedUnlocked())
+                    if (getFuelRemainingForSelectedDestination() > 0 && isPlanetSelectedUnlocked() || true)
                         entityData.set(JUMPING, entityData.get(JUMPING) + 1);
                     else
                     {
@@ -579,8 +574,7 @@ public class RE extends Entity implements PlayerRideable
         {
 
             Minecraft.getInstance().setScreen(new RocketSpaceScreen(this));
-
-
+            
             return InteractionResult.SUCCESS;
         }
 

@@ -1,7 +1,6 @@
 package com.wdiscute.laicaps.block.telescope;
 
 import com.wdiscute.laicaps.AdvHelper;
-import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModMenuTypes;
 import com.wdiscute.laicaps.network.Payloads;
@@ -16,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class TelescopeMenu extends AbstractContainerMenu

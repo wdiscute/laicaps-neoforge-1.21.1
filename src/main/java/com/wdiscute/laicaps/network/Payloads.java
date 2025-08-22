@@ -56,7 +56,7 @@ public class Payloads
     public record ToastPayload(String menuName, String entryName) implements CustomPacketPayload
     {
 
-        public static final CustomPacketPayload.Type<ToastPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("sendToast"));
+        public static final CustomPacketPayload.Type<ToastPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("send_toast"));
 
         public static final StreamCodec<ByteBuf, ToastPayload> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.STRING_UTF8,
@@ -64,6 +64,25 @@ public class Payloads
                 ByteBufCodecs.STRING_UTF8,
                 ToastPayload::entryName,
                 ToastPayload::new
+        );
+
+        @Override
+        public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record ChangePlanetSelected(String entityUUID, String planet) implements CustomPacketPayload
+    {
+
+        public static final CustomPacketPayload.Type<ChangePlanetSelected> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("change_planet_selected"));
+
+        public static final StreamCodec<ByteBuf, ChangePlanetSelected> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8,
+                ChangePlanetSelected::entityUUID,
+                ByteBufCodecs.STRING_UTF8,
+                ChangePlanetSelected::planet,
+                ChangePlanetSelected::new
         );
 
         @Override

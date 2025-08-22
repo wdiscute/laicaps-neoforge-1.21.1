@@ -8,10 +8,10 @@ import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.block.telescope.RevealRenderUtil;
 import com.wdiscute.laicaps.entity.rocket.RE;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
@@ -19,9 +19,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.fml.ISystemReportExtender;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,23 +130,38 @@ public class RocketSpaceScreen extends Screen
         if(rocketState != 0) return false;
 
         //ember
-        if (x > 250 && x < 283 && y > 170 && y < 200){}
+        if (x > 250 && x < 283 && y > 170 && y < 200)
+        {
+            PacketDistributor.sendToServer(new Payloads.ChangePlanetSelected(re.getStringUUID(), "ember"));
+            System.out.println("clicked on ember");
+        }
 
         //asha
-        if (x > 310 && x < 335 && y > 86 && y < 111){}
+        if (x > 310 && x < 335 && y > 86 && y < 111)
+            PacketDistributor.sendToServer(new Payloads.ChangePlanetSelected(re.getStringUUID(), "asha"));
 
         //overworld
-        if (x > 392 && x < 429 && y > 121 && y < 160){}
+        if (x > 392 && x < 429 && y > 121 && y < 160)
+            PacketDistributor.sendToServer(new Payloads.ChangePlanetSelected(re.getStringUUID(), "overworld"));
 
         //lunamar
-        if (x > 444 && x < 589 && y > 16 && y < 65){}
+        if (x > 444 && x < 589 && y > 16 && y < 65)
+            PacketDistributor.sendToServer(new Payloads.ChangePlanetSelected(re.getStringUUID(), "lunamar"));
 
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public boolean isPauseScreen()
     {
+        return false;
+    }
+
+    @Override
+    public void renderBackground(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    {
+        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
@@ -240,13 +257,11 @@ public class RocketSpaceScreen extends Screen
 
         //render tooltip
         renderPlanetTooltip(guiGraphics, mouseX, mouseY);
-
-        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
     }
 
 
 
-    private void checkMissingItemsMessage(@Nullable GuiGraphics guiGraphics)
+    private void checkMissingItemsMessage(@NotNull GuiGraphics guiGraphics)
     {
 
         ItemStack planet = re.getEntityData().get(RE.PLANET_SELECTED);
@@ -276,8 +291,7 @@ public class RocketSpaceScreen extends Screen
 
         if (rocketState == 0)
         {
-            if (!(guiGraphics == null))
-                guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
+            guiGraphics.drawString(this.font, Component.translatable("gui.laicaps.rocket.missing_nothing"), uiX + 30, uiY + 70, 13186614, true);
         }
 
     }
@@ -286,6 +300,8 @@ public class RocketSpaceScreen extends Screen
     {
         float fuelRequired = 0;
         boolean selectedPlanetHasAFuelConsumedSet = false;
+
+        assert Minecraft.getInstance().player != null;
 
         if (Minecraft.getInstance().player.level().dimension() == EMBER_KEY)
         {

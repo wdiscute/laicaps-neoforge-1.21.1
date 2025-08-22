@@ -158,6 +158,12 @@ public class ModEventBusEvents
         );
 
 
+        registrar.playToServer(
+                Payloads.ChangePlanetSelected.TYPE,
+                Payloads.ChangePlanetSelected.STREAM_CODEC,
+                PayloadReceiver::receiveChangePlanetSelected
+        );
+
     }
 
 

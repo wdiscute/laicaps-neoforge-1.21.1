@@ -4,6 +4,7 @@ import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModDataAttachments;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
+import com.wdiscute.laicaps.entity.rocket.RE;
 import com.wdiscute.laicaps.fishing.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -15,14 +16,19 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class PayloadReceiver
 {
+    private static final Logger log = LoggerFactory.getLogger(PayloadReceiver.class);
+
     public static void receiveFishingCompletedServer(final Payloads.FishingCompletedPayload data, final IPayloadContext context)
     {
 
@@ -102,6 +108,32 @@ public class PayloadReceiver
                 data.bait(),
                 data.difficulty()
         ));
+    }
+
+    public static void receiveChangePlanetSelected(final Payloads.ChangePlanetSelected data, final IPayloadContext context)
+    {
+
+        System.out.println("received " + data.planet());
+
+        List<Entity> entites =  context.player().level().getEntities(null,
+                new AABB(-10, -10, -10, 10, 10, 10).move(context.player().position()));
+
+        for(Entity e : entites)
+        {
+            if(e instanceof RE re && re.getStringUUID().equals(data.entityUUID()))
+            {
+                ItemStack is = ItemStack.EMPTY;
+
+                if(data.planet().equals("ember")) is = new ItemStack(ModItems.EMBER.get());
+                if(data.planet().equals("asha")) is = new ItemStack(ModItems.ASHA.get());
+                if(data.planet().equals("overworld")) is = new ItemStack(ModItems.OVERWORLD.get());
+                if(data.planet().equals("lunamar")) is = new ItemStack(ModItems.LUNAMAR.get());
+
+                re.getEntityData().set(RE.PLANET_SELECTED, is);
+                break;
+            }
+        }
+
     }
 
 
