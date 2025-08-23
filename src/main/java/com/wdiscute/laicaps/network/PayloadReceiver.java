@@ -20,6 +20,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,14 +99,18 @@ public class PayloadReceiver
 
     }
 
-
     public static void receiveToast(final Payloads.ToastPayload data, final IPayloadContext context)
     {
         Laicaps.sendToast(data.menuName(), data.entryName());
     }
 
-
     public static void receiveFishingClient(final Payloads.FishingPayload data, final IPayloadContext context)
+    {
+        client(data, context);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void client(Payloads.FishingPayload data, IPayloadContext context)
     {
         Minecraft.getInstance().setScreen(new FishingMinigameScreen(
                 Component.literal("Fishing"),

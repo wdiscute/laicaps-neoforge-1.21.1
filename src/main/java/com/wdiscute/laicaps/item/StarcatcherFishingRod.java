@@ -39,7 +39,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
     {
         if(entity instanceof ServerPlayer player)
         {
-            if(stack != player.getMainHandItem()) stack.set(ModDataComponents.CAST, false);
+            if(stack != player.getMainHandItem() && Boolean.TRUE.equals(stack.get(ModDataComponents.CAST))) stack.set(ModDataComponents.CAST, false);
 
         }
         super.inventoryTick(stack, level, entity, slotId, isSelected);

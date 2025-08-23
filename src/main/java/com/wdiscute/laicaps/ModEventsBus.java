@@ -44,7 +44,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(modid = Laicaps.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-public class ClientEvents
+public class ModEventsBus
 {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
@@ -119,12 +119,12 @@ public class ClientEvents
         event.register(
                 ModEntities.NIMBLE.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                ClientEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                ModEventsBus::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
         event.register(
                 ModEntities.SNUFFLER.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                ClientEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                ModEventsBus::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
     }
 
@@ -150,20 +150,17 @@ public class ClientEvents
                 PayloadReceiver::receiveFishingCompletedServer
         );
 
-
         registrar.playToClient(
                 Payloads.ToastPayload.TYPE,
                 Payloads.ToastPayload.STREAM_CODEC,
                 PayloadReceiver::receiveToast
         );
 
-
         registrar.playToServer(
                 Payloads.ChangePlanetSelected.TYPE,
                 Payloads.ChangePlanetSelected.STREAM_CODEC,
                 PayloadReceiver::receiveChangePlanetSelected
         );
-
     }
 
 

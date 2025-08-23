@@ -45,6 +45,7 @@ import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -87,6 +88,7 @@ public class Laicaps
     }
 
 
+    @OnlyIn(Dist.CLIENT)
     public static void sendToast(String menuName, String entryName)
     {
         Minecraft.getInstance().getToasts().addToast(new EntryUnlockedToast(menuName, entryName));
@@ -115,54 +117,6 @@ public class Laicaps
     }
 
 
-    public void ceilingStuff(ChunkEvent.Load event)
-    {
-
-        Level level = event.getChunk().getLevel();
-
-        if(level instanceof ServerLevel sl)
-        {
-            List<Entity> da = sl.getEntities(null, new AABB(-5,-5,-5,5,5,5));
-
-            for (Entity wad : da)
-            {
-                if(wad instanceof ServerPlayer sp)
-                {
-                    sp.connection.send(new ClientboundStopSoundPacket(null, null));
-                }
-            }
-        }
-
-        ChunkAccess chunk = event.getChunk();
-
-        if(event.isNewChunk() && event.getChunk().getLevel().dimension() == Laicaps.LUNAMAR_KEY)
-        {
-            System.out.println("new chunk");
-
-            for (int i = 0; i < 16; i++)
-            {
-                for (int j = 0; j < 16; j++)
-                {
-                    int x = event.getChunk().getPos().getBlockX(i);
-                    int z = event.getChunk().getPos().getBlockZ(j);
-
-                    chunk.setBlockState(new BlockPos(x, 100, z), Blocks.LAPIS_BLOCK.defaultBlockState(), false);
-                }
-            }
-
-            for (int i = 0; i < 16; i++)
-            {
-                for (int j = 0; j < 16; j++)
-                {
-                    int x = event.getChunk().getPos().getBlockX(i);
-                    int z = event.getChunk().getPos().getBlockZ(j);
-
-                    if(x % 6 == 0 && z % 6 == 0)
-                        chunk.setBlockState(new BlockPos(x, 99, z), Blocks.REDSTONE_LAMP.defaultBlockState().setValue(RedstoneLampBlock.LIT, true), false);
-                }
-            }
-        }
-    }
 
     public void modifyItemTooltip(ItemTooltipEvent event)
     {

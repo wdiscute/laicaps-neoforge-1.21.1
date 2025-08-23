@@ -29,6 +29,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -561,6 +563,13 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public void screen()
+    {
+        Minecraft.getInstance().setScreen(new MainScreen(this));
+    }
+
+
     public InteractionResult interactWithPart(Player player, interact interaction)
     {
         //ride
@@ -573,9 +582,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         //open main menu
         if (interaction.equals(interact.OPEN_MAIN_SCREEN) && level().isClientSide)
         {
-
-            Minecraft.getInstance().setScreen(new MainScreen(this));
-            
+            screen();
             return InteractionResult.SUCCESS;
         }
 

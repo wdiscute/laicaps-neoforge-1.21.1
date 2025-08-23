@@ -113,7 +113,7 @@ public class FishingBobEntity extends Projectile
     }
 
 
-    public void sendPacket()
+    public void reel()
     {
         List<FishProperties> available = new ArrayList<>(List.of());
 
@@ -186,6 +186,7 @@ public class FishingBobEntity extends Projectile
             level().addFreshEntity(itemFished);
 
             player.setData(ModDataAttachments.FISHING, "");
+            if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)) player.getMainHandItem().set(ModDataComponents.CAST, false);
             kill();
         }
         else
@@ -360,7 +361,7 @@ public class FishingBobEntity extends Projectile
         if (currentState == FishHookState.BITING)
         {
             if (!level().isClientSide) currentState = FishHookState.FISHING;
-            if (!level().isClientSide) sendPacket();
+            if (!level().isClientSide) reel();
             return true;
         }
         else
