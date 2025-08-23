@@ -4,8 +4,6 @@
 
   "tag.item.laicaps.sweetlilies" : "Sweetlilies",
 
-  "tag.item.laicaps.fishing_game_items" : "Fishing Minigame Items",
-
   "tag.item.laicaps.globes" : "Globes",
   "tag.block.laicaps.globes" : "Globes",
 
@@ -393,6 +391,7 @@
 
 
 
+
   "item.laicaps.red_herring" : "Red Herring",
   "tooltip.laicaps.red_herring.0" : "A great sign of more fishes to come!",
   "tooltip.laicaps.red_herring.1" : "Or maybe that's why it's got that name?",
@@ -449,14 +448,36 @@
 
 
 
+  "item.laicaps.crimson_starfish" : "Crimson Starfish",
+  "tooltip.laicaps.crimson_starfish.0" : "A red colored starfish.",
+  "tooltip.laicaps.crimson_starfish.1" : "Not to be confused for a 1-star fish.",
 
 
+  "item.laicaps.verdant_seahorse" : "Verdant Seahorse",
+  "tooltip.laicaps.verdant_seahorse.0" : "One of many seahorses that habit Lunamar.",
+  "tooltip.laicaps.verdant_seahorse.1" : "This one has green fins, indicating it's age.",
 
 
+  "item.laicaps.radiant_seahorse" : "Radiant Seahorse",
+  "tooltip.laicaps.radiant_seahorse.0" : "One of many seahorses that habit Lunamar.",
+  "tooltip.laicaps.radiant_seahorse.1" : "The blue colored fins indicate it's still young",
+  "tooltip.laicaps.radiant_seahorse.2" : "and probably good at valorant.",
 
 
+  "item.laicaps.octo" : "Octo",
+  "tooltip.laicaps.octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.octo.1" : "They won't usually be aggressive unless provoked,",
+  "tooltip.laicaps.octo.2" : "although they can be quite territorial.",
 
+  "item.laicaps.red_reef_octo" : "Red Reef Octo",
+  "tooltip.laicaps.red_reef_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.red_reef_octo.1" : "This Octo decided to make a red conch into his lair.",
+  "tooltip.laicaps.red_reef_octo.2" : "although they can be quite territorial.",
 
+  "item.laicaps.lumen_drifter" : "Lumen Drifter",
+  "tooltip.laicaps.lumen_drifter.0" : "Not to be confused with a starfish, these creatures",
+  "tooltip.laicaps.lumen_drifter.1" : "are a lot smaller and thinner in size, and are",
+  "tooltip.laicaps.lumen_drifter.2" : "actually not related to starfishes.",
 
 
 
@@ -523,22 +544,6 @@
   "tooltip.laicaps.moonshade_fruit.0": "A strange, moon-shaped fruit",
   "tooltip.laicaps.moonshade_fruit.1": "glowing with a soft purple hue.",
   "tooltip.laicaps.moonshade_fruit.2": "It pulses gently, as if alive.",
-
-
-  "entity.laicaps.rocket": "WIP Rocket",
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -642,347 +647,355 @@
   "tooltip.laicaps.entry_page.unlock.before" : "you have gained more knowledge of ",
   "tooltip.laicaps.entry_page.unlock.after" : "",
 
-  "block.laicaps.astronomy_research_table": "Astronomy Research Table",
-  "tooltip.laicaps.astronomy_research_table.0": "A handy research table used to gather",
-  "tooltip.laicaps.astronomy_research_table.1": "your thoughts relating to the universe.",
-  "tooltip.laicaps.astronomy_research_table.2": "Essential for those who wish to learn",
-  "tooltip.laicaps.astronomy_research_table.3": "more about the celestial bodies in this system",
-  "tooltip.laicaps.astronomy_research_table.4": "before embarking in a space adventure.",
-
-
-
 
   "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
 
-  "gui.astronomy_research_table.menu.entry1.image" : "menu_illustration_1",
-  "gui.astronomy_research_table.menu.entry1.name" : "      Introduction",
-  "gui.astronomy_research_table.menu.entry1.toast" : "Introduction",
+  "gui.notebook.menu.entry1.image" : "menu_illustration_1",
+  "gui.notebook.menu.entry1.name" : "      Introduction",
+  "gui.notebook.menu.entry1.toast" : "Introduction",
 
 
-  "gui.astronomy_research_table.menu.entry1.left.2" : "If I am to succeed into my space",
-  "gui.astronomy_research_table.menu.entry1.left.3" : "journey, it's best to keep all",
-  "gui.astronomy_research_table.menu.entry1.left.4" : "my findings in a centralized space.",
+  "gui.notebook.menu.entry1.left.2" : "If I am to succeed into my space",
+  "gui.notebook.menu.entry1.left.3" : "journey, it's best to keep all",
+  "gui.notebook.menu.entry1.left.4" : "my findings in a centralized space.",
 
-  "gui.astronomy_research_table.menu.entry1.left.7" : "This notebook will do perfectly.",
+  "gui.notebook.menu.entry1.left.7" : "This notebook will do perfectly.",
 
-  "gui.astronomy_research_table.menu.entry1.left.9" : "Anytime I find something interesting",
-  "gui.astronomy_research_table.menu.entry1.left.10" : "I'll note it down for future me!",
+  "gui.notebook.menu.entry1.left.9" : "Anytime I find something interesting",
+  "gui.notebook.menu.entry1.left.10" : "I'll note it down for future me!",
 
 
-  "gui.astronomy_research_table.menu.entry1.right.3" : "I can easily bookmark relevant",
-  "gui.astronomy_research_table.menu.entry1.right.4" : "pages and come back when needed!",
-  "gui.astronomy_research_table.menu.entry1.right.5" : "So handy!",
+  "gui.notebook.menu.entry1.right.3" : "I can easily bookmark relevant",
+  "gui.notebook.menu.entry1.right.4" : "pages and come back when needed!",
+  "gui.notebook.menu.entry1.right.5" : "So handy!",
 
 
 
-  "gui.astronomy_research_table.menu.entry1.right.16" : "Using these markers at the bottom",
-  "gui.astronomy_research_table.menu.entry1.right.17" : "I can quickly cycle through the",
-  "gui.astronomy_research_table.menu.entry1.right.18" : "pages.",
+  "gui.notebook.menu.entry1.right.16" : "Using these markers at the bottom",
+  "gui.notebook.menu.entry1.right.17" : "I can quickly cycle through the",
+  "gui.notebook.menu.entry1.right.18" : "pages.",
 
 
 
-  "gui.astronomy_research_table.menu.entry2.image" : "menu_illustration_2",
-  "gui.astronomy_research_table.menu.entry2.name" : " About the Telescope",
-  "gui.astronomy_research_table.menu.entry2.toast" : "About the Telescope",
+  "gui.notebook.menu.entry2.image" : "menu_illustration_2",
+  "gui.notebook.menu.entry2.name" : " About the Telescope",
+  "gui.notebook.menu.entry2.toast" : "About the Telescope",
 
-  "gui.astronomy_research_table.menu.entry2.left.2" : "The first step of space travel is",
-  "gui.astronomy_research_table.menu.entry2.left.3" : "picking a good target. For that",
-  "gui.astronomy_research_table.menu.entry2.left.4" : "I will of course need a telescope!",
+  "gui.notebook.menu.entry2.left.2" : "The first step of space travel is",
+  "gui.notebook.menu.entry2.left.3" : "picking a good target. For that",
+  "gui.notebook.menu.entry2.left.4" : "I will of course need a telescope!",
 
 
 
-  "gui.astronomy_research_table.menu.entry2.left.15" : "Once I have a telescope built it",
-  "gui.astronomy_research_table.menu.entry2.left.16" : "should be easy enough to wait for",
-  "gui.astronomy_research_table.menu.entry2.left.17" : "the right atmospheric conditions",
-  "gui.astronomy_research_table.menu.entry2.left.18" : "and gaze upon the vast emptiness",
-  "gui.astronomy_research_table.menu.entry2.left.19" : "of space.",
+  "gui.notebook.menu.entry2.left.15" : "Once I have a telescope built it",
+  "gui.notebook.menu.entry2.left.16" : "should be easy enough to wait for",
+  "gui.notebook.menu.entry2.left.17" : "the right atmospheric conditions",
+  "gui.notebook.menu.entry2.left.18" : "and gaze upon the vast emptiness",
+  "gui.notebook.menu.entry2.left.19" : "of space.",
 
 
-  "gui.astronomy_research_table.menu.entry2.right.3" : "With a diamond, some gold, and",
-  "gui.astronomy_research_table.menu.entry2.right.4" : "some better lenses, I should be",
-  "gui.astronomy_research_table.menu.entry2.right.5" : "able to upgrade a spyglass into",
-  "gui.astronomy_research_table.menu.entry2.right.6" : "a telescope! ",
+  "gui.notebook.menu.entry2.right.3" : "With a diamond, some gold, and",
+  "gui.notebook.menu.entry2.right.4" : "some better lenses, I should be",
+  "gui.notebook.menu.entry2.right.5" : "able to upgrade a spyglass into",
+  "gui.notebook.menu.entry2.right.6" : "a telescope! ",
 
-  "gui.astronomy_research_table.menu.entry2.right.8" : "I will also need a stronger stand",
-  "gui.astronomy_research_table.menu.entry2.right.9" : "to support the heavier spyglass",
+  "gui.notebook.menu.entry2.right.8" : "I will also need a stronger stand",
+  "gui.notebook.menu.entry2.right.9" : "to support the heavier spyglass",
 
 
 
 
-  "gui.astronomy_research_table.menu.entry3.image" : "menu_illustration_3",
-  "gui.astronomy_research_table.menu.entry3.name" : "  Building a Spaceship",
-  "gui.astronomy_research_table.menu.entry3.toast" : "Building a Spaceship",
+  "gui.notebook.menu.entry3.image" : "menu_illustration_3",
+  "gui.notebook.menu.entry3.name" : "  Building a Spaceship",
+  "gui.notebook.menu.entry3.toast" : "Building a Spaceship",
 
-  "gui.astronomy_research_table.menu.entry3.left.2" : "§cWORK IN PROGRESS",
-  "gui.astronomy_research_table.menu.entry3.left.3" : "§c[The progression and method of",
-  "gui.astronomy_research_table.menu.entry3.left.4" : "§cbuilding a spaceship is not final",
-  "gui.astronomy_research_table.menu.entry3.left.5" : "§cand is unlikely to stay]",
+  "gui.notebook.menu.entry3.left.2" : "§cWORK IN PROGRESS",
+  "gui.notebook.menu.entry3.left.3" : "§c[The progression and method of",
+  "gui.notebook.menu.entry3.left.4" : "§cbuilding a spaceship is not final",
+  "gui.notebook.menu.entry3.left.5" : "§cand is unlikely to stay]",
 
 
-  "gui.astronomy_research_table.menu.entry3.left.8" : "To start working towards",
-  "gui.astronomy_research_table.menu.entry3.left.9" : "a spaceship it's better I",
-  "gui.astronomy_research_table.menu.entry3.left.10" : "sketch out a blueprint with",
-  "gui.astronomy_research_table.menu.entry3.left.11" : "some lapis lazuli and paper.",
+  "gui.notebook.menu.entry3.left.8" : "To start working towards",
+  "gui.notebook.menu.entry3.left.9" : "a spaceship it's better I",
+  "gui.notebook.menu.entry3.left.10" : "sketch out a blueprint with",
+  "gui.notebook.menu.entry3.left.11" : "some lapis lazuli and paper.",
 
-  "gui.astronomy_research_table.menu.entry3.right.3" : "Once I got a sketch I'll need",
-  "gui.astronomy_research_table.menu.entry3.right.4" : "to settle down on the design",
-  "gui.astronomy_research_table.menu.entry3.right.5" : "by crafting a Research Station",
-  "gui.astronomy_research_table.menu.entry3.right.6" : "with some planks and paper.",
+  "gui.notebook.menu.entry3.right.3" : "Once I got a sketch I'll need",
+  "gui.notebook.menu.entry3.right.4" : "to settle down on the design",
+  "gui.notebook.menu.entry3.right.5" : "by crafting a Research Station",
+  "gui.notebook.menu.entry3.right.6" : "with some planks and paper.",
 
 
 
 
-  "gui.astronomy_research_table.menu.entry3.right.15" : "§cWORK IN PROGRESS",
-  "gui.astronomy_research_table.menu.entry3.right.16" : "§c[The progression and method of",
-  "gui.astronomy_research_table.menu.entry3.right.17" : "§cbuilding a spaceship is not final",
-  "gui.astronomy_research_table.menu.entry3.right.18" : "§cand is unlikely to stay]",
+  "gui.notebook.menu.entry3.right.15" : "§cWORK IN PROGRESS",
+  "gui.notebook.menu.entry3.right.16" : "§c[The progression and method of",
+  "gui.notebook.menu.entry3.right.17" : "§cbuilding a spaceship is not final",
+  "gui.notebook.menu.entry3.right.18" : "§cand is unlikely to stay]",
 
 
-  "gui.astronomy_research_table.menu.entry4.image" : "menu_illustration_4",
-  "gui.astronomy_research_table.menu.entry4.name" : "    Spaceship Fuel",
-  "gui.astronomy_research_table.menu.entry4.toast" : "Spaceship Fuel",
+  "gui.notebook.menu.entry4.image" : "menu_illustration_4",
+  "gui.notebook.menu.entry4.name" : "    Fueling and Takeoff!",
+  "gui.notebook.menu.entry4.toast" : "Fueling and Takeoff!",
 
 
-  "gui.astronomy_research_table.menu.entry5.left.4" : "Getting to space requires a",
-  "gui.astronomy_research_table.menu.entry5.left.5" : "lot of power, thankfully with some",
-  "gui.astronomy_research_table.menu.entry5.left.6" : "coal and pristine enderpearl dust",
-  "gui.astronomy_research_table.menu.entry5.left.7" : "I can make a powerful fuel to fill",
-  "gui.astronomy_research_table.menu.entry5.left.8" : "the spaceship tanks with.",
+  "gui.notebook.menu.entry4.left.3" : "With some pristine enderpearl",
+  "gui.notebook.menu.entry4.left.4" : "dust I can infuse 4 coal into a",
+  "gui.notebook.menu.entry4.left.5" : "much more powerful version which",
+  "gui.notebook.menu.entry4.left.6" : "can be used as fuel for my",
+  "gui.notebook.menu.entry4.left.7" : "spaceship.",
 
 
+  "gui.notebook.menu.entry4.left.16" : "It's best to make sure I have",
+  "gui.notebook.menu.entry4.left.17" : "enough fuel for the return trip",
+  "gui.notebook.menu.entry4.left.18" : "too. Who knows how long I can stay",
+  "gui.notebook.menu.entry4.left.19" : "in this unknown planet for.",
 
 
+  "gui.notebook.menu.entry4.right.3" : "Asha looks like a nice suitable",
+  "gui.notebook.menu.entry4.right.4" : "planet for my first trip. Some iron",
+  "gui.notebook.menu.entry4.right.5" : "tools will probably suffice for this",
+  "gui.notebook.menu.entry4.right.6" : "journey and be able to fight off",
+  "gui.notebook.menu.entry4.right.7" : "any dangers that may appear.",
 
+  "gui.notebook.menu.entry4.right.10" : "Once I have everything ready,",
+  "gui.notebook.menu.entry4.right.11" : "it's time to sit down and launch",
+  "gui.notebook.menu.entry4.right.12" : "towards Asha! Wish me luck.",
 
 
-  "gui.astronomy_research_table.ember.entry1.name" : "      §cEmber§r - Planet",
-  "gui.astronomy_research_table.ember.entry1.toast" : "Ember - Planet",
+  "gui.notebook.menu.entry4.right.15" : "§cWORK IN PROGRESS",
+  "gui.notebook.menu.entry4.right.16" : "§c[Tutorial to be reworked in",
+  "gui.notebook.menu.entry4.right.17" : "§cthe future]",
 
-  "gui.astronomy_research_table.ember.entry1.image" : "ember_illustration_1",
 
-  "gui.astronomy_research_table.ember.entry1.left.10" : "               §c§k!!!§r   §cEMBER   §c§k!!!§r",
+  "gui.notebook.ember.entry1.name" : "      §cEmber§r - Planet",
+  "gui.notebook.ember.entry1.toast" : "Ember - Planet",
 
-  "gui.astronomy_research_table.ember.entry1.left.12" : "A planet consumed by fire and ash.",
-  "gui.astronomy_research_table.ember.entry1.left.13" : "The surface glows from it's rivers",
-  "gui.astronomy_research_table.ember.entry1.left.14" : "of molten rock.",
+  "gui.notebook.ember.entry1.image" : "ember_illustration_1",
 
-  "gui.astronomy_research_table.ember.entry1.left.16" : "Smoke covers the land with no",
-  "gui.astronomy_research_table.ember.entry1.left.17" : "traces of vegetation or water.",
+  "gui.notebook.ember.entry1.left.10" : "               §c§k!!!§r   §cEMBER   §c§k!!!§r",
 
-  "gui.astronomy_research_table.ember.entry1.left.19" : "Anything that inhabits it must be",
-  "gui.astronomy_research_table.ember.entry1.left.20" : "just as unwelcoming as it's planet",
+  "gui.notebook.ember.entry1.left.12" : "A planet consumed by fire and ash.",
+  "gui.notebook.ember.entry1.left.13" : "The surface glows from it's rivers",
+  "gui.notebook.ember.entry1.left.14" : "of molten rock.",
 
+  "gui.notebook.ember.entry1.left.16" : "Smoke covers the land with no",
+  "gui.notebook.ember.entry1.left.17" : "traces of vegetation or water.",
 
-  "gui.astronomy_research_table.ember.entry1.right.2" : "Surface Temperature:",
-  "gui.astronomy_research_table.ember.entry1.right.3" : "§4523°C",
-  "gui.astronomy_research_table.ember.entry1.right.4" : "Atmospheric Composition:",
-  "gui.astronomy_research_table.ember.entry1.right.5" : "§484% CO2, 12% SO2, 4% others",
-  "gui.astronomy_research_table.ember.entry1.right.6" : "Atmospheric Pressure:",
-  "gui.astronomy_research_table.ember.entry1.right.7" : "§44.6 atm",
-  "gui.astronomy_research_table.ember.entry1.right.8" : "Orbital Period:",
-  "gui.astronomy_research_table.ember.entry1.right.9" : "§4181 Overworld days",
-  "gui.astronomy_research_table.ember.entry1.right.10" : "Dominant Biomes:",
-  "gui.astronomy_research_table.ember.entry1.right.11" : "§4Lava Seas, Ash Deserts",
-  "gui.astronomy_research_table.ember.entry1.right.12" : "Orbital Distance:",
-  "gui.astronomy_research_table.ember.entry1.right.13" : "§40.5 AU",
-  "gui.astronomy_research_table.ember.entry1.right.14" : "Seismic Activity:",
-  "gui.astronomy_research_table.ember.entry1.right.15" : "§4Extreme, frequent eruptions",
+  "gui.notebook.ember.entry1.left.19" : "Anything that inhabits it must be",
+  "gui.notebook.ember.entry1.left.20" : "just as unwelcoming as it's planet",
 
-  "gui.astronomy_research_table.ember.entry1.right.18" : "Final Analysis:",
-  "gui.astronomy_research_table.ember.entry1.right.19" : "§4Space suit required.",
 
+  "gui.notebook.ember.entry1.right.2" : "Surface Temperature:",
+  "gui.notebook.ember.entry1.right.3" : "§4523°C",
+  "gui.notebook.ember.entry1.right.4" : "Atmospheric Composition:",
+  "gui.notebook.ember.entry1.right.5" : "§484% CO2, 12% SO2, 4% others",
+  "gui.notebook.ember.entry1.right.6" : "Atmospheric Pressure:",
+  "gui.notebook.ember.entry1.right.7" : "§44.6 atm",
+  "gui.notebook.ember.entry1.right.8" : "Orbital Period:",
+  "gui.notebook.ember.entry1.right.9" : "§4181 Overworld days",
+  "gui.notebook.ember.entry1.right.10" : "Dominant Biomes:",
+  "gui.notebook.ember.entry1.right.11" : "§4Lava Seas, Ash Deserts",
+  "gui.notebook.ember.entry1.right.12" : "Orbital Distance:",
+  "gui.notebook.ember.entry1.right.13" : "§40.5 AU",
+  "gui.notebook.ember.entry1.right.14" : "Seismic Activity:",
+  "gui.notebook.ember.entry1.right.15" : "§4Extreme, frequent eruptions",
 
-  "gui.astronomy_research_table.ember.entry2.name" : "      Ember - 2",
-  "gui.astronomy_research_table.ember.entry2.toast" : "Ember - 2",
-  "gui.astronomy_research_table.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.notebook.ember.entry1.right.18" : "Final Analysis:",
+  "gui.notebook.ember.entry1.right.19" : "§4Space suit required.",
 
-  "gui.astronomy_research_table.ember.entry3.name" : "      Ember - 3",
-  "gui.astronomy_research_table.ember.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.astronomy_research_table.ember.entry4.name" : "      Ember - 4",
-  "gui.astronomy_research_table.ember.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.notebook.ember.entry2.name" : "      Ember - 2",
+  "gui.notebook.ember.entry2.toast" : "Ember - 2",
+  "gui.notebook.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
+  "gui.notebook.ember.entry3.name" : "      Ember - 3",
+  "gui.notebook.ember.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
+  "gui.notebook.ember.entry4.name" : "      Ember - 4",
+  "gui.notebook.ember.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
-  "gui.astronomy_research_table.asha.entry1.name" : "       §dAsha§r - Planet",
-  "gui.astronomy_research_table.asha.entry1.toast" : "Asha - Planet",
-  "gui.astronomy_research_table.asha.entry1.image" : "asha_illustration_1",
 
-  "gui.astronomy_research_table.asha.entry1.left.9" : "               §d§k!!!§r   §dASHA   §d§k!!!§r",
 
-  "gui.astronomy_research_table.asha.entry1.left.11" : "Asha appears to be a friendly",
-  "gui.astronomy_research_table.asha.entry1.left.12" : "planet with no signs of danger.",
-  "gui.astronomy_research_table.asha.entry1.left.13" : "Soil and mineral composition is",
-  "gui.astronomy_research_table.asha.entry1.left.14" : "similar to the Overworld, so",
-  "gui.astronomy_research_table.asha.entry1.left.15" : "natural resources should be just",
-  "gui.astronomy_research_table.asha.entry1.left.16" : "as easy to obtain.",
+  "gui.notebook.asha.entry1.name" : "       §dAsha§r - Planet",
+  "gui.notebook.asha.entry1.toast" : "Asha - Planet",
+  "gui.notebook.asha.entry1.image" : "asha_illustration_1",
 
-  "gui.astronomy_research_table.asha.entry1.left.18" : "The perfect planet for my first",
-  "gui.astronomy_research_table.asha.entry1.left.19" : "otherworldly expedition!",
+  "gui.notebook.asha.entry1.left.9" : "               §d§k!!!§r   §dASHA   §d§k!!!§r",
 
+  "gui.notebook.asha.entry1.left.11" : "Asha appears to be a friendly",
+  "gui.notebook.asha.entry1.left.12" : "planet with no signs of danger.",
+  "gui.notebook.asha.entry1.left.13" : "Soil and mineral composition is",
+  "gui.notebook.asha.entry1.left.14" : "similar to the Overworld, so",
+  "gui.notebook.asha.entry1.left.15" : "natural resources should be just",
+  "gui.notebook.asha.entry1.left.16" : "as easy to obtain.",
 
-  "gui.astronomy_research_table.asha.entry1.right.2" : "Surface Temperature:",
-  "gui.astronomy_research_table.asha.entry1.right.3" : "§222°C",
-  "gui.astronomy_research_table.asha.entry1.right.4" : "Atmospheric Composition:",
-  "gui.astronomy_research_table.asha.entry1.right.5" : "§278% N, 20% O2, 2% others",
-  "gui.astronomy_research_table.asha.entry1.right.6" : "Atmospheric Pressure:",
-  "gui.astronomy_research_table.asha.entry1.right.7" : "§21.17 atm",
-  "gui.astronomy_research_table.asha.entry1.right.8" : "Orbital Period:",
-  "gui.astronomy_research_table.asha.entry1.right.9" : "§2395 Overworld days",
-  "gui.astronomy_research_table.asha.entry1.right.10" : "Dominant Biomes:",
-  "gui.astronomy_research_table.asha.entry1.right.11" : "§2Forests, rivers and grasslands",
-  "gui.astronomy_research_table.asha.entry1.right.12" : "Orbital Distance:",
-  "gui.astronomy_research_table.asha.entry1.right.13" : "§20.8 AU",
-  "gui.astronomy_research_table.asha.entry1.right.14" : "Seismic Activity:",
-  "gui.astronomy_research_table.asha.entry1.right.15" : "§2Minimal, geologically stable",
+  "gui.notebook.asha.entry1.left.18" : "The perfect planet for my first",
+  "gui.notebook.asha.entry1.left.19" : "otherworldly expedition!",
 
-  "gui.astronomy_research_table.asha.entry1.right.18" : "Final Analysis:",
-  "gui.astronomy_research_table.asha.entry1.right.19" : "§2No space suit required",
 
+  "gui.notebook.asha.entry1.right.2" : "Surface Temperature:",
+  "gui.notebook.asha.entry1.right.3" : "§222°C",
+  "gui.notebook.asha.entry1.right.4" : "Atmospheric Composition:",
+  "gui.notebook.asha.entry1.right.5" : "§278% N, 20% O2, 2% others",
+  "gui.notebook.asha.entry1.right.6" : "Atmospheric Pressure:",
+  "gui.notebook.asha.entry1.right.7" : "§21.17 atm",
+  "gui.notebook.asha.entry1.right.8" : "Orbital Period:",
+  "gui.notebook.asha.entry1.right.9" : "§2395 Overworld days",
+  "gui.notebook.asha.entry1.right.10" : "Dominant Biomes:",
+  "gui.notebook.asha.entry1.right.11" : "§2Forests, rivers and grasslands",
+  "gui.notebook.asha.entry1.right.12" : "Orbital Distance:",
+  "gui.notebook.asha.entry1.right.13" : "§20.8 AU",
+  "gui.notebook.asha.entry1.right.14" : "Seismic Activity:",
+  "gui.notebook.asha.entry1.right.15" : "§2Minimal, geologically stable",
 
+  "gui.notebook.asha.entry1.right.18" : "Final Analysis:",
+  "gui.notebook.asha.entry1.right.19" : "§2No space suit required",
 
-  "gui.astronomy_research_table.asha.entry2.name" : "  §dAsha§r - Fauna & Flora",
-  "gui.astronomy_research_table.asha.entry2.toast" : "Asha - Fauna & Flora",
-  "gui.astronomy_research_table.asha.entry2.image" : "asha_illustration_2",
 
-  "gui.astronomy_research_table.asha.entry2.left.11" : "The whole planet feels familiar.",
-  "gui.astronomy_research_table.asha.entry2.left.12" : "Like a twin planet to the Overworld.",
 
-  "gui.astronomy_research_table.asha.entry2.left.14" : "Fauna and flora flourish",
-  "gui.astronomy_research_table.asha.entry2.left.15" : "everywhere with no signs of",
-  "gui.astronomy_research_table.asha.entry2.left.16" : "natural predators.",
+  "gui.notebook.asha.entry2.name" : "  §dAsha§r - Fauna & Flora",
+  "gui.notebook.asha.entry2.toast" : "Asha - Fauna & Flora",
+  "gui.notebook.asha.entry2.image" : "asha_illustration_2",
 
-  "gui.astronomy_research_table.asha.entry2.left.18" : "I can barely believe a planet so",
-  "gui.astronomy_research_table.asha.entry2.left.19" : "full of life was hiding right next",
-  "gui.astronomy_research_table.asha.entry2.left.20" : "to the overworld in the sky.",
+  "gui.notebook.asha.entry2.left.11" : "The whole planet feels familiar.",
+  "gui.notebook.asha.entry2.left.12" : "Like a twin planet to the Overworld.",
 
-  "gui.astronomy_research_table.asha.entry2.right.2" : "Further research and testing is",
-  "gui.astronomy_research_table.asha.entry2.right.3" : "needed but every creature I come",
-  "gui.astronomy_research_table.asha.entry2.right.4" : "across seems curious rather than",
-  "gui.astronomy_research_table.asha.entry2.right.5" : "afraid of me getting close.",
+  "gui.notebook.asha.entry2.left.14" : "Fauna and flora flourish",
+  "gui.notebook.asha.entry2.left.15" : "everywhere with no signs of",
+  "gui.notebook.asha.entry2.left.16" : "natural predators.",
 
-  "gui.astronomy_research_table.asha.entry2.right.8" : "I found two fish who",
-  "gui.astronomy_research_table.asha.entry2.right.9" : "seem to hate each other,",
-  "gui.astronomy_research_table.asha.entry2.right.10" : "yet they swim together...",
+  "gui.notebook.asha.entry2.left.18" : "I can barely believe a planet so",
+  "gui.notebook.asha.entry2.left.19" : "full of life was hiding right next",
+  "gui.notebook.asha.entry2.left.20" : "to the overworld in the sky.",
 
+  "gui.notebook.asha.entry2.right.2" : "Further research and testing is",
+  "gui.notebook.asha.entry2.right.3" : "needed but every creature I come",
+  "gui.notebook.asha.entry2.right.4" : "across seems curious rather than",
+  "gui.notebook.asha.entry2.right.5" : "afraid of me getting close.",
 
+  "gui.notebook.asha.entry2.right.8" : "I found two fish who",
+  "gui.notebook.asha.entry2.right.9" : "seem to hate each other,",
+  "gui.notebook.asha.entry2.right.10" : "yet they swim together...",
 
 
 
-  "gui.astronomy_research_table.asha.entry3.name" : "     §dAsha§r - Lunarveil",
-  "gui.astronomy_research_table.asha.entry3.image" : "asha_illustration_3",
 
-  "gui.astronomy_research_table.asha.entry3.left.11" : "I found these unique flowers.",
 
-  "gui.astronomy_research_table.asha.entry3.left.13" : "I've named them Lunarveil for now.",
+  "gui.notebook.asha.entry3.name" : "     §dAsha§r - Lunarveil",
+  "gui.notebook.asha.entry3.image" : "asha_illustration_3",
 
-  "gui.astronomy_research_table.asha.entry3.left.15" : "They appear to open under the",
-  "gui.astronomy_research_table.asha.entry3.left.16" : "moonlight to release their glittering",
-  "gui.astronomy_research_table.asha.entry3.left.17" : "pollen, lighting up the area.",
+  "gui.notebook.asha.entry3.left.11" : "I found these unique flowers.",
 
-  "gui.astronomy_research_table.asha.entry3.left.19" : "Possibly to attract pollinators?",
+  "gui.notebook.asha.entry3.left.13" : "I've named them Lunarveil for now.",
 
+  "gui.notebook.asha.entry3.left.15" : "They appear to open under the",
+  "gui.notebook.asha.entry3.left.16" : "moonlight to release their glittering",
+  "gui.notebook.asha.entry3.left.17" : "pollen, lighting up the area.",
 
-  "gui.astronomy_research_table.asha.entry3.right.3" : "They would look beautiful",
-  "gui.astronomy_research_table.asha.entry3.right.4" : "in my garden back in the",
-  "gui.astronomy_research_table.asha.entry3.right.5" : "Overworld. Surely it won't",
-  "gui.astronomy_research_table.asha.entry3.right.6" : "hurt to take a few back home...",
+  "gui.notebook.asha.entry3.left.19" : "Possibly to attract pollinators?",
 
-  "gui.astronomy_research_table.asha.entry3.right.17" : "... I wonder what my bees",
-  "gui.astronomy_research_table.asha.entry3.right.18" : "will think of them...",
 
+  "gui.notebook.asha.entry3.right.3" : "They would look beautiful",
+  "gui.notebook.asha.entry3.right.4" : "in my garden back in the",
+  "gui.notebook.asha.entry3.right.5" : "Overworld. Surely it won't",
+  "gui.notebook.asha.entry3.right.6" : "hurt to take a few back home...",
 
+  "gui.notebook.asha.entry3.right.17" : "... I wonder what my bees",
+  "gui.notebook.asha.entry3.right.18" : "will think of them...",
 
 
 
-  "gui.astronomy_research_table.asha.entry4.name" : "     §dAsha§r - Sweetlily",
-  "gui.astronomy_research_table.asha.entry4.toast" : "Asha - Sweetlilies",
-  "gui.astronomy_research_table.asha.entry4.image" : "asha_illustration_4",
 
-  "gui.astronomy_research_table.asha.entry4.left.11" : "This lily-like flower smells weirdly",
-  "gui.astronomy_research_table.asha.entry4.left.12" : "sweet. One of the tiny creatures",
-  "gui.astronomy_research_table.asha.entry4.left.13" : "just ate the petals right off.",
 
-  "gui.astronomy_research_table.asha.entry4.left.15" : "It only makes sense I name",
-  "gui.astronomy_research_table.asha.entry4.left.16" : "them Sweetlily.",
+  "gui.notebook.asha.entry4.name" : "     §dAsha§r - Sweetlily",
+  "gui.notebook.asha.entry4.toast" : "Asha - Sweetlilies",
+  "gui.notebook.asha.entry4.image" : "asha_illustration_4",
 
-  "gui.astronomy_research_table.asha.entry4.right.3" : "Grinding it to a powder is easy",
-  "gui.astronomy_research_table.asha.entry4.right.4" : "enough, it makes for the perfect",
-  "gui.astronomy_research_table.asha.entry4.right.5" : "replacement of the sugarcane",
-  "gui.astronomy_research_table.asha.entry4.right.6" : "I'm used to.",
+  "gui.notebook.asha.entry4.left.11" : "This lily-like flower smells weirdly",
+  "gui.notebook.asha.entry4.left.12" : "sweet. One of the tiny creatures",
+  "gui.notebook.asha.entry4.left.13" : "just ate the petals right off.",
 
+  "gui.notebook.asha.entry4.left.15" : "It only makes sense I name",
+  "gui.notebook.asha.entry4.left.16" : "them Sweetlily.",
 
-  "gui.astronomy_research_table.asha.entry4.right.15" : "Some tiny creatures I found",
-  "gui.astronomy_research_table.asha.entry4.right.16" : "really liked this powder. If I",
-  "gui.astronomy_research_table.asha.entry4.right.17" : "could find some kind of fruit I",
-  "gui.astronomy_research_table.asha.entry4.right.18" : "could make treats for them and",
-  "gui.astronomy_research_table.asha.entry4.right.19" : "possibly make a friend?",
+  "gui.notebook.asha.entry4.right.3" : "Grinding it to a powder is easy",
+  "gui.notebook.asha.entry4.right.4" : "enough, it makes for the perfect",
+  "gui.notebook.asha.entry4.right.5" : "replacement of the sugarcane",
+  "gui.notebook.asha.entry4.right.6" : "I'm used to.",
 
 
-  "gui.astronomy_research_table.overworld.entry1.name" : "    Overworld - 1",
-  "gui.astronomy_research_table.overworld.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.notebook.asha.entry4.right.15" : "Some tiny creatures I found",
+  "gui.notebook.asha.entry4.right.16" : "really liked this powder. If I",
+  "gui.notebook.asha.entry4.right.17" : "could find some kind of fruit I",
+  "gui.notebook.asha.entry4.right.18" : "could make treats for them and",
+  "gui.notebook.asha.entry4.right.19" : "possibly make a friend?",
 
-  "gui.astronomy_research_table.overworld.entry2.name" : "    Overworld - 2",
-  "gui.astronomy_research_table.overworld.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.astronomy_research_table.overworld.entry3.name" : "    Overworld - 3",
-  "gui.astronomy_research_table.overworld.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.notebook.overworld.entry1.name" : "    Overworld - 1",
+  "gui.notebook.overworld.entry1.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.astronomy_research_table.overworld.entry4.name" : "    Overworld - 4",
-  "gui.astronomy_research_table.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.notebook.overworld.entry2.name" : "    Overworld - 2",
+  "gui.notebook.overworld.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
+  "gui.notebook.overworld.entry3.name" : "    Overworld - 3",
+  "gui.notebook.overworld.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.astronomy_research_table.lunamar.entry1.name" : "      §3Lunamar§r - Planet",
-  "gui.astronomy_research_table.lunamar.entry1.image" : "lunamar_illustration_1",
+  "gui.notebook.overworld.entry4.name" : "    Overworld - 4",
+  "gui.notebook.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.astronomy_research_table.lunamar.entry1.left.11" : "            §3§k!!!§r   §3lunamar   §3§k!!!§r",
 
-  "gui.astronomy_research_table.lunamar.entry1.left.13" : "A giant, dark ocean-covered",
-  "gui.astronomy_research_table.lunamar.entry1.left.14" : "planet illuminated by shimmering",
-  "gui.astronomy_research_table.lunamar.entry1.left.15" : "lights beneath its surface.",
+  "gui.notebook.lunamar.entry1.name" : "      §3Lunamar§r - Planet",
+  "gui.notebook.lunamar.entry1.image" : "lunamar_illustration_1",
 
-  "gui.astronomy_research_table.lunamar.entry1.left.17" : "Despite its distance from the Sun,",
-  "gui.astronomy_research_table.lunamar.entry1.left.18" : "Lunamar appears to maintain a mild",
-  "gui.astronomy_research_table.lunamar.entry1.left.19" : "climate, likely due to it's dense",
-  "gui.astronomy_research_table.lunamar.entry1.left.20" : "atmosphere trapping heat below.",
+  "gui.notebook.lunamar.entry1.left.11" : "            §3§k!!!§r   §3lunamar   §3§k!!!§r",
 
+  "gui.notebook.lunamar.entry1.left.13" : "A giant, dark ocean-covered",
+  "gui.notebook.lunamar.entry1.left.14" : "planet illuminated by shimmering",
+  "gui.notebook.lunamar.entry1.left.15" : "lights beneath its surface.",
 
-  "gui.astronomy_research_table.lunamar.entry1.right.2" : "Surface Temperature:",
-  "gui.astronomy_research_table.lunamar.entry1.right.3" : "§28°C",
-  "gui.astronomy_research_table.lunamar.entry1.right.4" : "Atmospheric Composition:",
-  "gui.astronomy_research_table.lunamar.entry1.right.5" : "§270%% N, 18% O2, 8% CO2, 4% others",
-  "gui.astronomy_research_table.lunamar.entry1.right.6" : "Atmospheric Pressure:",
-  "gui.astronomy_research_table.lunamar.entry1.right.7" : "§22.2 atm",
-  "gui.astronomy_research_table.lunamar.entry1.right.8" : "Orbital Period:",
-  "gui.astronomy_research_table.lunamar.entry1.right.9" : "§2849 Overworld days",
-  "gui.astronomy_research_table.lunamar.entry1.right.10" : "Dominant Biomes:",
-  "gui.astronomy_research_table.lunamar.entry1.right.11" : "§2Oceans, with the very rare",
-  "gui.astronomy_research_table.lunamar.entry1.right.12" : "Orbital Distance:",
-  "gui.astronomy_research_table.lunamar.entry1.right.13" : "§22.06 AU",
-  "gui.astronomy_research_table.lunamar.entry1.right.14" : "Seismic Activity:",
-  "gui.astronomy_research_table.lunamar.entry1.right.15" : "§2Low, underwater vents are common",
+  "gui.notebook.lunamar.entry1.left.17" : "Despite its distance from the Sun,",
+  "gui.notebook.lunamar.entry1.left.18" : "Lunamar appears to maintain a mild",
+  "gui.notebook.lunamar.entry1.left.19" : "climate, likely due to it's dense",
+  "gui.notebook.lunamar.entry1.left.20" : "atmosphere trapping heat below.",
 
-  "gui.astronomy_research_table.lunamar.entry1.right.18" : "Final Analysis:",
-  "gui.astronomy_research_table.lunamar.entry1.right.19" : "§2Diving Suit Recommended for.",
-  "gui.astronomy_research_table.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
 
+  "gui.notebook.lunamar.entry1.right.2" : "Surface Temperature:",
+  "gui.notebook.lunamar.entry1.right.3" : "§28°C",
+  "gui.notebook.lunamar.entry1.right.4" : "Atmospheric Composition:",
+  "gui.notebook.lunamar.entry1.right.5" : "§270%% N, 18% O2, 8% CO2, 4% others",
+  "gui.notebook.lunamar.entry1.right.6" : "Atmospheric Pressure:",
+  "gui.notebook.lunamar.entry1.right.7" : "§22.2 atm",
+  "gui.notebook.lunamar.entry1.right.8" : "Orbital Period:",
+  "gui.notebook.lunamar.entry1.right.9" : "§2849 Overworld days",
+  "gui.notebook.lunamar.entry1.right.10" : "Dominant Biomes:",
+  "gui.notebook.lunamar.entry1.right.11" : "§2Oceans, with the very rare",
+  "gui.notebook.lunamar.entry1.right.12" : "Orbital Distance:",
+  "gui.notebook.lunamar.entry1.right.13" : "§22.06 AU",
+  "gui.notebook.lunamar.entry1.right.14" : "Seismic Activity:",
+  "gui.notebook.lunamar.entry1.right.15" : "§2Low, underwater vents are common",
 
-  "gui.astronomy_research_table.lunamar.entry2.name" : "     §3Lunamar§r - Illuma",
-  "gui.astronomy_research_table.lunamar.entry2.image" : "lunamar_illustration_2",
+  "gui.notebook.lunamar.entry1.right.18" : "Final Analysis:",
+  "gui.notebook.lunamar.entry1.right.19" : "§2Diving Suit Recommended for.",
+  "gui.notebook.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
 
-  "gui.astronomy_research_table.lunamar.entry2.left.11" : "These shiny flowers bloom",
-  "gui.astronomy_research_table.lunamar.entry2.left.12" : "when underwater or during rain time.",
 
-  "gui.astronomy_research_table.lunamar.entry2.left.14" : "While blooming they emit a",
-  "gui.astronomy_research_table.lunamar.entry2.left.15" : "soft glow which lights up the",
-  "gui.astronomy_research_table.lunamar.entry2.left.16" : "ocean floor.",
+  "gui.notebook.lunamar.entry2.name" : "     §3Lunamar§r - Illuma",
+  "gui.notebook.lunamar.entry2.image" : "lunamar_illustration_2",
 
-  "gui.astronomy_research_table.lunamar.entry3.name" : "      §3Lunamar§r - 3",
-  "gui.astronomy_research_table.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+  "gui.notebook.lunamar.entry2.left.11" : "These shiny flowers bloom",
+  "gui.notebook.lunamar.entry2.left.12" : "when underwater or during rain time.",
 
-  "gui.astronomy_research_table.lunamar.entry4.name" : "      §3Lunamar§r - 4",
-  "gui.astronomy_research_table.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
+  "gui.notebook.lunamar.entry2.left.14" : "While blooming they emit a",
+  "gui.notebook.lunamar.entry2.left.15" : "soft glow which lights up the",
+  "gui.notebook.lunamar.entry2.left.16" : "ocean floor.",
+
+  "gui.notebook.lunamar.entry3.name" : "      §3Lunamar§r - 3",
+  "gui.notebook.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
+
+  "gui.notebook.lunamar.entry4.name" : "      §3Lunamar§r - 4",
+  "gui.notebook.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
 
 
 

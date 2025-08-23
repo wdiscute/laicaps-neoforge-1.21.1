@@ -23,11 +23,13 @@ public class EntryUnlockedToast implements Toast
     private int old;
     private static final Random r = new Random();
 
-    public EntryUnlockedToast(String menuName, String entryName)
+    public EntryUnlockedToast(String advName, String entryName)
     {
-        this.icon = Laicaps.rl("textures/gui/notebook/bookmark/bookmark_" + menuName + "_" + entryName + "_toast.png");
+        String nameWithoutEntries = advName.substring(0, advName.indexOf("_"));
+
+        this.icon = Laicaps.rl("textures/gui/notebook/bookmark/bookmark_" + nameWithoutEntries + "_" + entryName + "_toast.png");
         this.title = Component.translatable("gui.laicaps.toast.entry_unlocked");
-        this.description = I18n.get("gui.astronomy_research_table." + menuName + "." + entryName + ".toast");
+        this.description = I18n.get("gui.notebook." + nameWithoutEntries + "." + entryName + ".toast");
     }
 
     public Toast.Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)

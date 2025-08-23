@@ -222,6 +222,8 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     {
         super.tick();
 
+        if(tickCount % 100 == 0) awardEntryToPlayersNearby();
+
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
 
@@ -274,7 +276,6 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             handleClientAnimations();
             return;
         }
-
 
         ItemStack rocketState = this.itemStacks.get(3);
         if (state == 0 && !rocketState.is(Items.DIRT)) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
@@ -364,7 +365,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                     if (entity instanceof ServerPlayer sp)
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry2");
-                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember", "entry2"));
+                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember_entries", "entry2"));
                     }
                 }
             }
@@ -378,7 +379,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                     if (entity instanceof ServerPlayer sp)
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry2");
-                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha", "entry2"));
+                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha_entries", "entry2"));
                     }
                 }
             }
@@ -397,7 +398,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                     if (entity instanceof ServerPlayer sp)
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "lunamar_entries", "entry2");
-                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar", "entry2"));
+                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar_entries", "entry2"));
                     }
                 }
             }
@@ -562,6 +563,23 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         {
         }
     }
+
+    private void awardEntryToPlayersNearby()
+    {
+
+       List<Entity> entities = level().getEntities(null, new AABB(-10, -10, -10, 10, 10, 10).move(position()));
+
+       for (Entity e : entities)
+       {
+           if (e instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry4"))
+           {
+               AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry4");
+               PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry4"));
+           }
+       }
+
+    }
+
 
     @OnlyIn(Dist.CLIENT)
     public void screen()

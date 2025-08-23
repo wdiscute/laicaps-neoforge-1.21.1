@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.entity.fishing;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.laicaps.Laicaps;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -13,8 +14,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbilities;
 import org.joml.Matrix4f;
 
 public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
@@ -49,73 +54,71 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 
         poseStack.popPose();
 
-        this.renderLeash2(fishingBobEntity, partialTicks, poseStack, buffer, fishingBobEntity.getOwner());
+        //render string
+        if(fishingBobEntity.getOwner() instanceof Player player)
+        {
+            poseStack.pushPose();
 
+            float f = player.getAttackAnim(partialTicks);
+            float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
+            Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTicks);
+            Vec3 vec31 = fishingBobEntity.getPosition(partialTicks).add(0.0F, 0.25F, 0.0F);
+            float f2 = (float) (vec3.x - vec31.x);
+            float f3 = (float) (vec3.y - vec31.y);
+            float f4 = (float) (vec3.z - vec31.z);
+            VertexConsumer vertexconsumer1 = buffer.getBuffer(RenderType.lineStrip());
+            PoseStack.Pose posestack$pose1 = poseStack.last();
 
+            for (int j = 0; j <= 16; ++j)
+            {
+                stringVertex(f2, f3, f4, vertexconsumer1, posestack$pose1, fraction(j, 16), fraction(j + 1, 16));
+            }
+
+            poseStack.popPose();
+        }
     }
 
+    private static float fraction(int numerator, int denominator) {
+        return (float)numerator / (float)denominator;
+    }
 
-    private <E extends Entity> void renderLeash2(FishingBobEntity entity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, E leashHolder)
-    {
-        poseStack.pushPose();
-        Vec3 vec3 = leashHolder.getRopeHoldPosition(partialTick); //TODO FIX PLAYER HOLDING LEASH POSITION
-        double d0 = (double) (entity.getPreciseBodyRotation(partialTick) * ((float) Math.PI / 180F)) + (Math.PI / 2D);
-        Vec3 vec31 = new Vec3(0, 0.2, 0);
-        double d1 = Math.cos(d0) * vec31.z + Math.sin(d0) * vec31.x;
-        double d2 = Math.sin(d0) * vec31.z - Math.cos(d0) * vec31.x;
-        double d3 = Mth.lerp(partialTick, entity.xo, entity.getX()) + d1;
-        double d4 = Mth.lerp(partialTick, entity.yo, entity.getY()) + vec31.y;
-        double d5 = Mth.lerp(partialTick, entity.zo, entity.getZ()) + d2;
-        poseStack.translate(d1, vec31.y, d2);
-        float f = (float) (vec3.x - d3);
-        float f1 = (float) (vec3.y - d4);
-        float f2 = (float) (vec3.z - d5);
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.leash());
-        Matrix4f matrix4f = poseStack.last().pose();
-        float f4 = Mth.invSqrt(f * f + f2 * f2) * 0.025F / 2.0F;
-        float f5 = f2 * f4;
-        float f6 = f * f4;
-        BlockPos blockpos = BlockPos.containing(entity.getEyePosition(partialTick));
-        BlockPos blockpos1 = BlockPos.containing(leashHolder.getEyePosition(partialTick));
-        int i = this.getBlockLightLevel(entity, blockpos);
-        int j = 15; //TODO FIX THE LIGHT LEVEL CHECK
-        int k = entity.level().getBrightness(LightLayer.SKY, blockpos);
-        int l = entity.level().getBrightness(LightLayer.SKY, blockpos1);
-
-        for (int i1 = 0; i1 <= 24; ++i1)
-        {
-            addVertexPair(vertexconsumer, matrix4f, f, f1, f2, i, j, k, l, 0.025F, 0.025F, f5, f6, i1, false);
+    private Vec3 getPlayerHandPos(Player player, float p_340872_, float partialTick) {
+        int i = -1;
+        ItemStack itemstack = player.getMainHandItem();
+        if (!itemstack.canPerformAction(ItemAbilities.FISHING_ROD_CAST)) {
+            i = -i;
         }
 
-        for (int j1 = 24; j1 >= 0; --j1)
-        {
-            addVertexPair(vertexconsumer, matrix4f, f, f1, f2, i, j, k, l, 0.025F, 0.0F, f5, f6, j1, true);
+        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
+            double d4 = (double)960.0F / (double)(Integer)this.entityRenderDispatcher.options.fov().get();
+            Vec3 vec3 = this.entityRenderDispatcher.camera.getNearPlane().getPointOnPlane((float)i * 0.525F, -0.1F).scale(d4).yRot(p_340872_ * 0.5F).xRot(-p_340872_ * 0.7F);
+            return player.getEyePosition(partialTick).add(vec3);
+        } else {
+            float f = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot) * ((float)Math.PI / 180F);
+            double d0 = Mth.sin(f);
+            double d1 = Mth.cos(f);
+            float f1 = player.getScale();
+            double d2 = (double)i * 0.35 * (double)f1;
+            double d3 = 0.8 * (double)f1;
+            float f2 = player.isCrouching() ? -0.1875F : 0.0F;
+            return player.getEyePosition(partialTick).add(-d1 * d2 - d0 * d3, (double)f2 - 0.45 * (double)f1, -d0 * d2 + d1 * d3);
         }
-
-        poseStack.popPose();
     }
 
 
-    private static void addVertexPair(VertexConsumer buffer, Matrix4f pose, float startX, float startY, float startZ, int entityBlockLight, int holderBlockLight, int entitySkyLight, int holderSkyLight, float yOffset, float dy, float dx, float dz, int index, boolean reverse)
+    private static void stringVertex(float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction)
     {
-        float f = (float) index / 24.0F;
-        int i = (int) Mth.lerp(f, (float) entityBlockLight, (float) holderBlockLight);
-        int j = (int) Mth.lerp(f, (float) entitySkyLight, (float) holderSkyLight);
-        int k = LightTexture.pack(i, j);
-        float f1 = index % 2 == (reverse ? 1 : 0) ? 0.7F : 1.0F;
-        float f2 = 0.5F * f1;
-        float f3 = 0.4F * f1;
-        float f4 = 0.3F * f1;
-        float f5 = startX * f;
-        float f6 = startY > 0.0F ? startY * f * f : startY - startY * (1.0F - f) * (1.0F - f);
-        float f7 = startZ * f;
-        buffer.addVertex(pose, f5 - dx, f6 + dy, f7 + dz).setColor(f2, f3, f4, 1.0F).setLight(k);
-        buffer.addVertex(pose, f5 + dx, f6 + yOffset - dy, f7 - dz).setColor(f2, f3, f4, 1.0F).setLight(k);
-    }
-
-    public void vertex(PoseStack.Pose pose, VertexConsumer consumer, int x, int y, int z, float u, float v, int normalX, int normalY, int normalZ, int packedLight)
-    {
-        consumer.addVertex(pose, (float) x, (float) y, (float) z).setColor(-1).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(pose, (float) normalX, (float) normalZ, (float) normalY);
+        float f = x * stringFraction;
+        float f1 = y * (stringFraction * stringFraction + stringFraction) * 0.5F + 0.25F;
+        float f2 = z * stringFraction;
+        float f3 = x * nextStringFraction - f;
+        float f4 = y * (nextStringFraction * nextStringFraction + nextStringFraction) * 0.5F + 0.25F - f1;
+        float f5 = z * nextStringFraction - f2;
+        float f6 = Mth.sqrt(f3 * f3 + f4 * f4 + f5 * f5);
+        f3 /= f6;
+        f4 /= f6;
+        f5 /= f6;
+        consumer.addVertex(pose, f, f1, f2).setColor(-16777216).setNormal(pose, f3, f4, f5);
     }
 
 }

@@ -376,7 +376,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
             if (entryUnlocked)
             {
                 guiGraphics.drawString(
-                        this.font, Component.translatable("gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".name"),
+                        this.font, Component.translatable("gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".name"),
                         uiX + 90, uiY + 230, 0, false);
             }
             else
@@ -430,14 +430,14 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
         if (entryUnlocked)
         {
             //render image
-            String keyImage = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".image";
+            String keyImage = "gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".image";
             if (I18n.exists(keyImage))
                 renderImage(guiGraphics, Laicaps.rl("textures/gui/notebook/illustration/" + I18n.get(keyImage) + ".png"));
 
             //render text left
             for (int i = 0; i < 21; i++)
             {
-                String key = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".left." + i;
+                String key = "gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".left." + i;
                 if (I18n.exists(key))
                     guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
             }
@@ -445,7 +445,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
             //render text right
             for (int i = 0; i < 21; i++)
             {
-                String key = "gui.astronomy_research_table." + currentPlanetString + ".entry" + currentEntry + ".right." + i;
+                String key = "gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".right." + i;
                 if (I18n.exists(key))
                     guiGraphics.drawString(this.font, Component.translatable(key), uiX + 272, uiY + 10 + (i * 10), 0, false);
             }

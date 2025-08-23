@@ -2,26 +2,26 @@ package com.wdiscute.laicaps.item;
 
 import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class InventoryTickBlockItem extends BlockItem
 {
 
     private final String adv;
     private final String criteria;
-    private final String planetForToast;
 
     public InventoryTickBlockItem(Block block, Properties properties, String adv, String criteria, String planetForToast)
     {
         super(block, properties);
         this.adv = adv;
         this.criteria = criteria;
-        this.planetForToast = planetForToast;
     }
 
     @Override
@@ -32,7 +32,8 @@ public class InventoryTickBlockItem extends BlockItem
             if(!AdvHelper.hasAdvancementCriteria(sp, adv, criteria))
             {
                 AdvHelper.awardAdvancementCriteria(sp, adv, criteria);
-                Laicaps.sendToast(planetForToast, criteria);
+                PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload(adv, criteria));
+
             }
         }
         super.inventoryTick(stack, level, entity, slotId, isSelected);

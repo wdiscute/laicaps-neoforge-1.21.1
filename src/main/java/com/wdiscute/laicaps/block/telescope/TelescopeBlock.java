@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.block.telescope;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.*;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 public class TelescopeBlock extends HorizontalDirectionalBlock implements EntityBlock
@@ -75,7 +77,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
                 if (player instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry3"))
                 {
                     AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry3");
-                    Laicaps.sendToast("menu", "entry3");
+                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry3"));
                 }
 
             }
