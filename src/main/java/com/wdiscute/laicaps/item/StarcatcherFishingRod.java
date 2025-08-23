@@ -7,6 +7,7 @@ import com.wdiscute.laicaps.fishing.FishingRodMenu;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -33,6 +34,16 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
         super(properties);
     }
 
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
+    {
+        if(entity instanceof ServerPlayer player)
+        {
+            if(stack != player.getMainHandItem()) stack.set(ModDataComponents.CAST, false);
+
+        }
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+    }
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
@@ -69,7 +80,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
                 Entity entity = new FishingBobEntity(level, player, bobber, bait);
                 level.addFreshEntity(entity);
                 if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
-                itemstack.set(ModDataComponents.CAST, true);
+                if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)) player.getMainHandItem().set(ModDataComponents.CAST, true);
             }
 
             player.awardStat(Stats.ITEM_USED.get(this));
@@ -87,7 +98,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
                     {
                         fbe.kill();
                         if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), "");
-                        itemstack.set(ModDataComponents.CAST, false);
+                        if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)) player.getMainHandItem().set(ModDataComponents.CAST, false);
                     }
                 }
             }

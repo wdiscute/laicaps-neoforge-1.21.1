@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "item/fishing_rod",
   "textures": {
     "layer0": "laicaps:item/starcatcher_fishing_rod_cast"
   }

@@ -1,14 +1,11 @@
 {
-  "parent": "minecraft:item/handheld",
-  "loader": "neoforge:separate_transforms",
-
-  "base": {
-    "parent": "laicaps:item/starcatcher_fishing_rod_uncast"
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "laicaps:item/starcatcher_fishing_rod_uncast"
   },
-
   "overrides": [
     {
-      "predicate": { "laicaps:cast": 1 },
+      "predicate": {"laicaps:cast": 1},
       "model": "laicaps:item/starcatcher_fishing_rod_cast"
     }
   ]
