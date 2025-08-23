@@ -135,32 +135,6 @@ public class ModItems
     //`--' '--'  `-----'   `-----' `--' '--' `------'    `--'
     //
 
-
-    public static final DeferredItem<Item> TANK = ITEMS.register(
-            "tank", () -> new TankItem("small", 400, new Item.Properties()
-                    .rarity(Rarity.RARE)
-                    .stacksTo(1)
-                    .component(ModDataComponents.FUEL, 0)
-                    .durability(400)
-                    .setNoRepair()));
-
-    public static final DeferredItem<Item> MEDIUM_TANK = ITEMS.register(
-            "medium_tank", () -> new TankItem("medium", 800, new Item.Properties()
-                    .rarity(Rarity.RARE)
-                    .stacksTo(1)
-                    .component(ModDataComponents.FUEL, 0)
-                    .durability(800)
-                    .setNoRepair()));
-
-
-    public static final DeferredItem<Item> LARGE_TANK = ITEMS.register(
-            "large_tank", () -> new TankItem("large", 1500, new Item.Properties()
-                    .rarity(Rarity.RARE)
-                    .stacksTo(1)
-                    .durability(1500)
-                    .component(ModDataComponents.FUEL, 0)
-                    .setNoRepair()));
-
     public static final DeferredItem<Item> ENDERBLAZE_FUEL = ITEMS.register("enderblaze_fuel", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final DeferredItem<Item> PRISTINE_ENDERPEARL_DUST = ITEMS.register("pristine_enderpearl_dust", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 

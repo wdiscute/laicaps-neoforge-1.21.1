@@ -7,13 +7,11 @@
     "BrushCraftingRemainingFix",
     "FishingMixin",
     "JumpingAcessor",
-    "StopRidingMixin",
-    "TankDurabilityTooltipFix"
+    "StopRidingMixin"
   ],
   "client": [
     "AdvancementProgressAcessor",
-    "JumpingAcessor",
-    "TankDurabilityTooltipFix"
+    "JumpingAcessor"
   ],
   "injectors": {
     "defaultRequire": 1
