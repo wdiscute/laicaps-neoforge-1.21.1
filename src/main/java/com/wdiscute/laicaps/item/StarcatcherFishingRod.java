@@ -36,6 +36,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
+
         ItemStack itemstack = player.getItemInHand(hand).copy();
 
         if(player.isCrouching() && hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD.get()))
@@ -68,6 +69,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
                 Entity entity = new FishingBobEntity(level, player, bobber, bait);
                 level.addFreshEntity(entity);
                 if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
+                itemstack.set(ModDataComponents.CAST, true);
             }
 
             player.awardStat(Stats.ITEM_USED.get(this));
@@ -85,6 +87,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
                     {
                         fbe.kill();
                         if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), "");
+                        itemstack.set(ModDataComponents.CAST, false);
                     }
                 }
             }

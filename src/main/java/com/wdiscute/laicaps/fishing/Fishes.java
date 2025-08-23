@@ -335,8 +335,6 @@ public record Fishes()
             .timeRestrictions(FishProperties.daytime.DAY)
             .mustBeClear();
 
-
-
     //
     //,--.
     //|  | ,--.,--. ,--,--,   ,--,--. ,--,--,--.  ,--,--. ,--.--.
@@ -370,6 +368,55 @@ public record Fishes()
             5
     )
             .canBeBucketed(ModItems.MOONRAY_BUCKET.get());
+
+
+
+    public static final FishProperties LUMEN_DRIFTER = new FishProperties(
+            ModItems.LUMEN_DRIFTER.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    );
+
+    public static final FishProperties RADIANT_SEAHORSE = new FishProperties(
+            ModItems.RADIANT_SEAHORSE.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    );
+
+    public static final FishProperties VERDANT_SEAHORSE = new FishProperties(
+            ModItems.VERDANT_SEAHORSE.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    );
+
+    public static final FishProperties OCTO = new FishProperties(
+            ModItems.OCTO.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    );
+
+
+    public static final FishProperties RED_REEF_OCTO = new FishProperties(
+            ModItems.RED_REEF_OCTO.get(),
+            List.of(getDimResourceKey("lunamar")),
+            null,
+            5
+    );
+
+
+    public static final FishProperties CRIMSON_STARFISH = new FishProperties(
+            ModItems.CRIMSON_STARFISH.get(),
+            List.of(getDimResourceKey("lunamar")),
+            List.of(getBiomeResourceKey("asha_ocean")),
+            5
+    );
+
+
+
 
 
     public static final FishProperties SUPER_SPECIAL_FISH = new FishProperties(//
@@ -430,7 +477,9 @@ public record Fishes()
             SOLAR_CARP, MEADOW_PERCH,
             EEL, THUNDERCHARGED_EEL,
             RED_HERRING, AVIAN,
-            TWILIGHT_TROUT
+            TWILIGHT_TROUT, CRIMSON_STARFISH,
+            LUMEN_DRIFTER, VERDANT_SEAHORSE, RADIANT_SEAHORSE,
+            OCTO, RED_REEF_OCTO
 
 
 

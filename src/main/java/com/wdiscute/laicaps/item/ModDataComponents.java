@@ -5,6 +5,7 @@ import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -35,8 +36,8 @@ public class ModDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BAIT = register("bait",
             builder -> builder.persistent(ItemContainerContents.CODEC));
 
-
-
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> CAST = register("cast",
+            builder -> builder.persistent(Codec.BOOL));
 
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,

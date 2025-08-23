@@ -44,7 +44,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(modid = Laicaps.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-public class ModEventBusEvents
+public class ClientEvents
 {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
@@ -119,12 +119,12 @@ public class ModEventBusEvents
         event.register(
                 ModEntities.NIMBLE.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                ModEventBusEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                ClientEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
         event.register(
                 ModEntities.SNUFFLER.get(), SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                ModEventBusEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                ClientEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
     }
 

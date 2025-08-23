@@ -6,6 +6,7 @@ import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
 import com.wdiscute.laicaps.entity.rocket.RE;
 import com.wdiscute.laicaps.fishing.FishingMinigameScreen;
+import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -45,6 +46,10 @@ public class PayloadReceiver
                 {
                     if (data.time() != -1)
                     {
+                        if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
+                            player.getMainHandItem().set(ModDataComponents.CAST, false);
+
+
                         if(fbe.stack.is(ModItems.THUNDERCHARGED_EEL))
                         {
                             LightningBolt strike = new LightningBolt(EntityType.LIGHTNING_BOLT, level);

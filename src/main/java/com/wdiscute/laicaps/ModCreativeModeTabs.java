@@ -61,9 +61,6 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.SPACESHIP_BLUEPRINT_SKETCH.get());
                                 output.accept(ModBlocks.RESEARCH_STATION.get());
 
-                                output.accept(ModItems.TANK.get());
-                                output.accept(ModItems.MEDIUM_TANK.get());
-                                output.accept(ModItems.LARGE_TANK.get());
                                 output.accept(ModItems.ENDERBLAZE_FUEL.get());
                                 output.accept(ModItems.PRISTINE_ENDERPEARL_DUST.get());
 
@@ -205,7 +202,7 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.KARPENJOE.get());
                                 output.accept(ModItems.STORMSAIL_RAY.get());
                                 output.accept(ModItems.SUNFANG_EEL.get());
-
+                                output.accept(ModItems.SUNFANG_EEL.get());
                             })
                             .build()
             );
@@ -246,6 +243,17 @@ public class ModCreativeModeTabs
 
 
                                 output.accept(ModItems.SWIBBLE_SPAWN_EGG.get());
+
+
+                                //fishing
+                                output.accept(ModItems.CRIMSON_STARFISH.get());
+                                output.accept(ModItems.VERDANT_SEAHORSE.get());
+                                output.accept(ModItems.RADIANT_SEAHORSE.get());
+                                output.accept(ModItems.OCTO.get());
+                                output.accept(ModItems.RED_REEF_OCTO.get());
+                                output.accept(ModItems.LUMEN_DRIFTER.get());
+                                output.accept(ModItems.LUMEN_DRIFTER.get());
+
 
                             })
                             .build());

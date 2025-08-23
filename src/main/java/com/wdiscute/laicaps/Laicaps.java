@@ -19,6 +19,7 @@ import com.wdiscute.laicaps.entity.fishing.FishingBobRenderer;
 import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
+import com.wdiscute.laicaps.item.ModItemProperties;
 import com.wdiscute.laicaps.particle.*;
 import com.wdiscute.laicaps.notebook.EntryUnlockedToast;
 import com.wdiscute.laicaps.worldgen.ModFeatures;
@@ -199,6 +200,8 @@ public class Laicaps
         {
             Sheets.addWoodType(ModWoodTypes.OAKROOT);
             Sheets.addWoodType(ModWoodTypes.OAKHEART);
+
+            ModItemProperties.addCustomItemProperties();
 
             event.enqueueWork(() ->
             {

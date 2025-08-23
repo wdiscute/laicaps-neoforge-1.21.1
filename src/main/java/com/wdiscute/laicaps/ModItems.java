@@ -211,6 +211,12 @@ public class ModItems
     public static final DeferredItem<Item> KARPENJOE = ITEMS.register("karpenjoe", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> STORMSAIL_RAY = ITEMS.register("stormsail_ray", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> SUNFANG_EEL = ITEMS.register("sunfang_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> CRIMSON_STARFISH = ITEMS.register("crimson_starfish", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> LUMEN_DRIFTER = ITEMS.register("lumen_drifter", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> RADIANT_SEAHORSE = ITEMS.register("radiant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> VERDANT_SEAHORSE = ITEMS.register("verdant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> OCTO = ITEMS.register("octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> RED_REEF_OCTO = ITEMS.register("red_reef_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
 
 
     //todo add mobeffect that makes player unable to move because of being zapped
