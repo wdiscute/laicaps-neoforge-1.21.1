@@ -1,7 +1,10 @@
 package com.wdiscute.laicaps.entity.rocket.rocketparts;
 
+import com.wdiscute.laicaps.AdvHelper;
 import com.wdiscute.laicaps.entity.rocket.RE;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -10,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -40,6 +44,14 @@ public class RPCarpet extends RP
         }
         else
         {
+
+            if (player instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry5"))
+            {
+                AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry5");
+                PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry5"));
+            }
+
+
             parentRocket.checkPassengers(RE.FIRST_SEAT);
             parentRocket.checkPassengers(RE.SECOND_SEAT);
             parentRocket.checkPassengers(RE.THIRD_SEAT);

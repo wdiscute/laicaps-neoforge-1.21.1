@@ -751,8 +751,8 @@
 
 
   "gui.notebook.menu.entry4.image" : "menu_illustration_4",
-  "gui.notebook.menu.entry4.name" : "    Fueling and Takeoff!",
-  "gui.notebook.menu.entry4.toast" : "Fueling and Takeoff!",
+  "gui.notebook.menu.entry4.name" : "    Fueling to space",
+  "gui.notebook.menu.entry4.toast" : "Fueling to space",
 
 
   "gui.notebook.menu.entry4.left.3" : "With some pristine enderpearl",
@@ -788,8 +788,8 @@
 
 
   "gui.notebook.menu.entry5.image" : "menu_illustration_5",
-  "gui.notebook.menu.entry5.name" : "        Takeoff!",
-  "gui.notebook.menu.entry5.toast" : "Takeoff!",
+  "gui.notebook.menu.entry5.name" : "    Making it your own!",
+  "gui.notebook.menu.entry5.toast" : "Making it your own!",
 
   "gui.notebook.menu.entry5.left.3" : "Asha looks like a nice suitable",
   "gui.notebook.menu.entry5.left.4" : "planet for my first trip. Some iron",
@@ -816,10 +816,16 @@
 
 
 
-  "gui.notebook.menu.entry5.right.13" : "Once I have everything ready,",
-  "gui.notebook.menu.entry5.right.14" : "it's time to start the take-off",
-  "gui.notebook.menu.entry5.right.15" : "sequence by holding [jump].",
-  "gui.notebook.menu.entry5.right.16" : "Wish me luck.",
+  "gui.notebook.menu.entry5.right.11" : "Once I have everything ready,",
+  "gui.notebook.menu.entry5.right.12" : "it's time to start the take-off",
+  "gui.notebook.menu.entry5.right.13" : "sequence by holding [jump].",
+  "gui.notebook.menu.entry5.right.14" : "Wish me luck.",
+
+
+
+  "gui.notebook.menu.entry5.right.17" : "§cWORK IN PROGRESS",
+  "gui.notebook.menu.entry5.right.18" : "§c[Tutorial to be reworked in",
+  "gui.notebook.menu.entry5.right.19" : "§cthe future]",
 
 
   "gui.notebook.ember.entry1.name" : "      §cEmber§r - Planet",
