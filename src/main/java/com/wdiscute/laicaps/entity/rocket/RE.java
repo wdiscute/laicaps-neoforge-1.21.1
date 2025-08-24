@@ -20,6 +20,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -64,9 +65,6 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     public static final EntityDataAccessor<Optional<UUID>> SECOND_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.OPTIONAL_UUID);
     public static final EntityDataAccessor<Optional<UUID>> THIRD_SEAT = SynchedEntityData.defineId(RE.class, EntityDataSerializers.OPTIONAL_UUID);
 
-
-    public NonNullList<ItemStack> itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
-
     private final RP[] subEntities;
 
     public int landingCounter;
@@ -107,14 +105,14 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         RP leftCockpitWall = new RP(new AABB(-0.6, 0, -0.08, 0.6, 3.52, 0), new Vec3(-1.4, 0.8, -1), false, true, this, interact.NONE);
 
         //door inner
-        RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, interact.TOGGLE_DOOR);
+        RPDoorStairs doorStairs = new RPDoorStairs(new AABB(-0.8, 0, -0.25, 0.8, 0.5, 0.25), new Vec3(0, 0, 3), false, this, interact.NONE);
         RP doorFloor = new RP(new AABB(-1.5, 0, 0, 1.5, 0.08, 0.6), new Vec3(0, 0.8, 2.2), false, true, this, interact.NONE);
         RP doorInnerLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(-1.70, 0.8, 2.2), false, true, this, interact.NONE);
         RP doorInnerRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.52, 0.08), new Vec3(1.70, 0.8, 2.2), false, true, this, interact.NONE);
 
         //door outer
         RP doorLeft = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(-1.15, 0.8, 2.75), false, true, this, interact.NONE);
-        RPDoor door = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3(0.00, 0.8, 2.75), false, this, interact.NONE);
+        RPDoor door = new RPDoor(new AABB(-0.9, 0, 0, 0.9, 3.15, 0.08), new Vec3(0.00, 0.8, 2.75), false, this, interact.TOGGLE_DOOR);
         RP doorRight = new RP(new AABB(-0.3, 0, 0, 0.3, 3.15, 0.08), new Vec3(1.15, 0.8, 2.75), false, true, this, interact.NONE);
 
         RP doorCeiling = new RP(new AABB(-1.45, 0, 0, 1.45, 0.08, 0.6), new Vec3(0, 3.95, 2.25), false, true, this, interact.NONE);
@@ -132,9 +130,6 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         //this.subEntities = new RP[]{refuelScreen};
 
         this.setId(ENTITY_COUNTER.getAndAdd(subEntities.length + 1) + 1);
-
-        if (!level().isClientSide) itemStacks.set(4, new ItemStack(ModItems.OVERWORLD.get()));
-
     }
 
 
@@ -200,7 +195,6 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
     public void checkPassengers(EntityDataAccessor<Optional<UUID>> seat)
     {
-
         boolean firstsafe = false;
         for (Entity entity : getPassengers())
         {
@@ -209,12 +203,9 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                 firstsafe = true;
                 break;
             }
-
         }
 
         if (!firstsafe) entityData.set(seat, Optional.of(UUID.randomUUID()));
-
-
     }
 
 
@@ -222,7 +213,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     {
         super.tick();
 
-        if(tickCount % 100 == 0) awardEntryToPlayersNearby();
+        if (tickCount % 100 == 0) awardEntryToPlayersNearby();
 
         int state = entityData.get(STATE);
         int jumping = entityData.get(JUMPING);
@@ -237,7 +228,6 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         {
             if (Minecraft.getInstance().player == null) return;
 
-            //TODO MAKE PARTICLES SPAWN FROM THE FUEL TANK AND NOT FIXED COORDS
             if (random.nextFloat() < (float) jumping / 200 || state != 0)
             {
                 Vec3 left = position().add(2.8, 1.5, 0.5);
@@ -277,42 +267,50 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             return;
         }
 
-        ItemStack rocketState = this.itemStacks.get(3);
-        if (state == 0 && !rocketState.is(Items.DIRT)) this.itemStacks.set(3, new ItemStack(Items.DIRT, 1));
-        if (state == 1 && !rocketState.is(Items.STONE)) this.itemStacks.set(3, new ItemStack(Items.STONE, 1));
-        if (state == 2 && !rocketState.is(Items.ANDESITE)) this.itemStacks.set(3, new ItemStack(Items.ANDESITE, 1));
-        if (state == 3 && !rocketState.is(Items.GRANITE)) this.itemStacks.set(3, new ItemStack(Items.GRANITE, 1));
-        if (state == 4 && !rocketState.is(Items.DIORITE)) this.itemStacks.set(3, new ItemStack(Items.DIORITE, 1));
-
-
-        if (!level().isClientSide) entityData.set(MISSING_FUEL, !(getFuelRemainingForSelectedDestination() > 0));
-        if (!level().isClientSide) entityData.set(MISSING_KNOWLEDGE, !isPlanetSelectedUnlocked());
+        entityData.set(MISSING_FUEL, !(getFuelRemainingForSelectedDestination() > 0));
+        entityData.set(MISSING_KNOWLEDGE, !isPlanetSelectedUnlocked());
 
         //landed aka on-ground
         if (state == 0)
         {
 
             //JUMPING handler & countdown display
-            if (getFirstPassenger() instanceof JumpingAcessor jumpingAcessor)
+            for (Entity e : getPassengers())
             {
-                if (jumpingAcessor.isJumping())
+                if (e instanceof JumpingAcessor jumpingAcessor && e.getUUID().equals(entityData.get(FIRST_SEAT).get()))
                 {
-                    if (getFuelRemainingForSelectedDestination() > 0 && isPlanetSelectedUnlocked())
-                        entityData.set(JUMPING, entityData.get(JUMPING) + 1);
+                    if (jumpingAcessor.isJumping())
+                    {
+                        if (getFuelRemainingForSelectedDestination() > 0 && isPlanetSelectedUnlocked())
+                        {
+                            entityData.set(JUMPING, entityData.get(JUMPING) + 1);
+
+                            if (entityData.get(JUMPING) == 2)
+                            {
+                                for (Entity d : getPassengers())
+                                {
+                                    if (d instanceof Player player)
+                                        player.displayClientMessage(
+                                                Component.translatable("gui.laicaps.main_screen.takeoff"), true);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (getFirstPassenger() instanceof Player player)
+                            {
+                                player.displayClientMessage(Component.translatable("gui.laicaps.main_screen.missing_something"), true);
+                            }
+                            entityData.set(JUMPING, -1);
+                        }
+                    }
                     else
                     {
-                        if (getFirstPassenger() instanceof Player player)
-                        {
-                            player.displayClientMessage(Component.translatable("gui.laicaps.main_screen.missing_something"), true);
-                        }
                         entityData.set(JUMPING, -1);
                     }
-                }
-                else
-                {
-                    entityData.set(JUMPING, -1);
-                }
 
+
+                }
 
             }
 
@@ -340,29 +338,27 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
             if (position().y > 200)
             {
-                ItemStack itemStack = new ItemStack(itemStacks.get(2).getItem());
-                itemStack.set(ModDataComponents.FUEL, getFuelRemainingForSelectedDestination());
-                itemStacks.set(2, itemStack);
+                entityData.set(FUEL, getFuelRemainingForSelectedDestination());
                 entityData.set(STATE, 2);
                 takeoffCounter = 0;
             }
             return;
         }
 
-        //ORBIT / TELEPORT TO DIMENSION / TODO MINIGAME
+        //ORBIT / TELEPORT TO DIMENSION
         if (state == 2)
         {
             entityData.set(STATE, 3);
 
             ResourceKey<Level> key = null;
 
-            if (itemStacks.get(4).is(ModItems.EMBER.get()))
+            if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER.get()))
             {
-                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
+                key = Laicaps.EMBER_KEY;
 
                 for (Entity entity : getPassengers())
                 {
-                    if (entity instanceof ServerPlayer sp)
+                    if (entity instanceof ServerPlayer sp && AdvHelper.hasAdvancementCriteria(sp, "ember_entries", "entry2"))
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry2");
                         PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember_entries", "entry2"));
@@ -370,13 +366,13 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                 }
             }
 
-            if (itemStacks.get(4).is(ModItems.ASHA.get()))
+            if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA.get()))
             {
-                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
+                key = Laicaps.ASHA_KEY;
 
                 for (Entity entity : getPassengers())
                 {
-                    if (entity instanceof ServerPlayer sp)
+                    if (entity instanceof ServerPlayer sp && AdvHelper.hasAdvancementCriteria(sp, "asha_entries", "entry2"))
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry2");
                         PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha_entries", "entry2"));
@@ -384,18 +380,18 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                 }
             }
 
-            if (itemStacks.get(4).is(ModItems.OVERWORLD.get()))
+            if (entityData.get(PLANET_SELECTED).is(ModItems.OVERWORLD.get()))
             {
-                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
+                key = Level.OVERWORLD;
             }
 
-            if (itemStacks.get(4).is(ModItems.LUNAMAR.get()))
+            if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR.get()))
             {
-                key = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
+                key = Laicaps.LUNAMAR_KEY;
 
                 for (Entity entity : getPassengers())
                 {
-                    if (entity instanceof ServerPlayer sp)
+                    if (entity instanceof ServerPlayer sp && AdvHelper.hasAdvancementCriteria(sp, "lunamar_entries", "entry2"))
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "lunamar_entries", "entry2");
                         PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar_entries", "entry2"));
@@ -414,134 +410,15 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             return;
         }
 
-
         //landing
         if (state == 3)
         {
             landingCounter++;
 
-            Component compTitle = Component.literal("");
-            Component comp = null;
-
-            AABB aabb = new AABB(-5, -5, -5, 5, 5, 5).move(position());
-            List<Entity> entites = level().getEntities(null, aabb);
-
-            List<ServerPlayer> sps = new ArrayList<>();
-
-            for (Entity entity : entites)
-            {
-                if (entity instanceof ServerPlayer sp)
-                {
-                    sps.add(sp);
-                }
-            }
-
-
-            //landing on
-            if (landingCounter == 50)
-            {
-                Component planet = Component.translatable("gui.laicaps.landing.landing.overworld");
-
-                if (level().dimension().equals(Laicaps.EMBER_KEY))
-                    planet = Component.translatable("gui.laicaps.landing.landing.ember");
-                if (level().dimension().equals(Laicaps.ASHA_KEY))
-                    planet = Component.translatable("gui.laicaps.landing.landing.asha");
-                if (level().dimension().equals(Laicaps.OVERWORLD_KEY))
-                    planet = Component.translatable("gui.laicaps.landing.landing.overworld");
-                if (level().dimension().equals(Laicaps.LUNAMAR_KEY))
-                    planet = Component.translatable("gui.laicaps.landing.landing.lunamar");
-
-                comp = Component.translatable("gui.laicaps.landing.landing.base").append(planet);
-
-                for (ServerPlayer sp : sps)
-                {
-                    sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
-                    sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
-                }
-            }
-
-
-            //temperature
-            if (landingCounter == 200)
-            {
-
-                int temp = 0;
-
-                if (level().dimension().equals(Laicaps.EMBER_KEY)) temp = r.nextInt(100) - 50 + 523;
-                if (level().dimension().equals(Laicaps.ASHA_KEY)) temp = r.nextInt(10) - 5 + 22;
-                if (level().dimension().equals(Laicaps.OVERWORLD_KEY)) temp = r.nextInt(100) - 50 + 523;
-                if (level().dimension().equals(Laicaps.LUNAMAR_KEY)) temp = r.nextInt(100) - 50 + 523;
-
-                if (level().rainLevel > 20) temp -= 10;
-
-                String tempString = temp + "";
-
-                if (temp > 50)
-                {
-                    tempString = "§c" + tempString;
-                }
-                else
-                {
-                    tempString = "§2" + tempString;
-                }
-
-                comp = Component.translatable("gui.laicaps.landing.temperature.base").append(Component.literal(tempString + "°c"));
-            }
-
-
-            //weather
-            if (landingCounter == 350)
-            {
-
-                Component weather = Component.translatable("gui.laicaps.landing.weather.clear");
-                ;
-
-                int random = r.nextInt(3);
-
-                if (level().rainLevel > 20)
-                {
-                    if (random == 0) weather = Component.translatable("gui.laicaps.landing.weather.light_rain");
-                    if (random == 1) weather = Component.translatable("gui.laicaps.landing.weather.moderate_rain");
-                    if (random == 2) weather = Component.translatable("gui.laicaps.landing.weather.strong_rain");
-                }
-
-                if (level().thunderLevel > 20)
-                {
-                    if (random == 0) weather = Component.translatable("gui.laicaps.landing.weather.light_thunder");
-                    if (random == 1) weather = Component.translatable("gui.laicaps.landing.weather.moderate_thunder");
-                    if (random == 2) weather = Component.translatable("gui.laicaps.landing.weather.strong_thunder");
-                }
-
-
-                comp = Component.translatable("gui.laicaps.landing.weather.base").append(weather);
-            }
-
-
-            //atmosphere
-            if (landingCounter == 500)
-            {
-
-                Component atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.breathable");
-
-                if (level().dimension().equals(Laicaps.EMBER_KEY))
-                    atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.unbreathable");
-
-                comp = Component.translatable("gui.laicaps.landing.atmosphere.base").append(atmosphere);
-            }
-
-
-            //send packet
-            if (comp != null)
-            {
-                for (ServerPlayer sp : sps)
-                {
-                    sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
-                    sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
-                }
-            }
-
+            sendLandingMessage();
 
             //check if landed
+            //TODO IMPROVE THIS
             if (level().getBlockState(blockPosition().below()).isAir())
             {
                 Vec3 vec3 = position();
@@ -555,28 +432,122 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                 entityData.set(STATE, 0);
                 return;
             }
-            return;
+        }
+    }
+
+    private void sendLandingMessage()
+    {
+        Component compTitle = Component.literal("");
+        Component comp = null;
+
+        //landing on
+        if (landingCounter == 50)
+        {
+            Component planet = Component.translatable("gui.laicaps.landing.landing.overworld");
+
+            if (level().dimension().equals(Laicaps.EMBER_KEY))
+                planet = Component.translatable("gui.laicaps.landing.landing.ember");
+            if (level().dimension().equals(Laicaps.ASHA_KEY))
+                planet = Component.translatable("gui.laicaps.landing.landing.asha");
+            if (level().dimension().equals(Laicaps.OVERWORLD_KEY))
+                planet = Component.translatable("gui.laicaps.landing.landing.overworld");
+            if (level().dimension().equals(Laicaps.LUNAMAR_KEY))
+                planet = Component.translatable("gui.laicaps.landing.landing.lunamar");
+
+            comp = Component.translatable("gui.laicaps.landing.landing.base").append(planet);
         }
 
-        //crashing if minigame failed
-        if (state == 4)
+        //temperature
+        if (landingCounter == 200)
         {
+            int temp = 0;
+
+            if (level().dimension().equals(Laicaps.EMBER_KEY)) temp = r.nextInt(100) - 50 + 523;
+            if (level().dimension().equals(Laicaps.ASHA_KEY)) temp = r.nextInt(10) - 5 + 22;
+            if (level().dimension().equals(Laicaps.OVERWORLD_KEY)) temp = r.nextInt(30) - 15 + 20;
+            if (level().dimension().equals(Laicaps.LUNAMAR_KEY)) temp = r.nextInt(10) - 5 + 6;
+
+            if (level().rainLevel > 20) temp -= 10;
+
+            String tempString = temp + "";
+
+            if (temp > 50)
+            {
+                tempString = "§c" + tempString;
+            }
+            else
+            {
+                tempString = "§2" + tempString;
+            }
+
+            comp = Component.translatable("gui.laicaps.landing.temperature.base").append(Component.literal(tempString + "°c"));
         }
+
+        //weather
+        if (landingCounter == 350)
+        {
+
+            Component weather = Component.translatable("gui.laicaps.landing.weather.clear");
+
+            int random = r.nextInt(3);
+
+            if (level().rainLevel > 0.2f)
+            {
+                if (random == 0) weather = Component.translatable("gui.laicaps.landing.weather.light_rain");
+                if (random == 1) weather = Component.translatable("gui.laicaps.landing.weather.moderate_rain");
+                if (random == 2) weather = Component.translatable("gui.laicaps.landing.weather.strong_rain");
+            }
+
+            if (level().thunderLevel > 0.2f)
+            {
+                if (random == 0) weather = Component.translatable("gui.laicaps.landing.weather.light_thunder");
+                if (random == 1) weather = Component.translatable("gui.laicaps.landing.weather.moderate_thunder");
+                if (random == 2) weather = Component.translatable("gui.laicaps.landing.weather.strong_thunder");
+            }
+
+            comp = Component.translatable("gui.laicaps.landing.weather.base").append(weather);
+        }
+
+        //atmosphere
+        if (landingCounter == 500)
+        {
+            Component atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.breathable");
+
+            if (level().dimension().equals(Laicaps.EMBER_KEY))
+                atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.unbreathable");
+
+            comp = Component.translatable("gui.laicaps.landing.atmosphere.base").append(atmosphere);
+        }
+
+        for (Entity entity : getPassengers())
+        {
+            if (entity instanceof ServerPlayer sp)
+            {
+                //send packet
+                if (comp != null)
+                {
+                    sp.connection.send(new ClientboundSetTitleTextPacket(compTitle));
+                    sp.connection.send(new ClientboundSetSubtitleTextPacket(comp));
+                }
+            }
+        }
+
+
     }
 
     private void awardEntryToPlayersNearby()
     {
 
-       List<Entity> entities = level().getEntities(null, new AABB(-10, -10, -10, 10, 10, 10).move(position()));
+        List<Entity> entities = level().getEntities(null, new AABB(-10, -10, -10, 10, 10, 10).move(position()));
 
-       for (Entity e : entities)
-       {
-           if (e instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry4"))
-           {
-               AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry4");
-               PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry4"));
-           }
-       }
+        for (Entity e : entities)
+        {
+            if (e instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry4"))
+            {
+                AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry4");
+                PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry4"));
+            }
+        }
 
     }
 
@@ -633,7 +604,6 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     {
         ServerPlayer spToCheck = null;
 
-
         if (getFirstPassenger() instanceof ServerPlayer serverPlayer)
         {
             spToCheck = serverPlayer;
@@ -660,10 +630,13 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         if (spToCheck == null) return !entityData.get(MISSING_KNOWLEDGE);
 
         //return if player has discovered the planet selected
-        if (itemStacks.get(4).is(ModItems.EMBER)) return AdvHelper.hasAdvancement(spToCheck, "ember_discovered");
-        if (itemStacks.get(4).is(ModItems.ASHA)) return AdvHelper.hasAdvancement(spToCheck, "asha_discovered");
-        if (itemStacks.get(4).is(ModItems.OVERWORLD)) return true;
-        if (itemStacks.get(4).is(ModItems.LUNAMAR)) return AdvHelper.hasAdvancement(spToCheck, "lunamar_discovered");
+        if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER))
+            return AdvHelper.hasAdvancement(spToCheck, "ember_discovered");
+        if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA))
+            return AdvHelper.hasAdvancement(spToCheck, "asha_discovered");
+        if (entityData.get(PLANET_SELECTED).is(ModItems.OVERWORLD)) return true;
+        if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR))
+            return AdvHelper.hasAdvancement(spToCheck, "lunamar_discovered");
 
         return false;
     }
@@ -671,12 +644,8 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     public int getFuelRemainingForSelectedDestination()
     {
 
-        if (itemStacks.get(4).isEmpty()) return -1;
-        if (itemStacks.get(2).isEmpty()) return -1;
-
         float fuelRequired = 0;
-        int fuelAvailable = itemStacks.get(2).get(ModDataComponents.FUEL);
-
+        int fuelAvailable = entityData.get(FUEL);
 
         boolean isCurrentDimensionUnknown = true;
 
@@ -684,46 +653,46 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
         if (dimension == Laicaps.EMBER_KEY)
         {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 490;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 700;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 1240;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 490;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.OVERWORLD)) fuelRequired = 700;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR)) fuelRequired = 1240;
             isCurrentDimensionUnknown = false;
         }
 
         if (dimension == Laicaps.ASHA_KEY)
         {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 490;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 330;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 870;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 490;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.OVERWORLD)) fuelRequired = 330;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR)) fuelRequired = 870;
             isCurrentDimensionUnknown = false;
         }
 
         if (dimension == Laicaps.OVERWORLD_KEY)
         {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 790;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 330;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 660;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 790;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 330;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR)) fuelRequired = 660;
             isCurrentDimensionUnknown = false;
         }
 
         if (dimension == Laicaps.LUNAMAR_KEY)
         {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 1240;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 870;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 660;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 1240;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 870;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.OVERWORLD)) fuelRequired = 660;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR)) fuelRequired = 120;
             isCurrentDimensionUnknown = false;
         }
 
         if (isCurrentDimensionUnknown)
         {
-            if (itemStacks.get(4).is(ModItems.EMBER)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.ASHA)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.OVERWORLD)) fuelRequired = 120;
-            if (itemStacks.get(4).is(ModItems.LUNAMAR)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.OVERWORLD)) fuelRequired = 120;
+            if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR)) fuelRequired = 120;
         }
 
         return ((int) (fuelAvailable - fuelRequired));
@@ -752,7 +721,13 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     @Override
     public boolean hurt(DamageSource source, float amount)
     {
-        //this.kill();
+
+        level().addFreshEntity(new ItemEntity(
+                level(), position().x, position().y + 1, position().z,
+                new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get()))
+        );
+
+        this.kill();
         return super.hurt(source, amount);
     }
 
@@ -837,7 +812,25 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
     @Override
     public Vec3 getDismountLocationForPassenger(LivingEntity passenger)
     {
-        return position().add(new Vec3(0, 1.55, -1.5));
+
+        if (entityData.get(FIRST_SEAT).equals(Optional.of(passenger.getUUID())))
+        {
+            return new Vec3(0, 1.7, -1.5).add(position());
+        }
+
+        if (entityData.get(SECOND_SEAT).equals(Optional.of(passenger.getUUID())))
+        {
+            return new Vec3(-1.3, 1.2, -0.3).add(position());
+        }
+
+        if (entityData.get(THIRD_SEAT).equals(Optional.of(passenger.getUUID())))
+        {
+            return new Vec3(-1.3, 1.2, 1.5).add(position());
+        }
+
+
+        return new Vec3(0, 10, 0);
+
     }
 
     @Override
@@ -886,14 +879,20 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         compound.putInt("state", this.entityData.get(STATE));
         compound.putBoolean("door", this.entityData.get(DOOR));
         compound.putInt("jumping", this.entityData.get(JUMPING));
+        compound.putInt("fuel", this.entityData.get(FUEL));
+
+        compound.putUUID("first_seat", this.entityData.get(FIRST_SEAT).get());
+        compound.putUUID("second_seat", this.entityData.get(SECOND_SEAT).get());
+        compound.putUUID("third_seat", this.entityData.get(THIRD_SEAT).get());
 
         ItemStackHandler inventory = new ItemStackHandler(5);
-        inventory.setStackInSlot(0, itemStacks.get(0));
-        inventory.setStackInSlot(1, itemStacks.get(1));
-        inventory.setStackInSlot(2, itemStacks.get(2));
-        inventory.setStackInSlot(3, itemStacks.get(3));
-        inventory.setStackInSlot(4, itemStacks.get(4));
-        compound.put("inventory", inventory.serializeNBT(registryAccess()));
+        inventory.setStackInSlot(0, entityData.get(PLANET_SELECTED));
+        inventory.setStackInSlot(1, entityData.get(CARPET_FIRST_SEAT));
+        inventory.setStackInSlot(2, entityData.get(CARPET_SECOND_SEAT));
+        inventory.setStackInSlot(3, entityData.get(CARPET_THIRD_SEAT));
+        inventory.setStackInSlot(4, entityData.get(GLOBE));
+
+        compound.put("items", inventory.serializeNBT(registryAccess()));
     }
 
     @Override
@@ -902,16 +901,20 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         this.entityData.set(STATE, compound.getInt("state"));
         this.entityData.set(DOOR, compound.getBoolean("door"));
         this.entityData.set(JUMPING, compound.getInt("jumping"));
+        this.entityData.set(FUEL, compound.getInt("fuel"));
+
+        this.entityData.set(FIRST_SEAT, Optional.of(compound.getUUID("first_seat")));
+        this.entityData.set(SECOND_SEAT, Optional.of(compound.getUUID("second_seat")));
+        this.entityData.set(THIRD_SEAT, Optional.of(compound.getUUID("third_seat")));
+
 
         ItemStackHandler inventory = new ItemStackHandler(5);
-        inventory.deserializeNBT(registryAccess(), compound.getCompound("inventory"));
-        itemStacks.set(0, inventory.getStackInSlot(0));
-        itemStacks.set(1, inventory.getStackInSlot(1));
-        itemStacks.set(2, inventory.getStackInSlot(2));
-        itemStacks.set(3, inventory.getStackInSlot(3));
-        itemStacks.set(4, inventory.getStackInSlot(4));
-        compound.put("inventory", inventory.serializeNBT(registryAccess()));
-
+        inventory.deserializeNBT(registryAccess(), compound.getCompound("items"));
+        entityData.set(PLANET_SELECTED, inventory.getStackInSlot(0));
+        entityData.set(CARPET_FIRST_SEAT, inventory.getStackInSlot(1));
+        entityData.set(CARPET_SECOND_SEAT, inventory.getStackInSlot(2));
+        entityData.set(CARPET_THIRD_SEAT, inventory.getStackInSlot(3));
+        entityData.set(GLOBE, inventory.getStackInSlot(4));
     }
 
     @Override

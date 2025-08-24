@@ -141,7 +141,7 @@ public class RefuelMenu extends AbstractContainerMenu
     {
         counter++;
 
-        if(counter % 20 == 0)
+        if(counter % 2 == 0)
         {
             int fuel = re.getEntityData().get(RE.FUEL);
             if(fuel < 1300 && inventory.getStackInSlot(0).is(ModItems.ENDERBLAZE_FUEL))
@@ -149,10 +149,6 @@ public class RefuelMenu extends AbstractContainerMenu
                 re.getEntityData().set(RE.FUEL, fuel + 11);
                 inventory.getStackInSlot(0).shrink(1);
             }
-
-            int fuel2 = re.getEntityData().get(RE.FUEL);
-            int fuel3 = re.getEntityData().get(RE.FUEL);
-
         }
 
         return true;

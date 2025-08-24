@@ -45,6 +45,7 @@ public class RPCarpet extends RP
             parentRocket.checkPassengers(RE.THIRD_SEAT);
 
             if (getPassengers().isEmpty())
+
             {
                 parentRocket.getEntityData().set(seat, Optional.of(player.getUUID()));
                 return parentRocket.interactWithPart(player, interaction);

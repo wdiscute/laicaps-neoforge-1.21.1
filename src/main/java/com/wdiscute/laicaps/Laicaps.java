@@ -2,7 +2,6 @@ package com.wdiscute.laicaps;
 
 import com.mojang.logging.LogUtils;
 import com.wdiscute.laicaps.block.astronomytable.NotebookScreen;
-import com.wdiscute.laicaps.block.researchstation.ResearchStationScreen;
 import com.wdiscute.laicaps.block.telescope.TelescopeScreen;
 import com.wdiscute.laicaps.entity.bluetale.BluetaleRenderer;
 import com.wdiscute.laicaps.entity.bluetale.RedtaleRenderer;
@@ -27,23 +26,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.RedstoneLampBlock;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
@@ -57,7 +48,6 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import net.neoforged.neoforge.event.level.ChunkEvent;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -68,7 +58,7 @@ public class Laicaps
     public static final String MOD_ID = "laicaps";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final int MENU_ENTRIES = 4;
+    public static final int MENU_ENTRIES = 5;
     public static final int EMBER_ENTRIES = 4;
     public static final int ASHA_ENTRIES = 4;
     public static final int OVERWORLD_ENTRIES = 4;
@@ -207,7 +197,6 @@ public class Laicaps
         public static void registerScreens(RegisterMenuScreensEvent event)
         {
             event.register(ModMenuTypes.TELESCOPE_MENU.get(), TelescopeScreen::new);
-            event.register(ModMenuTypes.RESEARCH_STATION_MENU.get(), ResearchStationScreen::new);
             event.register(ModMenuTypes.NOTEBOOK_MENU.get(), NotebookScreen::new);
             event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
             event.register(ModMenuTypes.REFUEL_MENU.get(), RefuelScreen::new);
