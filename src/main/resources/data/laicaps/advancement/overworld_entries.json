@@ -12,6 +12,24 @@
     },
     "entry4": {
       "trigger": "minecraft:impossible"
+    },
+    "entry5": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry6": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry7 ": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry8": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry9": {
+      "trigger": "minecraft:impossible"
+    },
+    "entry10": {
+      "trigger": "minecraft:impossible"
     }
   },
   "display": {
