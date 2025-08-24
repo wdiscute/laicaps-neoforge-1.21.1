@@ -768,28 +768,58 @@
   "gui.notebook.menu.entry4.left.13" : "and even spin my little globe!",
 
 
-  "gui.notebook.menu.entry4.left.16" : "It's best to make sure I have",
-  "gui.notebook.menu.entry4.left.17" : "enough fuel for the return trip",
-  "gui.notebook.menu.entry4.left.18" : "too. Who knows how long I can stay",
-  "gui.notebook.menu.entry4.left.19" : "in this unknown planet for.",
+  "gui.notebook.menu.entry4.right.3" : "It's best to make sure I have",
+  "gui.notebook.menu.entry4.right.4" : "enough fuel for the return trip",
+  "gui.notebook.menu.entry4.right.5" : "too. Who knows how long I can stay",
+  "gui.notebook.menu.entry4.right.6" : "in this unknown planet for.",
 
 
-  "gui.notebook.menu.entry4.right.3" : "Asha looks like a nice suitable",
-  "gui.notebook.menu.entry4.right.4" : "planet for my first trip. Some iron",
-  "gui.notebook.menu.entry4.right.5" : "tools will probably suffice for this",
-  "gui.notebook.menu.entry4.right.6" : "journey and be able to fight off",
-  "gui.notebook.menu.entry4.right.7" : "any dangers that may appear.",
+  "gui.notebook.menu.entry4.right.10" : "To get inside the spaceship",
+  "gui.notebook.menu.entry4.right.11" : "it's as easy as interacting with",
+  "gui.notebook.menu.entry4.right.12" : "the door on the back!",
 
-  "gui.notebook.menu.entry4.right.10" : "Once I have everything ready,",
-  "gui.notebook.menu.entry4.right.11" : "it's time to sit down and launch",
-  "gui.notebook.menu.entry4.right.12" : "towards Asha! Wish me luck.",
-
-  "gui.notebook.menu.entry4.right.14" : "[YOU CAN RIGHT CLICK",
-  "gui.notebook.menu.entry4.right.15" : "THE BACK DOOR TO OPEN]",
 
   "gui.notebook.menu.entry4.right.17" : "§cWORK IN PROGRESS",
   "gui.notebook.menu.entry4.right.18" : "§c[Tutorial to be reworked in",
   "gui.notebook.menu.entry4.right.19" : "§cthe future]",
+
+
+
+
+
+  "gui.notebook.menu.entry5.image" : "menu_illustration_5",
+  "gui.notebook.menu.entry5.name" : "        Takeoff!",
+  "gui.notebook.menu.entry5.toast" : "Takeoff!",
+
+  "gui.notebook.menu.entry5.left.3" : "Asha looks like a nice suitable",
+  "gui.notebook.menu.entry5.left.4" : "planet for my first trip. Some iron",
+  "gui.notebook.menu.entry5.left.5" : "tools will probably suffice for this",
+  "gui.notebook.menu.entry5.left.6" : "journey and be able to fight off",
+  "gui.notebook.menu.entry5.left.7" : "any dangers that may appear.",
+
+
+  "gui.notebook.menu.entry5.left.11" : "Several parts of my spaceship",
+  "gui.notebook.menu.entry5.left.12" : "can be customized such as the",
+  "gui.notebook.menu.entry5.left.13" : "carpets we sit in, and the",
+  "gui.notebook.menu.entry5.left.14" : "globe inside the cockpit!",
+
+
+
+
+  "gui.notebook.menu.entry5.right.3" : "[Major ship customization overhaul",
+  "gui.notebook.menu.entry5.right.4" : "soon, featuring different modules",
+  "gui.notebook.menu.entry5.right.5" : "to pick from, such as storage,",
+  "gui.notebook.menu.entry5.right.6" : "fuel consumption upgrade, etc!",
+  "gui.notebook.menu.entry5.right.7" : "Feel free to suggest ideas in",
+  "gui.notebook.menu.entry5.right.8" : "the discord!]",
+
+
+
+
+  "gui.notebook.menu.entry5.right.13" : "Once I have everything ready,",
+  "gui.notebook.menu.entry5.right.14" : "it's time to start the take-off",
+  "gui.notebook.menu.entry5.right.15" : "sequence by holding [jump].",
+  "gui.notebook.menu.entry5.right.16" : "Wish me luck.",
 
 
   "gui.notebook.ember.entry1.name" : "      §cEmber§r - Planet",
