@@ -59,7 +59,6 @@ public class ModCreativeModeTabs
                                 //rocket stuff
                                 output.accept(ModItems.SPACESHIP_BLUEPRINT.get());
                                 output.accept(ModItems.SPACESHIP_BLUEPRINT_SKETCH.get());
-                                output.accept(ModBlocks.RESEARCH_STATION.get());
 
                                 output.accept(ModItems.ENDERBLAZE_FUEL.get());
                                 output.accept(ModItems.PRISTINE_ENDERPEARL_DUST.get());

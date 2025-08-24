@@ -6,7 +6,6 @@ import com.wdiscute.laicaps.block.rotating.RotatingControllerBlock;
 import com.wdiscute.laicaps.block.rotating.RotatingPuzzleBlock;
 import com.wdiscute.laicaps.block.sign.*;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlock;
-import com.wdiscute.laicaps.block.researchstation.ResearchStationBlock;
 import com.wdiscute.laicaps.block.seagrass.MoonshadeSeagrassBlock;
 import com.wdiscute.laicaps.block.seagrass.MoonshadeTallSeagrassBlock;
 import com.wdiscute.laicaps.block.single.*;
@@ -113,15 +112,6 @@ public class ModBlocks
                                     super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
                                 }
                             }
-            );
-
-    public static final DeferredBlock<Block> RESEARCH_STATION =
-            registerBlock(
-                    "research_station", () ->
-                            new ResearchStationBlock(BlockBehaviour.Properties.of()
-                                    .strength(5f)
-                                    .noOcclusion()
-                            )
             );
 
 

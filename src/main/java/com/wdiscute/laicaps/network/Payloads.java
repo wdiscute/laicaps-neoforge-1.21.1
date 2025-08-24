@@ -91,5 +91,22 @@ public class Payloads
         }
     }
 
+    public record BluePrintCompletedPayload(String da) implements CustomPacketPayload
+    {
+
+        public static final CustomPacketPayload.Type<BluePrintCompletedPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("blueprint_completed"));
+
+        public static final StreamCodec<ByteBuf, BluePrintCompletedPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8,
+                BluePrintCompletedPayload::da,
+                BluePrintCompletedPayload::new
+        );
+
+        @Override
+        public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
 
 }

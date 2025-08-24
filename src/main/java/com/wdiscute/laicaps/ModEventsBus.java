@@ -161,6 +161,13 @@ public class ModEventsBus
                 Payloads.ChangePlanetSelected.STREAM_CODEC,
                 PayloadReceiver::receiveChangePlanetSelected
         );
+
+        registrar.playToServer(
+                Payloads.BluePrintCompletedPayload.TYPE,
+                Payloads.BluePrintCompletedPayload.STREAM_CODEC,
+                PayloadReceiver::receiveBluePrintCompleted
+        );
+
     }
 
 

@@ -124,14 +124,12 @@ public class PayloadReceiver
     public static void receiveChangePlanetSelected(final Payloads.ChangePlanetSelected data, final IPayloadContext context)
     {
 
-        System.out.println("received " + data.planet());
-
         List<Entity> entites =  context.player().level().getEntities(null,
                 new AABB(-10, -10, -10, 10, 10, 10).move(context.player().position()));
 
         for(Entity e : entites)
         {
-            if(e instanceof RE re && re.getStringUUID().equals(data.entityUUID()))
+            if(e instanceof RE re && re.getStringUUID().equals(data.entityUUID()) && re.getEntityData().get(RE.STATE) == 0)
             {
                 ItemStack is = ItemStack.EMPTY;
 
@@ -148,4 +146,22 @@ public class PayloadReceiver
     }
 
 
+    public static void receiveBluePrintCompleted(final Payloads.BluePrintCompletedPayload data, final IPayloadContext context)
+    {
+
+        if(context.player().getMainHandItem().is(ModItems.SPACESHIP_BLUEPRINT_SKETCH))
+        {
+            context.player().getMainHandItem().shrink(1);
+            context.player().addItem(new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get()));
+            System.out.println("done!!!");
+            return;
+        }
+
+        if(context.player().getOffhandItem().is(ModItems.SPACESHIP_BLUEPRINT_SKETCH))
+        {
+            context.player().getOffhandItem().shrink(1);
+            context.player().addItem(new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get()));
+        }
+
+    }
 }

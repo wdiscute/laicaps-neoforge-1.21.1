@@ -38,7 +38,6 @@ public class MainScreen extends Screen
     private static final ResourceLocation INV_AND_BORDER_BACKGROUND = Laicaps.rl("textures/gui/main_screen/inventory_overlay.png");
     private static final ResourceLocation PLANET_SCREEN_BACKGROUND = Laicaps.rl("textures/gui/main_screen/planet_screen_background.png");
     private static final ResourceLocation BLACK_OVERLAY = Laicaps.rl("textures/gui/telescope/black.png");
-    private static final ResourceLocation FUEL = Laicaps.rl("textures/gui/main_screen/fuel.png");
 
     private static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
     private static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl( "asha"));
@@ -105,7 +104,6 @@ public class MainScreen extends Screen
     int lunamarEntries;
 
     int rocketState = 0;
-    int counter = 0;
 
     @Override
     protected void init()
@@ -181,10 +179,9 @@ public class MainScreen extends Screen
         fuel = re.getEntityData().get(RE.FUEL);
 
         float fuelPercentage = (((float) (fuel * 100) / 1300));
-        float fuelPercentageOfBar = fuelPercentage * 128 / 100;
+        float fuelPercentageOfBar = fuelPercentage * 130 / 100;
 
-        //guiGraphics.fill(uiX + 3, uiY + 28, uiX + 157, uiY + 29, -1);
-        guiGraphics.fill(uiX + 31, uiY + 102, uiX + ((int) (31 + fuelPercentageOfBar)), uiY + 115,-5020);
+        guiGraphics.fill(uiX + 31, uiY + 102, uiX + ((int) (34 + fuelPercentageOfBar)), uiY + 115,-5020);
 
 
 

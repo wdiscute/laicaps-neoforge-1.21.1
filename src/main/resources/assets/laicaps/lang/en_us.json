@@ -29,6 +29,7 @@
 
 
   "gui.laicaps.landing.landing.base" : "Landing on ",
+
   "gui.laicaps.landing.landing.ember" : "§cEmber",
   "gui.laicaps.landing.landing.asha" : "§dAsha",
   "gui.laicaps.landing.landing.overworld" : "§2Overworld",
@@ -110,8 +111,8 @@
   "tooltip.laicaps.spaceship_blueprint.4": "WIP",
   "tooltip.laicaps.spaceship_blueprint.5": "You can place this down to summon the spaceship",
   "item.laicaps.spaceship_blueprint_sketch": "Spaceship Blueprint Sketch",
-  "item.laicaps.spaceship_blueprint_sketch.0": "A rough sketch of a spaceship.",
-  "item.laicaps.spaceship_blueprint_sketch.1": "Must be finalized in a blueprint station.",
+  "tooltip.laicaps.spaceship_blueprint_sketch.0": "A rough sketch of a spaceship.",
+  "tooltip.laicaps.spaceship_blueprint_sketch.1": "[use] to finalize it into a full blueprint.",
 
   "item.laicaps.telescope_lenses": "Telescope Lenses",
 
@@ -139,9 +140,8 @@
   "gui.laicaps.telescope.tooltip.ember.1": "",
   "gui.laicaps.telescope.tooltip.ember.2": "A planet consumed by fire and ash.",
   "gui.laicaps.telescope.tooltip.ember.3": "",
-  "gui.laicaps.telescope.tooltip.ember.4": "Check your Astronomy Research",
-  "gui.laicaps.telescope.tooltip.ember.5": "Table for more information.",
-  "gui.laicaps.telescope.tooltip.ember.6": "",
+  "gui.laicaps.telescope.tooltip.ember.4": "Check your notebook for more information.",
+  "gui.laicaps.telescope.tooltip.ember.5": "",
 
   "gui.laicaps.telescope.tooltip.ember_blur.0": "§6§kEMBER",
   "gui.laicaps.telescope.tooltip.ember_blur.1": "",
@@ -151,9 +151,8 @@
   "gui.laicaps.telescope.tooltip.asha.1": "",
   "gui.laicaps.telescope.tooltip.asha.2": "An overworld-like planet welcoming of your visit.",
   "gui.laicaps.telescope.tooltip.asha.3": "",
-  "gui.laicaps.telescope.tooltip.asha.4": "Check your Astronomy Research Table for",
-  "gui.laicaps.telescope.tooltip.asha.5": "more information.",
-  "gui.laicaps.telescope.tooltip.asha.6": "",
+  "gui.laicaps.telescope.tooltip.asha.4": "Check your notebook for more information.",
+  "gui.laicaps.telescope.tooltip.asha.5": "",
 
   "gui.laicaps.telescope.tooltip.asha_blur.0": "§d§kASHA",
   "gui.laicaps.telescope.tooltip.asha_blur.1": "",
@@ -164,9 +163,8 @@
   "gui.laicaps.telescope.tooltip.overworld.1": "",
   "gui.laicaps.telescope.tooltip.overworld.2": "Home sweet home.",
   "gui.laicaps.telescope.tooltip.overworld.3": "",
-  "gui.laicaps.telescope.tooltip.overworld.4": "Check your Astronomy Research",
-  "gui.laicaps.telescope.tooltip.overworld.5": "Table for more information.",
-  "gui.laicaps.telescope.tooltip.overworld.6": "",
+  "gui.laicaps.telescope.tooltip.overworld.4": "Check your notebook for more information.",
+  "gui.laicaps.telescope.tooltip.overworld.5": "",
 
 
 
@@ -174,9 +172,8 @@
   "gui.laicaps.telescope.tooltip.lunamar.1": "",
   "gui.laicaps.telescope.tooltip.lunamar.2": "An ocean planet full of life.",
   "gui.laicaps.telescope.tooltip.lunamar.3": "",
-  "gui.laicaps.telescope.tooltip.lunamar.4": "Check your Astronomy Research ",
-  "gui.laicaps.telescope.tooltip.lunamar.5": "Table for more information.",
-  "gui.laicaps.telescope.tooltip.lunamar.6": "",
+  "gui.laicaps.telescope.tooltip.lunamar.4": "Check your notebook for more information.",
+  "gui.laicaps.telescope.tooltip.lunamar.5": "",
 
   "gui.laicaps.telescope.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
   "gui.laicaps.telescope.tooltip.lunamar_blur.1": "",
@@ -188,12 +185,13 @@
 
   "gui.laicaps.spaceship.unsafe": "It is not safe to dismount now",
 
-  "gui.laicaps.main_screen.missing_tank":      "§c        Insert Tank",
   "gui.laicaps.main_screen.missing_fuel":      "§c     Not Enough Fuel",
   "gui.laicaps.main_screen.missing_knowledge": "§c   Undiscovered planet",
   "gui.laicaps.main_screen.missing_nothing":   "§a     Ready for Takeoff",
 
   "gui.laicaps.main_screen.missing_something": "§cThe rocket is not ready for takeoff",
+
+  "gui.laicaps.main_screen.takeoff": "§2Initiating takeoff...",
 
   "gui.laicaps.main_screen.tooltip.ember.0": "§6Ember",
   "gui.laicaps.main_screen.tooltip.ember_blur.0": "§6§kEMBER",
@@ -208,7 +206,7 @@
 
 
   "item.laicaps.astronomy_notebook": "Astronomy Notebook",
-  "item.laicaps.astronomy_notebook.use": "§cPlace at an Astronomy Table to open",
+  "item.laicaps.astronomy_notebook.use": "§c[use] to open!",
   "tooltip.laicaps.astronomy_notebook.0" : "A trusty Notebook where you note down",
   "tooltip.laicaps.astronomy_notebook.1" : "all of your findings and thoughts about",
   "tooltip.laicaps.astronomy_notebook.2" : "the stars above and the earth bellow.",
@@ -234,36 +232,11 @@
   "item.laicaps.elite_microchip": "Elite Microchip",
   "tooltip.laicaps.elite_microchip.0": "WIP",
 
-  "item.laicaps.tank": "Tank",
-  "tooltip.laicaps.tank.small.0": "A small tank capable of storing",
-  "tooltip.laicaps.tank.small.1": "enough enderblaze fuel for a",
-  "tooltip.laicaps.tank.small.2": "single one-way journey.",
-  "tooltip.laicaps.tank.small.3": "Refuel it at a Refuel Station.",
-
-  "item.laicaps.medium_tank": "Medium Tank",
-  "tooltip.laicaps.tank.medium.0": "A medium sized tank capable of storing",
-  "tooltip.laicaps.tank.medium.1": "a decent amount of enderblaze fuel.",
-  "tooltip.laicaps.tank.medium.2": "Possibly enough for a short journey and back.",
-  "tooltip.laicaps.tank.medium.3": "Refuel it at a Refuel Station.",
-
-  "item.laicaps.large_tank": "Large Tank",
-  "tooltip.laicaps.tank.large.0": "A large tank capable of storing",
-  "tooltip.laicaps.tank.large.1": "a huge amount of enderblaze fuel.",
-  "tooltip.laicaps.tank.large.2": "It makes space travel a breeze.",
-  "tooltip.laicaps.tank.large.3": "Refuel it at a Refuel Station.",
-
-  "tooltip.laicaps.tank.fuel": "Fuel",
-
-  "item.laicaps.rocket": "WIP Rocket",
-  "tooltip.laicaps.rocket.0": "WIP!! eventually there will be a whole process for",
-  "tooltip.laicaps.rocket.1": "slowly building towards the rocket ship with several in-world building stages",
-  "tooltip.laicaps.rocket.2": "This is a quick dirty workaround for playtesting",
-
 
   "item.laicaps.enderblaze_fuel": "Enderblaze Fuel",
   "tooltip.laicaps.enderblaze_fuel.0": "A strong fuel made by combining",
-  "tooltip.laicaps.enderblaze_fuel.1": "blaze powder with pristine ender pearl dust.",
-  "tooltip.laicaps.enderblaze_fuel.2": "Can be used as rocket fuel when fed into a tank.",
+  "tooltip.laicaps.enderblaze_fuel.1": "coal with pristine ender pearl dust.",
+  "tooltip.laicaps.enderblaze_fuel.2": "Can be used as rocket fuel.",
 
 
   "item.laicaps.pristine_enderpearl_dust": "Pristine Ender Pearl Dust",
@@ -353,14 +326,17 @@
 
   "block.laicaps.ember_globe": "Ember Globe",
   "tooltip.laicaps.ember_globe.0": "A surprisingly accurate model of Ember,",
-  "tooltip.laicaps.ember_globe.1": "obtained very rarely from chests",
+  "tooltip.laicaps.ember_globe.1": "obtained very rarely from chests in Ember",
+  "tooltip.laicaps.ember_globe.3": "WIP NOT CURRENTLY OBTAINABLE",
+
   "block.laicaps.asha_globe": "Asha Globe",
   "tooltip.laicaps.asha_globe.0": "A fascinatingly accurate model of Asha,",
   "tooltip.laicaps.asha_globe.1": "down to every river and ravine.",
   "tooltip.laicaps.asha_globe.2": "Obtained very rarely from chests in Asha.",
+
   "block.laicaps.overworld_globe": "Overworld Globe",
-  "tooltip.laicaps.overworld_globe.0": "A surprisingly accurate model of the Overworld.",
   "tooltip.laicaps.overworld_globe.1": "WIP NOT CURRENTLY OBTAINABLE",
+
   "block.laicaps.lunamar_globe": "Lunamar Globe",
   "tooltip.laicaps.lunamar_globe.0": "A model of Lunamar.",
   "tooltip.laicaps.lunamar_globe.1": "Perhaps accurate? It's mostly water.",
@@ -369,24 +345,30 @@
 
   "entity.laicaps.bluetale" : "Bluetale",
   "item.laicaps.bluetale_spawn_egg" : "Bluetale Spawn Egg",
+  "item.laicaps.bluetale_bucket" : "Bucket of Bluetale",
+
   "item.laicaps.bluetale" : "Bluetale",
   "tooltip.laicaps.bluetale.0" : "A shimmering fish found in Asha with a glowing blue tail.",
   "tooltip.laicaps.bluetale.1" : "Praised for bringing good luck to anglers.",
+
   "item.laicaps.cooked_bluetale" : "Cooked Bluetale",
   "tooltip.laicaps.cooked_bluetale.0" : "A bluetale cooked to perfection.",
   "tooltip.laicaps.cooked_bluetale.1" : "A shame it had to end like this.",
-  "item.laicaps.bluetale_bucket" : "Bucket of Bluetale",
+
 
 
   "entity.laicaps.redtale" : "Redtale",
   "item.laicaps.redtale_spawn_egg" : "Redtale Spawn Egg",
+  "item.laicaps.redtale_bucket" : "Bucket of Redtale",
+
   "item.laicaps.redtale" : "Redtale",
   "tooltip.laicaps.redtale.0" : "A shimmering fish found in Asha with a glowing red tail.",
   "tooltip.laicaps.redtale.1" : "Scorned for bringing bad luck to anglers.",
+
   "item.laicaps.cooked_redtale" : "Cooked Redtale",
   "tooltip.laicaps.cooked_redtale.0" : "A redtale cooked to perfection.",
   "tooltip.laicaps.cooked_redtale.1" : "The only thing it's good for.",
-  "item.laicaps.redtale_bucket" : "Bucket of Redtale",
+
 
 
 
@@ -448,6 +430,8 @@
 
 
 
+
+
   "item.laicaps.crimson_starfish" : "Crimson Starfish",
   "tooltip.laicaps.crimson_starfish.0" : "A red colored starfish.",
   "tooltip.laicaps.crimson_starfish.1" : "Not to be confused for a 1-star fish.",
@@ -483,36 +467,49 @@
 
   "entity.laicaps.bubblemouth" : "Bubblemouth",
   "item.laicaps.bubblemouth_spawn_egg" : "Bubblemouth Spawn Egg",
+  "item.laicaps.bubblemouth_bucket" : "Bucket of Bubblemouth",
+
   "item.laicaps.bubblemouth" : "Bubblemouth",
   "tooltip.laicaps.bubblemouth.0" : "A chubby slow-swimming fish from Lunamar.",
   "tooltip.laicaps.bubblemouth.1" : "Often seen drifting through moonshade kelp,",
   "tooltip.laicaps.bubblemouth.2" : "blowing tiny bubbles for no apparent reason.",
+
   "item.laicaps.cooked_bubblemouth" : "Cooked Bubblemouth",
   "tooltip.laicaps.cooked_bubblemouth.0" : "A tasty smoked Bubblemouth.",
   "tooltip.laicaps.cooked_bubblemouth.1" : "Goes perfect with some moonshade fruit.",
-  "item.laicaps.bubblemouth_bucket" : "Bucket of Bubblemouth",
+
+
 
   "entity.laicaps.moonray" : "Moonray",
   "item.laicaps.moonray_spawn_egg" : "Moonray Spawn Egg",
+  "item.laicaps.moonray_bucket" : "Bucket of Moonray",
+
   "item.laicaps.moonray" : "Moonray",
   "tooltip.laicaps.moonray.0" : "A slow moving ray that gently glides along the waves.",
   "tooltip.laicaps.moonray.1" : "Now dead.",
-  "item.laicaps.moonray_bucket" : "Bucket of Moonray",
+
+
 
   "entity.laicaps.glimpuff" : "Glimpuff",
   "item.laicaps.glimpuff_spawn_egg" : "Glimpuff Spawn Egg",
+  "item.laicaps.glimpuff_bucket" : "Bucket of Glimpuff",
+
   "item.laicaps.glimpuff" : "Glimpuff",
   "tooltip.laicaps.glimpuff.0" : "A unique fish which feeds on moonshade fruit.",
   "tooltip.laicaps.glimpuff.1" : "It's digestive system absorbs the glowing properties",
   "tooltip.laicaps.glimpuff.2" : "of the fruit making it glow for a while after eating.",
+
   "item.laicaps.cooked_glimpuff" : "Cooked Glimpuff",
   "tooltip.laicaps.cooked_glimpuff.0" : "A tasty smoked Glimpuff.",
   "tooltip.laicaps.cooked_glimpuff.1" : "Goes perfect with some moonshade fruit.",
-  "item.laicaps.glimpuff_bucket" : "Bucket of Glimpuff",
+
+
 
 
   "entity.laicaps.swibble": "Swibble",
   "item.laicaps.swibble_spawn_egg": "Swibble Spawn Egg",
+
+
 
   "entity.laicaps.nimble": "Nimble",
   "item.laicaps.nimble_spawn_egg": "Nimble Spawn Egg",
@@ -531,15 +528,20 @@
   "block.laicaps.water_container": "Water Container",
   "tooltip.laicaps.water_container.0": "Dev block to contain water in the",
   "tooltip.laicaps.water_container.1": "floating water cubes of lunamar",
+
   "block.laicaps.water_container_helper": "Water Container Helper",
   "tooltip.laicaps.water_container_helper.0": "This block deletes itself when.",
   "tooltip.laicaps.water_container_helper.1": "naturally generated through structures",
 
+
+
   "block.laicaps.moonshade_kelp": "Moonshade Kelp",
+  "block.laicaps.moonshade_tall_seagrass": "Tall Moonshade Seagrass",
+
   "block.laicaps.moonshade_seagrass": "Moonshade Seagrass",
   "tooltip.laicaps.moonshade_seagrass.0": "Seagrass resembling that of the overworld,",
   "tooltip.laicaps.moonshade_seagrass.1": "but due to the lack of sunlight it has a bluer tint.",
-  "block.laicaps.moonshade_tall_seagrass": "Tall Moonshade Seagrass",
+
   "item.laicaps.moonshade_fruit": "Moonshade Fruit",
   "tooltip.laicaps.moonshade_fruit.0": "A strange, moon-shaped fruit",
   "tooltip.laicaps.moonshade_fruit.1": "glowing with a soft purple hue.",
@@ -637,9 +639,11 @@
   "tooltip.laicaps.ember_entry.0": "A torn piece of paper hot to the touch.",
   "tooltip.laicaps.ember_entry.1": "Some notes about Ember were hastily",
   "tooltip.laicaps.ember_entry.2": "written down.",
+
   "tooltip.laicaps.asha_entry.0": "An old note left behind by whoever",
   "tooltip.laicaps.asha_entry.1": "passed by Asha before you. Its information",
   "tooltip.laicaps.asha_entry.2": "will surely prove useful to you.",
+
   "tooltip.laicaps.lunamar_entry.0": "A waterproof piece of paper",
   "tooltip.laicaps.lunamar_entry.1": "carefully written containing some",
   "tooltip.laicaps.lunamar_entry.2": "information about Lunamar.",
@@ -648,7 +652,17 @@
   "tooltip.laicaps.entry_page.unlock.after" : "",
 
 
+
+
+
+
+
+
+
+
   "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
+
+
 
   "gui.notebook.menu.entry1.image" : "menu_illustration_1",
   "gui.notebook.menu.entry1.name" : "      Introduction",
@@ -720,11 +734,13 @@
   "gui.notebook.menu.entry3.left.10" : "sketch out a blueprint with",
   "gui.notebook.menu.entry3.left.11" : "some lapis lazuli and paper.",
 
-  "gui.notebook.menu.entry3.right.3" : "Once I got a sketch I'll need",
-  "gui.notebook.menu.entry3.right.4" : "to settle down on the design",
-  "gui.notebook.menu.entry3.right.5" : "by crafting a Research Station",
-  "gui.notebook.menu.entry3.right.6" : "with some planks and paper.",
 
+
+  "gui.notebook.menu.entry3.right.3" : "Once I got a blueprint I just",
+  "gui.notebook.menu.entry3.right.4" : "need to use the power of the",
+  "gui.notebook.menu.entry3.right.5" : "unfinished progress system",
+  "gui.notebook.menu.entry3.right.6" : "to summon a spaceship into",
+  "gui.notebook.menu.entry3.right.7" : "existence. Wow!",
 
 
 
@@ -768,10 +784,12 @@
   "gui.notebook.menu.entry4.right.11" : "it's time to sit down and launch",
   "gui.notebook.menu.entry4.right.12" : "towards Asha! Wish me luck.",
 
+  "gui.notebook.menu.entry4.right.14" : "[YOU CAN RIGHT CLICK",
+  "gui.notebook.menu.entry4.right.15" : "THE BACK DOOR TO OPEN]",
 
-  "gui.notebook.menu.entry4.right.15" : "§cWORK IN PROGRESS",
-  "gui.notebook.menu.entry4.right.16" : "§c[Tutorial to be reworked in",
-  "gui.notebook.menu.entry4.right.17" : "§cthe future]",
+  "gui.notebook.menu.entry4.right.17" : "§cWORK IN PROGRESS",
+  "gui.notebook.menu.entry4.right.18" : "§c[Tutorial to be reworked in",
+  "gui.notebook.menu.entry4.right.19" : "§cthe future]",
 
 
   "gui.notebook.ember.entry1.name" : "      §cEmber§r - Planet",

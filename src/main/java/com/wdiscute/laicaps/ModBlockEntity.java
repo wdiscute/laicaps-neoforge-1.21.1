@@ -9,7 +9,6 @@ import com.wdiscute.laicaps.block.sign.ModSignBlockEntity;
 import com.wdiscute.laicaps.block.hidden.HiddenControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesControllerBlockEntity;
 import com.wdiscute.laicaps.block.notes.NotesPuzzleBlockEntity;
-import com.wdiscute.laicaps.block.researchstation.ResearchStationBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolControllerBlockEntity;
 import com.wdiscute.laicaps.block.symbol.SymbolPuzzleBlockEntity;
 import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
@@ -66,16 +65,6 @@ public class ModBlockEntity
 
     public static final Supplier<BlockEntityType<TelescopeBlockEntity>> TELESCOPE = BLOCK_ENTITIES.register("telescope",
             () -> BlockEntityType.Builder.of(TelescopeBlockEntity::new, ModBlocks.TELESCOPE.get())
-                    .build(null));
-
-    //todo make notebook table
-//    public static final Supplier<BlockEntityType<AstronomyTableBlockEntity>> ASTRONOMY_TABLE = BLOCK_ENTITIES.register("astronomy_table",
-//            () -> BlockEntityType.Builder.of(AstronomyTableBlockEntity::new, ModBlocks.ASTRONOMY_RESEARCH_TABLE.get())
-//                    .build(null));
-
-
-    public static final Supplier<BlockEntityType<ResearchStationBlockEntity>> RESEARCH_STATION = BLOCK_ENTITIES.register("research_station",
-            () -> BlockEntityType.Builder.of(ResearchStationBlockEntity::new, ModBlocks.RESEARCH_STATION.get())
                     .build(null));
 
     public static final Supplier<BlockEntityType<RotatingPuzzleBlockentity>> ROTATING_PUZZLE = BLOCK_ENTITIES.register("rotating_puzzle",

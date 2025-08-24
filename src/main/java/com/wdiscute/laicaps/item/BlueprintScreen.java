@@ -1,39 +1,35 @@
-package com.wdiscute.laicaps.block.researchstation;
+package com.wdiscute.laicaps.item;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.sun.jna.platform.win32.WinDef;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.ModTags;
+import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ResearchStationScreen extends AbstractContainerScreen<ResearchStationMenu>
+public class BlueprintScreen extends Screen
 {
-
-    private static ResearchStationMenu menu;
-
-    private static final Logger log = LoggerFactory.getLogger(ResearchStationScreen.class);
-    private static final ResourceLocation BACKGROUND = Laicaps.rl("textures/gui/research_station/background.png");
+    private static final ResourceLocation BACKGROUND = Laicaps.rl("textures/gui/blueprint/background.png");
 
     Random r = new Random();
 
-    ItemStack itemStack = ItemStack.EMPTY;
-
     int uiX;
     int uiY;
+
+    boolean completed = false;
 
     int jigsawSelected = -1;
 
@@ -44,42 +40,21 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
     {
         super.init();
 
-        imageWidth = 512;
-        imageHeight = 256;
-        uiX = (width - imageWidth) / 2;
-        uiY = (height - imageHeight) / 2;
+        uiX = (width - 512) / 2;
+        uiY = (height - 256) / 2;
     }
 
     private void scramble()
     {
         jigsaws.clear();
-        if (menu.blockEntity.inventory.getStackInSlot(0).is(ModItems.SPACESHIP_BLUEPRINT))
+
+        for (int i = 0; i < 5; i++)
         {
-            for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 7; j++)
             {
-                for (int j = 0; j < 7; j++)
-                {
-                    jigsaws.add(new Vector2f(0, 0));
-                }
+                jigsaws.add(new Vector2f(r.nextInt(200) - 100, r.nextInt(150) - 75));
             }
-        }
-        else
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 7; j++)
-                {
-//                    if (i > 3)
-//                    {
-//                        jigsaws.add(new Vector2f(10, 0));
-//                    }
-//                    else
-//                    {
-//                        jigsaws.add(new Vector2f(0, 0));
-//                    }
-                    jigsaws.add(new Vector2f(r.nextInt(200) - 100, r.nextInt(150) - 75));
-                }
-            }
+
         }
 
         for (int i = 0; i < 35; i++)
@@ -112,17 +87,20 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
 
     }
 
+    @Override
+    public boolean isPauseScreen()
+    {
+        return false;
+    }
 
     @Override
-    protected void containerTick()
+    public void tick()
     {
-
-        if (itemStack.isEmpty()) return;
+        if(completed) return;
 
         //auto-adjust
         for (int i = 0; i < 35; i++)
         {
-
             if (Math.abs(jigsaws.get(i).x) < 6 && Math.abs(jigsaws.get(i).y) < 6)
             {
                 int x = 0;
@@ -139,7 +117,6 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
                 }
 
                 jigsaws.set(i, new Vector2f(x, y));
-
             }
         }
 
@@ -157,16 +134,21 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
 
         if (!pieceNotInPlace)
         {
-            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 1);
+            completed = true;
+            PacketDistributor.sendToServer(new Payloads.BluePrintCompletedPayload("done"));
+
+            for (int i = 0; i < 35; i++)
+            {
+                jigsaws.set(i, new Vector2f(0, 0));
+            }
         }
-
-
-        super.containerTick();
     }
+
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY)
     {
+        if(completed) return false;
 
         if (jigsawSelected != -1)
         {
@@ -205,7 +187,7 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
     {
         super.mouseClicked(mouseX, mouseY, button);
 
-        if (itemStack.isEmpty() || itemStack.is(ModTags.Items.COMPLETED_BLUEPRINTS)) return false;
+        if(completed) return false;
 
         double x = mouseX - uiX;
         double y = mouseY - uiY;
@@ -235,8 +217,10 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
 
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY)
+    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
     {
+        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+
         //initial setup every frame
         double x = mouseX - uiX;
         double y = mouseY - uiY;
@@ -248,28 +232,33 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
         renderImage(guiGraphics, BACKGROUND);
 
 
-        if (!itemStack.equals(menu.blockEntity.inventory.getStackInSlot(0)))
+        for (int i = 0; i < 5; i++)
         {
-            itemStack = menu.blockEntity.inventory.getStackInSlot(0);
-            scramble();
-        }
-
-        if (!menu.blockEntity.inventory.getStackInSlot(0).isEmpty())
-        {
-            for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 7; j++)
             {
-                for (int j = 0; j < 7; j++)
-                {
-                    ResourceLocation rl = Laicaps.rl("textures/gui/research_station/" + getName(i, j) + ".png");
+                ResourceLocation rl = Laicaps.rl("textures/gui/blueprint/" + getName(i, j) + ".png");
 
-                    int index = i * 7 + j;
-                    renderImage(guiGraphics, rl, ((int) jigsaws.get(index).x), ((int) jigsaws.get(index).y));
-                }
+                int index = i * 7 + j;
+                renderImage(guiGraphics, rl, ((int) jigsaws.get(index).x), ((int) jigsaws.get(index).y));
             }
         }
 
-
     }
+
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    {
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
+        {
+            this.onClose();
+            return true;
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
 
     private static @NotNull String getName(int i, int j)
     {
@@ -305,14 +294,12 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
     {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
-    public ResearchStationScreen(ResearchStationMenu researchStationMenu, Inventory playerInventory, Component title)
+    public BlueprintScreen()
     {
-        super(researchStationMenu, playerInventory, title);
-        menu = researchStationMenu;
+        super(Component.empty());
+        scramble();
     }
 
 
@@ -324,12 +311,5 @@ public class ResearchStationScreen extends AbstractContainerScreen<ResearchStati
     private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl, int x, int y)
     {
         guiGraphics.blit(rl, uiX + x, uiY + y, 0, 0, 512, 256, 512, 256);
-    }
-
-
-    //empty so it doesn't render "inventory"  and "telescope" text
-    @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY)
-    {
     }
 }
