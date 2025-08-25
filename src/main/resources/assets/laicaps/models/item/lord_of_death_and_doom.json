@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "laicaps:item/lord_of_death_and_doom"
+  }
+}

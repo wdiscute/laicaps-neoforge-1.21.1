@@ -50,6 +50,11 @@ public class ModFoodProperties
             .saturationModifier(0.1f)
             .build();
 
+    public static final FoodProperties GHOST_FISH = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationModifier(0.1f)
+            .effect(new MobEffectInstance(MobEffects.INVISIBILITY, 1200, 0), 0.6F)
+            .build();
 
     public static final FoodProperties MOONSHADE_FRUIT = new FoodProperties.Builder()
             .nutrition(3)
@@ -72,6 +77,18 @@ public class ModFoodProperties
             .nutrition(3)
             .saturationModifier(2)
             .effect(new MobEffectInstance(MobEffects.POISON, 100, 1), 1F)
+            .build();
+
+    public static final FoodProperties LORD_OF_DEATH_AND_DOOM = new FoodProperties.Builder()
+            .nutrition(3)
+            .saturationModifier(2)
+            .effect(new MobEffectInstance(MobEffects.WITHER, 19, 0), 1F)
+            .build();
+
+    public static final FoodProperties VESANI = new FoodProperties.Builder()
+            .nutrition(10)
+            .saturationModifier(10)
+            .effect(new MobEffectInstance(MobEffects.ABSORPTION, 6000, 2), 1F)
             .build();
 
     public static final FoodProperties KARPENJOE = new FoodProperties.Builder()

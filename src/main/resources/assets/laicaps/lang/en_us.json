@@ -374,6 +374,16 @@
 
 
 
+  "item.laicaps.waterlogged_satchel" : "Waterlogged Satchel",
+  "tooltip.laicaps.waterlogged_satchel.0" : "A satchel containing many secrets",
+  "tooltip.laicaps.waterlogged_satchel.1" : "from the waters underneath.",
+
+  "item.laicaps.fish_bones" : "Fish Bones",
+  "item.laicaps.fish_bones.0" : "Some fish bones. All that",
+  "item.laicaps.fish_bones.1" : "remains of a once happy fish.",
+
+
+
   "item.laicaps.red_herring" : "Red Herring",
   "tooltip.laicaps.red_herring.0" : "A great sign of more fishes to come!",
   "tooltip.laicaps.red_herring.1" : "Or maybe that's why it's got that name?",
@@ -428,6 +438,22 @@
   "tooltip.laicaps.sunfang_eel.0" : "An Eel who hate the rain and will hide",
   "tooltip.laicaps.sunfang_eel.1" : "away at any sign of precipitation.",
 
+  "item.laicaps.forest_bream" : "Forest Bream",
+  "tooltip.laicaps.forest_bream.0" : "A species of fish often",
+  "tooltip.laicaps.forest_bream.1" : "found in the lakes of Asha",
+
+  "item.laicaps.solar_koi" : "Solar Koi",
+  "tooltip.laicaps.solar_koi.0" : "An incredibly beautiful fish often",
+  "tooltip.laicaps.solar_koi.1" : "found in the tranquil waters of Asha",
+
+  "item.laicaps.jewel_koi" : "Jewel Koi",
+  "tooltip.laicaps.jewel_koi.0" : "An incredibly beautiful fish often",
+  "tooltip.laicaps.jewel_koi.1" : "found in the tranquil waters of Asha",
+
+  "item.laicaps.lake_snapper" : "Lake Snapper",
+  "tooltip.laicaps.lake_snapper.0" : "A fish often used for the sole purpose of saying:",
+  "tooltip.laicaps.lake_snapper.1" : "Snapper? I hardly even know her!",
+
 
 
 
@@ -436,17 +462,14 @@
   "tooltip.laicaps.crimson_starfish.0" : "A red colored starfish.",
   "tooltip.laicaps.crimson_starfish.1" : "Not to be confused for a 1-star fish.",
 
-
   "item.laicaps.verdant_seahorse" : "Verdant Seahorse",
   "tooltip.laicaps.verdant_seahorse.0" : "One of many seahorses that habit Lunamar.",
   "tooltip.laicaps.verdant_seahorse.1" : "This one has green fins, indicating it's age.",
-
 
   "item.laicaps.radiant_seahorse" : "Radiant Seahorse",
   "tooltip.laicaps.radiant_seahorse.0" : "One of many seahorses that habit Lunamar.",
   "tooltip.laicaps.radiant_seahorse.1" : "The blue colored fins indicate it's still young",
   "tooltip.laicaps.radiant_seahorse.2" : "and probably good at valorant.",
-
 
   "item.laicaps.octo" : "Octo",
   "tooltip.laicaps.octo.0" : "An Octo, one of the most dominant species in Lunamar.",
@@ -456,12 +479,73 @@
   "item.laicaps.red_reef_octo" : "Red Reef Octo",
   "tooltip.laicaps.red_reef_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
   "tooltip.laicaps.red_reef_octo.1" : "This Octo decided to make a red conch into his lair.",
-  "tooltip.laicaps.red_reef_octo.2" : "although they can be quite territorial.",
+
+  "item.laicaps.ghost_octo" : "Ghost Octo",
+  "tooltip.laicaps.ghost_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+
+  "item.laicaps.greater_octo" : "Greater Octo",
+  "tooltip.laicaps.greater_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+
+  "item.laicaps.lesser_octo" : "Lesser Octo",
+  "tooltip.laicaps.lesser_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+
+  "item.laicaps.coral_octo" : "Coral Octo",
+  "tooltip.laicaps.coral_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
 
   "item.laicaps.lumen_drifter" : "Lumen Drifter",
   "tooltip.laicaps.lumen_drifter.0" : "Not to be confused with a starfish, these creatures",
   "tooltip.laicaps.lumen_drifter.1" : "are a lot smaller and thinner in size, and are",
   "tooltip.laicaps.lumen_drifter.2" : "actually not related to starfishes.",
+
+  "item.laicaps.dhufish" : "Dhufish",
+  "tooltip.laicaps.dhufish.0" : "This ugly tries to hang around other fish",
+  "tooltip.laicaps.dhufish.1" : "but they always get away.",
+  "tooltip.laicaps.dhufish.2" : "Somehow very effective at guaranteeing food",
+  "tooltip.laicaps.dhufish.3" : "and shelter away from natural predators.",
+
+  "item.laicaps.emperor_angelfish" : "Emperor Angelfish",
+  "tooltip.laicaps.emperor_angelfish.0" : "A gorgeous Angelfish, one of the last of it's kind.",
+  "tooltip.laicaps.emperor_angelfish.1" : "Now dead in your hands.",
+
+  "item.laicaps.vesani" : "Vesani",
+  "tooltip.laicaps.vesani.0" : "This species of fish is really good",
+  "tooltip.laicaps.vesani.1" : "at camouflaging as other species",
+  "tooltip.laicaps.vesani.2" : "It's unusual to see them out in the",
+  "tooltip.laicaps.vesani.3" : "open with it's normal appearance.",
+
+  "item.laicaps.drowned_cod" : "Drowned Cod",
+  "tooltip.laicaps.drowned_cod.0" : "A cod similar in color to the drowned back",
+  "tooltip.laicaps.drowned_cod.1" : "in the overworld. Probably just a coincidence.",
+
+  "item.laicaps.mad_ranga_danchovy" : "Mad Ranga Danchovy",
+  "tooltip.laicaps.mad_ranga_danchovy.0" : "Unlike what it's name might suggest, this",
+  "tooltip.laicaps.mad_ranga_danchovy.1" : "species of anchovy is quite friendly.",
+
+  "item.laicaps.kimbarao" : "Kimbarão",
+  "tooltip.laicaps.kimbarao.0" : "A tenebrous shark species known for it's",
+  "tooltip.laicaps.kimbarao.1" : "awful spelling abilities (for a shark)",
+
+  "item.laicaps.circus" : "Circus",
+  "tooltip.laicaps.circus.0" : "A clownfish-like species that hangs around in groups",
+
+  "item.laicaps.ghost_fish" : "Ghost Fish",
+  "tooltip.laicaps.ghost_fish.0" : "A see-through fish often referred to as a ghost.",
+  "tooltip.laicaps.ghost_fish.1" : "Said to bring good luck if spotted after dinner.",
+
+  "item.laicaps.lord_of_death_and_doom" : "Lord Of Death And Doom",
+  "tooltip.laicaps.lord_of_death_and_doom.0" : "Size: 1",
+
+  "item.laicaps.ghoti" : "Ghoti",
+  "tooltip.laicaps.ghoti.0" : "A fish often mispronounced because of it's spelling.",
+  "tooltip.laicaps.ghoti.1" : "During the colder days of Lunamar you can",
+  "tooltip.laicaps.ghoti.2" : "hear it say 'Hey Lunamar, Ghoti here.'",
+
+
+
+
+
+
+
 
 
 

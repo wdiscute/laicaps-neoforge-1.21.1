@@ -54,6 +54,8 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.CREEPER_BOBBER.get());
                                 output.accept(ModItems.TREASURE_BOBBER.get());
                                 output.accept(ModItems.FAST_BITING_BOBBER.get());
+                                output.accept(ModItems.WATERLOGGED_SATCHEL.get());
+                                output.accept(ModItems.FISH_BONES.get());
 
 
                                 //rocket stuff
@@ -202,6 +204,10 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.STORMSAIL_RAY.get());
                                 output.accept(ModItems.SUNFANG_EEL.get());
                                 output.accept(ModItems.SUNFANG_EEL.get());
+                                output.accept(ModItems.FOREST_BREAM.get());
+                                output.accept(ModItems.JEWEL_KOI.get());
+                                output.accept(ModItems.SOLAR_KOI.get());
+                                output.accept(ModItems.LAKE_SNAPPER.get());
                             })
                             .build()
             );
@@ -251,8 +257,20 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.OCTO.get());
                                 output.accept(ModItems.RED_REEF_OCTO.get());
                                 output.accept(ModItems.LUMEN_DRIFTER.get());
-                                output.accept(ModItems.LUMEN_DRIFTER.get());
-
+                                output.accept(ModItems.DHUFISH.get());
+                                output.accept(ModItems.EMPEROR_ANGELFISH.get());
+                                output.accept(ModItems.VESANI.get());
+                                output.accept(ModItems.GHOST_OCTO.get());
+                                output.accept(ModItems.GREATER_OCTO.get());
+                                output.accept(ModItems.LESSER_OCTO.get());
+                                output.accept(ModItems.CORAL_OCTO.get());
+                                output.accept(ModItems.DROWNED_COD.get());
+                                output.accept(ModItems.MAD_RANGA_DANCHOVY.get());
+                                output.accept(ModItems.KIMBARAO.get());
+                                output.accept(ModItems.CIRCUS.get());
+                                output.accept(ModItems.GHOST_FISH.get());
+                                output.accept(ModItems.LORD_OF_DEATH_AND_DOOM.get());
+                                output.accept(ModItems.GHOTI.get());
 
                             })
                             .build());

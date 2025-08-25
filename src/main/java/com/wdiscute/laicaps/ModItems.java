@@ -23,6 +23,10 @@ public class ModItems
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Laicaps.MOD_ID);
 
+
+    public static final DeferredItem<Item> JAR = ITEMS.register("jar", () -> new Item(new Item.Properties().stacksTo(16)));
+
+
     //
     //,------. ,--.  ,---.   ,--.  ,--. ,--. ,--.  ,--.  ,----.
     //|  .---' |  | '   .-'  |  '--'  | |  | |  ,'.|  | '  .-./
@@ -30,6 +34,8 @@ public class ModItems
     //|  |`    |  | .-'    | |  |  |  | |  | |  | `   | '  '--'  |
     //`--'     `--' `-----'  `--'  `--' `--' `--'  `--'  `------'
     //
+
+    public static final DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> STARCATCHER_FISHING_ROD = ITEMS.register(
             "starcatcher_fishing_rod",
@@ -41,14 +47,68 @@ public class ModItems
                             .component(ModDataComponents.BAIT.get(), ItemContainerContents.fromItems(List.of(ItemStack.EMPTY))))
     );
 
+    //bobbers
     public static final DeferredItem<Item> OAKHEART_BERRIES_BAIT = ITEMS.register("oakheart_berries_bait", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> CREEPER_BOBBER = ITEMS.register("creeper_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> TREASURE_BOBBER = ITEMS.register("treasure_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BAIT_SAVING_BOBBER = ITEMS.register("bait_saving_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> DIFFICULTY_BOBBER = ITEMS.register("difficulty_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> FAST_BITING_BOBBER = ITEMS.register("fast_biting_bobber", () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties()));
+
+
+    //fishing fishes
+
+    public static final DeferredItem<Item> FISH_BONES = ITEMS.register("fish_bones", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+
+    //asha
+    public static final DeferredItem<Item> RED_HERRING = ITEMS.register("red_herring", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> AVIAN = ITEMS.register("avian", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> TWILIGHT_TROUT = ITEMS.register("twilight_trout", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> EEL = ITEMS.register("eel", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> MEADOW_PERCH = ITEMS.register("meadow_perch", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SOLAR_CARP = ITEMS.register("solar_carp", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> VERY_TINY_SHARK = ITEMS.register("very_tiny_shark", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> AZURE_TUNA = ITEMS.register("azure_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SCARLET_TUNA = ITEMS.register("scarlet_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SAGE_TUNA = ITEMS.register("sage_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> KARPENJOE = ITEMS.register("karpenjoe", () -> new Item(new Item.Properties().food(ModFoodProperties.KARPENJOE)));
+    public static final DeferredItem<Item> STORMSAIL_RAY = ITEMS.register("stormsail_ray", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SUNFANG_EEL = ITEMS.register("sunfang_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> FOREST_BREAM = ITEMS.register("forest_bream", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> JEWEL_KOI = ITEMS.register("jewel_koi", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> SOLAR_KOI = ITEMS.register("solar_koi", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> LAKE_SNAPPER = ITEMS.register("lake_snapper", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+
+
+
+    //lunamar
+    public static final DeferredItem<Item> CRIMSON_STARFISH = ITEMS.register("crimson_starfish", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> LUMEN_DRIFTER = ITEMS.register("lumen_drifter", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> RADIANT_SEAHORSE = ITEMS.register("radiant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> VERDANT_SEAHORSE = ITEMS.register("verdant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> OCTO = ITEMS.register("octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> RED_REEF_OCTO = ITEMS.register("red_reef_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    //todo add mobeffect that makes player unable to move because of being zapped
+    public static final DeferredItem<Item> THUNDERCHARGED_EEL = ITEMS.register("thundercharged_eel", () -> new ThunderchargedEel(new Item.Properties().food(ModFoodProperties.THUNDERCHARGED_EEL)));
+    public static final DeferredItem<Item> DHUFISH = ITEMS.register("dhufish", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> EMPEROR_ANGELFISH = ITEMS.register("emperor_angelfish", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> VESANI = ITEMS.register("vesani", () -> new Item(new Item.Properties().food(ModFoodProperties.VESANI)));
+    public static final DeferredItem<Item> GHOST_OCTO = ITEMS.register("ghost_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> GREATER_OCTO = ITEMS.register("greater_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> LESSER_OCTO = ITEMS.register("lesser_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> CORAL_OCTO = ITEMS.register("coral_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> DROWNED_COD = ITEMS.register("drowned_cod", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> MAD_RANGA_DANCHOVY = ITEMS.register("mad_ranga_danchovy", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> KIMBARAO = ITEMS.register("kimbarao", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> CIRCUS = ITEMS.register("circus", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> GHOST_FISH = ITEMS.register("ghost_fish", () -> new Item(new Item.Properties().food(ModFoodProperties.GHOST_FISH)));
+    public static final DeferredItem<Item> LORD_OF_DEATH_AND_DOOM = ITEMS.register("lord_of_death_and_doom", () -> new Item(new Item.Properties().food(ModFoodProperties.LORD_OF_DEATH_AND_DOOM)));
+    public static final DeferredItem<Item> GHOTI = ITEMS.register("ghoti", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+
+
 
     //
     //,--.   ,--. ,--.  ,---.    ,-----.
@@ -157,7 +217,6 @@ public class ModItems
 
 
     public static final DeferredItem<Item> STARFLIES_JAR = ITEMS.register("starflies_jar", () -> new Starflies_jar(new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<Item> JAR = ITEMS.register("jar", () -> new Item(new Item.Properties().stacksTo(16)));
 
     public static final DeferredItem<Item> SWEETLILY_SUGAR = ITEMS.register("sweetlily_sugar", () -> new Item(new Item.Properties()));
 
@@ -198,34 +257,6 @@ public class ModItems
 
     public static final DeferredItem<Item> NIMBLE_SPAWN_EGG = ITEMS.register("nimble_spawn_egg", () -> new SpawnEggItem(ModEntities.NIMBLE.get(), 14531970, 14714721, new Item.Properties()));
     public static final DeferredItem<Item> NIMBLE_SWEET_TREAT = ITEMS.register("nimble_sweet_treat", () -> new Item(new Item.Properties()));
-
-    //fishing fishes
-    public static final DeferredItem<Item> RED_HERRING = ITEMS.register("red_herring", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> AVIAN = ITEMS.register("avian", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> TWILIGHT_TROUT = ITEMS.register("twilight_trout", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> EEL = ITEMS.register("eel", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> MEADOW_PERCH = ITEMS.register("meadow_perch", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> SOLAR_CARP = ITEMS.register("solar_carp", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> VERY_TINY_SHARK = ITEMS.register("very_tiny_shark", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> AZURE_TUNA = ITEMS.register("azure_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> SCARLET_TUNA = ITEMS.register("scarlet_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> SAGE_TUNA = ITEMS.register("sage_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> KARPENJOE = ITEMS.register("karpenjoe", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> STORMSAIL_RAY = ITEMS.register("stormsail_ray", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> SUNFANG_EEL = ITEMS.register("sunfang_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> CRIMSON_STARFISH = ITEMS.register("crimson_starfish", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> LUMEN_DRIFTER = ITEMS.register("lumen_drifter", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> RADIANT_SEAHORSE = ITEMS.register("radiant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> VERDANT_SEAHORSE = ITEMS.register("verdant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> OCTO = ITEMS.register("octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> RED_REEF_OCTO = ITEMS.register("red_reef_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-
-
-    //todo add mobeffect that makes player unable to move because of being zapped
-    public static final DeferredItem<Item> THUNDERCHARGED_EEL = ITEMS.register(
-            "thundercharged_eel", () -> new ThunderchargedEel(new Item.Properties().food(ModFoodProperties.THUNDERCHARGED_EEL)));
-
-
 
 
 
