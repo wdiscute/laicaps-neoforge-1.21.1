@@ -78,15 +78,15 @@ public class ModItems
     public static final DeferredItem<Item> STORMSAIL_RAY = ITEMS.register("stormsail_ray", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> SUNFANG_EEL = ITEMS.register("sunfang_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> FOREST_BREAM = ITEMS.register("forest_bream", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> JEWEL_KOI = ITEMS.register("jewel_koi", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> SOLAR_KOI = ITEMS.register("solar_koi", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> LAKE_SNAPPER = ITEMS.register("lake_snapper", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> JEWEL_KOI = ITEMS.register("jewel_koi", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SOLAR_KOI = ITEMS.register("solar_koi", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> LAKE_SNAPPER = ITEMS.register("lake_snapper", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
 
 
 
     //lunamar
     public static final DeferredItem<Item> CRIMSON_STARFISH = ITEMS.register("crimson_starfish", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    public static final DeferredItem<Item> LUMEN_DRIFTER = ITEMS.register("lumen_drifter", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> LUMEN_DRIFTER = ITEMS.register("lumen_drifter", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> RADIANT_SEAHORSE = ITEMS.register("radiant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
     public static final DeferredItem<Item> VERDANT_SEAHORSE = ITEMS.register("verdant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
     public static final DeferredItem<Item> OCTO = ITEMS.register("octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
@@ -106,7 +106,7 @@ public class ModItems
     public static final DeferredItem<Item> CIRCUS = ITEMS.register("circus", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> GHOST_FISH = ITEMS.register("ghost_fish", () -> new Item(new Item.Properties().food(ModFoodProperties.GHOST_FISH)));
     public static final DeferredItem<Item> LORD_OF_DEATH_AND_DOOM = ITEMS.register("lord_of_death_and_doom", () -> new Item(new Item.Properties().food(ModFoodProperties.LORD_OF_DEATH_AND_DOOM)));
-    public static final DeferredItem<Item> GHOTI = ITEMS.register("ghoti", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
+    public static final DeferredItem<Item> GHOTI = ITEMS.register("ghoti", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
 
 
 
