@@ -2,12 +2,9 @@ package com.wdiscute.laicaps.entity.rocket;
 
 import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.entity.rocket.rocketparts.*;
-import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;

@@ -8,6 +8,8 @@ import com.wdiscute.laicaps.entity.bluetale.RedtaleRenderer;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthRenderer;
 import com.wdiscute.laicaps.entity.gecko.GeckoRenderer;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffRenderer;
+import com.wdiscute.laicaps.entity.magma.MagmaRenderer;
+import com.wdiscute.laicaps.entity.magma.RockRenderer;
 import com.wdiscute.laicaps.entity.moonray.MoonrayRenderer;
 import com.wdiscute.laicaps.entity.nimble.NimbleRenderer;
 import com.wdiscute.laicaps.entity.rocket.RefuelScreen;
@@ -163,6 +165,10 @@ public class Laicaps
             EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), context -> new ModBoatRenderer(context, true));
 
             EntityRenderers.register(ModEntities.ROCKET.get(), RocketRenderer::new);
+
+            EntityRenderers.register(ModEntities.MAGMA.get(), MagmaRenderer::new);
+            EntityRenderers.register(ModEntities.ROCK.get(), RockRenderer::new);
+
             EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
 
 

@@ -7,6 +7,8 @@ import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthEntity;
 import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
+import com.wdiscute.laicaps.entity.magma.MagmaEntity;
+import com.wdiscute.laicaps.entity.magma.RockEntity;
 import com.wdiscute.laicaps.entity.moonray.MoonrayEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RE;
@@ -84,6 +86,15 @@ public class ModEntities
     public static final Supplier<EntityType<FishingBobEntity>> FISHING_BOB =
             registerKapiten("fishing_bob", FishingBobEntity::new, MobCategory.MISC,
                     b -> b.noSummon().noSave().sized(0.3f, 0.3f));
+
+    public static final Supplier<EntityType<MagmaEntity>> MAGMA =
+            ENTITY_TYPES.register("magma", () -> EntityType.Builder.of(MagmaEntity::new, MobCategory.MISC)
+                    .sized(1f, 1f).build("magma"));
+
+    public static final Supplier<EntityType<RockEntity>> ROCK =
+            registerKapiten("rock_shield", RockEntity::new, MobCategory.MISC,
+                    b -> b.noSave().sized(1f, 1));
+
 
     public static void register(IEventBus eventBus)
     {

@@ -153,7 +153,6 @@ public class PayloadReceiver
         {
             context.player().getMainHandItem().shrink(1);
             context.player().addItem(new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get()));
-            System.out.println("done!!!");
             return;
         }
 

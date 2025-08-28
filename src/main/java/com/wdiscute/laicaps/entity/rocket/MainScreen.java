@@ -129,7 +129,6 @@ public class MainScreen extends Screen
         if (x > 250 && x < 283 && y > 170 && y < 200)
         {
             PacketDistributor.sendToServer(new Payloads.ChangePlanetSelected(re.getStringUUID(), "ember"));
-            System.out.println("clicked on ember");
         }
 
         //asha

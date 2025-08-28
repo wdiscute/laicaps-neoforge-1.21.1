@@ -10,6 +10,8 @@ import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.gecko.GeckoModel;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffModel;
+import com.wdiscute.laicaps.entity.magma.MagmaModel;
+import com.wdiscute.laicaps.entity.magma.RockModel;
 import com.wdiscute.laicaps.entity.moonray.MoonrayEntity;
 import com.wdiscute.laicaps.entity.moonray.MoonrayModel;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
@@ -70,6 +72,9 @@ public class ModEventsBus
         event.registerLayerDefinition(SnufflerModel.LAYER_LOCATION, SnufflerModel::createBodyLayer);
 
         event.registerLayerDefinition(RocketModel.LAYER_LOCATION, RocketModel::createBodyLayer);
+
+        event.registerLayerDefinition(MagmaModel.LAYER_LOCATION, MagmaModel::createBodyLayer);
+        event.registerLayerDefinition(RockModel.LAYER_LOCATION, RockModel::createBodyLayer);
 
         event.registerLayerDefinition(FishingBobModel.LAYER_LOCATION, FishingBobModel::createBodyLayer);
     }
