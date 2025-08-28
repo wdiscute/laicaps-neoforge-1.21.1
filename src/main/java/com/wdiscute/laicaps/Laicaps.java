@@ -23,6 +23,7 @@ import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.item.ModItemProperties;
 import com.wdiscute.laicaps.particle.*;
 import com.wdiscute.laicaps.notebook.EntryUnlockedToast;
+import com.wdiscute.laicaps.util.RGBTooltipHelper;
 import com.wdiscute.laicaps.worldgen.ModFeatures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
@@ -72,6 +73,7 @@ public class Laicaps
     public static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
     public static final ResourceKey<Level> ICY_WORLD_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("icy_world"));
 
+    public static float hue;
 
 
     public static ResourceLocation rl(String s)
@@ -89,7 +91,7 @@ public class Laicaps
 
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
-        NeoForge.EVENT_BUS.addListener(this::modifyItemTooltip);
+        NeoForge.EVENT_BUS.addListener(RGBTooltipHelper::modifyItemTooltip);
         //NeoForge.EVENT_BUS.addListener(EntriesChecks::itemPickupEvent);
 
         ModCreativeModeTabs.register(modEventBus);
@@ -109,33 +111,6 @@ public class Laicaps
     }
 
 
-
-    public void modifyItemTooltip(ItemTooltipEvent event)
-    {
-        List<Component> tooltipComponents = event.getToolTip();
-        ItemStack stack = event.getItemStack();
-
-        if (I18n.exists("tooltip." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + ".0"))
-        {
-            if (event.getFlags().hasShiftDown())
-            {
-                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_down"));
-                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.empty"));
-
-                for (int i = 0; i < 100; i++)
-                {
-                    if (!I18n.exists("tooltip." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + "." + i))
-                        break;
-                    tooltipComponents.add(Component.translatable("tooltip." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + "." + i));
-                }
-
-            } else
-            {
-                tooltipComponents.add(Component.translatable("tooltip.laicaps.generic.shift_up"));
-            }
-
-        }
-    }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

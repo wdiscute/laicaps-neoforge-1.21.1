@@ -9,6 +9,7 @@ import com.wdiscute.laicaps.item.*;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.MoverType;
@@ -21,6 +22,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.awt.*;
 import java.util.List;
 
 public class ModItems
@@ -31,15 +33,11 @@ public class ModItems
 
     public static final DeferredItem<Item> JAR = ITEMS.register("jar", () -> new Item(new Item.Properties().stacksTo(16)));
 
-    public static final DeferredItem<Item> ROCK = ITEMS.register("rock", () -> new Item(new Item.Properties().stacksTo(16))
-    {
-        @Override
-        public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-        {
-            super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        }
-    });
+    public static final DeferredItem<Item> ROCK = ITEMS.register("rock", () -> new Item(new Item.Properties().stacksTo(16)));
 
+
+    public static final DeferredItem<Item> RGB = ITEMS.register("rgb", () -> new RGBItem(new Item.Properties().stacksTo(16)));
+    
 
     //
     //,------. ,--.  ,---.   ,--.  ,--. ,--. ,--.  ,--.  ,----.

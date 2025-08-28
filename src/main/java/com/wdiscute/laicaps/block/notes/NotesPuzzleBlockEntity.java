@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.block.notes;
 
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.block.TickableBlockEntity;
+import com.wdiscute.laicaps.util.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;

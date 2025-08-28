@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.block.rotating;
 
 import com.wdiscute.laicaps.ModBlockEntity;
-import com.wdiscute.laicaps.block.TickableBlockEntity;
+import com.wdiscute.laicaps.util.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

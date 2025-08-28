@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.block.TickableBlockEntity;
+import com.wdiscute.laicaps.util.TickableBlockEntity;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,7 +1,7 @@
 package com.wdiscute.laicaps.block.astronomytable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.wdiscute.laicaps.AdvHelper;
+import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

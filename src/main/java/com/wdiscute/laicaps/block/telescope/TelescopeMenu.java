@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.block.telescope;
 
-import com.wdiscute.laicaps.AdvHelper;
+import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.ModBlocks;
 import com.wdiscute.laicaps.ModMenuTypes;
 import com.wdiscute.laicaps.network.Payloads;

@@ -3,7 +3,7 @@ package com.wdiscute.laicaps.block.symbol;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModBlockEntity;
 import com.wdiscute.laicaps.ModBlocks;
-import com.wdiscute.laicaps.block.TickableBlockEntity;
+import com.wdiscute.laicaps.util.TickableBlockEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

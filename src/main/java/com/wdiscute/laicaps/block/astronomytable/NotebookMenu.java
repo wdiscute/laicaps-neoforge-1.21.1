@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.block.astronomytable;
 
-import com.wdiscute.laicaps.AdvHelper;
+import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;

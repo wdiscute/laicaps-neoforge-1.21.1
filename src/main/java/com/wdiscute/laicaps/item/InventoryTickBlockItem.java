@@ -1,7 +1,6 @@
 package com.wdiscute.laicaps.item;
 
-import com.wdiscute.laicaps.AdvHelper;
-import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.network.Payloads;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;

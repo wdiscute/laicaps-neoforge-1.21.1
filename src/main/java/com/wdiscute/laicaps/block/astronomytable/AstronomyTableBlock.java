@@ -1,8 +1,7 @@
 package com.wdiscute.laicaps.block.astronomytable;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.laicaps.AdvHelper;
-import com.wdiscute.laicaps.ModBlockEntity;
+import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.block.telescope.TelescopeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

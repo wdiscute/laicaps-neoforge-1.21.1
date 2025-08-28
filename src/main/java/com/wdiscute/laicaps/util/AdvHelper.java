@@ -1,6 +1,7 @@
-package com.wdiscute.laicaps;
+package com.wdiscute.laicaps.util;
 
 import com.google.common.collect.Iterables;
+import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.mixin.AdvancementProgressAcessor;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
