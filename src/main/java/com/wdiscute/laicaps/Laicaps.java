@@ -23,18 +23,14 @@ import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.item.ModItemProperties;
 import com.wdiscute.laicaps.particle.*;
 import com.wdiscute.laicaps.notebook.EntryUnlockedToast;
-import com.wdiscute.laicaps.util.RGBTooltipHelper;
+import com.wdiscute.laicaps.util.Tooltips;
 import com.wdiscute.laicaps.worldgen.ModFeatures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -50,10 +46,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.slf4j.Logger;
-
-import java.util.List;
 
 @Mod(Laicaps.MOD_ID)
 public class Laicaps
@@ -91,7 +84,7 @@ public class Laicaps
 
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
-        NeoForge.EVENT_BUS.addListener(RGBTooltipHelper::modifyItemTooltip);
+        NeoForge.EVENT_BUS.addListener(Tooltips::modifyItemTooltip);
         //NeoForge.EVENT_BUS.addListener(EntriesChecks::itemPickupEvent);
 
         ModCreativeModeTabs.register(modEventBus);

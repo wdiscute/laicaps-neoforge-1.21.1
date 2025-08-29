@@ -2,27 +2,20 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
-import com.wdiscute.laicaps.entity.magma.RockEntity;
 import com.wdiscute.laicaps.item.StarcatcherFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.awt.*;
 import java.util.List;
 
 public class ModItems
@@ -33,11 +26,6 @@ public class ModItems
 
     public static final DeferredItem<Item> JAR = ITEMS.register("jar", () -> new Item(new Item.Properties().stacksTo(16)));
 
-    public static final DeferredItem<Item> ROCK = ITEMS.register("rock", () -> new Item(new Item.Properties().stacksTo(16)));
-
-
-    public static final DeferredItem<Item> RGB = ITEMS.register("rgb", () -> new RGBItem(new Item.Properties().stacksTo(16)));
-    
 
     //
     //,------. ,--.  ,---.   ,--.  ,--. ,--. ,--.  ,--.  ,----.

@@ -4,14 +4,13 @@ import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.awt.*;
 import java.util.List;
 
-public class RGBTooltipHelper
+public class Tooltips
 {
 
     public static void modifyItemTooltip(ItemTooltipEvent event)
