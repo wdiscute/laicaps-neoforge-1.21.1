@@ -504,8 +504,8 @@
   "tooltip.laicaps.dhufish.3" : "and shelter away from natural predators.",
 
   "item.laicaps.emperor_angelfish" : "Emperor Angelfish",
-  "tooltip.laicaps.emperor_angelfish.0" : "A gorgeous <rgb>Angelfish</rgb>, one of the last of it's kind.",
-  "tooltip.laicaps.emperor_angelfish.1" : "Now dead in your hands.",
+  "tooltip.laicaps.emperor_angelfish.0" : "A gorgeous <gradient-54>Angelfish</gradient-62>, one of the last of it's kind.",
+  "tooltip.laicaps.emperor_angelfish.1" : "Now <rgb>dead</rgb> in your hands.",
 
   "item.laicaps.vesani" : "Vesani",
   "tooltip.laicaps.vesani.0" : "This species of fish is really good",
