@@ -106,6 +106,7 @@ public class ModItems
     public static final DeferredItem<Item> GHOST_FISH = ITEMS.register("ghost_fish", () -> new Item(new Item.Properties().food(ModFoodProperties.GHOST_FISH)));
     public static final DeferredItem<Item> LORD_OF_DEATH_AND_DOOM = ITEMS.register("lord_of_death_and_doom", () -> new Item(new Item.Properties().food(ModFoodProperties.LORD_OF_DEATH_AND_DOOM)));
     public static final DeferredItem<Item> GHOTI = ITEMS.register("ghoti", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    public static final DeferredItem<Item> SKYYFISH = ITEMS.register("skyyfish", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
 
 
 

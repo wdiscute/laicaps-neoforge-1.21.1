@@ -268,6 +268,7 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.GHOST_FISH.get());
                                 output.accept(ModItems.LORD_OF_DEATH_AND_DOOM.get());
                                 output.accept(ModItems.GHOTI.get());
+                                output.accept(ModItems.SKYYFISH.get());
 
                             })
                             .build());

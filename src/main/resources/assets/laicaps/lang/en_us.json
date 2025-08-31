@@ -509,7 +509,7 @@
 
   "item.laicaps.vesani" : "Vesani",
   "tooltip.laicaps.vesani.0" : "This species of fish is really good",
-  "tooltip.laicaps.vesani.1" : "at camouflaging as other species",
+  "tooltip.laicaps.vesani.1" : "at camouflaging as other species.",
   "tooltip.laicaps.vesani.2" : "It's unusual to see them out in the",
   "tooltip.laicaps.vesani.3" : "open with it's normal appearance.",
 
@@ -541,6 +541,9 @@
   "tooltip.laicaps.ghoti.2" : "hear it say 'Hey Lunamar, Ghoti here.'",
 
 
+  "item.laicaps.skyyfish" : "Skyyfish",
+  "tooltip.laicaps.skyyfish.0" : "A fish often found swimming up in",
+  "tooltip.laicaps.skyyfish.1" : "the floating cubes of Lunamar.",
 
 
 
