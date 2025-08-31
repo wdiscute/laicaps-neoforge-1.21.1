@@ -30,10 +30,10 @@
 
   "gui.laicaps.landing.landing.base" : "Landing on ",
 
-  "gui.laicaps.landing.landing.ember" : "§cEmber",
+  "gui.laicaps.landing.landing.ember" : "<gradient-00>Ember</gradient-07>",
   "gui.laicaps.landing.landing.asha" : "§dAsha",
   "gui.laicaps.landing.landing.overworld" : "§2Overworld",
-  "gui.laicaps.landing.landing.lunamar" : "§3Lunamar",
+  "gui.laicaps.landing.landing.lunamar" : "<gradient-54>Lunamar</gradient-66>",
 
 
   "gui.laicaps.landing.temperature.base" : "Temperature: ",
@@ -136,7 +136,7 @@
   "gui.laicaps.telescope.tooltip.generic.advanced.0": "§cYour telescope is not advanced",
   "gui.laicaps.telescope.tooltip.generic.advanced.1": "§cenough to look this far into space",
 
-  "gui.laicaps.telescope.tooltip.ember.0": "§6Ember",
+  "gui.laicaps.telescope.tooltip.ember.0": "<gradient-00>Ember</gradient-07>",
   "gui.laicaps.telescope.tooltip.ember.1": "",
   "gui.laicaps.telescope.tooltip.ember.2": "A planet consumed by fire and ash.",
   "gui.laicaps.telescope.tooltip.ember.3": "",
@@ -147,7 +147,7 @@
   "gui.laicaps.telescope.tooltip.ember_blur.1": "",
 
 
-  "gui.laicaps.telescope.tooltip.asha.0": "§dAsha",
+  "gui.laicaps.telescope.tooltip.asha.0": "<gradient-78>Asha</gradient-87>",
   "gui.laicaps.telescope.tooltip.asha.1": "",
   "gui.laicaps.telescope.tooltip.asha.2": "An overworld-like planet welcoming of your visit.",
   "gui.laicaps.telescope.tooltip.asha.3": "",
@@ -168,7 +168,7 @@
 
 
 
-  "gui.laicaps.telescope.tooltip.lunamar.0": "§9Lunamar",
+  "gui.laicaps.telescope.tooltip.lunamar.0": "<gradient-54>Lunamar</gradient-66>",
   "gui.laicaps.telescope.tooltip.lunamar.1": "",
   "gui.laicaps.telescope.tooltip.lunamar.2": "An ocean planet full of life.",
   "gui.laicaps.telescope.tooltip.lunamar.3": "",
@@ -193,15 +193,15 @@
 
   "gui.laicaps.main_screen.takeoff": "§2Initiating takeoff...",
 
-  "gui.laicaps.main_screen.tooltip.ember.0": "§6Ember",
+  "gui.laicaps.main_screen.tooltip.ember.0": "<gradient-00>Ember</gradient-07>",
   "gui.laicaps.main_screen.tooltip.ember_blur.0": "§6§kEMBER",
 
-  "gui.laicaps.main_screen.tooltip.asha.0": "§dAsha",
+  "gui.laicaps.main_screen.tooltip.asha.0": "<gradient-78>Asha</gradient-87>",
   "gui.laicaps.main_screen.tooltip.asha_blur.0": "§d§kASHA",
 
   "gui.laicaps.main_screen.tooltip.overworld.0": "§2Overworld",
 
-  "gui.laicaps.main_screen.tooltip.lunamar.0": "§9Lunamar",
+  "gui.laicaps.main_screen.tooltip.lunamar.0": "<gradient-54>Lunamar</gradient-66>",
   "gui.laicaps.main_screen.tooltip.lunamar_blur.0": "§9§kLUNAMAR",
 
 
@@ -220,15 +220,15 @@
   "tooltip.laicaps.ember_teleporter.0": "Quick and dirty creative mode teleporter",
 
   "item.laicaps.basic_microchip": "Basic Microchip",
-  "tooltip.laicaps.basic_microchip.0": "A small basic microchip found in Asha",
+  "tooltip.laicaps.basic_microchip.0": "A small basic microchip found in <gradient-78>Asha</gradient-87>",
   "tooltip.laicaps.basic_microchip.1": "left behind by whatever once inhabited it.",
   "item.laicaps.refined_microchip": "Refined Microchip",
-  "tooltip.laicaps.refined_microchip.0": "A refined microchip found in Lunamar.",
+  "tooltip.laicaps.refined_microchip.0": "A refined microchip found in <gradient-54>Lunamar</gradient-66>.",
   "tooltip.laicaps.refined_microchip.1": "You are unsure why or how it got there.",
   "item.laicaps.advanced_microchip": "Advanced Microchip",
-  "tooltip.laicaps.advanced_microchip.0": "An advanced microchip found in Ember.",
+  "tooltip.laicaps.advanced_microchip.0": "An advanced microchip found in <gradient-00>Ember</gradient-07>.",
   "tooltip.laicaps.advanced_microchip.1": "It's hot to the touch... is it processing something",
-  "tooltip.laicaps.advanced_microchip.2": "or just leftover heat from Ember?",
+  "tooltip.laicaps.advanced_microchip.2": "or just leftover heat from <gradient-00>Ember</gradient-07>?",
   "item.laicaps.elite_microchip": "Elite Microchip",
   "tooltip.laicaps.elite_microchip.0": "WIP",
 
@@ -302,20 +302,20 @@
   "block.laicaps.lunarveil": "Lunarveil",
 
   "item.laicaps.starflies_jar": "Jar of Starflies",
-  "item.laicaps.starflies_jar.0": "A jar filled with glowing Starflies.",
-  "item.laicaps.starflies_jar.1": "Native to Asha, these gentle",
-  "item.laicaps.starflies_jar.2": "creatures drift in the night",
-  "item.laicaps.starflies_jar.3": "lighting up the surrounding area",
+  "tooltip.laicaps.starflies_jar.0": "A jar filled with glowing Starflies.",
+  "tooltip.laicaps.starflies_jar.1": "Native to <gradient-78>Asha</gradient-87>, these gentle",
+  "tooltip.laicaps.starflies_jar.2": "creatures drift in the night",
+  "tooltip.laicaps.starflies_jar.3": "lighting up the surrounding area",
 
   "item.laicaps.jar": "Jar",
-  "item.laicaps.jar.0": "Just a simple glass jar.",
-  "item.laicaps.jar.1": "Can be used to make jam or",
-  "item.laicaps.jar.2": "catch Starflies during nighttime.",
+  "tooltip.laicaps.jar.0": "Just a simple glass jar.",
+  "tooltip.laicaps.jar.1": "Can be used to make jam or",
+  "tooltip.laicaps.jar.2": "catch Starflies during nighttime.",
 
   "item.laicaps.oakheart_berries_jam": "Oakheart Berries Jam",
-  "item.laicaps.oakheart_berries_jam.0": "A delicious Jar of oakheart berries.",
-  "item.laicaps.oakheart_berries_jam.1": "Better be eat it before a Nimble",
-  "item.laicaps.oakheart_berries_jam.2": "tries to steal it!",
+  "tooltip.laicaps.oakheart_berries_jam.0": "A delicious Jar of oakheart berries.",
+  "tooltip.laicaps.oakheart_berries_jam.1": "Better be eat it before a Nimble",
+  "tooltip.laicaps.oakheart_berries_jam.2": "tries to steal it!",
 
   "block.laicaps.asha_grass_block": "Asha Grass Block",
   "block.laicaps.asha_dirt": "Asha Dirt",
@@ -325,22 +325,22 @@
   "block.laicaps.illuma": "Illuma",
 
   "block.laicaps.ember_globe": "Ember Globe",
-  "tooltip.laicaps.ember_globe.0": "A surprisingly accurate model of Ember,",
-  "tooltip.laicaps.ember_globe.1": "obtained very rarely from chests in Ember",
+  "tooltip.laicaps.ember_globe.0": "A surprisingly accurate model of <gradient-00>Ember</gradient-07>,",
+  "tooltip.laicaps.ember_globe.1": "obtained very rarely from chests in <gradient-00>Ember</gradient-07>",
   "tooltip.laicaps.ember_globe.3": "WIP NOT CURRENTLY OBTAINABLE",
 
   "block.laicaps.asha_globe": "Asha Globe",
-  "tooltip.laicaps.asha_globe.0": "A fascinatingly accurate model of Asha,",
+  "tooltip.laicaps.asha_globe.0": "A fascinatingly accurate model of <gradient-78>Asha</gradient-87>,",
   "tooltip.laicaps.asha_globe.1": "down to every river and ravine.",
-  "tooltip.laicaps.asha_globe.2": "Obtained very rarely from chests in Asha.",
+  "tooltip.laicaps.asha_globe.2": "Obtained very rarely from chests in <gradient-78>Asha</gradient-87>.",
 
   "block.laicaps.overworld_globe": "Overworld Globe",
   "tooltip.laicaps.overworld_globe.1": "WIP NOT CURRENTLY OBTAINABLE",
 
   "block.laicaps.lunamar_globe": "Lunamar Globe",
-  "tooltip.laicaps.lunamar_globe.0": "A model of Lunamar.",
+  "tooltip.laicaps.lunamar_globe.0": "A model of <gradient-54>Lunamar</gradient-66>.",
   "tooltip.laicaps.lunamar_globe.1": "Perhaps accurate? It's mostly water.",
-  "tooltip.laicaps.lunamar_globe.2": "Obtained very rarely from chests in Lunamar",
+  "tooltip.laicaps.lunamar_globe.2": "Obtained very rarely from chests in <gradient-54>Lunamar</gradient-66>",
 
 
   "entity.laicaps.bluetale" : "Bluetale",
@@ -348,7 +348,7 @@
   "item.laicaps.bluetale_bucket" : "Bucket of Bluetale",
 
   "item.laicaps.bluetale" : "Bluetale",
-  "tooltip.laicaps.bluetale.0" : "A shimmering fish found in Asha with a glowing blue tail.",
+  "tooltip.laicaps.bluetale.0" : "A shimmering fish found in <gradient-78>Asha</gradient-87> with a glowing blue tail.",
   "tooltip.laicaps.bluetale.1" : "Praised for bringing good luck to anglers.",
 
   "item.laicaps.cooked_bluetale" : "Cooked Bluetale",
@@ -362,7 +362,7 @@
   "item.laicaps.redtale_bucket" : "Bucket of Redtale",
 
   "item.laicaps.redtale" : "Redtale",
-  "tooltip.laicaps.redtale.0" : "A shimmering fish found in Asha with a glowing red tail.",
+  "tooltip.laicaps.redtale.0" : "A shimmering fish found in <gradient-78>Asha</gradient-87> with a glowing red tail.",
   "tooltip.laicaps.redtale.1" : "Scorned for bringing bad luck to anglers.",
 
   "item.laicaps.cooked_redtale" : "Cooked Redtale",
@@ -440,15 +440,15 @@
 
   "item.laicaps.forest_bream" : "Forest Bream",
   "tooltip.laicaps.forest_bream.0" : "A species of fish often",
-  "tooltip.laicaps.forest_bream.1" : "found in the lakes of Asha",
+  "tooltip.laicaps.forest_bream.1" : "found in the lakes of <gradient-78>Asha</gradient-87>",
 
   "item.laicaps.solar_koi" : "Solar Koi",
   "tooltip.laicaps.solar_koi.0" : "An incredibly beautiful fish often",
-  "tooltip.laicaps.solar_koi.1" : "found in the tranquil waters of Asha",
+  "tooltip.laicaps.solar_koi.1" : "found in the tranquil waters of <gradient-78>Asha</gradient-87>",
 
   "item.laicaps.jewel_koi" : "Jewel Koi",
   "tooltip.laicaps.jewel_koi.0" : "An incredibly beautiful fish often",
-  "tooltip.laicaps.jewel_koi.1" : "found in the tranquil waters of Asha",
+  "tooltip.laicaps.jewel_koi.1" : "found in the tranquil waters of <gradient-78>Asha</gradient-87>",
 
   "item.laicaps.lake_snapper" : "Lake Snapper",
   "tooltip.laicaps.lake_snapper.0" : "A fish often used for the sole purpose of saying:",
@@ -463,34 +463,34 @@
   "tooltip.laicaps.crimson_starfish.1" : "Not to be confused for a 1-star fish.",
 
   "item.laicaps.verdant_seahorse" : "Verdant Seahorse",
-  "tooltip.laicaps.verdant_seahorse.0" : "One of many seahorses that habit Lunamar.",
+  "tooltip.laicaps.verdant_seahorse.0" : "One of many seahorses that habit <gradient-54>Lunamar</gradient-66>.",
   "tooltip.laicaps.verdant_seahorse.1" : "This one has green fins, indicating it's age.",
 
   "item.laicaps.radiant_seahorse" : "Radiant Seahorse",
-  "tooltip.laicaps.radiant_seahorse.0" : "One of many seahorses that habit Lunamar.",
+  "tooltip.laicaps.radiant_seahorse.0" : "One of many seahorses that habit <gradient-54>Lunamar</gradient-66>.",
   "tooltip.laicaps.radiant_seahorse.1" : "The blue colored fins indicate it's still young",
   "tooltip.laicaps.radiant_seahorse.2" : "and probably good at valorant.",
 
   "item.laicaps.octo" : "Octo",
-  "tooltip.laicaps.octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.octo.0" : "An Octo, one of the most dominant species in <gradient-54>Lunamar</gradient-66>.",
   "tooltip.laicaps.octo.1" : "They won't usually be aggressive unless provoked,",
   "tooltip.laicaps.octo.2" : "although they can be quite territorial.",
 
   "item.laicaps.red_reef_octo" : "Red Reef Octo",
-  "tooltip.laicaps.red_reef_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.red_reef_octo.0" : "An Octo, one of the most dominant species in <gradient-54>Lunamar</gradient-66>.",
   "tooltip.laicaps.red_reef_octo.1" : "This Octo decided to make a red conch into his lair.",
 
   "item.laicaps.ghost_octo" : "Ghost Octo",
-  "tooltip.laicaps.ghost_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.ghost_octo.0" : "An Octo, one of the most dominant species in <gradient-54>Lunamar</gradient-66>.",
 
   "item.laicaps.greater_octo" : "Greater Octo",
-  "tooltip.laicaps.greater_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.greater_octo.0" : "An Octo, one of the most dominant species in <gradient-54>Lunamar</gradient-66>.",
 
   "item.laicaps.lesser_octo" : "Lesser Octo",
-  "tooltip.laicaps.lesser_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.lesser_octo.0" : "An Octo, one of the most dominant species in <gradient-54>Lunamar</gradient-66>.",
 
   "item.laicaps.coral_octo" : "Coral Octo",
-  "tooltip.laicaps.coral_octo.0" : "An Octo, one of the most dominant species in Lunamar.",
+  "tooltip.laicaps.coral_octo.0" : "An Octo, one of the most dominant species in <gradient-54>Lunamar</gradient-66>.",
 
   "item.laicaps.lumen_drifter" : "Lumen Drifter",
   "tooltip.laicaps.lumen_drifter.0" : "Not to be confused with a starfish, these creatures",
@@ -537,13 +537,13 @@
 
   "item.laicaps.ghoti" : "Ghoti",
   "tooltip.laicaps.ghoti.0" : "A fish often mispronounced because of it's spelling.",
-  "tooltip.laicaps.ghoti.1" : "During the colder days of Lunamar you can",
-  "tooltip.laicaps.ghoti.2" : "hear it say 'Hey Lunamar, Ghoti here.'",
+  "tooltip.laicaps.ghoti.1" : "During the colder days of <gradient-54>Lunamar</gradient-66> you can",
+  "tooltip.laicaps.ghoti.2" : "hear it say 'Hey <gradient-54>Lunamar</gradient-66>, Ghoti here.'",
 
 
   "item.laicaps.skyyfish" : "Skyyfish",
   "tooltip.laicaps.skyyfish.0" : "A fish often found swimming up in",
-  "tooltip.laicaps.skyyfish.1" : "the floating cubes of Lunamar.",
+  "tooltip.laicaps.skyyfish.1" : "the floating cubes of <gradient-54>Lunamar</gradient-66>.",
 
 
 
@@ -557,7 +557,7 @@
   "item.laicaps.bubblemouth_bucket" : "Bucket of Bubblemouth",
 
   "item.laicaps.bubblemouth" : "Bubblemouth",
-  "tooltip.laicaps.bubblemouth.0" : "A chubby slow-swimming fish from Lunamar.",
+  "tooltip.laicaps.bubblemouth.0" : "A chubby slow-swimming fish from <gradient-54>Lunamar</gradient-66>.",
   "tooltip.laicaps.bubblemouth.1" : "Often seen drifting through moonshade kelp,",
   "tooltip.laicaps.bubblemouth.2" : "blowing tiny bubbles for no apparent reason.",
 
@@ -614,7 +614,7 @@
 
   "block.laicaps.water_container": "Water Container",
   "tooltip.laicaps.water_container.0": "Dev block to contain water in the",
-  "tooltip.laicaps.water_container.1": "floating water cubes of lunamar",
+  "tooltip.laicaps.water_container.1": "floating water cubes of <gradient-54>Lunamar</gradient-66>",
 
   "block.laicaps.water_container_helper": "Water Container Helper",
   "tooltip.laicaps.water_container_helper.0": "This block deletes itself when.",
@@ -724,16 +724,16 @@
   "item.laicaps.entry.paper": "Paper,Log,Entry,Notes,Report,Page,Sheet,Memo,Fragment,Draft,Chart,Note,Logbook,Document,Blueprint,Script,Annotation",
 
   "tooltip.laicaps.ember_entry.0": "A torn piece of paper hot to the touch.",
-  "tooltip.laicaps.ember_entry.1": "Some notes about Ember were hastily",
+  "tooltip.laicaps.ember_entry.1": "Some notes about <gradient-00>Ember</gradient-07> were hastily",
   "tooltip.laicaps.ember_entry.2": "written down.",
 
   "tooltip.laicaps.asha_entry.0": "An old note left behind by whoever",
-  "tooltip.laicaps.asha_entry.1": "passed by Asha before you. Its information",
+  "tooltip.laicaps.asha_entry.1": "passed by <gradient-78>Asha</gradient-87> before you. Its information",
   "tooltip.laicaps.asha_entry.2": "will surely prove useful to you.",
 
   "tooltip.laicaps.lunamar_entry.0": "A waterproof piece of paper",
   "tooltip.laicaps.lunamar_entry.1": "carefully written containing some",
-  "tooltip.laicaps.lunamar_entry.2": "information about Lunamar.",
+  "tooltip.laicaps.lunamar_entry.2": "information about <gradient-54>Lunamar</gradient-66>.",
 
   "tooltip.laicaps.entry_page.unlock.before" : "you have gained more knowledge of ",
   "tooltip.laicaps.entry_page.unlock.after" : "",
@@ -748,6 +748,14 @@
 
 
   "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
+
+
+
+  "gui.notebook.menu.missing" : "         §c§k!!!!!!!!!!!!!",
+  "gui.notebook.ember.missing" : "      <gradient-00>Ember</gradient-07> - §k!!!!!!!!!",
+  "gui.notebook.asha.missing" : "       <gradient-78>Asha</gradient-87> - §c§k!!!!!!!!!",
+  "gui.notebook.overworld.missing" : "  <gradient-27>Overworld</gradient-38> - §c§k!!!!!!!!!",
+  "gui.notebook.lunamar.missing" : "    <gradient-54>Lunamar</gradient-66> - §c§k!!!!!!!!!",
 
 
 
@@ -878,7 +886,7 @@
   "gui.notebook.menu.entry5.name" : "Making it your own!",
   "gui.notebook.menu.entry5.toast" : "Making it your own!",
 
-  "gui.notebook.menu.entry5.left.3" : "Asha looks like a nice suitable",
+  "gui.notebook.menu.entry5.left.3" : "<gradient-78>Asha</gradient-87> looks like a nice suitable",
   "gui.notebook.menu.entry5.left.4" : "planet for my first trip. Some iron",
   "gui.notebook.menu.entry5.left.5" : "tools will probably suffice for this",
   "gui.notebook.menu.entry5.left.6" : "journey and be able to fight off",
@@ -915,12 +923,11 @@
   "gui.notebook.menu.entry5.right.19" : "§cthe future]",
 
 
-  "gui.notebook.ember.entry1.name" : "      §cEmber§r - Planet",
+  "gui.notebook.ember.entry1.name" : "      <gradient-00>Ember</gradient-07> - Planet",
   "gui.notebook.ember.entry1.toast" : "Ember - Planet",
-
   "gui.notebook.ember.entry1.image" : "ember_illustration_1",
 
-  "gui.notebook.ember.entry1.left.10" : "               §c§k!!!§r   §cEMBER   §c§k!!!§r",
+  "gui.notebook.ember.entry1.left.10" : "               §c§k!!!§r   <gradient-00>Ember</gradient-07>   §c§k!!!§r",
 
   "gui.notebook.ember.entry1.left.12" : "A planet consumed by fire and ash.",
   "gui.notebook.ember.entry1.left.13" : "The surface glows from it's rivers",
@@ -952,26 +959,26 @@
   "gui.notebook.ember.entry1.right.19" : "§4Space suit required.",
 
 
-  "gui.notebook.ember.entry2.name" : "      Ember - 2",
+  "gui.notebook.ember.entry2.name" : "      <gradient-00>Ember</gradient-07> - 2",
   "gui.notebook.ember.entry2.toast" : "Ember - 2",
   "gui.notebook.ember.entry2.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.notebook.ember.entry3.name" : "      Ember - 3",
+  "gui.notebook.ember.entry3.name" : "      <gradient-00>Ember</gradient-07> - 3",
   "gui.notebook.ember.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.notebook.ember.entry4.name" : "      Ember - 4",
+  "gui.notebook.ember.entry4.name" : "      <gradient-00>Ember</gradient-07> - 4",
   "gui.notebook.ember.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
 
 
-  "gui.notebook.asha.entry1.name" : "       §dAsha§r - Planet",
+  "gui.notebook.asha.entry1.name" : "       <gradient-78>Asha</gradient-87> - Planet",
   "gui.notebook.asha.entry1.toast" : "Asha - Planet",
   "gui.notebook.asha.entry1.image" : "asha_illustration_1",
 
-  "gui.notebook.asha.entry1.left.9" : "               §d§k!!!§r   §dASHA   §d§k!!!§r",
+  "gui.notebook.asha.entry1.left.9" : "               §d§k!!!§r   <gradient-78>Asha</gradient-87>   §d§k!!!§r",
 
-  "gui.notebook.asha.entry1.left.11" : "Asha appears to be a friendly",
+  "gui.notebook.asha.entry1.left.11" : "<gradient-78>Asha</gradient-87> appears to be a friendly",
   "gui.notebook.asha.entry1.left.12" : "planet with no signs of danger.",
   "gui.notebook.asha.entry1.left.13" : "Soil and mineral composition is",
   "gui.notebook.asha.entry1.left.14" : "similar to the Overworld, so",
@@ -1002,7 +1009,7 @@
 
 
 
-  "gui.notebook.asha.entry2.name" : "  §dAsha§r - Fauna & Flora",
+  "gui.notebook.asha.entry2.name" : "  <gradient-78>Asha</gradient-87> - Fauna & Flora",
   "gui.notebook.asha.entry2.toast" : "Asha - Fauna & Flora",
   "gui.notebook.asha.entry2.image" : "asha_illustration_2",
 
@@ -1030,7 +1037,8 @@
 
 
 
-  "gui.notebook.asha.entry3.name" : "     §dAsha§r - Lunarveil",
+  "gui.notebook.asha.entry3.name" : "     <gradient-78>Asha</gradient-87> - Lunarveil",
+  "gui.notebook.asha.entry3.toast" : "Lunarveil",
   "gui.notebook.asha.entry3.image" : "asha_illustration_3",
 
   "gui.notebook.asha.entry3.left.11" : "I found these unique flowers.",
@@ -1056,8 +1064,8 @@
 
 
 
-  "gui.notebook.asha.entry4.name" : "     §dAsha§r - Sweetlily",
-  "gui.notebook.asha.entry4.toast" : "Asha - Sweetlilies",
+  "gui.notebook.asha.entry4.name" : "     <gradient-78>Asha</gradient-87> - Sweetlily",
+  "gui.notebook.asha.entry4.toast" : "Sweetlilies",
   "gui.notebook.asha.entry4.image" : "asha_illustration_4",
 
   "gui.notebook.asha.entry4.left.11" : "This lily-like flower smells weirdly",
@@ -1093,17 +1101,18 @@
   "gui.notebook.overworld.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
 
-  "gui.notebook.lunamar.entry1.name" : "      §3Lunamar§r - Planet",
+  "gui.notebook.lunamar.entry1.name" : "      <gradient-54>Lunamar</gradient-66> - Planet",
+  "gui.notebook.lunamar.entry1.toast" : "Lunamar - Planet",
   "gui.notebook.lunamar.entry1.image" : "lunamar_illustration_1",
 
-  "gui.notebook.lunamar.entry1.left.11" : "            §3§k!!!§r   §3lunamar   §3§k!!!§r",
+  "gui.notebook.lunamar.entry1.left.11" : "            §3§k!!!§r   <gradient-54>Lunamar</gradient-66>   §3§k!!!§r",
 
   "gui.notebook.lunamar.entry1.left.13" : "A giant, dark ocean-covered",
   "gui.notebook.lunamar.entry1.left.14" : "planet illuminated by shimmering",
   "gui.notebook.lunamar.entry1.left.15" : "lights beneath its surface.",
 
   "gui.notebook.lunamar.entry1.left.17" : "Despite its distance from the Sun,",
-  "gui.notebook.lunamar.entry1.left.18" : "Lunamar appears to maintain a mild",
+  "gui.notebook.lunamar.entry1.left.18" : "<gradient-54>Lunamar</gradient-66> appears to maintain a mild",
   "gui.notebook.lunamar.entry1.left.19" : "climate, likely due to it's dense",
   "gui.notebook.lunamar.entry1.left.20" : "atmosphere trapping heat below.",
 
@@ -1128,7 +1137,8 @@
   "gui.notebook.lunamar.entry1.right.20" : "§2deeper underwater exploration.",
 
 
-  "gui.notebook.lunamar.entry2.name" : "     §3Lunamar§r - Illuma",
+  "gui.notebook.lunamar.entry2.name" : "     <gradient-54>Lunamar</gradient-66> - Illuma",
+  "gui.notebook.lunamar.entry2.toast" : "Illuma",
   "gui.notebook.lunamar.entry2.image" : "lunamar_illustration_2",
 
   "gui.notebook.lunamar.entry2.left.11" : "These shiny flowers bloom",
@@ -1138,10 +1148,10 @@
   "gui.notebook.lunamar.entry2.left.15" : "soft glow which lights up the",
   "gui.notebook.lunamar.entry2.left.16" : "ocean floor.",
 
-  "gui.notebook.lunamar.entry3.name" : "      §3Lunamar§r - 3",
+  "gui.notebook.lunamar.entry3.name" : "      <gradient-54>Lunamar</gradient-66> - 3",
   "gui.notebook.lunamar.entry3.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r",
 
-  "gui.notebook.lunamar.entry4.name" : "      §3Lunamar§r - 4",
+  "gui.notebook.lunamar.entry4.name" : "      <gradient-54>Lunamar</gradient-66> - 4",
   "gui.notebook.lunamar.entry4.left.3" : "               §c§k!!!§r   §cWIP   §c§k!!!§r"
 
 

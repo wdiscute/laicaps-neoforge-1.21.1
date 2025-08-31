@@ -45,6 +45,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.event.RenderFrameEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
@@ -85,6 +86,7 @@ public class Laicaps
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
         NeoForge.EVENT_BUS.addListener(Tooltips::modifyItemTooltip);
+        NeoForge.EVENT_BUS.addListener(Laicaps::renderFrame);
         //NeoForge.EVENT_BUS.addListener(EntriesChecks::itemPickupEvent);
 
         ModCreativeModeTabs.register(modEventBus);
@@ -102,8 +104,6 @@ public class Laicaps
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
-
-
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -175,6 +175,11 @@ public class Laicaps
             event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
             event.register(ModMenuTypes.REFUEL_MENU.get(), RefuelScreen::new);
         }
-
     }
+
+    public static void renderFrame(RenderFrameEvent.Post event)
+    {
+        Laicaps.hue += 0.001f;
+    }
+
 }

@@ -6,6 +6,7 @@ import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.network.Payloads;
+import com.wdiscute.laicaps.util.Tooltips;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -415,7 +416,7 @@ public class MainScreen extends Screen
         {
             if (I18n.exists("gui.laicaps.main_screen.tooltip." + planet + "." + i))
             {
-                list.add(Component.translatable("gui.laicaps.main_screen.tooltip." + planet + "." + i));
+                list.add(Tooltips.DecodeTranslationKeyTags("gui.laicaps.main_screen.tooltip." + planet + "." + i));
             } else
             {
                 if (i == 0)

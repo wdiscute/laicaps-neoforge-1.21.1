@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.block.astronomytable;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.util.Tooltips;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -375,20 +376,22 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
         {
             if (entryUnlocked)
             {
-                guiGraphics.drawString(
-                        this.font, Component.translatable("gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".name"),
+
+                String k = "gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".name";
+
+                guiGraphics.drawString(this.font, Tooltips.DecodeTranslationKeyTags(k),
                         uiX + 90, uiY + 230, 0, false);
             }
             else
             {
                 String s = "";
-                if (currentPlanet == 0) s = "         §c§k!!!!!!!!!!!!!";
-                if (currentPlanet == 1) s = "      §6Ember§r - §c§k!!!!!!!!!";
-                if (currentPlanet == 2) s = "       §dAsha§r - §c§k!!!!!!!!!";
-                if (currentPlanet == 3) s = "  §2Overworld§r - §c§k!!!!!!!!!";
-                if (currentPlanet == 4) s = "    §9Lunamar§r - §c§k!!!!!!!!!";
+                if (currentPlanet == 0) s = "gui.notebook.menu.missing";
+                if (currentPlanet == 1) s = "gui.notebook.ember.missing";
+                if (currentPlanet == 2) s = "gui.notebook.asha.missing";
+                if (currentPlanet == 3) s = "gui.notebook.overworld.missing";
+                if (currentPlanet == 4) s = "gui.notebook.lunamar.missing";
 
-                guiGraphics.drawString(this.font, Component.literal(s), uiX + 100, uiY + 230, 0, false);
+                guiGraphics.drawString(this.font, Tooltips.DecodeTranslationKeyTags(s), uiX + 100, uiY + 230, 0, false);
             }
 
 
@@ -439,7 +442,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
             {
                 String key = "gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".left." + i;
                 if (I18n.exists(key))
-                    guiGraphics.drawString(this.font, Component.translatable(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
+                    guiGraphics.drawString(this.font, Tooltips.DecodeTranslationKeyTags(key), uiX + 65, uiY + 10 + (i * 10), 0, false);
             }
 
             //render text right
@@ -447,7 +450,7 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
             {
                 String key = "gui.notebook." + currentPlanetString + ".entry" + currentEntry + ".right." + i;
                 if (I18n.exists(key))
-                    guiGraphics.drawString(this.font, Component.translatable(key), uiX + 272, uiY + 10 + (i * 10), 0, false);
+                    guiGraphics.drawString(this.font, Tooltips.DecodeTranslationKeyTags(key), uiX + 272, uiY + 10 + (i * 10), 0, false);
             }
         }
 

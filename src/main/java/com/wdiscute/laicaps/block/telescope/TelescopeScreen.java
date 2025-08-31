@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.util.Tooltips;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -638,7 +639,7 @@ public class TelescopeScreen extends AbstractContainerScreen<TelescopeMenu>
         {
             if (I18n.exists("gui.laicaps.telescope.tooltip." + input + "." + i))
             {
-                list.add(Component.translatable("gui.laicaps.telescope.tooltip." + input + "." + i));
+                list.add(Tooltips.DecodeTranslationKeyTags("gui.laicaps.telescope.tooltip." + input + "." + i));
             } else
             {
                 if (i == 0)

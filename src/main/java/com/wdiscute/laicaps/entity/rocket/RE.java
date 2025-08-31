@@ -5,6 +5,7 @@ import com.wdiscute.laicaps.entity.rocket.rocketparts.*;
 import com.wdiscute.laicaps.mixin.JumpingAcessor;
 import com.wdiscute.laicaps.network.Payloads;
 import com.wdiscute.laicaps.util.AdvHelper;
+import com.wdiscute.laicaps.util.Tooltips;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -450,7 +451,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             if (level().dimension().equals(Laicaps.OVERWORLD_KEY))
                 planet = Component.translatable("gui.laicaps.landing.landing.overworld");
             if (level().dimension().equals(Laicaps.LUNAMAR_KEY))
-                planet = Component.translatable("gui.laicaps.landing.landing.lunamar");
+                planet = Tooltips.DecodeTranslationKeyTags("gui.laicaps.landing.landing.lunamar");
 
             comp = Component.translatable("gui.laicaps.landing.landing.base").append(planet);
         }
