@@ -61,12 +61,6 @@ public class Laicaps
     public static final int OVERWORLD_ENTRIES = 4;
     public static final int LUNAMAR_ENTRIES = 4;
 
-    public static final ResourceKey<Level> EMBER_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("ember"));
-    public static final ResourceKey<Level> ASHA_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("asha"));
-    public static final ResourceKey<Level> OVERWORLD_KEY = ResourceKey.create(Registries.DIMENSION, ResourceLocation.withDefaultNamespace("overworld"));
-    public static final ResourceKey<Level> LUNAMAR_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("lunamar"));
-    public static final ResourceKey<Level> ICY_WORLD_KEY = ResourceKey.create(Registries.DIMENSION, Laicaps.rl("icy_world"));
-
     public static float hue;
 
 

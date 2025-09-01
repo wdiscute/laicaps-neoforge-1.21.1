@@ -353,7 +353,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
             if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER.get()))
             {
-                key = Laicaps.EMBER_KEY;
+                key = LaicapsKeys.EMBER;
 
                 for (Entity entity : getPassengers())
                 {
@@ -367,7 +367,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
             if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA.get()))
             {
-                key = Laicaps.ASHA_KEY;
+                key = LaicapsKeys.ASHA;
 
                 for (Entity entity : getPassengers())
                 {
@@ -386,7 +386,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
             if (entityData.get(PLANET_SELECTED).is(ModItems.LUNAMAR.get()))
             {
-                key = Laicaps.LUNAMAR_KEY;
+                key = LaicapsKeys.LUNAMAR;
 
                 for (Entity entity : getPassengers())
                 {
@@ -444,13 +444,13 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         {
             Component planet = Component.translatable("gui.laicaps.landing.landing.overworld");
 
-            if (level().dimension().equals(Laicaps.EMBER_KEY))
+            if (level().dimension().equals(LaicapsKeys.EMBER))
                 planet = Component.translatable("gui.laicaps.landing.landing.ember");
-            if (level().dimension().equals(Laicaps.ASHA_KEY))
+            if (level().dimension().equals(LaicapsKeys.ASHA))
                 planet = Component.translatable("gui.laicaps.landing.landing.asha");
-            if (level().dimension().equals(Laicaps.OVERWORLD_KEY))
+            if (level().dimension().equals(LaicapsKeys.OVERWORLD))
                 planet = Component.translatable("gui.laicaps.landing.landing.overworld");
-            if (level().dimension().equals(Laicaps.LUNAMAR_KEY))
+            if (level().dimension().equals(LaicapsKeys.LUNAMAR))
                 planet = Tooltips.DecodeTranslationKeyTags("gui.laicaps.landing.landing.lunamar");
 
             comp = Component.translatable("gui.laicaps.landing.landing.base").append(planet);
@@ -461,10 +461,10 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         {
             int temp = 0;
 
-            if (level().dimension().equals(Laicaps.EMBER_KEY)) temp = r.nextInt(100) - 50 + 523;
-            if (level().dimension().equals(Laicaps.ASHA_KEY)) temp = r.nextInt(10) - 5 + 22;
-            if (level().dimension().equals(Laicaps.OVERWORLD_KEY)) temp = r.nextInt(30) - 15 + 20;
-            if (level().dimension().equals(Laicaps.LUNAMAR_KEY)) temp = r.nextInt(10) - 5 + 6;
+            if (level().dimension().equals(LaicapsKeys.EMBER)) temp = r.nextInt(100) - 50 + 523;
+            if (level().dimension().equals(LaicapsKeys.ASHA)) temp = r.nextInt(10) - 5 + 22;
+            if (level().dimension().equals(LaicapsKeys.OVERWORLD)) temp = r.nextInt(30) - 15 + 20;
+            if (level().dimension().equals(LaicapsKeys.LUNAMAR)) temp = r.nextInt(10) - 5 + 6;
 
             if (level().rainLevel > 20) temp -= 10;
 
@@ -512,7 +512,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
         {
             Component atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.breathable");
 
-            if (level().dimension().equals(Laicaps.EMBER_KEY))
+            if (level().dimension().equals(LaicapsKeys.EMBER))
                 atmosphere = Component.translatable("gui.laicaps.landing.atmosphere.unbreathable");
 
             comp = Component.translatable("gui.laicaps.landing.atmosphere.base").append(atmosphere);
@@ -650,7 +650,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
         ResourceKey<Level> dimension = level().dimension();
 
-        if (dimension == Laicaps.EMBER_KEY)
+        if (dimension == LaicapsKeys.EMBER)
         {
             if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 120;
             if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 490;
@@ -659,7 +659,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             isCurrentDimensionUnknown = false;
         }
 
-        if (dimension == Laicaps.ASHA_KEY)
+        if (dimension == LaicapsKeys.ASHA)
         {
             if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 490;
             if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 120;
@@ -668,7 +668,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             isCurrentDimensionUnknown = false;
         }
 
-        if (dimension == Laicaps.OVERWORLD_KEY)
+        if (dimension == LaicapsKeys.OVERWORLD)
         {
             if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 790;
             if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 330;
@@ -677,7 +677,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             isCurrentDimensionUnknown = false;
         }
 
-        if (dimension == Laicaps.LUNAMAR_KEY)
+        if (dimension == LaicapsKeys.LUNAMAR)
         {
             if (entityData.get(PLANET_SELECTED).is(ModItems.EMBER)) fuelRequired = 1240;
             if (entityData.get(PLANET_SELECTED).is(ModItems.ASHA)) fuelRequired = 870;
