@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-import java.awt.*;
 import java.util.List;
 
 public class Tooltips
@@ -30,7 +29,7 @@ public class Tooltips
                     if (!I18n.exists("tooltip." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + "." + i))
                         break;
 
-                    String s = I18n.get("tooltip." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + "." + i).toString();
+                    String s = I18n.get("tooltip." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace() + "." + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath() + "." + i);
 
                     tooltipComponents.add(DecodeTranslationKeyTags(s));
 
@@ -86,7 +85,7 @@ public class Tooltips
 
             float pingPongedHue = mapHuePingPong(i * 0.01f + hue, min, max);
 
-            int color = Color.HSBtoRGB(pingPongedHue, 1, 1);
+            int color = HueToRGBInt(pingPongedHue);
 
             Component l = Component.literal(s).withColor(color);
 
@@ -119,7 +118,7 @@ public class Tooltips
         {
             String s = text.substring(i, i + 1);
 
-            int color = Color.HSBtoRGB(i * speed + hue, 1, 1);
+            int color = HueToRGBInt(i * speed + hue);
 
             Component l = Component.literal(s).withColor(color);
 
@@ -127,8 +126,48 @@ public class Tooltips
         }
 
         return c;
-
-
     }
+
+
+    public static int HueToRGBInt(float hue)
+    {
+        int r = 0, g = 0, b = 0;
+
+        float h = (hue - (float) Math.floor(hue)) * 6.0f;
+        float f = h - (float) Math.floor(h);
+        float q = 1.0f - f;
+        float t = 1.0f - (1.0f - f);
+        switch ((int) h)
+        {
+            case 0:
+                r = (int) (255.0f + 0.5f);
+                g = (int) (t * 255.0f + 0.5f);
+                break;
+            case 1:
+                r = (int) (q * 255.0f + 0.5f);
+                g = (int) (255.0f + 0.5f);
+                break;
+            case 2:
+                g = (int) (255.0f + 0.5f);
+                b = (int) (t * 255.0f + 0.5f);
+                break;
+            case 3:
+                g = (int) (q * 255.0f + 0.5f);
+                b = (int) (255.0f + 0.5f);
+                break;
+            case 4:
+                r = (int) (t * 255.0f + 0.5f);
+                g = 0;
+                b = (int) (255.0f + 0.5f);
+                break;
+            case 5:
+                r = (int) (255.0f + 0.5f);
+                g = 0;
+                b = (int) (q * 255.0f + 0.5f);
+                break;
+        }
+        return 0xff000000 | (r << 16) | (g << 8) | (b);
+    }
+
 
 }
