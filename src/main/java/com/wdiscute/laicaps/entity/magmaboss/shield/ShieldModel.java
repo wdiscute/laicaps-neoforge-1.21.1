@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.entity.magma;
+package com.wdiscute.laicaps.entity.magmaboss.shield;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -9,13 +9,13 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class RockModel<T extends RockEntity> extends HierarchicalModel<T>
+public class ShieldModel<T extends ShieldEntity> extends HierarchicalModel<T>
 {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Laicaps.rl("rock"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Laicaps.rl("shield"), "main");
     private final ModelPart root;
 
-    public RockModel(ModelPart root) {
+    public ShieldModel(ModelPart root) {
         this.root = root.getChild("root");
     }
 
@@ -31,7 +31,7 @@ public class RockModel<T extends RockEntity> extends HierarchicalModel<T>
     }
 
     @Override
-    public void setupAnim(RockEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
+    public void setupAnim(ShieldEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
         this.root().getAllParts().forEach(ModelPart::resetPose);
     }

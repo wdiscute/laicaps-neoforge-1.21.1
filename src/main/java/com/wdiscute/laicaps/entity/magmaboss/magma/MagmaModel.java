@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.entity.magma;
+package com.wdiscute.laicaps.entity.magmaboss.magma;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

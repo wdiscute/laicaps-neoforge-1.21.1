@@ -5,10 +5,10 @@ import com.wdiscute.laicaps.entity.bluetale.RedtaleEntity;
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
 import com.wdiscute.laicaps.entity.boat.ModChestBoatEntity;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthEntity;
-import com.wdiscute.laicaps.entity.gecko.GeckoEntity;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
-import com.wdiscute.laicaps.entity.magma.MagmaEntity;
-import com.wdiscute.laicaps.entity.magma.RockEntity;
+import com.wdiscute.laicaps.entity.magmaboss.magma.MagmaEntity;
+import com.wdiscute.laicaps.entity.magmaboss.rock.RockEntity;
+import com.wdiscute.laicaps.entity.magmaboss.shield.ShieldEntity;
 import com.wdiscute.laicaps.entity.moonray.MoonrayEntity;
 import com.wdiscute.laicaps.entity.nimble.NimbleEntity;
 import com.wdiscute.laicaps.entity.rocket.RE;
@@ -38,11 +38,6 @@ public class ModEntities
     public static final Supplier<EntityType<ModChestBoatEntity>> MOD_CHEST_BOAT =
             ENTITY_TYPES.register("mod_chest_boat", () -> EntityType.Builder.<ModChestBoatEntity>of(ModChestBoatEntity::new, MobCategory.MISC)
                     .sized(1.375f, 0.5625f).build("mod_chest_boat"));
-
-
-    public static final Supplier<EntityType<GeckoEntity>> GECKO =
-            ENTITY_TYPES.register("gecko", () -> EntityType.Builder.of(GeckoEntity::new, MobCategory.CREATURE)
-                    .sized(0.75f, 0.35f).build("gecko"));
 
 
 
@@ -91,9 +86,13 @@ public class ModEntities
             ENTITY_TYPES.register("magma", () -> EntityType.Builder.of(MagmaEntity::new, MobCategory.MISC)
                     .sized(1f, 1f).build("magma"));
 
+    public static final Supplier<EntityType<ShieldEntity>> SHIELD =
+            registerKapiten("shield", ShieldEntity::new, MobCategory.MISC,
+                    b -> b.noSummon().noSave().sized(1f, 1));
+
     public static final Supplier<EntityType<RockEntity>> ROCK =
-            registerKapiten("rock_shield", RockEntity::new, MobCategory.MISC,
-                    b -> b.noSave().sized(1f, 1));
+            registerKapiten("rock", RockEntity::new, MobCategory.MISC,
+                    b -> b.noSave().canSpawnFarFromPlayer().sized(1.5f, 1.5f));
 
 
     public static void register(IEventBus eventBus)

@@ -1,5 +1,6 @@
-package com.wdiscute.laicaps.entity.magma;
+package com.wdiscute.laicaps.entity.magmaboss.magma;
 
+import com.wdiscute.laicaps.entity.magmaboss.shield.ShieldEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,7 +19,7 @@ public class MagmaEntity extends Entity
     private final Random r = new Random();
     private final int random = r.nextInt(20);
 
-    private final RockEntity[] shields;
+    private final ShieldEntity[] shields;
 
     public int counter;
 
@@ -28,7 +29,7 @@ public class MagmaEntity extends Entity
     {
         super(entityType, level);
 
-        this.shields = new RockEntity[]{null, null, null, null, null, null, null, null, };
+        this.shields = new ShieldEntity[]{null, null, null, null, null, null, null, null, };
     }
 
     @Override
@@ -61,7 +62,7 @@ public class MagmaEntity extends Entity
                 {
                     if(shields[i] == null && !level().isClientSide)
                     {
-                        RockEntity re = new RockEntity(level(), this, i);
+                        ShieldEntity re = new ShieldEntity(level(), this, i);
                         re.moveTo(position());
                         shields[i] = re;
                         level().addFreshEntity(re);

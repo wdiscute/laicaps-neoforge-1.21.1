@@ -1,6 +1,7 @@
-package com.wdiscute.laicaps.entity.magma;
+package com.wdiscute.laicaps.entity.magmaboss.shield;
 
 import com.wdiscute.laicaps.ModEntities;
+import com.wdiscute.laicaps.entity.magmaboss.magma.MagmaEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -12,21 +13,21 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-public class RockEntity extends Projectile
+public class ShieldEntity extends Projectile
 {
-    public static final EntityDataAccessor<Integer> ORDER = SynchedEntityData.defineId(RockEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> ORDER = SynchedEntityData.defineId(ShieldEntity.class, EntityDataSerializers.INT);
 
     public int order;
 
-    public RockEntity(EntityType<? extends RockEntity> entityType, Level level)
+    public ShieldEntity(EntityType<? extends ShieldEntity> entityType, Level level)
     {
         super(entityType, level);
     }
 
 
-    public RockEntity(Level level, MagmaEntity magma, int order)
+    public ShieldEntity(Level level, MagmaEntity magma, int order)
     {
-        super(ModEntities.ROCK.get(), level);
+        super(ModEntities.SHIELD.get(), level);
 
         this.moveTo(magma.position());
         this.setOwner(magma);
