@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps.fishing;
 
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.LaicapsKeys;
 import com.wdiscute.laicaps.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -8,6 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+
+import static com.wdiscute.laicaps.LaicapsKeys.*;
 
 import java.util.List;
 
@@ -21,72 +25,74 @@ public record Fishes()
     // `---'     `--'     `----' `--'    '--'   '--'  `---'  `--'    `--'  `---'
     //
 
+    //region Overworld
+
     public static final FishProperties STICK = new FishProperties(
             Items.STICK,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties LEATHER_BOOTS = new FishProperties(
             Items.LEATHER_BOOTS,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties WHEAT_SEEDS = new FishProperties(
             Items.WHEAT_SEEDS,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties BONE = new FishProperties(
             Items.BONE,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties STRING = new FishProperties(
             Items.STRING,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties BOWL = new FishProperties(
             Items.BOWL,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties INK_SAC = new FishProperties(
             Items.INK_SAC,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties TRIPWIRE_HOOK = new FishProperties(
             Items.TRIPWIRE_HOOK,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties ROTTEN_FLESH = new FishProperties(
             Items.ROTTEN_FLESH,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             1
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties BAMBOO = new FishProperties(
             Items.BAMBOO,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             List.of(
                     getBiomeResourceKey("minecraft", "jungle"),
                     getBiomeResourceKey("minecraft", "sparse_jungle"),
@@ -96,7 +102,7 @@ public record Fishes()
 
     public static final FishProperties LILY_PAD = new FishProperties(
             Items.LILY_PAD,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             List.of(
                     getBiomeResourceKey("minecraft", "swamp"),
                     getBiomeResourceKey("minecraft", "mangrove_swamp")),
@@ -105,7 +111,7 @@ public record Fishes()
 
     public static final FishProperties SEAGRASS = new FishProperties(
             Items.SEAGRASS,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             List.of(
                     getBiomeResourceKey("minecraft", "river"),
                     getBiomeResourceKey("minecraft", "frozen_river")
@@ -115,16 +121,16 @@ public record Fishes()
 
     public static final FishProperties SNOWBALL = new FishProperties(
             Items.SNOWBALL,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             List.of(
-                    getBiomeResourceKey("minecraft", "frozen_river"),
-                    getBiomeResourceKey("minecraft", "frozen_peaks"),
-                    getBiomeResourceKey("minecraft", "frozen_ocean"),
-                    getBiomeResourceKey("minecraft", "deep_frozen_ocean"),
-                    getBiomeResourceKey("minecraft", "snowy_beach"),
-                    getBiomeResourceKey("minecraft", "snowy_plains"),
-                    getBiomeResourceKey("minecraft", "snowy_slopes"),
-                    getBiomeResourceKey("minecraft", "snowy_taiga")
+                    Biomes.FROZEN_RIVER,
+                    Biomes.FROZEN_PEAKS,
+                    Biomes.FROZEN_OCEAN,
+                    Biomes.DEEP_FROZEN_OCEAN,
+                    Biomes.SNOWY_BEACH,
+                    Biomes.SNOWY_PLAINS,
+                    Biomes.SNOWY_SLOPES,
+                    Biomes.SNOWY_TAIGA
             ),
             3
     )
@@ -135,7 +141,7 @@ public record Fishes()
 
     public static final FishProperties SALMON = new FishProperties(
             Items.SALMON,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             20
     )
@@ -145,7 +151,7 @@ public record Fishes()
 
     public static final FishProperties COD = new FishProperties(
             Items.COD,
-            List.of(getDimResourceKey("minecraft", "overworld")),
+            List.of(OVERWORLD),
             null,
             20
     )
@@ -155,14 +161,16 @@ public record Fishes()
 
     public static final FishProperties AXOLOTL_BUCKET = new FishProperties(
             Items.AXOLOTL_BUCKET,
-            List.of(getDimResourceKey("minecraft", "overworld")),
-            List.of(getBiomeResourceKey("minecraft", "lush_caves")),
+            List.of(OVERWORLD),
+            List.of(Biomes.LUSH_CAVES),
             0
     )
             .mustBeCaughtBellowY(50)
             .mustHaveCorrectBait()
             .correctBaitChanceAdded(Items.BUCKET, 10);
 
+
+    //endregion Overworld
 
     //
     //                 ,--.
@@ -172,23 +180,25 @@ public record Fishes()
     // `--`--' `----'  `--' `--'  `--`--'
     //
 
+    //region Asha
+
     public static final FishProperties STICK_ASHA = new FishProperties(
             Items.STICK,
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             10
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties GOLD_NUGGET = new FishProperties(
             Items.GOLD_NUGGET,
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             10
     ).skipsMinigame().doesNotConsumeBait();
 
     public static final FishProperties GOLD_INGOT = new FishProperties(
             Items.GOLD_INGOT,
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             20
     )
@@ -198,7 +208,7 @@ public record Fishes()
 
     public static final FishProperties BLUETALE = new FishProperties(
             ModItems.BLUETALE.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             5
     )
@@ -208,7 +218,7 @@ public record Fishes()
 
     public static final FishProperties REDTALE = new FishProperties(
             ModItems.REDTALE.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             5
     )
@@ -219,7 +229,7 @@ public record Fishes()
 
     public static final FishProperties RED_HERRING = new FishProperties(
             ModItems.RED_HERRING.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             5
     );
@@ -227,7 +237,7 @@ public record Fishes()
 
     public static final FishProperties AVIAN = new FishProperties(
             ModItems.AVIAN.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             2
     ).timeRestrictions(FishProperties.daytime.NIGHT);
@@ -235,7 +245,7 @@ public record Fishes()
 
     public static final FishProperties TWILIGHT_TROUT = new FishProperties(
             ModItems.TWILIGHT_TROUT.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             10
     ).timeRestrictions(FishProperties.daytime.MIDNIGHT);
@@ -243,7 +253,7 @@ public record Fishes()
 
     public static final FishProperties THUNDERCHARGED_EEL = new FishProperties(
             ModItems.THUNDERCHARGED_EEL.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             25
     )
@@ -253,7 +263,7 @@ public record Fishes()
 
     public static final FishProperties EEL = new FishProperties(
             ModItems.EEL.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             5
     )
@@ -262,7 +272,7 @@ public record Fishes()
 
     public static final FishProperties MEADOW_PERCH = new FishProperties(
             ModItems.MEADOW_PERCH.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             5
     )
@@ -271,7 +281,7 @@ public record Fishes()
 
     public static final FishProperties SOLAR_CARP = new FishProperties(
             ModItems.SOLAR_CARP.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             5
     )
@@ -281,35 +291,35 @@ public record Fishes()
 
     public static final FishProperties VERY_TINY_SHARK = new FishProperties(
             ModItems.VERY_TINY_SHARK.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             List.of(getBiomeResourceKey("asha_ocean")),
             2
     );
 
     public static final FishProperties AZURE_TUNA = new FishProperties(
             ModItems.AZURE_TUNA.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             List.of(getBiomeResourceKey("asha_ocean")),
             5
     );
 
     public static final FishProperties SCARLET_TUNA = new FishProperties(
             ModItems.AZURE_TUNA.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             List.of(getBiomeResourceKey("asha_ocean")),
             5
     );
 
     public static final FishProperties SAGE_TUNA = new FishProperties(
             ModItems.AZURE_TUNA.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             List.of(getBiomeResourceKey("asha_ocean")),
             5
     );
 
     public static final FishProperties KARPENJOE = new FishProperties(
             ModItems.KARPENJOE.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             1
     )
@@ -320,7 +330,7 @@ public record Fishes()
 
     public static final FishProperties STORMSAIL_RAY = new FishProperties(
             ModItems.STORMSAIL_RAY.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             List.of(getBiomeResourceKey("asha_ocean")),
             15
     )
@@ -328,12 +338,48 @@ public record Fishes()
 
     public static final FishProperties SUNFANG_EEL = new FishProperties(
             ModItems.SUNFANG_EEL.get(),
-            List.of(getDimResourceKey("asha")),
+            List.of(ASHA),
             null,
             5
     )
             .timeRestrictions(FishProperties.daytime.DAY)
             .mustBeClear();
+
+
+
+    public static final FishProperties FOREST_BREAM = new FishProperties(
+            ModItems.FOREST_BREAM.get(),
+            List.of(ASHA),
+            List.of(ASHA_FOREST, ASHA_JUNGLE, ASHA_FLOWER_FOREST, ASHA_MESA, ASHA_MOUNTAINS, ASHA_PLAINS),
+            5
+    );
+
+
+    public static final FishProperties JEWEL_KOI = new FishProperties(
+            ModItems.JEWEL_KOI.get(),
+            List.of(ASHA),
+            List.of(ASHA_FOREST, ASHA_JUNGLE, ASHA_FLOWER_FOREST, ASHA_MESA, ASHA_MOUNTAINS, ASHA_PLAINS, ASHA_RIVER),
+            5
+    )
+            .timeRestrictions(FishProperties.daytime.NIGHT);
+
+    public static final FishProperties SOLAR_KOI = new FishProperties(
+            ModItems.SOLAR_KOI.get(),
+            List.of(ASHA),
+            List.of(ASHA_FOREST, ASHA_JUNGLE, ASHA_FLOWER_FOREST, ASHA_MESA, ASHA_MOUNTAINS, ASHA_PLAINS, ASHA_RIVER),
+            5
+    )
+            .timeRestrictions(FishProperties.daytime.DAY);
+
+    public static final FishProperties LAKE_SNAPPER = new FishProperties(
+            ModItems.LAKE_SNAPPER.get(),
+            List.of(ASHA),
+            List.of(ASHA_FOREST, ASHA_JUNGLE, ASHA_FLOWER_FOREST, ASHA_MESA, ASHA_MOUNTAINS, ASHA_PLAINS),
+            5
+    );
+
+    //endregion Asha
+
 
     //
     //,--.
@@ -343,11 +389,12 @@ public record Fishes()
     //`--'  `----'  `--''--'  `--`--' `--`--`--'  `--`--' `--'
     //
 
+    //region Lunamar
 
 
     public static final FishProperties GLIMPUFF = new FishProperties(
             ModItems.GLIMPUFF.get(),
-            List.of(getDimResourceKey("lunamar")),
+            List.of(LaicapsKeys.LUNAMAR),
             null,
             5
     )
@@ -355,7 +402,7 @@ public record Fishes()
 
     public static final FishProperties BUBBLEMOUTH = new FishProperties(
             ModItems.BUBBLEMOUTH.get(),
-            List.of(getDimResourceKey("lunamar")),
+            List.of(LaicapsKeys.LUNAMAR),
             null,
             5
     )
@@ -363,7 +410,7 @@ public record Fishes()
 
     public static final FishProperties MOONRAY = new FishProperties(
             ModItems.MOONRAY.get(),
-            List.of(getDimResourceKey("lunamar")),
+            List.of(LaicapsKeys.LUNAMAR),
             null,
             5
     )
@@ -371,69 +418,36 @@ public record Fishes()
 
 
 
-    public static final FishProperties LUMEN_DRIFTER = new FishProperties(
-            ModItems.LUMEN_DRIFTER.get(),
-            List.of(getDimResourceKey("lunamar")),
-            null,
-            5
-    );
-
-    public static final FishProperties RADIANT_SEAHORSE = new FishProperties(
-            ModItems.RADIANT_SEAHORSE.get(),
-            List.of(getDimResourceKey("lunamar")),
+    public static final FishProperties CRIMSON_STARFISH = new FishProperties(
+            ModItems.CRIMSON_STARFISH.get(),
+            List.of(LaicapsKeys.LUNAMAR),
             null,
             5
     );
 
     public static final FishProperties VERDANT_SEAHORSE = new FishProperties(
             ModItems.VERDANT_SEAHORSE.get(),
-            List.of(getDimResourceKey("lunamar")),
+            List.of(LaicapsKeys.LUNAMAR),
+            null,
+            5
+    );
+
+    public static final FishProperties RADIANT_SEAHORSE = new FishProperties(
+            ModItems.RADIANT_SEAHORSE.get(),
+            List.of(LaicapsKeys.LUNAMAR),
             null,
             5
     );
 
     public static final FishProperties OCTO = new FishProperties(
             ModItems.OCTO.get(),
-            List.of(getDimResourceKey("lunamar")),
+            List.of(LaicapsKeys.LUNAMAR),
             null,
             5
     );
 
+    //endregion lunamar
 
-    public static final FishProperties RED_REEF_OCTO = new FishProperties(
-            ModItems.RED_REEF_OCTO.get(),
-            List.of(getDimResourceKey("lunamar")),
-            null,
-            5
-    );
-
-
-    public static final FishProperties CRIMSON_STARFISH = new FishProperties(
-            ModItems.CRIMSON_STARFISH.get(),
-            List.of(getDimResourceKey("lunamar")),
-            List.of(getBiomeResourceKey("asha_ocean")),
-            5
-    );
-
-
-
-
-
-    public static final FishProperties SUPER_SPECIAL_FISH = new FishProperties(//
-            Items.COD,                                      //item rewarded on fishing
-            List.of(getDimResourceKey("asha")),   //list of dimensions it can "spawn" in - null for all
-            null,                                           //list of biomes it can "spawn" in - null for all
-            2                                               //base chance
-    )
-            .correctBaitChanceAdded(ModItems.OAKHEART_BERRIES_BAIT.get(), 20)
-            .mustBeCaughtAboveY(100)
-            .mustBeCaughtBellowY(120)
-            .mustBeRaining()
-            .mustBeThundering()
-            .incorrectBaits(List.of(Items.ROTTEN_FLESH, Items.DIAMOND))
-            .mustHaveCorrectBait()
-            .doesNotConsumeBait()
-            .skipsMinigame();
 
     public static ResourceKey<Level> getDimResourceKey(String laicapsName)
     {
@@ -464,22 +478,15 @@ public record Fishes()
             TRIPWIRE_HOOK,
             ROTTEN_FLESH, BAMBOO,
             LILY_PAD, SALMON,
-            COD,AXOLOTL_BUCKET,
-            STICK_ASHA, GOLD_INGOT,
-            GOLD_NUGGET,
-            BLUETALE, REDTALE,
-            SEAGRASS, SNOWBALL,
-            GLIMPUFF, BUBBLEMOUTH,
-            SUNFANG_EEL, STORMSAIL_RAY,
-            MOONRAY, KARPENJOE,
-            AZURE_TUNA, SCARLET_TUNA, SAGE_TUNA,
-            VERY_TINY_SHARK,
-            SOLAR_CARP, MEADOW_PERCH,
-            EEL, THUNDERCHARGED_EEL,
-            RED_HERRING, AVIAN,
-            TWILIGHT_TROUT, CRIMSON_STARFISH,
-            LUMEN_DRIFTER, VERDANT_SEAHORSE, RADIANT_SEAHORSE,
-            OCTO, RED_REEF_OCTO
+            COD,AXOLOTL_BUCKET
+
+            //asha
+
+
+
+            //lunamar
+
+
 
 
 
