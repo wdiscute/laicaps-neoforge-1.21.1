@@ -13,8 +13,10 @@ import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthModel;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthRenderer;
 import com.wdiscute.laicaps.entity.fishing.FishingBobModel;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
+import com.wdiscute.laicaps.entity.glimpuff.GlimpuffGlowLayer;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffModel;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffRenderer;
+import com.wdiscute.laicaps.entity.magmaboss.magma.MagmaEntity;
 import com.wdiscute.laicaps.entity.magmaboss.magma.MagmaModel;
 import com.wdiscute.laicaps.entity.magmaboss.magma.MagmaRenderer;
 import com.wdiscute.laicaps.entity.magmaboss.rock.RockModel;
@@ -54,7 +56,11 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.ElytraLayer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -62,10 +68,14 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
@@ -75,10 +85,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.client.event.RenderFrameEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
@@ -131,15 +138,18 @@ public class Laicaps
         ModMenuTypes.register(modEventBus);
         ModFeatures.register(modEventBus);
         ModDataAttachments.register(modEventBus);
+        ModDataSerializers.register(modEventBus);
 
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
+
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
+
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
@@ -193,6 +203,9 @@ public class Laicaps
             event.registerSpriteSet(ModParticles.ROCKET_FIRE_SIMPLE_PARTICLES.get(), RocketFireSimpleParticles.Provider::new);
             event.registerSpriteSet(ModParticles.FISHING_NOTIFICATION.get(), FishingNotificationParticles.Provider::new);
             event.registerSpriteSet(ModParticles.FISHING_BITING.get(), FishingBitingParticles.Provider::new);
+
+            event.registerSpriteSet(ModParticles.ROCK_FALLING.get(), RockParticles.Provider::new);
+            event.registerSpriteSet(ModParticles.ROCK_EXPLOSION.get(), RockExplosionParticles.Provider::new);
         }
 
         @SubscribeEvent
@@ -256,6 +269,8 @@ public class Laicaps
             event.put(ModEntities.SWIBBLE.get(), SwibbleEntity.createAttributes().build());
             event.put(ModEntities.NIMBLE.get(), NimbleEntity.createAttributes().build());
             event.put(ModEntities.SNUFFLER.get(), SnufflerEntity.createAttributes().build());
+
+            event.put(ModEntities.MAGMA.get(), MagmaEntity.createAttributes().build());
         }
 
         @SubscribeEvent
@@ -347,7 +362,6 @@ public class Laicaps
             event.registerBlockEntityRenderer(ModBlockEntity.MOD_SIGN.get(), SignRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntity.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
         }
-
 
     }
 

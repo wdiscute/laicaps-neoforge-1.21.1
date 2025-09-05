@@ -39,7 +39,7 @@ public class MagmaRenderer extends EntityRenderer<MagmaEntity>
     @Override
     public ResourceLocation getTextureLocation(MagmaEntity rocketEntity)
     {
-        return Laicaps.rl("textures/entity/rocket/rocket.png");
+        return Laicaps.rl("textures/entity/magma/magma.png");
     }
 
 

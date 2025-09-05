@@ -5,10 +5,14 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.GlowSquid;
 
 public class RockRenderer extends EntityRenderer<RockEntity>
 {
@@ -35,8 +39,6 @@ public class RockRenderer extends EntityRenderer<RockEntity>
 
         poseStack.translate(0, -1, 0);
 
-
-
         this.model.setupAnim(rockEntity, 0.0F, 0.0F, rockEntity.tickCount + partialTicks, 0.0F, 0.0F);
 
         VertexConsumer vertexconsumer = buffer.getBuffer(this.model.renderType(this.getTextureLocation(rockEntity)));
@@ -44,6 +46,14 @@ public class RockRenderer extends EntityRenderer<RockEntity>
 
         poseStack.popPose();
     }
+
+    @Override
+    protected int getBlockLightLevel(RockEntity entity, BlockPos pos)
+    {
+        return 15;
+    }
+
+
 
     @Override
     public ResourceLocation getTextureLocation(RockEntity rocketEntity)

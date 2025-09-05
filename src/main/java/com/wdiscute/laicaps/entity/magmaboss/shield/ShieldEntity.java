@@ -29,6 +29,15 @@ public class ShieldEntity extends Projectile
     {
         super(ModEntities.SHIELD.get(), level);
 
+
+        this.xo = magma.position().x;
+        this.yo = magma.position().y;
+        this.zo = magma.position().z;
+
+        this.xOld = magma.position().x;
+        this.yOld = magma.position().y;
+        this.zOld = magma.position().z;
+
         this.moveTo(magma.position());
         this.setOwner(magma);
         this.entityData.set(ORDER, order);
