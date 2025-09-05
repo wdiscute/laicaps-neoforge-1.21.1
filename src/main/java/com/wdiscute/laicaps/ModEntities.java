@@ -83,8 +83,8 @@ public class ModEntities
                     b -> b.noSummon().noSave().sized(0.3f, 0.3f));
 
     public static final Supplier<EntityType<MagmaEntity>> MAGMA =
-            ENTITY_TYPES.register("magma", () -> EntityType.Builder.of(MagmaEntity::new, MobCategory.MISC)
-                    .sized(1f, 1f).build("magma"));
+            ENTITY_TYPES.register("magma", () -> EntityType.Builder.of(MagmaEntity::new, MobCategory.MONSTER)
+                    .sized(3f, 5f).build("magma"));
 
     public static final Supplier<EntityType<ShieldEntity>> SHIELD =
             registerKapiten("shield", ShieldEntity::new, MobCategory.MISC,
@@ -92,7 +92,7 @@ public class ModEntities
 
     public static final Supplier<EntityType<RockEntity>> ROCK =
             registerKapiten("rock", RockEntity::new, MobCategory.MISC,
-                    b -> b.noSave().canSpawnFarFromPlayer().sized(1.5f, 1.5f));
+                    b -> b.noSave().canSpawnFarFromPlayer().sized(1.5f, 0.5f));
 
 
     public static void register(IEventBus eventBus)

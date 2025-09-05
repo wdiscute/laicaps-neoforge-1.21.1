@@ -40,7 +40,12 @@ public class ShieldEntity extends Projectile
     {
         this.order = entityData.get(ORDER);
 
-        if(this.getOwner() == null) return;
+        if(this.getOwner() == null)
+        {
+            kill();
+            return;
+        }
+
 
         MagmaEntity magma = ((MagmaEntity) this.getOwner());
 
@@ -78,9 +83,9 @@ public class ShieldEntity extends Projectile
     @Override
     public boolean hurt(DamageSource source, float amount)
     {
-        System.out.println(level());
-        ((MagmaEntity) this.getOwner()).destroyShield(order);
-        this.kill();
+        if(((MagmaEntity) this.getOwner()).destroyShield(order))
+            this.kill();
+
         return super.hurt(source, amount);
     }
 

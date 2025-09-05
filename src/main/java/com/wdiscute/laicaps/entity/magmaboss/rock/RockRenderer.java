@@ -2,6 +2,7 @@ package com.wdiscute.laicaps.entity.magmaboss.rock;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -23,6 +24,20 @@ public class RockRenderer extends EntityRenderer<RockEntity>
     {
         super.render(rockEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         poseStack.pushPose();
+
+        rockEntity.xRot += 0.3f;
+        rockEntity.yRot += 1.5f;
+        rockEntity.zRot += 0.6f;
+
+        poseStack.mulPose(Axis.XP.rotationDegrees(rockEntity.xRot));
+        poseStack.mulPose(Axis.YP.rotationDegrees(rockEntity.yRot));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(rockEntity.zRot));
+
+        poseStack.translate(0, -1, 0);
+
+
+
+        this.model.setupAnim(rockEntity, 0.0F, 0.0F, rockEntity.tickCount + partialTicks, 0.0F, 0.0F);
 
         VertexConsumer vertexconsumer = buffer.getBuffer(this.model.renderType(this.getTextureLocation(rockEntity)));
         this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);

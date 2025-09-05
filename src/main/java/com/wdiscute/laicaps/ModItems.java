@@ -27,6 +27,8 @@ public class ModItems
     public static final DeferredItem<Item> JAR = ITEMS.register("jar", () -> new Item(new Item.Properties().stacksTo(16)));
 
 
+
+
     //
     //,------. ,--.  ,---.   ,--.  ,--. ,--. ,--.  ,--.  ,----.
     //|  .---' |  | '   .-'  |  '--'  | |  | |  ,'.|  | '  .-./
@@ -90,7 +92,7 @@ public class ModItems
     public static final DeferredItem<Item> VERDANT_SEAHORSE = ITEMS.register("verdant_seahorse", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
     public static final DeferredItem<Item> OCTO = ITEMS.register("octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
     public static final DeferredItem<Item> RED_REEF_OCTO = ITEMS.register("red_reef_octo", () -> new Item(new Item.Properties().food(ModFoodProperties.EEL)));
-    //todo add mobeffect that makes player unable to move because of being zapped
+    //todo add mobEffect that makes player unable to move because of being zapped
     public static final DeferredItem<Item> THUNDERCHARGED_EEL = ITEMS.register("thundercharged_eel", () -> new ThunderchargedEel(new Item.Properties().food(ModFoodProperties.THUNDERCHARGED_EEL)));
     public static final DeferredItem<Item> DHUFISH = ITEMS.register("dhufish", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> EMPEROR_ANGELFISH = ITEMS.register("emperor_angelfish", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));

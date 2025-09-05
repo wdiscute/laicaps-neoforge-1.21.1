@@ -39,6 +39,12 @@ public class ModParticles
     public static final Supplier<SimpleParticleType> FISHING_BITING =
             PARTICLE_TYPES.register("fishing_biting", () -> new SimpleParticleType(true));
 
+    public static final Supplier<SimpleParticleType> ROCK_FALLING =
+            PARTICLE_TYPES.register("rock_falling", () -> new SimpleParticleType(true));
+
+    public static final Supplier<SimpleParticleType> ROCK_EXPLOSION =
+            PARTICLE_TYPES.register("rock_explosion", () -> new SimpleParticleType(true));
+
     public static void register(IEventBus eventBus)
     {
         PARTICLE_TYPES.register(eventBus);

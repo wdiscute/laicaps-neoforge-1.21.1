@@ -28,7 +28,6 @@ public class ShieldRenderer extends EntityRenderer<ShieldEntity>
 
         if(rockEntity.getOwner() == null)
         {
-            System.out.println("no owner");
             poseStack.popPose();
             return;
         }
