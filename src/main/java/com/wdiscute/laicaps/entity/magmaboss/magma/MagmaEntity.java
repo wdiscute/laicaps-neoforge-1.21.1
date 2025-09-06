@@ -58,6 +58,11 @@ public class MagmaEntity extends Monster
         this.setHealth(200);
     }
 
+    @Override
+    public int getTeamColor()
+    {
+        return 16740912;
+    }
 
     @Override
     public void startSeenByPlayer(ServerPlayer serverPlayer)
