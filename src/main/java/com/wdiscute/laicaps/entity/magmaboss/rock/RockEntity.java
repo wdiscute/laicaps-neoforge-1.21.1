@@ -136,6 +136,10 @@ public class RockEntity extends ThrowableProjectile
                     null, position().x, position().y, position().z,
                     SoundEvents.LAVA_POP, SoundSource.BLOCKS);
 
+            sl.playSound(
+                    null, position().x, position().y, position().z,
+                    SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS);
+
         }
     }
 
