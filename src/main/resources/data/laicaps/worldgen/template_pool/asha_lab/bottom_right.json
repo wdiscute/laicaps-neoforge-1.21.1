@@ -1,0 +1,15 @@
+{
+  "name": "laicaps:asha_combat_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "laicaps:asha/asha_lab/bottom_right",
+        "processors": "laicaps:asha_symbols_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
