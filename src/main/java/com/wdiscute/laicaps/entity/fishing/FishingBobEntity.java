@@ -44,6 +44,7 @@ public class FishingBobEntity extends Projectile
 
     public final Player player;
     private FishHookState currentState;
+    public FishProperties fishProperties;
     public ItemStack stack;
     public ItemStack bobber;
     public ItemStack bait;
@@ -134,20 +135,22 @@ public class FishingBobEntity extends Projectile
 
         if (available.isEmpty()) available.add(Fishes.STICK);
 
-        FishProperties fp = available.get(random.nextInt(available.size()));
+        fishProperties = available.get(random.nextInt(available.size()));
 
 
-        if (bait.is(Items.BUCKET) && fp.bucket_fish != null)
+
+
+        if (bait.is(Items.BUCKET) && fishProperties.bucket_fish != null)
         {
-            stack = new ItemStack(fp.bucket_fish);
+            stack = new ItemStack(fishProperties.bucket_fish);
         }
         else
         {
-            stack = new ItemStack(fp.fish);
+            stack = new ItemStack(fishProperties.fish);
         }
 
 
-        if (fp.shouldSkipMinigame)
+        if (fishProperties.shouldSkipMinigame)
         {
             Entity itemFished = new ItemEntity(
                     level(),
@@ -204,7 +207,7 @@ public class FishingBobEntity extends Projectile
 
 
         //consume bait
-        if (fp.consumesBait)
+        if (fishProperties.consumesBait)
         {
             ItemStack bait = player.getMainHandItem().get(ModDataComponents.BAIT).copyOne();
 

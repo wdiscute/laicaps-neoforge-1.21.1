@@ -2,10 +2,12 @@ package com.wdiscute.laicaps;
 
 
 import com.wdiscute.laicaps.entity.boat.ModBoatEntity;
+import com.wdiscute.laicaps.fishing.FishingGuideItem;
 import com.wdiscute.laicaps.item.StarcatcherFishingRod;
 import com.wdiscute.laicaps.item.*;
 
 
+import com.wdiscute.laicaps.notebook.NotebookItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
@@ -36,6 +38,9 @@ public class ModItems
     //|  |`    |  | .-'    | |  |  |  | |  | |  | `   | '  '--'  |
     //`--'     `--' `-----'  `--'  `--' `--' `--'  `--'  `------'
     //
+
+    public static final DeferredItem<Item> FISHING_GUIDE = ITEMS.register("fishing_guide", () -> new FishingGuideItem(new Item.Properties()));
+
 
     public static final DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", () -> new Item(new Item.Properties()));
 
@@ -129,7 +134,7 @@ public class ModItems
 
     public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new
             NotebookItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1),
-            "menu_entries", "entry1", "menu"));
+            "menu_entries", "entry1"));
 
     public static final DeferredItem<Item> EMBER_ENTRY = ITEMS.register(
             "ember_entry", () ->

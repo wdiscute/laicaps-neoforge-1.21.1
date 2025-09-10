@@ -1,5 +1,5 @@
 {
-  "parent": "laicaps:land_on_overworld",
+  "parent": "laicaps:root",
   "criteria": {
     "entry1": {
       "trigger": "minecraft:impossible"

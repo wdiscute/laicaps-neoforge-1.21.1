@@ -1,5 +1,6 @@
-package com.wdiscute.laicaps.item;
+package com.wdiscute.laicaps.notebook;
 
+import com.wdiscute.laicaps.item.EntryUnlockableItem;
 import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.block.astronomytable.NotebookMenu;
 import com.wdiscute.laicaps.network.Payloads;
@@ -18,9 +19,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class NotebookItem extends EntryUnlockableItem implements MenuProvider
 {
-    public NotebookItem(Properties properties, String adv, String criteria, String planetForToast)
+    public NotebookItem(Properties properties, String adv, String criteria)
     {
-        super(properties, adv, criteria, planetForToast);
+        super(properties, adv, criteria);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class NotebookItem extends EntryUnlockableItem implements MenuProvider
         if(player instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry2"))
         {
             AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry2");
-            PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry2"));
+            PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("menu_entries", "entry2"));
         }
 
         return super.use(level, player, usedHand);

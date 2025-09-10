@@ -1,0 +1,132 @@
+{
+  "parent": "laicaps:fishing_rod",
+  "criteria": {
+    "laicaps_red_herring": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_avian": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_twilight_trout": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_eel": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_meadow_perch": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_solar_carp": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_very_tiny_shark": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_azure_tuna": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_scarlet_tuna": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_sage_tuna": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_karpenjoe": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_stormsail_ray": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_sunfang_eel": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_forest_bream": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_jewel_koi": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_solar_koi": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_lake_snapper": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_crimson_starfish": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_lumen_drifter": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_verdant_seahorse": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_octo": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_red_reef_octo": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_thundercharged_eel": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_dhufish": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_emperor_angelfish": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_vesani": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_ghost_octo": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_greater_octo": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_lesser_octo": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_coral_octo": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_drowned_cod": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_mad_ranga_danchovy": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_kimbarao": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_circus": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_ghost_fish": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_lord_of_death_and_doom": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_ghoti": {
+      "trigger": "minecraft:impossible"
+    },
+    "laicaps_skyyfish": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": "Catch all the fishes!",
+    "icon": {
+      "count": 1,
+      "id": "laicaps:octo"
+    },
+    "title": "Bookmarks",
+    "frame": "challenge",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "sends_telemetry_event": false
+}

@@ -78,7 +78,7 @@ public class TelescopeBlock extends HorizontalDirectionalBlock implements Entity
                 if (player instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry3"))
                 {
                     AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry3");
-                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry3"));
+                    PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("menu_entries", "entry3"));
                 }
 
             }

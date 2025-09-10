@@ -51,7 +51,7 @@ public class Tooltips
 
         if (s.contains("<rgb>"))
         {
-            return Component.literal("")
+            return Component.empty()
                     .append(s.substring(0, s.indexOf("<rgb>")))
                     .append(RGBEachLetter(Laicaps.hue, s.substring(s.indexOf("<rgb>") + 5, s.indexOf("</rgb>")), 0.01f))
                     .append(s.substring(s.indexOf("</rgb>") + 6));
@@ -61,7 +61,7 @@ public class Tooltips
             float min = Float.parseFloat("0." + s.substring(s.indexOf("<gradient") + 10, s.indexOf("<gradient") + 12));
             float max = Float.parseFloat("0." + s.substring(s.indexOf("</gradient") + 11, s.indexOf("</gradient") + 13));
 
-            return Component.literal("")
+            return Component.empty()
                     .append(s.substring(0, s.indexOf("<gradient")))
                     .append(Gradient(Laicaps.hue, s.substring(s.indexOf("<gradient") + 13, s.indexOf("</gradient")), min, max))
                     .append(s.substring(s.indexOf("</gradient") + 14));
@@ -76,7 +76,7 @@ public class Tooltips
 
     public static Component Gradient(float hue, String text, float min, float max)
     {
-        Component c = Component.literal("");
+        Component c = Component.empty();
 
         for (int i = 0; i < text.length(); i++)
         {
@@ -89,7 +89,7 @@ public class Tooltips
 
             Component l = Component.literal(s).withColor(color);
 
-            c = Component.literal("").append(c).append(l);
+            c = Component.empty().append(c).append(l);
         }
 
         return c;
@@ -110,7 +110,7 @@ public class Tooltips
     public static Component RGBEachLetter(float hue, String text, float speed)
     {
 
-        Component c = Component.literal("");
+        Component c = Component.empty();
 
         hue += 0.001f;
 
@@ -122,7 +122,7 @@ public class Tooltips
 
             Component l = Component.literal(s).withColor(color);
 
-            c = Component.literal("").append(c).append(l);
+            c = Component.empty().append(c).append(l);
         }
 
         return c;

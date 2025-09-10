@@ -119,7 +119,6 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
         //previous arrow
         if (x > 68 && x < 105 && y > 230 && y < 240)
         {
-
             if(currentEntry == 1 && currentPlanet == 0)
             {
                 return false;
@@ -166,9 +165,6 @@ public class NotebookScreen extends AbstractContainerScreen<NotebookMenu>
                 }
                 return false;
             }
-
-
-
 
         }
 

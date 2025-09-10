@@ -7,9 +7,12 @@ import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
 import com.wdiscute.laicaps.entity.rocket.RE;
 import com.wdiscute.laicaps.fishing.FishingMinigameScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
+import com.wdiscute.laicaps.util.AdvHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -22,7 +25,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import org.openjdk.nashorn.api.tree.ForInLoopTree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,8 +35,6 @@ import java.util.List;
 
 public class PayloadReceiver
 {
-    private static final Logger log = LoggerFactory.getLogger(PayloadReceiver.class);
-
     public static void receiveFishingCompletedServer(final Payloads.FishingCompletedPayload data, final IPayloadContext context)
     {
 
@@ -90,6 +93,26 @@ public class PayloadReceiver
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_NO, SoundSource.AMBIENT);
                     }
+
+                    if(context.player() instanceof ServerPlayer sp)
+                    {
+                        if(fbe.fishProperties.hasGuideEntry)
+                        {
+                            String name = BuiltInRegistries.ITEM.getKey(fbe.fishProperties.fish.asItem()).getNamespace() +
+                                    "_" + BuiltInRegistries.ITEM.getKey(fbe.fishProperties.fish.asItem()).getPath();
+
+                            if(!AdvHelper.hasAdvancementCriteria(sp, "fishes", name))
+                            {
+                                AdvHelper.awardAdvancementCriteria(sp, "fishes", name);
+
+                                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fbe.stack));
+                            }
+
+                        }
+
+
+                    }
+
                     fbe.kill();
                 }
             }
@@ -97,12 +120,19 @@ public class PayloadReceiver
 
         player.setData(ModDataAttachments.FISHING.get(), "");
 
+
     }
 
-    public static void receiveToast(final Payloads.ToastPayload data, final IPayloadContext context)
+    public static void receiveEntryUnlocked(final Payloads.EntryUnlockedPayload data, final IPayloadContext context)
     {
-        Laicaps.sendToast(data.menuName(), data.entryName());
+        Laicaps.entryUnlockedToast(data.menuName(), data.entryName());
     }
+
+    public static void receiveFishCaught(final Payloads.FishCaughtPayload data, final IPayloadContext context)
+    {
+        Laicaps.fishCaughtToast(data.is());
+    }
+
 
     public static void receiveFishingClient(final Payloads.FishingPayload data, final IPayloadContext context)
     {
@@ -113,7 +143,6 @@ public class PayloadReceiver
     public static void client(Payloads.FishingPayload data, IPayloadContext context)
     {
         Minecraft.getInstance().setScreen(new FishingMinigameScreen(
-                Component.literal("Fishing"),
                 data.stack(),
                 data.bobber(),
                 data.bait(),

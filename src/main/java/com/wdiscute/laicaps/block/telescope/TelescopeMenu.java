@@ -65,19 +65,19 @@ public class TelescopeMenu extends AbstractContainerMenu
                 case 1:
                     AdvHelper.awardAdvancement(sp, "ember_discovered");
                     AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
-                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember_entries", "entry1"));
+                    PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("ember_entries", "entry1"));
                     break;
 
                 case 2:
                     AdvHelper.awardAdvancement(sp, "asha_discovered");
                     AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry1");
-                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha_entries", "entry1"));
+                    PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("asha_entries", "entry1"));
                     break;
 
                 case 3:
                     AdvHelper.awardAdvancement(sp, "lunamar_discovered");
                     AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry1");
-                    PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar_entries", "entry1"));
+                    PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("lunamar_entries", "entry1"));
 
             }
         }

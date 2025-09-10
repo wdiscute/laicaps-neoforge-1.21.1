@@ -1,0 +1,563 @@
+package com.wdiscute.laicaps.fishing;
+
+import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.ModDataAttachments;
+import com.wdiscute.laicaps.util.Tooltips;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.ReportedException;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.font.FontSet;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class FishingGuideScreen extends Screen
+{
+
+    private static final ResourceLocation BACKGROUND = Laicaps.rl("textures/gui/fishing/guide/background.png");
+
+    private static final ResourceLocation ARROW_PREVIOUS = Laicaps.rl("textures/gui/notebook/arrow_previous.png");
+    private static final ResourceLocation ARROW_NEXT = Laicaps.rl("textures/gui/notebook/arrow_next.png");
+
+    int uiX;
+    int uiY;
+
+    int imageWidth;
+    int imageHeight;
+
+    int currentPaper;
+
+    ClientLevel level;
+    LocalPlayer player;
+
+    List<FishProperties> entries = new ArrayList<>();
+
+
+    @Override
+    protected void init()
+    {
+        super.init();
+
+        imageWidth = 512;
+        imageHeight = 256;
+
+        uiX = (width - imageWidth) / 2;
+        uiY = (height - imageHeight) / 2;
+
+        level = Minecraft.getInstance().level;
+        player = Minecraft.getInstance().player;
+
+        //get all FishProperties that have GuideEntry
+        for (FishProperties f : Fishes.entries) if (f.hasGuideEntry) entries.add(f);
+    }
+
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    {
+        InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(key))
+        {
+            this.onClose();
+            return true;
+        }
+
+        if (this.minecraft.options.keyDrop.isActiveAndMatches(key))
+        {
+            player.setData(ModDataAttachments.MANA, 1);
+            System.out.println("tried to set fishes caught data attachment");
+            return true;
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    {
+        double x = mouseX - uiX;
+        double y = mouseY - uiY;
+
+        //previous arrow
+        if (x > 68 && x < 105 && y > 230 && y < 240)
+        {
+            if (currentPaper != 0)
+            {
+                currentPaper--;
+                currentPaper--;
+            }
+        }
+
+
+        //next arrow
+        if (x > 420 && x < 440 && y > 230 && y < 240)
+        {
+            if (currentPaper < entries.size() - 2)
+            {
+                currentPaper++;
+                currentPaper++;
+            }
+        }
+
+
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    protected boolean shouldNarrateNavigation()
+    {
+        return false;
+    }
+
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+        renderImage(guiGraphics, BACKGROUND);
+
+        renderPage(guiGraphics, mouseX, mouseY, 70, 0);
+
+        renderPage(guiGraphics, mouseX, mouseY, 276, 1);
+
+        System.out.println(player.getData(ModDataAttachments.MANA));
+
+
+        //render arrows above everything else
+        if (currentPaper != 0)
+            guiGraphics.blit(ARROW_PREVIOUS, uiX + 65, uiY + 227, 0, 0, 23, 13, 23, 13);
+        if (currentPaper < entries.size() - 1)
+            guiGraphics.blit(ARROW_NEXT, uiX + 420, uiY + 227, 0, 0, 23, 13, 23, 13);
+    }
+
+
+    private void renderPage(GuiGraphics guiGraphics, int mouseX, int mouseY, int xOffset, int pageOffset)
+    {
+
+        double x = mouseX - uiX;
+        double y = mouseY - uiY;
+
+
+        if (entries.size() < currentPaper + pageOffset + 1) return;
+
+        ItemStack is = new ItemStack(entries.get(currentPaper + pageOffset).fish);
+        FishProperties fp = entries.get(currentPaper + pageOffset);
+
+        renderItem(is, uiX + xOffset + 10, uiY + 60);
+
+        guiGraphics.drawString(this.font, I18n.get(is.getDescriptionId()), uiX + xOffset + 45, uiY + 60, 0, false);
+        guiGraphics.drawString(this.font, I18n.get("gui.guide.not_caught"), uiX + xOffset + 45, uiY + 70, 0, false);
+
+
+        int yOffset = 110;
+
+        //planet
+        {
+            Component comp;
+
+            if (fp.dim == null)
+            {
+                comp = Component.translatable("gui.guide.no_restriction");
+            }
+            else
+            {
+                //if theres only one planet
+                if (fp.dim.size() == 1)
+                {
+                    //check if planet has a translation
+                    if (I18n.exists("gui.guide." + fp.dim.getFirst().location()))
+                    {
+                        comp = Tooltips.DecodeTranslationKeyTags("gui.guide." + fp.dim.getFirst().location());
+                    }
+                    else
+                    {
+                        comp = Component.literal(fp.dim.getFirst().location().toString());
+                    }
+                }
+                else
+                {
+                    comp = Component.translatable("gui.guide.hover");
+
+                    //show tooltip while hovering
+                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
+                    {
+                        List<Component> c = new ArrayList<>();
+
+                        for (int i = 0; i < fp.dim.size(); i++)
+                        {
+                            c.add(Component.literal(fp.dim.get(i).location().toString()));
+                        }
+                        guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
+                    }
+                }
+            }
+
+            if (fp.dim == null)
+            {
+                comp = comp.copy().withColor(0x00AA00);
+            }
+            else
+            {
+                if (fp.dim.contains(level.dimension()))
+                {
+                    comp = comp.copy().withColor(0x00AA00);
+                }
+                else
+                {
+                    comp = comp.copy().withColor(0xAA0000);
+                }
+            }
+
+
+            Component start = Component.translatable("gui.guide.biome");
+
+            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
+        }
+
+
+        //planet blacklist
+        {
+            if (!fp.dimensionBlackList.isEmpty())
+            {
+                guiGraphics.drawString(this.font, Component.literal("[!]").withColor(0xAA0000), uiX + xOffset + 160, uiY + yOffset, 0, false);
+
+                //show tooltip while hovering
+                if (x > xOffset + 155 && x < xOffset + 175 && y > yOffset - 4 && y < yOffset + 12)
+                {
+                    List<Component> c = new ArrayList<>();
+
+                    c.add(Component.translatable("gui.guide.blacklisted_dimensions"));
+
+                    for (int i = 0; i < fp.dimensionBlackList.size(); i++)
+                    {
+                        c.add(Component.literal(fp.dimensionBlackList.get(i).location().toString()));
+                    }
+                    guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
+                }
+            }
+        }
+
+        yOffset += 15;
+
+        //biome:
+        {
+            Component comp;
+
+            if (fp.biome == null)
+            {
+                comp = Component.translatable("gui.guide.no_restriction");
+            }
+            else
+            {
+                //if theres only one planet
+                if (fp.biome.size() == 1)
+                {
+                    //check if planet has a translation
+                    if (I18n.exists("gui.guide." + fp.biome.getFirst().location()))
+                    {
+                        comp = Tooltips.DecodeTranslationKeyTags("gui.guide." + fp.biome.getFirst().location());
+                    }
+                    else
+                    {
+                        comp = Component.literal(fp.biome.getFirst().location().toString());
+                    }
+                }
+                else
+                {
+                    comp = Component.translatable("gui.guide.hover");
+
+                    //show tooltip while hovering
+                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
+                    {
+                        List<Component> c = new ArrayList<>();
+
+                        for (int i = 0; i < fp.biome.size(); i++)
+                        {
+                            c.add(Component.literal(fp.biome.get(i).location().toString()));
+                        }
+                        guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
+                    }
+                }
+            }
+
+            if (fp.biome == null)
+            {
+                comp = comp.copy().withColor(0x00AA00);
+            }
+            else
+            {
+                if (fp.biome.contains(level.getBiome(Minecraft.getInstance().player.blockPosition()).getKey()))
+                {
+                    comp = comp.copy().withColor(0x00AA00);
+                }
+                else
+                {
+                    comp = comp.copy().withColor(0xAA0000);
+                }
+            }
+
+
+            Component start = Component.translatable("gui.guide.biome");
+
+            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
+        }
+
+        //biome blacklist
+        {
+            if (!fp.biomeBlacklist.isEmpty())
+            {
+                guiGraphics.drawString(this.font, Component.literal("[!]").withColor(0xAA0000), uiX + xOffset + 160, uiY + yOffset, 0, false);
+
+                //show tooltip while hovering
+                if (x > xOffset + 155 && x < xOffset + 175 && y > yOffset - 4 && y < yOffset + 12)
+                {
+                    List<Component> c = new ArrayList<>();
+
+                    c.add(Component.translatable("gui.guide.blacklisted_biomes"));
+
+                    for (int i = 0; i < fp.biomeBlacklist.size(); i++)
+                    {
+                        c.add(Component.literal(fp.biomeBlacklist.get(i).location().toString()));
+                    }
+                    guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
+                }
+            }
+        }
+
+
+        yOffset += 15;
+
+        if (fp.correctBait.equals(Items.AIR))
+        {
+            guiGraphics.drawString(this.font, I18n.get("gui.guide.bait") + I18n.get("gui.guide.no_restriction"), uiX + xOffset, uiY + yOffset, 0, false);
+        }
+        else
+        {
+            ItemStack stack = new ItemStack(fp.correctBait);
+            guiGraphics.drawString(this.font, I18n.get("gui.guide.bait") + I18n.get(stack.getDescriptionId()), uiX + xOffset, uiY + yOffset, 0, false);
+
+            if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
+            {
+                guiGraphics.renderTooltip(this.font, stack, mouseX, mouseY);
+            }
+        }
+
+        yOffset += 15;
+
+
+        //weather
+        {
+            Component comp;
+
+            if (!fp.mustBeClear && !fp.mustBeThundering && !fp.mustBeRaining)
+            {
+                comp = Component.translatable("gui.guide.no_restriction").withColor(0x00AA00);
+            }
+            else
+            {
+                comp = Component.translatable("gui.guide.no_restriction");
+                if (fp.mustBeRaining)
+                {
+                    if (level.getRainLevel(0) > 0.5)
+                        comp = Component.translatable("gui.guide.raining").withColor(0x00AA00);
+                    else
+                        comp = Component.translatable("gui.guide.raining").withColor(0xAA0000);
+                }
+
+                if (fp.mustBeThundering)
+                {
+                    if (level.getThunderLevel(0) > 0.5)
+                        comp = Component.translatable("gui.guide.thundering").withColor(0x00AA00);
+                    else
+                        comp = Component.translatable("gui.guide.thundering").withColor(0xAA0000);
+                }
+
+                if (fp.mustBeClear)
+                {
+                    if (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5)
+                        comp = Component.translatable("gui.guide.clear").withColor(0xAA0000);
+                    else
+                        comp = Component.translatable("gui.guide.clear").withColor(0x00AA00);
+                }
+            }
+
+            Component start = Component.translatable("gui.guide.weather");
+
+            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
+
+        }
+
+
+        yOffset += 15;
+
+
+        //daytime
+        {
+            Component comp;
+
+            if (fp.timeRestriction == FishProperties.daytime.ALL)
+            {
+                comp = Component.translatable("gui.guide.no_restriction").withColor(0x00AA00);
+            }
+            else
+            {
+                long time = level.getDayTime() % 24000;
+
+                comp = switch (fp.timeRestriction)
+                {
+                    case FishProperties.daytime.DAY:
+                        if (!(time > 23000 || time < 12700))
+                            yield Component.translatable("gui.guide.day").withColor(0xAA0000);
+                        else
+                            yield Component.translatable("gui.guide.day").withColor(0x00AA00);
+
+                    case FishProperties.daytime.NOON:
+                        if (!(time > 3500 && time < 8500))
+                            yield Component.translatable("gui.guide.noon").withColor(0xAA0000);
+                        else
+                            yield Component.translatable("gui.guide.noon").withColor(0x00AA00);
+
+                    case FishProperties.daytime.NIGHT:
+                        if (!(time < 23000 && time > 12700))
+                            yield Component.translatable("gui.guide.night").withColor(0xAA0000);
+                        else
+                            yield Component.translatable("gui.guide.night").withColor(0x00AA00);
+
+                    case FishProperties.daytime.MIDNIGHT:
+                        if (!(time > 16500 && time < 19500))
+                            yield Component.translatable("gui.guide.midnight").withColor(0xAA0000);
+                        else
+                            yield Component.translatable("gui.guide.midnight").withColor(0x00AA00);
+
+                    default:
+                        yield Component.empty();
+                };
+
+
+            }
+
+            Component start = Component.translatable("gui.guide.daytime");
+
+            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
+
+        }
+
+
+        yOffset += 15;
+
+        if (fp.mustBeCaughtAboveY != Integer.MIN_VALUE)
+        {
+            guiGraphics.drawString(this.font, I18n.get("gui.guide.min_elevation") + fp.mustBeCaughtAboveY, uiX + xOffset, uiY + yOffset, 0, false);
+            yOffset += 15;
+        }
+
+
+        if (fp.mustBeCaughtBellowY != Integer.MAX_VALUE)
+        {
+            guiGraphics.drawString(this.font, I18n.get("gui.guide.max_elevation") + fp.mustBeCaughtBellowY, uiX + xOffset, uiY + yOffset, 0, false);
+        }
+
+
+    }
+
+
+    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
+    {
+        guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
+    }
+
+    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl, int yOffset)
+    {
+        guiGraphics.blit(rl, uiX, uiY + yOffset, 0, 0, 512, 256, 512, 256);
+    }
+
+    @Override
+    public boolean isPauseScreen()
+    {
+        return false;
+    }
+
+
+    private void renderItem(ItemStack stack, int x, int y)
+    {
+        renderItem(stack, x, y, 3);
+    }
+
+    private void renderItem(ItemStack stack, int x, int y, int scale)
+    {
+
+        Level level = Minecraft.getInstance().level;
+        LivingEntity entity = Minecraft.getInstance().player;
+
+        if (!stack.isEmpty())
+        {
+            BakedModel bakedmodel = this.minecraft.getItemRenderer().getModel(stack, level, entity, 234234);
+
+            PoseStack pose = new PoseStack();
+
+            pose.pushPose();
+            pose.translate((float) (x + 8), (float) (y + 8), (float) (150));
+
+            try
+            {
+                pose.scale(16F * scale, -16F * scale, 16F * scale);
+                boolean flag = !bakedmodel.usesBlockLight();
+                if (flag)
+                {
+                    Lighting.setupForFlatItems();
+                }
+
+                this.minecraft.getItemRenderer().render(stack, ItemDisplayContext.GUI, false, pose, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+
+                //flush()
+                RenderSystem.disableDepthTest();
+                Minecraft.getInstance().renderBuffers().bufferSource().endBatch();
+                RenderSystem.enableDepthTest();
+
+
+                if (flag)
+                {
+                    Lighting.setupFor3DItems();
+                }
+            } catch (Throwable throwable)
+            {
+                CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering item");
+                CrashReportCategory crashreportcategory = crashreport.addCategory("Item being rendered");
+                crashreportcategory.setDetail("Item Type", () -> String.valueOf(stack.getItem()));
+                crashreportcategory.setDetail("Item Components", () -> String.valueOf(stack.getComponents()));
+                crashreportcategory.setDetail("Item Foil", () -> String.valueOf(stack.hasFoil()));
+                throw new ReportedException(crashreport);
+            }
+
+            pose.popPose();
+        }
+
+    }
+
+
+    protected FishingGuideScreen()
+    {
+        super(Component.empty());
+    }
+}

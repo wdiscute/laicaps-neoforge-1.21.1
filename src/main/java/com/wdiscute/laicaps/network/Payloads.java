@@ -53,17 +53,34 @@ public class Payloads
     }
 
 
-    public record ToastPayload(String menuName, String entryName) implements CustomPacketPayload
+    public record EntryUnlockedPayload(String menuName, String entryName) implements CustomPacketPayload
     {
 
-        public static final CustomPacketPayload.Type<ToastPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("send_toast"));
+        public static final CustomPacketPayload.Type<EntryUnlockedPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("entry_unlocked"));
 
-        public static final StreamCodec<ByteBuf, ToastPayload> STREAM_CODEC = StreamCodec.composite(
+        public static final StreamCodec<ByteBuf, EntryUnlockedPayload> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.STRING_UTF8,
-                ToastPayload::menuName,
+                EntryUnlockedPayload::menuName,
                 ByteBufCodecs.STRING_UTF8,
-                ToastPayload::entryName,
-                ToastPayload::new
+                EntryUnlockedPayload::entryName,
+                EntryUnlockedPayload::new
+        );
+
+        @Override
+        public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record FishCaughtPayload(ItemStack is) implements CustomPacketPayload
+    {
+
+        public static final CustomPacketPayload.Type<FishCaughtPayload> TYPE = new CustomPacketPayload.Type<>(Laicaps.rl("fish_caught"));
+
+        public static final StreamCodec<ByteBuf, FishCaughtPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.fromCodec(ItemStack.CODEC),
+                FishCaughtPayload::is,
+                FishCaughtPayload::new
         );
 
         @Override

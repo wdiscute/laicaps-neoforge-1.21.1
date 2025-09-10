@@ -16,29 +16,31 @@ public class FishProperties
 
     final public Item fish;
     public Item bucket_fish;
-    final private List<ResourceKey<Biome>> biome;
-    final private List<ResourceKey<Level>> dim;
-    final private int baseChance;
+    final public List<ResourceKey<Biome>> biome;
+    final public List<ResourceKey<Level>> dim;
+    final public int baseChance;
 
-    private List<Item> incorrectBaits = List.of();
+    public List<Item> incorrectBaits = List.of();
 
-    private List<ResourceKey<Biome>> biomeBlacklist = new ArrayList<>();
-    private List<ResourceKey<Dimension>> dimensionBlackList = new ArrayList<>();
-    private boolean mustBeClear = false;
-    private boolean mustBeRaining = false;
-    private boolean mustBeThundering = false;
-    private int mustBeCaughtBellowY = Integer.MAX_VALUE;
-    private int mustBeCaughtAboveY = Integer.MIN_VALUE;
-    private boolean mustHaveCorrectBait = false;
-    private boolean mustHaveCorrectBobber = false;
-    private Item correctBait = ItemStack.EMPTY.getItem();
-    private Item correctBobber = ItemStack.EMPTY.getItem();
-    private int correctBaitChanceAdded = 0;
-    private daytime timeRestriction = daytime.ALL;
+    public List<ResourceKey<Biome>> biomeBlacklist = new ArrayList<>();
+    public List<ResourceKey<Dimension>> dimensionBlackList = new ArrayList<>();
+    public boolean mustBeClear = false;
+    public boolean mustBeRaining = false;
+    public boolean mustBeThundering = false;
+    public int mustBeCaughtBellowY = Integer.MAX_VALUE;
+    public int mustBeCaughtAboveY = Integer.MIN_VALUE;
+    public boolean mustHaveCorrectBait = false;
+    public boolean mustHaveCorrectBobber = false;
+    public Item correctBait = ItemStack.EMPTY.getItem();
+    public Item correctBobber = ItemStack.EMPTY.getItem();
+    public int correctBaitChanceAdded = 0;
+    public daytime timeRestriction = daytime.ALL;
 
     public boolean consumesBait = true;
 
     public boolean shouldSkipMinigame = false;
+
+    public boolean hasGuideEntry = true;
 
 
     public enum daytime
@@ -62,6 +64,12 @@ public class FishProperties
     public FishProperties skipsMinigame()
     {
         this.shouldSkipMinigame = true;
+        return this;
+    }
+
+    public FishProperties hasGuideEntry(Boolean b)
+    {
+        this.hasGuideEntry = b;
         return this;
     }
 

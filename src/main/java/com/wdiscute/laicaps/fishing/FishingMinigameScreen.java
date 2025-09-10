@@ -27,7 +27,7 @@ public class
 FishingMinigameScreen extends Screen implements GuiEventListener
 {
 
-    private static final ResourceLocation TEXTURE = Laicaps.rl("textures/gui/fishing/fishing.png");
+    private static final ResourceLocation TEXTURE = Laicaps.rl("textures/gui/fishing/minigame.png");
 
     final ItemStack itemBeingFished;
     final ItemStack bobber;
@@ -68,9 +68,9 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     int treasureProgress = 0;
     int treasureProgressSmooth = 0;
 
-    public FishingMinigameScreen(Component title, ItemStack stack, ItemStack bobber, ItemStack bait, int dif)
+    public FishingMinigameScreen(ItemStack stack, ItemStack bobber, ItemStack bait, int dif)
     {
-        super(title);
+        super(Component.empty());
         this.itemBeingFished = stack;
         this.bobber = bobber;
         this.bait = bait;

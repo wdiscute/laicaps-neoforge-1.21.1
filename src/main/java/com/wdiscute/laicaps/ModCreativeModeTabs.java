@@ -41,6 +41,7 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.OVERWORLD_ENTRY.get());
 
                                 //fishing
+                                output.accept(ModItems.FISHING_GUIDE.get());
                                 output.accept(ModItems.STARCATCHER_FISHING_ROD.get());
                                 output.accept(ModItems.STARCATCHER_TWINE.get());
 

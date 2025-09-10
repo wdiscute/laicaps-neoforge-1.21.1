@@ -14,14 +14,12 @@ public class EntryUnlockableItem extends Item
 
     private final String adv;
     private final String criteria;
-    private final String planetForToast;
 
-    public EntryUnlockableItem(Properties properties, String adv, String criteria, String planetForToast)
+    public EntryUnlockableItem(Properties properties, String adv, String criteria)
     {
         super(properties);
         this.adv = adv;
         this.criteria = criteria;
-        this.planetForToast = planetForToast;
     }
 
     @Override
@@ -32,7 +30,7 @@ public class EntryUnlockableItem extends Item
             if(!AdvHelper.hasAdvancementCriteria(sp, adv, criteria))
             {
                 AdvHelper.awardAdvancementCriteria(sp, adv, criteria);
-                PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload(adv, criteria));
+                PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload(adv, criteria));
             }
         }
         super.inventoryTick(stack, level, entity, slotId, isSelected);

@@ -182,9 +182,9 @@ public class AdvHelper
 
     }
 
-    public static void awardAdvancementCriteria(ServerPlayer player, String achievementName, String criteria)
+    public static void awardAdvancementCriteria(ServerPlayer player, String advancementName, String criteria)
     {
-        awardAdvancementCriteria(player, Laicaps.MOD_ID, achievementName, criteria);
+        awardAdvancementCriteria(player, Laicaps.MOD_ID, advancementName, criteria);
     }
 
 

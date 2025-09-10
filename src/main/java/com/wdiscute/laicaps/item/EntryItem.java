@@ -58,7 +58,7 @@ public class EntryItem extends Item
                 sp.displayClientMessage(Component.literal("There are no entries left to unlock"), true);
                 return false;
             }
-            sp.displayClientMessage(Component.translatable("tooltip.laicaps.entry_page.unlock.before").append(Component.translatable("gui.astronomy_research_table." + planet + "." + criteria + ".name")).append(Component.translatable("tooltip.laicaps.entry_page.unlock.after")), true);
+            sp.displayClientMessage(Component.translatable("tooltip.laicaps.entry_page.unlock.before").append(Component.translatable("gui.notebook." + planet + "." + criteria + ".name")).append(Component.translatable("tooltip.laicaps.entry_page.unlock.after")), true);
             AdvHelper.awardAdvancementCriteria(sp, planet + "_entries", criteria);
             return true;
         }

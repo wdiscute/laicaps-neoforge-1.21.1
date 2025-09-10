@@ -740,15 +740,41 @@
 
 
 
+  "gui.guide.caught" : "Caught ",
+  "gui.guide.not_caught" : "Not Caught yet!",
+
+
+  "gui.guide.planet" : "Planet: ",
+  "gui.guide.biome" : "Biome: ",
+  "gui.guide.blacklisted_biomes" : "Blacklisted Biomes: ",
+  "gui.guide.blacklisted_dimensions" : "Blacklisted Dimensions: ",
+  "gui.guide.bait" : "Bait: ",
+  "gui.guide.weather" : "Weather: ",
+  "gui.guide.raining" : "Raining",
+  "gui.guide.thundering" : "Thundering",
+  "gui.guide.clear" : "Clear",
+  "gui.guide.daytime" : "Daytime: ",
+  "gui.guide.day" : "Day",
+  "gui.guide.noon" : "Noon",
+  "gui.guide.night" : "Night",
+  "gui.guide.midnight" : "Midnight",
+  "gui.guide.min_elevation" : "Minimum Elevation: ",
+  "gui.guide.max_elevation" : "Maximum Elevation: ",
+  "gui.guide.no_restriction" : "No Restriction",
+  "gui.guide.hover" : "[hover]",
+
+
+  "gui.guide.laicaps:ember" : "Ember",
+  "gui.guide.laicaps:asha" : "Asha",
+  "gui.guide.laicaps:lunamar" : "Lunamar",
+  "gui.guide.minecraft:overworld" : "Overworld",
 
 
 
 
-
-
+  "gui.laicaps.toast.fish_caught" : "New Fish Caught!",
 
   "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
-
 
 
   "gui.notebook.menu.missing" : "         §c§k!!!!!!!!!!!!!",

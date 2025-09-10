@@ -3,6 +3,7 @@ package com.wdiscute.laicaps;
 import com.mojang.serialization.Codec;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.attachment.IAttachmentSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
@@ -15,12 +16,13 @@ public class ModDataAttachments
             NeoForgeRegistries.ATTACHMENT_TYPES, Laicaps.MOD_ID);
 
 
-    // Serialization via map codec
     public static final Supplier<AttachmentType<String>> FISHING = ATTACHMENT_TYPES.register(
             "laicaps_fishing", () -> AttachmentType.builder(() -> "").serialize(Codec.unit("")).build()
     );
 
-
+    public static final Supplier<AttachmentType<Integer>> MANA = ATTACHMENT_TYPES.register(
+            "mana", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
 
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);

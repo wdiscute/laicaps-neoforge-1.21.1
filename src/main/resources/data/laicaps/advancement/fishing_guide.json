@@ -1,0 +1,28 @@
+{
+  "parent": "laicaps:fishing_rod",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:fishing_guide"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "description": "Catch all the fishes!",
+    "icon": {
+      "count": 1,
+      "id": "laicaps:fishing_guide"
+    },
+    "title": "Bookmarks",
+    "frame": "challenge",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "sends_telemetry_event": false
+}

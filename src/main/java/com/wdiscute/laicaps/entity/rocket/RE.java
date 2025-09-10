@@ -360,7 +360,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                     if (entity instanceof ServerPlayer sp && AdvHelper.hasAdvancementCriteria(sp, "ember_entries", "entry2"))
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "ember_entries", "entry2");
-                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("ember_entries", "entry2"));
+                        PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("ember_entries", "entry2"));
                     }
                 }
             }
@@ -374,7 +374,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                     if (entity instanceof ServerPlayer sp && AdvHelper.hasAdvancementCriteria(sp, "asha_entries", "entry2"))
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "asha_entries", "entry2");
-                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("asha_entries", "entry2"));
+                        PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("asha_entries", "entry2"));
                     }
                 }
             }
@@ -393,7 +393,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
                     if (entity instanceof ServerPlayer sp && AdvHelper.hasAdvancementCriteria(sp, "lunamar_entries", "entry2"))
                     {
                         AdvHelper.awardAdvancementCriteria(sp, "lunamar_entries", "entry2");
-                        PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("lunamar_entries", "entry2"));
+                        PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("lunamar_entries", "entry2"));
                     }
                 }
             }
@@ -436,7 +436,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
 
     private void sendLandingMessage()
     {
-        Component compTitle = Component.literal("");
+        Component compTitle = Component.empty();
         Component comp = null;
 
         //landing on
@@ -544,7 +544,7 @@ public class RE extends Entity implements PlayerRideable, MenuProvider
             if (e instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry4"))
             {
                 AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry4");
-                PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry4"));
+                PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("menu_entries", "entry4"));
             }
         }
 

@@ -48,7 +48,7 @@ public class RPCarpet extends RP
             if (player instanceof ServerPlayer sp && !AdvHelper.hasAdvancementCriteria(sp, "menu_entries", "entry5"))
             {
                 AdvHelper.awardAdvancementCriteria(sp, "menu_entries", "entry5");
-                PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload("menu_entries", "entry5"));
+                PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload("menu_entries", "entry5"));
             }
 
 

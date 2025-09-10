@@ -31,7 +31,7 @@ public class InventoryTickBlockItem extends BlockItem
             if(!AdvHelper.hasAdvancementCriteria(sp, adv, criteria))
             {
                 AdvHelper.awardAdvancementCriteria(sp, adv, criteria);
-                PacketDistributor.sendToPlayer(sp, new Payloads.ToastPayload(adv, criteria));
+                PacketDistributor.sendToPlayer(sp, new Payloads.EntryUnlockedPayload(adv, criteria));
 
             }
         }

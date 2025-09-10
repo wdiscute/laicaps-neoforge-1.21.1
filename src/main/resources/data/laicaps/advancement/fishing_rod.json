@@ -1,0 +1,28 @@
+{
+  "parent": "laicaps:root",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "laicaps:starcatcher_fishing_rod"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "description": "Craft a Starcatcher's Fishing Rod",
+    "icon": {
+      "count": 1,
+      "id": "laicaps:starcatcher_fishing_rod"
+    },
+    "title": "Bookmarks",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "sends_telemetry_event": false
+}

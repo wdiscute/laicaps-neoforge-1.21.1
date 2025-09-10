@@ -13,7 +13,6 @@ import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthModel;
 import com.wdiscute.laicaps.entity.bubblemouth.BubblemouthRenderer;
 import com.wdiscute.laicaps.entity.fishing.FishingBobModel;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffEntity;
-import com.wdiscute.laicaps.entity.glimpuff.GlimpuffGlowLayer;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffModel;
 import com.wdiscute.laicaps.entity.glimpuff.GlimpuffRenderer;
 import com.wdiscute.laicaps.entity.magmaboss.magma.MagmaEntity;
@@ -39,14 +38,15 @@ import com.wdiscute.laicaps.entity.swibble.SwibbleEntity;
 import com.wdiscute.laicaps.entity.swibble.SwibbleModel;
 import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
 import com.wdiscute.laicaps.entity.fishing.FishingBobRenderer;
+import com.wdiscute.laicaps.fishing.FishCaughtToast;
 import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.item.ModItemProperties;
 import com.wdiscute.laicaps.network.PayloadReceiver;
 import com.wdiscute.laicaps.network.Payloads;
-import com.wdiscute.laicaps.particle.*;
 import com.wdiscute.laicaps.notebook.EntryUnlockedToast;
+import com.wdiscute.laicaps.particle.*;
 import com.wdiscute.laicaps.util.Tooltips;
 import com.wdiscute.laicaps.worldgen.ModFeatures;
 import net.minecraft.client.Minecraft;
@@ -56,11 +56,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.ElytraLayer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -68,14 +64,11 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
@@ -115,9 +108,15 @@ public class Laicaps
 
 
     @OnlyIn(Dist.CLIENT)
-    public static void sendToast(String menuName, String entryName)
+    public static void entryUnlockedToast(String menuName, String entryName)
     {
         Minecraft.getInstance().getToasts().addToast(new EntryUnlockedToast(menuName, entryName));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void fishCaughtToast(ItemStack is)
+    {
+        Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(is));
     }
 
 
@@ -336,9 +335,15 @@ public class Laicaps
             );
 
             registrar.playToClient(
-                    Payloads.ToastPayload.TYPE,
-                    Payloads.ToastPayload.STREAM_CODEC,
-                    PayloadReceiver::receiveToast
+                    Payloads.EntryUnlockedPayload.TYPE,
+                    Payloads.EntryUnlockedPayload.STREAM_CODEC,
+                    PayloadReceiver::receiveEntryUnlocked
+            );
+
+            registrar.playToClient(
+                    Payloads.FishCaughtPayload.TYPE,
+                    Payloads.FishCaughtPayload.STREAM_CODEC,
+                    PayloadReceiver::receiveFishCaught
             );
 
             registrar.playToServer(
