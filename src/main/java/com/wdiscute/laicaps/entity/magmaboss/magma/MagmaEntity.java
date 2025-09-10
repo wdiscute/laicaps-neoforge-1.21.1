@@ -214,8 +214,6 @@ public class MagmaEntity extends Monster
     @Override
     public boolean hurt(DamageSource source, float amount)
     {
-        System.out.println(source + "   " + amount);
-
         if (amount > getMaxHealth() * 2)
         {
             this.setRemoved(RemovalReason.KILLED);

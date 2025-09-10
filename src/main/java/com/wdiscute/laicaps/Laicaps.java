@@ -43,8 +43,9 @@ import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
 import com.wdiscute.laicaps.item.ModItemProperties;
-import com.wdiscute.laicaps.network.PayloadReceiver;
-import com.wdiscute.laicaps.network.Payloads;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.ModDataAttachments;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.PayloadReceiver;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.Payloads;
 import com.wdiscute.laicaps.notebook.EntryUnlockedToast;
 import com.wdiscute.laicaps.particle.*;
 import com.wdiscute.laicaps.util.Tooltips;
@@ -145,7 +146,7 @@ public class Laicaps
 
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID)
     public static class ClientModEvents
     {
 
@@ -223,9 +224,17 @@ public class Laicaps
     }
 
 
-    @EventBusSubscriber(modid = Laicaps.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(modid = Laicaps.MOD_ID)
     public static class ModEventsBus
     {
+
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event)
+        {
+            event.registerBlockEntityRenderer(ModBlockEntity.MOD_SIGN.get(), SignRenderer::new);
+            event.registerBlockEntityRenderer(ModBlockEntity.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
+        }
+
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
         {
@@ -361,12 +370,7 @@ public class Laicaps
         }
 
 
-        @SubscribeEvent
-        public static void registerBER(EntityRenderersEvent.RegisterRenderers event)
-        {
-            event.registerBlockEntityRenderer(ModBlockEntity.MOD_SIGN.get(), SignRenderer::new);
-            event.registerBlockEntityRenderer(ModBlockEntity.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
-        }
+
 
     }
 

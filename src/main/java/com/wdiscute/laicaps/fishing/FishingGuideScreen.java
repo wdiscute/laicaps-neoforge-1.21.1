@@ -5,23 +5,24 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModDataAttachments;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.FishCaughtCounter;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.ModDataAttachments;
 import com.wdiscute.laicaps.util.Tooltips;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -83,13 +84,6 @@ public class FishingGuideScreen extends Screen
             return true;
         }
 
-        if (this.minecraft.options.keyDrop.isActiveAndMatches(key))
-        {
-            player.setData(ModDataAttachments.MANA, 1);
-            System.out.println("tried to set fishes caught data attachment");
-            return true;
-        }
-
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
@@ -104,6 +98,7 @@ public class FishingGuideScreen extends Screen
         {
             if (currentPaper != 0)
             {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 currentPaper--;
                 currentPaper--;
             }
@@ -115,6 +110,7 @@ public class FishingGuideScreen extends Screen
         {
             if (currentPaper < entries.size() - 2)
             {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 currentPaper++;
                 currentPaper++;
             }
@@ -141,9 +137,6 @@ public class FishingGuideScreen extends Screen
 
         renderPage(guiGraphics, mouseX, mouseY, 276, 1);
 
-        System.out.println(player.getData(ModDataAttachments.MANA));
-
-
         //render arrows above everything else
         if (currentPaper != 0)
             guiGraphics.blit(ARROW_PREVIOUS, uiX + 65, uiY + 227, 0, 0, 23, 13, 23, 13);
@@ -158,7 +151,6 @@ public class FishingGuideScreen extends Screen
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
-
         if (entries.size() < currentPaper + pageOffset + 1) return;
 
         ItemStack is = new ItemStack(entries.get(currentPaper + pageOffset).fish);
@@ -166,8 +158,31 @@ public class FishingGuideScreen extends Screen
 
         renderItem(is, uiX + xOffset + 10, uiY + 60);
 
-        guiGraphics.drawString(this.font, I18n.get(is.getDescriptionId()), uiX + xOffset + 45, uiY + 60, 0, false);
-        guiGraphics.drawString(this.font, I18n.get("gui.guide.not_caught"), uiX + xOffset + 45, uiY + 70, 0, false);
+        guiGraphics.drawString(this.font, Component.translatable(is.getDescriptionId()), uiX + xOffset + 50, uiY + 60, 0, false);
+
+        //count list and check
+        {
+
+            List<FishCaughtCounter> fishCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
+
+            boolean found = false;
+
+            for (FishCaughtCounter f : fishCounter)
+            {
+                if(BuiltInRegistries.ITEM.getKey(entries.get(currentPaper + pageOffset).fish).equals(f.getResourceLocation()))
+                {
+                    Component c = Component.literal("[" + f.getCount() + "]").withColor(0x00AA00);
+                    guiGraphics.drawString(this.font, Component.translatable("gui.guide.caught").append(c).withColor(0x00AA00), uiX + xOffset + 50, uiY + 70, 0, false);
+                    found = true;
+                    break;
+                }
+            }
+
+            if(!found)
+            {
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught").withColor(0xAA0000), uiX + xOffset + 50, uiY + 70, 0, false);
+            }
+        }
 
 
         int yOffset = 110;

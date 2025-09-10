@@ -1,6 +1,6 @@
 package com.wdiscute.laicaps.item;
 
-import com.wdiscute.laicaps.ModDataAttachments;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.ModDataAttachments;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
 import com.wdiscute.laicaps.fishing.FishingRodMenu;
@@ -37,10 +37,10 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
     {
-        if(entity instanceof ServerPlayer player)
+        if (entity instanceof ServerPlayer player)
         {
-            if(stack != player.getMainHandItem() && Boolean.TRUE.equals(stack.get(ModDataComponents.CAST))) stack.set(ModDataComponents.CAST, false);
-
+            if (stack != player.getMainHandItem() && Boolean.TRUE.equals(stack.get(ModDataComponents.CAST)))
+                stack.set(ModDataComponents.CAST, false);
         }
         super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
@@ -50,7 +50,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
 
         ItemStack itemstack = player.getItemInHand(hand).copy();
 
-        if(player.isCrouching() && hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD.get()))
+        if (player.isCrouching() && hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD.get()))
         {
             player.openMenu(this);
             return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
@@ -79,8 +79,9 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
 
                 Entity entity = new FishingBobEntity(level, player, bobber, bait);
                 level.addFreshEntity(entity);
-                if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
-                if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)) player.getMainHandItem().set(ModDataComponents.CAST, true);
+                if (!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
+                if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
+                    player.getMainHandItem().set(ModDataComponents.CAST, true);
             }
 
             player.awardStat(Stats.ITEM_USED.get(this));
@@ -97,8 +98,9 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
                     if (entity instanceof FishingBobEntity fbe && !fbe.checkBiting())
                     {
                         fbe.kill();
-                        if(!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), "");
-                        if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)) player.getMainHandItem().set(ModDataComponents.CAST, false);
+                        if (!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), "");
+                        if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
+                            player.getMainHandItem().set(ModDataComponents.CAST, false);
                     }
                 }
             }

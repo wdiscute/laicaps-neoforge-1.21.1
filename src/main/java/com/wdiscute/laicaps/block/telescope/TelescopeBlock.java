@@ -2,7 +2,7 @@ package com.wdiscute.laicaps.block.telescope;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.laicaps.*;
-import com.wdiscute.laicaps.network.Payloads;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.Payloads;
 import com.wdiscute.laicaps.util.AdvHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;

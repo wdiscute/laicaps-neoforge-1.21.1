@@ -1,4 +1,4 @@
-package com.wdiscute.laicaps.network;
+package com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp;
 
 import com.wdiscute.laicaps.Laicaps;
 import io.netty.buffer.ByteBuf;

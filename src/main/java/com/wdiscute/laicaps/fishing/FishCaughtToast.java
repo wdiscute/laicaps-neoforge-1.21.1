@@ -24,20 +24,23 @@ public class FishCaughtToast implements Toast
     private static final String gibberish = "§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     private int old;
     private static final Random r = new Random();
+    private final ItemStack is;
 
     public FishCaughtToast(ItemStack is)
     {
+        this.is = is;
         this.icon = Laicaps.rl("");
         this.title = Component.translatable("gui.laicaps.toast.fish_caught");
         this.description =  is.getHoverName().getString();
-
     }
 
     public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)
     {
 
         guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
-        guiGraphics.blit(icon, 6, 6, 0, 0, 20, 20, 20, 20);
+        //guiGraphics.blit(icon, 6, 6, 0, 0, 20, 20, 20, 20);
+
+        guiGraphics.renderItem(is, 8, 8);
 
         guiGraphics.drawString(toastComponent.getMinecraft().font, this.title, 30, 7, 16746751, false);
 

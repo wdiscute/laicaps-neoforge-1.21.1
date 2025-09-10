@@ -3,7 +3,7 @@ package com.wdiscute.laicaps.notebook;
 import com.wdiscute.laicaps.item.EntryUnlockableItem;
 import com.wdiscute.laicaps.util.AdvHelper;
 import com.wdiscute.laicaps.block.astronomytable.NotebookMenu;
-import com.wdiscute.laicaps.network.Payloads;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.Payloads;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;

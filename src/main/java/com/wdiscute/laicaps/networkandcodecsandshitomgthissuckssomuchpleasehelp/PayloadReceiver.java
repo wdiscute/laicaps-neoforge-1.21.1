@@ -1,16 +1,15 @@
-package com.wdiscute.laicaps.network;
+package com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp;
 
 import com.wdiscute.laicaps.Laicaps;
-import com.wdiscute.laicaps.ModDataAttachments;
 import com.wdiscute.laicaps.ModItems;
 import com.wdiscute.laicaps.entity.fishing.FishingBobEntity;
 import com.wdiscute.laicaps.entity.rocket.RE;
 import com.wdiscute.laicaps.fishing.FishingMinigameScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
-import com.wdiscute.laicaps.util.AdvHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -21,16 +20,15 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SuspiciousStewItem;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import org.openjdk.nashorn.api.tree.ForInLoopTree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PayloadReceiver
@@ -51,11 +49,11 @@ public class PayloadReceiver
                 {
                     if (data.time() != -1)
                     {
-                        if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
+                        if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
                             player.getMainHandItem().set(ModDataComponents.CAST, false);
 
 
-                        if(fbe.stack.is(ModItems.THUNDERCHARGED_EEL))
+                        if (fbe.stack.is(ModItems.THUNDERCHARGED_EEL))
                         {
                             LightningBolt strike = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
                             strike.setPos(fbe.position());
@@ -87,6 +85,44 @@ public class PayloadReceiver
 
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
+
+
+                        //award fish counter
+                        List<FishCaughtCounter> list = player.getData(ModDataAttachments.FISHES_CAUGHT);
+                        ResourceLocation rl = BuiltInRegistries.ITEM.getKey(fbe.stack.getItem());
+
+                        List<FishCaughtCounter> newlist = new ArrayList<>();
+
+                        boolean found = false;
+
+                        for (FishCaughtCounter f : list)
+                        {
+                            newlist.add(f);
+
+                            if (rl.equals(f.getResourceLocation()))
+                            {
+                                found = true;
+
+                                FishCaughtCounter plusOne = new FishCaughtCounter(rl, f.getCount() + 1);
+                                newlist.remove(f);
+                                newlist.add(plusOne);
+                            }
+                        }
+
+                        if(!found)
+                        {
+                            newlist.add(new FishCaughtCounter(rl, 1));
+
+                            if(player instanceof ServerPlayer sp)
+                            {
+                                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(new ItemStack(fbe.stack.getItem())));
+                            }
+                        }
+
+                        player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
+
+
+
                     }
                     else
                     {
@@ -94,24 +130,7 @@ public class PayloadReceiver
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_NO, SoundSource.AMBIENT);
                     }
 
-                    if(context.player() instanceof ServerPlayer sp)
-                    {
-                        if(fbe.fishProperties.hasGuideEntry)
-                        {
-                            String name = BuiltInRegistries.ITEM.getKey(fbe.fishProperties.fish.asItem()).getNamespace() +
-                                    "_" + BuiltInRegistries.ITEM.getKey(fbe.fishProperties.fish.asItem()).getPath();
 
-                            if(!AdvHelper.hasAdvancementCriteria(sp, "fishes", name))
-                            {
-                                AdvHelper.awardAdvancementCriteria(sp, "fishes", name);
-
-                                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fbe.stack));
-                            }
-
-                        }
-
-
-                    }
 
                     fbe.kill();
                 }
@@ -153,19 +172,20 @@ public class PayloadReceiver
     public static void receiveChangePlanetSelected(final Payloads.ChangePlanetSelected data, final IPayloadContext context)
     {
 
-        List<Entity> entites =  context.player().level().getEntities(null,
+        List<Entity> entites = context.player().level().getEntities(
+                null,
                 new AABB(-10, -10, -10, 10, 10, 10).move(context.player().position()));
 
-        for(Entity e : entites)
+        for (Entity e : entites)
         {
-            if(e instanceof RE re && re.getStringUUID().equals(data.entityUUID()) && re.getEntityData().get(RE.STATE) == 0)
+            if (e instanceof RE re && re.getStringUUID().equals(data.entityUUID()) && re.getEntityData().get(RE.STATE) == 0)
             {
                 ItemStack is = ItemStack.EMPTY;
 
-                if(data.planet().equals("ember")) is = new ItemStack(ModItems.EMBER.get());
-                if(data.planet().equals("asha")) is = new ItemStack(ModItems.ASHA.get());
-                if(data.planet().equals("overworld")) is = new ItemStack(ModItems.OVERWORLD.get());
-                if(data.planet().equals("lunamar")) is = new ItemStack(ModItems.LUNAMAR.get());
+                if (data.planet().equals("ember")) is = new ItemStack(ModItems.EMBER.get());
+                if (data.planet().equals("asha")) is = new ItemStack(ModItems.ASHA.get());
+                if (data.planet().equals("overworld")) is = new ItemStack(ModItems.OVERWORLD.get());
+                if (data.planet().equals("lunamar")) is = new ItemStack(ModItems.LUNAMAR.get());
 
                 re.getEntityData().set(RE.PLANET_SELECTED, is);
                 break;
@@ -178,14 +198,14 @@ public class PayloadReceiver
     public static void receiveBluePrintCompleted(final Payloads.BluePrintCompletedPayload data, final IPayloadContext context)
     {
 
-        if(context.player().getMainHandItem().is(ModItems.SPACESHIP_BLUEPRINT_SKETCH))
+        if (context.player().getMainHandItem().is(ModItems.SPACESHIP_BLUEPRINT_SKETCH))
         {
             context.player().getMainHandItem().shrink(1);
             context.player().addItem(new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get()));
             return;
         }
 
-        if(context.player().getOffhandItem().is(ModItems.SPACESHIP_BLUEPRINT_SKETCH))
+        if (context.player().getOffhandItem().is(ModItems.SPACESHIP_BLUEPRINT_SKETCH))
         {
             context.player().getOffhandItem().shrink(1);
             context.player().addItem(new ItemStack(ModItems.SPACESHIP_BLUEPRINT.get()));

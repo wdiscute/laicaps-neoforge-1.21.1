@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.laicaps.Laicaps;
 import com.wdiscute.laicaps.ModItems;
-import com.wdiscute.laicaps.network.Payloads;
+import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.Payloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -463,8 +463,6 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
         if (completionSmooth < 0)
         {
-            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1));
-
             this.onClose();
         }
 
