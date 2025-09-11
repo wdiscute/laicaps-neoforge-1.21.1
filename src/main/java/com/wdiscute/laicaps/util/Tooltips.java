@@ -4,6 +4,7 @@ import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
@@ -76,7 +77,7 @@ public class Tooltips
 
     public static Component Gradient(float hue, String text, float min, float max)
     {
-        Component c = Component.empty();
+        MutableComponent c = Component.empty();
 
         for (int i = 0; i < text.length(); i++)
         {
@@ -89,7 +90,7 @@ public class Tooltips
 
             Component l = Component.literal(s).withColor(color);
 
-            c = Component.empty().append(c).append(l);
+            c.append(l);
         }
 
         return c;
@@ -97,12 +98,7 @@ public class Tooltips
 
     public static float mapHuePingPong(float h, float min, float max)
     {
-        h = h % 1;
-
-        // Triangle wave between 0 and 1
-        float t = Math.abs(2f * h - 1f);
-
-        // Scale to [min,max]
+        float t = Math.abs(2f * (h % 1) - 1f);
         return min + t * (max - min);
     }
 
@@ -110,7 +106,7 @@ public class Tooltips
     public static Component RGBEachLetter(float hue, String text, float speed)
     {
 
-        Component c = Component.empty();
+        MutableComponent c = Component.empty();
 
         hue += 0.001f;
 
@@ -122,7 +118,7 @@ public class Tooltips
 
             Component l = Component.literal(s).withColor(color);
 
-            c = Component.empty().append(c).append(l);
+            c.append(l);
         }
 
         return c;
