@@ -240,6 +240,10 @@ public class FishingBobEntity extends Projectile
         else
         {
             player.setData(ModDataAttachments.FISHING.get(), "");
+
+            if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
+                player.getMainHandItem().set(ModDataComponents.CAST, false);
+
             this.discard();
             return true;
         }
