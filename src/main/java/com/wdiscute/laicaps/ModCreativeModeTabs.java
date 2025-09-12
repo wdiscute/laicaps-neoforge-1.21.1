@@ -24,13 +24,13 @@ public class ModCreativeModeTabs
 
     public static final Supplier<CreativeModeTab> LAICAPS =
             CREATIVE_MODE_TABS.register(
-                    "laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ASTRONOMY_NOTEBOOK.get()))
+                    "laicaps", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.NOTEBOOK.get()))
                             .title(Component.translatable("creativetab.laicaps.laicaps"))
                             .displayItems((itemDisplayParameters, output) ->
                             {
 
                                 //telescope and astronomy stuff
-                                output.accept(ModItems.ASTRONOMY_NOTEBOOK.get());
+                                output.accept(ModItems.NOTEBOOK.get());
                                 output.accept(ModBlocks.TELESCOPE_STAND.get());
                                 output.accept(ModBlocks.TELESCOPE.get());
 
