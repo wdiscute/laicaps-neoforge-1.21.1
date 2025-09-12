@@ -66,6 +66,8 @@ import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -124,7 +126,6 @@ public class Laicaps
     public Laicaps(IEventBus modEventBus, ModContainer modContainer)
     {
         NeoForge.EVENT_BUS.addListener(Tooltips::modifyItemTooltip);
-        NeoForge.EVENT_BUS.addListener(Laicaps::renderFrame);
         //NeoForge.EVENT_BUS.addListener(EntriesChecks::itemPickupEvent);
 
         ModCreativeModeTabs.register(modEventBus);
@@ -140,15 +141,21 @@ public class Laicaps
         ModDataAttachments.register(modEventBus);
         ModDataSerializers.register(modEventBus);
 
-
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
+
+
+
     @EventBusSubscriber(modid = MOD_ID)
-    public static class ClientModEvents
+    public static class ModEvents
     {
+        @SubscribeEvent
+        public static void renderFrame(RenderFrameEvent.Post event)
+        {
+            Laicaps.hue += 0.001f;
+        }
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
@@ -157,6 +164,7 @@ public class Laicaps
             Sheets.addWoodType(ModWoodTypes.OAKHEART);
 
             ModItemProperties.addCustomItemProperties();
+
 
             event.enqueueWork(() ->
             {
@@ -194,6 +202,35 @@ public class Laicaps
         }
 
         @SubscribeEvent
+        public static void FishSpotterLayer(RegisterGuiLayersEvent event)
+        {
+            event.registerAboveAll(
+                    Laicaps.rl("test_layer"), (guiGraphics, deltaTracker) ->
+                    {
+
+                        ItemStack hand = Minecraft.getInstance().player.getMainHandItem();
+
+                        ItemContainerContents icc = hand.get(ModDataComponents.BOBBER);
+
+                        if(icc != null) {
+
+                            ItemStack is = icc.copyOne();
+                            if(is.is(ModItems.FISH_SPOTTER))
+                            {
+
+                                guiGraphics.renderItem(new ItemStack(Items.DIAMOND), 0, 0);
+
+
+                            }
+                        }
+
+
+
+
+                    });
+        }
+
+        @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event)
         {
             event.registerSpriteSet(ModParticles.CHASE_PUZZLE_PARTICLES.get(), ChasePuzzleParticles.Provider::new);
@@ -216,17 +253,6 @@ public class Laicaps
             event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
             event.register(ModMenuTypes.REFUEL_MENU.get(), RefuelScreen::new);
         }
-    }
-
-    public static void renderFrame(RenderFrameEvent.Post event)
-    {
-        Laicaps.hue += 0.001f;
-    }
-
-
-    @EventBusSubscriber(modid = Laicaps.MOD_ID)
-    public static class ModEventsBus
-    {
 
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event)
@@ -312,12 +338,12 @@ public class Laicaps
             event.register(
                     ModEntities.NIMBLE.get(), SpawnPlacementTypes.ON_GROUND,
                     Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                    ModEventsBus::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                    ModEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
             event.register(
                     ModEntities.SNUFFLER.get(), SpawnPlacementTypes.ON_GROUND,
                     Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                    ModEventsBus::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                    ModEvents::checkNimbleSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
 
         }
 
@@ -368,9 +394,6 @@ public class Laicaps
             );
 
         }
-
-
-
 
     }
 
