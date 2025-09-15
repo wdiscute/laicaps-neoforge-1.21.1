@@ -1,9 +1,11 @@
 package com.wdiscute.laicaps.item;
 
+import com.wdiscute.laicaps.LaicapsKeys;
 import com.wdiscute.laicaps.ModSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -18,15 +20,25 @@ public class ChiselItem extends Item
         super(pProperties);
     }
 
-    @Override
-    public InteractionResult useOn(UseOnContext pContext)
-    {
-        Level level = pContext.getLevel();
 
-        if (!level.isClientSide() && pContext.getPlayer().isCrouching())
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
+    {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
+    }
+
+    @Override
+    public InteractionResult useOn(UseOnContext context)
+    {
+        if(context.getLevel().isClientSide);
+
+
+        Level level = context.getLevel();
+
+        if (!level.isClientSide() && context.getPlayer().isCrouching())
         {
-            pContext.getItemInHand().set(ModDataComponents.COORDINATES.get(), pContext.getClickedPos());
-            level.playSound(null, pContext.getClickedPos(), ModSounds.CHISEL_USE.get(), SoundSource.BLOCKS);
+            context.getItemInHand().set(ModDataComponents.COORDINATES.get(), context.getClickedPos());
+            level.playSound(null, context.getClickedPos(), ModSounds.CHISEL_USE.get(), SoundSource.BLOCKS);
             return InteractionResult.SUCCESS;
         }
 

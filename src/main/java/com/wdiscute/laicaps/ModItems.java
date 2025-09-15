@@ -62,6 +62,7 @@ public class ModItems
     public static final DeferredItem<Item> BAIT_SAVING_BOBBER = ITEMS.register("bait_saving_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> DIFFICULTY_BOBBER = ITEMS.register("difficulty_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> FAST_BITING_BOBBER = ITEMS.register("fast_biting_bobber", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> FISH_SPOTTER = ITEMS.register("fish_spotter", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties()));
 
@@ -132,7 +133,7 @@ public class ModItems
     public static final DeferredItem<Item> SPACESHIP_BLUEPRINT_SKETCH = ITEMS.register("spaceship_blueprint_sketch", () ->
             new SpaceshipSketchItem(new Item.Properties().rarity(Rarity.EPIC)));
 
-    public static final DeferredItem<Item> ASTRONOMY_NOTEBOOK = ITEMS.register("astronomy_notebook", () -> new
+    public static final DeferredItem<Item> NOTEBOOK = ITEMS.register("notebook", () -> new
             NotebookItem(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1),
             "menu_entries", "entry1"));
 
