@@ -2,7 +2,6 @@ package com.wdiscute.laicaps.entity.fishing;
 
 import com.wdiscute.laicaps.*;
 import com.wdiscute.laicaps.fishing.FishProperties;
-import com.wdiscute.laicaps.fishing.Fishes;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.ModDataAttachments;
 import com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp.Payloads;
@@ -123,35 +122,33 @@ public class FishingBobEntity extends Projectile
         bait = player.getMainHandItem().getComponents().get(ModDataComponents.BAIT.get()).copyOne();
 
 
-        for (FishProperties fp : Fishes.entries)
+        for (FishProperties fp : level().registryAccess().registryOrThrow(LaicapsKeys.FISH_REGISTRY))
         {
-            int chance = fp.getChance(level(), blockPosition(), bobber, bait);
+            //int chance = fp.getChance(level(), blockPosition(), bobber, bait);
 
-            for (int i = 0; i < chance; i++)
+            for (int i = 0; i < 2; i++)
             {
                 available.add(fp);
             }
 
         }
 
-        if (available.isEmpty()) available.add(Fishes.STICK);
-
         fishProperties = available.get(random.nextInt(available.size()));
 
 
 
 
-        if (bait.is(Items.BUCKET) && fishProperties.bucket_fish != null)
-        {
-            stack = new ItemStack(fishProperties.bucket_fish);
-        }
-        else
-        {
-            stack = new ItemStack(fishProperties.fish);
-        }
+//        if (bait.is(Items.BUCKET) && fishProperties.bucketFish != null)
+//        {
+//            stack = new ItemStack(fishProperties.bucketFish);
+//        }
+//        else
+//        {
+//            stack = new ItemStack(fishProperties.fish);
+//        }
 
 
-        if (fishProperties.shouldSkipMinigame)
+        if (fishProperties.skipMinigame())
         {
             Entity itemFished = new ItemEntity(
                     level(),
@@ -208,7 +205,7 @@ public class FishingBobEntity extends Projectile
 
 
         //consume bait
-        if (fishProperties.consumesBait)
+        if (fishProperties.br().consumesBait())
         {
             ItemStack bait = player.getMainHandItem().get(ModDataComponents.BAIT).copyOne();
 

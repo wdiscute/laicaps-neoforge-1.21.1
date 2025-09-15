@@ -39,6 +39,7 @@ import com.wdiscute.laicaps.entity.swibble.SwibbleModel;
 import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
 import com.wdiscute.laicaps.entity.fishing.FishingBobRenderer;
 import com.wdiscute.laicaps.fishing.FishCaughtToast;
+import com.wdiscute.laicaps.fishing.FishProperties;
 import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
@@ -87,6 +88,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import org.slf4j.Logger;
 
 @Mod(Laicaps.MOD_ID)
@@ -145,18 +147,28 @@ public class Laicaps
     }
 
 
-
-
-
     @EventBusSubscriber(modid = MOD_ID)
     public static class ModEvents
     {
+
+        @SubscribeEvent
+        public static void addRegistry(DataPackRegistryEvent.NewRegistry event)
+        {
+            event.dataPackRegistry(
+                    LaicapsKeys.FISH_REGISTRY,
+                    FishProperties.RECORD_CODEC,
+                    FishProperties.RECORD_CODEC,
+                    builder -> builder.maxId(256));
+        }
+
+        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void renderFrame(RenderFrameEvent.Post event)
         {
             Laicaps.hue += 0.001f;
         }
 
+        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
@@ -201,6 +213,7 @@ public class Laicaps
 
         }
 
+        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void FishSpotterLayer(RegisterGuiLayersEvent event)
         {
@@ -212,24 +225,20 @@ public class Laicaps
 
                         ItemContainerContents icc = hand.get(ModDataComponents.BOBBER);
 
-                        if(icc != null) {
-
+                        if (icc != null)
+                        {
                             ItemStack is = icc.copyOne();
-                            if(is.is(ModItems.FISH_SPOTTER))
+                            if (is.is(ModItems.FISH_SPOTTER))
                             {
 
                                 guiGraphics.renderItem(new ItemStack(Items.DIAMOND), 0, 0);
-
-
                             }
                         }
-
-
-
 
                     });
         }
 
+        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event)
         {
@@ -245,6 +254,7 @@ public class Laicaps
             event.registerSpriteSet(ModParticles.ROCK_EXPLOSION.get(), RockExplosionParticles.Provider::new);
         }
 
+        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event)
         {
@@ -254,6 +264,7 @@ public class Laicaps
             event.register(ModMenuTypes.REFUEL_MENU.get(), RefuelScreen::new);
         }
 
+        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void registerBER(EntityRenderersEvent.RegisterRenderers event)
         {
@@ -261,6 +272,7 @@ public class Laicaps
             event.registerBlockEntityRenderer(ModBlockEntity.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
         }
 
+        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
         {

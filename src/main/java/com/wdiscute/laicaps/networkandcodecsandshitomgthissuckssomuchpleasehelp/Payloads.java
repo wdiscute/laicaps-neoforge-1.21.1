@@ -1,6 +1,7 @@
 package com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp;
 
 import com.wdiscute.laicaps.Laicaps;
+import com.wdiscute.laicaps.fishing.FishProperties;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -124,6 +125,4 @@ public class Payloads
             return TYPE;
         }
     }
-
-
 }

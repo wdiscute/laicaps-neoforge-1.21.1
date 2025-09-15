@@ -1,314 +1,300 @@
 package com.wdiscute.laicaps.fishing;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.laicaps.LaicapsKeys;
+import com.wdiscute.laicaps.item.ModDataComponents;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class FishProperties
+public record FishProperties(
+        ResourceLocation fish,
+        int baseChance,
+
+        WorldRestrictions wr,
+        BaitRestrictions br,
+        Daytime daytime,
+        Weather weather,
+        int mustBeCaughtBellowY,
+        int mustBeCaughtAboveY,
+        boolean skipMinigame,
+        boolean hasGuideEntry
+)
 {
+    public static final Codec<FishProperties> RECORD_CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    //mandatory
+                    ResourceLocation.CODEC.fieldOf("fish_name").forGetter(FishProperties::fish),
+                    Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
+                    //optional
+                    WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
+                    BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
+                    Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
+                    Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
+                    Codec.INT.optionalFieldOf("bellow_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBellowY),
+                    Codec.INT.optionalFieldOf("above_y", Integer.MIN_VALUE).forGetter(FishProperties::mustBeCaughtAboveY),
+                    Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
+                    Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
 
-    final public Item fish;
-    public Item bucket_fish;
-    final public List<ResourceKey<Biome>> biome;
-    final public List<ResourceKey<Level>> dim;
-    final public int baseChance;
-
-    public List<Item> incorrectBaits = List.of();
-
-    public List<ResourceKey<Biome>> biomeBlacklist = new ArrayList<>();
-    public List<ResourceKey<Dimension>> dimensionBlackList = new ArrayList<>();
-    public boolean mustBeClear = false;
-    public boolean mustBeRaining = false;
-    public boolean mustBeThundering = false;
-    public int mustBeCaughtBellowY = Integer.MAX_VALUE;
-    public int mustBeCaughtAboveY = Integer.MIN_VALUE;
-    public boolean mustHaveCorrectBait = false;
-    public boolean mustHaveCorrectBobber = false;
-    public Item correctBait = ItemStack.EMPTY.getItem();
-    public Item correctBobber = ItemStack.EMPTY.getItem();
-    public int correctBaitChanceAdded = 0;
-    public daytime timeRestriction = daytime.ALL;
-
-    public boolean consumesBait = true;
-
-    public boolean shouldSkipMinigame = false;
-
-    public boolean hasGuideEntry = true;
+            ).apply(instance, FishProperties::new)
+    );
 
 
-    public enum daytime
+    public record BaitRestrictions(
+            List<ResourceLocation> correctBobber,
+            List<ResourceLocation> correctBait,
+            boolean consumesBait,
+            int correctBaitChanceAdded,
+            List<ResourceLocation> incorrectBaits,
+            boolean mustHaveCorrectBait)
     {
-        ALL,
-        DAY,
-        NOON,
-        NIGHT,
-        MIDNIGHT
+        public static final Codec<BaitRestrictions> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_bobber", List.of()).forGetter(BaitRestrictions::correctBobber),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_bait", List.of()).forGetter(BaitRestrictions::correctBait),
+                        Codec.BOOL.optionalFieldOf("consumes_bait", true).forGetter(BaitRestrictions::consumesBait),
+                        Codec.INT.optionalFieldOf("correct_bait_chance_added", 0).forGetter(BaitRestrictions::correctBaitChanceAdded),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("incorrect_baits", List.of()).forGetter(BaitRestrictions::incorrectBaits),
+                        Codec.BOOL.optionalFieldOf("must_have_correct_bait", false).forGetter(BaitRestrictions::mustHaveCorrectBait)
+                ).apply(instance, BaitRestrictions::new));
+        
+        public static final BaitRestrictions DEFAULT = new BaitRestrictions(
+                List.of(),
+                List.of(),
+                true,
+                0,
+                List.of(),
+                false);
     }
 
-
-    public FishProperties(Item fish, List<ResourceKey<Level>> dimensionList, List<ResourceKey<Biome>> biomeList, int baseChance)
+    public record WorldRestrictions(
+            List<ResourceLocation> dims,
+            List<ResourceLocation> dimsBlacklist,
+            List<ResourceLocation> biomes,
+            List<ResourceLocation> biomesBlacklist)
     {
-        this.fish = fish;
-        this.dim = dimensionList;
-        this.biome = biomeList;
-        this.baseChance = baseChance;
+        public static final Codec<WorldRestrictions> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions", List.of()).forGetter(WorldRestrictions::dims),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimension_blacklist", List.of()).forGetter(WorldRestrictions::dimsBlacklist),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes", List.of()).forGetter(WorldRestrictions::biomes),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biome_blacklist", List.of()).forGetter(WorldRestrictions::biomesBlacklist)
+                ).apply(instance, WorldRestrictions::new));
+
+        public static final WorldRestrictions DEFAULT = new WorldRestrictions(
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of());
     }
 
-    public FishProperties skipsMinigame()
+    public enum Daytime implements StringRepresentable
     {
-        this.shouldSkipMinigame = true;
-        return this;
+        ALL("all"),
+        DAY("day"),
+        NOON("noon"),
+        NIGHT("night"),
+        MIDNIGHT("midnight");
+
+        public static final Codec<Daytime> CODEC = StringRepresentable.fromEnum(Daytime::values);
+        private final String key;
+
+        Daytime(String key)
+        {
+            this.key = key;
+        }
+
+        public String getSerializedName()
+        {
+            return this.key;
+        }
     }
 
-    public FishProperties hasGuideEntry(Boolean b)
+    public enum Weather implements StringRepresentable
     {
-        this.hasGuideEntry = b;
-        return this;
+        ALL("all"),
+        CLEAR("clear"),
+        RAIN("rain"),
+        THUNDER("thunder");
+
+        public static final Codec<Weather> CODEC = StringRepresentable.fromEnum(Weather::values);
+        private final String key;
+
+        Weather(String key)
+        {
+            this.key = key;
+        }
+
+        public String getSerializedName()
+        {
+            return this.key;
+        }
     }
 
-    public FishProperties mustHaveCorrectBobber(Item bobber)
+    public static FishProperties getFishPropertiesFromItem(RegistryAccess registry, ItemStack is)
     {
-        this.mustHaveCorrectBobber = true;
-        this.correctBobber = bobber;
-        return this;
+        return getFishPropertiesFromItem(registry, is.getItem());
     }
 
-    public FishProperties doesNotConsumeBait()
+    public static FishProperties getFishPropertiesFromItem(RegistryAccess registry, Item item)
     {
-        this.consumesBait = false;
-        return this;
+        return getFishPropertiesFromItem(registry, BuiltInRegistries.ITEM.getKey(item));
     }
 
-
-    public FishProperties incorrectBaits(List<Item> blacklist)
+    public static FishProperties getFishPropertiesFromItem(RegistryAccess registry, ResourceLocation item)
     {
-        this.incorrectBaits = blacklist;
-        return this;
+        for (FishProperties fp : registry.registryOrThrow(LaicapsKeys.FISH_REGISTRY))
+        {
+            if (fp.fish == item) return fp;
+        }
+        return null;
     }
 
-    public FishProperties mustBeThundering()
+    public static List<FishProperties> getFPs(Level level)
     {
-        this.mustBeThundering = true;
-        return this;
+        return getFPs(level.registryAccess());
     }
 
-    public FishProperties mustBeRaining()
+    public static List<FishProperties> getFPs(RegistryAccess registryAccess)
     {
-        this.mustBeRaining = true;
-        return this;
+        return registryAccess.registryOrThrow(LaicapsKeys.FISH_REGISTRY).stream().toList();
     }
 
-    public FishProperties mustBeClear()
-    {
-        this.mustBeClear = true;
-        return this;
-    }
-
-    public FishProperties timeRestrictions(daytime time)
-    {
-        timeRestriction = time;
-        return this;
-    }
-
-
-    public FishProperties mustBeCaughtBellowY(int i)
-    {
-        this.mustBeCaughtBellowY = i;
-        return this;
-    }
-
-    public FishProperties mustBeCaughtAboveY(int i)
-    {
-        this.mustBeCaughtAboveY = i;
-        return this;
-    }
-
-    public FishProperties mustHaveCorrectBait()
-    {
-        this.mustHaveCorrectBait = true;
-        return this;
-    }
-
-    public FishProperties correctBaitChanceAdded(Item item, int addedChance)
-    {
-        this.correctBait = item;
-        this.correctBaitChanceAdded = addedChance;
-        return this;
-    }
-
-    public FishProperties canBeBucketed(Item bucket_of_fish)
-    {
-        this.bucket_fish = bucket_of_fish;
-        return this;
-    }
-
-
-    public FishProperties biomeBlacklist(List<ResourceKey<Biome>> biome)
-    {
-        biomeBlacklist = biome;
-        return this;
-    }
-
-    public FishProperties biomeBlacklist(ResourceKey<Biome> biome)
-    {
-        biomeBlacklist.add(biome);
-        return this;
-    }
-
-    public FishProperties dimensionBlacklist(List<ResourceKey<Dimension>> dim)
-    {
-        dimensionBlackList = dim;
-        return this;
-    }
-
-    public FishProperties dimensionBlacklist(ResourceKey<Dimension> dim)
-    {
-        dimensionBlackList.add(dim);
-        return this;
-    }
-
-
-    public int getChance(Level level, BlockPos pos, ItemStack bobber, ItemStack bait)
+    public int getChance(FishProperties fp, Player player, ItemStack rod)
     {
 
-        int chance = baseChance;
+        Level level = player.level();
+
+        int chance = fp.baseChance();
+
+        ItemStack bobber = rod.get(ModDataComponents.BOBBER).copyOne();
+        ItemStack bait = rod.get(ModDataComponents.BAIT).copyOne();
+
 
         //dimension  check
-        if (dim != null)
+        if (!fp.wr().dims().isEmpty())
         {
-            if (!this.dim.contains(level.dimension()))
+            if (!fp.wr().dims().contains(level.dimension().registry()))
+            {
+                return 0;
+            }
+        }
+
+        if (!fp.wr().dimsBlacklist().isEmpty())
+        {
+            if (fp.wr().dimsBlacklist().contains(level.dimension().registry()))
             {
                 return 0;
             }
         }
 
         //biome check
-        if (biome != null)
+        if (!fp.wr().biomes().isEmpty())
         {
-            if (!this.biome.contains(level.getBiome(pos).getKey()))
+            if (!fp.wr().biomes().contains(level.getBiome(player.blockPosition()).getKey().location()))
             {
                 return 0;
             }
         }
 
-        if (!biomeBlacklist.isEmpty())
+        if (!fp.wr().biomesBlacklist().isEmpty())
         {
-            if (this.biomeBlacklist.contains(level.getBiome(pos).getKey()))
-            {
-                return 0;
-            }
-        }
-
-        if (!dimensionBlackList.isEmpty())
-        {
-            if (this.dimensionBlackList.contains(level.dimension()))
+            if (fp.wr().biomesBlacklist().contains(level.getBiome(player.blockPosition()).getKey().location()))
             {
                 return 0;
             }
         }
 
         //blacklisted baits
-        if (incorrectBaits.contains(bait.getItem()))
+        if (fp.br().incorrectBaits().contains(BuiltInRegistries.ITEM.getKey(bait.getItem())))
         {
             return 0;
         }
 
         //y level check
-        if (pos.getY() > mustBeCaughtBellowY)
+        if (player.position().y > fp.mustBeCaughtBellowY())
         {
             return 0;
         }
 
         //y level check
-        if (pos.getY() < mustBeCaughtAboveY)
+        if (player.position().y < fp.mustBeCaughtAboveY())
         {
             return 0;
         }
 
         //time check
-        if (timeRestriction != daytime.ALL)
+        if (fp.daytime() != FishProperties.Daytime.ALL)
         {
+
+            //TODO change 24000 to the fraction of level day cycle
             long time = level.getDayTime() % 24000;
 
-            switch (timeRestriction)
+            switch (fp.daytime())
             {
-                case daytime.DAY:
+                case FishProperties.Daytime.DAY:
                     if (!(time > 23000 || time < 12700)) return 0;
                     break;
 
-                case daytime.NOON:
+                case FishProperties.Daytime.NOON:
                     if (!(time > 3500 && time < 8500)) return 0;
                     break;
 
-                case daytime.NIGHT:
+                case FishProperties.Daytime.NIGHT:
                     if (!(time < 23000 && time > 12700)) return 0;
                     break;
 
-                case daytime.MIDNIGHT:
+                case FishProperties.Daytime.MIDNIGHT:
                     if (!(time > 16500 && time < 19500)) return 0;
                     break;
             }
         }
 
         //clear check
-        if (mustBeClear && (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5))
+        if (fp.weather() == FishProperties.Weather.CLEAR && (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5))
         {
             return 0;
         }
 
         //rain check
-        if (mustBeRaining && level.getRainLevel(0) < 0.5)
+        if (fp.weather() == FishProperties.Weather.RAIN && level.getRainLevel(0) < 0.5)
         {
             return 0;
         }
 
         //thunder check
-        if (mustBeThundering && level.getThunderLevel(0) < 0.5)
+        if (fp.weather() == FishProperties.Weather.THUNDER && level.getThunderLevel(0) < 0.5)
         {
             return 0;
         }
 
         //correct bait check
-        if (mustHaveCorrectBait)
+        if (fp.br().mustHaveCorrectBait() && !fp.br().correctBait().contains(BuiltInRegistries.ITEM.getKey(bait.getItem())))
         {
-            if (bait.is(correctBait))
-            {
-                chance += correctBaitChanceAdded;
-            }
-            else
-            {
-                return 0;
-            }
+            return 0;
         }
-        else
+
+        //correct bait chance bonus
+        if (fp.br().correctBait().contains(BuiltInRegistries.ITEM.getKey(bait.getItem())))
         {
-            if (correctBaitChanceAdded > 0)
-            {
-                if (bait.is(correctBait))
-                {
-                    chance += correctBaitChanceAdded;
-                }
-            }
+            chance += fp.br().correctBaitChanceAdded();
         }
 
         //correct bobber check
-        if (mustHaveCorrectBobber)
+        if (!fp.br().correctBobber().contains(BuiltInRegistries.ITEM.getKey(bobber.getItem())))
         {
-            if (!bobber.is(correctBobber))
-            {
-                return 0;
-            }
+            return 0;
         }
 
         return chance;
     }
-
 
 }
