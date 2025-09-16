@@ -40,6 +40,7 @@ import com.wdiscute.laicaps.entity.swibble.SwibbleRenderer;
 import com.wdiscute.laicaps.entity.fishing.FishingBobRenderer;
 import com.wdiscute.laicaps.fishing.FishCaughtToast;
 import com.wdiscute.laicaps.fishing.FishProperties;
+import com.wdiscute.laicaps.fishing.FishTrackerLayer;
 import com.wdiscute.laicaps.fishing.FishingRodScreen;
 import com.wdiscute.laicaps.item.ModDataComponents;
 import com.wdiscute.laicaps.entity.boat.ModBoatRenderer;
@@ -217,25 +218,7 @@ public class Laicaps
         @SubscribeEvent
         public static void FishSpotterLayer(RegisterGuiLayersEvent event)
         {
-            event.registerAboveAll(
-                    Laicaps.rl("test_layer"), (guiGraphics, deltaTracker) ->
-                    {
-
-                        ItemStack hand = Minecraft.getInstance().player.getMainHandItem();
-
-                        ItemContainerContents icc = hand.get(ModDataComponents.BOBBER);
-
-                        if (icc != null)
-                        {
-                            ItemStack is = icc.copyOne();
-                            if (is.is(ModItems.FISH_SPOTTER))
-                            {
-
-                                guiGraphics.renderItem(new ItemStack(Items.DIAMOND), 0, 0);
-                            }
-                        }
-
-                    });
+            event.registerAboveAll(Laicaps.rl("fish_tracker"), new FishTrackerLayer());
         }
 
         @OnlyIn(Dist.CLIENT)

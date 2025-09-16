@@ -168,7 +168,7 @@ public record FishProperties(
         return registryAccess.registryOrThrow(LaicapsKeys.FISH_REGISTRY).stream().toList();
     }
 
-    public int getChance(FishProperties fp, Player player, ItemStack rod)
+    public static int getChance(FishProperties fp, Player player, ItemStack rod)
     {
 
         Level level = player.level();
@@ -182,7 +182,7 @@ public record FishProperties(
         //dimension  check
         if (!fp.wr().dims().isEmpty())
         {
-            if (!fp.wr().dims().contains(level.dimension().registry()))
+            if (!fp.wr().dims().contains(level.dimension().location()))
             {
                 return 0;
             }
@@ -190,7 +190,7 @@ public record FishProperties(
 
         if (!fp.wr().dimsBlacklist().isEmpty())
         {
-            if (fp.wr().dimsBlacklist().contains(level.dimension().registry()))
+            if (fp.wr().dimsBlacklist().contains(level.dimension().location()))
             {
                 return 0;
             }
@@ -289,7 +289,7 @@ public record FishProperties(
         }
 
         //correct bobber check
-        if (!fp.br().correctBobber().contains(BuiltInRegistries.ITEM.getKey(bobber.getItem())))
+        if (!fp.br().correctBobber().isEmpty() && !fp.br().correctBobber().contains(BuiltInRegistries.ITEM.getKey(bobber.getItem())))
         {
             return 0;
         }
