@@ -425,9 +425,9 @@
   "tooltip.laicaps.sage_tuna.0" : "A beautiful sage-tinted Tuna.",
   "tooltip.laicaps.sage_tuna.1" : "A common catch in the high sea.",
 
-  "item.laicaps.karpenjoe" : "Karpenjoe",
-  "tooltip.laicaps.karpenjoe.0" : "A majestic carp glowing in modding knowledge.",
-  "tooltip.laicaps.karpenjoe.1" : "It is said anglers eat it for good luck before debugging.",
+  "item.laicaps.carpenjoe" : "Carpenjoe",
+  "tooltip.laicaps.carpenjoe.0" : "A majestic carp glowing in modding knowledge.",
+  "tooltip.laicaps.carpenjoe.1" : "It is said anglers eat it for good luck before debugging.",
 
   "item.laicaps.stormsail_ray" : "Stormsail Ray",
   "tooltip.laicaps.stormsail_ray.0" : "A rare ray which surfaces only whilst raining.",

@@ -1,0 +1,11 @@
+{
+  "fish": "laicaps:meadow_perch",
+  "base_chance": 5,
+  "daytime": "day",
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes_blacklist": ["laicaps:asha_ocean"]
+  }
+}
+

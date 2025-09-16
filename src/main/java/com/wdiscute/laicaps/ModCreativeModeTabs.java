@@ -198,7 +198,7 @@ public class ModCreativeModeTabs
                                 output.accept(ModItems.AZURE_TUNA.get());
                                 output.accept(ModItems.SCARLET_TUNA.get());
                                 output.accept(ModItems.SAGE_TUNA.get());
-                                output.accept(ModItems.KARPENJOE.get());
+                                output.accept(ModItems.CARPENJOE.get());
                                 output.accept(ModItems.STORMSAIL_RAY.get());
                                 output.accept(ModItems.SUNFANG_EEL.get());
                                 output.accept(ModItems.SUNFANG_EEL.get());

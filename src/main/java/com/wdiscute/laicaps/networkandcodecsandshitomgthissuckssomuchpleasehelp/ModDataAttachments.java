@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp
 import com.mojang.serialization.Codec;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
@@ -24,7 +25,13 @@ public class ModDataAttachments
 
 
     public static final Supplier<AttachmentType<String>> FISHING = ATTACHMENT_TYPES.register(
-            "laicaps_fishing", () -> AttachmentType.builder(() -> "").serialize(Codec.unit("")).build()
+            "fishing", () -> AttachmentType.builder(() -> "").serialize(Codec.unit("")).build()
+    );
+
+    public static final Supplier<AttachmentType<ResourceLocation>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
+            "fish_spotter", () -> AttachmentType.builder(() -> Laicaps.rl("none"))
+                    .serialize(ResourceLocation.CODEC)
+                    .build()
     );
 
     public static final Supplier<AttachmentType<List<FishCaughtCounter>>> FISHES_CAUGHT = ATTACHMENT_TYPES.register(

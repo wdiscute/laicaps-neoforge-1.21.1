@@ -1,0 +1,10 @@
+{
+  "fish": "laicaps:stormsail_ray",
+  "base_chance": 5,
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes": ["laicaps:asha_ocean"]
+  }
+}
+

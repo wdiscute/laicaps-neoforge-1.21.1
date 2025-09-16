@@ -1,0 +1,11 @@
+{
+  "fish": "laicaps:sunfang_eel",
+  "base_chance": 5,
+  "daytime": "day",
+  "weather": "clear",
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"]
+  }
+}
+

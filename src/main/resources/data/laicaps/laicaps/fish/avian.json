@@ -1,0 +1,10 @@
+{
+  "fish": "laicaps:avian",
+  "base_chance": 5,
+  "daytime": "night",
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"]
+  }
+}
+

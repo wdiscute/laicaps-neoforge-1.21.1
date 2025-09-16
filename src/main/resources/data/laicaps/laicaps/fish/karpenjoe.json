@@ -1,0 +1,18 @@
+{
+  "fish": "laicaps:carpenjoe",
+  "base_chance": 1,
+  "daytime": "day",
+  "weather": "clear",
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes_blacklist": ["laicaps:asha_ocean"]
+  },
+
+  "bait_restrictions": {
+    "correct_baits": ["laicaps:oakheart_berries_bait"],
+    "correct_bait_chance_added": 10
+  }
+
+}
+

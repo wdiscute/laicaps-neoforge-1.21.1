@@ -1,0 +1,10 @@
+{
+  "fish": "laicaps:red_herring",
+  "base_chance": 5,
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes": ["minecraft:asha_ocean"]
+  }
+}
+

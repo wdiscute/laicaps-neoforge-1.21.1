@@ -1,0 +1,10 @@
+{
+  "fish": "laicaps:azure_tuna",
+  "base_chance": 5,
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes": ["minecraft:asha_ocean"]
+  }
+}
+

@@ -1,0 +1,17 @@
+{
+  "fish": "laicaps:forest_bream",
+  "base_chance": 5,
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes": [
+      "laicaps:asha_forest",
+      "laicaps:asha_jungle",
+      "laicaps:asha_flower_forest",
+      "laicaps:asha_mesa",
+      "laicaps:asha_mountains",
+      "laicaps:asha_plains"
+    ]
+  }
+}
+

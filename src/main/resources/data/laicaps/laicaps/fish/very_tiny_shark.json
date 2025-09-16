@@ -1,0 +1,10 @@
+{
+  "fish": "laicaps:very_tiny_shark",
+  "base_chance": 1,
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes": ["minecraft:asha_ocean"]
+  }
+}
+

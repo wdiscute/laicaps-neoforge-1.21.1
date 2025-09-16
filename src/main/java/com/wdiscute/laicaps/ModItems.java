@@ -82,7 +82,7 @@ public class ModItems
     public static final DeferredItem<Item> AZURE_TUNA = ITEMS.register("azure_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> SCARLET_TUNA = ITEMS.register("scarlet_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> SAGE_TUNA = ITEMS.register("sage_tuna", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
-    public static final DeferredItem<Item> KARPENJOE = ITEMS.register("karpenjoe", () -> new Item(new Item.Properties().food(ModFoodProperties.KARPENJOE)));
+    public static final DeferredItem<Item> CARPENJOE = ITEMS.register("carpenjoe", () -> new Item(new Item.Properties().food(ModFoodProperties.KARPENJOE)));
     public static final DeferredItem<Item> STORMSAIL_RAY = ITEMS.register("stormsail_ray", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> SUNFANG_EEL = ITEMS.register("sunfang_eel", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     public static final DeferredItem<Item> FOREST_BREAM = ITEMS.register("forest_bream", () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));

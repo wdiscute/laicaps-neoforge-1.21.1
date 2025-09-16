@@ -32,7 +32,7 @@ public record FishProperties(
     public static final Codec<FishProperties> RECORD_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     //mandatory
-                    ResourceLocation.CODEC.fieldOf("fish_name").forGetter(FishProperties::fish),
+                    ResourceLocation.CODEC.fieldOf("fish").forGetter(FishProperties::fish),
                     Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
                     //optional
                     WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
@@ -58,8 +58,8 @@ public record FishProperties(
     {
         public static final Codec<BaitRestrictions> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_bobber", List.of()).forGetter(BaitRestrictions::correctBobber),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_bait", List.of()).forGetter(BaitRestrictions::correctBait),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_bobbers", List.of()).forGetter(BaitRestrictions::correctBobber),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_baits", List.of()).forGetter(BaitRestrictions::correctBait),
                         Codec.BOOL.optionalFieldOf("consumes_bait", true).forGetter(BaitRestrictions::consumesBait),
                         Codec.INT.optionalFieldOf("correct_bait_chance_added", 0).forGetter(BaitRestrictions::correctBaitChanceAdded),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("incorrect_baits", List.of()).forGetter(BaitRestrictions::incorrectBaits),
@@ -84,9 +84,9 @@ public record FishProperties(
         public static final Codec<WorldRestrictions> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions", List.of()).forGetter(WorldRestrictions::dims),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimension_blacklist", List.of()).forGetter(WorldRestrictions::dimsBlacklist),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions_blacklist", List.of()).forGetter(WorldRestrictions::dimsBlacklist),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes", List.of()).forGetter(WorldRestrictions::biomes),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biome_blacklist", List.of()).forGetter(WorldRestrictions::biomesBlacklist)
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", List.of()).forGetter(WorldRestrictions::biomesBlacklist)
                 ).apply(instance, WorldRestrictions::new));
 
         public static final WorldRestrictions DEFAULT = new WorldRestrictions(

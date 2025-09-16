@@ -1,0 +1,11 @@
+{
+  "fish": "laicaps:twilight_trout",
+  "base_chance": 5,
+  "daytime": "midnight",
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"],
+    "biomes_blacklist": ["laicaps:asha_ocean"]
+  }
+}
+

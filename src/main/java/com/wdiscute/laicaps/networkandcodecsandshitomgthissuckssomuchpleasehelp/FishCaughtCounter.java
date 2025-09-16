@@ -12,8 +12,7 @@ import java.util.List;
 public class FishCaughtCounter
 {
 
-
-    public static final Codec<FishCaughtCounter> RECORD_CODEC = RecordCodecBuilder.create(instance ->
+    public static final Codec<FishCaughtCounter> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     ResourceLocation.CODEC.fieldOf("rl").forGetter(FishCaughtCounter::getResourceLocation),
                     Codec.INT.optionalFieldOf("count", 0).forGetter(FishCaughtCounter::getCount)
@@ -28,7 +27,7 @@ public class FishCaughtCounter
 
 
 
-    public static final Codec<List<FishCaughtCounter>> LIST_CODEC = FishCaughtCounter.RECORD_CODEC.listOf();
+    public static final Codec<List<FishCaughtCounter>> LIST_CODEC = FishCaughtCounter.CODEC.listOf();
 
 
     private final ResourceLocation resourceLocation;
@@ -37,7 +36,6 @@ public class FishCaughtCounter
 
     public FishCaughtCounter(ResourceLocation rl, Integer count)
     {
-
         this.resourceLocation = rl;
         this.count = count;
     }

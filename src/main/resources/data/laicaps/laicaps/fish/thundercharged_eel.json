@@ -1,0 +1,11 @@
+{
+  "fish": "laicaps:thundercharged_eel",
+  "base_chance": 25,
+  "daytime": "night",
+  "weather": "thunder",
+
+  "world_restrictions": {
+    "dimensions": ["laicaps:asha"]
+  }
+}
+
