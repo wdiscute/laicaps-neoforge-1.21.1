@@ -8,6 +8,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -65,7 +66,7 @@ public record FishProperties(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("incorrect_baits", List.of()).forGetter(BaitRestrictions::incorrectBaits),
                         Codec.BOOL.optionalFieldOf("must_have_correct_bait", false).forGetter(BaitRestrictions::mustHaveCorrectBait)
                 ).apply(instance, BaitRestrictions::new));
-        
+
         public static final BaitRestrictions DEFAULT = new BaitRestrictions(
                 List.of(),
                 List.of(),
@@ -139,17 +140,17 @@ public record FishProperties(
         }
     }
 
-    public static FishProperties getFishPropertiesFromItem(RegistryAccess registry, ItemStack is)
+    public static FishProperties getFishProperties(RegistryAccess registry, ItemStack is)
     {
-        return getFishPropertiesFromItem(registry, is.getItem());
+        return getFishProperties(registry, is.getItem());
     }
 
-    public static FishProperties getFishPropertiesFromItem(RegistryAccess registry, Item item)
+    public static FishProperties getFishProperties(RegistryAccess registry, Item item)
     {
-        return getFishPropertiesFromItem(registry, BuiltInRegistries.ITEM.getKey(item));
+        return getFishProperties(registry, BuiltInRegistries.ITEM.getKey(item));
     }
 
-    public static FishProperties getFishPropertiesFromItem(RegistryAccess registry, ResourceLocation item)
+    public static FishProperties getFishProperties(RegistryAccess registry, ResourceLocation item)
     {
         for (FishProperties fp : registry.registryOrThrow(LaicapsKeys.FISH_REGISTRY))
         {
@@ -168,10 +169,10 @@ public record FishProperties(
         return registryAccess.registryOrThrow(LaicapsKeys.FISH_REGISTRY).stream().toList();
     }
 
-    public static int getChance(FishProperties fp, Player player, ItemStack rod)
+    public static int getChance(FishProperties fp, Entity entity, ItemStack rod)
     {
 
-        Level level = player.level();
+        Level level = entity.level();
 
         int chance = fp.baseChance();
 
@@ -180,38 +181,18 @@ public record FishProperties(
 
 
         //dimension  check
-        if (!fp.wr().dims().isEmpty())
-        {
-            if (!fp.wr().dims().contains(level.dimension().location()))
-            {
-                return 0;
-            }
-        }
+        if (!fp.wr().dims().isEmpty() && !fp.wr().dims().contains(level.dimension().location()))
+            return 0;
 
-        if (!fp.wr().dimsBlacklist().isEmpty())
-        {
-            if (fp.wr().dimsBlacklist().contains(level.dimension().location()))
-            {
-                return 0;
-            }
-        }
+        if (fp.wr().dimsBlacklist().contains(level.dimension().location()))
+            return 0;
 
         //biome check
-        if (!fp.wr().biomes().isEmpty())
-        {
-            if (!fp.wr().biomes().contains(level.getBiome(player.blockPosition()).getKey().location()))
-            {
-                return 0;
-            }
-        }
+        if (!fp.wr().biomes().isEmpty() && !fp.wr().biomes().contains(level.getBiome(entity.blockPosition()).getKey().location()))
+            return 0;
 
-        if (!fp.wr().biomesBlacklist().isEmpty())
-        {
-            if (fp.wr().biomesBlacklist().contains(level.getBiome(player.blockPosition()).getKey().location()))
-            {
-                return 0;
-            }
-        }
+        if (fp.wr().biomesBlacklist().contains(level.getBiome(entity.blockPosition()).getKey().location()))
+            return 0;
 
         //blacklisted baits
         if (fp.br().incorrectBaits().contains(BuiltInRegistries.ITEM.getKey(bait.getItem())))
@@ -220,13 +201,13 @@ public record FishProperties(
         }
 
         //y level check
-        if (player.position().y > fp.mustBeCaughtBellowY())
+        if (entity.position().y > fp.mustBeCaughtBellowY())
         {
             return 0;
         }
 
         //y level check
-        if (player.position().y < fp.mustBeCaughtAboveY())
+        if (entity.position().y < fp.mustBeCaughtAboveY())
         {
             return 0;
         }

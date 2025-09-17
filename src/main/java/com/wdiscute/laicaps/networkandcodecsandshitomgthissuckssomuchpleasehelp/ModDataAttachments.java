@@ -3,6 +3,7 @@ package com.wdiscute.laicaps.networkandcodecsandshitomgthissuckssomuchpleasehelp
 import com.mojang.serialization.Codec;
 import com.wdiscute.laicaps.Laicaps;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
@@ -25,7 +26,10 @@ public class ModDataAttachments
 
 
     public static final Supplier<AttachmentType<String>> FISHING = ATTACHMENT_TYPES.register(
-            "fishing", () -> AttachmentType.builder(() -> "").serialize(Codec.unit("")).build()
+            "fishing", () -> AttachmentType.builder(() -> "")
+                    .serialize(Codec.unit(""))
+                    .sync(new FishingSyncHandler())
+                    .build()
     );
 
     public static final Supplier<AttachmentType<ResourceLocation>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
@@ -49,6 +53,28 @@ public class ModDataAttachments
         ATTACHMENT_TYPES.register(eventBus);
     }
 
+
+    public static class FishingSyncHandler implements AttachmentSyncHandler<String>
+    {
+        @Override
+        public void write(@NotNull RegistryFriendlyByteBuf buf, @NotNull String attachment, boolean initialSync)
+        {
+            ByteBufCodecs.STRING_UTF8.encode(buf, attachment);
+        }
+
+        @Override
+        @Nullable
+        public String read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable String previousValue)
+        {
+            return ByteBufCodecs.STRING_UTF8.decode(buf);
+        }
+
+        @Override
+        public boolean sendToPlayer(@NotNull IAttachmentHolder holder, @NotNull ServerPlayer to)
+        {
+            return holder == to;
+        }
+    }
 
     public static class FishCounterSyncHandler implements AttachmentSyncHandler<List<FishCaughtCounter>>
     {
