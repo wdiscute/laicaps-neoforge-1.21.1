@@ -41,7 +41,7 @@ logoFile="laicaps 400x400.png" #optional
 #credits="" #optional
 
 # A text field displayed in the mod UI
-authors="wdiscute, tofushi, Nikdo53, daffydj" #optional
+authors="wdiscute, Nikdo53, daffydj" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''A fantasy space exploration mod'''
